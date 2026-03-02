@@ -21,7 +21,7 @@
 
 1000 REM TEXTES DE Stannis,...
 1001 DATA "C'est STORM'S END"
-0002 DATA "Mon frere  Robert"
+1002 DATA "Mon frere  Robert"
 1003 DATA "est fou de croire"
 1004 DATA "en votre aptitude"
 1005 DATA "Il est fou ! mais"

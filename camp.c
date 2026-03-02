@@ -726,7 +726,7 @@ void sleep(void)
 */
 	char p,i,max;
 	
-	if(ville>6) {
+	if(ville>6 && ville < 10) {
 		printAtXY(9,10, "Trop dangereux !");
 		wait(250);
 	} else {
@@ -810,6 +810,9 @@ void main()
 		io_needed = 1;
 		saveCharacters();
 		restorePageZero();
-		SwitchToCommand("LABY");
+		if (ville == 10) // dehors
+			SwitchToCommand("MAP");
+		else 
+			SwitchToCommand("LABY");
 		//SwitchToCommand("!DIR");
 }

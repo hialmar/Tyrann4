@@ -50,7 +50,7 @@
 1032 DATA "de cette sorciere par"
 1033 DATA "un  marchand  Dornien"
 1034 DATA "peut-etre y est elle."
-1031 DATA "Allez maintenant !!!!"
+1035 DATA "Allez maintenant !!!!"
 
 
 

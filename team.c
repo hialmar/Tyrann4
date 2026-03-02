@@ -65,21 +65,21 @@ void loadCharacters(void)
 		// 48010 O1=#A000
 		// 48015 O1=O1+1:VIL=PEEK(O1):PRINT SPC(9);"...";
 		ptr = (char*)0xa001;
-		//printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
+		printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
 		version = *ptr; ptr++;
 		x = *ptr; ptr++;
 		y = *ptr; ptr++;
 		s = *ptr; ptr++;
 		ca = *ptr; ptr++;
 		ville = *ptr; ptr++;
-		//printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
+		printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
 		// test
 		if (x==0 || x > 100) {
 			x = 2; y = 2; s = 1; ville = 4;
 			//printf("x=%d y=%d s=%d ca=%d\n", x, y, s, ca);
 		}
 		ink(eencre[ville-1]);
-		//printf("ville: %d\n", ville);
+		printf("ville: %d\n", ville);
 		puts("         ...\n");
 		// 48020 FOR P=1TO6
 		for(perso=0;perso<6;perso++) {

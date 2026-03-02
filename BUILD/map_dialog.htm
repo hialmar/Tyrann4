@@ -4,7 +4,7 @@
 		<meta name="robots" content="noindex">
 		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
 		<title>dialog</title>
-		<link href="C:\OSDK\\documentation\documentation.css" rel="stylesheet" type="text/css">
+		<link href="C:\OSDK\documentation\documentation.css" rel="stylesheet" type="text/css">
 	</HEAD>
 	<BODY>
 <hr>
@@ -15,12 +15,18 @@
 <td valign=top>
 <a name="Normal"></a>
 <h1>Normal memory</h1>
-<table border>
+<table class='memmap'>
+<thead>
 <tr>
-<th>Adress</th><th colspan="2">Size</th><th>Name</th>
+<th colspan=4>Section layout</th>
 </tr>
 <tr>
-<td><b>$600</b></td><td align="right">161</td><td align="right">17</td><td>osdk_start</td></tr>
+<th>Address</th><th colspan="2">Size</th><th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>$600</b></td><td align="right" id='osdk_start'>161</td><td align="right">17</td><td>osdk_start</td></tr>
 <tr>
 <td>$611</td><td colspan="2" align="right">1</td><td>retstack</td></tr>
 <tr>
@@ -38,7 +44,7 @@
 <tr>
 <td>$69e</td><td colspan="2" align="right">3</td><td>jsrvect</td></tr>
 <tr>
-<td>$6a1</td><td align="right">26</td><td align="right">5</td><td>_exit</td></tr>
+<td>$6a1</td><td align="right" id='_exit'>26</td><td align="right">5</td><td>_exit</td></tr>
 <tr>
 <td>$6a6</td><td colspan="2" align="right">4</td><td>reterr</td></tr>
 <tr>
@@ -48,185 +54,185 @@
 <tr>
 <td>$6b3</td><td colspan="2" align="right">8</td><td>cfi</td></tr>
 <tr>
-<td>$6bb</td><td align="right">2</td><td align="right">2</td><td>_tmax</td></tr>
+<td>$6bb</td><td align="right" id='_tmax'>2</td><td align="right">2</td><td>_tmax</td></tr>
 <tr>
-<td>$6bd</td><td align="right">1</td><td align="right">1</td><td>_coteTexte</td></tr>
+<td>$6bd</td><td align="right" id='_coteTexte'>1</td><td align="right">1</td><td>_coteTexte</td></tr>
 <tr>
-<td>$6be</td><td align="right">36</td><td align="right">36</td><td>_persos</td></tr>
+<td>$6be</td><td align="right" id='_persos'>36</td><td align="right">36</td><td>_persos</td></tr>
 <tr>
-<td>$6e2</td><td align="right">468</td><td align="right">65</td><td>_loadTextesPersos</td></tr>
+<td>$6e2</td><td align="right" id='_loadTextesPersos'>468</td><td align="right">65</td><td>_loadTextesPersos</td></tr>
 <tr>
 <td>$723</td><td colspan="2" align="right">126</td><td>skip</td></tr>
 <tr>
-<td>$7a1</td><td colspan="2" align="right">26</td><td>Ldialog101</td></tr>
+<td>$7a1</td><td colspan="2" align="right">26</td><td>Ldialog167</td></tr>
 <tr>
-<td>$7bb</td><td colspan="2" align="right">16</td><td>Ldialog102</td></tr>
+<td>$7bb</td><td colspan="2" align="right">16</td><td>Ldialog168</td></tr>
 <tr>
 <td>$7cb</td><td colspan="2" align="right">43</td><td>skip</td></tr>
 <tr>
 <td>$7f6</td><td colspan="2" align="right">15</td><td>skip</td></tr>
 <tr>
-<td>$805</td><td colspan="2" align="right">33</td><td>Ldialog109</td></tr>
+<td>$805</td><td colspan="2" align="right">33</td><td>Ldialog175</td></tr>
 <tr>
 <td>$826</td><td colspan="2" align="right">66</td><td>skip</td></tr>
 <tr>
-<td>$868</td><td colspan="2" align="right">14</td><td>Ldialog110</td></tr>
+<td>$868</td><td colspan="2" align="right">14</td><td>Ldialog176</td></tr>
 <tr>
 <td>$876</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
 <td>$87e</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$882</td><td colspan="2" align="right">14</td><td>Ldialog112</td></tr>
+<td>$882</td><td colspan="2" align="right">14</td><td>Ldialog178</td></tr>
 <tr>
 <td>$890</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
 <td>$8a0</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$8b3</td><td colspan="2" align="right">3</td><td>Ldialog107, skip</td></tr>
+<td>$8b3</td><td colspan="2" align="right">3</td><td>Ldialog173, skip</td></tr>
 <tr>
-<td>$8b6</td><td align="right">283</td><td align="right">49</td><td>_loadNomsImagesPersos</td></tr>
+<td>$8b6</td><td align="right" id='_loadNomsImagesPersos'>283</td><td align="right">49</td><td>_loadNomsImagesPersos</td></tr>
 <tr>
 <td>$8e7</td><td colspan="2" align="right">43</td><td>skip</td></tr>
 <tr>
 <td>$912</td><td colspan="2" align="right">15</td><td>skip</td></tr>
 <tr>
-<td>$921</td><td colspan="2" align="right">33</td><td>Ldialog117</td></tr>
+<td>$921</td><td colspan="2" align="right">33</td><td>Ldialog183</td></tr>
 <tr>
 <td>$942</td><td colspan="2" align="right">65</td><td>skip</td></tr>
 <tr>
-<td>$983</td><td colspan="2" align="right">14</td><td>Ldialog118</td></tr>
+<td>$983</td><td colspan="2" align="right">14</td><td>Ldialog184</td></tr>
 <tr>
 <td>$991</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
 <td>$999</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$99d</td><td colspan="2" align="right">14</td><td>Ldialog120</td></tr>
+<td>$99d</td><td colspan="2" align="right">14</td><td>Ldialog186</td></tr>
 <tr>
 <td>$9ab</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
 <td>$9bb</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$9ce</td><td colspan="2" align="right">3</td><td>Ldialog115, skip</td></tr>
+<td>$9ce</td><td colspan="2" align="right">3</td><td>Ldialog181, skip</td></tr>
 <tr>
-<td>$9d1</td><td align="right">2485</td><td align="right">41</td><td>_dialogue</td></tr>
+<td>$9d1</td><td align="right" id='_dialogue'>2485</td><td align="right">41</td><td>_dialogue</td></tr>
 <tr>
-<td>$9fa</td><td colspan="2" align="right">54</td><td>Ldialog121</td></tr>
+<td>$9fa</td><td colspan="2" align="right">54</td><td>Ldialog187</td></tr>
 <tr>
-<td>$a30</td><td colspan="2" align="right">29</td><td>Ldialog124</td></tr>
+<td>$a30</td><td colspan="2" align="right">29</td><td>Ldialog190</td></tr>
 <tr>
-<td>$a4d</td><td colspan="2" align="right">7</td><td>Ldialog125</td></tr>
+<td>$a4d</td><td colspan="2" align="right">7</td><td>Ldialog191</td></tr>
 <tr>
-<td>$a54</td><td colspan="2" align="right">205</td><td>Ldialog126</td></tr>
+<td>$a54</td><td colspan="2" align="right">205</td><td>Ldialog192</td></tr>
 <tr>
-<td>$b21</td><td colspan="2" align="right">18</td><td>Ldialog127</td></tr>
+<td>$b21</td><td colspan="2" align="right">18</td><td>Ldialog193</td></tr>
 <tr>
 <td>$b33</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$b37</td><td colspan="2" align="right">29</td><td>Ldialog129</td></tr>
+<td>$b37</td><td colspan="2" align="right">29</td><td>Ldialog195</td></tr>
 <tr>
 <td>$b54</td><td colspan="2" align="right">27</td><td>skip</td></tr>
 <tr>
-<td>$b6f</td><td colspan="2" align="right">36</td><td>Ldialog130</td></tr>
+<td>$b6f</td><td colspan="2" align="right">36</td><td>Ldialog196</td></tr>
 <tr>
 <td>$b93</td><td colspan="2" align="right">96</td><td>skip</td></tr>
 <tr>
-<td>$bf3</td><td colspan="2" align="right">110</td><td>Ldialog134</td></tr>
+<td>$bf3</td><td colspan="2" align="right">110</td><td>Ldialog200</td></tr>
 <tr>
 <td>$c61</td><td colspan="2" align="right">92</td><td>skip</td></tr>
 <tr>
 <td>$cbd</td><td colspan="2" align="right">69</td><td>skip</td></tr>
 <tr>
-<td>$d02</td><td colspan="2" align="right">18</td><td>Ldialog135</td></tr>
+<td>$d02</td><td colspan="2" align="right">18</td><td>Ldialog201</td></tr>
 <tr>
 <td>$d14</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$d18</td><td colspan="2" align="right">43</td><td>Ldialog137</td></tr>
+<td>$d18</td><td colspan="2" align="right">43</td><td>Ldialog203</td></tr>
 <tr>
 <td>$d43</td><td colspan="2" align="right">138</td><td>skip</td></tr>
 <tr>
 <td>$dcd</td><td colspan="2" align="right">36</td><td>skip</td></tr>
 <tr>
-<td>$df1</td><td colspan="2" align="right">3</td><td>Ldialog146</td></tr>
+<td>$df1</td><td colspan="2" align="right">3</td><td>Ldialog212</td></tr>
 <tr>
-<td>$df4</td><td colspan="2" align="right">20</td><td>Ldialog140, Ldialog144</td></tr>
+<td>$df4</td><td colspan="2" align="right">20</td><td>Ldialog206, Ldialog210</td></tr>
 <tr>
 <td>$e08</td><td colspan="2" align="right">69</td><td>skip</td></tr>
 <tr>
-<td>$e4d</td><td colspan="2" align="right">146</td><td>Ldialog147</td></tr>
+<td>$e4d</td><td colspan="2" align="right">146</td><td>Ldialog213</td></tr>
 <tr>
-<td>$edf</td><td colspan="2" align="right">42</td><td>Ldialog148</td></tr>
+<td>$edf</td><td colspan="2" align="right">42</td><td>Ldialog214</td></tr>
 <tr>
-<td>$f09</td><td colspan="2" align="right">96</td><td>Ldialog150</td></tr>
+<td>$f09</td><td colspan="2" align="right">96</td><td>Ldialog216</td></tr>
 <tr>
-<td>$f69</td><td colspan="2" align="right">20</td><td>Ldialog151</td></tr>
+<td>$f69</td><td colspan="2" align="right">20</td><td>Ldialog217</td></tr>
 <tr>
 <td>$f7d</td><td colspan="2" align="right">6</td><td>skip</td></tr>
 <tr>
-<td>$f83</td><td colspan="2" align="right">31</td><td>Ldialog153</td></tr>
+<td>$f83</td><td colspan="2" align="right">31</td><td>Ldialog219</td></tr>
 <tr>
 <td>$fa2</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$fb2</td><td colspan="2" align="right">18</td><td>Ldialog131, Ldialog138</td></tr>
+<td>$fb2</td><td colspan="2" align="right">18</td><td>Ldialog197, Ldialog204</td></tr>
 <tr>
 <td>$fc4</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$fc8</td><td colspan="2" align="right">29</td><td>Ldialog133</td></tr>
+<td>$fc8</td><td colspan="2" align="right">29</td><td>Ldialog199</td></tr>
 <tr>
 <td>$fe5</td><td colspan="2" align="right">115</td><td>skip</td></tr>
 <tr>
-<td>$1058</td><td colspan="2" align="right">394</td><td>Ldialog156</td></tr>
+<td>$1058</td><td colspan="2" align="right">394</td><td>Ldialog222</td></tr>
 <tr>
-<td>$11e2</td><td colspan="2" align="right">58</td><td>Ldialog157</td></tr>
+<td>$11e2</td><td colspan="2" align="right">58</td><td>Ldialog223</td></tr>
 <tr>
 <td>$121c</td><td colspan="2" align="right">36</td><td>skip</td></tr>
 <tr>
-<td>$1240</td><td colspan="2" align="right">3</td><td>Ldialog161</td></tr>
+<td>$1240</td><td colspan="2" align="right">3</td><td>Ldialog227</td></tr>
 <tr>
-<td>$1243</td><td colspan="2" align="right">218</td><td>Ldialog162</td></tr>
+<td>$1243</td><td colspan="2" align="right">218</td><td>Ldialog228</td></tr>
 <tr>
-<td>$131d</td><td colspan="2" align="right">29</td><td>Ldialog163</td></tr>
+<td>$131d</td><td colspan="2" align="right">29</td><td>Ldialog229</td></tr>
 <tr>
-<td>$133a</td><td colspan="2" align="right">16</td><td>Ldialog122, Ldialog159</td></tr>
+<td>$133a</td><td colspan="2" align="right">16</td><td>Ldialog188, Ldialog225</td></tr>
 <tr>
 <td>$134a</td><td colspan="2" align="right">60</td><td>skip</td></tr>
 <tr>
-<td>$1386</td><td align="right">529</td><td align="right">48</td><td>_loadImage</td></tr>
+<td>$1386</td><td align="right" id='_loadImage'>529</td><td align="right">48</td><td>_loadImage</td></tr>
 <tr>
 <td>$13b6</td><td colspan="2" align="right">34</td><td>skip</td></tr>
 <tr>
-<td>$13d8</td><td colspan="2" align="right">75</td><td>Ldialog165</td></tr>
+<td>$13d8</td><td colspan="2" align="right">75</td><td>Ldialog231</td></tr>
 <tr>
-<td>$1423</td><td colspan="2" align="right">40</td><td>Ldialog167</td></tr>
+<td>$1423</td><td colspan="2" align="right">40</td><td>Ldialog233</td></tr>
 <tr>
-<td>$144b</td><td colspan="2" align="right">99</td><td>Ldialog168</td></tr>
+<td>$144b</td><td colspan="2" align="right">99</td><td>Ldialog234</td></tr>
 <tr>
-<td>$14ae</td><td colspan="2" align="right">59</td><td>Ldialog171</td></tr>
+<td>$14ae</td><td colspan="2" align="right">59</td><td>Ldialog237</td></tr>
 <tr>
-<td>$14e9</td><td colspan="2" align="right">18</td><td>Ldialog172</td></tr>
+<td>$14e9</td><td colspan="2" align="right">18</td><td>Ldialog238</td></tr>
 <tr>
 <td>$14fb</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$14ff</td><td colspan="2" align="right">29</td><td>Ldialog174</td></tr>
+<td>$14ff</td><td colspan="2" align="right">29</td><td>Ldialog240</td></tr>
 <tr>
 <td>$151c</td><td colspan="2" align="right">3</td><td>skip</td></tr>
 <tr>
-<td>$151f</td><td colspan="2" align="right">7</td><td>Ldialog169</td></tr>
+<td>$151f</td><td colspan="2" align="right">7</td><td>Ldialog235</td></tr>
 <tr>
-<td>$1526</td><td colspan="2" align="right">59</td><td>Ldialog175</td></tr>
+<td>$1526</td><td colspan="2" align="right">59</td><td>Ldialog241</td></tr>
 <tr>
-<td>$1561</td><td colspan="2" align="right">18</td><td>Ldialog176</td></tr>
+<td>$1561</td><td colspan="2" align="right">18</td><td>Ldialog242</td></tr>
 <tr>
 <td>$1573</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$1577</td><td colspan="2" align="right">29</td><td>Ldialog178</td></tr>
+<td>$1577</td><td colspan="2" align="right">29</td><td>Ldialog244</td></tr>
 <tr>
-<td>$1594</td><td colspan="2" align="right">3</td><td>Ldialog170, skip</td></tr>
+<td>$1594</td><td colspan="2" align="right">3</td><td>Ldialog236, skip</td></tr>
 <tr>
-<td>$1597</td><td align="right">2537</td><td align="right">52</td><td>_main</td></tr>
+<td>$1597</td><td align="right" id='_main'>2537</td><td align="right">52</td><td>_main</td></tr>
 <tr>
 <td>$15cb</td><td colspan="2" align="right">36</td><td>skip</td></tr>
 <tr>
-<td>$15ef</td><td colspan="2" align="right">15</td><td>Ldialog181</td></tr>
+<td>$15ef</td><td colspan="2" align="right">15</td><td>Ldialog247</td></tr>
 <tr>
 <td>$15fe</td><td colspan="2" align="right">176</td><td>skip</td></tr>
 <tr>
@@ -242,9 +248,9 @@
 <tr>
 <td>$183f</td><td colspan="2" align="right">30</td><td>skip</td></tr>
 <tr>
-<td>$185d</td><td colspan="2" align="right">7</td><td>Ldialog191</td></tr>
+<td>$185d</td><td colspan="2" align="right">7</td><td>Ldialog257</td></tr>
 <tr>
-<td>$1864</td><td colspan="2" align="right">14</td><td>Ldialog195</td></tr>
+<td>$1864</td><td colspan="2" align="right">14</td><td>Ldialog261</td></tr>
 <tr>
 <td>$1872</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
@@ -258,141 +264,141 @@
 <tr>
 <td>$1939</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$193d</td><td colspan="2" align="right">14</td><td>Ldialog196, Ldialog199</td></tr>
+<td>$193d</td><td colspan="2" align="right">14</td><td>Ldialog262, Ldialog265</td></tr>
 <tr>
 <td>$194b</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
 <td>$1953</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$1957</td><td colspan="2" align="right">14</td><td>Ldialog198</td></tr>
+<td>$1957</td><td colspan="2" align="right">14</td><td>Ldialog264</td></tr>
 <tr>
 <td>$1965</td><td colspan="2" align="right">33</td><td>skip</td></tr>
 <tr>
 <td>$1986</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$1999</td><td colspan="2" align="right">14</td><td>Ldialog192, Ldialog203, skip</td></tr>
+<td>$1999</td><td colspan="2" align="right">14</td><td>Ldialog258, Ldialog269, skip</td></tr>
 <tr>
 <td>$19a7</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
 <td>$19af</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$19b3</td><td colspan="2" align="right">14</td><td>Ldialog194</td></tr>
+<td>$19b3</td><td colspan="2" align="right">14</td><td>Ldialog260</td></tr>
 <tr>
 <td>$19c1</td><td colspan="2" align="right">33</td><td>skip</td></tr>
 <tr>
 <td>$19e2</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$19f5</td><td colspan="2" align="right">14</td><td>Ldialog204, skip</td></tr>
+<td>$19f5</td><td colspan="2" align="right">14</td><td>Ldialog270, skip</td></tr>
 <tr>
 <td>$1a03</td><td colspan="2" align="right">52</td><td>skip</td></tr>
 <tr>
-<td>$1a37</td><td colspan="2" align="right">45</td><td>Ldialog189, Ldialog205</td></tr>
+<td>$1a37</td><td colspan="2" align="right">45</td><td>Ldialog255, Ldialog271</td></tr>
 <tr>
 <td>$1a64</td><td colspan="2" align="right">36</td><td>skip</td></tr>
 <tr>
-<td>$1a88</td><td colspan="2" align="right">43</td><td>Ldialog211</td></tr>
+<td>$1a88</td><td colspan="2" align="right">43</td><td>Ldialog277</td></tr>
 <tr>
-<td>$1ab3</td><td colspan="2" align="right">51</td><td>Ldialog212</td></tr>
+<td>$1ab3</td><td colspan="2" align="right">51</td><td>Ldialog278</td></tr>
 <tr>
-<td>$1ae6</td><td colspan="2" align="right">30</td><td>Ldialog214</td></tr>
+<td>$1ae6</td><td colspan="2" align="right">30</td><td>Ldialog280</td></tr>
 <tr>
-<td>$1b04</td><td colspan="2" align="right">93</td><td>Ldialog215</td></tr>
+<td>$1b04</td><td colspan="2" align="right">93</td><td>Ldialog281</td></tr>
 <tr>
-<td>$1b61</td><td colspan="2" align="right">30</td><td>Ldialog216</td></tr>
+<td>$1b61</td><td colspan="2" align="right">30</td><td>Ldialog282</td></tr>
 <tr>
-<td>$1b7f</td><td colspan="2" align="right">287</td><td>Ldialog217</td></tr>
+<td>$1b7f</td><td colspan="2" align="right">287</td><td>Ldialog283</td></tr>
 <tr>
-<td>$1c9e</td><td colspan="2" align="right">63</td><td>Ldialog185</td></tr>
+<td>$1c9e</td><td colspan="2" align="right">63</td><td>Ldialog251</td></tr>
 <tr>
 <td>$1cdd</td><td colspan="2" align="right">36</td><td>skip</td></tr>
 <tr>
-<td>$1d01</td><td colspan="2" align="right">15</td><td>Ldialog223</td></tr>
+<td>$1d01</td><td colspan="2" align="right">15</td><td>Ldialog289</td></tr>
 <tr>
 <td>$1d10</td><td colspan="2" align="right">25</td><td>skip</td></tr>
 <tr>
 <td>$1d29</td><td colspan="2" align="right">21</td><td>skip</td></tr>
 <tr>
-<td>$1d3e</td><td colspan="2" align="right">45</td><td>Ldialog179</td></tr>
+<td>$1d3e</td><td colspan="2" align="right">45</td><td>Ldialog245</td></tr>
 <tr>
 <td>$1d6b</td><td colspan="2" align="right">155</td><td>skip</td></tr>
 <tr>
-<td>$1e06</td><td colspan="2" align="right">63</td><td>Ldialog229</td></tr>
+<td>$1e06</td><td colspan="2" align="right">63</td><td>Ldialog295</td></tr>
 <tr>
 <td>$1e45</td><td colspan="2" align="right">36</td><td>skip</td></tr>
 <tr>
-<td>$1e69</td><td colspan="2" align="right">19</td><td>Ldialog233</td></tr>
+<td>$1e69</td><td colspan="2" align="right">19</td><td>Ldialog299</td></tr>
 <tr>
-<td>$1e7c</td><td colspan="2" align="right">45</td><td>Ldialog224</td></tr>
+<td>$1e7c</td><td colspan="2" align="right">45</td><td>Ldialog290</td></tr>
 <tr>
 <td>$1ea9</td><td colspan="2" align="right">149</td><td>skip</td></tr>
 <tr>
-<td>$1f3e</td><td colspan="2" align="right">32</td><td>Ldialog237</td></tr>
+<td>$1f3e</td><td colspan="2" align="right">32</td><td>Ldialog303</td></tr>
 <tr>
-<td>$1f5e</td><td colspan="2" align="right">34</td><td>Ldialog180, Ldialog225, Ldialog234, Ldialog238</td></tr>
+<td>$1f5e</td><td colspan="2" align="right">34</td><td>Ldialog246, Ldialog291, Ldialog300, Ldialog304</td></tr>
 <tr>
-<td>$1f80</td><td align="right">40</td><td align="right">40</td><td>_imagesPersos</td></tr>
+<td>$1f80</td><td align="right" id='_imagesPersos'>40</td><td align="right">40</td><td>_imagesPersos</td></tr>
 <tr>
-<td>$1fa8</td><td align="right">60</td><td align="right">60</td><td>_textesPersos</td></tr>
+<td>$1fa8</td><td align="right" id='_textesPersos'>60</td><td align="right">60</td><td>_textesPersos</td></tr>
 <tr>
-<td>$1fe4</td><td align="right">1501</td><td align="right">1024</td><td>_textes</td></tr>
+<td>$1fe4</td><td align="right" id='_textes'>1501</td><td align="right">1024</td><td>_textes</td></tr>
 <tr>
-<td>$23e4</td><td colspan="2" align="right">5</td><td>Ldialog244</td></tr>
+<td>$23e4</td><td colspan="2" align="right">5</td><td>Ldialog310</td></tr>
 <tr>
-<td>$23e9</td><td colspan="2" align="right">27</td><td>Ldialog242</td></tr>
+<td>$23e9</td><td colspan="2" align="right">27</td><td>Ldialog308</td></tr>
 <tr>
-<td>$2404</td><td colspan="2" align="right">8</td><td>Ldialog240</td></tr>
+<td>$2404</td><td colspan="2" align="right">8</td><td>Ldialog306</td></tr>
 <tr>
-<td>$240c</td><td colspan="2" align="right">18</td><td>Ldialog228</td></tr>
+<td>$240c</td><td colspan="2" align="right">18</td><td>Ldialog294</td></tr>
 <tr>
-<td>$241e</td><td colspan="2" align="right">24</td><td>Ldialog220</td></tr>
+<td>$241e</td><td colspan="2" align="right">24</td><td>Ldialog286</td></tr>
 <tr>
-<td>$2436</td><td colspan="2" align="right">12</td><td>Ldialog184</td></tr>
+<td>$2436</td><td colspan="2" align="right">12</td><td>Ldialog250</td></tr>
 <tr>
-<td>$2442</td><td colspan="2" align="right">23</td><td>Ldialog155</td></tr>
+<td>$2442</td><td colspan="2" align="right">23</td><td>Ldialog221</td></tr>
 <tr>
-<td>$2459</td><td colspan="2" align="right">38</td><td>Ldialog143</td></tr>
+<td>$2459</td><td colspan="2" align="right">38</td><td>Ldialog209</td></tr>
 <tr>
-<td>$247f</td><td colspan="2" align="right">10</td><td>Ldialog114</td></tr>
+<td>$247f</td><td colspan="2" align="right">10</td><td>Ldialog180</td></tr>
 <tr>
-<td>$2489</td><td colspan="2" align="right">13</td><td>Ldialog106</td></tr>
+<td>$2489</td><td colspan="2" align="right">13</td><td>Ldialog172</td></tr>
 <tr>
-<td>$2496</td><td colspan="2" align="right">13</td><td>Ldialog104</td></tr>
+<td>$2496</td><td colspan="2" align="right">13</td><td>Ldialog170</td></tr>
 <tr>
-<td>$24a3</td><td colspan="2" align="right">13</td><td>Ldialog100</td></tr>
+<td>$24a3</td><td colspan="2" align="right">13</td><td>Ldialog166</td></tr>
 <tr>
-<td>$24b0</td><td colspan="2" align="right">12</td><td>Ldialog98</td></tr>
+<td>$24b0</td><td colspan="2" align="right">12</td><td>Ldialog164</td></tr>
 <tr>
-<td>$24bc</td><td colspan="2" align="right">16</td><td>Ldialog96</td></tr>
+<td>$24bc</td><td colspan="2" align="right">16</td><td>Ldialog162</td></tr>
 <tr>
-<td>$24cc</td><td colspan="2" align="right">13</td><td>Ldialog94</td></tr>
+<td>$24cc</td><td colspan="2" align="right">13</td><td>Ldialog160</td></tr>
 <tr>
-<td>$24d9</td><td colspan="2" align="right">11</td><td>Ldialog92</td></tr>
+<td>$24d9</td><td colspan="2" align="right">11</td><td>Ldialog158</td></tr>
 <tr>
-<td>$24e4</td><td colspan="2" align="right">12</td><td>Ldialog90</td></tr>
+<td>$24e4</td><td colspan="2" align="right">12</td><td>Ldialog156</td></tr>
 <tr>
-<td>$24f0</td><td colspan="2" align="right">11</td><td>Ldialog88</td></tr>
+<td>$24f0</td><td colspan="2" align="right">11</td><td>Ldialog154</td></tr>
 <tr>
-<td>$24fb</td><td colspan="2" align="right">6</td><td>Ldialog86</td></tr>
+<td>$24fb</td><td colspan="2" align="right">6</td><td>Ldialog152</td></tr>
 <tr>
-<td>$2501</td><td colspan="2" align="right">14</td><td>Ldialog84</td></tr>
+<td>$2501</td><td colspan="2" align="right">14</td><td>Ldialog150</td></tr>
 <tr>
-<td>$250f</td><td colspan="2" align="right">13</td><td>Ldialog82</td></tr>
+<td>$250f</td><td colspan="2" align="right">13</td><td>Ldialog148</td></tr>
 <tr>
-<td>$251c</td><td colspan="2" align="right">14</td><td>Ldialog80</td></tr>
+<td>$251c</td><td colspan="2" align="right">14</td><td>Ldialog146</td></tr>
 <tr>
-<td>$252a</td><td colspan="2" align="right">10</td><td>Ldialog78</td></tr>
+<td>$252a</td><td colspan="2" align="right">10</td><td>Ldialog144</td></tr>
 <tr>
-<td>$2534</td><td colspan="2" align="right">11</td><td>Ldialog76</td></tr>
+<td>$2534</td><td colspan="2" align="right">11</td><td>Ldialog142</td></tr>
 <tr>
-<td>$253f</td><td colspan="2" align="right">13</td><td>Ldialog74</td></tr>
+<td>$253f</td><td colspan="2" align="right">13</td><td>Ldialog140</td></tr>
 <tr>
-<td>$254c</td><td colspan="2" align="right">12</td><td>Ldialog72</td></tr>
+<td>$254c</td><td colspan="2" align="right">12</td><td>Ldialog138</td></tr>
 <tr>
-<td>$2558</td><td colspan="2" align="right">14</td><td>Ldialog70</td></tr>
+<td>$2558</td><td colspan="2" align="right">14</td><td>Ldialog136</td></tr>
 <tr>
-<td>$2566</td><td colspan="2" align="right">13</td><td>Ldialog68</td></tr>
+<td>$2566</td><td colspan="2" align="right">13</td><td>Ldialog134</td></tr>
 <tr>
-<td>$2573</td><td colspan="2" align="right">12</td><td>Ldialog66</td></tr>
+<td>$2573</td><td colspan="2" align="right">12</td><td>Ldialog132</td></tr>
 <tr>
 <td>$257f</td><td colspan="2" align="right">12</td><td>mul32u</td></tr>
 <tr>
@@ -400,702 +406,721 @@
 <tr>
 <td>$25ac</td><td colspan="2" align="right">21</td><td>ROTATE_R</td></tr>
 <tr>
-<td>$25c1</td><td align="right">2</td><td align="right">2</td><td>_randseedLow</td></tr>
+<td>$25c1</td><td align="right" id='_randseedLow'>2</td><td align="right">2</td><td>_randseedLow</td></tr>
 <tr>
-<td>$25c3</td><td align="right">2</td><td align="right">2</td><td>_randseedTop</td></tr>
+<td>$25c3</td><td align="right" id='_randseedTop'>2</td><td align="right">2</td><td>_randseedTop</td></tr>
 <tr>
-<td>$25c5</td><td align="right">69</td><td align="right">69</td><td>_rand32</td></tr>
+<td>$25c5</td><td align="right" id='_rand32'>69</td><td align="right">69</td><td>_rand32</td></tr>
 <tr>
-<td>$260a</td><td align="right">30</td><td align="right">15</td><td>_printf</td></tr>
+<td>$260a</td><td align="right" id='_memcpy'>242</td><td align="right">53</td><td>_memcpy</td></tr>
 <tr>
-<td>$2619</td><td colspan="2" align="right">3</td><td>printvect</td></tr>
+<td>$263f</td><td colspan="2" align="right">18</td><td>memcpyloop</td></tr>
 <tr>
-<td>$261c</td><td colspan="2" align="right">12</td><td>storechar</td></tr>
+<td>$2651</td><td colspan="2" align="right">1</td><td>return</td></tr>
 <tr>
-<td>$2628</td><td align="right">272</td><td align="right">24</td><td>_sprintf</td></tr>
+<td>$2652</td><td colspan="2" align="right">23</td><td>get_2ptr</td></tr>
 <tr>
-<td>$2640</td><td colspan="2" align="right">15</td><td>printf</td></tr>
+<td>$2669</td><td colspan="2" align="right">17</td><td>div16i</td></tr>
 <tr>
-<td>$264f</td><td colspan="2" align="right">9</td><td>formloop</td></tr>
+<td>$267a</td><td colspan="2" align="right">15</td><td>mod16i</td></tr>
 <tr>
-<td>$2658</td><td colspan="2" align="right">6</td><td>charput</td></tr>
+<td>$2689</td><td colspan="2" align="right">6</td><td>resignmod</td></tr>
 <tr>
-<td>$265e</td><td colspan="2" align="right">1</td><td>endform</td></tr>
+<td>$268f</td><td colspan="2" align="right">11</td><td>resign</td></tr>
 <tr>
-<td>$265f</td><td colspan="2" align="right">41</td><td>printfloat</td></tr>
+<td>$269a</td><td colspan="2" align="right">17</td><td>unsign</td></tr>
 <tr>
-<td>$2688</td><td colspan="2" align="right">26</td><td>formfield</td></tr>
+<td>$26ab</td><td colspan="2" align="right">17</td><td>unsign1</td></tr>
 <tr>
-<td>$26a2</td><td colspan="2" align="right">20</td><td>printchar</td></tr>
+<td>$26bc</td><td colspan="2" align="right">1</td><td>unsign2</td></tr>
 <tr>
-<td>$26b6</td><td colspan="2" align="right">22</td><td>printstr</td></tr>
+<td>$26bd</td><td colspan="2" align="right">18</td><td>div16u</td></tr>
 <tr>
-<td>$26cc</td><td colspan="2" align="right">16</td><td>prtsloop</td></tr>
+<td>$26cf</td><td colspan="2" align="right">20</td><td>udiv2</td></tr>
 <tr>
-<td>$26dc</td><td colspan="2" align="right">6</td><td>endprts</td></tr>
+<td>$26e3</td><td colspan="2" align="right">12</td><td>udiv3</td></tr>
 <tr>
-<td>$26e2</td><td colspan="2" align="right">19</td><td>printint</td></tr>
+<td>$26ef</td><td colspan="2" align="right">8</td><td>mod16u</td></tr>
 <tr>
-<td>$26f5</td><td colspan="2" align="right">23</td><td>printhex</td></tr>
+<td>$26f7</td><td colspan="2" align="right">5</td><td>zerodiv</td></tr>
 <tr>
-<td>$270c</td><td colspan="2" align="right">1</td><td>saveptrform</td></tr>
+<td>$26fc</td><td align="right" id='_hires'>3</td><td align="right">3</td><td>_hires</td></tr>
 <tr>
-<td>$270d</td><td colspan="2" align="right">2</td><td>saveform</td></tr>
+<td>$26ff</td><td align="right" id='_text'>3</td><td align="right">3</td><td>_text</td></tr>
 <tr>
-<td>$270f</td><td colspan="2" align="right">1</td><td>saveptrarg</td></tr>
+<td>$2702</td><td align="right" id='_ping'>3</td><td align="right">3</td><td>_ping</td></tr>
 <tr>
-<td>$2710</td><td colspan="2" align="right">11</td><td>hexbyte</td></tr>
+<td>$2705</td><td align="right" id='_shoot'>3</td><td align="right">3</td><td>_shoot</td></tr>
 <tr>
-<td>$271b</td><td colspan="2" align="right">6</td><td>nibble</td></tr>
+<td>$2708</td><td align="right" id='_zap'>3</td><td align="right">3</td><td>_zap</td></tr>
 <tr>
-<td>$2721</td><td colspan="2" align="right">6</td><td>chiffre</td></tr>
+<td>$270b</td><td align="right" id='_explode'>3</td><td align="right">3</td><td>_explode</td></tr>
 <tr>
-<td>$2727</td><td colspan="2" align="right">17</td><td>nextarg</td></tr>
+<td>$270e</td><td align="right" id='_kbdclick1'>3</td><td align="right">3</td><td>_kbdclick1</td></tr>
 <tr>
-<td>$2738</td><td align="right">118</td><td align="right">15</td><td>_itoa</td></tr>
+<td>$2711</td><td align="right" id='_kbdclick2'>3</td><td align="right">3</td><td>_kbdclick2</td></tr>
 <tr>
-<td>$2747</td><td colspan="2" align="right">12</td><td>bufconv</td></tr>
+<td>$2714</td><td align="right" id='_cls'>3</td><td align="right">3</td><td>_cls</td></tr>
 <tr>
-<td>$2753</td><td colspan="2" align="right">22</td><td>itoa</td></tr>
+<td>$2717</td><td align="right" id='_lores0'>3</td><td align="right">3</td><td>_lores0</td></tr>
 <tr>
-<td>$2769</td><td colspan="2" align="right">5</td><td>uitoa</td></tr>
+<td>$271a</td><td align="right" id='_lores1'>3</td><td align="right">3</td><td>_lores1</td></tr>
 <tr>
-<td>$276e</td><td colspan="2" align="right">19</td><td>itoaloop</td></tr>
+<td>$271d</td><td align="right" id='_key'>13</td><td align="right">8</td><td>_key</td></tr>
 <tr>
-<td>$2781</td><td colspan="2" align="right">21</td><td>poploop</td></tr>
+<td>$2725</td><td colspan="2" align="right">5</td><td>key001</td></tr>
 <tr>
-<td>$2796</td><td colspan="2" align="right">5</td><td>udiv10</td></tr>
+<td>$272a</td><td align="right" id='_get'>43</td><td align="right">8</td><td>_get</td></tr>
 <tr>
-<td>$279b</td><td colspan="2" align="right">11</td><td>udiv10lp</td></tr>
+<td>$2732</td><td colspan="2" align="right">9</td><td>getXparm</td></tr>
 <tr>
-<td>$27a6</td><td colspan="2" align="right">8</td><td>contdiv</td></tr>
+<td>$273b</td><td colspan="2" align="right">19</td><td>getXloop</td></tr>
 <tr>
-<td>$27ae</td><td align="right">242</td><td align="right">53</td><td>_memcpy</td></tr>
+<td>$274e</td><td colspan="2" align="right">3</td><td>grexit</td></tr>
 <tr>
-<td>$27e3</td><td colspan="2" align="right">18</td><td>memcpyloop</td></tr>
+<td>$2751</td><td colspan="2" align="right">4</td><td>grexit2</td></tr>
 <tr>
-<td>$27f5</td><td colspan="2" align="right">1</td><td>return</td></tr>
+<td>$2755</td><td align="right" id='_getchar'>12</td><td align="right">12</td><td>_getchar</td></tr>
 <tr>
-<td>$27f6</td><td colspan="2" align="right">23</td><td>get_2ptr</td></tr>
+<td>$2761</td><td align="right" id='_putchar'>19</td><td align="right">4</td><td>_putchar</td></tr>
 <tr>
-<td>$280d</td><td colspan="2" align="right">17</td><td>div16i</td></tr>
+<td>$2765</td><td colspan="2" align="right">11</td><td>putchar</td></tr>
 <tr>
-<td>$281e</td><td colspan="2" align="right">15</td><td>mod16i</td></tr>
+<td>$2770</td><td colspan="2" align="right">4</td><td>putchar2</td></tr>
 <tr>
-<td>$282d</td><td colspan="2" align="right">6</td><td>resignmod</td></tr>
+<td>$2774</td><td align="right" id='_puts'>33</td><td align="right">13</td><td>_puts</td></tr>
 <tr>
-<td>$2833</td><td colspan="2" align="right">11</td><td>resign</td></tr>
+<td>$2781</td><td colspan="2" align="right">15</td><td>putsloop</td></tr>
 <tr>
-<td>$283e</td><td colspan="2" align="right">17</td><td>unsign</td></tr>
+<td>$2790</td><td colspan="2" align="right">5</td><td>endputs</td></tr>
 <tr>
-<td>$284f</td><td colspan="2" align="right">17</td><td>unsign1</td></tr>
+<td>$2795</td><td align="right" id='_gets'>64</td><td align="right">11</td><td>_gets</td></tr>
 <tr>
-<td>$2860</td><td colspan="2" align="right">1</td><td>unsign2</td></tr>
+<td>$27a0</td><td colspan="2" align="right">2</td><td>gets</td></tr>
 <tr>
-<td>$2861</td><td colspan="2" align="right">18</td><td>div16u</td></tr>
+<td>$27a2</td><td colspan="2" align="right">22</td><td>getsloop</td></tr>
 <tr>
-<td>$2873</td><td colspan="2" align="right">20</td><td>udiv2</td></tr>
+<td>$27b8</td><td colspan="2" align="right">7</td><td>echochar</td></tr>
 <tr>
-<td>$2887</td><td colspan="2" align="right">12</td><td>udiv3</td></tr>
+<td>$27bf</td><td colspan="2" align="right">8</td><td>backspace</td></tr>
 <tr>
-<td>$2893</td><td colspan="2" align="right">8</td><td>mod16u</td></tr>
+<td>$27c7</td><td colspan="2" align="right">14</td><td>endgets</td></tr>
 <tr>
-<td>$289b</td><td colspan="2" align="right">5</td><td>zerodiv</td></tr>
+<td>$27d5</td><td align="right" id='_strlen'>31</td><td align="right">13</td><td>_strlen</td></tr>
 <tr>
-<td>$28a0</td><td align="right">3</td><td align="right">3</td><td>_hires</td></tr>
+<td>$27e2</td><td colspan="2" align="right">12</td><td>looplen</td></tr>
 <tr>
-<td>$28a3</td><td align="right">3</td><td align="right">3</td><td>_text</td></tr>
+<td>$27ee</td><td colspan="2" align="right">6</td><td>endstrlen</td></tr>
 <tr>
-<td>$28a6</td><td align="right">3</td><td align="right">3</td><td>_ping</td></tr>
+<td>$27f4</td><td align="right" id='_curset'>11</td><td align="right">11</td><td>_curset</td></tr>
 <tr>
-<td>$28a9</td><td align="right">3</td><td align="right">3</td><td>_shoot</td></tr>
+<td>$27ff</td><td align="right" id='_curmov'>11</td><td align="right">11</td><td>_curmov</td></tr>
 <tr>
-<td>$28ac</td><td align="right">3</td><td align="right">3</td><td>_zap</td></tr>
+<td>$280a</td><td align="right" id='_draw'>11</td><td align="right">11</td><td>_draw</td></tr>
 <tr>
-<td>$28af</td><td align="right">3</td><td align="right">3</td><td>_explode</td></tr>
+<td>$2815</td><td align="right" id='_hchar'>11</td><td align="right">11</td><td>_hchar</td></tr>
 <tr>
-<td>$28b2</td><td align="right">3</td><td align="right">3</td><td>_kbdclick1</td></tr>
+<td>$2820</td><td align="right" id='_fill'>11</td><td align="right">11</td><td>_fill</td></tr>
 <tr>
-<td>$28b5</td><td align="right">3</td><td align="right">3</td><td>_kbdclick2</td></tr>
+<td>$282b</td><td align="right" id='_paper'>11</td><td align="right">11</td><td>_paper</td></tr>
 <tr>
-<td>$28b8</td><td align="right">3</td><td align="right">3</td><td>_cls</td></tr>
+<td>$2836</td><td align="right" id='_ink'>11</td><td align="right">11</td><td>_ink</td></tr>
 <tr>
-<td>$28bb</td><td align="right">3</td><td align="right">3</td><td>_lores0</td></tr>
+<td>$2841</td><td align="right" id='_circle'>11</td><td align="right">11</td><td>_circle</td></tr>
 <tr>
-<td>$28be</td><td align="right">3</td><td align="right">3</td><td>_lores1</td></tr>
+<td>$284c</td><td align="right" id='_point'>14</td><td align="right">14</td><td>_point</td></tr>
 <tr>
-<td>$28c1</td><td align="right">13</td><td align="right">8</td><td>_key</td></tr>
+<td>$285a</td><td align="right" id='_pattern'>85</td><td align="right">11</td><td>_pattern</td></tr>
 <tr>
-<td>$28c9</td><td colspan="2" align="right">5</td><td>key001</td></tr>
+<td>$2865</td><td colspan="2" align="right">8</td><td>mul16u</td></tr>
 <tr>
-<td>$28ce</td><td align="right">43</td><td align="right">8</td><td>_get</td></tr>
+<td>$286d</td><td colspan="2" align="right">27</td><td>mult1</td></tr>
 <tr>
-<td>$28d6</td><td colspan="2" align="right">9</td><td>getXparm</td></tr>
+<td>$2888</td><td colspan="2" align="right">8</td><td>mult2</td></tr>
 <tr>
-<td>$28df</td><td colspan="2" align="right">19</td><td>getXloop</td></tr>
+<td>$2890</td><td colspan="2" align="right">31</td><td>mul16i</td></tr>
 <tr>
-<td>$28f2</td><td colspan="2" align="right">3</td><td>grexit</td></tr>
+<td>$28af</td><td align="right" id='_printf'>30</td><td align="right">15</td><td>_printf</td></tr>
 <tr>
-<td>$28f5</td><td colspan="2" align="right">4</td><td>grexit2</td></tr>
+<td>$28be</td><td colspan="2" align="right">3</td><td>printvect</td></tr>
 <tr>
-<td>$28f9</td><td align="right">12</td><td align="right">12</td><td>_getchar</td></tr>
+<td>$28c1</td><td colspan="2" align="right">12</td><td>storechar</td></tr>
 <tr>
-<td>$2905</td><td align="right">19</td><td align="right">4</td><td>_putchar</td></tr>
+<td>$28cd</td><td align="right" id='_sprintf'>295</td><td align="right">24</td><td>_sprintf</td></tr>
 <tr>
-<td>$2909</td><td colspan="2" align="right">11</td><td>putchar</td></tr>
+<td>$28e5</td><td colspan="2" align="right">15</td><td>printf</td></tr>
 <tr>
-<td>$2914</td><td colspan="2" align="right">4</td><td>putchar2</td></tr>
+<td>$28f4</td><td colspan="2" align="right">9</td><td>formloop</td></tr>
 <tr>
-<td>$2918</td><td align="right">33</td><td align="right">13</td><td>_puts</td></tr>
+<td>$28fd</td><td colspan="2" align="right">6</td><td>charput</td></tr>
 <tr>
-<td>$2925</td><td colspan="2" align="right">15</td><td>putsloop</td></tr>
+<td>$2903</td><td colspan="2" align="right">1</td><td>endform</td></tr>
 <tr>
-<td>$2934</td><td colspan="2" align="right">5</td><td>endputs</td></tr>
+<td>$2904</td><td colspan="2" align="right">41</td><td>printfloat</td></tr>
 <tr>
-<td>$2939</td><td align="right">64</td><td align="right">11</td><td>_gets</td></tr>
+<td>$292d</td><td colspan="2" align="right">30</td><td>formfield</td></tr>
 <tr>
-<td>$2944</td><td colspan="2" align="right">2</td><td>gets</td></tr>
+<td>$294b</td><td colspan="2" align="right">20</td><td>printchar</td></tr>
 <tr>
-<td>$2946</td><td colspan="2" align="right">22</td><td>getsloop</td></tr>
+<td>$295f</td><td colspan="2" align="right">22</td><td>printstr</td></tr>
 <tr>
-<td>$295c</td><td colspan="2" align="right">7</td><td>echochar</td></tr>
+<td>$2975</td><td colspan="2" align="right">16</td><td>prtsloop</td></tr>
 <tr>
-<td>$2963</td><td colspan="2" align="right">8</td><td>backspace</td></tr>
+<td>$2985</td><td colspan="2" align="right">6</td><td>endprts</td></tr>
 <tr>
-<td>$296b</td><td colspan="2" align="right">14</td><td>endgets</td></tr>
+<td>$298b</td><td colspan="2" align="right">19</td><td>printint</td></tr>
 <tr>
-<td>$2979</td><td align="right">31</td><td align="right">13</td><td>_strlen</td></tr>
+<td>$299e</td><td colspan="2" align="right">19</td><td>printuint</td></tr>
 <tr>
-<td>$2986</td><td colspan="2" align="right">12</td><td>looplen</td></tr>
+<td>$29b1</td><td colspan="2" align="right">23</td><td>printhex</td></tr>
 <tr>
-<td>$2992</td><td colspan="2" align="right">6</td><td>endstrlen</td></tr>
+<td>$29c8</td><td colspan="2" align="right">1</td><td>saveptrform</td></tr>
 <tr>
-<td>$2998</td><td align="right">11</td><td align="right">11</td><td>_curset</td></tr>
+<td>$29c9</td><td colspan="2" align="right">2</td><td>saveform</td></tr>
 <tr>
-<td>$29a3</td><td align="right">11</td><td align="right">11</td><td>_curmov</td></tr>
+<td>$29cb</td><td colspan="2" align="right">1</td><td>saveptrarg</td></tr>
 <tr>
-<td>$29ae</td><td align="right">11</td><td align="right">11</td><td>_draw</td></tr>
+<td>$29cc</td><td colspan="2" align="right">11</td><td>hexbyte</td></tr>
 <tr>
-<td>$29b9</td><td align="right">11</td><td align="right">11</td><td>_hchar</td></tr>
+<td>$29d7</td><td colspan="2" align="right">6</td><td>nibble</td></tr>
 <tr>
-<td>$29c4</td><td align="right">11</td><td align="right">11</td><td>_fill</td></tr>
+<td>$29dd</td><td colspan="2" align="right">6</td><td>chiffre</td></tr>
 <tr>
-<td>$29cf</td><td align="right">11</td><td align="right">11</td><td>_paper</td></tr>
+<td>$29e3</td><td colspan="2" align="right">17</td><td>nextarg</td></tr>
 <tr>
-<td>$29da</td><td align="right">11</td><td align="right">11</td><td>_ink</td></tr>
+<td>$29f4</td><td align="right" id='_itoa'>120</td><td align="right">11</td><td>_itoa</td></tr>
 <tr>
-<td>$29e5</td><td align="right">11</td><td align="right">11</td><td>_circle</td></tr>
+<td>$29ff</td><td colspan="2" align="right">27</td><td>itoa</td></tr>
 <tr>
-<td>$29f0</td><td align="right">14</td><td align="right">14</td><td>_point</td></tr>
+<td>$2a1a</td><td colspan="2" align="right">17</td><td>itoaloop</td></tr>
 <tr>
-<td>$29fe</td><td align="right">85</td><td align="right">11</td><td>_pattern</td></tr>
+<td>$2a2b</td><td colspan="2" align="right">21</td><td>poploop</td></tr>
 <tr>
-<td>$2a09</td><td colspan="2" align="right">8</td><td>mul16u</td></tr>
+<td>$2a40</td><td colspan="2" align="right">8</td><td>uitoa</td></tr>
 <tr>
-<td>$2a11</td><td colspan="2" align="right">27</td><td>mult1</td></tr>
+<td>$2a48</td><td colspan="2" align="right">12</td><td>bufconv</td></tr>
 <tr>
-<td>$2a2c</td><td colspan="2" align="right">8</td><td>mult2</td></tr>
+<td>$2a54</td><td colspan="2" align="right">5</td><td>udiv10</td></tr>
 <tr>
-<td>$2a34</td><td colspan="2" align="right">31</td><td>mul16i</td></tr>
+<td>$2a59</td><td colspan="2" align="right">11</td><td>udiv10lp</td></tr>
 <tr>
-<td>$2a53</td><td align="right">74</td><td align="right">57</td><td>_memset</td></tr>
+<td>$2a64</td><td colspan="2" align="right">8</td><td>contdiv</td></tr>
 <tr>
-<td>$2a8c</td><td colspan="2" align="right">12</td><td>memsetloop</td></tr>
+<td>$2a6c</td><td align="right" id='_memset'>74</td><td align="right">57</td><td>_memset</td></tr>
 <tr>
-<td>$2a98</td><td colspan="2" align="right">2</td><td>memsetret, patch_memsetret_x</td></tr>
+<td>$2aa5</td><td colspan="2" align="right">12</td><td>memsetloop</td></tr>
 <tr>
-<td>$2a9a</td><td colspan="2" align="right">3</td><td>patch_memsetret_a</td></tr>
+<td>$2ab1</td><td colspan="2" align="right">2</td><td>memsetret, patch_memsetret_x</td></tr>
 <tr>
-<td>$2a9d</td><td align="right">2</td><td align="right">2</td><td>_saved</td></tr>
+<td>$2ab3</td><td colspan="2" align="right">3</td><td>patch_memsetret_a</td></tr>
 <tr>
-<td>$2a9f</td><td align="right">9</td><td align="right">9</td><td>_eencre</td></tr>
+<td>$2ab6</td><td align="right" id='_saved'>2</td><td align="right">2</td><td>_saved</td></tr>
 <tr>
-<td>$2aa8</td><td align="right">2</td><td align="right">2</td><td>_ptTextes</td></tr>
+<td>$2ab8</td><td align="right" id='_eencre'>9</td><td align="right">9</td><td>_eencre</td></tr>
 <tr>
-<td>$2aaa</td><td align="right">1</td><td align="right">1</td><td>_nbTextes</td></tr>
+<td>$2ac1</td><td align="right" id='_ptTextes'>2</td><td align="right">2</td><td>_ptTextes</td></tr>
 <tr>
-<td>$2aab</td><td align="right">116</td><td align="right">29</td><td>_wait</td></tr>
+<td>$2ac3</td><td align="right" id='_nbTextes'>1</td><td align="right">1</td><td>_nbTextes</td></tr>
 <tr>
-<td>$2ac8</td><td colspan="2" align="right">4</td><td>Lcommon65</td></tr>
+<td>$2ac4</td><td align="right" id='_wait'>116</td><td align="right">29</td><td>_wait</td></tr>
 <tr>
-<td>$2acc</td><td colspan="2" align="right">14</td><td>Lcommon68, Lcommon69</td></tr>
+<td>$2ae1</td><td colspan="2" align="right">4</td><td>Lcommon131</td></tr>
 <tr>
-<td>$2ada</td><td colspan="2" align="right">28</td><td>skip</td></tr>
+<td>$2ae5</td><td colspan="2" align="right">14</td><td>Lcommon134, Lcommon135</td></tr>
 <tr>
-<td>$2af6</td><td colspan="2" align="right">41</td><td>Lcommon66</td></tr>
+<td>$2af3</td><td colspan="2" align="right">28</td><td>skip</td></tr>
 <tr>
-<td>$2b1f</td><td align="right">242</td><td align="right">108</td><td>_printAtXY</td></tr>
+<td>$2b0f</td><td colspan="2" align="right">41</td><td>Lcommon132</td></tr>
 <tr>
-<td>$2b8b</td><td colspan="2" align="right">24</td><td>Lcommon71</td></tr>
+<td>$2b38</td><td align="right" id='_printAtXY'>242</td><td align="right">108</td><td>_printAtXY</td></tr>
 <tr>
-<td>$2ba3</td><td colspan="2" align="right">42</td><td>Lcommon74</td></tr>
+<td>$2ba4</td><td colspan="2" align="right">24</td><td>Lcommon137</td></tr>
 <tr>
-<td>$2bcd</td><td colspan="2" align="right">22</td><td>skip</td></tr>
+<td>$2bbc</td><td colspan="2" align="right">42</td><td>Lcommon140</td></tr>
 <tr>
-<td>$2be3</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$2be6</td><td colspan="2" align="right">22</td><td>skip</td></tr>
 <tr>
-<td>$2beb</td><td colspan="2" align="right">24</td><td>Lcommon72</td></tr>
+<td>$2bfc</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$2c03</td><td colspan="2" align="right">14</td><td>skip</td></tr>
+<td>$2c04</td><td colspan="2" align="right">24</td><td>Lcommon138</td></tr>
 <tr>
-<td>$2c11</td><td align="right">159</td><td align="right">133</td><td>_attribAtXY</td></tr>
+<td>$2c1c</td><td colspan="2" align="right">14</td><td>skip</td></tr>
 <tr>
-<td>$2c96</td><td colspan="2" align="right">26</td><td>Lcommon76</td></tr>
+<td>$2c2a</td><td align="right" id='_attribAtXY'>159</td><td align="right">133</td><td>_attribAtXY</td></tr>
 <tr>
-<td>$2cb0</td><td align="right">82</td><td align="right">82</td><td>_backupPageZero</td></tr>
+<td>$2caf</td><td colspan="2" align="right">26</td><td>Lcommon142</td></tr>
 <tr>
-<td>$2d02</td><td align="right">77</td><td align="right">77</td><td>_restorePageZero</td></tr>
+<td>$2cc9</td><td align="right" id='_backupPageZero'>82</td><td align="right">82</td><td>_backupPageZero</td></tr>
 <tr>
-<td>$2d4f</td><td align="right">812</td><td align="right">83</td><td>_printTitle</td></tr>
+<td>$2d1b</td><td align="right" id='_restorePageZero'>77</td><td align="right">77</td><td>_restorePageZero</td></tr>
 <tr>
-<td>$2da2</td><td colspan="2" align="right">27</td><td>skip</td></tr>
+<td>$2d68</td><td align="right" id='_printTitle'>812</td><td align="right">83</td><td>_printTitle</td></tr>
 <tr>
-<td>$2dbd</td><td colspan="2" align="right">43</td><td>skip</td></tr>
+<td>$2dbb</td><td colspan="2" align="right">27</td><td>skip</td></tr>
 <tr>
-<td>$2de8</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$2dd6</td><td colspan="2" align="right">43</td><td>skip</td></tr>
 <tr>
-<td>$2df0</td><td colspan="2" align="right">25</td><td>skip</td></tr>
+<td>$2e01</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$2e09</td><td colspan="2" align="right">29</td><td>skip</td></tr>
+<td>$2e09</td><td colspan="2" align="right">25</td><td>skip</td></tr>
 <tr>
-<td>$2e26</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$2e22</td><td colspan="2" align="right">29</td><td>skip</td></tr>
 <tr>
-<td>$2e46</td><td colspan="2" align="right">40</td><td>skip</td></tr>
+<td>$2e3f</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$2e6e</td><td colspan="2" align="right">43</td><td>skip</td></tr>
+<td>$2e5f</td><td colspan="2" align="right">40</td><td>skip</td></tr>
 <tr>
-<td>$2e99</td><td colspan="2" align="right">40</td><td>skip</td></tr>
+<td>$2e87</td><td colspan="2" align="right">43</td><td>skip</td></tr>
 <tr>
-<td>$2ec1</td><td colspan="2" align="right">54</td><td>skip</td></tr>
+<td>$2eb2</td><td colspan="2" align="right">40</td><td>skip</td></tr>
 <tr>
-<td>$2ef7</td><td colspan="2" align="right">29</td><td>skip</td></tr>
+<td>$2eda</td><td colspan="2" align="right">54</td><td>skip</td></tr>
 <tr>
-<td>$2f14</td><td colspan="2" align="right">40</td><td>skip</td></tr>
+<td>$2f10</td><td colspan="2" align="right">29</td><td>skip</td></tr>
 <tr>
-<td>$2f3c</td><td colspan="2" align="right">55</td><td>skip</td></tr>
+<td>$2f2d</td><td colspan="2" align="right">40</td><td>skip</td></tr>
 <tr>
-<td>$2f73</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$2f55</td><td colspan="2" align="right">55</td><td>skip</td></tr>
 <tr>
-<td>$2f93</td><td colspan="2" align="right">29</td><td>skip</td></tr>
+<td>$2f8c</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$2fb0</td><td colspan="2" align="right">21</td><td>skip</td></tr>
+<td>$2fac</td><td colspan="2" align="right">29</td><td>skip</td></tr>
 <tr>
-<td>$2fc5</td><td colspan="2" align="right">25</td><td>skip</td></tr>
+<td>$2fc9</td><td colspan="2" align="right">21</td><td>skip</td></tr>
 <tr>
-<td>$2fde</td><td colspan="2" align="right">43</td><td>skip</td></tr>
+<td>$2fde</td><td colspan="2" align="right">25</td><td>skip</td></tr>
 <tr>
-<td>$3009</td><td colspan="2" align="right">29</td><td>skip</td></tr>
+<td>$2ff7</td><td colspan="2" align="right">43</td><td>skip</td></tr>
 <tr>
-<td>$3026</td><td colspan="2" align="right">53</td><td>skip</td></tr>
+<td>$3022</td><td colspan="2" align="right">29</td><td>skip</td></tr>
 <tr>
-<td>$305b</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$303f</td><td colspan="2" align="right">53</td><td>skip</td></tr>
 <tr>
-<td>$307b</td><td align="right">227</td><td align="right">68</td><td>_printFrame</td></tr>
+<td>$3074</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$30bf</td><td colspan="2" align="right">57</td><td>skip</td></tr>
+<td>$3094</td><td align="right" id='_printFrame'>227</td><td align="right">68</td><td>_printFrame</td></tr>
 <tr>
-<td>$30f8</td><td colspan="2" align="right">16</td><td>Lcommon84</td></tr>
+<td>$30d8</td><td colspan="2" align="right">57</td><td>skip</td></tr>
 <tr>
-<td>$3108</td><td colspan="2" align="right">14</td><td>Lcommon85</td></tr>
+<td>$3111</td><td colspan="2" align="right">16</td><td>Lcommon150</td></tr>
 <tr>
-<td>$3116</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$3121</td><td colspan="2" align="right">14</td><td>Lcommon151</td></tr>
 <tr>
-<td>$311e</td><td colspan="2" align="right">4</td><td>skip</td></tr>
+<td>$312f</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$3122</td><td colspan="2" align="right">14</td><td>Lcommon87</td></tr>
+<td>$3137</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$3130</td><td colspan="2" align="right">27</td><td>skip</td></tr>
+<td>$313b</td><td colspan="2" align="right">14</td><td>Lcommon153</td></tr>
 <tr>
-<td>$314b</td><td colspan="2" align="right">19</td><td>skip</td></tr>
+<td>$3149</td><td colspan="2" align="right">27</td><td>skip</td></tr>
 <tr>
-<td>$315e</td><td align="right">791</td><td align="right">69</td><td>_loadTexts</td></tr>
+<td>$3164</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$31a3</td><td colspan="2" align="right">24</td><td>skip</td></tr>
+<td>$3177</td><td align="right" id='_loadTexts'>791</td><td align="right">69</td><td>_loadTexts</td></tr>
 <tr>
-<td>$31bb</td><td colspan="2" align="right">24</td><td>Lcommon90</td></tr>
+<td>$31bc</td><td colspan="2" align="right">24</td><td>skip</td></tr>
 <tr>
-<td>$31d3</td><td colspan="2" align="right">22</td><td>skip</td></tr>
+<td>$31d4</td><td colspan="2" align="right">24</td><td>Lcommon156</td></tr>
 <tr>
-<td>$31e9</td><td colspan="2" align="right">68</td><td>skip</td></tr>
+<td>$31ec</td><td colspan="2" align="right">22</td><td>skip</td></tr>
 <tr>
-<td>$322d</td><td colspan="2" align="right">31</td><td>skip</td></tr>
+<td>$3202</td><td colspan="2" align="right">68</td><td>skip</td></tr>
 <tr>
-<td>$324c</td><td colspan="2" align="right">73</td><td>skip</td></tr>
+<td>$3246</td><td colspan="2" align="right">31</td><td>skip</td></tr>
 <tr>
-<td>$3295</td><td colspan="2" align="right">31</td><td>skip</td></tr>
+<td>$3265</td><td colspan="2" align="right">73</td><td>skip</td></tr>
 <tr>
-<td>$32b4</td><td colspan="2" align="right">53</td><td>skip</td></tr>
+<td>$32ae</td><td colspan="2" align="right">31</td><td>skip</td></tr>
 <tr>
-<td>$32e9</td><td colspan="2" align="right">14</td><td>Lcommon94</td></tr>
+<td>$32cd</td><td colspan="2" align="right">53</td><td>skip</td></tr>
 <tr>
-<td>$32f7</td><td colspan="2" align="right">89</td><td>skip</td></tr>
+<td>$3302</td><td colspan="2" align="right">14</td><td>Lcommon160</td></tr>
 <tr>
-<td>$3350</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$3310</td><td colspan="2" align="right">89</td><td>skip</td></tr>
 <tr>
-<td>$3370</td><td colspan="2" align="right">16</td><td>skip</td></tr>
+<td>$3369</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3380</td><td colspan="2" align="right">78</td><td>skip</td></tr>
+<td>$3389</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$33ce</td><td colspan="2" align="right">77</td><td>skip</td></tr>
+<td>$3399</td><td colspan="2" align="right">78</td><td>skip</td></tr>
 <tr>
-<td>$341b</td><td colspan="2" align="right">14</td><td>Lcommon91</td></tr>
+<td>$33e7</td><td colspan="2" align="right">77</td><td>skip</td></tr>
 <tr>
-<td>$3429</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$3434</td><td colspan="2" align="right">14</td><td>Lcommon157</td></tr>
 <tr>
-<td>$3431</td><td colspan="2" align="right">4</td><td>skip</td></tr>
+<td>$3442</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$3435</td><td colspan="2" align="right">14</td><td>Lcommon93</td></tr>
+<td>$344a</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$3443</td><td colspan="2" align="right">16</td><td>skip</td></tr>
+<td>$344e</td><td colspan="2" align="right">14</td><td>Lcommon159</td></tr>
 <tr>
-<td>$3453</td><td colspan="2" align="right">19</td><td>skip</td></tr>
+<td>$345c</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$3466</td><td colspan="2" align="right">15</td><td>skip</td></tr>
+<td>$346c</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$3475</td><td align="right">8</td><td align="right">8</td><td>_save_zero2</td></tr>
+<td>$347f</td><td colspan="2" align="right">15</td><td>skip</td></tr>
 <tr>
-<td>$347d</td><td align="right">147</td><td align="right">8</td><td>_save_zero</td></tr>
+<td>$348e</td><td align="right" id='_save_zero2'>8</td><td align="right">8</td><td>_save_zero2</td></tr>
 <tr>
-<td>$3485</td><td colspan="2" align="right">59</td><td>Lcommon97</td></tr>
+<td>$3496</td><td align="right" id='_save_zero'>147</td><td align="right">8</td><td>_save_zero</td></tr>
 <tr>
-<td>$34c0</td><td colspan="2" align="right">39</td><td>Lcommon89</td></tr>
+<td>$349e</td><td colspan="2" align="right">59</td><td>Lcommon163</td></tr>
 <tr>
-<td>$34e7</td><td colspan="2" align="right">39</td><td>Lcommon83</td></tr>
+<td>$34d9</td><td colspan="2" align="right">39</td><td>Lcommon155</td></tr>
 <tr>
-<td>$350e</td><td colspan="2" align="right">2</td><td>Lcommon79</td></tr>
+<td><b>$3500</b></td><td colspan="2" align="right">39</td><td>Lcommon149</td></tr>
 <tr>
-<td>$3510</td><td align="right">1</td><td align="right">1</td><td>_s</td></tr>
+<td>$3527</td><td colspan="2" align="right">2</td><td>Lcommon145</td></tr>
 <tr>
-<td>$3511</td><td align="right">1</td><td align="right">1</td><td>_x</td></tr>
+<td>$3529</td><td align="right" id='_s'>1</td><td align="right">1</td><td>_s</td></tr>
 <tr>
-<td>$3512</td><td align="right">1</td><td align="right">1</td><td>_y</td></tr>
+<td>$352a</td><td align="right" id='_x'>1</td><td align="right">1</td><td>_x</td></tr>
 <tr>
-<td>$3513</td><td align="right">1</td><td align="right">1</td><td>_ville</td></tr>
+<td>$352b</td><td align="right" id='_y'>1</td><td align="right">1</td><td>_y</td></tr>
 <tr>
-<td>$3514</td><td align="right">1</td><td align="right">1</td><td>_ca</td></tr>
+<td>$352c</td><td align="right" id='_ville'>1</td><td align="right">1</td><td>_ville</td></tr>
 <tr>
-<td>$3515</td><td align="right">2</td><td align="right">2</td><td>_teamfilename</td></tr>
+<td>$352d</td><td align="right" id='_ca'>1</td><td align="right">1</td><td>_ca</td></tr>
 <tr>
-<td>$3517</td><td align="right">1</td><td align="right">1</td><td>_io_needed</td></tr>
+<td>$352e</td><td align="right" id='_teamfilename'>2</td><td align="right">2</td><td>_teamfilename</td></tr>
 <tr>
-<td>$3518</td><td align="right">2064</td><td align="right">77</td><td>_loadCharacters</td></tr>
+<td>$3530</td><td align="right" id='_io_needed'>1</td><td align="right">1</td><td>_io_needed</td></tr>
 <tr>
-<td>$3565</td><td colspan="2" align="right">50</td><td>skip</td></tr>
+<td>$3531</td><td align="right" id='_loadCharacters'>2294</td><td align="right">77</td><td>_loadCharacters</td></tr>
 <tr>
-<td>$3597</td><td colspan="2" align="right">6</td><td>Lteam69</td></tr>
+<td>$357e</td><td colspan="2" align="right">50</td><td>skip</td></tr>
 <tr>
-<td>$359d</td><td colspan="2" align="right">16</td><td>Lteam70</td></tr>
+<td>$35b0</td><td colspan="2" align="right">6</td><td>Lteam135</td></tr>
 <tr>
-<td>$35ad</td><td colspan="2" align="right">43</td><td>skip</td></tr>
+<td>$35b6</td><td colspan="2" align="right">16</td><td>Lteam136</td></tr>
 <tr>
-<td>$35d8</td><td colspan="2" align="right">14</td><td>skip</td></tr>
+<td>$35c6</td><td colspan="2" align="right">89</td><td>skip</td></tr>
 <tr>
-<td>$35e6</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$361f</td><td colspan="2" align="right">14</td><td>skip</td></tr>
 <tr>
-<td>$3606</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$362d</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3613</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$364d</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3633</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$365a</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3640</td><td colspan="2" align="right">33</td><td>skip</td></tr>
+<td>$367a</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3661</td><td colspan="2" align="right">33</td><td>skip</td></tr>
+<td>$3687</td><td colspan="2" align="right">33</td><td>skip</td></tr>
 <tr>
-<td>$3682</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$36a8</td><td colspan="2" align="right">33</td><td>skip</td></tr>
 <tr>
-<td>$36a2</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$36c9</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$36af</td><td colspan="2" align="right">47</td><td>skip</td></tr>
+<td>$36e9</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$36de</td><td colspan="2" align="right">20</td><td>Lteam75</td></tr>
+<td>$36f6</td><td colspan="2" align="right">82</td><td>skip</td></tr>
 <tr>
-<td>$36f2</td><td colspan="2" align="right">42</td><td>Lteam73</td></tr>
+<td>$3748</td><td colspan="2" align="right">28</td><td>skip</td></tr>
 <tr>
-<td>$371c</td><td colspan="2" align="right">41</td><td>skip</td></tr>
+<td>$3764</td><td colspan="2" align="right">81</td><td>skip</td></tr>
 <tr>
-<td>$3745</td><td colspan="2" align="right">24</td><td>Lteam79</td></tr>
+<td>$37b5</td><td colspan="2" align="right">20</td><td>Lteam145</td></tr>
 <tr>
-<td>$375d</td><td colspan="2" align="right">22</td><td>skip</td></tr>
+<td>$37c9</td><td colspan="2" align="right">42</td><td>Lteam143</td></tr>
 <tr>
-<td>$3773</td><td colspan="2" align="right">23</td><td>skip</td></tr>
+<td>$37f3</td><td colspan="2" align="right">81</td><td>skip</td></tr>
 <tr>
-<td>$378a</td><td colspan="2" align="right">7</td><td>Lteam83</td></tr>
+<td>$3844</td><td colspan="2" align="right">24</td><td>Lteam151</td></tr>
 <tr>
-<td>$3791</td><td colspan="2" align="right">14</td><td>Lteam85</td></tr>
+<td>$385c</td><td colspan="2" align="right">22</td><td>skip</td></tr>
 <tr>
-<td>$379f</td><td colspan="2" align="right">16</td><td>skip</td></tr>
+<td>$3872</td><td colspan="2" align="right">23</td><td>skip</td></tr>
 <tr>
-<td>$37af</td><td colspan="2" align="right">85</td><td>skip</td></tr>
+<td>$3889</td><td colspan="2" align="right">7</td><td>Lteam155</td></tr>
 <tr>
-<td>$3804</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$3890</td><td colspan="2" align="right">14</td><td>Lteam157</td></tr>
 <tr>
-<td>$380c</td><td colspan="2" align="right">14</td><td>Lteam86</td></tr>
+<td>$389e</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$381a</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$38ae</td><td colspan="2" align="right">85</td><td>skip</td></tr>
 <tr>
-<td>$3822</td><td colspan="2" align="right">4</td><td>skip</td></tr>
+<td>$3903</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$3826</td><td colspan="2" align="right">14</td><td>Lteam88</td></tr>
+<td>$390b</td><td colspan="2" align="right">14</td><td>Lteam158</td></tr>
 <tr>
-<td>$3834</td><td colspan="2" align="right">16</td><td>skip</td></tr>
+<td>$3919</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$3844</td><td colspan="2" align="right">19</td><td>skip</td></tr>
+<td>$3921</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$3857</td><td colspan="2" align="right">14</td><td>skip</td></tr>
+<td>$3925</td><td colspan="2" align="right">14</td><td>Lteam160</td></tr>
 <tr>
-<td>$3865</td><td colspan="2" align="right">16</td><td>skip</td></tr>
+<td>$3933</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$3875</td><td colspan="2" align="right">71</td><td>skip</td></tr>
+<td>$3943</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$38bc</td><td colspan="2" align="right">127</td><td>skip</td></tr>
+<td>$3956</td><td colspan="2" align="right">14</td><td>skip</td></tr>
 <tr>
-<td>$393b</td><td colspan="2" align="right">127</td><td>skip</td></tr>
+<td>$3964</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$39ba</td><td colspan="2" align="right">83</td><td>skip</td></tr>
+<td>$3974</td><td colspan="2" align="right">71</td><td>skip</td></tr>
 <tr>
-<td>$3a0d</td><td colspan="2" align="right">113</td><td>skip</td></tr>
+<td>$39bb</td><td colspan="2" align="right">127</td><td>skip</td></tr>
 <tr>
-<td>$3a7e</td><td colspan="2" align="right">14</td><td>Lteam80, Lteam91</td></tr>
+<td>$3a3a</td><td colspan="2" align="right">127</td><td>skip</td></tr>
 <tr>
-<td>$3a8c</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$3ab9</td><td colspan="2" align="right">83</td><td>skip</td></tr>
 <tr>
-<td>$3a94</td><td colspan="2" align="right">4</td><td>skip</td></tr>
+<td>$3b0c</td><td colspan="2" align="right">113</td><td>skip</td></tr>
 <tr>
-<td>$3a98</td><td colspan="2" align="right">14</td><td>Lteam82</td></tr>
+<td>$3b7d</td><td colspan="2" align="right">14</td><td>Lteam152, Lteam163</td></tr>
 <tr>
-<td>$3aa6</td><td colspan="2" align="right">19</td><td>skip</td></tr>
+<td>$3b8b</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$3ab9</td><td colspan="2" align="right">24</td><td>skip</td></tr>
+<td>$3b93</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$3ad1</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3b97</td><td colspan="2" align="right">14</td><td>Lteam154</td></tr>
 <tr>
-<td>$3ade</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$3ba5</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$3afe</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3bb8</td><td colspan="2" align="right">24</td><td>skip</td></tr>
 <tr>
-<td>$3b0b</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$3bd0</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3b2b</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3bdd</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3b38</td><td colspan="2" align="right">257</td><td>skip</td></tr>
+<td>$3bfd</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3c39</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3c0a</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3c46</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$3c2a</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3c66</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3c37</td><td colspan="2" align="right">257</td><td>skip</td></tr>
 <tr>
-<td>$3c73</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$3d38</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3c93</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3d45</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3ca0</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$3d65</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3cc0</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3d72</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3ccd</td><td colspan="2" align="right">32</td><td>skip</td></tr>
+<td>$3d92</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3ced</td><td colspan="2" align="right">13</td><td>skip</td></tr>
+<td>$3d9f</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3cfa</td><td colspan="2" align="right">11</td><td>skip</td></tr>
+<td>$3dbf</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3d05</td><td colspan="2" align="right">32</td><td>Lteam71</td></tr>
+<td>$3dcc</td><td colspan="2" align="right">32</td><td>skip</td></tr>
 <tr>
-<td>$3d25</td><td colspan="2" align="right">3</td><td>Lteam72</td></tr>
+<td>$3dec</td><td colspan="2" align="right">13</td><td>skip</td></tr>
 <tr>
-<td>$3d28</td><td align="right">1853</td><td align="right">73</td><td>_saveCharacters</td></tr>
+<td>$3df9</td><td colspan="2" align="right">11</td><td>skip</td></tr>
 <tr>
-<td>$3d71</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$3e04</td><td colspan="2" align="right">32</td><td>Lteam137</td></tr>
 <tr>
-<td>$3da2</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$3e24</td><td colspan="2" align="right">3</td><td>Lteam138</td></tr>
 <tr>
-<td>$3dd3</td><td colspan="2" align="right">41</td><td>skip</td></tr>
+<td>$3e27</td><td align="right" id='_saveCharacters'>1853</td><td align="right">73</td><td>_saveCharacters</td></tr>
 <tr>
-<td>$3dfc</td><td colspan="2" align="right">41</td><td>skip</td></tr>
+<td>$3e70</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$3e25</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$3ea1</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$3e56</td><td colspan="2" align="right">15</td><td>skip</td></tr>
+<td>$3ed2</td><td colspan="2" align="right">41</td><td>skip</td></tr>
 <tr>
-<td>$3e65</td><td colspan="2" align="right">14</td><td>Lteam99</td></tr>
+<td>$3efb</td><td colspan="2" align="right">41</td><td>skip</td></tr>
 <tr>
-<td>$3e73</td><td colspan="2" align="right">94</td><td>skip</td></tr>
+<td>$3f24</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$3ed1</td><td colspan="2" align="right">15</td><td>skip</td></tr>
+<td>$3f55</td><td colspan="2" align="right">15</td><td>skip</td></tr>
 <tr>
-<td>$3ee0</td><td colspan="2" align="right">22</td><td>Lteam103</td></tr>
+<td>$3f64</td><td colspan="2" align="right">14</td><td>Lteam171</td></tr>
 <tr>
-<td>$3ef6</td><td colspan="2" align="right">16</td><td>skip</td></tr>
+<td>$3f72</td><td colspan="2" align="right">94</td><td>skip</td></tr>
 <tr>
-<td>$3f06</td><td colspan="2" align="right">77</td><td>skip</td></tr>
+<td>$3fd0</td><td colspan="2" align="right">15</td><td>skip</td></tr>
 <tr>
-<td>$3f53</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$3fdf</td><td colspan="2" align="right">22</td><td>Lteam175</td></tr>
 <tr>
-<td>$3f5b</td><td colspan="2" align="right">14</td><td>Lteam104</td></tr>
+<td>$3ff5</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$3f69</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$4005</td><td colspan="2" align="right">77</td><td>skip</td></tr>
 <tr>
-<td>$3f71</td><td colspan="2" align="right">4</td><td>skip</td></tr>
+<td>$4052</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$3f75</td><td colspan="2" align="right">14</td><td>Lteam106</td></tr>
+<td>$405a</td><td colspan="2" align="right">14</td><td>Lteam176</td></tr>
 <tr>
-<td>$3f83</td><td colspan="2" align="right">16</td><td>skip</td></tr>
+<td>$4068</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$3f93</td><td colspan="2" align="right">19</td><td>skip</td></tr>
+<td>$4070</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$3fa6</td><td colspan="2" align="right">33</td><td>skip</td></tr>
+<td>$4074</td><td colspan="2" align="right">14</td><td>Lteam178</td></tr>
 <tr>
-<td>$3fc7</td><td colspan="2" align="right">127</td><td>skip</td></tr>
+<td>$4082</td><td colspan="2" align="right">16</td><td>skip</td></tr>
 <tr>
-<td>$4046</td><td colspan="2" align="right">108</td><td>skip</td></tr>
+<td>$4092</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$40b2</td><td colspan="2" align="right">102</td><td>skip</td></tr>
+<td>$40a5</td><td colspan="2" align="right">33</td><td>skip</td></tr>
 <tr>
-<td>$4118</td><td colspan="2" align="right">94</td><td>skip</td></tr>
+<td>$40c6</td><td colspan="2" align="right">127</td><td>skip</td></tr>
 <tr>
-<td>$4176</td><td colspan="2" align="right">14</td><td>Lteam100, Lteam109</td></tr>
+<td>$4145</td><td colspan="2" align="right">108</td><td>skip</td></tr>
 <tr>
-<td>$4184</td><td colspan="2" align="right">8</td><td>skip</td></tr>
+<td>$41b1</td><td colspan="2" align="right">102</td><td>skip</td></tr>
 <tr>
-<td>$418c</td><td colspan="2" align="right">4</td><td>skip</td></tr>
+<td>$4217</td><td colspan="2" align="right">94</td><td>skip</td></tr>
 <tr>
-<td>$4190</td><td colspan="2" align="right">14</td><td>Lteam102</td></tr>
+<td>$4275</td><td colspan="2" align="right">14</td><td>Lteam172, Lteam181</td></tr>
 <tr>
-<td>$419e</td><td colspan="2" align="right">19</td><td>skip</td></tr>
+<td>$4283</td><td colspan="2" align="right">8</td><td>skip</td></tr>
 <tr>
-<td>$41b1</td><td colspan="2" align="right">41</td><td>skip</td></tr>
+<td>$428b</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$41da</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$428f</td><td colspan="2" align="right">14</td><td>Lteam174</td></tr>
 <tr>
-<td>$420b</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$429d</td><td colspan="2" align="right">19</td><td>skip</td></tr>
 <tr>
-<td>$423c</td><td colspan="2" align="right">274</td><td>skip</td></tr>
+<td>$42b0</td><td colspan="2" align="right">41</td><td>skip</td></tr>
 <tr>
-<td>$434e</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$42d9</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$437f</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$430a</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$43b0</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$433b</td><td colspan="2" align="right">274</td><td>skip</td></tr>
 <tr>
-<td>$43e1</td><td colspan="2" align="right">49</td><td>skip</td></tr>
+<td>$444d</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$4412</td><td colspan="2" align="right">23</td><td>skip</td></tr>
+<td>$447e</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$4429</td><td colspan="2" align="right">57</td><td>skip</td></tr>
+<td>$44af</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$4462</td><td colspan="2" align="right">3</td><td>Lteam113</td></tr>
+<td>$44e0</td><td colspan="2" align="right">49</td><td>skip</td></tr>
 <tr>
-<td>$4465</td><td align="right">1</td><td align="right">1</td><td>_pm</td></tr>
+<td>$4511</td><td colspan="2" align="right">23</td><td>skip</td></tr>
 <tr>
-<td>$4466</td><td align="right">1</td><td align="right">1</td><td>_nf</td></tr>
+<td>$4528</td><td colspan="2" align="right">57</td><td>skip</td></tr>
 <tr>
-<td>$4467</td><td align="right">1</td><td align="right">1</td><td>_np</td></tr>
+<td>$4561</td><td colspan="2" align="right">3</td><td>Lteam185</td></tr>
 <tr>
-<td>$4468</td><td align="right">1</td><td align="right">1</td><td>_tl</td></tr>
+<td>$4564</td><td align="right" id='_pm'>1</td><td align="right">1</td><td>_pm</td></tr>
 <tr>
-<td>$4469</td><td align="right">1</td><td align="right">1</td><td>_dedans</td></tr>
+<td>$4565</td><td align="right" id='_nf'>1</td><td align="right">1</td><td>_nf</td></tr>
 <tr>
-<td>$446a</td><td align="right">45</td><td align="right">45</td><td>_combats_coffres</td></tr>
+<td>$4566</td><td align="right" id='_np'>1</td><td align="right">1</td><td>_np</td></tr>
 <tr>
-<td>$4497</td><td align="right">6</td><td align="right">6</td><td>_ingredients</td></tr>
+<td>$4567</td><td align="right" id='_tl'>1</td><td align="right">1</td><td>_tl</td></tr>
 <tr>
-<td>$449d</td><td align="right">36</td><td align="right">36</td><td>_cles</td></tr>
+<td>$4568</td><td align="right" id='_dedans'>1</td><td align="right">1</td><td>_dedans</td></tr>
 <tr>
-<td>$44c1</td><td align="right">1</td><td align="right">1</td><td>_selle_dragon</td></tr>
+<td>$4569</td><td align="right" id='_combats_coffres'>45</td><td align="right">45</td><td>_combats_coffres</td></tr>
 <tr>
-<td>$44c2</td><td align="right">1</td><td align="right">1</td><td>_filet</td></tr>
+<td>$4596</td><td align="right" id='_ingredients'>6</td><td align="right">6</td><td>_ingredients</td></tr>
 <tr>
-<td>$44c3</td><td align="right">1</td><td align="right">1</td><td>_boussole</td></tr>
+<td>$459c</td><td align="right" id='_cles'>36</td><td align="right">36</td><td>_cles</td></tr>
 <tr>
-<td>$44c4</td><td align="right">276</td><td align="right">276</td><td>_characters</td></tr>
+<td>$45c0</td><td align="right" id='_selle_dragon'>1</td><td align="right">1</td><td>_selle_dragon</td></tr>
 <tr>
-<td>$45d8</td><td align="right">1</td><td align="right">1</td><td>_lo</td></tr>
+<td>$45c1</td><td align="right" id='_filet'>1</td><td align="right">1</td><td>_filet</td></tr>
 <tr>
-<td>$45d9</td><td align="right">140</td><td align="right">1</td><td>_hi</td></tr>
+<td>$45c2</td><td align="right" id='_boussole'>1</td><td align="right">1</td><td>_boussole</td></tr>
 <tr>
-<td>$45da</td><td colspan="2" align="right">45</td><td>Lteam98</td></tr>
+<td>$45c3</td><td align="right" id='_characters'>276</td><td align="right">276</td><td>_characters</td></tr>
 <tr>
-<td>$4607</td><td colspan="2" align="right">39</td><td>Lteam96</td></tr>
+<td>$46d7</td><td align="right" id='_lo'>1</td><td align="right">1</td><td>_lo</td></tr>
 <tr>
-<td>$462e</td><td colspan="2" align="right">14</td><td>Lteam78</td></tr>
+<td>$46d8</td><td align="right" id='_hi'>202</td><td align="right">1</td><td>_hi</td></tr>
 <tr>
-<td>$463c</td><td colspan="2" align="right">32</td><td>Lteam68</td></tr>
+<td>$46d9</td><td colspan="2" align="right">45</td><td>Lteam170</td></tr>
 <tr>
-<td>$465c</td><td colspan="2" align="right">9</td><td>Lteam66</td></tr>
+<td>$4706</td><td colspan="2" align="right">39</td><td>Lteam168</td></tr>
 <tr>
-<td>$4665</td><td align="right">1</td><td align="right">1</td><td>_SPStorage</td></tr>
+<td>$472d</td><td colspan="2" align="right">14</td><td>Lteam150</td></tr>
 <tr>
-<td>$4666</td><td align="right">5</td><td align="right">5</td><td>_BackupSP</td></tr>
+<td>$473b</td><td colspan="2" align="right">11</td><td>Lteam148</td></tr>
 <tr>
-<td>$466b</td><td align="right">73</td><td align="right">73</td><td>_DiscSave</td></tr>
+<td>$4746</td><td colspan="2" align="right">31</td><td>Lteam142</td></tr>
 <tr>
-<td>$46b4</td><td align="right">30</td><td align="right">30</td><td>_DiscLoad</td></tr>
+<td>$4765</td><td colspan="2" align="right">20</td><td>Lteam140</td></tr>
 <tr>
-<td>$46d2</td><td align="right">39</td><td align="right">12</td><td>_Sedoric</td></tr>
+<td>$4779</td><td colspan="2" align="right">32</td><td>Lteam134</td></tr>
 <tr>
-<td>$46de</td><td colspan="2" align="right">27</td><td>sedoricloop1</td></tr>
+<td>$4799</td><td colspan="2" align="right">9</td><td>Lteam132</td></tr>
 <tr>
-<td>$46f9</td><td align="right">55</td><td align="right">12</td><td>_SwitchToCommand</td></tr>
+<td>$47a2</td><td align="right" id='_SPStorage'>1</td><td align="right">1</td><td>_SPStorage</td></tr>
 <tr>
-<td>$4705</td><td colspan="2" align="right">25</td><td>sedoricloop2</td></tr>
+<td>$47a3</td><td align="right" id='_BackupSP'>5</td><td align="right">5</td><td>_BackupSP</td></tr>
 <tr>
-<td>$471e</td><td colspan="2" align="right">8</td><td>TableBit</td></tr>
+<td>$47a8</td><td align="right" id='_DiscSave'>73</td><td align="right">73</td><td>_DiscSave</td></tr>
 <tr>
-<td>$4726</td><td colspan="2" align="right">10</td><td>calculXY</td></tr>
+<td>$47f1</td><td align="right" id='_DiscLoad'>30</td><td align="right">30</td><td>_DiscLoad</td></tr>
 <tr>
-<td>$4730</td><td align="right">27</td><td align="right">27</td><td>_SetBit</td></tr>
+<td>$480f</td><td align="right" id='_Sedoric'>39</td><td align="right">12</td><td>_Sedoric</td></tr>
 <tr>
-<td>$474b</td><td align="right">27</td><td align="right">27</td><td>_InvertBit</td></tr>
+<td>$481b</td><td colspan="2" align="right">27</td><td>sedoricloop1</td></tr>
 <tr>
-<td>$4766</td><td align="right">28</td><td align="right">28</td><td>_TestBit</td></tr>
+<td>$4836</td><td align="right" id='_SwitchToCommand'>55</td><td align="right">12</td><td>_SwitchToCommand</td></tr>
 <tr>
-<td>$4782</td><td align="right">70</td><td align="right">39</td><td>_lz77_unpack</td></tr>
+<td>$4842</td><td colspan="2" align="right">25</td><td>sedoricloop2</td></tr>
 <tr>
-<td>$47a9</td><td colspan="2" align="right">12</td><td>unpack_loop</td></tr>
+<td>$485b</td><td colspan="2" align="right">8</td><td>TableBit</td></tr>
 <tr>
-<td>$47b5</td><td colspan="2" align="right">3</td><td>skip</td></tr>
+<td>$4863</td><td colspan="2" align="right">10</td><td>calculXY</td></tr>
 <tr>
-<td>$47b8</td><td colspan="2" align="right">2</td><td>end_reload_mask</td></tr>
+<td>$486d</td><td align="right" id='_SetBit'>27</td><td align="right">27</td><td>_SetBit</td></tr>
 <tr>
-<td>$47ba</td><td colspan="2" align="right">10</td><td>write_byte</td></tr>
+<td>$4888</td><td align="right" id='_InvertBit'>27</td><td align="right">27</td><td>_InvertBit</td></tr>
 <tr>
-<td>$47c4</td><td colspan="2" align="right">4</td><td>skip</td></tr>
+<td>$48a3</td><td align="right" id='_TestBit'>28</td><td align="right">28</td><td>_TestBit</td></tr>
 <tr>
-<td>$47c8</td><td align="right">84</td><td align="right">11</td><td>_UnpackEndLoop</td></tr>
+<td>$48bf</td><td align="right" id='_lz77_unpack'>70</td><td align="right">39</td><td>_lz77_unpack</td></tr>
 <tr>
-<td>$47d3</td><td colspan="2" align="right">9</td><td>skip</td></tr>
+<td>$48e6</td><td colspan="2" align="right">12</td><td>unpack_loop</td></tr>
 <tr>
-<td>$47dc</td><td colspan="2" align="right">40</td><td>back_copy</td></tr>
+<td>$48f2</td><td colspan="2" align="right">3</td><td>skip</td></tr>
 <tr>
-<td>$4804</td><td colspan="2" align="right">24</td><td>copy_loop</td></tr>
+<td>$48f5</td><td colspan="2" align="right">2</td><td>end_reload_mask</td></tr>
 <tr>
-<td>$481c</td><td align="right">41</td><td align="right">2</td><td>_affimage</td></tr>
+<td>$48f7</td><td colspan="2" align="right">10</td><td>write_byte</td></tr>
 <tr>
-<td>$481e</td><td colspan="2" align="right">2</td><td>affimage_begin</td></tr>
+<td>$4901</td><td colspan="2" align="right">4</td><td>skip</td></tr>
 <tr>
-<td>$4820</td><td colspan="2" align="right">21</td><td>affimage_loop1</td></tr>
+<td>$4905</td><td align="right" id='_UnpackEndLoop'>84</td><td align="right">11</td><td>_UnpackEndLoop</td></tr>
 <tr>
-<td>$4835</td><td colspan="2" align="right">10</td><td>affimage_mid</td></tr>
+<td>$4910</td><td colspan="2" align="right">9</td><td>skip</td></tr>
 <tr>
-<td>$483f</td><td colspan="2" align="right">6</td><td>affimage_last</td></tr>
+<td>$4919</td><td colspan="2" align="right">40</td><td>back_copy</td></tr>
 <tr>
-<td>$4845</td><td align="right">256</td><td align="right">256</td><td>osdk_stack</td></tr>
+<td>$4941</td><td colspan="2" align="right">24</td><td>copy_loop</td></tr>
 <tr>
-<td>$4945</td><td align="right">4</td><td align="right">4</td><td>osdk_check</td></tr>
+<td>$4959</td><td align="right" id='_affimage'>41</td><td align="right">2</td><td>_affimage</td></tr>
 <tr>
-<td>$4949</td><td align="right">30390</td><td align="right">30390</td><td>osdk_end</td></tr>
+<td>$495b</td><td colspan="2" align="right">2</td><td>affimage_begin</td></tr>
+<tr>
+<td>$495d</td><td colspan="2" align="right">21</td><td>affimage_loop1</td></tr>
+<tr>
+<td>$4972</td><td colspan="2" align="right">10</td><td>affimage_mid</td></tr>
+<tr>
+<td>$497c</td><td colspan="2" align="right">6</td><td>affimage_last</td></tr>
+<tr>
+<td>$4982</td><td align="right" id='osdk_stack'>256</td><td align="right">256</td><td>osdk_stack</td></tr>
+<tr>
+<td>$4a82</td><td align="right" id='osdk_check'>4</td><td align="right">4</td><td>osdk_check</td></tr>
+<tr>
+<td>$4a86</td><td align="right" id='osdk_end'>30073</td><td align="right">30073</td><td>osdk_end</td></tr>
+</tbody>
 </table>
 </td>
 <td valign=top>
 <a name="Zero"></a>
 <h1>Zero page</h1>
-<table border>
+<table class='memmap'>
+<thead>
 <tr>
-<th>Adress</th><th colspan="2">Size</th><th>Name</th>
+<th colspan=4>Section layout</th>
 </tr>
 <tr>
-<td>$50</td><td colspan="2" align="right">2</td><td>ap</td></tr>
+<th>Address</th><th colspan="2">Size</th><th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$50</td><td colspan="2" align="right">2</td><td>ap, zp_compiler_save_start</td></tr>
 <tr>
 <td>$52</td><td colspan="2" align="right">2</td><td>fp</td></tr>
 <tr>
@@ -1137,13 +1162,16 @@
 <tr>
 <td>$78</td><td colspan="2" align="right">2</td><td>reg6</td></tr>
 <tr>
-<td>$7a</td><td colspan="2" align="right">133</td><td>reg7</td></tr>
+<td>$7a</td><td colspan="2" align="right">2</td><td>reg7</td></tr>
+<tr>
+<td>$7c</td><td colspan="2" align="right">131</td><td>zp_compiler_save_end</td></tr>
+</tbody>
 </table>
 </td>
 </tr>
 </table>
 <hr>
-<center>Generated by MemMap version 0.4</center>
+<center>Generated by MemMap version 1.1</center>
 <hr>
 	</BODY>
 </HTML>
