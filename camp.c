@@ -35,6 +35,8 @@ extern unsigned char boussole;
 extern unsigned char filet;
 extern unsigned char selle_dragon;
 
+extern unsigned char out;
+
 extern char io_needed;
 extern char eencre[];
 
@@ -810,7 +812,7 @@ void main()
 		io_needed = 1;
 		saveCharacters();
 		restorePageZero();
-		if (ville == 10) // dehors
+		if (out == 1) // dehors
 			SwitchToCommand("MAP");
 		else 
 			SwitchToCommand("LABY");

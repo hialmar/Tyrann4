@@ -31,3 +31,9 @@ pour optimiser certains modules.
    une critique,  m'ont reboosté quand j'étais enfermé dans un code buggué parfois pdt 1 semaine, fichtre !
 
    
+
+
+   Rome est exaspérée par sa frontière nord en Bretagne, le mur d'Antonin semble la limite pour les légions romaines et l'Empereur Lucius Verus décide d'envoyer des renforts. C'est la légion de Nemausus (Nîmes) qui est choisie, son père l'empereur Antonin, dont les parents étaient originaires, lui en avait vanté les qualités, fruits du multiculturalisme de ses rangs, c'est un genre de légion étrangère avant l'heure avec beaucoup de gaulois, de gallo-romains, mais aussi d'espagnols et en fait de toutes les régions de l'empire… d'où des compétences surprenantes et même parfois fantastiques.
+   Afin d'assurer cette fois le succès de l'expédition, un commando est soigneusement constitué pour infiltrer le territoire des Pictes (Ecosse actuelle) et d'y glaner toutes informations utiles au plan d'invasion:
+   > places fortes, points faibles, géographie des lieux, noms des chefs, armements, effectifs, etc...
+   

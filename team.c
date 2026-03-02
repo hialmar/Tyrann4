@@ -31,6 +31,8 @@ unsigned char np; // nombre d'ingredients de la potion
 unsigned char nf; // nombre de fuites
 unsigned char pm; // potion faite ?
 
+unsigned char out=1; // sur la carte ?
+
 char ca = 0; // case courante
 
 char * teamfilename = "TEAM.BIN"; // fichier contenant l'équipe
@@ -184,7 +186,10 @@ void loadCharacters(void)
 		ptr++;
 		pm=*ptr;
 		ptr++;
-		//printf("longueur %d\n", (int) (ptr - 0xa000));
+		out=1;//*ptr;
+		printf("out : %d", out);
+		ptr++;
+		printf("longueur %d\n", (int) (ptr - 0xa000));
 	} else {
 		printf("Erreur lors du chargement de TEAM.BIN\n");
 		exit(1);
@@ -264,6 +269,9 @@ void saveCharacters(void)
 	*ptr = nf;
 	ptr++;
 	*ptr = pm;
+	ptr++;
+	*ptr = out;
+	printf("out : %d", out);
 	ptr++;
 	//printf("fin (%x) longueur %d\n", (unsigned int) ptr, (int) (ptr - 0xa000));
 	if (io_needed) {

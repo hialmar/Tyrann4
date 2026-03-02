@@ -37,7 +37,7 @@
 
 extern char io_needed;
 
-extern unsigned char ville;
+extern unsigned char out;
 
 #define TMAX 800
 char textes[TMAX];
@@ -223,7 +223,7 @@ void main() {
     io_needed=1;
     loadCharacters();
 
-    ville = 10; // dehors
+    out = 1; // dehors
 
 #ifdef debug
     printf("taper sur une touche pour continuer\n");
@@ -488,7 +488,7 @@ void play_map() {
 		combat = (nb_combat < 20) ? rand()%10 == 1 : rand()%15 == 1;
 		if(combat) {
 			nb_combat++;
-			printAtXY(3, 25, "debug : C pour combat, autre evite.\n");
+			printAtXY(3, 25, "debug : C pour combat, autre evite");
 			keycode = get();
 			if (keycode == 'c' || keycode == 'C') {
 				text();
@@ -496,7 +496,9 @@ void play_map() {
 				saveCharacters();
 				restorePageZero();
 				SwitchToCommand("COMBAT");
-			}
+			} else {
+                printAtXY(3, 25, "                                    ");
+            }
 		}
 #endif
 
