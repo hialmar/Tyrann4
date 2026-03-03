@@ -78,7 +78,7 @@ void loadCharacters(void)
 		// test
 		if (x==0 || x > 100) {
 			x = 2; y = 2; s = 1; ville = 4;
-			//printf("x=%d y=%d s=%d ca=%d\n", x, y, s, ca);
+			// printf("x=%d y=%d s=%d ca=%d\n", x, y, s, ca);
 		}
 		ink(eencre[ville-1]);
 		printf("ville: %d\n", ville);

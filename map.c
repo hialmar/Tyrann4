@@ -39,6 +39,10 @@ extern char io_needed;
 
 extern unsigned char out;
 
+extern unsigned char x; // coords
+extern unsigned char y;
+
+
 #define TMAX 800
 char textes[TMAX];
 int tmax = TMAX;
@@ -420,7 +424,6 @@ void display_window() {
  * play_map(): affichage de la carte et boucle principale de gestion du clavier et des déplacements
  */
 void play_map() { 
-    uchar x, y;    // coordonnees ABSOLUES du personnage dans la map
     uchar px,py;   // coordonnees RELATIVES du personnage dans la fenêtre d'affichage
     uchar xv, yv;  // coordonnées de départ (offset) de la map pour l'affichage dans la fenêtre
     uchar i, j;
@@ -438,7 +441,7 @@ void play_map() {
     uchar keycode = NO_KEY;
     bool end = FALSE;
 
-    x = 50; y = 50;
+    // x = 50; y = 50;
 
     // Boucle principale:
     // - affichage de la partie visible de la carte dans la fenêtre
@@ -496,20 +499,23 @@ void play_map() {
         
 		// combats aléatoires ?
 #ifdef RANDOM
-		combat = (nb_combat < 20) ? rand()%10 == 1 : rand()%15 == 1;
+		combat = (nb_combat < 20) ? my_rnd(30) == 1 : my_rnd(100) == 1;
 		if(combat) {
 			nb_combat++;
-			printAtXY(3, 25, "debug : F pour combat, autre evite");
-			keycode = get();
-			if (keycode == 'f' || keycode == 'F') {
-				text();
-				io_needed = 0;
-				saveCharacters();
-				restorePageZero();
-				SwitchToCommand("COMBAT");
-			} else {
-                printAtXY(3, 25, "                                    ");
+			printAtXY(3, 25, "Voulez-vous combattre (O/N) ?");
+            while(1) {
+                keycode = get();
+                if (keycode == 'o' || keycode == 'O') {
+                    text();
+                    io_needed = 0;
+                    saveCharacters();
+                    restorePageZero();
+                    SwitchToCommand("COMBAT");
+                } else if (keycode == 'n' || keycode == 'N') {
+                    break;
+                }
             }
+            printAtXY(3, 25, "                                    ");
 		}
 #endif
 
