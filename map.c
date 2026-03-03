@@ -412,7 +412,8 @@ void display_window() {
     }
     // Affichage des instructions sous la fenêtre:
     gotoxy(WX+4, WY+WIN_EXT_HEIGHT);   printf("Deplacements: fleches");
-    gotoxy(WX+4, WY+WIN_EXT_HEIGHT+1); printf("    ESC = quitter");
+    gotoxy(WX+4, WY+WIN_EXT_HEIGHT+1); printf("    C   = camper");
+    gotoxy(WX+4, WY+WIN_EXT_HEIGHT+2); printf("    ESC = quitter");
 }
 
 /** 
@@ -539,6 +540,8 @@ void play_map() {
             case 'M':
                 cls();
                 init_map();
+                cls();
+                display_window();
                 break;
             case 'c':
             case 'C':
