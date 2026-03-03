@@ -4,12 +4,12 @@ TYRANN IV
 Antoninus Nemausus Missio
 Maximus, Dom50, Hialmar, Retroric - 2026
 
-  Compagnon guerrier bonjour à toi, si tu as survécu à Tyrann, au Fer d'Amnukor (Tyrann II) et à Tyrann IV 
+  Compagnon guerrier bonjour à toi, si tu as survécu à Tyrann, au Fer d'Amnukor (Tyrann II) et à Tyrann III 
   (Rendez vous à Westeros) tu dois avoir hâte de découvrir TYRANN IV, mais avant l'aventure, une dédicace :
 
-    Ce jeu est dédié à la mémoire de Maximus, Denis Sol, parti bien trop tôt.
+****. Ce jeu est dédié à la mémoire de Maximus, Denis Sol, parti bien trop tôt.  ******
 
-   Attention ce jeu est un hommage à ces 2 best sellers des années 80, créés par le duo Remy Gosselin et 
+Attention ce jeu est un hommage à ces 2 best sellers des années 80, créés par le duo Remy Gosselin et 
    Mathias Wystrach de la société Norsoft, à qui je dois mes premières heures de passion ORIC et RPG, 
    encore merci Messieurs.  ;) 
 
