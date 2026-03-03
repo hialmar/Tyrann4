@@ -498,9 +498,9 @@ void play_map() {
 		combat = (nb_combat < 20) ? rand()%10 == 1 : rand()%15 == 1;
 		if(combat) {
 			nb_combat++;
-			printAtXY(3, 25, "debug : C pour combat, autre evite");
+			printAtXY(3, 25, "debug : F pour combat, autre evite");
 			keycode = get();
-			if (keycode == 'c' || keycode == 'C') {
+			if (keycode == 'f' || keycode == 'F') {
 				text();
 				io_needed = 0;
 				saveCharacters();
@@ -521,8 +521,8 @@ void play_map() {
         keycode = key(); // key n'attend pas
         switch(keycode) {
             case KEY_ESC:
-            case 'f':
-            case 'F':
+            case 'e':
+            case 'E':
                 end = TRUE;
                 break;
             case 's':
