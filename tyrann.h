@@ -51,7 +51,7 @@ void GenerateTables();
 
 extern unsigned char SPStorage;
 extern void BackupSP();
-extern char DiscSave(char * filename, char * pini, char * pend);
+extern char DiscSave(char * filename, unsigned char * pini, unsigned char * pend);
 extern char DiscLoad(char * filename);
 extern char Sedoric(char * command);
 extern void SwitchToCommand(char * command);

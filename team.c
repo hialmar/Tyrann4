@@ -277,6 +277,6 @@ void saveCharacters(void)
 	if (io_needed) {
 		//restorePageZero();
 		// 49390 PING:CSAVE "TEAM",A#A000,EO1
-		DiscSave("TEAM.BIN",(char*)0xa000, ptr);
+		DiscSave("TEAM.BIN",(unsigned char*)0xa000, (unsigned char*)ptr);
 	}
 }

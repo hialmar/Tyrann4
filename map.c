@@ -233,7 +233,17 @@ void main() {
     hide_cursor();
 
     display_title_screen();
-    init_map();
+    DiscLoad("MAP.BIN");
+    // init_map();
+
+    // printf("begin : %x, end : %x, size %d\n", (int)map, (unsigned int)(map) + sizeof(map), sizeof(map));
+
+    // DiscSave("MAP.BIN",(unsigned char*)map, (unsigned char*)((unsigned int)(map) + sizeof(map)));
+
+#ifdef debug
+    printf("taper sur une touche pour continuer\n");
+    a = (char)getchar();
+#endif
 
     cls();
     display_window();
@@ -515,6 +525,21 @@ void play_map() {
             case 'F':
                 end = TRUE;
                 break;
+            case 's':
+            case 'S':
+                gotoxy(3, 25);
+                printf("begin : %x, end : %x, size %d\n", (int)map, (unsigned int)(map) + sizeof(map), sizeof(map));
+                DiscSave("MAP.BIN",(unsigned char*)map, (unsigned char*)((unsigned int)(map) + sizeof(map)));
+                break;
+            case 'r':
+            case 'R':
+                DiscLoad("MAP.BIN");
+                break;
+            case 'm':
+            case 'M':
+                cls();
+                init_map();
+                break;
             case 'c':
             case 'C':
 				io_needed = 1;
@@ -555,7 +580,7 @@ void display_title_screen() {
 	cls(); paper(0); ink(4);
 
 	printf("\n\n\n\n\n");    
-	printf("  Demo carte deroulante en C\n");
+	printf("      Carte du Monde v2\n");
     printf("  --------------------------\n");
     printf("\n\n\n");
     printf("Initialisation en cours...\n");
