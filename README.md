@@ -7,21 +7,21 @@ Maximus, Dom50, Hialmar, Retroric - 2026
   Compagnon guerrier bonjour à toi, si tu as survécu à Tyrann, au Fer d'Amnukor (Tyrann II) et à Tyrann III 
   (Rendez vous à Westeros) tu dois avoir hâte de découvrir TYRANN IV, mais avant l'aventure, une dédicace :
 
-****. Ce jeu est dédié à la mémoire de Maximus, Denis Sol, parti bien trop tôt.  ******
+****. Ce jeu est dédié à la mémoire de Maximus, Denis Sol, parti bien trop tôt.  ****
 
-Attention ce jeu est un hommage à ces 2 best sellers des années 80, créés par le duo Remy Gosselin et 
+Nous lui laissons la parole ci-dessous :
+
+  D'abord à propos de Tyrann 3
+
+  Attention ce jeu est un hommage aux jeux Tyrann des années 80, créés par le duo Remy Gosselin et 
    Mathias Wystrach de la société Norsoft, à qui je dois mes premières heures de passion ORIC et RPG, 
    encore merci Messieurs.  ;) 
 
    C'est un jeu amateur en BASIC, en C et en Assembleur.
 
-Il est le fruit d'une communauté formidable sans laquelle je n'aurais jamais pu aboutir, il reste forcément perfectible.
-Le code est libre et à la disposition de quiconque désireux de le retoucher, notamment pour les autres émulateurs ou 
-pour optimiser certains modules.
-
- Etant vraiment limité en anglais la V1 est francophone, mais bientôt une version internationale en anglais sera 
- traduite ainsi qu'une version disquette en code C propulsée par Hialmar et Domi, donc ce n'est que le premier 
- étage de la fusée 
+  Il est le fruit d'une communauté formidable sans laquelle je n'aurais jamais pu aboutir, il reste forcément perfectible.
+  Le code est libre et à la disposition de quiconque désireux de le retoucher,  
+  pour optimiser certains modules.
 
    Je remercie chaleureusement les innombrables coups de main, d'abord Chloé qui a lancé la machine et m'a 
    notamment donné les bons guides pour le laby et ensuite tout ce forum, avec Hialmar  codeveloppeur en C 
@@ -31,7 +31,7 @@ pour optimiser certains modules.
    une critique,  m'ont reboosté quand j'étais enfermé dans un code buggué parfois pdt 1 semaine, fichtre !
 
    
-
+  Puis de Tyrann IV
 
    Rome est exaspérée par sa frontière nord en Bretagne, le mur d'Antonin semble la limite pour les légions 
    romaines et l'Empereur Lucius Verus décide d'envoyer des renforts. C'est la légion de Nemausus (Nîmes) 
@@ -43,4 +43,6 @@ pour optimiser certains modules.
    infiltrer le territoire des Pictes (Ecosse actuelle) et d'y glaner toutes informations utiles au 
    plan d'invasion : places fortes, points faibles, géographie des lieux, noms des chefs, armements, 
    effectifs, etc...
+   
+
    
