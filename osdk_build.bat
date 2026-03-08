@@ -8,8 +8,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 
 :: Goto Basic
 :: Goto Dialog
-Goto Camp
-:: Goto Map
+:: Goto Camp
+Goto Map
 
 ::
 :: Set the build parameters : Laby
@@ -48,7 +48,7 @@ CALL osdk_config_map.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 
-:: Goto Tap2dsk
+Goto Tap2dsk
 
 ::
 :: Same for CopyZeroPage

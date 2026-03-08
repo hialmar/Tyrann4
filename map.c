@@ -144,7 +144,7 @@ char c_values[] = { C_EMPTY, C_WALL, C_TREE, C_WATER, C_HILL1, C_HILL2};
                                        get_low_quartet(map[y][div2(x)])  \
                                     :  get_high_quartet(map[y][div2(x)]))
 
-// pour affecter une double valeur, on passera TOUJOUTS les quartets dans l'ordre (SUPERIEUR, INFERIEUR)
+// pour affecter une double valeur, on passera TOUJOURS les quartets dans l'ordre (SUPERIEUR, INFERIEUR)
 // pour correspondre à l'ordre des cases (1ere case PAIRE? 2e case IMPAIRE)
 #define combine_cellvalues(highval, lowval)    ((highval << 4) | lowval)
 #define set_cellvalues(addr, highval, lowval)  ((*addr) = combine_cellvalues(highval, lowval))
@@ -172,7 +172,7 @@ char c_values[] = { C_EMPTY, C_WALL, C_TREE, C_WATER, C_HILL1, C_HILL2};
 // Représentation de la carte, chaque case est un caractère (char)
 // BRANCHE "2_cells_per_byte": on regroupe 2 valeurs en 1 octet => dimension X du tableau = XSIZE/2
 // (condition: que XSIZE soit pair... ce qui simplifie aussi grandement tous les calculs)
-char map[MAP_YSIZE][MAP_XSIZE/2];
+extern char map[MAP_YSIZE][MAP_XSIZE/2];
 
 /* adresse contenant la dernière touche pressée du clavier */
 uchar *keyb_norm_key_press_addr = (uchar *) 0x208;
@@ -190,6 +190,8 @@ void  test_keys();
 void  hide_cursor();
 void  show_cursor();
 void  test_division_entiere();
+
+extern void setanimate();
 
 /** 
  * my_rnd(uchar max) : renvoie un nombre aléatoire (entier positif) dans l'intervalle  [0...max[
@@ -226,6 +228,7 @@ void main() {
     cls(); paper(0); ink(2);
     io_needed=1;
     loadCharacters();
+    DiscLoad("FN.BIN"); // fonte spéciale
 
     out = 1; // dehors
 
@@ -253,6 +256,8 @@ void main() {
     display_window();
 
     //test_keys();
+    setanimate();
+
     play_map();
 
 
@@ -262,6 +267,8 @@ void main() {
 	restorePageZero();
 	//SwitchToCommand("LABY");
     // show_cursor();
+    unsetanimate();
+    DiscLoad("FONT.BIN");
 	SwitchToCommand("!DIR");
 	// End game: show the cursor and quit
 }
@@ -502,7 +509,7 @@ void play_map() {
 		combat = (nb_combat < 20) ? my_rnd(30) == 1 : my_rnd(100) == 1;
 		if(combat) {
 			nb_combat++;
-			printAtXY(3, 25, "Voulez-vous combattre (O/N) ?");
+			printAtXY(3, 25, "Voulez-vous combattre (O ou N)?");
             while(1) {
                 keycode = get();
                 if (keycode == 'o' || keycode == 'O') {
@@ -510,6 +517,8 @@ void play_map() {
                     io_needed = 0;
                     saveCharacters();
                     restorePageZero();
+                    unsetanimate();
+                    DiscLoad("FONT.BIN");
                     SwitchToCommand("COMBAT");
                 } else if (keycode == 'n' || keycode == 'N') {
                     break;
@@ -535,8 +544,8 @@ void play_map() {
             case 's':
             case 'S':
                 gotoxy(3, 25);
-                printf("begin : %x, end : %x, size %d\n", (int)map, (unsigned int)(map) + sizeof(map), sizeof(map));
-                DiscSave("MAP.BIN",(unsigned char*)map, (unsigned char*)((unsigned int)(map) + sizeof(map)));
+                printf("begin : %x, end : %x, size %d\n", (int)map, (unsigned int)(map) + sizeof(map), 5000);
+                DiscSave("MAP.BIN",(unsigned char*)map, (unsigned char*)((unsigned int)(map) + 5000));
                 break;
             case 'r':
             case 'R':
@@ -554,6 +563,8 @@ void play_map() {
 				io_needed = 1;
 				saveCharacters();
 				restorePageZero();
+                unsetanimate();
+                DiscLoad("FONT.BIN");
 				SwitchToCommand("CAMP");
                 break;
             case 'j':
