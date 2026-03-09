@@ -74,7 +74,7 @@ typedef unsigned char bool; // boolean
 #define SCREEN_HEIGHT 28
 
 // Dimensions X et Y de la fenêtre d'affichage
-#define WIN_XSIZE  30
+#define WIN_XSIZE  15
 #define WIN_YSIZE  15
 
 // Coordonnées du coin supérieur gauche de la fenêtre d'affichage
@@ -406,19 +406,19 @@ void display_window() {
     #define WIN_EXT_HEIGHT  (WIN_YSIZE + 2)  // hauteur totale de la fenêtre avec son cadre
 
     // trait haut
-    for(x=0; x < WIN_EXT_WIDTH; x++) {
+    for(x=0; x < WIN_EXT_WIDTH*2; x++) {
         *addr++ = C_CHECKERBOARD; // caractère damier
     }
-    addr += (SCREEN_WIDTH - WIN_EXT_WIDTH);
+    addr += (SCREEN_WIDTH - WIN_EXT_WIDTH*2);
     // traits verticaux gauche et droit
     for(y=1; y < WIN_EXT_HEIGHT-1; y++) {
         *addr = C_CHECKERBOARD; // caractère damier
-        addr += WIN_EXT_WIDTH-1;
+        addr += WIN_EXT_WIDTH*2-1;
         *addr = C_CHECKERBOARD; // caractère damier
-        addr += (SCREEN_WIDTH - WIN_EXT_WIDTH + 1);
+        addr += (SCREEN_WIDTH - WIN_EXT_WIDTH*2 + 1);
     }
     // trait bas
-    for(x=0; x < WIN_EXT_WIDTH; x++) {
+    for(x=0; x < WIN_EXT_WIDTH*2; x++) {
         *addr++ = C_CHECKERBOARD; // caractère damier
     }
     // Affichage des instructions sous la fenêtre:
@@ -484,16 +484,18 @@ void play_map() {
 
                 //*addr++ = get_cvalue(get_cellvalue(j, *current_cell_addr));
                 if(is_odd(j)) {
+                    *addr++ = (unsigned char)1;
                     // NB: on incrémente le pointeur de cellule du tableau uniquement après case impaire
                     *addr++ = get_cvalue(get_low_quartet(*current_cell_addr++));
                 } 
                 else { // even
+                    *addr++ = (unsigned char)2;
                     *addr++ = get_cvalue(get_high_quartet(*current_cell_addr));
                     // NB: ici, pas d'incrément du pointeur current_cell_addr, car case paire
                     // et la prochaine case impaire à afficher est la valeur du quartet inférieur
                 }
             }
-            addr += (SCREEN_WIDTH - WIN_XSIZE);
+            addr += (SCREEN_WIDTH - WIN_XSIZE*2);
             current_cell_addr += (MAP_XSIZE - WIN_XSIZE)/2;
 
         }
