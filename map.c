@@ -74,11 +74,11 @@ typedef unsigned char bool; // boolean
 #define SCREEN_HEIGHT 28
 
 // Dimensions X et Y de la fenêtre d'affichage
-#define WIN_XSIZE  15
+#define WIN_XSIZE  16
 #define WIN_YSIZE  15
 
 // Coordonnées du coin supérieur gauche de la fenêtre d'affichage
-#define WX  5
+#define WX  4
 #define WY  5
 
 // Dimensions X et Y de la carte
@@ -269,6 +269,7 @@ void main() {
     // show_cursor();
     unsetanimate();
     DiscLoad("FONT.BIN");
+    ink(7);
 	SwitchToCommand("!DIR");
 	// End game: show the cursor and quit
 }
@@ -501,7 +502,7 @@ void play_map() {
         }
         
         // Affichage personnage: PX et PY sont les coordonnees relatives
-        if(x > WIN_XSIZE/2) px = x - xv; else px = x;
+        if(x > WIN_XSIZE/2) px = 2*(x - xv); else px = 2*x;
         if(y > WIN_YSIZE/2) py = y - yv; else py = y;
         addr = (char *) (TEXT_SCREEN + (WY+1+py)*SCREEN_WIDTH + WX+1+px);
         *addr = C_PLAYER;
