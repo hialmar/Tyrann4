@@ -363,6 +363,15 @@
             if (arr && (offs + 1 + 1 + 9 + 1) < arr.length) {
                 if (arr[offs] == 0x16)
                     return parseTap(arr, offs + 1);
+                if (arr[offs] == 83 && arr[offs+1] == 69 && arr[offs+1] == 68) {
+                    // sedoric file
+                    arr[offs+11] = 0x24;
+                    offs+=12;
+                    tap = {b: 0, e: arr.length-12, size: arr.length-12, name: pack("sedfile"), bytes: []};
+                    for (var n = 0; offs < arr.length && n < tap.size; n++, offs++)
+                        tap.bytes.push(arr[offs]);
+                    tap.size = tap.bytes.length;
+                }
                 if (arr[offs] == 0x24) {
                     offs++;
                     var e = arr[offs + 4] * 256 + arr[offs + 5];
@@ -390,9 +399,19 @@
                 case 768:
                     font = arr;
                     break;
+                case 908:
+                    font = [];
+                    for (i = 12; i < 908; i++)
+                        font.push(arr[i]);
+                    break;
                 case 1024:
                     font = [];
                     for (i = 256; i < 1024; i++)
+                        font.push(arr[i]);
+                    break;
+                case 1036:
+                    font = [];
+                    for (i = 256+12; i < 1036; i++)
                         font.push(arr[i]);
                     break;
                 case 16384:
@@ -410,7 +429,9 @@
                         console.log(tap.name || 'NONAME');
                         switch (tap.size) {
                             case 768:
+                            case 908:
                             case 1024:
+                            case 1036:
                                 parseFontArray(tap.bytes);
                                 break;
                             default:

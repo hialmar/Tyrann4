@@ -50,7 +50,7 @@
  59 ZS$ = "Press any key...  "+STR$(RND(1))
  60 GOSUB 91
  61 GET A$
- 62 UNTIL0
+ 62 UNTIL A$="F"
  63 END
  64 'BprintBoard
  65 'BBOARD P=PAPER ; I=INK
