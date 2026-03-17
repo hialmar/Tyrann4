@@ -24,9 +24,13 @@ END {
         ln = order[i]
         stmt = original[ln]
 
-        gsub(/\b(GOTO|GOSUB)[ \t]+([0-9]+)/, "&L\\2", stmt)
-        gsub(/\bTHEN[ \t]+([0-9]+)/, "THEN L\\1", stmt)
-        gsub(/\bTHEN[ \t]+GOTO[ \t]+([0-9]+)/, "THEN GOTO L\\1", stmt)
+        print "Line avt gsub " stmt > "/dev/stderr"
+
+        gsub(/(GOTO|GOSUB)[ \t]+([0-9]+)/, "&L\\2", stmt)
+        gsub(/THEN[ \t]+([0-9]+)/, "THEN L\\1", stmt)
+        gsub(/THEN[ \t]+GOTO[ \t]+([0-9]+)/, "THEN GOTO L\\1", stmt)
+
+        print "Line apr gsub " stmt > "/dev/stderr"
 
         printf "L%d: %s\n", ln, stmt
 

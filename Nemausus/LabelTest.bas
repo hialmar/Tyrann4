@@ -1,0 +1,3 @@
+#define MAX 10
+#labels
+ FORI=1TOMAX:PRINTI:NEXTI
