@@ -40,7 +40,7 @@ void main() {
 		if(c==18) {
 			c=0;
 			l++;
-			ADDR_SCR+=40*12+4;
+			ADDR_SCR+=40*11+4;
 			printf("Touche\n");
     		get();
 		}
