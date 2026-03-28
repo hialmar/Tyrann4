@@ -1,0 +1,487 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML lang=fr dir=ltr>
+	<HEAD>
+		<meta name="robots" content="noindex">
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<title>HW</title>
+		<link href="C:\OSDK_1_12\documentation\documentation.css" rel="stylesheet" type="text/css">
+	</HEAD>
+	<BODY>
+<hr>
+<center>HW</center>
+<hr>
+<table>
+<tr>
+<td valign=top>
+<a name="Normal"></a>
+<h1>Normal memory</h1>
+<table border>
+<tr>
+<th>Adress</th><th colspan="2">Size</th><th>Name</th>
+</tr>
+<tr>
+<td><b>$600</b></td><td align="right">161</td><td align="right">17</td><td>osdk_start</td></tr>
+<tr>
+<td>$611</td><td colspan="2" align="right">1</td><td>retstack</td></tr>
+<tr>
+<td>$612</td><td colspan="2" align="right">10</td><td>enter</td></tr>
+<tr>
+<td>$61c</td><td colspan="2" align="right">8</td><td>savereg</td></tr>
+<tr>
+<td>$624</td><td colspan="2" align="right">61</td><td>noregstosave</td></tr>
+<tr>
+<td>$661</td><td colspan="2" align="right">24</td><td>leave</td></tr>
+<tr>
+<td>$679</td><td colspan="2" align="right">8</td><td>restorereg</td></tr>
+<tr>
+<td>$681</td><td colspan="2" align="right">29</td><td>noregstorestore</td></tr>
+<tr>
+<td>$69e</td><td colspan="2" align="right">3</td><td>jsrvect</td></tr>
+<tr>
+<td>$6a1</td><td align="right">441</td><td align="right">5</td><td>_exit</td></tr>
+<tr>
+<td>$6a6</td><td colspan="2" align="right">4</td><td>reterr</td></tr>
+<tr>
+<td>$6aa</td><td colspan="2" align="right">4</td><td>false, retzero</td></tr>
+<tr>
+<td>$6ae</td><td colspan="2" align="right">5</td><td>true</td></tr>
+<tr>
+<td>$6b3</td><td colspan="2" align="right">8</td><td>cfi</td></tr>
+<tr>
+<td>$6bb</td><td colspan="2" align="right">1</td><td>FLAGFIN</td></tr>
+<tr>
+<td>$6bc</td><td colspan="2" align="right">1</td><td>TOGGLEEDIT</td></tr>
+<tr>
+<td>$6bd</td><td colspan="2" align="right">8</td><td>TABCAR</td></tr>
+<tr>
+<td>$6c5</td><td colspan="2" align="right">1</td><td>XPERSO</td></tr>
+<tr>
+<td>$6c6</td><td colspan="2" align="right">1</td><td>YPERSO</td></tr>
+<tr>
+<td>$6c7</td><td colspan="2" align="right">1</td><td>PERSO</td></tr>
+<tr>
+<td>$6c8</td><td colspan="2" align="right">1</td><td>PERSEDIT</td></tr>
+<tr>
+<td>$6c9</td><td colspan="2" align="right">1</td><td>Xtmp</td></tr>
+<tr>
+<td>$6ca</td><td colspan="2" align="right">1</td><td>Ytmp</td></tr>
+<tr>
+<td>$6cb</td><td colspan="2" align="right">1</td><td>SCRPTRX</td></tr>
+<tr>
+<td>$6cc</td><td colspan="2" align="right">1</td><td>SCRPTRY</td></tr>
+<tr>
+<td>$6cd</td><td colspan="2" align="right">2</td><td>NBOBJENPLUS</td></tr>
+<tr>
+<td>$6cf</td><td colspan="2" align="right">25</td><td>AppuieTouche, STRINGS</td></tr>
+<tr>
+<td>$6e8</td><td colspan="2" align="right">26</td><td>MessageVide</td></tr>
+<tr>
+<td>$702</td><td colspan="2" align="right">25</td><td>MessageMur</td></tr>
+<tr>
+<td>$71b</td><td colspan="2" align="right">25</td><td>MessageArbre</td></tr>
+<tr>
+<td>$734</td><td colspan="2" align="right">28</td><td>MessageMontagnes</td></tr>
+<tr>
+<td>$750</td><td colspan="2" align="right">23</td><td>MessageLacs</td></tr>
+<tr>
+<td>$767</td><td colspan="2" align="right">18</td><td>MessageExplications</td></tr>
+<tr>
+<td>$779</td><td colspan="2" align="right">32</td><td>M1</td></tr>
+<tr>
+<td>$799</td><td colspan="2" align="right">24</td><td>M2</td></tr>
+<tr>
+<td>$7b1</td><td colspan="2" align="right">25</td><td>M3</td></tr>
+<tr>
+<td>$7ca</td><td colspan="2" align="right">2</td><td>M4</td></tr>
+<tr>
+<td>$7cc</td><td colspan="2" align="right">31</td><td>M5</td></tr>
+<tr>
+<td>$7eb</td><td colspan="2" align="right">36</td><td>M6</td></tr>
+<tr>
+<td>$80f</td><td colspan="2" align="right">35</td><td>M7</td></tr>
+<tr>
+<td>$832</td><td colspan="2" align="right">5</td><td>M8</td></tr>
+<tr>
+<td>$837</td><td colspan="2" align="right">35</td><td>M9</td></tr>
+<tr>
+<td>$85a</td><td align="right">1277</td><td align="right">90</td><td>_main</td></tr>
+<tr>
+<td>$8b4</td><td colspan="2" align="right">26</td><td>boucleJeu</td></tr>
+<tr>
+<td>$8ce</td><td colspan="2" align="right">16</td><td>hideCursor</td></tr>
+<tr>
+<td>$8de</td><td colspan="2" align="right">16</td><td>showCursor</td></tr>
+<tr>
+<td>$8ee</td><td colspan="2" align="right">11</td><td>initSCRPTR</td></tr>
+<tr>
+<td>$8f9</td><td colspan="2" align="right">19</td><td>initRandom</td></tr>
+<tr>
+<td>$90c</td><td colspan="2" align="right">1</td><td>affCarte</td></tr>
+<tr>
+<td>$90d</td><td colspan="2" align="right">14</td><td>affTouche</td></tr>
+<tr>
+<td>$91b</td><td colspan="2" align="right">14</td><td>affVide</td></tr>
+<tr>
+<td>$929</td><td colspan="2" align="right">14</td><td>affMur</td></tr>
+<tr>
+<td>$937</td><td colspan="2" align="right">14</td><td>affArbre</td></tr>
+<tr>
+<td>$945</td><td colspan="2" align="right">14</td><td>affMontagnes</td></tr>
+<tr>
+<td>$953</td><td colspan="2" align="right">14</td><td>affLacs</td></tr>
+<tr>
+<td>$961</td><td colspan="2" align="right">2</td><td>affExplications</td></tr>
+<tr>
+<td>$963</td><td colspan="2" align="right">30</td><td>boucle</td></tr>
+<tr>
+<td>$981</td><td colspan="2" align="right">40</td><td>affiche</td></tr>
+<tr>
+<td>$9a9</td><td colspan="2" align="right">1</td><td>fin</td></tr>
+<tr>
+<td>$9aa</td><td colspan="2" align="right">14</td><td>initVars</td></tr>
+<tr>
+<td>$9b8</td><td colspan="2" align="right">2</td><td>boucle1</td></tr>
+<tr>
+<td>$9ba</td><td colspan="2" align="right">12</td><td>boucle2, locaddrMAP</td></tr>
+<tr>
+<td>$9c6</td><td colspan="2" align="right">17</td><td>suite</td></tr>
+<tr>
+<td>$9d7</td><td colspan="2" align="right">17</td><td>suite2</td></tr>
+<tr>
+<td>$9e8</td><td colspan="2" align="right">30</td><td>boucle3</td></tr>
+<tr>
+<td>$a06</td><td colspan="2" align="right">15</td><td>dessineArbres</td></tr>
+<tr>
+<td>$a15</td><td colspan="2" align="right">2</td><td>boucle4</td></tr>
+<tr>
+<td>$a17</td><td colspan="2" align="right">13</td><td>repeatrandom</td></tr>
+<tr>
+<td>$a24</td><td colspan="2" align="right">14</td><td>suite5</td></tr>
+<tr>
+<td>$a32</td><td colspan="2" align="right">41</td><td>suite7</td></tr>
+<tr>
+<td>$a5b</td><td colspan="2" align="right">13</td><td>dessineMontagnes</td></tr>
+<tr>
+<td>$a68</td><td colspan="2" align="right">8</td><td>boucle4</td></tr>
+<tr>
+<td>$a70</td><td colspan="2" align="right">13</td><td>repeatrandom</td></tr>
+<tr>
+<td>$a7d</td><td colspan="2" align="right">14</td><td>suite5</td></tr>
+<tr>
+<td>$a8b</td><td colspan="2" align="right">36</td><td>suite7</td></tr>
+<tr>
+<td>$aaf</td><td colspan="2" align="right">13</td><td>dessineLacs</td></tr>
+<tr>
+<td>$abc</td><td colspan="2" align="right">8</td><td>boucle4</td></tr>
+<tr>
+<td>$ac4</td><td colspan="2" align="right">13</td><td>repeatrandom</td></tr>
+<tr>
+<td>$ad1</td><td colspan="2" align="right">14</td><td>suite5</td></tr>
+<tr>
+<td>$adf</td><td colspan="2" align="right">21</td><td>suite7</td></tr>
+<tr>
+<td>$af4</td><td colspan="2" align="right">2</td><td>boucleX</td></tr>
+<tr>
+<td>$af6</td><td colspan="2" align="right">41</td><td>boucleY</td></tr>
+<tr>
+<td>$b1f</td><td colspan="2" align="right">40</td><td>afficheCadre</td></tr>
+<tr>
+<td>$b47</td><td colspan="2" align="right">3</td><td>boucle1</td></tr>
+<tr>
+<td>$b4a</td><td colspan="2" align="right">3</td><td>boucle3, locpgscra</td></tr>
+<tr>
+<td>$b4d</td><td colspan="2" align="right">6</td><td>locpgscrb</td></tr>
+<tr>
+<td>$b53</td><td colspan="2" align="right">2</td><td>suite2</td></tr>
+<tr>
+<td>$b55</td><td colspan="2" align="right">23</td><td>boucle4</td></tr>
+<tr>
+<td>$b6c</td><td colspan="2" align="right">5</td><td>locpgscrc</td></tr>
+<tr>
+<td>$b71</td><td colspan="2" align="right">9</td><td>locpgscrd</td></tr>
+<tr>
+<td>$b7a</td><td colspan="2" align="right">9</td><td>afficheMap</td></tr>
+<tr>
+<td>$b83</td><td colspan="2" align="right">7</td><td>suite0</td></tr>
+<tr>
+<td>$b8a</td><td colspan="2" align="right">11</td><td>suite1</td></tr>
+<tr>
+<td>$b95</td><td colspan="2" align="right">7</td><td>suite21</td></tr>
+<tr>
+<td>$b9c</td><td colspan="2" align="right">41</td><td>suite2</td></tr>
+<tr>
+<td>$bc5</td><td colspan="2" align="right">2</td><td>pgetiq_boucleY</td></tr>
+<tr>
+<td>$bc7</td><td colspan="2" align="right">50</td><td>pgetiq_boucleX</td></tr>
+<tr>
+<td>$bf9</td><td colspan="2" align="right">15</td><td>pgetiq_finboucleY</td></tr>
+<tr>
+<td>$c08</td><td colspan="2" align="right">9</td><td>suitexinf</td></tr>
+<tr>
+<td>$c11</td><td colspan="2" align="right">8</td><td>suitexsup</td></tr>
+<tr>
+<td>$c19</td><td colspan="2" align="right">3</td><td>suitexy</td></tr>
+<tr>
+<td>$c1c</td><td colspan="2" align="right">14</td><td>suitey</td></tr>
+<tr>
+<td>$c2a</td><td colspan="2" align="right">5</td><td>suiteyinf</td></tr>
+<tr>
+<td>$c2f</td><td colspan="2" align="right">8</td><td>suiteysup</td></tr>
+<tr>
+<td>$c37</td><td colspan="2" align="right">2</td><td>suitez</td></tr>
+<tr>
+<td>$c39</td><td colspan="2" align="right">24</td><td>commonsuite</td></tr>
+<tr>
+<td>$c51</td><td colspan="2" align="right">35</td><td>inKeys</td></tr>
+<tr>
+<td>$c74</td><td colspan="2" align="right">3</td><td>suiteinK</td></tr>
+<tr>
+<td>$c77</td><td colspan="2" align="right">10</td><td>ggauche</td></tr>
+<tr>
+<td>$c81</td><td colspan="2" align="right">10</td><td>gdroite</td></tr>
+<tr>
+<td>$c8b</td><td colspan="2" align="right">10</td><td>ghaut</td></tr>
+<tr>
+<td>$c95</td><td colspan="2" align="right">10</td><td>gbas</td></tr>
+<tr>
+<td>$c9f</td><td colspan="2" align="right">25</td><td>gtoggle</td></tr>
+<tr>
+<td>$cb8</td><td colspan="2" align="right">6</td><td>gfin</td></tr>
+<tr>
+<td>$cbe</td><td colspan="2" align="right">22</td><td>testcase</td></tr>
+<tr>
+<td>$cd4</td><td colspan="2" align="right">1</td><td>suite</td></tr>
+<tr>
+<td>$cd5</td><td colspan="2" align="right">25</td><td>gestedit</td></tr>
+<tr>
+<td>$cee</td><td colspan="2" align="right">11</td><td>persom</td></tr>
+<tr>
+<td>$cf9</td><td colspan="2" align="right">4</td><td>suitea</td></tr>
+<tr>
+<td>$cfd</td><td colspan="2" align="right">14</td><td>persop</td></tr>
+<tr>
+<td>$d0b</td><td colspan="2" align="right">10</td><td>editgauche</td></tr>
+<tr>
+<td>$d15</td><td colspan="2" align="right">10</td><td>editdroite</td></tr>
+<tr>
+<td>$d1f</td><td colspan="2" align="right">10</td><td>edithaut</td></tr>
+<tr>
+<td>$d29</td><td colspan="2" align="right">10</td><td>editbas</td></tr>
+<tr>
+<td>$d33</td><td colspan="2" align="right">35</td><td>editcase</td></tr>
+<tr>
+<td>$d56</td><td colspan="2" align="right">1</td><td>sortie</td></tr>
+<tr>
+<td>$d57</td><td align="right">10</td><td align="right">10</td><td>_rand, _random</td></tr>
+<tr>
+<td>$d61</td><td align="right">20</td><td align="right">20</td><td>_srandom</td></tr>
+<tr>
+<td>$d75</td><td align="right">11</td><td align="right">11</td><td>_curset</td></tr>
+<tr>
+<td>$d80</td><td align="right">11</td><td align="right">11</td><td>_curmov</td></tr>
+<tr>
+<td>$d8b</td><td align="right">11</td><td align="right">11</td><td>_draw</td></tr>
+<tr>
+<td>$d96</td><td align="right">11</td><td align="right">11</td><td>_hchar</td></tr>
+<tr>
+<td>$da1</td><td align="right">11</td><td align="right">11</td><td>_fill</td></tr>
+<tr>
+<td>$dac</td><td align="right">11</td><td align="right">11</td><td>_paper</td></tr>
+<tr>
+<td>$db7</td><td align="right">11</td><td align="right">11</td><td>_ink</td></tr>
+<tr>
+<td>$dc2</td><td align="right">11</td><td align="right">11</td><td>_circle</td></tr>
+<tr>
+<td>$dcd</td><td align="right">14</td><td align="right">14</td><td>_point</td></tr>
+<tr>
+<td>$ddb</td><td align="right">46</td><td align="right">11</td><td>_pattern</td></tr>
+<tr>
+<td>$de6</td><td colspan="2" align="right">9</td><td>getXparm</td></tr>
+<tr>
+<td>$def</td><td colspan="2" align="right">19</td><td>getXloop</td></tr>
+<tr>
+<td>$e02</td><td colspan="2" align="right">3</td><td>grexit</td></tr>
+<tr>
+<td>$e05</td><td colspan="2" align="right">4</td><td>grexit2</td></tr>
+<tr>
+<td>$e09</td><td align="right">3</td><td align="right">3</td><td>_hires</td></tr>
+<tr>
+<td>$e0c</td><td align="right">3</td><td align="right">3</td><td>_text</td></tr>
+<tr>
+<td>$e0f</td><td align="right">3</td><td align="right">3</td><td>_ping</td></tr>
+<tr>
+<td>$e12</td><td align="right">3</td><td align="right">3</td><td>_shoot</td></tr>
+<tr>
+<td>$e15</td><td align="right">3</td><td align="right">3</td><td>_zap</td></tr>
+<tr>
+<td>$e18</td><td align="right">3</td><td align="right">3</td><td>_explode</td></tr>
+<tr>
+<td>$e1b</td><td align="right">3</td><td align="right">3</td><td>_kbdclick1</td></tr>
+<tr>
+<td>$e1e</td><td align="right">3</td><td align="right">3</td><td>_kbdclick2</td></tr>
+<tr>
+<td>$e21</td><td align="right">3</td><td align="right">3</td><td>_cls</td></tr>
+<tr>
+<td>$e24</td><td align="right">3</td><td align="right">3</td><td>_lores0</td></tr>
+<tr>
+<td>$e27</td><td align="right">3</td><td align="right">3</td><td>_lores1</td></tr>
+<tr>
+<td>$e2a</td><td align="right">13</td><td align="right">8</td><td>_key</td></tr>
+<tr>
+<td>$e32</td><td colspan="2" align="right">5</td><td>key001</td></tr>
+<tr>
+<td>$e37</td><td align="right">8</td><td align="right">8</td><td>_get</td></tr>
+<tr>
+<td>$e3f</td><td align="right">20</td><td align="right">10</td><td>_testbit</td></tr>
+<tr>
+<td>$e49</td><td colspan="2" align="right">7</td><td>boucle</td></tr>
+<tr>
+<td>$e50</td><td colspan="2" align="right">3</td><td>fin</td></tr>
+<tr>
+<td>$e53</td><td align="right">15</td><td align="right">5</td><td>_delai</td></tr>
+<tr>
+<td>$e58</td><td colspan="2" align="right">2</td><td>delai1</td></tr>
+<tr>
+<td>$e5a</td><td colspan="2" align="right">7</td><td>delai2</td></tr>
+<tr>
+<td>$e61</td><td colspan="2" align="right">1</td><td>ranPGTMP</td></tr>
+<tr>
+<td>$e62</td><td align="right">13</td><td align="right">13</td><td>_rand01</td></tr>
+<tr>
+<td>$e6f</td><td align="right">13</td><td align="right">13</td><td>_rand1248</td></tr>
+<tr>
+<td>$e7c</td><td align="right">69</td><td align="right">13</td><td>_rand124</td></tr>
+<tr>
+<td>$e89</td><td colspan="2" align="right">28</td><td>ScreenAdressLow</td></tr>
+<tr>
+<td>$ea5</td><td colspan="2" align="right">28</td><td>ScreenAdressHigh</td></tr>
+<tr>
+<td>$ec1</td><td align="right">52</td><td align="right">39</td><td>_AdvancedPrint</td></tr>
+<tr>
+<td>$ee8</td><td colspan="2" align="right">5</td><td>loop_char, read</td></tr>
+<tr>
+<td>$eed</td><td colspan="2" align="right">7</td><td>write</td></tr>
+<tr>
+<td>$ef4</td><td colspan="2" align="right">1</td><td>end_loop_char</td></tr>
+<tr>
+<td>$ef5</td><td align="right">45</td><td align="right">33</td><td>_APlot</td></tr>
+<tr>
+<td>$f16</td><td colspan="2" align="right">1</td><td>loop1</td></tr>
+<tr>
+<td>$f17</td><td colspan="2" align="right">10</td><td>writP</td></tr>
+<tr>
+<td>$f21</td><td colspan="2" align="right">1</td><td>end_loop_plot</td></tr>
+<tr>
+<td>$f22</td><td align="right">238</td><td align="right">16</td><td>_testmem</td></tr>
+<tr>
+<td>$f32</td><td colspan="2" align="right">12</td><td>boucle1</td></tr>
+<tr>
+<td>$f3e</td><td colspan="2" align="right">194</td><td>zerotrouve</td></tr>
+<tr>
+<td><b>$1000</b></td><td colspan="2" align="right">3</td><td>saverti</td></tr>
+<tr>
+<td>$1003</td><td colspan="2" align="right">12</td><td>PATTERNS, PatLac</td></tr>
+<tr>
+<td>$100f</td><td colspan="2" align="right">1</td><td>Timer</td></tr>
+<tr>
+<td>$1010</td><td align="right">52</td><td align="right">34</td><td>_animate</td></tr>
+<tr>
+<td>$1032</td><td colspan="2" align="right">2</td><td>suite</td></tr>
+<tr>
+<td>$1034</td><td colspan="2" align="right">11</td><td>boucle</td></tr>
+<tr>
+<td>$103f</td><td colspan="2" align="right">5</td><td>fin</td></tr>
+<tr>
+<td>$1044</td><td align="right">43</td><td align="right">43</td><td>_setanimate</td></tr>
+<tr>
+<td>$106f</td><td align="right">16787</td><td align="right">145</td><td>_unsetanimate</td></tr>
+<tr>
+<td><b>$1100</b></td><td colspan="2" align="right">16384</td><td>TMAP</td></tr>
+<tr>
+<td><b>$5100</b></td><td colspan="2" align="right">129</td><td>MapAddressLow</td></tr>
+<tr>
+<td>$5181</td><td colspan="2" align="right">129</td><td>MapAddressHigh</td></tr>
+<tr>
+<td>$5202</td><td align="right">256</td><td align="right">256</td><td>osdk_stack</td></tr>
+<tr>
+<td>$5302</td><td align="right">4</td><td align="right">4</td><td>osdk_check</td></tr>
+<tr>
+<td>$5306</td><td align="right">27897</td><td align="right">27897</td><td>osdk_end</td></tr>
+</table>
+</td>
+<td valign=top>
+<a name="Zero"></a>
+<h1>Zero page</h1>
+<table border>
+<tr>
+<th>Adress</th><th colspan="2">Size</th><th>Name</th>
+</tr>
+<tr>
+<td><b>$00</b></td><td colspan="2" align="right">1</td><td>XPTR</td></tr>
+<tr>
+<td>$01</td><td colspan="2" align="right">1</td><td>YPTR</td></tr>
+<tr>
+<td>$02</td><td colspan="2" align="right">2</td><td>ADDRMAP</td></tr>
+<tr>
+<td>$04</td><td colspan="2" align="right">2</td><td>ADDRTMP</td></tr>
+<tr>
+<td>$06</td><td colspan="2" align="right">2</td><td>PGSCRA</td></tr>
+<tr>
+<td>$08</td><td colspan="2" align="right">2</td><td>PGSCRB</td></tr>
+<tr>
+<td>$0a</td><td colspan="2" align="right">70</td><td>compteLignes</td></tr>
+<tr>
+<td>$50</td><td colspan="2" align="right">2</td><td>ap</td></tr>
+<tr>
+<td>$52</td><td colspan="2" align="right">2</td><td>fp</td></tr>
+<tr>
+<td>$54</td><td colspan="2" align="right">2</td><td>sp</td></tr>
+<tr>
+<td>$56</td><td colspan="2" align="right">2</td><td>tmp0</td></tr>
+<tr>
+<td>$58</td><td colspan="2" align="right">2</td><td>tmp1</td></tr>
+<tr>
+<td>$5a</td><td colspan="2" align="right">2</td><td>tmp2</td></tr>
+<tr>
+<td>$5c</td><td colspan="2" align="right">2</td><td>tmp3</td></tr>
+<tr>
+<td>$5e</td><td colspan="2" align="right">2</td><td>tmp4</td></tr>
+<tr>
+<td>$60</td><td colspan="2" align="right">2</td><td>tmp5</td></tr>
+<tr>
+<td>$62</td><td colspan="2" align="right">2</td><td>tmp6</td></tr>
+<tr>
+<td>$64</td><td colspan="2" align="right">2</td><td>tmp7</td></tr>
+<tr>
+<td>$66</td><td colspan="2" align="right">2</td><td>op1</td></tr>
+<tr>
+<td>$68</td><td colspan="2" align="right">2</td><td>op2</td></tr>
+<tr>
+<td>$6a</td><td colspan="2" align="right">2</td><td>tmp</td></tr>
+<tr>
+<td>$6c</td><td colspan="2" align="right">2</td><td>reg0</td></tr>
+<tr>
+<td>$6e</td><td colspan="2" align="right">2</td><td>reg1</td></tr>
+<tr>
+<td>$70</td><td colspan="2" align="right">2</td><td>reg2</td></tr>
+<tr>
+<td>$72</td><td colspan="2" align="right">2</td><td>reg3</td></tr>
+<tr>
+<td>$74</td><td colspan="2" align="right">2</td><td>reg4</td></tr>
+<tr>
+<td>$76</td><td colspan="2" align="right">2</td><td>reg5</td></tr>
+<tr>
+<td>$78</td><td colspan="2" align="right">2</td><td>reg6</td></tr>
+<tr>
+<td>$7a</td><td colspan="2" align="right">121</td><td>reg7</td></tr>
+<tr>
+<td>$f3</td><td colspan="2" align="right">12</td><td>PatLacPtr</td></tr>
+</table>
+</td>
+</tr>
+</table>
+<hr>
+<center>Generated by MemMap version 0.4</center>
+<hr>
+	</BODY>
+</HTML>
