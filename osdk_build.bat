@@ -10,7 +10,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Dialog
 :: Goto Camp
 :: Goto Map
-Goto Tuile
+:: Goto Tuile
+Goto Tuiles
 
 ::
 :: Set the build parameters : Laby
@@ -57,6 +58,18 @@ Goto Tap2dsk
 :: Same for Tuile
 ::
 CALL osdk_config_tuiles.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe build\symbols build\map_tuiles.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+
+
+Goto End
+
+:Tuiles
+
+::
+:: Same for Tuiles
+::
+CALL osdk_config_tuiles_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_tuiles.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 

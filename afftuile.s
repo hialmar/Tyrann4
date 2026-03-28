@@ -20,7 +20,7 @@ lp_tuile
 	jsr _cherche_et_aff_tuile		;************* C'EST LA ROUTINE QUE TU PEUX RECPERER TELLE QUELLE  *************
 	pla
 	tax
-	jsr wait_touche					; attend appui puis relaché touche
+	jsr _wait_touche					; attend appui puis relaché touche
 chk_208	
 	lda $208
 	cmp #$BC						; touche flèche droite ==> tuile suivante
@@ -220,10 +220,10 @@ rens_adr_car
 ;------------------------------------------------------		
 ; -----  routine attend appui touche puis relacher ---
 ;------------------------------------------------------ spécifique pour mon test
-wait_touche	
+_wait_touche	
 		lda $208
 		cmp #$38
-		beq wait_touche
+		beq _wait_touche
 wait_lachez	
 		lda $208
 		cmp #$38
