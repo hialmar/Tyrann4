@@ -3,6 +3,45 @@
 _ADDR_SCR	.dsb 2
 _NUM_TUILE	.dsb 1
 
+;********************************************************
+;***      routine test pour vérification  tuiles      ***
+;***  affiche toutes les tuiles l'une après l'autre   *** 
+;***             par appui sur les flèches            ***
+;********************************************************
+_test_verif
+	jsr _impl_car
+test_tuiles
+	jsr _hires_et_atributs			; spécifique à ce test passe en HIRES et installe 12 atributs de couleur (hauteur tuile)
+	ldx #$00						; N° d'ordre de la tuile à afficher
+lp_tuile
+	jsr _init_scr_hires				; Spécifique pour mon test $A002, $A003
+	txa								; sauve le n° de tuile  affichée
+	pha								; sur la pile
+	jsr _cherche_et_aff_tuile		;************* C'EST LA ROUTINE QUE TU PEUX RECPERER TELLE QUELLE  *************
+	pla
+	tax
+	jsr _wait_touche					; attend appui puis relaché touche
+chk_208	
+	lda $208
+	cmp #$BC						; touche flèche droite ==> tuile suivante
+	bne autre_touche_1
+	inx
+	cpx #$4E						; Nb max de tuiles
+	bne lp_tuile
+	dex
+	jmp chk_208
+autre_touche_1	
+	cmp #$AC						; touche flèche GAUCHE ==> tuile précédente		
+	bne on_sort						; ni précédente, ni suivante
+	dex
+	cpx #$FF
+	bne lp_tuile
+	inx
+	beq chk_208
+on_sort	
+	cmp #$84						; on sort par appui sur barre espace
+	bne chk_208						; aucun des trois alors boucle sur test touches
+	rts
 
 ;---------------------------------------------------------------------
 ;- passe en mode HIRES et installe 200 atributs couleur jaune et cyan -
@@ -87,13 +126,10 @@ _init_scr_hires
 	sta adr_screen_1+1
 	lda _ADDR_SCR+1
 	sta adr_screen_1+2
-	lda _ADDR_SCR
-	clc
-	adc #1
-	sta adr_screen_2+1
-	lda _ADDR_SCR+1
-	adc #0
 	sta adr_screen_2+2
+	ldx _ADDR_SCR
+	inx
+	stx adr_screen_2+1
 	rts
 
 ;--------------------------------------------------

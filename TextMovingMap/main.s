@@ -12,8 +12,8 @@
 #define 	XMAX	128 
 #define 	YMAX	128 
 
-#define		XSIZE	32
-#define		YSIZE	16
+#define		XSIZE	14
+#define		YSIZE	8
 
 
 #define		MINARBRES 	250
