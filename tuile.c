@@ -34,8 +34,6 @@ void main() {
 	int y = 3;
 	char fin = 0;
 	char keycode = 0;
-	ADDR_SCR = (unsigned char *)0xa003;
-	NUM_TUILE = 0;
 
     printf("Touche\n");
     get();
@@ -45,14 +43,14 @@ void main() {
 		c=0;
 		l=0;
 		ADDR_SCR = (unsigned char *)0xa003;
-		NUM_TUILE = 0;
+		NUM_TUILE = 0x10;
 		while(l != 8) {
 			init_scr_hires();
 			if (c == x && l == y) {
 				NUM_TUILE = 0x4b;
 				printf("(X,Y) = (%d,%d) adr = %x\n",x,y,ADDR_SCR);
 			} else {
-				NUM_TUILE = 0;
+				NUM_TUILE = 0x10;
 			}
 			cherche_et_aff_tuile();
 			ADDR_SCR+=2;
