@@ -1,25 +1,23 @@
 
+
+_ADDR_SCR	.dsb 2
+_NUM_TUILE	.dsb 1
+
 ;********************************************************
 ;***      routine test pour vérification  tuiles      ***
 ;***  affiche toutes les tuiles l'une après l'autre   *** 
 ;***             par appui sur les flèches            ***
 ;********************************************************
 _test_verif
-	ldy #0
-  	lda (sp),y ; Adr lo
-  	sta tmp0
-  	iny
-  	lda (sp),y ; Adr hi
-  	sta tmp1
-	jsr impl_car
+	jsr _impl_car
 test_tuiles
-	jsr hires_et_atributs			; spécifique à ce test passe en HIRES et installe 12 atributs de couleur (hauteur tuile)
+	jsr _hires_et_atributs			; spécifique à ce test passe en HIRES et installe 12 atributs de couleur (hauteur tuile)
 	ldx #$00						; N° d'ordre de la tuile à afficher
 lp_tuile
 	jsr _init_scr_hires				; Spécifique pour mon test $A002, $A003
 	txa								; sauve le n° de tuile  affichée
 	pha								; sur la pile
-	jsr cherche_et_aff_tuile		;************* C'EST LA ROUTINE QUE TU PEUX RECPERER TELLE QUELLE  *************
+	jsr _cherche_et_aff_tuile		;************* C'EST LA ROUTINE QUE TU PEUX RECPERER TELLE QUELLE  *************
 	pla
 	tax
 	jsr wait_touche					; attend appui puis relaché touche
@@ -46,33 +44,45 @@ on_sort
 	rts
 
 ;---------------------------------------------------------------------
-;- passe en mode HIRES et installe 12 atributs couleur jaune et cyan -
+;- passe en mode HIRES et installe 200 atributs couleur jaune et cyan -
 ;---------------------------------------------------------------------	 routine spécifique pour mon test
-hires_et_atributs	
+_hires_et_atributs	
 		jsr $EC33
+		lda #$01
+		sta $00
+		lda #$A0
+		sta $01
+		ldy #100
+loop
 		lda #$03
-		sta $A001
-		sta $A051
-		sta $A0A1
-		sta $A0F1	
-		sta $A141
-		sta $A191
+		ldx #$0
+		sta ($00,x)
+		jsr add40
 		lda #$06
-		sta $A029
-		sta $A079
-		sta $A0c9
-		sta $A119
-		sta $A169
-		sta $A1b9
+		ldx #$0
+		sta ($00,x)
+		jsr add40
+		dey
+		bne loop
+		rts
+
+add40
+		clc
+		lda $00
+		adc #40
+		sta $00
+		lda $01
+		adc #$0
+		sta $01
 		rts
 
 ;-----------------------------------------------------------
 ;----   Affiche une tuile en haut à gauche de l'écran HIRES
 ;-----------------------------------------------------------
-cherche_et_aff_tuile
+_cherche_et_aff_tuile
 ; en entrée : X contient le n° de tuile
 ; En sortie : La tuile est à l'écran
-	
+		lda _NUM_TUILE
 		jsr find_compsants
 		jsr aff__tuile			; côte à côte pour minimiser le Nn d'addition (adrsses écran)
 		rts
@@ -112,16 +122,15 @@ aff__tuile
 ;--- init adresses écran HIRES ----
 ;----------------------------------
 _init_scr_hires
-				lda tmp0				;Routine et Adresses spécifiques pour mon test
-				sta adr_screen_1+1
-				lda tmp1
-				sta adr_screen_1+2
-				sta adr_screen_2+2
-				lda tmp0
-				clc
-				adc 1
-				sta adr_screen_2+1
-				rts
+	lda _ADDR_SCR				;Routine et Adresses spécifiques pour mon test
+	sta adr_screen_1+1
+	lda _ADDR_SCR+1
+	sta adr_screen_1+2
+	sta adr_screen_2+2
+	ldx _ADDR_SCR
+	inx
+	stx adr_screen_2+1
+	rts
 
 ;--------------------------------------------------
 ;---               affiche demie tuile               
@@ -226,7 +235,7 @@ wait_lachez
 ;***   implantation caractères redéfinis      ***
 ;************************************************ 	peut être lancé séparément pour ne charger dans le jeu
 ;													que la zone des caractères  une fois rédéfinie
-impl_car
+_impl_car
 	ldx #$00
 lp1_impl	
 	lda dta_car_redef_p1,x
