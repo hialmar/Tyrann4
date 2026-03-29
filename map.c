@@ -150,12 +150,12 @@ char c_values[] = { C_EMPTY, C_WALL, C_TREE, C_WATER, C_HILL1, C_HILL2};
 #define set_cellvalues(addr, highval, lowval)  ((*addr) = combine_cellvalues(highval, lowval))
 
 // Scan codes des touches du clavier
-// #define KEY_LEFT  172
-// #define KEY_RIGHT 188
-// #define KEY_DOWN  180
-// #define KEY_UP    156
-// #define KEY_SPACE 132
-// #define KEY_ESC   169
+// #define KEY_LEFT  172 0xac
+// #define KEY_RIGHT 188 0xbc
+// #define KEY_DOWN  180 0xb4
+// #define KEY_UP    156 0x9c
+// #define KEY_SPACE 132 0x84
+// #define KEY_ESC   169 0xa9
 
 #define KEY_LEFT  8
 #define KEY_RIGHT 9

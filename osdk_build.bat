@@ -10,8 +10,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Dialog
 :: Goto Camp
 :: Goto Map
-Goto Tuile
-:: Goto Tuiles
+:: Goto Tuile
+Goto Tuiles
 
 ::
 :: Set the build parameters : Laby

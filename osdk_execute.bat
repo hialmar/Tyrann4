@@ -9,7 +9,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 ::
 :: Set the build paremeters
 ::
-CALL osdk_config_tuiles.bat
+CALL osdk_config_tuiles_asm.bat
 
 ::
 :: Run the emulator using the common batch

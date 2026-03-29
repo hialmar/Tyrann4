@@ -1,22 +1,86 @@
 c .dsb 1
-
-touche .asc "Touche",0
+l .dsb 1 ; ligne courante
+x .dsb 1 ; pos perso x
+y .dsb 1 ; pos perso y
+key .dsb 1; touche tapée
 
 _main
+	jsr hideCursor
+	lda #$3
+	sta x
+	sta y
 	lda #$0
 	sta _NUM_TUILE
-	lda #$03
-	sta _ADDR_SCR
-	lda #$A0
-	sta _ADDR_SCR+1
     jsr print
     jsr _wait_touche
     jsr _impl_car
 	jsr _hires_et_atributs
-	lda #18
-	sta c
 main_loop
+	lda #0
+	sta c
+	sta l
+	lda #$03
+	sta _ADDR_SCR
+	lda #$A0
+	sta _ADDR_SCR+1
+	jsr draw_loop
+; déplacements perso
+	jsr depl_perso
+	lda x
+	clc
+	adc #48
+	sta $bf6a
+	lda y
+	clc
+	adc #48
+	sta $bf6c
+escape
+	lda key
+	cmp #$a9						; on sort par appui sur escape
+	bne main_loop
+	jsr showCursor
+	rts
+
+hideCursor
+.(
+	lda #10
+	sta $26A
+	lda #4
+	sta $24E
+	lda #1
+	sta $24F
+	rts
+.)
+
+showCursor
+.(
+	lda #3
+	sta $26A
+	lda #32
+	sta $24E
+	lda #4
+	sta $24F
+	rts
+.)
+
+
+
+draw_loop
+.(
 	jsr _init_scr_hires
+	lda c
+	cmp x
+	bne tuile_def
+	lda l
+	cmp y
+	bne tuile_def
+	lda #$4b ; perso
+	sta _NUM_TUILE
+	jmp draw_tuile
+tuile_def
+	lda #$10 ; herbe
+	sta _NUM_TUILE
+draw_tuile
 	jsr _cherche_et_aff_tuile
 	lda _ADDR_SCR
 	clc
@@ -25,10 +89,18 @@ main_loop
 	lda _ADDR_SCR+1
 	adc #0
 	sta _ADDR_SCR+1
-	dec c
-	bne main_suite
-	lda #18
+	ldx c
+	inx
+	stx c
+	cpx #18
+	bne draw_loop
+	lda #0
 	sta c
+	ldx l
+	inx
+	stx l
+	cpx #7
+	beq draw_end
 	lda _ADDR_SCR
 	clc
 	adc #$BC
@@ -36,27 +108,79 @@ main_loop
 	lda _ADDR_SCR+1
 	adc #1
 	sta _ADDR_SCR+1
-	jsr print
-	jsr _wait_touche
-main_suite
-	ldx _NUM_TUILE
-	inx
-	stx _NUM_TUILE
-	txa
-	cmp #$4E
-	bne main_loop
+	jmp draw_loop
+draw_end
 	rts
+.)
+
+depl_perso
+.(
+	jsr _wait_touche
+check_touche
+	lda $208
+	sta key
+	cmp #$BC						; touche flèche droite 
+	bne fleche_gauche
+	ldx x
+	inx
+	stx x
+	cpx #18
+	bne depl_end 
+	dex
+	stx x
+	rts
+fleche_gauche	
+	cmp #$AC						; touche flèche GAUCHE		
+	bne fleche_haut	
+	ldx x				
+	dex
+	stx x
+	cpx #$FF
+	bne depl_end
+	inx
+	stx x
+	jmp depl_end
+fleche_haut	
+	ldx y
+	cmp #$9c						; touche flèche HAUT	
+	bne fleche_bas
+	dex
+	stx y
+	cpx #$FF
+	bne depl_end 
+	inx
+	stx y
+	rts
+fleche_bas
+	cmp #$b4                        ; touche flèche BAS	
+	bne autre_touche
+	ldx y
+	inx
+	stx y
+	cpx #7
+	bne depl_end
+	dex
+	stx y
+autre_touche
+	cmp #$38
+	beq check_touche
+depl_end
+	rts
+.)
 
 print
+.(
 	ldx #$ff
 print_loop
 	inx
-	lda touche,x
+	lda message_touche,x
 	sta $bf6a,x
 	bne print_loop
 	rts
+.)
 
-
+; message à afficher
+message_touche .asc "Touche",0
 ;
 ; We define the adress of the HIRES screen.
 ;
