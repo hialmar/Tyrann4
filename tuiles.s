@@ -5,7 +5,7 @@ y .dsb 1 ; pos perso y
 key .dsb 1; touche tapée
 
 _main
-	jsr hideCursor
+	jsr _hideCursor
 	lda #$3
 	sta x
 	sta y
@@ -38,30 +38,9 @@ escape
 	lda key
 	cmp #$a9						; on sort par appui sur escape
 	bne main_loop
-	jsr showCursor
+	jsr _showCursor
 	rts
 
-hideCursor
-.(
-	lda #10
-	sta $26A
-	lda #4
-	sta $24E
-	lda #1
-	sta $24F
-	rts
-.)
-
-showCursor
-.(
-	lda #3
-	sta $26A
-	lda #32
-	sta $24E
-	lda #4
-	sta $24F
-	rts
-.)
 
 
 

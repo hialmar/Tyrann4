@@ -203,7 +203,30 @@ wait_lachez
 		bne wait_lachez	
 		rts		
 .)		
-		
+
+_hideCursor
+.(
+	lda #10
+	sta $26A
+	lda #4
+	sta $24E
+	lda #1
+	sta $24F
+	rts
+.)
+
+_showCursor
+.(
+	lda #3
+	sta $26A
+	lda #32
+	sta $24E
+	lda #4
+	sta $24F
+	rts
+.)
+
+
 ;************************************************
 ;***   implantation caractères redéfinis      ***
 ;************************************************ 	peut être lancé séparément pour ne charger dans le jeu
