@@ -26,7 +26,7 @@ main_loop
 	jsr draw_loop
 ; déplacements perso
 	jsr depl_perso
-	lda x
+	lda x      ; aff pos perso
 	clc
 	adc #48
 	sta $bf6a
@@ -115,7 +115,6 @@ draw_end
 
 depl_perso
 .(
-	jsr _wait_touche
 check_touche
 	lda $208
 	sta key

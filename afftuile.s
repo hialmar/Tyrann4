@@ -40,6 +40,7 @@ add40
 ;--- init adresse d'affichage de la tuile
 ;----------------------------------
 _init_scr_hires
+.(
 	lda _ADDR_SCR				; Adresse où afficher la tuile
 	sta adr_screen_1+1
 	lda _ADDR_SCR+1
@@ -52,17 +53,19 @@ _init_scr_hires
 	adc #0
 	sta adr_screen_2+2
 	rts
-
+.)
 
 ;-----------------------------------------------------------
 ;----   Affiche une tuile
 ;-----------------------------------------------------------
 _cherche_et_aff_tuile
+.(
 ; En sortie : La tuile est à l'écran
 		lda _NUM_TUILE
 		jsr find_compsants
 		jsr aff__tuile			; côte à côte pour minimiser le Nn d'addition (adrsses écran)
 		rts
+.)
 
 ;----------------------------------------------------------
 ;---            cherche  4 composants tuile             ---
@@ -89,16 +92,19 @@ adr_compo
 ;---               affiche _tuile              ---- 
 ;--------------------------------------------------	
 aff__tuile
+.(
 			ldx #$00				; 0 pour indexer le premier 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères supérieurs (dont n° d'ordre stocké en $00 et $01)
 			ldx #$02				; 2 pour indexer le 3 ème 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères inférieurs (dont n° d'ordre stocké en $02 et $03)
 			rts	
+.)
 
 ;--------------------------------------------------
 ;---               affiche demie tuile               
 ;--------------------------------------------------	
 aff_demi_t	
+.(
 				jsr rens_adr_car		; n° car issus de $00 et $01
 				ldy #$00
 lp_2_sextets	
@@ -108,7 +114,8 @@ lp_2_sextets
 				cpy #$06
 				bne lp_2_sextets		
 				rts	
-				
+.)
+
 ;----------------------------------------------------------
 ;----           affiche deux sextets côte à côte      ----- 
 ;----------------------------------------------------------	
@@ -129,6 +136,7 @@ adr_screen_2
 ;--- MàJ adresses écran HIRES ----
 ;----------------------------------
 maj_scr_hires
+.(
 					clc
 					lda adr_screen_1+1
 					adc #$28
@@ -144,7 +152,7 @@ skip_ret_1
 					inc adr_screen_2+2
 end_maj_adr_ecr	
 					rts					
-				
+.)				
 				
 				
 				
@@ -155,6 +163,7 @@ end_maj_adr_ecr
 ; 				(0,ou 2 car incrémenté dans cette routine pour les 1 et 3)
 ; en sortie : 	adr_car_1 et adr_car_2 de la routine aff_2_sextets sont renséignées
 rens_adr_car
+.(
 				txa					
 				pha					; sauve le n° d'ordre du 1/4 de tuile haut gauche si X=0 bas gauche si x=2
 				lda $00,x			; n° premier car stocké en $00
@@ -177,13 +186,14 @@ rens_adr_car
 				lda sous_tuile,x	; partie basse adresse caractère
 				sta adr_car_2+1
 				rts
-
+.)
 
 		
 ;------------------------------------------------------		
 ; -----  routine attend appui touche puis relacher ---
 ;------------------------------------------------------ spécifique pour mon test
-_wait_touche	
+_wait_touche
+.(	
 		lda $208
 		cmp #$38
 		beq _wait_touche
@@ -192,13 +202,14 @@ wait_lachez
 		cmp #$38
 		bne wait_lachez	
 		rts		
-		
+.)		
 		
 ;************************************************
 ;***   implantation caractères redéfinis      ***
 ;************************************************ 	peut être lancé séparément pour ne charger dans le jeu
 ;													que la zone des caractères  une fois rédéfinie
 _impl_car
+.(
 	ldx #$00
 lp1_impl	
 	lda dta_car_redef_p1,x
@@ -214,7 +225,8 @@ lp2_impl
 	cpx #$50
 	bne lp2_impl	
 	rts
-	
+.)
+
 ; -----------------------------------------------
 ;       Table redéfinition  2nd jeu de car 
 ; -----------------------------------------------
