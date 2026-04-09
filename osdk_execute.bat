@@ -6,6 +6,10 @@
 ::
 IF "%OSDK%"=="" GOTO ErCfg
 
+cd c:\osdk\Oricutron\
+CALL oricutron.exe -t c:\Tyrann4\BUILD\tuiles.tap -s c:\Tyrann4\BUILD\symbols
+cd c:\Tyrann4
+Goto End
 ::
 :: Set the build paremeters
 ::

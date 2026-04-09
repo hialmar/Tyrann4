@@ -1,53 +1,13 @@
-
-
 _ADDR_SCR	.dsb 2
 _NUM_TUILE	.dsb 1
 
-;********************************************************
-;***      routine test pour vérification  tuiles      ***
-;***  affiche toutes les tuiles l'une après l'autre   *** 
-;***             par appui sur les flèches            ***
-;********************************************************
-_test_verif
-	jsr _impl_car
-test_tuiles
-	jsr _hires_et_atributs			; spécifique à ce test passe en HIRES et installe 12 atributs de couleur (hauteur tuile)
-	ldx #$00						; N° d'ordre de la tuile à afficher
-lp_tuile
-	jsr _init_scr_hires				; Spécifique pour mon test $A002, $A003
-	txa								; sauve le n° de tuile  affichée
-	pha								; sur la pile
-	jsr _cherche_et_aff_tuile		;************* C'EST LA ROUTINE QUE TU PEUX RECPERER TELLE QUELLE  *************
-	pla
-	tax
-	jsr _wait_touche					; attend appui puis relaché touche
-chk_208	
-	lda $208
-	cmp #$BC						; touche flèche droite ==> tuile suivante
-	bne autre_touche_1
-	inx
-	cpx #$4E						; Nb max de tuiles
-	bne lp_tuile
-	dex
-	jmp chk_208
-autre_touche_1	
-	cmp #$AC						; touche flèche GAUCHE ==> tuile précédente		
-	bne on_sort						; ni précédente, ni suivante
-	dex
-	cpx #$FF
-	bne lp_tuile
-	inx
-	beq chk_208
-on_sort	
-	cmp #$84						; on sort par appui sur barre espace
-	bne chk_208						; aucun des trois alors boucle sur test touches
-	rts
 
 ;---------------------------------------------------------------------
 ;- passe en mode HIRES et installe 200 atributs couleur jaune et cyan -
 ;---------------------------------------------------------------------	 routine spécifique pour mon test
 _hires_et_atributs	
-		jsr $EC33
+.(
+		jsr $EC33 ; hires
 		lda #$01
 		sta $00
 		lda #$A0
@@ -65,7 +25,6 @@ loop
 		dey
 		bne loop
 		rts
-
 add40
 		clc
 		lda $00
@@ -75,26 +34,46 @@ add40
 		adc #$0
 		sta $01
 		rts
+.)
+
+;----------------------------------
+;--- init adresse d'affichage de la tuile
+;----------------------------------
+_init_scr_hires
+.(
+	lda _ADDR_SCR				; Adresse où afficher la tuile
+	sta adr_screen_1+1
+	lda _ADDR_SCR+1
+	sta adr_screen_1+2
+	lda _ADDR_SCR
+	clc
+	adc #1
+	sta adr_screen_2+1
+	lda _ADDR_SCR+1
+	adc #0
+	sta adr_screen_2+2
+	rts
+.)
 
 ;-----------------------------------------------------------
-;----   Affiche une tuile en haut à gauche de l'écran HIRES
+;----   Affiche une tuile
 ;-----------------------------------------------------------
 _cherche_et_aff_tuile
-; en entrée : X contient le n° de tuile
+.(
 ; En sortie : La tuile est à l'écran
 		lda _NUM_TUILE
 		jsr find_compsants
 		jsr aff__tuile			; côte à côte pour minimiser le Nn d'addition (adrsses écran)
 		rts
+.)
 
 ;----------------------------------------------------------
 ;---            cherche  4 composants tuile             ---
 ;----------------------------------------------------------
-; en entrée : X contient le n° de tuile
+; en entrée : A contient le n° de tuile
 ; en sortie : les 4 n° de sous tuiles sont stockées en $00,$01,$02,$03 
 
 find_compsants
-
 			asl					;vers table DATA PLAN T4
 			tax					;
 			lda ptr_t,x			;Partie basse adresse composants
@@ -113,29 +92,19 @@ adr_compo
 ;---               affiche _tuile              ---- 
 ;--------------------------------------------------	
 aff__tuile
+.(
 			ldx #$00				; 0 pour indexer le premier 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères supérieurs (dont n° d'ordre stocké en $00 et $01)
 			ldx #$02				; 2 pour indexer le 3 ème 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères inférieurs (dont n° d'ordre stocké en $02 et $03)
 			rts	
-;----------------------------------
-;--- init adresses écran HIRES ----
-;----------------------------------
-_init_scr_hires
-	lda _ADDR_SCR				;Routine et Adresses spécifiques pour mon test
-	sta adr_screen_1+1
-	lda _ADDR_SCR+1
-	sta adr_screen_1+2
-	sta adr_screen_2+2
-	ldx _ADDR_SCR
-	inx
-	stx adr_screen_2+1
-	rts
+.)
 
 ;--------------------------------------------------
 ;---               affiche demie tuile               
 ;--------------------------------------------------	
 aff_demi_t	
+.(
 				jsr rens_adr_car		; n° car issus de $00 et $01
 				ldy #$00
 lp_2_sextets	
@@ -145,7 +114,8 @@ lp_2_sextets
 				cpy #$06
 				bne lp_2_sextets		
 				rts	
-				
+.)
+
 ;----------------------------------------------------------
 ;----           affiche deux sextets côte à côte      ----- 
 ;----------------------------------------------------------	
@@ -166,6 +136,7 @@ adr_screen_2
 ;--- MàJ adresses écran HIRES ----
 ;----------------------------------
 maj_scr_hires
+.(
 					clc
 					lda adr_screen_1+1
 					adc #$28
@@ -181,7 +152,7 @@ skip_ret_1
 					inc adr_screen_2+2
 end_maj_adr_ecr	
 					rts					
-				
+.)				
 				
 				
 				
@@ -192,6 +163,7 @@ end_maj_adr_ecr
 ; 				(0,ou 2 car incrémenté dans cette routine pour les 1 et 3)
 ; en sortie : 	adr_car_1 et adr_car_2 de la routine aff_2_sextets sont renséignées
 rens_adr_car
+.(
 				txa					
 				pha					; sauve le n° d'ordre du 1/4 de tuile haut gauche si X=0 bas gauche si x=2
 				lda $00,x			; n° premier car stocké en $00
@@ -214,13 +186,14 @@ rens_adr_car
 				lda sous_tuile,x	; partie basse adresse caractère
 				sta adr_car_2+1
 				rts
-
+.)
 
 		
 ;------------------------------------------------------		
 ; -----  routine attend appui touche puis relacher ---
 ;------------------------------------------------------ spécifique pour mon test
-_wait_touche	
+_wait_touche
+.(	
 		lda $208
 		cmp #$38
 		beq _wait_touche
@@ -229,13 +202,37 @@ wait_lachez
 		cmp #$38
 		bne wait_lachez	
 		rts		
-		
-		
+.)		
+
+_hideCursor
+.(
+	lda #10
+	sta $26A
+	lda #4
+	sta $24E
+	lda #1
+	sta $24F
+	rts
+.)
+
+_showCursor
+.(
+	lda #3
+	sta $26A
+	lda #32
+	sta $24E
+	lda #4
+	sta $24F
+	rts
+.)
+
+
 ;************************************************
 ;***   implantation caractères redéfinis      ***
 ;************************************************ 	peut être lancé séparément pour ne charger dans le jeu
 ;													que la zone des caractères  une fois rédéfinie
 _impl_car
+.(
 	ldx #$00
 lp1_impl	
 	lda dta_car_redef_p1,x
@@ -250,31 +247,9 @@ lp2_impl
 	inx
 	cpx #$50
 	bne lp2_impl	
-	jsr hires_
 	rts
-	
-;---------------------------------------------------------------------
-;- passe en mode HIRES et installe 12 atributs couleur jaune et cyan -
-;---------------------------------------------------------------------	 Routine Spécifique pour mon test
-hires_	
-	jsr $EC33
-	lda #$03
-	sta $A001
-	sta $A051
-	sta $A0A1
-	sta $A0F1	
-	sta $A141
-	sta $A191
-	lda #$06
-	sta $A029
-	sta $A079
-	sta $A0c9
-	sta $A119
-	sta $A169
-	sta $A1b9
-	rts	
+.)
 
-	
 ; -----------------------------------------------
 ;       Table redéfinition  2nd jeu de car 
 ; -----------------------------------------------

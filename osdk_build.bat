@@ -10,7 +10,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Dialog
 :: Goto Camp
 :: Goto Map
-Goto Tuile
+Goto MapAsm
+:: Goto Tuile
 :: Goto Tuiles
 
 ::
@@ -51,6 +52,17 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 
 Goto Tap2dsk
+
+:MapAsm
+
+::
+:: Same for MapAsm
+::
+CALL osdk_config_map_asm.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+
+Goto End
 
 :Tuile
 
