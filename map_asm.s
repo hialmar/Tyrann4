@@ -44,7 +44,17 @@ _main
 main_loop
 	jsr scrl_fenetre		; Affiche/ scrolle les 105 tuiles dans la fenetre
 	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
-	jsr	aff_text	
+	jsr	aff_text
+
+	ldy #$ff
+temporisation_2
+	ldx #$ff
+temporisation_1
+	dex
+	bne temporisation_1
+	dey
+	bne temporisation_2
+
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
 	lda $0c
 	cmp#$86
@@ -53,10 +63,6 @@ main_loop
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
 	jsr chck_mvt_perso_fenetre
 	jsr	eff_text
-	ldx #$ff
-temporisation
-	dex
-	bne temporisation
 	jmp main_loop
 sortie_main
 	rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
@@ -689,12 +695,6 @@ wait_key
 		lda $208
 		cmp #$38
 		beq wait_key
-;		pha
-;wait_release	
-;		lda $208
-;		cmp #$38
-;		bne wait_release
-;		pla
 		cmp #$ac
 		bne next_key_1
 		beq end_key
