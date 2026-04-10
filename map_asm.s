@@ -1089,8 +1089,8 @@ _kraken
 	bne fin_txt
 test_nord	
 	lda $05
-	cmp #$05				;et tenter de passer au nord de la ligne 19 de la carte
-	bne fin_txt
+	cmp #$10				; et tenter de passer au nord de la ligne 16 de la carte
+	bne fin_txt     ;  remettre bpl en fin de beta
 	
 	ldx #$00
 	lda t_kraken_1,x
