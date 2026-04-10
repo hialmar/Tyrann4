@@ -46,6 +46,8 @@ main_loop
 	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
 	jsr	aff_text
 
+	ldy $16
+	bne fin_temporisation
 	ldy #$ff
 temporisation_2
 	ldx #$ff
@@ -54,7 +56,7 @@ temporisation_1
 	bne temporisation_1
 	dey
 	bne temporisation_2
-
+fin_temporisation
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
 	lda $0c
 	cmp#$86
