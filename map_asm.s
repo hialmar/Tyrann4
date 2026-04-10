@@ -1,34 +1,78 @@
+#define FALSE 	0
+#define TRUE 	1
+
+#define CENTRE_ORDO 3
+#define CENTRE_ABS  8
+
+#define LARGEUR_FENETRE 	$0f
+#define HAUTEUR_FENETRE		$07
+
+#define YELLOW_INK 	3
+#define CYAN_INK 	6
+
+#define BLACK_PAPER $10
+
+	.zero
+
+	*= $00
 ; *********** VARIABLES PAGE ZERO  ***********
 ;
 ;	$00	:	repère 1/4 haut gauche tuile en cours
+tuile_en_cours_coin_hg	.dsb 1
 ;	$01	:	repère 1/4 haut droit tuile en cours
+tuile_en_cours_coin_hd	.dsb 1
 ;	$02	:	repère 1/4 bas gauche tuile en cours
+tuile_en_cours_coin_bg	.dsb 1
 ;	$03	:	repère 1/4 bas droit tuile en cours
+tuile_en_cours_coin_bd	.dsb 1
 ;	$04	:	n° tuile personnage affichée (pour animation droite gauche avant, bateau..)
+tuile_perso_aff .dsb 1
 ;Deux oordonnées coin haut gauche partie table affichée	dans fenêtre
 ;	$05	:	N° ligne data MAp en haut gauche fenêtre,Mémorisée tant que pas de scroll
+ligne_hg_map .dsb 1
 ;	$06	:	Rang dans la ligne Data Map en haut gauche fenêtre, Mémorisée tant que pas de scroll
+rang_hg_map .dsb 1
 ;Deux coordonnées variables dans table DataMap utilisées lors de l'affichage d'une fenêtre
 ;	$07	:	N° ligne data MAp
+ligne_map .dsb 1
 ;	$08	:	Rang dans la ligne Data Map
+rang_map .dsb 1
 ;	$09	:	Rang tuile dans fenêtre, utilisé comme index de la table d'adresses écran de la fanêtre ( de 0 a $69)
+rang_fenetre .dsb 1
 ;	$0A	:	N° identifiant quelle tuile en cours d'affichage
+tuile_courante .dsb 1
 ;	$0B	:	Direction scroll précedente( #$AC,$B4,$9C,$BC)
+direction_scroll_prec .dsb 1
 ;	$0C	:	Direction scroll demandée( #$AC,$B4,$9C,$BC)
+direction_scroll .dsb 1
 ;	$0D	:	Drapeau 1 si on a un bateau , 0 si pas de bateau
+a_un_bateau .dsb 1
 ;	$0E	:	valeur tuile position perso (attention, ce N'EST PAS la valeur de la tuile qui represente le perso)
+tuile_sous_pos_perso .dsb 1
 ;	$0F	:	ordonnée perso dans fenêtre Hires (varie de 1 à 7 , valeur initiale : 3)
+ordo_perso_fen .dsb 1
 ;	$10	:	abscisse perso dans fenêtre Hires (varie de 1 à 15 , valeur initiale :7)
+absc_perso_fen .dsb 1
 ;	$11	:	drapeau déplacer perso horizontalement dans fenêtre hires : 0 non 1 oui
+peut_bouger_horiz .dsb 1
 ;	$12	:	Valeur variable index position perso dans table d'adresses ecran ( $00 à $69)
+index_perso .dsb 1
 ;	$13	:	drapeau déplacer perso verticalement dans fenêtre hires : 0 non 1 oui
+peut_bouger_vert .dsb 1
 ;	$14	:	drapeau : 1 on est en mer, 0 on est à terre
+est_en_mer .dsb 1
 ;	$15	:	drapeau : 1 texte affiché , 0, pas de texte affiché
+est_affiche_texte .dsb 1
 ;	$16	:	drapeau : 1 scroll interdit , 0, scroll autorisé
+scroll_est_interdit .dsb 1
 ;	$17	:	drapeau : 1 deplacement perso  interdit , 0, déplacement perso autorisé
+depl_perso_est_interdit .dsb 1
 ;
 ;
 
+;;; STOP : 24 octets utilisés en début de page 0
+
+	.text
 
 _main
 	lda #10					; cache le curseur et vire le son des touches
@@ -46,7 +90,7 @@ main_loop
 	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
 	jsr	aff_text
 
-	ldy $16
+	ldy scroll_est_interdit
 	bne fin_temporisation
 	ldy #$ff
 temporisation_2
@@ -58,7 +102,7 @@ temporisation_1
 	bne temporisation_2
 fin_temporisation
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
-	lda $0c
+	lda direction_scroll
 	cmp#$86
 	beq sortie_main
 	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
@@ -76,54 +120,54 @@ sortie_main
 ;--- affiche hero   ------
 ;-------------------------
 aff_hero
-	lda $0c				; direction demandée
+	lda direction_scroll				; direction demandée
 	cmp #$38			; a-t-on frappé une touche autre qu'une des 4 flêches
 	beq fin_aff_perso
-	lda $0e
+	lda tuile_sous_pos_perso
 	bne mer_01
 	jsr choix_perso
 	bne skip_anim
 mer_01
 	lda $0e
-	cmp #$01
+	cmp #1
 	bne chck_direction
 	jsr choix_perso
 	bne skip_anim
 chck_direction	
-	lda $0c
-	cmp $0b				; direction précédente
+	lda direction_scroll
+	cmp direction_scroll_prec				; direction précédente
 	beq anim_perso		; si identique animation perso
-	sta $0b				; si non nouvelle direction
+	sta direction_scroll_prec				; si non nouvelle direction
 ratrappe_si_mer	
 	jsr choix_perso		; et choix nouveau perso
 	beq skip_anim		; saut inconditionnel
 anim_perso
-	lda $14
+	lda est_en_mer
 	bne ratrappe_si_mer	;retro action si en mer avant
-	lda $04				; $04 contient n° tuile perso affichée
-	eor #$01			; force le bit 0 alternativement à  0 ou à 1
-	sta $04				; et replace en  $04
+	lda tuile_perso_aff				; $04 contient n° tuile perso affichée
+	eor #1				; force le bit 0 alternativement à  0 ou à 1
+	sta tuile_perso_aff				; et replace en  $04
 skip_anim
-	lda $0c
-	sta $0b
-	ldx $12				; 
+	lda direction_scroll
+	sta direction_scroll_prec
+	ldx index_perso				; 
 	jsr maj_adr_scr_next_tuile			; en entrée x contient rang tuile dans  table adresses Hires
-	ldx  $04
+	ldx  tuile_perso_aff
 	jsr cherche_et_aff_tuile			; en entrée : X contient la reference de la tuile
 fin_aff_perso
 	lda #$00
-	sta $17	
+	sta depl_perso_est_interdit	
 	rts
 
 ;------ Choix tuile perso en fonction direction demandée   -----
 choix_perso
-		lda $0e
+		lda tuile_sous_pos_perso
 		beq mer_bateau
-		cmp #$01
+		cmp #TRUE
 		beq mer_bateau
-		lda #$0
-		sta $14					; drapeau  à 0 : on n'est pas en mer
-		lda $0c
+		lda #FALSE
+		sta est_en_mer					; drapeau  à 0 : on n'est pas en mer
+		lda direction_scroll
 		cmp #$9c
 		beq vers_haut			; Si flêche vers le haut
 		cmp #$b4
@@ -142,101 +186,101 @@ vers_droite
 vers_gauche
 		lda #$4a				; n° tuile perso regarde à droite
 fin_ch_perso
-		sta $04					; mémoire tuile perso affichée
+		sta tuile_perso_aff					; mémoire tuile perso affichée
 		rts
 mer_bateau
-		lda #$01
-		sta $14					; drapeau à 1: on est en mer
+		lda #TRUE
+		sta est_en_mer					; drapeau à 1: on est en mer
 		lda #$47
-		sta $04
+		sta tuile_perso_aff
 		rts
 	
 ; -----------------------------------------------------------------------
 ; ----------  routine regarde autour du perso  pour détection mer  ------	
 ; -----------------------------------------------------------------------	
 ; en entrée :	
-; en sortie : 	$0e contient valeur tuile sous perso
-;				$0c contient #$38 si scroll impossible (perso en bord de carte ou en bord de mer (si a terre)
+; en sortie : 	tuile_sous_pos_perso contient valeur tuile sous perso
+;				direction_scroll contient #$38 si scroll impossible (perso en bord de carte ou en bord de mer (si a terre)
 
 chck_around
-; d'abord on regarde si une touche flêchée a été pressée sinon $0c contient #$38
-		lda $0c
+; d'abord on regarde si une touche flêchée a été pressée sinon direction_scroll contient #$38
+		lda direction_scroll
 		cmp #$38
 		beq sortie_scroll_direct		; inutile de regarder si autre touche que flêchée
 ; Ensuite on regarde si on est déjà en mer auquel cas, pas de contrainte de bord de mer
 
-		lda $0e					; valeur tuile à la position du perso initialisée à #$50 (tuile NEMAUSUS)
+		lda tuile_sous_pos_perso					; valeur tuile à la position du perso initialisée à #$50 (tuile NEMAUSUS)
 		beq sortie_scroll_direct		; si on est en mer, pas de contrainte de proximité
 		cmp #$01
 		beq sortie_scroll_direct		; deux valeurs de tuiles pour la mer : $00 et $01
 
 ; puis déterminons la position perso dans la carte
-		lda $0f					; ordonnée perso dans fenête hires
+		lda ordo_perso_fen					; ordonnée perso dans fenête hires
 		clc
-		adc $05					; N° ligne ds table DataMAP en haut gauche fenêtre
-		sta $07
-		lda $10					; abscisse perso dans fenètre Hires
+		adc ligne_hg_map					; N° ligne ds table DataMAP en haut gauche fenêtre
+		sta ligne_map
+		lda absc_perso_fen					; abscisse perso dans fenètre Hires
 		clc
-		adc $06					; rang tuile ds ligne table dataMap en ahut cauche fenêtre
-		sta $08
+		adc rang_hg_map					; rang tuile ds ligne table dataMap en ahut cauche fenêtre
+		sta rang_map
 		
 ; que nous utilisons ensuite pour regarder autour du perso
-		lda $0c					; mémoire touche pressée
+		lda direction_scroll					; mémoire touche pressée
 		cmp #$ac				; recherche contenu tuile à gauche
 		bne sens_2
-		dec $08					; $08 contient rang perso dans ligne map
+		dec rang_map					; rang_map contient rang perso dans ligne map
 		bmi no_scroll			; le perso était en bord gauche map
 		jsr rech_tab_map		; en sortie  repère tuile dans $0a
-		lda $0a
+		lda tuile_courante
 		beq check_ville_bateau	; si bord de mer à gauche, est-on dans ville portuaire		
 		bne around_sortie		; saut inconditionnel			
 sens_2
 		cmp #$bc				; recherche contenu tuile à droite
 		bne sens_3
-		lda $08
+		lda rang_map
 		cmp #$1f				; rang tuile en bord droit de map
 		beq no_scroll			; si perso en bord droit, pas de scroll
-		inc $08					; si non, on regarde ce qu'il y a à droite
-		jsr rech_tab_map		; en sortie  repère tuile dans $0a
-		lda $0a
+		inc rang_map					; si non, on regarde ce qu'il y a à droite
+		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
+		lda tuile_courante
 		beq check_ville_bateau			
 		bne around_sortie			
 sens_3
 		cmp #$9c				; recherche contenu tuile au dessus
 		bne sens_4
-		dec $07
+		dec ligne_map
 		bmi no_scroll
-		jsr rech_tab_map		; en sortie  repère tuile dans $0a
-		lda $0a
+		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
+		lda tuile_courante
 		beq check_ville_bateau			
 		bne around_sortie			
 sens_4
 		cmp #$b4				; recherche contenu tuile en dessous
 		bne around_sortie
-		lda $07
+		lda ligne_map
 		cmp #$30
 		beq no_scroll
-		inc $07
-		jsr rech_tab_map		; en sortie  repère tuile dans $0a
-		lda $0a
+		inc ligne_map
+		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
+		lda tuile_courante
 		beq check_ville_bateau		
 around_sortie
-		lda #$00
-		sta $16				; ré-autorise scroll (pour une boucle dans la direction demandée)
-		sta $17				; ré-autorise mvt perso (pour une boucle dans la direction demandée)
+		lda #FALSE
+		sta scroll_est_interdit				; ré-autorise scroll (pour une boucle dans la direction demandée)
+		sta depl_perso_est_interdit				; ré-autorise mvt perso (pour une boucle dans la direction demandée)
 sortie_scroll_direct		
 		rts
 check_ville_bateau		
-		lda $0e				; valeur tuile à la position du perso 				
+		lda tuile_sous_pos_perso				; valeur tuile à la position du perso 				
 		cmp #$5e			; villes portuaires codées entre #$5e et #$63
 		bmi no_scroll		; si pas port 
-		lda $0d				; si port check bateau
+		lda a_un_bateau				; si port check bateau
 		beq no_scroll		; si pas bateau
 		bne around_sortie 	; Saut inconditionnel		
 no_scroll		
-		lda #$01			
-		sta $16				;mets à 1 drapeau scroll interdit (pour une boucle, dans la direction demandée)
-		sta $17				;mets à 1 drapeau mvt perso  interdit (pour une boucle, dans la direction demandée)
+		lda #TRUE			
+		sta scroll_est_interdit				;mets à 1 drapeau scroll interdit (pour une boucle, dans la direction demandée)
+		sta depl_perso_est_interdit				;mets à 1 drapeau mvt perso  interdit (pour une boucle, dans la direction demandée)
 		rts 
 
 ; -------------------------------------------------------------------------
@@ -244,69 +288,69 @@ no_scroll
 ; -----           et si le perso est au centre de la fenêtre         ------
 ; -------------------------------------------------------------------------
 chck_bords
-; en entrée :	$0c contient #38 si pas de touches flêchée pressée
-;				$0c contient valeur touche fléchée pressée sinon
+; en entrée :	direction_scroll contient #38 si pas de touches flêchée pressée
+;				direction_scroll contient valeur touche fléchée pressée sinon
 ; en sortie :	idem 	
-		lda $16						; si scroll déjà interdit par bord de mer
+		lda scroll_est_interdit						; si scroll déjà interdit par bord de mer
 		bne sort_direct	
-		lda $0c
+		lda direction_scroll
 		cmp #$38				 	; si 38, pas touche fléchée enfoncée
 		beq sort_direct
 ;vers droite
 		cmp #$BC					; touche flèche droite ==> tuile suivante
 		bne autre_touche_1
-		lda $06
-		cmp #$10					; au départ $06 = #$10 (rang tuile au bord gauche fénêtre) on ne peut atteindre la tuile suivante 
+		lda rang_hg_map
+		cmp #$10					; au départ rang_hg_map = #$10 (rang tuile au bord gauche fénêtre) on ne peut atteindre la tuile suivante 
 									; car le bord droit du plan est au bord droit de la fenêtre (largeur plan :#$10+#$0F = #$1f tuiles)
 		beq end_chck_bords_nsc		; dans ce cas, scroll horizontal interdit il faut checker déplacement horizontal perso dans fenêtre
-		lda $10						; rang (abscisse) perso dans fenètre
-		cmp #$08					; si perso pas au centre
+		lda absc_perso_fen						; rang (abscisse) perso dans fenètre
+		cmp #CENTRE_ABS					; si perso pas au centre
 		bne end_chck_bords_nsc		; pas de scroll fenètre		
-		inc $06						; Maj rang tuile DataMAP en bord gauche de fenêtre
+		inc rang_hg_map						; Maj rang tuile DataMAP en bord gauche de fenêtre
 		bne end_chck_bords			; saut inconditionnel
 autre_touche_1			
 		cmp #$AC					; touche flèche gauche ==> tuile précedente
 		bne autre_touche_2
-		lda $06
+		lda rang_hg_map
 		bmi end_chck_bords_nsc   	;
-		lda $10						; rang (abscisse) perso dans fenètre
-		cmp #$08					; si perso pas au centre
+		lda absc_perso_fen						; rang (abscisse) perso dans fenètre
+		cmp #CENTRE_ABS					; si perso pas au centre
 		bne end_chck_bords_nsc		; pas de scroll fenètre
-		dec $06
+		dec rang_hg_map
 		bpl end_chck_bords	
 autre_touche_2
 		cmp #$B4					; touche flèche BAS ==> tuile ligne de dessous		
 		bne autre_touche_3						
-		lda $05
+		lda ligne_hg_map
 		cmp #$2A
 		beq end_chck_bords_nsc
-		lda $0f						; hauteur (ordonnée) perso dans fenètre
-		cmp #$03					; si perso pas au centre
+		lda ordo_perso_fen						; hauteur (ordonnée) perso dans fenètre
+		cmp #CENTRE_ORDO					; si perso pas au centre
 		bne end_chck_bords_nsc		; pas de scroll fenètre		
-		inc $05
+		inc ligne_hg_map
 		bne end_chck_bords	
 autre_touche_3
 		cmp #$9C				; touche flèche haut ==> tuile ligne de dessus		
 		bne end_chck_bords						
-		lda $05
+		lda ligne_hg_map
 		beq end_chck_bords_nsc
-		lda $0f						; hauteur (ordonnée) perso dans fenètre
-		cmp #$03					; si perso pas au centre
+		lda ordo_perso_fen						; hauteur (ordonnée) perso dans fenètre
+		cmp #CENTRE_ORDO					; si perso pas au centre
 		bne end_chck_bords_nsc		; pas de scroll fenètre			
-		dec $05
+		dec ligne_hg_map
 end_chck_bords
-		lda #$00
-		sta $16					; ré-autorise scroll (pour une boucle, dans la direction demandée)
-		lda #$01
-		sta $17					; interdit deplacement perso (pour une boucle, dans la direstion demandée)
+		lda #FALSE
+		sta scroll_est_interdit					; ré-autorise scroll (pour une boucle, dans la direction demandée)
+		lda #TRUE
+		sta depl_perso_est_interdit					; interdit deplacement perso (pour une boucle, dans la direstion demandée)
 		rts
 end_chck_bords_nsc
-		lda #$01
-		sta $16					; interdit scroll (pour une boucle, dans la direstion demandée)
-		lda #$00
-		sta $17					; autorise deplacement perso (pour une boucle, dans la direstion demandée)
+		lda #TRUE
+		sta scroll_est_interdit					; interdit scroll (pour une boucle, dans la direstion demandée)
+		lda #FALSE
+		sta depl_perso_est_interdit					; autorise deplacement perso (pour une boucle, dans la direstion demandée)
 ;		lda #$38				; pour simuler aucune touche enfoncée donc interdire scroll carte
-;		sta $0c
+;		sta direction_scroll
 sort_direct		
 		rts
 
@@ -315,81 +359,81 @@ sort_direct
 ; ---------------------------------------------------------------------------------------------
 		
 chck_mvt_perso_fenetre
-		lda $16
+		lda scroll_est_interdit
 		beq sortie_perso			; si scrolling autorisé ==> deplacement perso interdit
-		lda $17
+		lda depl_perso_est_interdit
 		bne sortie_perso			; si déplacement déjà interdit par bord de de mer => on ne traite pas deplacement perso
 		
 ; on commence par afficher la tuile dont n° est sous le perso
-		ldx $12						; contient le n° de tuile sous le perso
+		ldx index_perso						; contient le n° de tuile sous le perso
 		jsr maj_adr_scr_next_tuile	; en entrée x contient rang tuile dans  table adresses Hires
-		ldx  $0e
+		ldx tuile_sous_pos_perso
 		jsr cherche_et_aff_tuile	; en entrée : X contient la reference de la tuile
-; puis on checke le bord de la fenêtre hires et on modifie le contenu de $12 en fonction de la direction demandée
+; puis on checke le bord de la fenêtre hires et on modifie le contenu de index_perso en fonction de la direction demandée
 
-		lda $0c
+		lda direction_scroll
 		cmp #$38 
 		beq sortie_perso			; pas de touche fléchée pressée  => on ne traite pas deplacement perso		
 
 deplc_gauche
 		cmp #$ac					; touche flèche gauche ==> deplacement vers la gauche
 		bne deplac_droite
-		lda $10
+		lda absc_perso_fen
 		cmp#$01
 		beq no_depl
-		dec $10
-		dec $12
+		dec absc_perso_fen
+		dec index_perso
 		jmp out_depl_perso
 deplac_droite
 		cmp #$bc					; touche flèche droite ==> deplacement vers la droite
 		bne deplac_bas		
-		lda $10
-		cmp #$0f   ;cmp #$15
+		lda absc_perso_fen
+		cmp #LARGEUR_FENETRE   ;cmp #$15
 		beq no_depl
-		inc $10
-		inc $12
+		inc absc_perso_fen
+		inc index_perso
 		jmp out_depl_perso
 deplac_bas		
 		cmp #$b4				; touche flèche bas ==> deplacement vers le bas
 		bne deplac_haut				
-		lda $0f
+		lda ordo_perso_fen
 		cmp #$06   ;cmp #$07
 		beq no_depl
-		inc $0f
-		lda $12
+		inc ordo_perso_fen
+		lda index_perso
 		clc
-		adc #$0f
-		sta $12
+		adc #LARGEUR_FENETRE
+		sta index_perso
 		jmp out_depl_perso
 deplac_haut
 		cmp #$9c				; touche flèche haut ==> deplacement vers le haut
 		bne sortie_perso	
-		lda $0f
+		lda ordo_perso_fen
 		beq no_depl
-		dec $0f
-		lda $12
+		dec ordo_perso_fen
+		lda index_perso
 		sec
-		sbc #$0f
-		sta $12		
+		sbc #LARGEUR_FENETRE
+		sta index_perso		
 out_depl_perso
 ; détermination n° tuile à la position perso
-		lda $0f					; ordonnée perso dans fenête hires
+		lda ordo_perso_fen					; ordonnée perso dans fenête hires
 		clc
-		adc $05					; N° ligne ds table DataMAP en haut gauche fenêtre
-		sta $07
-		lda $10					; abscisse perso dans fenètre Hires
+		adc ligne_hg_map					; N° ligne ds table DataMAP en haut gauche fenêtre
+		sta ligne_map
+		lda absc_perso_fen					; abscisse perso dans fenètre Hires
 		clc
-		adc $06					; rang tuile ds ligne table dataMap en ahut cauche fenêtre
-		sta $08
-		jsr rech_tab_map		; en sortie  repère tuile dans $0a
-		lda $0a
-		sta $0e					; repère tuile dans $0e	
-		lda #$00
-		sta $17
+		adc rang_hg_map					; rang tuile ds ligne table dataMap en ahut cauche fenêtre
+		sta rang_map
+		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
+		lda tuile_courante
+		sta tuile_sous_pos_perso					; repère tuile dans tuile_sous_pos_perso	
+		lda #FALSE
+		sta depl_perso_est_interdit
 		rts
 no_depl
-		lda #$01				; deplacement interdit
-		sta $17
+		lda #TRUE				; deplacement interdit
+		sta depl_perso_est_interdit
 sortie_perso		
 		rts
 
@@ -398,67 +442,67 @@ sortie_perso
 ;***       fenêtre de l'écran HIRES définie par la table tab_adr_hires        *** 
 ;***              apres recherche dans la table DATA PLAN T4                  ***
 ;********************************************************************************
-;en entrée : 	position coin fenetre dans la ligne des DATA MAP stockée dans $06
-;				n°ligne DATA MAP stocké dans $05
+;en entrée : 	position coin fenetre dans la ligne des DATA MAP stockée dans rang_hg_map
+;				n°ligne DATA MAP stocké dans ligne_hg_map
 ;En sortie :	Les tuiles sont affichées dans la fenetre Hires
 
 scrl_fenetre
-	lda $16				; drapeau scroll (autorisé : 0 , interdit : 1)
+	lda scroll_est_interdit				; drapeau scroll (autorisé : 0 , interdit : 1)
 	bne sortie_fenetre	; scroll interdit par bord de mer ou bord de carte
-	lda $0c
+	lda direction_scroll
 	cmp #$38
 	beq sortie_fenetre	; aucune touche fléchées pressée
-	lda $05
-	sta $07				; n° ligne datamap (variable)
-	lda $06
-	sta $08				; position dans ligne des datamap
+	lda ligne_hg_map
+	sta ligne_map				; n° ligne datamap (variable)
+	lda rang_hg_map
+	sta rang_map				; position dans ligne des datamap
 	lda #$ff			; initialise  à $ff la
-	sta $09				; Mémoire de rang  de la tuile ds fenetre ( $00 à $69 soit 7 x$0f tuiles)
-	ldy #$00
+	sta rang_fenetre				; Mémoire de rang  de la tuile ds fenetre ( $00 à $69 soit 7 x$0f tuiles)
+	ldy #0
 lp_L7
-	ldx #$00			; index nombre de colonnes de tuiles à afficher (15) 
+	ldx #0			; index nombre de colonnes de tuiles à afficher (15) 
 lp_C15
-	inc $08				; position ds la ligne des DATAMAP (première valeur : 0)
-	inc $09				; Position dans la liste des adresses hires de la fenetre (première valeur : 0)
+	inc rang_map				; position ds la ligne des DATAMAP (première valeur : 0)
+	inc rang_fenetre				; Position dans la liste des adresses hires de la fenetre (première valeur : 0)
 	inx					; (première valeur : x=1) puis colonne suivante
-	jsr rech_tab_map	; en sortie $0A contient la reference de la tuile à afficher	
+	jsr rech_tab_map	; en sortie tuile_courante contient la reference de la tuile à afficher	
 	cpx #$10			; on affiche 15 tuile par ligne
 	beq autre_ligne
 	txa 
 	pha					;empile le rang de la tuile dans la ligne à afficher
-	ldx $09
+	ldx rang_fenetre
 	jsr maj_adr_scr_next_tuile	; en entrée x contient rang tuile dans  table adresses Hires
-	ldx $0A	;ldx $08
+	ldx tuile_courante	;ldx rang_map
 	jsr cherche_et_aff_tuile	; en entrée : X contient la reference de la tuile
 	pla
 	tax
 	bne lp_C15
 autre_ligne
-	dec $09
-	lda $06
-	sta $08	
-	inc $07
+	dec rang_fenetre
+	lda rang_hg_map
+	sta rang_map	
+	inc ligne_map
 	iny
-	cpy #$07
+	cpy #HAUTEUR_FENETRE
 ;	beq sortie_fenetre
 	bne lp_L7
 
 ; détermination n° tuile à la position perso
-	lda $0f					; ordonnée perso dans fenête hires
+	lda ordo_perso_fen					; ordonnée perso dans fenête hires
 	clc
-	adc $05					; N° ligne ds table DataMAP en haut gauche fenêtre
-	sta $07
-	lda $10					; abscisse perso dans fenètre Hires
+	adc ligne_hg_map					; N° ligne ds table DataMAP en haut gauche fenêtre
+	sta ligne_map
+	lda absc_perso_fen					; abscisse perso dans fenètre Hires
 	clc
-	adc $06					; rang tuile ds ligne table dataMap en ahut cauche fenêtre
-	sta $08
-	jsr rech_tab_map		; en sortie  repère tuile dans $0a
-	lda $0a
-	sta $0e					; repère tuile dans $0e	
+	adc rang_hg_map					; rang tuile ds ligne table dataMap en ahut cauche fenêtre
+	sta rang_map
+	jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
+	lda tuile_courante
+	sta tuile_sous_pos_perso					; repère tuile dans tuile_sous_pos_perso	
 	
 sortie_fenetre
-	lda #$00
-	sta $16					; autorise scroll pour prochaine boucle, jusqu'aux différents checks
+	lda #FALSE
+	sta scroll_est_interdit					; autorise scroll pour prochaine boucle, jusqu'aux différents checks
 	rts	
 	
 
@@ -469,45 +513,45 @@ sortie_fenetre
 ;-----------------------------------------------------------------------------		
 init_div_var
 	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
-	sta $05			; N° de ligne fixe tant que pas de scroll
+	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
 	lda #$10
-	sta $06			; rang ds ligne fixe tant que pas de scroll
+	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
 	lda #$4C
-	sta $04			; code tuile perso affichée
+	sta tuile_perso_aff			; code tuile perso affichée
 	lda #$34
-	sta $12			; valeur index perso dans table adresses hires fenêtre
+	sta index_perso			; valeur index perso dans table adresses hires fenêtre
 	lda #$9C
-	sta $0C			;  valeurs => ddirection scroll demandée
-	lda #$03
-	sta $0f			; Abscisse perso dans fenêtre Hires
-	lda #$08
-	sta $10			; Ordonnée perso dans fenêtre Hires
+	sta direction_scroll			;  valeurs => ddirection scroll demandée
+	lda #CENTRE_ORDO
+	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
+	lda #CENTRE_ABS
+	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
 	lda #$51		; repère tuile Nemausus
-	sta $0e			; sous position perso au départ
-	lda #$00
-	sta $11			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
-	sta $13			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
-	sta $15			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
-	sta $16			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
-	sta $17			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	lda #1	        ; TEMPO
-	sta $0d			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
+	sta tuile_sous_pos_perso			; sous position perso au départ
+	lda #FALSE
+	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
+	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
+	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
+	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
+	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
+	lda #TRUE	        ; TEMPO
+	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	rts
 		
 ;----------------------------------------------------------
 ;---   cherche n° de tuile en position X,Y dans carte   ---
 ;----------------------------------------------------------
-;en entrée : 	position dans la ligne stockée dans $08,
-;				n°ligne stocké dans $07
-; en sortie : 	Le numéro de tuile est dans $0A
+;en entrée : 	position dans la ligne stockée dans rang_map,
+;				n°ligne stocké dans ligne_map
+; en sortie : 	Le numéro de tuile est dans tuile_courante
 
 rech_tab_map
 		txa
 		pha
 		tya
 		pha
-		ldx $07				; X contient le n° de ligne DataMap(en partant de 0)
-		ldy $08				; y contient la position dans la ligne DataMap
+		ldx ligne_map				; X contient le n° de ligne DataMap(en partant de 0)
+		ldy rang_map				; y contient la position dans la ligne DataMap
 		txa					; prépare pointeur
 		asl					; vers table DATA PLAN T4
 		tax					;
@@ -518,7 +562,7 @@ rech_tab_map
 		sta adr_ligne+2
 adr_ligne	
 		lda $1111,y
-		sta $0A
+		sta tuile_courante
 		pla
 		tay
 		pla 
@@ -543,7 +587,7 @@ cherche_et_aff_tuile
 ;---            cherche  4 composants tuile             ---
 ;----------------------------------------------------------
 ; en entrée : X contient le n° de tuile
-; en sortie : les 4 n° de sous tuiles sont stockées en $00,$01,$02,$03 
+; en sortie : les 4 n° de sous tuiles sont stockées en tuile_en_cours_coin_hg=$00,tuile_en_cours_coin_hg=$01,tuile_en_cours_coin_bg=$02,tuile_en_cours_coin_bd=$03 
 
 find_compsants
 			txa
@@ -554,10 +598,10 @@ find_compsants
 			inx
 			lda ptr_t,x			;partie haute adresse composants
 			sta adr_compo+2
-			ldx #$03
+			ldx #3
 adr_compo	
 			lda $1111,x
-			sta $00,x			; **** bien sûr, tu peux choisir un autre emplacement page 0  que  $00,01,02,03...
+			sta tuile_en_cours_coin_hg,x			; **** bien sûr, tu peux choisir un autre emplacement page 0  que  $00,01,02,03...
 			dex
 			bpl adr_compo
 			rts	
@@ -565,12 +609,12 @@ adr_compo
 ;---               affiche _tuile              ---- 
 ;--------------------------------------------------	
 aff__tuile
-			lda $09
-			cmp $12					; n'affiche pas la tuile si c'est celle qui est sous le perso
+			lda rang_fenetre
+			cmp index_perso					; n'affiche pas la tuile si c'est celle qui est sous le perso
 			beq pas_daff
-			ldx #$00				; 0 pour indexer le premier 1/4 de tuile
+			ldx #0				; 0 pour indexer le premier 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères supérieurs (dont n° d'ordre stocké en $00 et $01)
-			ldx #$02				; 2 pour indexer le 3 ème 1/4 de tuile
+			ldx #2				; 2 pour indexer le 3 ème 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères inférieurs (dont n° d'ordre stocké en $02 et $03)
 pas_daff			
 			rts	
@@ -610,7 +654,7 @@ skip_inc_ph
 ;--------------------------------------------------	
 aff_demi_t	
 				jsr rens_adr_car		; n° car issus de $00 et $01
-				ldy #$00
+				ldy #0
 lp_2_sextets	
 				jsr aff_2_sextets		; 2 jeux de 6 octets  (partie haute tuile)
 				jsr maj_scr_hires
@@ -667,7 +711,7 @@ end_maj_adr_ecr
 rens_adr_car
 				txa					
 				pha					; sauve le n° d'ordre du 1/4 de tuile haut gauche si X=0 bas gauche si x=2
-				lda $00,x			; n° premier car stocké en $00
+				lda tuile_en_cours_coin_hg,x			; n° premier car stocké en $00
 				asl					; vers table adresse car  1/4 tuiles
 				tax					;
 				lda sous_tuile,x		; Partie haute adresse caractère
@@ -719,7 +763,7 @@ next_key_4
 no_key
 		lda #$38	
 end_key		
-		sta $0c
+		sta direction_scroll
 		rts		
 		
 		
@@ -748,14 +792,14 @@ lp2_impl
 ;---------------------------------------------------------------------	 routine spécifique l'emplacement choisie de la fenêtre
 hires_et_atributs	
 		jsr $EC33
-		lda #$03
+		lda #YELLOW_INK
 		sta $Aa01
 		sta $Aa51
 		sta $AaA1
 		sta $AaF1	
 		sta $Ab41
 		sta $Ab91
-		lda #$06
+		lda #CYAN_INK
 		sta $Aa29
 		sta $Aa79
 		sta $Aac9
@@ -763,14 +807,14 @@ hires_et_atributs
 		sta $Ab69
 		sta $Abb9
 		
-		lda #$03
+		lda #YELLOW_INK
 		sta $Abe1
 		sta $Ac31
 		sta $Ac81
 		sta $Acd1	
 		sta $Ad21
 		sta $Ad71
-		lda #$06
+		lda #CYAN_INK
 		sta $Ac09
 		sta $Ac59
 		sta $Aca9
@@ -778,14 +822,14 @@ hires_et_atributs
 		sta $Ad49
 		sta $Ad99		
 		
-		lda #$03
+		lda #YELLOW_INK
 		sta $Adc1
 		sta $Ae11
 		sta $Ae61
 		sta $Aeb1	
 		sta $Af01
 		sta $Af51
-		lda #$06
+		lda #CYAN_INK
 		sta $Ade9
 		sta $Ae39
 		sta $Ae89
@@ -793,14 +837,14 @@ hires_et_atributs
 		sta $Af29
 		sta $Af79		
 		
-		lda #$03
+		lda #YELLOW_INK
 		sta $Afa1
 		sta $Aff1
 		sta $b041
 		sta $b091	
 		sta $b0e1
 		sta $b131
-		lda #$06
+		lda #CYAN_INK
 		sta $Afc9
 		sta $b019
 		sta $b069
@@ -808,14 +852,14 @@ hires_et_atributs
 		sta $b109
 		sta $b159		
 		
-		lda #$03
+		lda #YELLOW_INK
 		sta $b181
 		sta $b1d1
 		sta $b221
 		sta $b271	
 		sta $b2c1
 		sta $b311
-		lda #$06
+		lda #CYAN_INK
 		sta $b1a9
 		sta $b1f9
 		sta $b249
@@ -823,14 +867,14 @@ hires_et_atributs
 		sta $b2e9
 		sta $b339		
 		
-		lda #$03
+		lda #YELLOW_INK
 		sta $b361
 		sta $b3b1
 		sta $b401
 		sta $b451	
 		sta $b4a1
 		sta $b4f1
-		lda #$06
+		lda #CYAN_INK
 		sta $b389
 		sta $b3d9
 		sta $b429
@@ -838,14 +882,14 @@ hires_et_atributs
 		sta $b4c9
 		sta $b519		
 		
-		lda #$03
+		lda #YELLOW_INK
 		sta $b541
 		sta $b591
 		sta $b5e1
 		sta $b631	
 		sta $b681
 		sta $b6d1
-		lda #$06
+		lda #CYAN_INK
 		sta $b569
 		sta $b5b9
 		sta $b609
@@ -854,7 +898,7 @@ hires_et_atributs
 		sta $b6f9		
 
 		;;; paper 0 sur les 3 lignes texte
-		lda #$10
+		lda #BLACK_PAPER
 		sta $bf68
 		sta $bf90
 		sta $bfb8
@@ -865,7 +909,7 @@ hires_et_atributs
 ;******* Affiche différents textes   ************
 ;************************************************
 aff_text
-	lda $0e			; valeur tuile sous perso
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	sec				; prépare retenue pour soustraction
 	sbc #$50		; la première ville est numéroté #$50 (la dernière : #$64)
 	bmi hadrian_wall	; si pas sur vile, test suivant
@@ -878,7 +922,7 @@ aff_text
 	lda ptr_v,x			; Partie haute premier byte chaine nom (ie :$a0,"narbone",0) 
 	sta adr_nom_1+2
 	sta lp_nom_v+2			
-	ldx #$00
+	ldx #0
 adr_nom_1	
 	lda $1111,x			;partie basse aadresse écran pour ecriture nom
 	sta adr_ecr_nom+1			
@@ -891,11 +935,11 @@ adr_ecr_nom
 	inx
 	bne lp_nom_v
 ask_enter	
-	ldx #$00
+	ldx #0
 lp_ask	
 	lda quest_enter,x
 	bne suite_ask
-	inc $15		;flag indiquant que quelquechose est ecrit en bas écran (pour que la routine Eff_texte le teste et agisse ou pas)	
+	inc est_affiche_texte		;flag indiquant que quelquechose est ecrit en bas écran (pour que la routine Eff_texte le teste et agisse ou pas)	
 	jmp fin_txt
 suite_ask	
 	sta $bfbf,x
@@ -905,12 +949,12 @@ suite_ask
 quest_enter	
 	.asc "Do you wish to enter the city?",0
 hadrian_wall
-	lda $0e
+	lda tuile_sous_pos_perso
 	cmp #$44				; valeur tuile mur Hadrien ouest
 	beq suite_hw
 	jmp druid_hut
 suite_hw	
-	ldx #$00
+	ldx #0
 	lda t_h_wall_1,x
 	sta adr_ecr_txt+1
 	lda #<t_h_wall_1+1
@@ -919,7 +963,7 @@ suite_hw
 	sta write_phrase+2	
 	jsr write_phrase
 	
-	ldx #$00
+	ldx #0
 	lda t_h_wall_2,x
 	sta adr_ecr_txt+1
 	lda #<t_h_wall_2+1
@@ -931,7 +975,7 @@ suite_hw
 	jsr eff_text
 	
 	
-	ldx #$00
+	ldx #0
 	lda t_h_wall_3,x
 	sta adr_ecr_txt+1
 	lda #<t_h_wall_3+1
@@ -940,7 +984,7 @@ suite_hw
 	sta write_phrase+2	
 	jsr write_phrase
 	
-	ldx #$00
+	ldx #0
 	lda t_h_wall_4,x
 	sta adr_ecr_txt+1
 	lda #<t_h_wall_4+1
@@ -951,7 +995,7 @@ suite_hw
 	jsr hit_key
 	jsr eff_text
 	
-	ldx #$00
+	ldx #0
 	lda t_h_wall_5,x
 	sta adr_ecr_txt+1
 	lda #<t_h_wall_5+1
@@ -960,7 +1004,7 @@ suite_hw
 	sta write_phrase+2	
 	jsr write_phrase		
 	
-	ldx #$00
+	ldx #0
 	lda t_h_wall_6,x
 	sta adr_ecr_txt+1
 	lda #<t_h_wall_6+1
@@ -972,12 +1016,12 @@ suite_hw
 	jsr eff_text
 
 druid_hut	
-	lda $0e
+	lda tuile_sous_pos_perso
 	cmp #$4e				; valeur tuile camp Druides
 	beq suite_dh
 	jmp herb_
 suite_dh	
-	ldx #$00
+	ldx #0
 	lda t_druid_hut_1,x
 	sta adr_ecr_txt+1
 	lda #<t_druid_hut_1+1
@@ -986,7 +1030,7 @@ suite_dh
 	sta write_phrase+2	
 	jsr write_phrase
 	
-	ldx #$00
+	ldx #0
 	lda t_druid_hut_2,x
 	sta adr_ecr_txt+1
 	lda #<t_druid_hut_2+1
@@ -997,7 +1041,7 @@ suite_dh
 	jsr hit_key
 	jsr eff_text
 	
-	ldx #$00
+	ldx #0
 	lda t_druid_hut_3,x
 	sta adr_ecr_txt+1
 	lda #<t_druid_hut_3+1
@@ -1006,7 +1050,7 @@ suite_dh
 	sta write_phrase+2	
 	jsr write_phrase
 	
-	ldx #$00
+	ldx #0
 	lda t_druid_hut_4,x
 	sta adr_ecr_txt+1
 	lda #<t_druid_hut_4+1
@@ -1026,7 +1070,7 @@ suite_dh
 	sta write_phrase+2	
 	jsr write_phrase		
 	
-	ldx #$00
+	ldx #0
 	lda t_druid_hut_6,x
 	sta adr_ecr_txt+1
 	lda #<t_druid_hut_6+1
@@ -1037,7 +1081,7 @@ suite_dh
 	jsr hit_key
 	jsr eff_text	
 	
-	ldx #$00
+	ldx #0
 	lda t_druid_hut_7,x
 	sta adr_ecr_txt+1
 	lda #<t_druid_hut_7+1
@@ -1046,7 +1090,7 @@ suite_dh
 	sta write_phrase+2	
 	jsr write_phrase		
 	
-	ldx #$00
+	ldx #0
 	lda t_druid_hut_8,x
 	sta adr_ecr_txt+1
 	lda #<t_druid_hut_8+1
@@ -1059,10 +1103,10 @@ suite_dh
 
 herb_
 
-	lda $0e
+	lda tuile_sous_pos_perso
 	cmp #$4F				; valeur tuile montagne et plante mortelle
 	bne _kraken
-	ldx #$00
+	ldx #0
 	lda t_herb_1,x
 	sta adr_ecr_txt+1
 	lda #<t_herb_1+1
@@ -1071,7 +1115,7 @@ herb_
 	sta write_phrase+2	
 	jsr write_phrase
 	
-	ldx #$00
+	ldx #0
 	lda t_herb_2,x
 	sta adr_ecr_txt+1
 	lda #<t_herb_2+1
@@ -1083,16 +1127,16 @@ herb_
 	jsr eff_text
 
 _kraken
-	lda $0e					; il faut être en mer
+	lda tuile_sous_pos_perso					; il faut être en mer
 	beq	test_nord
-	cmp #$01
+	cmp #TRUE
 	bne fin_txt
 test_nord	
-	lda $05
+	lda ligne_hg_map
 	cmp #$10				; et tenter de passer au nord de la ligne 16 de la carte
 	bne fin_txt     ;  remettre bpl en fin de beta
 	
-	ldx #$00
+	ldx #0
 	lda t_kraken_1,x
 	sta adr_ecr_txt+1
 	lda #<t_kraken_1+1
@@ -1101,7 +1145,7 @@ test_nord
 	sta write_phrase+2	
 	jsr write_phrase
 	
-	ldx #$00
+	ldx #0
 	lda t_kraken_2,x
 	sta adr_ecr_txt+1
 	lda #<t_kraken_2+1
@@ -1112,7 +1156,7 @@ test_nord
 	jsr hit_key
 	jsr eff_text	
 	
-	ldx #$00
+	ldx #0
 	lda t_kraken_3,x
 	sta adr_ecr_txt+1
 	lda #<t_kraken_3+1
@@ -1121,7 +1165,7 @@ test_nord
 	sta write_phrase+2	
 	jsr write_phrase
 	
-	ldx #$00
+	ldx #0
 	lda t_kraken_4,x
 	sta adr_ecr_txt+1
 	lda #<t_kraken_4+1
@@ -1142,8 +1186,8 @@ adr_ecr_txt
 	inx	
 	bne write_phrase
 end_phrase
-	lda #$01
-	sta $15
+	lda #TRUE
+	sta est_affiche_texte
 	rts
 	
 hit_key
@@ -1162,9 +1206,9 @@ release_
 ;******* efface le texte   ************
 ;************************************************	
 eff_text
-	lda $15
+	lda est_affiche_texte
 	beq out_eff_text
-	dec $15
+	dec est_affiche_texte
 	ldx #$27
 	lda #$20
 lp_efface	
