@@ -75,6 +75,7 @@ depl_perso_est_interdit .dsb 1
 	.text
 
 _main
+.(
 	lda #10					; cache le curseur et vire le son des touches
 	sta $26A
 	lda #4
@@ -103,7 +104,7 @@ temporisation_1
 fin_temporisation
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
 	lda direction_scroll
-	cmp#$86
+	cmp#$86					; Y pour sortir
 	beq sortie_main
 	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
@@ -113,13 +114,14 @@ fin_temporisation
 sortie_main
 	rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
-	
+.)	
 	
 	
 ;-------------------------
 ;--- affiche hero   ------
 ;-------------------------
 aff_hero
+.(
 	lda direction_scroll				; direction demandée
 	cmp #$38			; a-t-on frappé une touche autre qu'une des 4 flêches
 	beq fin_aff_perso
@@ -128,7 +130,7 @@ aff_hero
 	jsr choix_perso
 	bne skip_anim
 mer_01
-	lda $0e
+	lda tuile_sous_pos_perso
 	cmp #1
 	bne chck_direction
 	jsr choix_perso
@@ -155,12 +157,14 @@ skip_anim
 	ldx  tuile_perso_aff
 	jsr cherche_et_aff_tuile			; en entrée : X contient la reference de la tuile
 fin_aff_perso
-	lda #$00
+	lda #FALSE
 	sta depl_perso_est_interdit	
 	rts
+.)	
 
 ;------ Choix tuile perso en fonction direction demandée   -----
 choix_perso
+.(
 		lda tuile_sous_pos_perso
 		beq mer_bateau
 		cmp #TRUE
@@ -194,7 +198,8 @@ mer_bateau
 		lda #$47
 		sta tuile_perso_aff
 		rts
-	
+.)	
+
 ; -----------------------------------------------------------------------
 ; ----------  routine regarde autour du perso  pour détection mer  ------	
 ; -----------------------------------------------------------------------	
@@ -203,6 +208,7 @@ mer_bateau
 ;				direction_scroll contient #$38 si scroll impossible (perso en bord de carte ou en bord de mer (si a terre)
 
 chck_around
+.(
 ; d'abord on regarde si une touche flêchée a été pressée sinon direction_scroll contient #$38
 		lda direction_scroll
 		cmp #$38
@@ -282,12 +288,14 @@ no_scroll
 		sta scroll_est_interdit				;mets à 1 drapeau scroll interdit (pour une boucle, dans la direction demandée)
 		sta depl_perso_est_interdit				;mets à 1 drapeau mvt perso  interdit (pour une boucle, dans la direction demandée)
 		rts 
+.)	
 
 ; -------------------------------------------------------------------------
 ; ----------  routine teste si bords de carte en bord de fenêtre ----------	
 ; -----           et si le perso est au centre de la fenêtre         ------
 ; -------------------------------------------------------------------------
 chck_bords
+.(
 ; en entrée :	direction_scroll contient #38 si pas de touches flêchée pressée
 ;				direction_scroll contient valeur touche fléchée pressée sinon
 ; en sortie :	idem 	
@@ -353,12 +361,14 @@ end_chck_bords_nsc
 ;		sta direction_scroll
 sort_direct		
 		rts
+.)	
 
 ; ---------------------------------------------------------------------------------------------
 ; ---------   routine chck si deplacement perso possible (bord de carte )   ----------	
 ; ---------------------------------------------------------------------------------------------
 		
 chck_mvt_perso_fenetre
+.(
 		lda scroll_est_interdit
 		beq sortie_perso			; si scrolling autorisé ==> deplacement perso interdit
 		lda depl_perso_est_interdit
@@ -436,6 +446,7 @@ no_depl
 		sta depl_perso_est_interdit
 sortie_perso		
 		rts
+.)	
 
 ;********************************************************************************
 ;***                  routine  affiche 15 x 7 tuiles dans la                  ***
@@ -447,6 +458,7 @@ sortie_perso
 ;En sortie :	Les tuiles sont affichées dans la fenetre Hires
 
 scrl_fenetre
+.(
 	lda scroll_est_interdit				; drapeau scroll (autorisé : 0 , interdit : 1)
 	bne sortie_fenetre	; scroll interdit par bord de mer ou bord de carte
 	lda direction_scroll
@@ -504,7 +516,7 @@ sortie_fenetre
 	lda #FALSE
 	sta scroll_est_interdit					; autorise scroll pour prochaine boucle, jusqu'aux différents checks
 	rts	
-	
+.)	
 
 ;-----------------------------------------------------------------------------
 ; -----                initialise divers variables dont:                   ---
@@ -512,6 +524,7 @@ sortie_fenetre
 ;                     tuile perso affichée / index position perso
 ;-----------------------------------------------------------------------------		
 init_div_var
+.(
 	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
 	lda #$10
@@ -537,7 +550,8 @@ init_div_var
 	lda #TRUE	        ; TEMPO
 	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	rts
-		
+.)	
+
 ;----------------------------------------------------------
 ;---   cherche n° de tuile en position X,Y dans carte   ---
 ;----------------------------------------------------------
@@ -546,6 +560,7 @@ init_div_var
 ; en sortie : 	Le numéro de tuile est dans tuile_courante
 
 rech_tab_map
+.(
 		txa
 		pha
 		tya
@@ -568,11 +583,13 @@ adr_ligne
 		pla 
 		tax
 		rts			
-		
+.)
+
 ;-----------------------------------------------------------
 ;---- Affiche une tuile dans la fenêtre de l'écran HIRES ---
 ;-----------------------------------------------------------
 cherche_et_aff_tuile
+.(
 ; en entrée : X contient le n° de tuile
 ; En sortie : La tuile est à l'écran
 		tya
@@ -582,6 +599,7 @@ cherche_et_aff_tuile
 		pla
 		tay
 		rts
+.)	
 
 ;----------------------------------------------------------
 ;---            cherche  4 composants tuile             ---
@@ -590,6 +608,7 @@ cherche_et_aff_tuile
 ; en sortie : les 4 n° de sous tuiles sont stockées en tuile_en_cours_coin_hg=$00,tuile_en_cours_coin_hg=$01,tuile_en_cours_coin_bg=$02,tuile_en_cours_coin_bd=$03 
 
 find_compsants
+.(
 			txa
 			asl					;vers table DATA PLAN T4
 			tax					;
@@ -605,10 +624,13 @@ adr_compo
 			dex
 			bpl adr_compo
 			rts	
+.)
+
 ;--------------------------------------------------
 ;---               affiche _tuile              ---- 
 ;--------------------------------------------------	
 aff__tuile
+.(
 			lda rang_fenetre
 			cmp index_perso					; n'affiche pas la tuile si c'est celle qui est sous le perso
 			beq pas_daff
@@ -618,12 +640,15 @@ aff__tuile
 			jsr aff_demi_t			; les 2 caractères inférieurs (dont n° d'ordre stocké en $02 et $03)
 pas_daff			
 			rts	
+.)	
+
 ;----------------------------------------------------
 ;--- maj adresses écran HIRES  dans aff_2_sextets----
 ;----------------------------------------------------
 ;en entrée:			x contient rang tuile dans  table adresses Hires
 ;en sortie:			les 2 adresses hires tuile en cours, renseignées dans routine aff_2_sextets
 maj_adr_scr_next_tuile
+.(
 ;init_scr_hires
 				txa						; X contient rang tuile dans  table adresses Hires
 				asl						; prépare pour index
@@ -649,10 +674,13 @@ maj_adr_scr_next_tuile
 skip_inc_ph				
 				sta adr_screen_2+2		; renseigner partie haute 2ème adresse écran de la routine aff_2_sextets
 				rts
+.)	
+
 ;--------------------------------------------------
 ;---               affiche demie tuile               
 ;--------------------------------------------------	
 aff_demi_t	
+.(
 				jsr rens_adr_car		; n° car issus de $00 et $01
 				ldy #0
 lp_2_sextets	
@@ -662,27 +690,31 @@ lp_2_sextets
 				cpy #$06
 				bne lp_2_sextets		
 				rts	
-				
+.)	
+
 ;----------------------------------------------------------
 ;----           affiche deux sextets côte à côte      ----- 
 ;----------------------------------------------------------	
 ;pour faire seulement 10 additions par tuile  (2 x 5) au lieu de 20 (4 x 5)
 
 aff_2_sextets	
-
-adr_car_1	
+.(
++adr_car_1	
 					lda 1111,y
-adr_screen_1	
++adr_screen_1	
 					sta $1111
-adr_car_2	
++adr_car_2	
 					lda 2222,y
-adr_screen_2	
++adr_screen_2	
 					sta $2222	
-					rts				
+					rts
+.)
+				
 ;-------------------------------------------------
 ;--- MàJ adresses écran HIRES  dans une tuile ----
 ;-------------------------------------------------
 maj_scr_hires
+.(
 					clc
 					lda adr_screen_1+1
 					adc #$28
@@ -698,7 +730,7 @@ skip_ret_1
 					inc adr_screen_2+2
 end_maj_adr_ecr	
 					rts					
-				
+.)					
 				
 				
 				
@@ -709,6 +741,7 @@ end_maj_adr_ecr
 ; 				(0,ou 2 car incrémenté dans cette routine pour les 1 et 3)
 ; en sortie : 	adr_car_1 et adr_car_2 de la routine aff_2_sextets sont renséignées
 rens_adr_car
+.(
 				txa					
 				pha					; sauve le n° d'ordre du 1/4 de tuile haut gauche si X=0 bas gauche si x=2
 				lda tuile_en_cours_coin_hg,x			; n° premier car stocké en $00
@@ -731,13 +764,14 @@ rens_adr_car
 				lda sous_tuile,x	; partie basse adresse caractère
 				sta adr_car_2+1
 				rts
-
+.)	
 
 		
 ;------------------------------------------------------		
 ; -----  routine attend appui touche puis relacher ---
 ;------------------------------------------------------ spécifique pour mon test
 wait_key
+.(
 		lda $208
 		cmp #$38
 		beq wait_key
@@ -765,13 +799,14 @@ no_key
 end_key		
 		sta direction_scroll
 		rts		
-		
+.)			
 		
 ;************************************************
 ;***   implantation caractères redéfinis      ***
 ;************************************************ 	peut être lancé séparément pour ne charger dans le jeu
 ;													que la zone des caractères  une fois rédéfinie
 impl_car
+.(
 	ldx #$00
 lp1_impl	
 	lda dta_car_redef_p1,x
@@ -787,10 +822,13 @@ lp2_impl
 	cpx #$54
 	bne lp2_impl	
 	rts
+.)	
+
 ;---------------------------------------------------------------------
 ;- passe en mode HIRES et installe 12 atributs couleur jaune et cyan -
 ;---------------------------------------------------------------------	 routine spécifique l'emplacement choisie de la fenêtre
 hires_et_atributs	
+.(
 		jsr $EC33
 		lda #YELLOW_INK
 		sta $Aa01
@@ -904,11 +942,13 @@ hires_et_atributs
 		sta $bfb8
 										
 		rts	
-	
+.)	
+
 ;************************************************
 ;******* Affiche différents textes   ************
 ;************************************************
 aff_text
+.(
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	sec				; prépare retenue pour soustraction
 	sbc #$50		; la première ville est numéroté #$50 (la dernière : #$64)
@@ -923,11 +963,11 @@ aff_text
 	sta adr_nom_1+2
 	sta lp_nom_v+2			
 	ldx #0
-adr_nom_1	
++adr_nom_1	
 	lda $1111,x			;partie basse aadresse écran pour ecriture nom
 	sta adr_ecr_nom+1			
 	inx
-lp_nom_v			
++lp_nom_v			
 	lda $3333 ,x		; lit lettre des noms jusqu'à  rencontrer 0
 	beq ask_enter
 adr_ecr_nom
@@ -1177,11 +1217,13 @@ test_nord
 	jsr eff_text	
 fin_txt	
 	rts
-	
+.)
+
 write_phrase
+.(
 	lda $1111,x
 	beq end_phrase
-adr_ecr_txt
++adr_ecr_txt
 	sta $bf11,x
 	inx	
 	bne write_phrase
@@ -1189,8 +1231,10 @@ end_phrase
 	lda #TRUE
 	sta est_affiche_texte
 	rts
-	
+.)
+
 hit_key
+.(
 	lda $208
 	cmp #$84
 	bne hit_key
@@ -1199,13 +1243,14 @@ release_
 	cmp #$38
 	bne release_
 	rts
-	
+.)	
 	
 	
 ;************************************************
 ;******* efface le texte   ************
 ;************************************************	
 eff_text
+.(
 	lda est_affiche_texte
 	beq out_eff_text
 	dec est_affiche_texte
@@ -1218,7 +1263,7 @@ lp_efface
 	bne lp_efface
 out_eff_text
 	rts	
-	
+.)		
 
 	
 				
