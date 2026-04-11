@@ -17,12 +17,12 @@ AfficheAuCentre
  RETURN
  REM LABY
 GotoLaby
- CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_3  : LOAD "LABY"
+ CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  SaveTeam  : LOAD "LABY"
 MenuVille
  REM VILLAGE
  X=2:Y=2:MENU=1:
  TEXT:CLS:PAPER 0:POKE48035,0:POKE#26A,PEEK(#26A) AND 254
- S$=" "+CR$(VI)+" ":L=17:GOSUB  ville_4 
+ S$=" "+CR$(VI)+" ":L=17:GOSUB  AfficheCadre 
  PLOT 13,3,"VOUS POUVEZ..."
  PLOT 8,5,"1) VERS LES ECHOPPES"
  PLOT 8,6,"2) INSPECTER UN PERSONNAGE"
@@ -33,28 +33,28 @@ MenuVille
  IFVI>2 THEN PLOT 8,11,"7) ALLER AU LABORATOIRE"
  PLOT 8,13,"9) SAUVEGARDE SCENARIO"
  PLOT 6,15,"F)in": REM "M)emory R)einit B)oost"
- GOSUB  ville_5 :GOSUB ville_6 
-ville_16
+ GOSUB  AffichePersos :GOSUB RechargeSorts 
+LectureMenuVille
  GET A$
  IFA$<>"3"ANDA$<>"5"THEN CG=1
- IF A$="1" THEN  ville_7 
- IF A$="2" THEN A=VAL(A$):ENC=6:GOSUB  ville_8 :GOTO  ville_2 
- IF A$="3" THEN GOSUB  ville_9 :GOTO  ville_2 
- IF A$="4" THEN ville_10 
+ IF A$="1" THEN  MenuShops 
+ IF A$="2" THEN A=VAL(A$):ENC=6:GOSUB  InspecterHeros :GOTO  MenuVille 
+ IF A$="3" THEN GOSUB  AfficheEquipeDetails :GOTO  MenuVille 
+ IF A$="4" THEN MenuMestre 
  IF A$="5" THEN X=2:Y=2:S=2:CA=50:GOTO  GotoLaby 
- IF A$="6" THEN ville_12 
- IF A$="7" ANDVI>2THEN ville_13 
- IF A$="9" THEN ZAP:GOSUB  ville_3 :PING: GOTO  ville_2 
+ IF A$="6" THEN ExplorerMonde 
+ IF A$="7" ANDVI>2THEN MenuLabo 
+ IF A$="9" THEN ZAP:GOSUB  SaveTeam :PING: GOTO  MenuVille 
  IF A$="F" THEN PING:CLS:PLOT 10,10,"ESPECE DE PLEUTRE":END
  IFA$="M"THENS$=" >"+STR$(FRE(""))+" octets":PLOT 18,15,S$
  IFA$="R"THEN GOSUB  ResetAll 
  IFA$="B"THEN GOSUB  Booste 
- GOTO  ville_16 
-ville_8
- S$="INSPECTER QUEL HEROS ?  ":GOSUB  ville_17 :PRINT@6,3;S$
- GOSUB  ville_18 :P=A
+ GOTO  LectureMenuVille 
+InspecterHeros
+ S$="INSPECTER QUEL HEROS ?  ":GOSUB  AfficheSurFondCouleurVille :PRINT@6,3;S$
+ GOSUB  LectureNumeroVille :P=A
  S$=N$(P)+" ":IF MP(P)<>8 THEN S$=S$+M$(MP(P))
- L=23:CLS:GOSUB  ville_4 
+ L=23:CLS:GOSUB  AfficheCadre 
  PRINT @4,3;"Carr :";C$(CP(P)):PRINT @21,3;"Niv:"NI(P);"EXP:"XP(P)
  PRINT @4,5;"Sante:";OK$(OK(P)):PRINT @21,5;"PV :";ET(P)"/"PV(P)
  PRINT @4,7;"Bourse:";RI(P)"Cerfs d'Argent"
@@ -78,49 +78,49 @@ ville_8
  PRINT@26,18;"la ville:":PRINT@34,18;STR$(NC)
  PRINT@26,20;"Ingredients"
  PRINT@28,21;"Potion:":PRINT@34,21;STR$(NP)
- S$="   DONNER:":GOSUB ville_19 :PRINT@1,24;S$
- S$="A)rgent O)bjet R)ien ":GOSUB ville_17 :PRINT@14,24;S$
-ville_20
- GETA$:IF A$<>"A" AND A$<>"O" AND A$<>"R"THEN ville_20 
- IFA$<>"R"THEN ville_21 
- IFCP(P)>3THEN ville_22 ELSE ville_23 
-ville_21
- IFA$="A"THEN ville_24 ELSE ville_25 
-ville_22
- CLS:S$=" * SORTS * ":L=14:GOSUB  ville_4 
+ S$="   DONNER:":GOSUB AfficheFondBleu :PRINT@1,24;S$
+ S$="A)rgent O)bjet R)ien ":GOSUB AfficheSurFondCouleurVille :PRINT@14,24;S$
+LectureDonner
+ GETA$:IF A$<>"A" AND A$<>"O" AND A$<>"R"THEN LectureDonner 
+ IFA$<>"R"THEN LectureDonnerSuite 
+ IFCP(P)>3THEN AfficherSorts ELSE InspecterHerosFin 
+LectureDonnerSuite
+ IFA$="A"THEN DonnerArgent ELSE DonnerObjet 
+AfficherSorts
+ CLS:S$=" * SORTS * ":L=14:GOSUB  AfficheCadre 
  SS=NI(P):IFSS>8THENSS=8
  FORI=1TOSS
  S$=STR$(I)+" - "+SPELL$(CP(P)-3,I):PRINT@11,I+3;S$
  S$="("+STR$(SN(P,I))+" )": PRINT@25,I+3;S$:NEXT
- IF CP(P)<>5 OR OK(P)>2THEN GOSUB  ville_26 :GOTO  ville_23 
- GOSUB  ville_5 
-ville_32
+ IF CP(P)<>5 OR OK(P)>2THEN GOSUB  AttenteTouche :GOTO  InspecterHerosFin 
+ GOSUB  AffichePersos 
+AfficheChoixSoin
  S$="Sort de soins (O/N)?":L=13:GOSUB  AfficheAuCentre 
-ville_28
- GETA$:IF A$="N" THEN  ville_23  ELSE IF A$<>"O" THEN  ville_28 
+LectureSoinOuiNon
+ GETA$:IF A$="N" THEN  InspecterHerosFin  ELSE IF A$<>"O" THEN  LectureSoinOuiNon 
  S$="        LEQUEL  ?      ":L=13:GOSUB  AfficheAuCentre 
-ville_29
- GETA$:SP=VAL(A$):IFSP<1 OR SP=4 OR SP=6 OR SP>7 OR SP>NI(P) THEN ZAP:GOTO  ville_29 
+LectureSortSoin
+ GETA$:SP=VAL(A$):IFSP<1 OR SP=4 OR SP=6 OR SP>7 OR SP>NI(P) THEN ZAP:GOTO  LectureSortSoin 
  S$=" INCANTATION:"+SP$(2,SP)+" ":L=13:GOSUB  AfficheAuCentre 
- IF SP=5 THEN  ville_30 
+ IF SP=5 THEN  SoinFullVie 
  S$="   SOIGNER QUI  ? Aucun(0) ":L=17:GOSUB  AfficheAuCentre 
-ville_31
- GETA$:P=VAL(A$):IFP>6THEN ville_31 ELSEIFP=0THEN ville_23 
+SoinChoixPerso
+ GETA$:P=VAL(A$):IFP>6THEN SoinChoixPerso ELSEIFP=0THEN InspecterHerosFin 
  S$="                           ":L=17:GOSUB AfficheAuCentre :PING
- IF (SP=1 AND OK(P)=4) OR (SP=2 AND OK(P)<>2) OR (SP=3 AND OK(P)<>3) OR (SP=7 AND OK(P)<>4) THEN ZAP:GOTO  ville_23 
+ IF (SP=1 AND OK(P)=4) OR (SP=2 AND OK(P)<>2) OR (SP=3 AND OK(P)<>3) OR (SP=7 AND OK(P)<>4) THEN ZAP:GOTO  InspecterHerosFin 
  ET(P)=PV(P):IF SP<>1 THEN OK(P)=1
- GOSUB  ville_5 :GOTO  ville_32 
-ville_30
+ GOSUB  AffichePersos :GOTO  AfficheChoixSoin 
+SoinFullVie
  FOR I=1TO6:IF OK(I)<>4 THEN ET(I)=PV(I)
  NEXT
-ville_23
+InspecterHerosFin
  ZAP:RETURN
-ville_10
+MenuMestre
  REM SOINS
- S$="SOIGNER QUEL HEROS ? ":GOSUB  ville_17 :PRINT@9,3;S$
-ville_33
- GETP$:P=VAL(P$):IF P<1 OR P>6 THEN PING:GOTO  ville_33 
- ENC=2:S$="LE MESTRE LUWIN":L=16:CLS:GOSUB  ville_4 
+ S$="SOIGNER QUEL HEROS ? ":GOSUB  AfficheSurFondCouleurVille :PRINT@9,3;S$
+MestreChoixHeros
+ GETP$:P=VAL(P$):IF P<1 OR P>6 THEN PING:GOTO  MestreChoixHeros 
+ ENC=2:S$="LE MESTRE LUWIN":L=16:CLS:GOSUB  AfficheCadre 
  PRINT @5,5;"Bienvenue ";N$(P)
  PRINT @5,7;"Votre condition est: ";OK$(OK(P))
  S$="Etat:"+STR$(ET(P))+" /"+STR$(PV(P)):PLOT 5,9,S$
@@ -128,22 +128,22 @@ ville_33
  IF OK(P)=2 OR OK(P)=3 THEN HO=NI(P)*50
  IF OK(P)=4 THEN HO=NI(P)*100
  IF OK(P)=1 AND ET(P)<PV(P) THEN HO=NI(P)*25
- IF HO=0 THEN PLOT 7,11,M$:PING:WAIT TI*8:GOTO  ville_2 
+ IF HO=0 THEN PLOT 7,11,M$:PING:WAIT TI*8:GOTO  MenuVille 
  PRINT @5,11;"HONORAIRES: ";HO;" ca"
  PLOT 5,13,"JE VOUS SOIGNE (O/N) ?"
-ville_35
+MestreChoixOuiNon
  GETA$
- IF A$="N" THEN  ville_2 
- IF A$="O" THEN  ville_34 
- GOTO  ville_35 
-ville_34
- IF HO > RI(P) THEN S$="Par les 7, Vous etes trop pauvre !":GOTO  ville_36 
+ IF A$="N" THEN  MenuVille 
+ IF A$="O" THEN  MestreSoin 
+ GOTO  MestreChoixOuiNon 
+MestreSoin
+ IF HO > RI(P) THEN S$="Par les 7, Vous etes trop pauvre !":GOTO  MestreFin 
  RI(P)=RI(P)-HO:OK(P)=1:ET(P)=PV(P):HO=0:S$="Par les 7, Vous voila gueri !"
-ville_36
- PING:GOSUB  ville_17 :PRINT@4,15;S$
+MestreFin
+ PING:GOSUB  AfficheSurFondCouleurVille :PRINT@4,15;S$
  WAIT25*TI
- GOTO  ville_2 
-ville_9
+ GOTO  MenuVille 
+AfficheEquipeDetails
  REM EQUIPE
  CLS:PRINT@8,1;CHR$(145)CHR$(128)" * TYRANN 3 - EQUIPE *  "CHR$(144)
  L=3:PRINT@3,L;CHR$(145)CHR$(128)"PERSONNAGES MAISON   CARRIERE NIV "CHR$(144)
@@ -164,11 +164,11 @@ ville_9
  PRINT@3,L;CHR$(145)CHR$(128)"            < ESPACE >            "CHR$(144)
  PRINT@4,L;CHR$(128);STR$(TE);" ca"
  ENC=4
-ville_37
- GET A$:IF A$<>" " THEN  ville_37 
+AttenteToucheEspace
+ GET A$:IF A$<>" " THEN  AttenteToucheEspace 
  RETURN
-ville_12
- EN=3:S$="EXPLORER WESTEROS":L=18:CLS:GOSUB  ville_4 :L=3:EN=128
+ExplorerMonde
+ EN=3:S$="EXPLORER WESTEROS":L=18:CLS:GOSUB  AfficheCadre :L=3:EN=128
  FORI=TLTO1STEP-1
  L=L+1:EN=128+EE(I)
  PRINT@3,L;CHR$(EN);
@@ -178,64 +178,64 @@ ville_12
  S$=S$++CHR$(128+EE(VI))
  PRINT@27,L;S$
  NEXTI
- S$="OU VOULEZ VOUS ALLER ?":GOSUB  ville_17 :PRINT@7,L+3;S$
-ville_38
+ S$="OU VOULEZ VOUS ALLER ?":GOSUB  AfficheSurFondCouleurVille :PRINT@7,L+3;S$
+LectureNumeroVille
  GETP$:CR=VAL(P$)
- IFCR=VIORP$=" "ORCR>TLORCR<1THEN ville_2 
- S$=" OK !! EN ROUTE POUR:  ":GOSUB  ville_17 :PRINT@7,L+3;S$
+ IFCR=VIORP$=" "ORCR>TLORCR<1THEN MenuVille 
+ S$=" OK !! EN ROUTE POUR:  ":GOSUB  AfficheSurFondCouleurVille :PRINT@7,L+3;S$
  L=L+5:S$=CR$(CR):GOSUB  AfficheAuCentre 
- IFCR<1ORCR>TLTHEN PING:GOTO ville_38 
+ IFCR<1ORCR>TLTHEN PING:GOTO LectureNumeroVille 
  FOR M=2TO5:TC(VIL,M)=0:NEXT M ' reinit combats mais pas coffres
- VI=CR:GOSUB ville_3 :GOTO ville_2 
-ville_19
+ VI=CR:GOSUB SaveTeam :GOTO MenuVille 
+AfficheFondBleu
  REM FOND BLEU
  S$=" "+CHR$(148)+CHR$(128)+S$+CHR$(134)+CHR$(144)+" "
  RETURN
-ville_17
- REM FOND ROUGE
+AfficheSurFondCouleurVille
+ REM FOND couleur ville
  S$=" "+CHR$(145)+CHR$(135)+S$+CHR$(128+EE(VIL))+CHR$(144)
  RETURN
  REM DONNER Ag
-ville_24
- L=18:CLS:S$=N$(P)+" DONNE":GOSUB  ville_4 
+DonnerArgent
+ L=18:CLS:S$=N$(P)+" DONNE":GOSUB  AfficheCadre 
  FORI=1TO6:PRINT @4,3+I;I;N$(I):PRINT @18,3+I;RI(I);" ca":NEXT
  PRINT @4,11;"Votre Bourse:";RI(P)"Cerfs Ag"
  PRINT@12,18;"0 pour Quitter"
- S$="COMBIEN de C.Ag ":GOSUB  ville_17 :PRINT @3,14;S$;
- GOSUB  ville_39 :DO=CH:IF DO> RI(P) THEN PING:GOTO  ville_24 
- IF DO=0 THEN  ville_40 
- S$="ENRICHIR QUEL HEROS ?  0:Aucun":GOSUB ville_17 :PRINT@3,16;S$
-ville_41
- GET A$:A=VAL(A$):IF A>6 THEN PING:GOTO  ville_41 
- IF A=0 THEN  ville_42 
- RI(A)=RI(A)+DO:RI(P)=RI(P)-DO:PING:GOTO  ville_24 
-ville_40
+ S$="COMBIEN de C.Ag ":GOSUB  AfficheSurFondCouleurVille :PRINT @3,14;S$;
+ GOSUB  LectureNombre :DO=CH:IF DO> RI(P) THEN PING:GOTO  DonnerArgent 
+ IF DO=0 THEN  DonnerArgentFin 
+ S$="ENRICHIR QUEL HEROS ?  0:Aucun":GOSUB AfficheSurFondCouleurVille :PRINT@3,16;S$
+DonnerArgentChoixPerso
+ GET A$:A=VAL(A$):IF A>6 THEN PING:GOTO  DonnerArgentChoixPerso 
+ IF A=0 THEN  DonnerFin 
+ RI(A)=RI(A)+DO:RI(P)=RI(P)-DO:PING:GOTO  DonnerArgent 
+DonnerArgentFin
  RETURN
-ville_25
- S$="Quel Objet ? 0:aucun ":GOSUB ville_19 :PRINT@13,24;S$
-ville_43
- GETA$:O=VAL(A$):IF O>OP(P)THENPING:GOTO ville_43 
- IFO=0THEN ville_42 
- IT=SA(P,O):IF(IT>21ANDIT<27)OR(IT>33ANDIT<44)THENL=24:GOSUB ville_44 :GOTO ville_25 
- L=14:CLS:S$=N$(P)+" DONNE":GOSUB ville_4 
- S$=IT$(SA(P,O)):GOSUB  ville_19 :PRINT@8,3;S$
+DonnerObjet
+ S$="Quel Objet ? 0:aucun ":GOSUB AfficheFondBleu :PRINT@13,24;S$
+DonnerChoixObjet
+ GETA$:O=VAL(A$):IF O>OP(P)THENPING:GOTO DonnerChoixObjet 
+ IFO=0THEN DonnerFin 
+ IT=SA(P,O):IF(IT>21ANDIT<27)OR(IT>33ANDIT<44)THENL=24:GOSUB AfficheImpossible :GOTO DonnerObjet 
+ L=14:CLS:S$=N$(P)+" DONNE":GOSUB AfficheCadre 
+ S$=IT$(SA(P,O)):GOSUB  AfficheFondBleu :PRINT@8,3;S$
  FORI=1TO6:PRINT @12,4+I;I;N$(I):NEXT
-ville_46
+DonnerObjetQuelHeros
  PING:PRINT@14,12;" A QUEL HEROS ?  ";
-ville_45
- GET A$:A=VAL(A$):IF A<1 OR A>6 OR A=P THEN PING:GOTO  ville_45 
- IFSA(A,6)>0THENL=12:GOSUB ville_44 :GOTO  ville_46 
+DonnerObjetAQui
+ GET A$:A=VAL(A$):IF A<1 OR A>6 OR A=P THEN PING:GOTO  DonnerObjetAQui 
+ IFSA(A,6)>0THENL=12:GOSUB AfficheImpossible :GOTO  DonnerObjetQuelHeros 
  I=0
  REPEAT:I=I+1
  UNTILSA(A,I)=0
  SA(A,I)=SA(P,O):SA(P,O)=0
- OO=O:GOSUB ville_47 
-ville_42
- IF MENU=1THEN ville_2 
+ OO=O:GOSUB SupprimerObjetDuSac 
+DonnerFin
+ IF MENU=1THEN MenuVille 
  RETURN
-ville_44
+AfficheImpossible
  ZAP:PRINT @14,L;"  !IMPOSSIBLE!  ":WAIT150:RETURN
-ville_7
+MenuShops
  REM SHOPS
 ville_55
  S$=" GRAND MARCHE ":MENU=0:N=6:ENC=EE(VIL):GOSUB ville_48 
@@ -244,7 +244,7 @@ ville_55
  PLOT8,22,"Q > Quitter les commerces"
 ville_50
  GETP$:P=VAL(P$)
- IFP$="Q"THEN GOSUB ville_3 :GOTO ville_2 
+ IFP$="Q"THEN GOSUB SaveTeam :GOTO MenuVille 
  IFP$="D"THEN GOSUB ville_49 
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_50 
 ville_53
@@ -261,7 +261,7 @@ ville_81
  M$=" IMPOSSIBLE !":FD=145
  S$=CHR$(FD)+N$(P)+" "+C$(CP(P))+" "+STR$(RI(P))+" ca "+CHR$(144)
  L=2:GOSUB AfficheAuCentre 
- PRINT@6,3;" Que desirez vous acheter ";:GOSUB ville_39 
+ PRINT@6,3;" Que desirez vous acheter ";:GOSUB LectureNombre 
  IFCH>NTHEN ville_56 
  IFCH=0THEN ville_53 
  IFSH=1THENSS=0
@@ -349,9 +349,9 @@ ville_72
  SA(P,I)=SS+CH
  RETURN
 ville_54
- IFWR(P)=0ANDWL(P)=0ANDPT(P)=0ANDSA(P,1)=0ANDBT(P)=0THENS$=" ! VIDE ! ":GOSUB ville_17 :PRINT@20,17;S$:ZAP:WAIT80:RETURN
+ IFWR(P)=0ANDWL(P)=0ANDPT(P)=0ANDSA(P,1)=0ANDBT(P)=0THENS$=" ! VIDE ! ":GOSUB AfficheSurFondCouleurVille :PRINT@20,17;S$:ZAP:WAIT80:RETURN
 ville_75
- PING:S$="LEQUEL ? ":GOSUB ville_17 :PRINT@5,23;S$
+ PING:S$="LEQUEL ? ":GOSUB AfficheSurFondCouleurVille :PRINT@5,23;S$
 ville_73
  GETA$:CH=VAL(A$):IFCH>9THENZAP:GOTO ville_73 
  IFCH=0THENCH=10
@@ -362,7 +362,7 @@ ville_73
 ville_74
  IF(CH=7ANDWR(P)=0)OR(CH=8ANDWL(P)=0)OR(CH=9ANDPT(P)=0)OR(CH=10ANDBT(P)=0)THEN ville_75 
 ville_76
- IFCH<7THENPX=PR%(SA(P,CH)):GOSUB ville_77 :SA(P,CH)=0:OO=CH:GOSUB ville_47 :GOTO ville_78 
+ IFCH<7THENPX=PR%(SA(P,CH)):GOSUB ville_77 :SA(P,CH)=0:OO=CH:GOSUB SupprimerObjetDuSac :GOTO ville_78 
  IFCH>7THEN  ville_79 
  IFWR(P)=18THENFI=0
  PX=PR%(WR(P)):GOSUB ville_77 :WR(P)=0
@@ -379,7 +379,7 @@ ville_78
 ville_77
  REM OK
  RI(P)=RI(P)+INT(PX*2/3):ZAP:RETURN
-ville_47
+SupprimerObjetDuSac
  FORI=OOTO5
  IFSA(P,I+1)>0THENSA(P,I)=SA(P,I+1):SA(P,I+1)=0
  NEXTI
@@ -398,7 +398,7 @@ ville_49
 ville_82
  GETP$:P=VAL(P$)
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_82 
- GOSUB ville_24 :GOTO ville_7 
+ GOSUB DonnerArgent :GOTO MenuShops 
  RETURN
 ville_51
  REM CLIENT
@@ -430,7 +430,7 @@ ville_48
  POKE#26A,PEEK(#26A)AND254
  PRINT"**************************************"
  T=INT((33-LEN(S$))/2)
- S$="[ "+S$+" ] ":GOSUB ville_17 :PRINT@T,1;S$;CHR$(128+EN)
+ S$="[ "+S$+" ] ":GOSUB AfficheSurFondCouleurVille :PRINT@T,1;S$;CHR$(128+EN)
  INK(EN):J=N+4
  FORI=1TOJ:PRINT@2,I+1;"*":PRINT@39,I+1;"*":NEXTI
  FORI=1TON:L=I+2
@@ -455,15 +455,15 @@ ville_84
  IFN<>6ANDN<>NSTHENPRINT@12,L+3;" 0 POUR SORTIR"
  PRINT@2,L+4;"**************************************"
  RETURN
-ville_4
+AfficheCadre
  TEXT:PAPER0:INKEE(VI):PRINT
  PRINT" ************************************"
  FORI=1TOL:PRINT@2,I;"*":PRINT@38,I;"*":NEXTI
  T=INT((31-LEN(S$))/2)
- S$="< "+S$+" > ":GOSUB ville_17 :PRINT@T,1;S$
+ S$="< "+S$+" > ":GOSUB AfficheSurFondCouleurVille :PRINT@T,1;S$
  PRINT@2,I;"*************************************"
  RETURN
-ville_5
+AffichePersos
  L=19:PRINT@1,L;CHR$(145)"PERSONNAGES    CASTE      PV  ET  CA"
  FORI=1TO6:L=L+1
  IFCP(I)=1THENEN=131
@@ -479,37 +479,37 @@ ville_5
  NEXT
  EN=4
  RETURN
-ville_13
- CLS:L=20:S$=" # Labo d'Alchimie # ":EN=7:GOSUB ville_4 
- S$=" MEMBRES ADMIS ":GOSUB ville_19 :PLOT10,3,S$:J=1
+MenuLabo
+ CLS:L=20:S$=" # Labo d'Alchimie # ":EN=7:GOSUB AfficheCadre 
+ S$=" MEMBRES ADMIS ":GOSUB AfficheFondBleu :PLOT10,3,S$:J=1
  FORI=1TO6
  IFCP(I)<5THEN ville_86 
  PRINT@11,4+J;J;N$(I);" ";C$(CP(I)):J=J+1
 ville_86
  NEXT
- IFJ=1THEN ZAP:PRINT @11,4+J;J;" DEHORS !":WAIT300:ZAP:GOTO ville_2 
+ IFJ=1THEN ZAP:PRINT @11,4+J;J;" DEHORS !":WAIT300:ZAP:GOTO MenuVille 
  IFVI<>9THENPRINT@10,5+J;" > Il n'y a personne ":GOTO ville_87 
  PRINT@10,5+J;J;"Sorciere du Nord"
 ville_87
  IF PM=1THEN ville_88 
- S$="Ingredients Potion du Nord"+STR$(NP):GOSUB ville_19 :PRINT@3,7+J;S$
+ S$="Ingredients Potion du Nord"+STR$(NP):GOSUB AfficheFondBleu :PRINT@3,7+J;S$
  FORI=1TO6:PRINT @5,9+J+I;"-> ";IG$(I)
  IFIG(I)=1THENPLOT24,9+J+I,"> OK"
  NEXT
- L=21:GOSUB ville_26 
+ L=21:GOSUB AttenteTouche 
  IFNP<6ORVI<>9ORPM=1THEN ville_89 
  FORI=1TO5:SHOOT:WAIT30:PAPER I:NEXTI:EXPLODE:PAPER0
  FORI=1TO9
  PRINT@3,9+I;CHR$(144)"                                  ":NEXT
- PM=1:S$="L'Athanor cuit la potion":GOSUB ville_17 :L=12:GOSUB AfficheAuCentre 
+ PM=1:S$="L'Athanor cuit la potion":GOSUB AfficheSurFondCouleurVille :L=12:GOSUB AfficheAuCentre 
  FORI=1TO25:PRINT@7+I,14;">":WAIT20:NEXT
 ville_88
- L=12:S$="!! La potion est prete !! ":GOSUB ville_19 :GOSUB AfficheAuCentre :PING:WAIT30
- S$="Direction Castleblack ":GOSUB ville_17 :L=16:GOSUB AfficheAuCentre :ZAP:WAIT50
- L=21:GOSUB ville_26 
+ L=12:S$="!! La potion est prete !! ":GOSUB AfficheFondBleu :GOSUB AfficheAuCentre :PING:WAIT30
+ S$="Direction Castleblack ":GOSUB AfficheSurFondCouleurVille :L=16:GOSUB AfficheAuCentre :ZAP:WAIT50
+ L=21:GOSUB AttenteTouche 
 ville_89
- GOTO ville_2 
-ville_6
+ GOTO MenuVille 
+RechargeSorts
  FOR P=1TO6' recharge sorts
  IFET(P)>0ANDET(P)<5THENET(P)=ET(P)+FNA(3)
  IFCP(P)<4THEN ville_90 
@@ -523,14 +523,14 @@ ville_6
 ville_90
  NEXTP
  RETURN
-ville_26
- S$="< ESPACE > ":GOSUB  ville_17 :PRINT@13,L;S$:GETA$:IF A$<>" " THEN  ville_26 
+AttenteTouche
+ S$="< ESPACE > ":GOSUB  AfficheSurFondCouleurVille :PRINT@13,L;S$:GETA$:IF A$<>" " THEN  AttenteTouche 
  RETURN
 ville_91
  IF KEY$="" THEN  ville_91 
  RETURN
-ville_18
- GET A$:A=VAL(A$):IF A<1 OR A>6 THEN PING:GOTO  ville_18 
+LectureNumeroVille
+ GET A$:A=VAL(A$):IF A<1 OR A>6 THEN PING:GOTO  LectureNumeroVille 
  RETURN
 ResetAll
  REM REINITIALISE TOUT
@@ -552,7 +552,7 @@ Booste
  X=2:Y=2:S=2:TL=9
  PLOT27,16,"BOOST..OK":ZAP
  RETURN
-ville_39
+LectureNombre
  S$ = ""
 ville_93
  GET CH$
@@ -614,7 +614,7 @@ LoadTeam
  O1=O1+1:PM=PEEK(O1)::GOSUB ville_95 
  O1=O1+1:OUT=PEEK(O1)::GOSUB ville_95 
  RETURN
-ville_3
+SaveTeam
  TEXT:CLS:PRINT@8,2;CHR$(145);CHR$(135);"++ PREPARE L EQUIPE ++ ";CHR$(144)
  O1=#A000::GOSUB ville_96 
  O1=O1+1:POKEO1,1
