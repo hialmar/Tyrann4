@@ -464,7 +464,7 @@ AfficheCadre
  PRINT@2,I;"*************************************"
  RETURN
 AffichePersos
- L=19:PRINT@1,L;CHR$(145)"PERSONNAGES    CASTE      PV  ET  CA"
+ L=19:PRINT@1,L;CHR$(145)"PERSONNAGES    CASTE       PV  ET  CA"
  FORI=1TO6:L=L+1
  IFCP(I)=1THENEN=131
  IFCP(I)=2THENEN=135
