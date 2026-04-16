@@ -62,6 +62,13 @@ CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 
+::
+:: Same for MapAsm
+::
+CALL osdk_config_map_asm_dom.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+
 Goto End
 
 :Tuile

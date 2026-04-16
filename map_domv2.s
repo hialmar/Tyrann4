@@ -30,7 +30,7 @@
 ;
 
 
-main_routine
+_main
 	jsr impl_car			; Implante jeu de caractères redéfinis
 	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile) 
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
