@@ -23,7 +23,7 @@
 
 	.zero
 
-	*= $00
+	*= $a0
 	
 XPTR	.dsb 1 ; pos perso x map
 YPTR	.dsb 1 ; pos perso y map

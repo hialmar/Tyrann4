@@ -87,9 +87,11 @@ _main
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
 							; mais pas que...
 main_loop
+	; sei
 	jsr scrl_fenetre		; Affiche/ scrolle les 105 tuiles dans la fenetre
 	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
 	jsr	aff_text
+	; cli
 
 	ldy depl_perso_est_interdit
 	bne fin_temporisation
@@ -103,6 +105,7 @@ temporisation_1
 	bne temporisation_2
 fin_temporisation
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
+	; sei
 	lda direction_scroll
 	cmp#$86					; Y pour sortir
 	beq sortie_main
@@ -110,8 +113,16 @@ fin_temporisation
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
 	jsr chck_mvt_perso_fenetre
 	jsr	eff_text
+	; cli
 	jmp main_loop
 sortie_main
+	lda #3					; ré-affiche le curseur et remet le son des touches
+	sta $26A
+	lda #32					; remet la répétition des touches normale
+	sta $24E
+	lda #4
+	sta $24F
+	jsr $ec21               ; back to text mode
 	rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
 .)	
