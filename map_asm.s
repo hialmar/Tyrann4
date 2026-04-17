@@ -14,7 +14,7 @@
 
 	.zero
 
-	*= $30
+	*= $a0
 ; *********** VARIABLES PAGE ZERO  ***********
 ;
 ;	$00	:	repère 1/4 haut gauche tuile en cours
@@ -70,20 +70,20 @@ depl_perso_est_interdit .dsb 1
 ;
 ;
 
-;;; STOP : 24 octets utilisés en début de page 0
+;;; STOP : 24 octets utilisés en page 0
 
 	.text
 
 _main
 .(
-	;lda #10					; cache le curseur et vire le son des touches
-	;sta $26A
-	;lda #4
-	;sta $24E
-	;lda #1
-	;sta $24F
+	lda #4					; début de répétition touche après 4*30 = 120 ms
+	sta $24E
+	lda #1					; répétition d'une touche toutes les 30 ms
+	sta $24F
 	jsr impl_car			; Implante jeu de caractères redéfinis
 	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile) 
+	lda #10					; cache le curseur et vire le son des touches
+	sta $26A
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
 							; mais pas que...
 main_loop
@@ -548,8 +548,8 @@ init_div_var
 	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	; lda #TRUE	        ; TEMPO
-	; sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
+	lda #TRUE	        ; TEMPO
+	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	rts
 .)	
 
@@ -937,10 +937,10 @@ hires_et_atributs
 		sta $b6f9		
 
 		;;; paper 0 sur les 3 lignes texte
-;		lda #BLACK_PAPER
-;		sta $bf68
-;		sta $bf90
-;		sta $bfb8
+		lda #BLACK_PAPER
+		sta $bf68
+		sta $bf90
+		sta $bfb8
 										
 		rts	
 .)	
