@@ -62,6 +62,9 @@ CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\map.tap BUILD\map.pat.tap
+Goto End
+
+:MapAsmDom
 ::
 :: Same for MapAsmDom
 ::

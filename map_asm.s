@@ -14,7 +14,7 @@
 
 	.zero
 
-	*= $00
+	*= $30
 ; *********** VARIABLES PAGE ZERO  ***********
 ;
 ;	$00	:	repère 1/4 haut gauche tuile en cours
@@ -370,7 +370,7 @@ sort_direct
 chck_mvt_perso_fenetre
 .(
 		lda scroll_est_interdit
-		beq sortie_perso			; si scrolling autorisé ==> deplacement perso interdit
+		beq sortie_perso			; si scrolling autorisé ==> deplacement perso ok
 		lda depl_perso_est_interdit
 		bne sortie_perso			; si déplacement déjà interdit par bord de de mer => on ne traite pas deplacement perso
 		
@@ -756,7 +756,7 @@ rens_adr_car
 				pla					; récupère n° d'ordre 1/4 de tuile 
 				tax
 				inx					; l'incremente pour	du 1/4 de tuile haut droit si X=2 bas droit si x=3
-				lda $00,x			; n° deuxième car stocké en $01
+				lda tuile_en_cours_coin_hg,x			; n° deuxième car stocké en $01
 				asl					; vers table adresse car  1/4 tuiles
 				tax					;
 				lda sous_tuile,x		; Partie haute adresse caractère

@@ -7,7 +7,7 @@
 IF "%OSDK%"=="" GOTO ErCfg
 
 cd c:\osdk\Oricutron\
-CALL oricutron.exe -t c:\Tyrann4\BUILD\map.tap -s c:\Tyrann4\BUILD\symbols
+CALL oricutron.exe -t c:\Tyrann4\BUILD\map.pat.tap -s c:\Tyrann4\BUILD\symbols
 cd c:\Tyrann4
 Goto End
 ::
