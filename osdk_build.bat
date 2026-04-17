@@ -61,14 +61,14 @@ Goto Tap2dsk
 CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
-
+Copy BUILD\map.tap BUILD\map.pat.tap
 ::
-:: Same for MapAsm
+:: Same for MapAsmDom
 ::
 CALL osdk_config_map_asm_dom.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
-
+%OSDK%\bin\MemMap.exe build\symbols build\map_mapdom.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\map.tap BUILD\map.dom.tap
 Goto End
 
 :Tuile

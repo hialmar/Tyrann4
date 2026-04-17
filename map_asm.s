@@ -76,12 +76,12 @@ depl_perso_est_interdit .dsb 1
 
 _main
 .(
-	lda #10					; cache le curseur et vire le son des touches
-	sta $26A
-	lda #4
-	sta $24E
-	lda #1
-	sta $24F
+	;lda #10					; cache le curseur et vire le son des touches
+	;sta $26A
+	;lda #4
+	;sta $24E
+	;lda #1
+	;sta $24F
 	jsr impl_car			; Implante jeu de caractères redéfinis
 	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile) 
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
@@ -91,9 +91,9 @@ main_loop
 	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
 	jsr	aff_text
 
-	ldy scroll_est_interdit
+	ldy depl_perso_est_interdit
 	bne fin_temporisation
-	ldy #$ff
+	ldy #$7f
 temporisation_2
 	ldx #$ff
 temporisation_1
@@ -157,8 +157,8 @@ skip_anim
 	ldx  tuile_perso_aff
 	jsr cherche_et_aff_tuile			; en entrée : X contient la reference de la tuile
 fin_aff_perso
-	lda #FALSE
-	sta depl_perso_est_interdit	
+;	lda #FALSE
+;	sta depl_perso_est_interdit	
 	rts
 .)	
 
@@ -216,9 +216,9 @@ chck_around
 ; Ensuite on regarde si on est déjà en mer auquel cas, pas de contrainte de bord de mer
 
 		lda tuile_sous_pos_perso					; valeur tuile à la position du perso initialisée à #$50 (tuile NEMAUSUS)
-		beq sortie_scroll_direct		; si on est en mer, pas de contrainte de proximité
+		beq around_sortie ; sortie_scroll_direct		; si on est en mer, pas de contrainte de proximité
 		cmp #$01
-		beq sortie_scroll_direct		; deux valeurs de tuiles pour la mer : $00 et $01
+		beq around_sortie ; sortie_scroll_direct		; deux valeurs de tuiles pour la mer : $00 et $01
 
 ; puis déterminons la position perso dans la carte
 		lda ordo_perso_fen					; ordonnée perso dans fenête hires
@@ -355,8 +355,8 @@ end_chck_bords
 end_chck_bords_nsc
 		lda #TRUE
 		sta scroll_est_interdit					; interdit scroll (pour une boucle, dans la direstion demandée)
-		lda #FALSE
-		sta depl_perso_est_interdit					; autorise deplacement perso (pour une boucle, dans la direstion demandée)
+;		lda #FALSE
+;		sta depl_perso_est_interdit					; autorise deplacement perso (pour une boucle, dans la direstion demandée)
 ;		lda #$38				; pour simuler aucune touche enfoncée donc interdire scroll carte
 ;		sta direction_scroll
 sort_direct		
@@ -438,8 +438,8 @@ out_depl_perso
 		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
 		lda tuile_courante
 		sta tuile_sous_pos_perso					; repère tuile dans tuile_sous_pos_perso	
-		lda #FALSE
-		sta depl_perso_est_interdit
+;		lda #FALSE
+;		sta depl_perso_est_interdit
 		rts
 no_depl
 		lda #TRUE				; deplacement interdit
@@ -544,11 +544,12 @@ init_div_var
 	lda #FALSE
 	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
 	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
+	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	lda #TRUE	        ; TEMPO
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
+	; lda #TRUE	        ; TEMPO
+	; sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	rts
 .)	
 
@@ -936,10 +937,10 @@ hires_et_atributs
 		sta $b6f9		
 
 		;;; paper 0 sur les 3 lignes texte
-		lda #BLACK_PAPER
-		sta $bf68
-		sta $bf90
-		sta $bfb8
+;		lda #BLACK_PAPER
+;		sta $bf68
+;		sta $bf90
+;		sta $bfb8
 										
 		rts	
 .)	
