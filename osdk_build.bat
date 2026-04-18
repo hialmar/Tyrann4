@@ -6,11 +6,11 @@
 ::
 IF "%OSDK%"=="" GOTO ErCfg
 
-:: Goto Basic
+Goto Basic
 :: Goto Dialog
 :: Goto Camp
 :: Goto Map
-Goto MapAsm
+:: Goto MapAsm
 :: Goto Tuile
 :: Goto Tuiles
 
