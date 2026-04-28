@@ -13,7 +13,7 @@ DebutCombat
  PLOT 8,6,"! EN POSITION DE COMBAT !":PING
  GOSUB  DataLecture 
  GOTO  PiocheBanqueMonstres 
-combat_129
+GestBilanBatailleAff
  PAPER0:INK ENC:PRINT
  PRINT" ************************************"
  FORI=1TOL:PRINT@2,I;"*":PRINT@38,I;"*":NEXTI
@@ -40,7 +40,7 @@ EffaceVersion1
  FORII=1TO11:
  PRINT@1,7+II;CHR$(144)"                                        ":NEXTII
  RETURN
-combat_132
+EffaceVersion2
  FOR J=1TO11
  PRINT @3,10+J;"                                   ":NEXTJ
  RETURN
@@ -424,26 +424,26 @@ GestionTriSacFinLoop
  RETURN
 GestionArmes
  REM ARMES
- IF AU(AO(P))>19 THEN ARM=3:TST=3:ACT$=" lache "+IT$(BT(AO(P)))+" Sur ":GOTO  combat_96 
- IF AU(AO(P))>7  AND AU(AO(P))<15 OR AU(AO(P))=19 THEN TST=1:ARM=1:GOTO  combat_96 
+ IF AU(AO(P))>19 THEN ARM=3:TST=3:ACT$=" lache "+IT$(BT(AO(P)))+" Sur ":GOTO  FinGestionArmes 
+ IF AU(AO(P))>7  AND AU(AO(P))<15 OR AU(AO(P))=19 THEN TST=1:ARM=1:GOTO  FinGestionArmes 
  IF AU(AO(P))>14 AND AU(AO(P))<18 THEN TST=2:ARM=2
- IF AU(AO(P))=15 THEN ACT$=" decoche un carreau sur ":DFF=20:GOTO  combat_96 
- IF AU(AO(P))=16 THEN ACT$=" decoche une fleche sur ":DFF=10:GOTO  combat_96 
- IF AU(AO(P))=17 THEN ACT$=" projete un caillou sur ":DFF=-5:GOTO  combat_96 
+ IF AU(AO(P))=15 THEN ACT$=" decoche un carreau sur ":DFF=20:GOTO  FinGestionArmes 
+ IF AU(AO(P))=16 THEN ACT$=" decoche une fleche sur ":DFF=10:GOTO  FinGestionArmes 
+ IF AU(AO(P))=17 THEN ACT$=" projete un caillou sur ":DFF=-5:GOTO  FinGestionArmes 
  IF AU(AO(P))=18 THEN TST=3:DFF=15:ARM=4:ACT$=" lance son filet sur "
-combat_96
+FinGestionArmes
  RETURN
 GestionEffetArme
  REM EFFET ARME
  IF C6OK(TG(AO(P)))>4 OR VE(AO(P))> 80 THEN RT=1
- IF RT=0 THEN PING:PRINT@15,14;" et loupe ! ":GOTO  combat_97 
+ IF RT=0 THEN PING:PRINT@15,14;" et loupe ! ":GOTO  FinGestionEffetArme 
  SS=VIL+FNA(5)+BF(AO(P))
  IF EF(AO(P))>0 THEN SS=SS+((1+FNA(2))*(BF(AO(P))))
  IF C6OK(TG(AO(P)))>4 THEN SS=SS+C2PV(TG(AO(P)))
  C2PV(TG(AO(P)))=C2PV(TG(AO(P)))-SS
  PRINT @12,14;"lui inflige "SS" pv  "
- IF C2PV(TG(AO(P))) <= 0 THEN MT(AO(P))=MT(AO(P))+1:S$=MM$(MO(TG((AO(P))))):GOTO  combat_98 
-combat_97
+ IF C2PV(TG(AO(P))) <= 0 THEN MT(AO(P))=MT(AO(P))+1:S$=MM$(MO(TG((AO(P))))):GOTO  EnnemiMort 
+FinGestionEffetArme
  WAIT 15*TI
  RETURN
 GestionFilet
@@ -454,45 +454,45 @@ GestionFilet
 GestionD100
  REM + TESTS > D100
  SS=FNA(100):RT=0
- ON TST GOTO  combat_99 , combat_100 , combat_101 , combat_102 , combat_103 
-combat_99
+ ON TST GOTO  GestionCC , GestionCT , GestionAgilite , GestionQI , GestionFM 
+GestionCC
  REM Combat
- IF ESP(AO(P))=0 THEN  combat_104 
- IF SS < CC(AO(P))  + DFF THEN RT=1:GOTO  combat_105 
-combat_104
+ IF ESP(AO(P))=0 THEN  GestionCC2 
+ IF SS < CC(AO(P))  + DFF THEN RT=1:GOTO  GestionCCFin 
+GestionCC2
  IF SS < C3CC(AO(P)) +DFF THEN RT=1
-combat_105
+GestionCCFin
  RETURN
-combat_100
+GestionCT
  REM Tir
- IF ESP(AO(P))=0 THEN  combat_106 
- IF SS<CT(AO(P))  +DFF THEN RT=1:GOTO  combat_107 
-combat_106
+ IF ESP(AO(P))=0 THEN  GestionCT2 
+ IF SS<CT(AO(P))  +DFF THEN RT=1:GOTO  GestionCTFin 
+GestionCT2
  IF SS<C3CC(AO(P))+DFF THEN RT=1
-combat_107
+GestionCTFin
  RETURN
-combat_101
+GestionAgilite
  REM Agilite
- IF ARM=3 THEN IF SS < AANIM(AO(P))+DFF THEN RT=1:GOTO  combat_108 ' Test pour animal de combat
- IF ESP(AO(P))=1 THEN IF SS<AGI(AO(P))+DFF THEN RT=1:GOTO  combat_108 
+ IF ARM=3 THEN IF SS < AANIM(AO(P))+DFF THEN RT=1:GOTO  GestionAgiliteFin ' Test pour animal de combat
+ IF ESP(AO(P))=1 THEN IF SS<AGI(AO(P))+DFF THEN RT=1:GOTO  GestionAgiliteFin 
  IF ESP(AO(P))=0 THEN IF SS<C1AG(AO(P))+DFF THEN RT=1
-combat_108
+GestionAgiliteFin
  RETURN
-combat_102
+GestionQI
  REM QI
- IF ESP(AO(P))=0 THEN  combat_109 
- IF SS<IN(AO(P)) +DFF THEN RT=1:GOTO  combat_110 
-combat_109
+ IF ESP(AO(P))=0 THEN  GestionQI2 
+ IF SS<IN(AO(P)) +DFF THEN RT=1:GOTO  GestionQIFin 
+GestionQI2
  IF SS<C5QI(AO(P))+DFF THEN RT=1
-combat_110
+GestionQIFin
  RETURN
-combat_103
+GestionFM
  REM FM
- IF ESP(AO(P))=0 THEN  combat_111 
- IF SS<FM(AO(P))+DFF THEN RT=1:GOTO  combat_112 
-combat_111
+ IF ESP(AO(P))=0 THEN  GestionFM2 
+ IF SS<FM(AO(P))+DFF THEN RT=1:GOTO  GestionFMFin 
+GestionFM2
  IF SS<C5QI(AO(P))+DFF THEN RT=1
-combat_112
+GestionFMFin
  RETURN
  REM ENNEMIS
 GestionEnnemisPrisFilet
@@ -508,62 +508,62 @@ combat_377
  RETURN
 GestionAttaqueEnnemis
  REM ATTAQUE  ENNEMIS
-combat_113
- TE=FNA(6):IF OK(TE)=4 THEN  combat_113 
+CherchePersoNonMort
+ TE=FNA(6):IF OK(TE)=4 THEN  CherchePersoNonMort 
  TE$=N$(TE):SS$=" attaque ":TST=1
  IF MO(AO(P))>14 THEN IF FNA(10)>7 THEN SS$=" jette un sort sur":TST=4:IF MO(AO(P))> 20 THEN TE$="l'equipe"
  L=10:S$=CHR$(129)+MM$(MO(AO(P)))+SS$:GOSUB  AfficheAuCentre :ZAP
  L=12:S$=CHR$(129)+TE$:GOSUB  AfficheAuCentre :WAITTI*10
- DFF=(2*VIL)+FNA(10):GOSUB  GestionD100 :IF RT=0 THEN SS$="et loupe": GOTO  combat_114 
- IF TST=4 THEN GOTO  combat_115 
+ DFF=(2*VIL)+FNA(10):GOSUB  GestionD100 :IF RT=0 THEN SS$="et loupe": GOTO  GestAttEnnemiAff 
+ IF TST=4 THEN GOTO  GestSortsFaibles 
  SS=1+VIL+FNA(VIL)+CM(AO(P),4)-BC(TE)-PRD(TE):REM *** FORMULE ATTAQUE MONSTRE ***
- IF SS<=0 THEN SS$="l'armure resiste !":GOTO  combat_114 
-combat_122
+ IF SS<=0 THEN SS$="l'armure resiste !":GOTO  GestAttEnnemiAff 
+GestAttEnnemiChDeg
  SS$="lui inflige "+STR$(SS)+" pv"
  ET(TE)=ET(TE)-SS:ZAP:WAIT TI*5
  IF ET(TE)<=0 THEN ET(TE)=0:OK(TE)=4:HV=HV-1
-combat_114
+GestAttEnnemiAff
  L=14:S$=SS$:GOSUB  AfficheAuCentre :WAITTI*5
  IF OK(TE)=4 THEN PRINT @15,16;"et meurt...":EXPLODE
  GOSUB  AfficheEquipe 
- GOTO  combat_116 
-combat_115
+ GOTO  GestAttEnnemisFin 
+GestSortsFaibles
  REM SORTS faibles
- IF MO(AO(P)) > 20 THEN  combat_117 
-combat_124
+ IF MO(AO(P)) > 20 THEN  GestSortsForts 
+GestSortsFaiblesSuite
  IF FNA(10)>6 THEN SM=FNA(4)ELSE SM=1
- ON SM GOTO  combat_118 , combat_119 , combat_120 , combat_121 
-combat_118
+ ON SM GOTO  GestSortsFaiblesDegats , GestSortsFaiblesPoison , GestSortsFaiblesParalyse , GestSortsFaiblesArmureDim 
+GestSortsFaiblesDegats
  FOR I=1TO13:PRINT@3+I,12;CHR$(129);"*":WAIT3:NEXT:SHOOT
- SS=6+FNA(VIL)-INT(FM(TE)/10):GOTO  combat_122 
- GOTO  combat_123 
-combat_119
- IF OK(TE)=1 THEN SS$="il l'empoisonne":OK(TE)=2 ELSE  combat_124 
- GOTO  combat_123 
-combat_120
- IF OK(TE)=1 THEN SS$="ses muscles ne repondent plus":OK(TE)=3 ELSE  combat_124 
- GOTO  combat_123 
-combat_121
+ SS=6+FNA(VIL)-INT(FM(TE)/10):GOTO  GestAttEnnemiChDeg 
+ GOTO  GestSortsFaiblesFin 
+GestSortsFaiblesPoison
+ IF OK(TE)=1 THEN SS$="il l'empoisonne":OK(TE)=2 ELSE  GestSortsFaiblesSuite 
+ GOTO  GestSortsFaiblesFin 
+GestSortsFaiblesParalyse
+ IF OK(TE)=1 THEN SS$="ses muscles ne repondent plus":OK(TE)=3 ELSE  GestSortsFaiblesSuite 
+ GOTO  GestSortsFaiblesFin 
+GestSortsFaiblesArmureDim
  SS$="son armure diminue":BC(TE)=BC(TE)-1-FNA(2)
  IF BC(TE)<0 THEN BC(TE)=0
-combat_123
+GestSortsFaiblesFin
  L=14:S$=SS$:GOSUB  AfficheAuCentre :WAITTI*12
- GOTO  combat_116 
-combat_117
+ GOTO  GestAttEnnemisFin 
+GestSortsForts
  REM SORTS forts
  SM=FNA(5)
  GOSUB  EffaceVersion1 
  L=9:S$=SM$(SM):GOSUB  AfficheAuCentre :ZAP:WAITTI*20:LL=10
- IF SM=4 THEN MALUS=MALUS+1+FNA(2):GOTO  combat_116 
- IF SM=5 THEN GOSUB  combat_125 :GOTO  combat_116 
+ IF SM=4 THEN MALUS=MALUS+1+FNA(2):GOTO  GestAttEnnemisFin 
+ IF SM=5 THEN GOSUB  GestSortsFortsSoin :GOTO  GestAttEnnemisFin 
  FORJ=1TO6
- IF OK(J)=4 THEN  combat_126  ELSE LL=LL+1
- IF SM > 1 THEN  combat_127 
+ IF OK(J)=4 THEN  GestSortsFortsFin  ELSE LL=LL+1
+ IF SM > 1 THEN  GestSortsFortsDegats 
  BC(J)=BC(J)-1-FNA(2)
  IF BC(J)<0 THEN BC(J)=0
  S$=" "+STR$(BC(J))+" "
- PRINT@35,19+J;S$:GOTO  combat_126 
-combat_127
+ PRINT@35,19+J;S$:GOTO  GestSortsFortsFin 
+GestSortsFortsDegats
  SS=VIL+2+FNA(4)+CM(AO(P),4)
  IF CP(J)>3 THEN SS=SS-INT(QI(J)*2/10):IF SS<=0 THEN SS=1
  PRINT @5,LL;N$(J);" perd ";SS;" pv":ET(J)=ET(J)-SS
@@ -571,45 +571,45 @@ combat_127
  IF OK(J)=4 THEN PRINT @30,LL;"et meurt!":EXPLODE
  WAITTI*5
  GOSUB  AfficheEquipe 
-combat_126
+GestSortsFortsFin
  NEXTJ
-combat_116
+GestAttEnnemisFin
  RETURN
-combat_125
+GestSortsFortsSoin
  REM SOINS
  L=11
  FOR J=1TONE
  S$=" est gueri"
- IF C6(J)<2 OR C6(J)>3 THEN  combat_128 
+ IF C6(J)<2 OR C6(J)>3 THEN  GestSortsFortsSoinFin 
  C6(J)=1:C2=C2+5+FNA(8)
  S$=MM$(MO(J))+S$:GOSUB  AfficheAuCentre :WAIT TI*8:L=L+1
-combat_128
+GestSortsFortsSoinFin
  NEXTJ
  GOSUB  AfficheEnnemis 
  RETURN
 GestionRecompenses
  REM RECOMPENSES
  CLS:POKE#26A,PEEK(#26A) AND 254
- ENC=4:S$="BILAN DE LA BATAILLE":L=22:GOSUB  combat_129 
+ ENC=4:S$="BILAN DE LA BATAILLE":L=22:GOSUB  GestBilanBatailleAff 
  PING:PRINT@9,4;"!  VOUS AVEZ VAINCU  !"
  PRINT@4,6;"Chaque survivant gagne au moins:"
  XP=DC*5:PO=DC*3:PRINT@6,8;"> Points:";XP
  PRINT@6,9;"> Argent:";PO;"ca"
  FU=0
  FOR P=1TO6
- IF OK(P)>2 THEN  combat_130 
+ IF OK(P)>2 THEN  GestBilanPrime 
  XP(P)=XP(P)+XP+(MT(P)*20)+FNA(10*VIL)
  RI(P)=RI(P)+PO+(MT(P)*25)+FNA(10*VIL)
-combat_130
- IF MT(P)< NE THEN  combat_131 
+GestBilanPrime
+ IF MT(P)< NE THEN  GestBilanXP 
  S$="Bravo a "+N$(P):L=11:GOSUB  AfficheAuCentre :WAITTI*8
  S$="Tueur de tous les ennemis":L=12:GOSUB  AfficheAuCentre :WAITTI*12
  PRIME=(NE*100)+FNA(DC*20)
  S$="Voila une prime de"+STR$(PRI)+" ca":L=14:GOSUB  AfficheAuCentre :WAITTI*12
  RI(P)=RI(P)+PRI:XP(P)=XP(P)+XP+(MT(P)*20)+FNA(10*VIL)
- L=16:GOSUB  AttenteToucheEspace :GOSUB  combat_132 
-combat_131
- IF XP(P)>1000+(VIL*150) AND NI(P)<21 AND OK(P)<>4 THEN GOSUB  combat_133 
+ L=16:GOSUB  AttenteToucheEspace :GOSUB  EffaceVersion2 
+GestBilanXP
+ IF XP(P)>1000+(VIL*150) AND NI(P)<21 AND OK(P)<>4 THEN GOSUB  GestionBilanPromotion 
  NEXT P
  L=18:S$="DECAMPEZ MAINTENANT":GOSUB  AfficheAuCentre 
  L=21:GOSUB  AttenteToucheEspace 
@@ -620,7 +620,7 @@ FuiteRetourLaby
 RetourProgAppelant
  PRINT OUT
  IF OUT=1 THEN LOAD("MAP") ELSE LOAD("LABY")
-combat_133
+GestionBilanPromotion
  REM PROMOTION NEW
  NI(P)=NI(P)+1:XP(P)=0:FORJ=1TO5:PING:WAIT2*J:NEXT
  S$=CHR$(145)+C$(CP(P))+" "+N$(P)+" "+CHR$(144)+CHR$(132):L=11:GOSUB  AfficheAuCentre 
@@ -634,30 +634,30 @@ combat_133
  PLOT 7,17,S$
  PRINT @5,19;"Augmenter quelle carac (1-6) ?"
  GOSUB  LectureNombre :PROMO=5+FNA(4)
- IF A=1 THEN CC(P)=CC(P)+PRO:IFCC(P)>99THENCC(P)=99:GOTO  combat_135 
- IF A=2 THEN CT(P)=CT(P)+PRO:IFCT(P)>99THENCT(P)=99:GOTO  combat_135 
- IF A=3 THEN FO(P)=FO(P)+PRO:IFFO(P)>99THENFO(P)=99:GOTO  combat_135 
- IF A=4 THEN AG(P)=AG(P)+PRO:IFAG(P)>99THENAG(P)=99:GOTO  combat_135 
- IF A=5 THEN IN(P)=IN(P)+PRO:IFIN(P)>99THENIN(P)=99:GOTO  combat_135 
+ IF A=1 THEN CC(P)=CC(P)+PRO:IFCC(P)>99THENCC(P)=99:GOTO  GestionBilanPromotionAff 
+ IF A=2 THEN CT(P)=CT(P)+PRO:IFCT(P)>99THENCT(P)=99:GOTO  GestionBilanPromotionAff 
+ IF A=3 THEN FO(P)=FO(P)+PRO:IFFO(P)>99THENFO(P)=99:GOTO  GestionBilanPromotionAff 
+ IF A=4 THEN AG(P)=AG(P)+PRO:IFAG(P)>99THENAG(P)=99:GOTO  GestionBilanPromotionAff 
+ IF A=5 THEN IN(P)=IN(P)+PRO:IFIN(P)>99THENIN(P)=99:GOTO  GestionBilanPromotionAff 
  IF A=6 THEN FM(P)=FM(P)+PRO:IFFM(P)>99THENFM(P)=99
-combat_135
+GestionBilanPromotionAff
  S$=STR$(CC(P))+" "+STR$(CT(P))+" "+STR$(FO(P))+" "+STR$(AG(P))+" "+STR$(IN(P))+" "+STR$(FM(P))
  PLOT 7,18,S$
  PV(P)=PV(P)+FNA(3)+4:IFPV(P)>99THENPV(P)=99
- L=21:GOSUB  AttenteToucheEspace :GOSUB  combat_132 
+ L=21:GOSUB  AttenteToucheEspace :GOSUB  EffaceVersion2 
  RETURN
  'FOR J=1TO11:PRINT @3,10+J;"                                    ":NEXTJ
  'RETURN
 GestionPotionSoin
  L=11:S$=CHR$(130)+N$(AO(P))+" Soigne "+N$(TG((AO(P))))
- GOSUB  AfficheAuCentre :GOSUB  combat_136 :WAITTI*5
+ GOSUB  AfficheAuCentre :GOSUB  GestionResSortAffMieux :WAITTI*5
  L=14:GOSUB AfficheAuCentre 
  RETURN
 GestionPotionDivine
  REM Potion divine: Mise en majuscule du prenom
  L=10:S$=N$(AO(P))+" utilise Potion divine ":GOSUB  AfficheAuCentre 
  L=13:S$=N$(TG((AO(P))))+" a une force de colosse":GOSUB  AfficheAuCentre 
- FC(TG(AO(P)))=50+FNA(VIL*6):GOSUB combat_137 
+ FC(TG(AO(P)))=50+FNA(VIL*6):GOSUB GestionSortChercheIndicePersoDopeEbene 
  PD=1:PP=1
  S$=N$(TG((AO(P)))):N$(TG((AO(P))))=LEFT$(S$,1)
  FORI=2TOLEN(S$)
@@ -688,7 +688,7 @@ GestionPotionInvincible
  L=13:S$=N$(TG((AO(P))))+" est Invincible !":GOSUB  AfficheAuCentre 
  BC(TG(AO(P)))=50:ET(TG(AO(P)))=PV(TG(AO(P)))
  RETURN
-combat_137
+GestionSortChercheIndicePersoDopeEbene
  I=0'recherche indice du heros dope par potion ebene
  REPEAT
  I=I+1
@@ -697,9 +697,9 @@ combat_137
  RETURN
 combat_191
  FORJ=1TONE'monstres congele = perte de vitesse
- IF ESP(J)=1THEN  combat_138 
+ IF ESP(J)=1THEN  GestEffetSortCongelePerteVit 
  VE(J)=VE(J)-5
-combat_138
+GestEffetSortCongelePerteVit
  NEXTJ
  GOSUB  GestionEffetsSorts 
  RETURN
@@ -797,13 +797,13 @@ combat_156
  ZAP:FORI=1TO5:PAPER1:WAIT10:PAPER3:WAIT15:NEXT:PAPER0:EXPLODE
  SS=FNA(5)+3:C2PV(TG(AO(P)))=C2PV(TG(AO(P)))-SS
  S$=MM$(MO(TG((AO(P)))))+" perd "+STR$(SS)+" PV":GOSUB  combat_171 
- IF C2PV(TG(AO(P)))<=0 THEN MT(AO(P))=MT(AO(P))+1:S$=MM$(MO(TG((AO(P))))):GOTO  combat_98 
+ IF C2PV(TG(AO(P)))<=0 THEN MT(AO(P))=MT(AO(P))+1:S$=MM$(MO(TG((AO(P))))):GOTO  EnnemiMort 
  RETURN
 combat_157
  REM 1,3  PIERRE
  TST=4:DFF=25:GOSUB  GestionD100 :IF RT=0 THEN  combat_171 
  S$="se transforme en pierre":GOSUB  combat_171 
- S$=MM$(MO(TG((AO(P))))):GOTO  combat_98 
+ S$=MM$(MO(TG((AO(P))))):GOTO  EnnemiMort 
 combat_158
  REM 1,5 VENIN
  TST=5:DFF=40:GOSUB  GestionD100 :IF RT=0 THEN  combat_171 
@@ -818,7 +818,7 @@ combat_160
  REM 1,6 FOUDRE
  TST=4:DFF=30:GOSUB  GestionD100 :IF RT=0 THEN  combat_171 
  S$="Est reduit en cendres !":GOSUB  combat_171 
- MT(AO(P))=MT(AO(P))+1:S$=MM$(MO(TG((AO(P))))):GOTO  combat_98 
+ MT(AO(P))=MT(AO(P))+1:S$=MM$(MO(TG((AO(P))))):GOTO  EnnemiMort 
 combat_161
  REM 1,7 LAVE
  TST=5:DFF=35:GOSUB  GestionD100 :IF RT=0 THEN  combat_171 
@@ -833,7 +833,7 @@ combat_162
  REM  MESTRE
 combat_163
  REM 2,1 EAU
-combat_136
+GestionResSortAffMieux
  GOSUB  combat_182 
  S$="Il va un peu mieux"
  RETURN
@@ -924,7 +924,7 @@ combat_190
  PRINT@3,L;S$:WAITTI*5
 combat_189
  NEXTI
- WAITTI*20:IFEC=EVTHENGOSUB  combat_132 :PRINT@3,15;"Ha Ha Ha un Mental de minus !!"
+ WAITTI*20:IFEC=EVTHENGOSUB  EffaceVersion2 :PRINT@3,15;"Ha Ha Ha un Mental de minus !!"
  GOSUB  AfficheEnnemis 
  RETURN
 combat_177
@@ -998,7 +998,7 @@ combat_199
 combat_200
  GETA$:IFA$<>"R"THEN combat_200 
  RETURN
-combat_98
+EnnemiMort
  REM ENNEMI MORT
  PRINT @15,16;S$;" meurt ":EXPLODE:WAIT 5*TI
 combat_187
