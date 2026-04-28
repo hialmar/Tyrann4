@@ -84,7 +84,7 @@ AffichageCombatLoop
  POKE 48035,0
  GOSUB  AfficheEnnemis 
  GOSUB  AfficheEquipe 
- IF FF= 0 THEN GOSUB  AfficheFuiteON 
+ IF FF= 0 THEN GOSUB  AfficheFuiteOuiNon 
  IF BUG=1 THEN  FinBoucleCombat 
  FOR P=1TO6
  ACT(P)=3
@@ -243,18 +243,18 @@ MenuChoixDuPerso
 MenuChoixPersoBoucleLecture
  GET A$
  IF A$="A" AND ARM=1 THEN ACT(P)=1:GOTO  MenuChoixPersoArme 
- IF A$="O" AND OP(P)>0 THEN ACT(P)=2:GOSUB  MenuChoixPersoObjet :GOTO  combat_56 
+ IF A$="O" AND OP(P)>0 THEN ACT(P)=2:GOSUB  MenuChoixPersoObjet :GOTO  MenuChoixPersoFin 
  IF A$="P" THEN ACT(P)=3:PRD(P)=1+FNA(2):GOSUB  AfficheEquipe :GOTO  MenuChoixPersoFin 
  IF A$="S" AND CP(P)>3 THEN ACT(P)=4:GOSUB  MenuChoixPersoSorts :IF CH =0 THEN  MenuChoixDuPerso  ELSE  MenuChoixPersoFin 
  GOTO  MenuChoixPersoBoucleLecture 
 MenuChoixPersoFin
  RETURN
-AfficheFuiteON
+AfficheFuiteOuiNon
  REM FUITE
  FF=1:PRINT@15,12;CHR$(131)"FUIR O/N"
-ChoixFuiteON
+ChoixFuiteOuiNon
  GETA$
- IF A$<>"O" AND A$<>"N" THEN  ChoixFuiteON 
+ IF A$<>"O" AND A$<>"N" THEN  ChoixFuiteOuiNon 
  IF A$="N" THEN  ChoixFuiteNon 
  TEST=(VIL*2)+FNA(40)+10+NF
  IF TEST>AG(FNA(6)) THEN NF=0:GOTO  ChoixFuiteOui 
@@ -481,10 +481,10 @@ GestionAgiliteFin
 GestionQI
  REM QI
  IF ESP(AO(P))=0 THEN  GestionQI2 
- IF SS<IN(AO(P)) +DFF THEN RT=1:GOTO  GestionQIFin 
+ IF SS<IN(AO(P)) +DFF THEN RT=1:GOTO  GestionIntelFin 
 GestionQI2
  IF SS<C5QI(AO(P))+DFF THEN RT=1
-GestionQIFin
+GestionIntelFin
  RETURN
 GestionFM
  REM FM
@@ -1165,12 +1165,15 @@ DataLecture
  FORI=1TO5:READ SM$(I):NEXT
  RESTORE:RETURN
  DATA "OK","-Empoi- ","-Paral- ",">MORT< "
- DATA Chevalier,Mercenaire,Ranger,Sorcier,Mestre,Septon
- DATA Aucune,MARTELL,BARATHEON,TYRELL
- DATA GREYJOY,ARRYN,LANNISTER,TULLY,STARK
+ REM DATA Chevalier,Mercenaire,Ranger,Sorcier,Mestre,Septon
+ DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
+ DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Greek, Mesopotamian 
+ REM DATA Aucune,MARTELL,BARATHEON,TYRELL
+ REM DATA GREYJOY,ARRYN,LANNISTER,TULLY,STARK
  DATA 7,6,5,5,4,4,3,3,2,2,1,1
  DATA 75,8, 70,6, 50,5, 80,4, 95,3, 55,2
- DATA 23,Rat mutant, Chien-loup, Chacal, Gobelin, Coupe-jarret, Gueux, Rodeur, Spadassin
+ REM DATA 23,Rat mutant, Chien-loup, Chacal, Gobelin, Coupe-jarret, Gueux, Rodeur, Spadassin
+ DATA 23, Serpents, Dogs, Bear, Barbarian, Thief, Gueux, Rodeur, Spadassin
  DATA Ogre, Dothrakhi, Geant, Sauvageon, Lion, Grizzly
  DATA Sorcier de Feu, Sombre Pretresse, Moine Fou
  DATA Druide-Demon, Esprit Noir, Septon Blanc

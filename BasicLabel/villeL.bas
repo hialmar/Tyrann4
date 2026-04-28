@@ -529,8 +529,8 @@ AttenteTouche
 AttenteToucheLect
  IF KEY$="" THEN  AttenteToucheLect 
  RETURN
-LectureNumeroVille
- GET A$:A=VAL(A$):IF A<1 OR A>6 THEN PING:GOTO  LectureNumeroVille 
+LectureNumeroVilleLoop
+ GET A$:A=VAL(A$):IF A<1 OR A>6 THEN PING:GOTO  LectureNumeroVilleLoop 
  RETURN
 ResetAll
  REM REINITIALISE TOUT
