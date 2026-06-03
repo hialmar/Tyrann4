@@ -3,66 +3,66 @@
  TEXT:LOAD "FONT.BIN":PAPER0:INK6
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  DIM SN(6,9)
- GOSUB  LoadDataTexts :GOSUB  LoadTeam :PING:CG=0
+ GOSUB  ville_0 :GOSUB  ville_1 :PING:CG=0
  X=2:Y=2:S=2
- 'FORI=1TO9:FORJ=1TO4:CL(I,J)=1:NEXTJ,I'Toutes les clés
+ 'FORI=1TO9:FORJ=1TO4:CL(I,J)=1:NEXTJ,I'Toutes les cles
  'FORI=1TO6:PV(I)=ET(I):NEXTI
  'FORP=1TO6:FORI=1TO9:NI(I)=9:SN(P,I)=5:NEXTI,P'Tous les sorts
  'FOR M=1TO5:TC(VIL,M)=0:NEXT M'Tous les coffres et combats actifs
  'FORI=1TO6:IG(I)=0:NEXT:IG(3)=1:TL=9:VIL=9:NP=2
- GOTO MenuVille 
-AfficheAuCentre
+ GOTO ville_2 
+ville_27
  REM Centre
  T=INT((42-LEN(S$))/2):PRINT @T,L;S$
  RETURN
  REM LABY
-GotoLaby
- CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  SaveTeam  : LOAD "LABY"
-MenuVille
+ville_11
+ CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_3  : LOAD "LABY"
+ville_2
  REM VILLAGE
  X=2:Y=2:MENU=1:
  TEXT:CLS:PAPER 0:POKE48035,0:POKE#26A,PEEK(#26A) AND 254
- S$=" "+CR$(VI)+" ":L=17:GOSUB  AfficheCadre 
- PLOT 13,3,"VOUS POUVEZ..."
- PLOT 8,5,"1) VERS LES ECHOPPES"
- PLOT 8,6,"2) INSPECTER UN PERSONNAGE"
- PLOT 8,7,"3) VISUALISER L'EQUIPE"
- PLOT 8,8,"4) VOIR LE MESTRE"
- PRINT @8,9;"5) VISITER "+CR$(VILLE)
- PLOT 8,10,"6) EXPLORER WESTEROS"
- IFVI>2 THEN PLOT 8,11,"7) ALLER AU LABORATOIRE"
- PLOT 8,13,"9) SAUVEGARDE SCENARIO"
- PLOT 6,15,"F)in": REM "M)emory R)einit B)oost"
- GOSUB  AffichePersos :GOSUB RechargeSorts 
-LectureMenuVille
+ S$=" "+CR$(VI)+" ":L=17:GOSUB  ville_4 
+ PLOT 13,3,"YOUR CHOICE..."
+ PLOT8,5,"1) TO THE SHOPS"
+ PLOT8,6,"2) INSPECT A CHARACTER"
+ PLOT8,7,"3) TEAM OVERVIEW"
+ PLOT8,8,"4) MAESTER'S OFFICE"
+ PRINT@8,9;"5) VISIT "+CR$(VILLE)
+ PLOT8,10,"6) EXPLORE WESTEROS"
+ IFVI>2THENPLOT8,11,"7) TO LABORATORY"
+ PLOT8,13,"9) SAVE SCENARIO"
+ PLOT8,15,"F)inish "
+ GOSUB  ville_5 :GOSUB ville_6 
+ville_16
  GET A$
  IFA$<>"3"ANDA$<>"5"THEN CG=1
- IF A$="1" THEN  MenuShops 
- IF A$="2" THEN A=VAL(A$):ENC=6:GOSUB  InspecterHeros :GOTO  MenuVille 
- IF A$="3" THEN GOSUB  AfficheEquipeDetails :GOTO  MenuVille 
- IF A$="4" THEN MenuMestre 
- IF A$="5" THEN X=2:Y=2:S=2:CA=50:GOTO  GotoLaby 
- IF A$="6" THEN ExplorerMonde 
- IF A$="7" ANDVI>2THEN MenuLabo 
- IF A$="9" THEN ZAP:GOSUB  SaveTeam :PING: GOTO  MenuVille 
- IF A$="F" THEN PING:CLS:PLOT 10,10,"ESPECE DE PLEUTRE":END
- IFA$="M"THENS$=" >"+STR$(FRE(""))+" octets":PLOT 18,15,S$
- IFA$="R"THEN GOSUB  ResetAll 
- IFA$="B"THEN GOSUB  Booste 
- GOTO  LectureMenuVille 
-InspecterHeros
- S$="INSPECTER QUEL HEROS ?  ":GOSUB  AfficheSurFondCouleurVille :PRINT@6,3;S$
- GOSUB  LectureNumeroVille :P=A
+ IF A$="1" THEN  ville_7 
+ IF A$="2" THEN A=VAL(A$):ENC=6:GOSUB  ville_8 :GOTO  ville_2 
+ IF A$="3" THEN GOSUB  ville_9 :GOTO  ville_2 
+ IF A$="4" THEN ville_10 
+ IF A$="5" THEN X=2:Y=2:S=2:CA=50:GOTO  ville_11 
+ IF A$="6" THEN ville_12 
+ IF A$="7" ANDVI>2THEN ville_13 
+ IF A$="9" THEN ZAP:GOSUB  ville_3 :PING: GOTO  ville_2 
+ IFA$="F"THENPING:CLS:PLOT 3,10,"You are a coward, you know ?":END
+ IFA$="M"THENS$=" >"+STR$(FRE(""))+" bytes":PLOT 18,15,S$
+ IFA$="R"THEN GOSUB  ville_14 
+ IFA$="B"THEN GOSUB  ville_15 
+ GOTO  ville_16 
+ville_8
+ S$="INSPECT WHICH HERO ?  ":GOSUB  ville_17 :PRINT@6,3;S$
+ GOSUB  ville_18 :P=A
  S$=N$(P)+" ":IF MP(P)<>8 THEN S$=S$+M$(MP(P))
- L=23:CLS:GOSUB  AfficheCadre 
- PRINT @4,3;"Carr :";C$(CP(P)):PRINT @21,3;"Niv:"NI(P);"EXP:"XP(P)
- PRINT @4,5;"Sante:";OK$(OK(P)):PRINT @21,5;"PV :";ET(P)"/"PV(P)
- PRINT @4,7;"Bourse:";RI(P)"Cerfs d'Argent"
- PRINT @4,9;"Arme D: ";IT$(WR(P))
- PRINT @4,10;"Arme G: ";IT$(WL(P))
- PRINT @4,11;"Animal: ";IT$(BT(P))
- PRINT @4,12;"Armure: ";IT$(PT(P));"  CA:";CA(P)
- S$="CC  CT  Fo  Ag  In  FM "
+ L=23:CLS:GOSUB  ville_4 
+ PRINT@4,3;"Car :";C$(CP(P)):PRINT@21,3;"Lev:"NI(P);"EXP:"XP(P)
+ PRINT@4,5;"Health:";OK$(OK(P)):PRINT@22,5;"HP :";ET(P)"/"PV(P)
+ PRINT@4,7;"Money:";RI(P)"Silver stags"
+ PRINT@4,9;"R Weapon:";IT$(WR(P))
+ PRINT@4,10;"L Weapon: ";IT$(WL(P))
+ PRINT@4,11;"Animal: ";IT$(BT(P))
+ PRINT@4,12;"Armor: ";IT$(PT(P));"  AC:";CA(P)
+ S$="Ml  Rg  St  Dx  In  MS "
  PRINT@4,14;CHR$(145)CHR$(135)S$CHR$(144)
  S$=STR$(CC(P))+" "+STR$(CT(P))+" "+STR$(FO(P))+" "+STR$(AG(P))+" "+STR$(IN(P))+" "+STR$(FM(P))
  PLOT 5,15,S$
@@ -74,80 +74,80 @@ InspecterHeros
  FORI=1TO4
  IF CL(VI,I)=1THENNC=NC+1
  NEXT
- PRINT@26,17;"Clefs de"
- PRINT@26,18;"la ville:":PRINT@34,18;STR$(NC)
- PRINT@26,20;"Ingredients"
- PRINT@28,21;"Potion:":PRINT@34,21;STR$(NP)
- S$="   DONNER:":GOSUB AfficheFondBleu :PRINT@1,24;S$
- S$="A)rgent O)bjet R)ien ":GOSUB AfficheSurFondCouleurVille :PRINT@14,24;S$
-LectureDonner
- GETA$:IF A$<>"A" AND A$<>"O" AND A$<>"R"THEN LectureDonner 
- IFA$<>"R"THEN LectureDonnerSuite 
- IFCP(P)>3THEN AfficherSorts ELSE InspecterHerosFin 
-LectureDonnerSuite
- IFA$="A"THEN DonnerArgent ELSE DonnerObjet 
-AfficherSorts
- CLS:S$=" * SORTS * ":L=14:GOSUB  AfficheCadre 
+ PRINT@26,17;"Keys of"
+ PRINT@26,18;"the city:":PRINT@34,18;STR$(NC)
+ PRINT@28,20;"Potion:":PRINT@34,20;STR$(NP)
+ PRINT@26,21;"Ingredients"
+ S$="   GIVE:":GOSUB ville_19 :PRINT@1,24;S$
+ S$="M)oney I)tems Q)uit ":GOSUB ville_17 :PRINT@15,24;S$
+ville_20
+ GETA$:IF A$<>"M" AND A$<>"I" AND A$<>"Q"THEN ville_20 
+ IFA$<>"Q"THEN ville_21 
+ IFCP(P)>3THEN ville_22 ELSE ville_23 
+ville_21
+ IFA$="M"THEN ville_24 ELSE ville_25 
+ville_22
+ CLS:S$=" * SPELLS * ":L=14:GOSUB ville_4 
  SS=NI(P):IFSS>8THENSS=8
  FORI=1TOSS
  S$=STR$(I)+" - "+SPELL$(CP(P)-3,I):PRINT@11,I+3;S$
  S$="("+STR$(SN(P,I))+" )": PRINT@25,I+3;S$:NEXT
- IF CP(P)<>5 OR OK(P)>2THEN GOSUB  AttenteTouche :GOTO  InspecterHerosFin 
- GOSUB  AffichePersos 
-AfficheChoixSoin
- S$="Sort de soins (O/N)?":L=13:GOSUB  AfficheAuCentre 
-LectureSoinOuiNon
- GETA$:IF A$="N" THEN  InspecterHerosFin  ELSE IF A$<>"O" THEN  LectureSoinOuiNon 
- S$="        LEQUEL  ?      ":L=13:GOSUB  AfficheAuCentre 
-LectureSortSoin
- GETA$:SP=VAL(A$):IFSP<1 OR SP=4 OR SP=6 OR SP>7 OR SP>NI(P) THEN ZAP:GOTO  LectureSortSoin 
- S$=" INCANTATION:"+SP$(2,SP)+" ":L=13:GOSUB  AfficheAuCentre 
- IF SP=5 THEN  SoinFullVie 
- S$="   SOIGNER QUI  ? Aucun(0) ":L=17:GOSUB  AfficheAuCentre 
-SoinChoixPerso
- GETA$:P=VAL(A$):IFP>6THEN SoinChoixPerso ELSEIFP=0THEN InspecterHerosFin 
- S$="                           ":L=17:GOSUB AfficheAuCentre :PING
- IF (SP=1 AND OK(P)=4) OR (SP=2 AND OK(P)<>2) OR (SP=3 AND OK(P)<>3) OR (SP=7 AND OK(P)<>4) THEN ZAP:GOTO  InspecterHerosFin 
+ IFCP(P)<>5OROK(P)>2THEN GOSUB ville_26 :GOTO ville_23 
+ GOSUB ville_5 
+ville_32
+ S$="Healing Spells (Y/N)?":L=13:GOSUB ville_27 
+ville_28
+ GETA$:IFA$="N"THEN  ville_23  ELSEIF A$<>"Y" THEN ville_28 
+ S$="       WHICH ONE  ?     ":L=13:GOSUB ville_27 
+ville_29
+ GETA$:SP=VAL(A$):IFSP<1ORSP=4ORSP=6ORSP>NI(P)THENZAP:GOTO ville_29 
+ S$=" INCANTATION:"+SP$(2,SP)+" ":L=13:GOSUB ville_27 
+ IFSP=5THEN ville_30 
+ S$="   WHICH HERO  ? None(0) ":L=17:GOSUB ville_27 
+ville_31
+ GETA$:P=VAL(A$):IFP>6THEN ville_31 ELSEIFP=0THEN ville_23 
+ S$="                           ":L=17:GOSUB ville_27 :PING
+ IF (SP=1 AND OK(P)=4) OR (SP=2 AND OK(P)<>2) OR (SP=3 AND OK(P)<>3) OR (SP=7 AND OK(P)<>4) THEN ZAP:GOTO  ville_23 
  ET(P)=PV(P):IF SP<>1 THEN OK(P)=1
- GOSUB  AffichePersos :GOTO  AfficheChoixSoin 
-SoinFullVie
+ GOSUB  ville_5 :GOTO  ville_32 
+ville_30
  FOR I=1TO6:IF OK(I)<>4 THEN ET(I)=PV(I)
  NEXT
-InspecterHerosFin
+ville_23
  ZAP:RETURN
-MenuMestre
+ville_10
  REM SOINS
- S$="SOIGNER QUEL HEROS ? ":GOSUB  AfficheSurFondCouleurVille :PRINT@9,3;S$
-MestreChoixHeros
- GETP$:P=VAL(P$):IF P<1 OR P>6 THEN PING:GOTO  MestreChoixHeros 
- ENC=2:S$="LE MESTRE LUWIN":L=16:CLS:GOSUB  AfficheCadre 
- PRINT @5,5;"Bienvenue ";N$(P)
- PRINT @5,7;"Votre condition est: ";OK$(OK(P))
- S$="Etat:"+STR$(ET(P))+" /"+STR$(PV(P)):PLOT 5,9,S$
- IF OK(P)=1 AND ET(P)=PV(P) THEN M$="Vous etes en pleine forme !":HO=0
- IF OK(P)=2 OR OK(P)=3 THEN HO=NI(P)*50
- IF OK(P)=4 THEN HO=NI(P)*100
- IF OK(P)=1 AND ET(P)<PV(P) THEN HO=NI(P)*25
- IF HO=0 THEN PLOT 7,11,M$:PING:WAIT TI*8:GOTO  MenuVille 
- PRINT @5,11;"HONORAIRES: ";HO;" ca"
- PLOT 5,13,"JE VOUS SOIGNE (O/N) ?"
-MestreChoixOuiNon
+ S$="CURING WHICH HERO ? ":GOSUB ville_17 :PRINT@9,3;S$
+ville_33
+ GETP$:P=VAL(P$):IFP<1ORP>6THENPING:GOTO ville_33 
+ ENC=2:S$="THE MESTER LUWIN":L=16:CLS:GOSUB ville_4 
+ PRINT@5,5;"Welcome ";N$(P)"
+ PRINT@5,7;"Your condition is: ";OK$(OK(P))
+ S$="State:"+STR$(ET(P))+" /"+STR$(PV(P)):PLOT 5,9,S$
+ IFOK(P)=1AND ET(P)=PV(P)THEN M$="You're fine !":HO=0
+ IFOK(P)=2OROK(P)=3THENHO=NI(P)*50
+ IFOK(P)=4THENHO=NI(P)*100
+ IFOK(P)=1ANDET(P)<PV(P)THENHO=NI(P)*25
+ IFHO=0THENPLOT7,11,M$:PING:WAIT TI*8:GOTO ville_2 
+ PRINT@5,11;"FEES: ";HO;" ss"
+ PLOT5,13,"DO I CURE YOU (Y/N) ?"
+ville_35
  GETA$
- IF A$="N" THEN  MenuVille 
- IF A$="O" THEN  MestreSoin 
- GOTO  MestreChoixOuiNon 
-MestreSoin
- IF HO > RI(P) THEN S$="Par les 7, Vous etes trop pauvre !":GOTO  MestreFin 
- RI(P)=RI(P)-HO:OK(P)=1:ET(P)=PV(P):HO=0:S$="Par les 7, Vous voila gueri !"
-MestreFin
- PING:GOSUB  AfficheSurFondCouleurVille :PRINT@4,15;S$
+ IFA$="N"THEN ville_2 
+ IFA$="Y"THEN ville_34 
+ GOTO ville_35 
+ville_34
+ IFHO>RI(P)THENS$="Seven gods, you're too poor !":GOTO ville_36 
+ RI(P)=RI(P)-HO:OK(P)=1:ET(P)=PV(P):HO=0:S$="Thanks Gods, You're healed!"
+ville_36
+ PING:GOSUB ville_17 :PRINT@4,15;S$
  WAIT25*TI
- GOTO  MenuVille 
-AfficheEquipeDetails
+ GOTO  ville_2 
+ville_9
  REM EQUIPE
- CLS:PRINT@8,1;CHR$(145)CHR$(128)" * TYRANN 3 - EQUIPE *  "CHR$(144)
- L=3:PRINT@3,L;CHR$(145)CHR$(128)"PERSONNAGES MAISON   CARRIERE NIV "CHR$(144)
- PRINT@3,L+1;CHR$(148)CHR$(128)" Argent     CC CT Fo Ag In FM PV  "CHR$(144):L=5:TE=0
+ CLS:PRINT@8,1;CHR$(145)CHR$(128)" * TYRANN 3 - TEAM *  "CHR$(144)
+ L=3:PRINT@3,L;CHR$(145)CHR$(128)"CHARACTER   HOUSE    CAREER   LVL "CHR$(144)
+ PRINT@3,L+1;CHR$(148)CHR$(128)" Money      Ml Rg St Dx Ig MS HP   "CHR$(144):L=5:TE=0
  FOR I=1TO6
  IF CP(I)=1 THEN EN=131
  IF CP(I)=2 THEN EN=135
@@ -157,259 +157,262 @@ AfficheEquipeDetails
  IF CP(I)=6 THEN EN=130
  PRINT@1,L;CHR$(ENC);I;N$(I);:PRINT@17,L;M$(MP(I)):PRINT@27,L;C$(CP(I))
  PRINT@37,L;NI(I)
- PRINT@4,L+1;STR$(RI(I));" ca"
+ PRINT@4,L+1;STR$(RI(I));" ss"
  S$=STR$(CC(I))+STR$(CT(I))+STR$(FO(I))+STR$(AG(I))+STR$(IN(I))+STR$(FM(I))+STR$(ET(I))
  PRINT@16,L+1;S$:L=L+3:TE=TE+RI(I)
- NEXT I:PRINT@3,L-1;CHR$(148);CHR$(128)" Argent      CC CT Fo Ag In FM PV  "CHR$(144):WAIT300
- PRINT@3,L;CHR$(145)CHR$(128)"            < ESPACE >            "CHR$(144)
- PRINT@4,L;CHR$(128);STR$(TE);" ca"
+ NEXT I:PRINT@3,L-1;CHR$(148);CHR$(128)" Money      Ml Rg St Dx Ig MS HP  "CHR$(144):WAIT300
+ PRINT@3,L;CHR$(145)CHR$(128)"            < SPACE >            "CHR$(144)
+ PRINT@4,L;CHR$(128);STR$(TE);" ss"
  ENC=4
-AttenteToucheEspace
- GET A$:IF A$<>" " THEN  AttenteToucheEspace 
+ville_37
+ GET A$:IF A$<>" " THEN  ville_37 
  RETURN
-ExplorerMonde
- EN=3:S$="EXPLORER WESTEROS":L=18:CLS:GOSUB  AfficheCadre :L=3:EN=128
+ville_12
+ EN=3:S$="EXPLORE WESTEROS":L=18:CLS:GOSUB  ville_4 :L=3:EN=128
  FORI=TLTO1STEP-1
  L=L+1:EN=128+EE(I)
  PRINT@3,L;CHR$(EN);
  SS$=". ":IF I=VILTHENSS$="->"
  PRINT@5,L;I;SS$;CR$(I);"..........."
- S$=M$(I):IF I=1THENS$="LE TRONE"
+ S$=M$(I):IF I=1THENS$=" THRONE"
  S$=S$++CHR$(128+EE(VI))
  PRINT@27,L;S$
  NEXTI
- S$="OU VOULEZ VOUS ALLER ?":GOSUB  AfficheSurFondCouleurVille :PRINT@7,L+3;S$
-LectureNumeroVille
+ S$="WHERE DO YOU WANT TO GO ?":GOSUB  ville_17 :PRINT@7,L+3;S$
+ville_38
  GETP$:CR=VAL(P$)
- IFCR=VIORP$=" "ORCR>TLORCR<1THEN MenuVille 
- S$=" OK !! EN ROUTE POUR:  ":GOSUB  AfficheSurFondCouleurVille :PRINT@7,L+3;S$
- L=L+5:S$=CR$(CR):GOSUB  AfficheAuCentre 
- IFCR<1ORCR>TLTHEN PING:GOTO LectureNumeroVille 
+ IFCR=VIORP$=" "ORCR>TLORCR<1THEN ville_2 
+ S$=" OK !! LET'S GO:  ":GOSUB  ville_17 :PRINT@7,L+3;S$
+ L=L+5:S$=CR$(CR):GOSUB  ville_27 
+ IFCR<1ORCR>TLTHEN PING:GOTO ville_38 
  FOR M=2TO5:TC(VIL,M)=0:NEXT M ' reinit combats mais pas coffres
- VI=CR:GOSUB SaveTeam :GOTO MenuVille 
-AfficheFondBleu
+ VI=CR:GOSUB ville_3 :GOTO ville_2 
+ville_19
  REM FOND BLEU
  S$=" "+CHR$(148)+CHR$(128)+S$+CHR$(134)+CHR$(144)+" "
  RETURN
-AfficheSurFondCouleurVille
- REM FOND couleur ville
+ville_17
+ REM FOND ROUGE
  S$=" "+CHR$(145)+CHR$(135)+S$+CHR$(128+EE(VIL))+CHR$(144)
  RETURN
  REM DONNER Ag
-DonnerArgent
- L=18:CLS:S$=N$(P)+" DONNE":GOSUB  AfficheCadre 
- FORI=1TO6:PRINT @4,3+I;I;N$(I):PRINT @18,3+I;RI(I);" ca":NEXT
- PRINT @4,11;"Votre Bourse:";RI(P)"Cerfs Ag"
- PRINT@12,18;"0 pour Quitter"
- S$="COMBIEN de C.Ag ":GOSUB  AfficheSurFondCouleurVille :PRINT @3,14;S$;
- GOSUB  LectureNombre :DO=CH:IF DO> RI(P) THEN PING:GOTO  DonnerArgent 
- IF DO=0 THEN  DonnerArgentFin 
- S$="ENRICHIR QUEL HEROS ?  0:Aucun":GOSUB AfficheSurFondCouleurVille :PRINT@3,16;S$
-DonnerArgentChoixPerso
- GET A$:A=VAL(A$):IF A>6 THEN PING:GOTO  DonnerArgentChoixPerso 
- IF A=0 THEN  DonnerFin 
- RI(A)=RI(A)+DO:RI(P)=RI(P)-DO:PING:GOTO  DonnerArgent 
-DonnerArgentFin
- RETURN
-DonnerObjet
- S$="Quel Objet ? 0:aucun ":GOSUB AfficheFondBleu :PRINT@13,24;S$
-DonnerChoixObjet
- GETA$:O=VAL(A$):IF O>OP(P)THENPING:GOTO DonnerChoixObjet 
- IFO=0THEN DonnerFin 
- IT=SA(P,O):IF(IT>21ANDIT<27)OR(IT>33ANDIT<44)THENL=24:GOSUB AfficheImpossible :GOTO DonnerObjet 
- L=14:CLS:S$=N$(P)+" DONNE":GOSUB AfficheCadre 
- S$=IT$(SA(P,O)):GOSUB  AfficheFondBleu :PRINT@8,3;S$
- FORI=1TO6:PRINT @12,4+I;I;N$(I):NEXT
-DonnerObjetQuelHeros
- PING:PRINT@14,12;" A QUEL HEROS ?  ";
-DonnerObjetAQui
- GET A$:A=VAL(A$):IF A<1 OR A>6 OR A=P THEN PING:GOTO  DonnerObjetAQui 
- IFSA(A,6)>0THENL=12:GOSUB AfficheImpossible :GOTO  DonnerObjetQuelHeros 
- I=0
+ville_24
+ L=18:CLS:S$=N$(P)+" GIVE":GOSUB ville_4 
+ FORI=1TO6:PRINT@4,3+I;I;N$(I):PRINT@18,3+I;RI(I);" ss":NEXT
+ PRINT@4,11;"Your money:";RI(P)"Silver Stags"
+ PRINT@12,18;"0 to Quit"
+ S$="How much ?  ":GOSUB ville_17 :PRINT@3,14;S$;
+ GOSUB ville_39 :DO=CH:IFDO> RI(P)THEN PING:GOTO ville_24 
+ IFDO=0THEN ville_40 
+ S$="To Whom ?  0:None":GOSUB ville_17 :PRINT@3,16;S$
+ville_41
+ GETA$:A=VAL(A$):IFA>6 THENPING:GOTO  ville_41 
+ IFA=0THEN ville_42 
+ RI(A)=RI(A)+DO:RI(P)=RI(P)-DO:PING:GOTO ville_24 
+ville_40
+ IFX<>2THENRETURN
+ville_42
+ IF MENU=1 THEN  ville_2  ELSE RETURN
+ville_25
+ S$="Which Item ? 0:None ":GOSUB ville_19 :PRINT@13,24;S$
+ville_43
+ GETA$:O=VAL(A$):IF O>OP(P)THENPING:GOTO ville_43 
+ IFO=0THEN ville_44 
+ IT=SA(P,O)
+ L=16:CLS:S$=N$(P)+" GIVE":GOSUB ville_4 
+ S$=IT$(SA(P,O)):GOSUB  ville_19 :PRINT@8,3;S$
+ FORI=1TO6:PRINT @8,4+I;I;N$(I):PRINT @22,4+I;C$(CP(I)):NEXT
+ville_45
+ PING:PRINT@14,12;" TO WHOM ? ":PRINT@14,14;" 0 : Nobody "
+ GET A$:A=VAL(A$):IF A>6 OR A=P THEN  ville_45 
+ IFA=0THEN ZAP:GOTO  ville_44 
+ IF IT=20 OR IT=21 OR (IT>26ANDIT<34) THEN  ville_46 
+ IFSA(A,6)>0 OR ((IT>21ANDIT<27)ANDCP(A)<4)THEN ville_47 
+ IF(IT=34ANDCP(A)<>3)OR(IT=35ANDCP(A)<5)OR(IT=36ANDCP(A)<>6)THEN ville_47 
+ IFIT>37ANDIT<44 THEN IFBT(A)>0THEN ville_47 ELSE BT(A)=IT:GOTO ville_48 
+ GOTO  ville_46 
+ville_47
+ L=12:GOSUB ville_49 :GOTO ville_45 
+ville_46
+ CLS:PING:PRINT@22,10;"OK !":WAIT100:I=0
  REPEAT:I=I+1
  UNTILSA(A,I)=0
- SA(A,I)=SA(P,O):SA(P,O)=0
- OO=O:GOSUB SupprimerObjetDuSac 
-DonnerFin
- IF MENU=1THEN MenuVille 
- RETURN
-AfficheImpossible
+ SA(A,I)=SA(P,O)
+ville_48
+ SA(P,O)=0:OO=O:GOSUB  ville_50 
+ IFIT=35THENBS=1
+ IFIT=36THENSD=1
+ville_44
+ IF MENU=1THEN ville_2 ELSERETURN
+ville_49
  ZAP:PRINT @14,L;"  !IMPOSSIBLE!  ":WAIT150:RETURN
-MenuShops
- REM SHOPS
-MarcheMenuPrincipal
- S$=" GRAND MARCHE ":MENU=0:N=6:ENC=EE(VIL):GOSUB AfficheCadreMarche 
- PLOT10,10,"Qui veut marchander ?"
- PLOT8,18,"D > Donner de l'argent"
- PLOT8,22,"Q > Quitter les commerces"
-MarcheChoixDonneArgent
+ville_7
+ S$=" GREAT MARKET ":MENU=0:N=6:ENC=EE(VIL):GOSUB ville_51 
+ AL$="ALREADY GOT ONE !"
+ PLOT10,12,"Who wants to trade  ?"
+ PLOT12,16,"G > Give money"
+ PLOT12,18,"L > Leave shops"
+ville_53
  GETP$:P=VAL(P$)
- IFP$="Q"THEN GOSUB SaveTeam :GOTO MenuVille 
- IFP$="D"THEN GOSUB MarcheQuiDonneArgent 
- IFP<1ORP>6OROK(P)>2THENZAP:GOTO MarcheChoixDonneArgent 
-MarcheChoixBoutiqueLoop
- S$=" QUELLE ECHOPPE ?":N=NS:GOSUB AfficheCadreMarche :GOSUB MarcheMenuVendreInventaire 
- PRINT@9,8;" 0 > Changer de Client "
-MarcheChoixBoutique
- GETA$:SH=VAL(A$):IFSH>NSTHEN MarcheChoixBoutique 
- IFA$="C"THEN RI(P)=RI(P)+10000:GOTO MarcheChoixBoutiqueLoop 
- IFA$="V"THENGOSUB MarcheChoixVendre :GOTO MarcheChoixBoutiqueLoop 
- IFSH=0THEN MarcheMenuPrincipal 
-MarChoixObjets
+ IFP$="L"THEN M$="":O$="":S$="":GOSUB ville_3 :GOTO ville_2 
+ IFP$="G"THEN GOSUB  ville_52 
+ IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53 
+ville_56
+ S$=" WHICH SHOP ?":N=NS:ENC=EE(VIL):GOSUB ville_51 :GOSUB ville_54 
+ PRINT@9,8;" 0 > Change customer ":FR=FRE(0)
+ville_55
+ GETA$:SH=VAL(A$):IFSH>NSTHEN ville_55 
+ IFA$="C"THEN RI(P)=RI(P)+10000:GOTO ville_56 
+ IFA$="S"THENGOSUB ville_57 :GOTO ville_56 
+ IFSH=0THEN ville_7 
+ville_83
  REM CHOIX
- S$=SH$(SH):N=N(SH):EN=CO(SH):GOSUB  AfficheCadreMarche 
+ S$=SH$(SH):N=N(SH):EN=CO(SH):GOSUB  ville_51 
  M$=" IMPOSSIBLE !":FD=145
- S$=CHR$(FD)+N$(P)+" "+C$(CP(P))+" "+STR$(RI(P))+" ca "+CHR$(144)
- L=2:GOSUB AfficheAuCentre 
- PRINT@6,3;" Que desirez vous acheter ";:GOSUB LectureNombre 
- IFCH>NTHEN AfficheMessageErreur 
- IFCH=0THEN MarcheChoixBoutiqueLoop 
+ S$=CHR$(FD)+N$(P)+" "+C$(CP(P))+" "+STR$(RI(P))+" ss "+CHR$(144)
+ L=2:GOSUB ville_27 
+ PRINT@6,3;" Your choice ";:GOSUB ville_39 
+ IFCH>NTHEN ville_58 
+ IFCH=0THEN ville_56 
  IFSH=1THENSS=0
  IFSH=2THENSS=N(1)
  IFSH=3THENSS=N(1)+N(2)
  IFSH=4THENSS=N(1)+N(2)+N(3)
- IFPR%(CH+SS)>RI(P)THENM$=" TROP CHER ! ":GOTO AfficheMessageErreur 
- IFOB(P,6)<>0THENM$=" PLEIN! ":GOTO AfficheMessageErreur 
+ IFPR%(CH+SS)>RI(P)THENM$=" TOO EXPENSIVE! ":GOTO ville_58 
+ IFOB(P,6)<>0THENM$=" BAG IS FULL! ":GOTO ville_58 
  REM ARMES
- IFSH>1THEN MarcheHerboristeVerification 
- IFCH>7THEN MarcheAchatArme 
- IFPT(P)>0THEN M$="DEJA UNE ARMURE: "+IT$(PT(P)):GOTO AfficheMessageErreur 
- IFCH>3THEN MarcheChoixSupTrois 
- IFCP(P)>2THEN MarcheImpossibleClassePerso 
- GOTO MarcheOkClassePerso 
-MarcheChoixSupTrois
- IFCH>6THEN MarcheChoixSupSix 
- IFCP(P)>4THEN MarcheImpossibleClassePerso 
- GOTO MarcheOkClassePerso 
-MarcheChoixSupSix
- IFCP(P)<5THEN MarcheImpossibleClassePerso 
-MarcheOkClassePerso
+ IFSH>1THEN ville_59 
+ IFCH>7THEN ville_60 
+ IFPT(P)>0THEN M$=AL$:GOTO ville_58 
+ IFCH>3THEN ville_61 
+ IFCP(P)>2THEN ville_62 
+ GOTO ville_63 
+ville_61
+ IFCH>6THEN ville_64 
+ IFCP(P)>4THEN ville_62 
+ GOTO ville_63 
+ville_64
+ IFCP(P)<5THEN ville_62 
+ville_63
  PT(P)=CH:CA(P)=8-CH
- M$="  OK POUR: "+ IT$(PT(P))+" ":GOTO MarcheChoixValide 
-MarcheAchatArme
- REM Achat
- IFWR(P)>0ANDWL(P)>0THEN M$="DEJA 2 ARMES: ":GOTO AfficheMessageErreur 
- IFCH>12THEN MarcheChoixEpees 
- IFCP(P)>2THEN MarcheImpossibleClassePerso 
- GOTO MarcheChoixAfficheOk 
-MarcheChoixEpees
- REM 13 et 14
- IFCH>14THEN MarcheChoixArmeTir 
- IFCP(P)>4THEN  MarcheImpossibleClassePerso 
- GOTO MarcheChoixAfficheOk 
- REM TIR
-MarcheChoixArmeTir
- IFCH>17THEN MarcheChoixArmeFilet 
- IFCP(P)<3THEN MarcheImpossibleClassePerso 
- IFCH=17AND(CP(P)<3ORCP(P)>3)THEN MarcheImpossibleClassePerso 
- GOTO MarcheChoixAfficheOk 
-MarcheChoixArmeFilet
- REM NET
- IFCH>18THEN MarcheChoixAfficheOk 
- IFCP(P)<>3THEN MarcheImpossibleClassePerso 
- IFFI=1THEN M$="VOUS AVEZ DEJA UN FILET":GOTO AfficheMessageErreur ELSEFI=1
- REM VALID
-MarcheChoixAfficheOk
- M$="  OK POUR: "+IT$(CH)+" "
+ M$=IT$(PT(P)):GOTO ville_65 
+ville_60
+ IFWR(P)>0ANDWL(P)>0THEN M$=AL$:GOTO ville_58 
+ IFCH>12THEN ville_66 
+ IFCP(P)>2THEN ville_62 
+ GOTO ville_67 
+ville_66
+ IFCH>14THEN ville_68 
+ IFCP(P)>4THEN  ville_62 
+ GOTO ville_67 
+ville_68
+ IFCH>17THEN ville_69 
+ IFCP(P)<3THEN ville_62 
+ IFCH=17AND(CP(P)<3ORCP(P)>3)THEN ville_62 
+ GOTO ville_67 
+ville_69
+ IFCH>18THEN ville_67 
+ IFCP(P)<>3THEN ville_62 
+ IFFI=1THEN M$=AL$:GOTO ville_58 ELSEFI=1
+ville_67
+ M$=IT$(CH)
  IFWR(P)=0THENWR(P)=CHELSEWL(P)=CH
- GOTO MarcheChoixValide 
-MarcheHerboristeVerification
- REM HERBO
- IFSH>2THEN MarcheBazar 
- IFCP(P)=5ORCP(P)=6THEN MarcheHerboOk 
- IFCH>2ANDCP(P)<4THEN MarcheImpossibleClassePerso 
- IFCP(P)=4ANDCH>7THEN MarcheImpossibleClassePerso 
-MarcheHerboOk
- M$="  OK POUR: "+IT$(CH+SS)+" ":GOSUB MarcheCherchePlaceSac 
- GOTO MarcheChoixValide 
-MarcheBazar
- REM BAZAR
- IFSH=4THEN MarcheAnimaux 
- IFCH=9ANDCP(P)<5THEN MarcheImpossibleClassePerso 
- IFCH=9THENIFBS=1THENM$="VOUS AVEZ DEJA UNE BOUSSOLE":GOTO AfficheMessageErreur ELSEBS=1
- IF CH=10ANDCP(P)=6 THEN IF SD=1THEN M$="VOUS AVEZ DEJA UNE SELLE":GOTO AfficheMessageErreur  ELSE SD=P
- IF CH=10ANDCP(P)<>6 THEN  MarcheImpossibleClassePerso 
- M$="  OK POUR: "+IT$(CH+SS)+" ":GOSUB MarcheCherchePlaceSac 
- GOTO MarcheChoixValide 
-MarcheAnimaux
+ GOTO ville_65 
+ville_59
+ IFSH>2THEN ville_70 
+ IFCP(P)=5ORCP(P)=6THEN ville_71 
+ IFCH>2ANDCP(P)<4THEN ville_62 
+ IFCP(P)=4ANDCH>7THEN ville_62 
+ville_71
+ M$=IT$(CH+SS):GOSUB ville_72 
+ GOTO ville_65 
+ville_70
+ IFSH=4THEN ville_73 
+ IFCH=9ANDCP(P)<5THEN ville_62 
+ IFCH=9THENIFBS=1THENM$=AL$:GOTO ville_58 ELSEBS=1
+ IFCH=10ANDCP(P)=6THENIFSD=1THEN M$=AL$:GOTO ville_58 ELSESD=P
+ IFCH=10ANDCP(P)<>6THEN ville_62 
+ M$=IT$(CH+SS):GOSUB ville_72 
+ GOTO ville_65 
+ville_73
  REM ANIMAL
- IFCH=1ANDMP(P)<8THEN M$="Vous etes du SUD!":GOTO AfficheMessageErreur 
- IFBT(P)>0THEN M$="DEJA UN ANIMAL: "+IT$(BT(P)):GOTO AfficheMessageErreur 
- M$="  OK POUR: "+IT$(CH+SS)+" "
+ IFCH=1ANDMP(P)<8THEN M$="Not for Southerners":GOTO ville_58 
+ IFBT(P)>0THEN M$=AL$:GOTO ville_58 
+ M$=IT$(CH+SS)
  BT(P)=CH+SS
- GOTO MarcheChoixValide 
-MarcheCherchePlaceSac
+ GOTO ville_65 
+ville_72
  REM SAC
- IFSA(P,1)=0THENI=1:GOTO MarcheAjoutSac 
+ IFSA(P,1)=0THENI=1:GOTO ville_74 
  I=0:REPEAT
  I=I+1
  UNTILSA(P,I)=0ORI=6
- IFSA(P,6)>0THEN M$="PLEIN!":GOTO AfficheMessageErreur 
-MarcheAjoutSac
+ IFSA(P,6)>0THEN M$="BAG IS FULL!":GOTO ville_58 
+ville_74
  SA(P,I)=SS+CH
  RETURN
-MarcheChoixVendre
- IFWR(P)=0ANDWL(P)=0ANDPT(P)=0ANDSA(P,1)=0ANDBT(P)=0THENS$=" ! VIDE ! ":GOSUB AfficheSurFondCouleurVille :PRINT@20,17;S$:ZAP:WAIT80:RETURN
-MarcheVendreChoixObj
- PING:S$="LEQUEL ? ":GOSUB AfficheSurFondCouleurVille :PRINT@5,23;S$
-MarcheVendreChoixObjLect
- GETA$:CH=VAL(A$):IFCH>9THENZAP:GOTO MarcheVendreChoixObjLect 
+ville_57
+ IFWR(P)=0ANDWL(P)=0ANDPT(P)=0ANDSA(P,1)=0ANDBT(P)=0THENS$=" ! EMPTY ! ":GOSUB ville_17 :PRINT@20,17;S$:ZAP:WAIT80:RETURN
+ville_77
+ PING:S$="WHICH ONE ? ":GOSUB ville_17 :PRINT@5,23;S$
+ville_75
+ GETA$:CH=VAL(A$):IFCH>9THENZAP:GOTO ville_75 
  IFCH=0THENCH=10
- IFCH>6THEN MarVenChoixObjSpecif 
- IFSA(P,CH)=0THEN MarcheVendreChoixObj 
- IFSA(P,CH)=35THENBS=0:GOTO MarVenChObjBoussSelle 
- IFSA(P,CH)=36THENSD=0:GOTO MarVenChObjBoussSelle 
-MarVenChoixObjSpecif
- IF(CH=7ANDWR(P)=0)OR(CH=8ANDWL(P)=0)OR(CH=9ANDPT(P)=0)OR(CH=10ANDBT(P)=0)THEN MarcheVendreChoixObj 
-MarVenChObjBoussSelle
- IFCH<7THENPX=PR%(SA(P,CH)):GOSUB MarVenteOk :SA(P,CH)=0:OO=CH:GOSUB SupprimerObjetDuSac :GOTO MarVenteFin 
- IFCH>7THEN  MarVenteChObjAutres 
+ IFCH>6THEN ville_76 
+ IFSA(P,CH)=0THEN ville_77 
+ IFSA(P,CH)=35THENBS=0:GOTO ville_78 
+ IFSA(P,CH)=36THENSD=0:GOTO ville_78 
+ville_76
+ IF(CH=7ANDWR(P)=0)OR(CH=8ANDWL(P)=0)OR(CH=9ANDPT(P)=0)OR(CH=10ANDBT(P)=0)THEN ville_77 
+ville_78
+ IFCH<7THENPX=PR%(SA(P,CH)):GOSUB ville_79 :SA(P,CH)=0:OO=CH:GOSUB ville_50 :GOTO ville_80 
+ IFCH>7THEN  ville_81 
  IFWR(P)=18THENFI=0
- PX=PR%(WR(P)):GOSUB MarVenteOk :WR(P)=0
+ PX=PR%(WR(P)):GOSUB ville_79 :WR(P)=0
  IFWL(P)>0THEN WR(P)=WL(P):WL(P)=0
-MarVenteChObjAutres
- IFCH>8THEN MarVenteChObjSup8 
+ville_81
+ IFCH>8THEN ville_82 
  IFWL(P)=18THENFI=0
- PX=PR%(WL(P)):GOSUB MarVenteOk :WL(P)=0
-MarVenteChObjSup8
- IFCH=9THENPX=PR%(PT(P)):GOSUB MarVenteOk :PT(P)=0:CA(P)=0
- IFCH=10THENPX=PR%(BT(P)):GOSUB MarVenteOk :BT(P)=0
-MarVenteFin
+ PX=PR%(WL(P)):GOSUB ville_79 :WL(P)=0
+ville_82
+ IFCH=9THENPX=PR%(PT(P)):GOSUB ville_79 :PT(P)=0:CA(P)=0
+ IFCH=10THENPX=PR%(BT(P)):GOSUB ville_79 :BT(P)=0
+ville_80
  RETURN
-MarVenteOk
+ville_79
  REM OK
  RI(P)=RI(P)+INT(PX*2/3):ZAP:RETURN
-SupprimerObjetDuSac
+ville_50
  FORI=OOTO5
  IFSA(P,I+1)>0THENSA(P,I)=SA(P,I+1):SA(P,I+1)=0
  NEXTI
  RETURN
-MarcheChoixValide
+ville_65
  REM VALIDE
- RI(P)=RI(P)-PR%(CH+SS):FD=148:GOTO AfficheMessageErreur 
-MarcheImpossibleClassePerso
- M$="Impossible pour un "+C$(CP(P))
-AfficheMessageErreur
+ RI(P)=RI(P)-PR%(CH+SS):FD=148:GOTO ville_58 
+ville_62
+ M$="Impossible for a "+C$(CP(P))
+ville_58
  T=INT((38-LEN(M$))/2)
  PING:CLS:PRINT:PRINT@T,5;CHR$(FD);" ";M$;" ";CHR$(144)
- WAIT140:SS=0:GOTO MarChoixObjets 
-MarcheQuiDonneArgent
- PING:PLOT8,18,"Qui Donne  de l'argent ?"
-MarcheQuiDonneArgentLect
+ WAIT150:SS=0:IFSH=4ANDBT(P)>0THEN ville_56 ELSE ville_83 
+ville_52
+ PING:PLOT6,16,">> Who wants to give money ? <<"
+ville_84
  GETP$:P=VAL(P$)
- IFP<1ORP>6OROK(P)>2THENZAP:GOTO MarcheQuiDonneArgentLect 
- GOSUB DonnerArgent :GOTO MenuShops 
+ IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_84 
+ GOSUB ville_24 :GOTO ville_7 
  RETURN
-MarcheMenuVendreInventaire
+ville_54
  REM CLIENT
- S$=CHR$(135)+CHR$(145)+"INVENTAIRE: "+N$(P)+" "+CHR$(128+ENC)
+ S$=CHR$(135)+CHR$(145)+"INVENTORY: "+N$(P)+" "+CHR$(128+ENC)
  L=10:T=INT((42-LEN(S$))/2)
  PRINT@T,L;S$;CHR$(144)
  L=L+2
  FORI=1TO14:PRINT@2,I+9;"*":PRINT@39,I+9;"*":NEXTI
  PRINT@29,L;C$(CP(P))
- PRINT@28,L+1;RI(P)"ca"
- PRINT@29,L+8;"CA>";CA(P)
+ PRINT@28,L+1;RI(P)"ss"
+ PRINT@29,L+8;"AC>";CA(P)
  FORI=1TO6
  IFSA(P,I)>0THENM$=IT$(SA(P,I))ELSEM$="............"
  PRINT@4,L+I-1;I;M$
@@ -423,26 +426,26 @@ MarcheMenuVendreInventaire
  IFBT(P)>0THENM$=IT$(BT(P))ELSEM$="..........."
  PRINT@4,L;I;M$:L=L+2
  PRINT@2,L;"*************************************"
- PRINT@6,L;CHR$(135);CHR$(145);"V)endre ";CHR$(128+ENC);CHR$(144)
+ PRINT@6,L;CHR$(135);CHR$(145);" S)ell ";CHR$(128+ENC);CHR$(144)
  RETURN
-AfficheCadreMarche
+ville_51
  CLS:PRINT:INK(ENC):PRINTCHR$(17);
  POKE#26A,PEEK(#26A)AND254
  PRINT"**************************************"
  T=INT((33-LEN(S$))/2)
- S$="[ "+S$+" ] ":GOSUB AfficheSurFondCouleurVille :PRINT@T,1;S$;CHR$(128+EN)
- INK(EN):J=N+4
+ S$="[ "+S$+" ] ":GOSUB ville_17 :PRINT@T,1;S$;CHR$(128+EN)
+ INK(EN):IFN<>6THENJ=N+4ELSEJ=N+2
  FORI=1TOJ:PRINT@2,I+1;"*":PRINT@39,I+1;"*":NEXTI
  FORI=1TON:L=I+2
- IFN<>6THEN MarcheLignePasPerso 
+ IFN<>6THEN ville_85 
  T=34-LEN(STR$(RI(I)))
  IFOK(I)<3THENS$=C$(CP(I))ELSES$=OK$(OK(I))
- PRINT@4,L;I;N$(I);@18,L;S$;@T,L;RI(I);"ca":GOTO MarcheCadreFinLoop 
-MarcheLignePasPerso
- IFN<>NSTHEN MarcheCadreAffObjets 
- PRINT@12,L;I;SH$(I):GOTO MarcheCadreFinLoop 
-MarcheCadreAffObjets
+ PRINT@4,L;I;N$(I);@18,L;S$;@T,L;RI(I);"ss":GOTO ville_86 
+ville_85
+ IFN<>NSTHEN ville_87 
+ PRINT@12,L;I;SH$(I):GOTO ville_86 
  REM ITEMS
+ville_87
  IFSH=1THENO$=IT$(I):PX=PR%(I)
  IFSH=2THENO$=IT$(I+N(1)):PX=PR%(I+N(1))
  IFSH=3THENO$=IT$(I+N(1)+N(2)):PX=PR%(I+N(1)+N(2))
@@ -450,21 +453,22 @@ MarcheCadreAffObjets
  T=8-LEN(STR$(I)):PRINT@T,L+1;I"..."
  T=14-LEN(STR$(PX)):PRINT@T,L+1;PX"...."
  PRINT@17,L+1;O$
-MarcheCadreFinLoop
+ville_86
  NEXTI
- IFN<>6ANDN<>NSTHENPRINT@12,L+3;" 0 POUR SORTIR"
- PRINT@2,L+4;"**************************************"
+ IFN<>6ANDN<>NSTHENPRINT@12,L+3;" 0 to Leave"
+ T=L+4:IFN=6THENT=L+2
+ PRINT@2,T;"**************************************"
  RETURN
-AfficheCadre
+ville_4
  TEXT:PAPER0:INKEE(VI):PRINT
  PRINT" ************************************"
  FORI=1TOL:PRINT@2,I;"*":PRINT@38,I;"*":NEXTI
  T=INT((31-LEN(S$))/2)
- S$="< "+S$+" > ":GOSUB AfficheSurFondCouleurVille :PRINT@T,1;S$
+ S$="< "+S$+" > ":GOSUB ville_17 :PRINT@T,1;S$
  PRINT@2,I;"*************************************"
  RETURN
-AffichePersos
- L=19:PRINT@1,L;CHR$(145)"PERSONNAGES    CASTE       PV  ET  CA"
+ville_5
+ L=19:PRINT@1,L;CHR$(145)"CHARACTER      CAREER     HP  ST  AC "
  FORI=1TO6:L=L+1
  IFCP(I)=1THENEN=131
  IFCP(I)=2THENEN=135
@@ -479,60 +483,60 @@ AffichePersos
  NEXT
  EN=4
  RETURN
-MenuLabo
- CLS:L=20:S$=" # Labo d'Alchimie # ":EN=7:GOSUB AfficheCadre 
- S$=" MEMBRES ADMIS ":GOSUB AfficheFondBleu :PLOT10,3,S$:J=1
+ville_13
+ CLS:L=20:S$=" # Alchemist Lab # ":EN=7:GOSUB ville_4 
+ S$=" AUTHORISED PEOPLE ":GOSUB ville_19 :PLOT10,3,S$:J=1
  FORI=1TO6
- IFCP(I)<5THEN LaboFinBouclePersosOk 
+ IFCP(I)<5THEN ville_88 
  PRINT@11,4+J;J;N$(I);" ";C$(CP(I)):J=J+1
-LaboFinBouclePersosOk
+ville_88
  NEXT
- IFJ=1THEN ZAP:PRINT @11,4+J;J;" DEHORS !":WAIT300:ZAP:GOTO MenuVille 
- IFVI<>9THENPRINT@10,5+J;" > Il n'y a personne ":GOTO LaboAffIngredientsPotionNord 
- PRINT@10,5+J;J;"Sorciere du Nord"
-LaboAffIngredientsPotionNord
- IF PM=1THEN LaboPotionPrete 
- S$="Ingredients Potion du Nord"+STR$(NP):GOSUB AfficheFondBleu :PRINT@3,7+J;S$
+ IFJ=1THEN ZAP:PRINT @11,4+J;J;" GET OUT !":WAIT300:ZAP:GOTO ville_2 
+ IFVI<>9THENPRINT@10,5+J;" > There is nobody ":GOTO ville_89 
+ PRINT@10,5+J;J;"Northern Witch"
+ville_89
+ IF PM=1THEN ville_90 
+ S$="Ingredients of Potion"+STR$(NP):GOSUB ville_19 :PRINT@3,7+J;S$
  FORI=1TO6:PRINT @5,9+J+I;"-> ";IG$(I)
  IFIG(I)=1THENPLOT24,9+J+I,"> OK"
  NEXT
- L=21:GOSUB AttenteTouche 
- IFNP<6ORVI<>9ORPM=1THEN LaboFin 
+ L=21:GOSUB ville_26 
+ IFNP<6ORVI<>9ORPM=1THEN ville_91 
  FORI=1TO5:SHOOT:WAIT30:PAPER I:NEXTI:EXPLODE:PAPER0
  FORI=1TO9
  PRINT@3,9+I;CHR$(144)"                                  ":NEXT
- PM=1:S$="L'Athanor cuit la potion":GOSUB AfficheSurFondCouleurVille :L=12:GOSUB AfficheAuCentre 
+ PM=1:S$="The Athanor bakes the potion":GOSUB ville_17 :L=12:GOSUB ville_27 
  FORI=1TO25:PRINT@7+I,14;">":WAIT20:NEXT
-LaboPotionPrete
- L=12:S$="!! La potion est prete !! ":GOSUB AfficheFondBleu :GOSUB AfficheAuCentre :PING:WAIT30
- S$="Direction Castleblack ":GOSUB AfficheSurFondCouleurVille :L=16:GOSUB AfficheAuCentre :ZAP:WAIT50
- L=21:GOSUB AttenteTouche 
-LaboFin
- GOTO MenuVille 
-RechargeSorts
+ville_90
+ L=12:S$="!! the potion is ready !! ":GOSUB ville_19 :GOSUB ville_27 :PING:WAIT30
+ S$="Let's go to Castleblack ":GOSUB ville_17 :L=16:GOSUB ville_27 :ZAP:WAIT50
+ L=21:GOSUB ville_26 
+ville_91
+ GOTO ville_2 
+ville_6
  FOR P=1TO6' recharge sorts
  IFET(P)>0ANDET(P)<5THENET(P)=ET(P)+FNA(3)
- IFCP(P)<4THEN RechargeSortsFin 
+ IFCP(P)<4THEN ville_92 
  SS=NI(P):IFSS>8THENSS=8
  FORI=1TOSS
- SN(P,I)=FNA(3)+1
+ IFI<5THENSN(P,I)=FNA(3)+1
  IFI=5ORI=6THENSN(P,I)=FNA(2)+1
  IFI=7THENSN(P,I)=FNA(2)
  NEXTI
  SN(P,8)=1
-RechargeSortsFin
+ville_92
  NEXTP
  RETURN
-AttenteTouche
- S$="< ESPACE > ":GOSUB  AfficheSurFondCouleurVille :PRINT@13,L;S$:GETA$:IF A$<>" " THEN  AttenteTouche 
+ville_26
+ S$="< SPACE > ":GOSUB  ville_17 :PRINT@13,L;S$:GETA$:IF A$<>" " THEN  ville_26 
  RETURN
-AttenteToucheLect
- IF KEY$="" THEN  AttenteToucheLect 
+ville_93
+ IF KEY$="" THEN  ville_93 
  RETURN
-LectureNumeroVilleLoop
- GET A$:A=VAL(A$):IF A<1 OR A>6 THEN PING:GOTO  LectureNumeroVilleLoop 
+ville_18
+ GET A$:A=VAL(A$):IF A<1 OR A>6 THEN PING:GOTO  ville_18 
  RETURN
-ResetAll
+ville_14
  REM REINITIALISE TOUT
  FORI=1TO9
  FORJ=1TO4:CL(I,J)=0:NEXTJ'cles
@@ -542,7 +546,7 @@ ResetAll
  X=2:Y=2:S=2:VILLE=1:TL=1
  PLOT23,16,"REINIT..OK":ZAP
  RETURN
-Booste
+ville_15
  REM BOOSTE TOUT
  FORI=1TO9
  FORJ=1TO4:CL(I,J)=1:NEXTJ'cles
@@ -552,21 +556,21 @@ Booste
  X=2:Y=2:S=2:TL=9
  PLOT27,16,"BOOST..OK":ZAP
  RETURN
-LectureNombre
+ville_39
  S$ = ""
-LectureNombreLect
+ville_95
  GET CH$
- IF ASC(CH$) = 13 THEN  LectureNombreEntree 
- IF ASC(CH$) < 48 OR ASC(CH$) > 57 THEN PING:GOTO  LectureNombreLect 
+ IF ASC(CH$) = 13 THEN  ville_94 
+ IF ASC(CH$) < 48 OR ASC(CH$) > 57 THEN PING:GOTO  ville_95 
  PRINT CH$;
  S$ = S$ + CH$
- GOTO  LectureNombreLect 
-LectureNombreEntree
+ GOTO  ville_95 
+ville_94
  CH = VAL(S$)
  PRINT
  RETURN
-LoadTeam
- GOSUB AffChargementPatienter 
+ville_1
+ GOSUB ville_96 
  LOAD"TEAM.BIN"
  O1=#A000
  O1=O1+1:VIL=PEEK(O1)
@@ -588,7 +592,7 @@ LoadTeam
  O1=O1+1:AG(P)=PEEK(O1)
  O1=O1+1:IN(P)=PEEK(O1)
  O1=O1+1:FM(P)=PEEK(O1)
- O1=O1+1:PV(P)=PEEK(O1)::GOSUB BarreProgressionAvance 
+ O1=O1+1:PV(P)=PEEK(O1)::GOSUB ville_97 
  O1=O1+1:ET(P)=PEEK(O1)
  O1=O1+1:OK(P)=PEEK(O1)
  O1=O1+1:NI(P)=PEEK(O1)
@@ -600,23 +604,22 @@ LoadTeam
  O1=O1+1:BT(P)=PEEK(O1)
  FORI=1TO6:O1=O1+1:SAD(P,I)=PEEK(O1):NEXTI
  IF CP(P)>3 THEN FORI=1TO8:O1=O1+1:SN(P,I)=PEEK(O1):NEXT
- GOSUB BarreProgressionAvance :NEXT P
+ GOSUB ville_97 :NEXT P
  O1=O1+1:BS=PEEK(O1)
  O1=O1+1:FI=PEEK(O1)
- O1=O1+1:SD=PEEK(O1):GOSUB BarreProgressionAvance 
+ O1=O1+1:SD=PEEK(O1):GOSUB ville_97 
  FOR V=1TO9:FOR C=1TO4:O1=O1+1:CL(V,C)=PEEK(O1):NEXT C,V
  FOR I=1TO6:O1=O1+1:IG(I)=PEEK(O1):NEXT
  FOR V=1TO9:FORM=1TO5:O1=O1+1:TC(V,M)=PEEK(O1):NEXT M,V
- O1=O1+1:DE=PEEK(O1):GOSUB BarreProgressionAvance 
+ O1=O1+1:DE=PEEK(O1):GOSUB ville_97 
  O1=O1+1:TL=PEEK(O1):'PRINT "TL";TL:REM FR = FRE("")
  O1=O1+1:NP=PEEK(O1)
  O1=O1+1:NF=PEEK(O1)
- O1=O1+1:PM=PEEK(O1)::GOSUB BarreProgressionAvance 
- O1=O1+1:OUT=PEEK(O1)::GOSUB BarreProgressionAvance 
+ O1=O1+1:PM=PEEK(O1)::GOSUB ville_97 
  RETURN
-SaveTeam
- TEXT:CLS:PRINT@8,2;CHR$(145);CHR$(135);"++ PREPARE L EQUIPE ++ ";CHR$(144)
- O1=#A000::GOSUB AffSauvegardePatienter 
+ville_3
+ TEXT:CLS:PRINT@8,2;CHR$(145);CHR$(135);"++ PREPARING TEAM ++ ";CHR$(144)
+ O1=#A000::GOSUB ville_98 
  O1=O1+1:POKEO1,1
  O1=O1+1:POKEO1,X
  O1=O1+1:POKEO1,Y
@@ -634,7 +637,7 @@ SaveTeam
  O1=O1+1:POKEO1,FO(P)
  O1=O1+1:POKEO1,AG(P)
  O1=O1+1:POKEO1,IN(P)
- O1=O1+1:POKEO1,FM(P)::GOSUB BarreProgressionAvance 
+ O1=O1+1:POKEO1,FM(P)::GOSUB ville_97 
  O1=O1+1:POKEO1,PV(P)
  O1=O1+1:POKEO1,ET(P)
  O1=O1+1:POKEO1,OK(P)
@@ -644,38 +647,37 @@ SaveTeam
  O1=O1+1:POKEO1,WL(P)
  O1=O1+1:POKEO1,PT(P)
  O1=O1+1:POKEO1,CA(P)
- O1=O1+1:POKEO1,BT(P)::GOSUB BarreProgressionAvance 
+ O1=O1+1:POKEO1,BT(P)::GOSUB ville_97 
  FORI=1TO6:O1=O1+1:POKEO1,SAD(P,I):NEXTI
  IF CP(P)>3 THEN FORI=1TO8:O1=O1+1:POKEO1,SN(P,I):NEXT
  NEXT P
  O1=O1+1:POKEO1,BS
  O1=O1+1:POKEO1,FI
- O1=O1+1:POKEO1,SD:GOSUB BarreProgressionAvance 
+ O1=O1+1:POKEO1,SD:GOSUB ville_97 
  FOR V=1TO9:FOR C=1TO4:O1=O1+1:POKEO1,CL(V,C):NEXT C,V
  FORI=1TO6:O1=O1+1:POKEO1,IG(I):NEXT
  FOR V=1TO9:FORM=1TO5:O1=O1+1:POKEO1,TC(V,M):NEXT M,V
  O1=O1+1:POKEO1,DE
  O1=O1+1:POKEO1,TL:REM PRINT "TL";TL
- O1=O1+1:POKEO1,NP:GOSUB BarreProgressionAvance 
+ O1=O1+1:POKEO1,NP:GOSUB ville_97 
  O1=O1+1:POKEO1,NF
- O1=O1+1:POKEO1,PM::
- O1=O1+1:POKEO1,OUT::GOSUB BarreProgressionAvance 
+ O1=O1+1:POKEO1,PM::GOSUB ville_97 
  PING:SAVEU "TEAM.BIN",A#A000,EO1:REM FR = FRE("")
  REM SAVEU "TEAM2.BIN",A#A000,EO1
  RETURN
-AffChargementPatienter
- CLS:PRINT@7,8;".. Chargement * Patientez .."
- S$=CHR$(148)+" "+CHR$(144):CU=1:GOTO BarreProgressionAvance 
-AffSauvegardePatienter
- PRINT@7,8;"++ Sauvegarde + Patientez ++"
+ville_96
+ CLS:PRINT@7,8;".. Loading * Please Wait .."
+ S$=CHR$(148)+" "+CHR$(144):CU=1:GOTO ville_97 
+ville_98
+ PRINT@7,8;"++ Saving + Please Wait ++"
  S$=CHR$(145)+" "+CHR$(144):CU=1
-BarreProgressionAvance
+ville_97
  CU=CU+2:PRINT@CU,9;S$:REM FR = FRE("")
  RETURN
-LoadDataTexts
+ville_0
  TI=20:HV=6:DF=0
  DIM IT$(55),PR%(55),IP$(10,2),TP$(2,15)
- GOSUB  ChargeItems 
+ GOSUB  ville_99 
  FOR I=1TO4:READ TX$(I):NEXT I
  FOR I=1TO4:READ OK$(I):NEXTI
  FOR I=1TO9:FOR J=1TO4:READ PS$(I,J):NEXT J,I:READ PS$(9,5):READ PS$(9,6)
@@ -688,17 +690,17 @@ LoadDataTexts
  REM FR = FRE("")
  RETURN
  REM Lecture TITEMS
-ChargeItems
+ville_99
  LOAD "TITEMS.BIN"
  O1=#A000
  LI=PEEK(O1)
  FOR I=1 TO LI
  O1=O1+1:LG=PEEK(O1)
  S$=""
- IF LG=0 THEN  ChargeItemsFinLoop 
+ IF LG=0 THEN  ville_100 
  FOR J=1 TO LG
  O1=O1+1:S$=S$+CHR$(PEEK(O1))
-ChargeItemsFinLoop
+ville_100
  NEXT
  ITEM$(I)=S$
  NEXT
@@ -710,25 +712,23 @@ ChargeItemsFinLoop
  O1=O1+1:PR%(I)=DEEK(O1):O1=O1+1
  NEXT
  RETURN
- DATA "Ouille!","Le mur n'a rien senti","Tu as bu ?","Ou est la clef ?"
- DATA "OK","-Empoi- ","-Paral- ",">MORT< "
- DATA "King Robert","Queen Cersei","PRISON","Conseil"
- DATA "Prince Oberyn","Laboratory","PRISON","CELLIER"
- DATA "Lord Stannis","Melisandre","PRISON","VIVARIUM"
- DATA "Sir Loras","Lady MAERGERY","PRISON","COFFRES"
- DATA "Asha Greyjoy","Theon Greyjoy","PRISON","CELLIER"
+ DATA "Ouch!","Wall seems in good condition","Are you drunk ?","Where is the key ?"
+ DATA "OK","-Poison- ","-Paral- ",">DEAD< "
+ DATA "King Robert","Queen Cersei","JAIL","Council"
+ DATA "Prince Oberyn","Laboratory","JAIL","CELLAR"
+ DATA "Lord Stannis","Melisandre","JAIL","SOLAR"
+ DATA "Sir Loras","Lady MAERGERY","JAIL","COFFERS"
+ DATA "Asha Greyjoy","Theon Greyjoy","JAIL","CELLAR"
  DATA "Petyr","Lady Sansa","SKY CELL","MOON DOOR"
- DATA "Lord Tyrion","Lord Tywin","PRISON","CHAPELLE"
- DATA "Lord Brynden","PORCHERIE","PRISON","Cuisines"
- DATA "Lord Starck","Master Luwin","RANGER","CASTLEBLACK","- SUD -","- NORD -"
- DATA Chevalier,Mercenaire,Ranger,Sorcier,Mestre,Septon
- DATA "Aucune","KING'S LANDING",1, MARTELL,DORNE,5, BARATHEON
- DATA "STORM'S END",3, TYRELL,HIGHGARDEN,2
- DATA GREYJOY,PIKE,5, ARRYN,EYRIE,6, LANNISTER,CASTERLY ROC,1
+ DATA "Lord Tyrion","Lord Tywin","JAIL","CHAPEL"
+ DATA "Lord Brynden","PIGPEN","JAIL","Kitchens"
+ DATA "Lord Starck","Master Luwin","RANGER","CASTLEBLACK","-SOUTH-","- NORTH -"
+ DATA Knight,Mercenary,Ranger,Wizard,Maester,Septon
+ DATA None,"KING'S LANDING",1, MARTELL,DORNE,5, BARATHEON,"STORM'S END",3, TYRELL,HIGHGARDEN,2
+ DATA GREYJOY,PIKE,5, ARRYN,EYRIE,6, LANNISTER,CASTERLY ROCK,1
  DATA TULLY,RIVERRUN,4, STARK,WINTERFELL,7
- DATA ARMURERIE,19,7, HERBORISTERIE,7,2, BAZAR,10,3, ANIMALERIE,7,5
- DATA "sangsue royale","fleur de Lys","encre de poulpe"
- DATA "rose du Val","huile du Roc","foie de truite"
- DATA SOMMEIL, FEU, PIERRE, VENIN, SANG,  FOUDRE, LAVE, SEISME
- DATA EAU, SERUM, MUSCLE, BOUCLIER, ELIXIR, ECRAN, VIE, MORT
- DATA EPEE-FEU, FORCE, CHARME, VISION, GLACE, ILLUSION, VENT, DRAGON
+ DATA ARMORY,19,7, BOTANICS,7,2, BAZAAR,10,3, ANIMALS,7,5
+ DATA "royal leech","lily flower","kraken ink","rose of the Vale","oil of the Rock","trout liver"
+ DATA SLEEP, FIRE, STONE, VENOM, BLOOD,  LIGHTNING, LAVA, EARTHQUAKE
+ DATA WATER, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, DEATH
+ DATA FIRE-SWORD, STRENGTH, CHARM, VISION, FREEZE, ILLUSION, WIND, DRAGON
