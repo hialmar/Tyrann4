@@ -3,7 +3,7 @@
  POKE 48035,0
  PAPER0:INK6:POKE#26A,PEEK(#26A) AND 254
  A=DEEK(#308):R= RND(-A)
- GRAB : HIMEM 40959 : GOSUB  combat_0 : GOSUB  combat_1  : POKE 48035,0
+ GRAB : HIMEM 40959 : GOSUB  combat_load : GOSUB  combat_load_items  : POKE 48035,0
  NO=CA-30 ' numero du combat
  IF NO<13 THEN NC=1:GOTO  combat_2  ' niveau du combat
  IF NO<18 THEN NC=2:GOTO  combat_2 
@@ -11,7 +11,7 @@
 combat_2
  CLS:PAPER0:INK6:POKE#26A,PEEK(#26A) AND 254
  PLOT 8,6,"! MONSTERS ATTACK !":PING
- GOSUB  combat_3 
+ GOSUB  combat_read_data 
  GOTO  combat_4 
 combat_128
  PAPER0:INK ENC:PRINT
@@ -43,9 +43,9 @@ combat_131
  FOR J=1TO11
  PRINT @3,10+J;"                                   ":NEXTJ
  RETURN
-combat_9
+combat_chg_time
  GOSUB  combat_8 :PRINT @9,12;"Time (1-3) Now:";TI/5;:INPUT TI
- IF TI<1 OR TI>3 THEN PING:GOTO  combat_9 
+ IF TI<1 OR TI>3 THEN PING:GOTO  combat_chg_time 
  TI=5*TI
  RETURN
 combat_4
@@ -98,7 +98,7 @@ combat_17
  GETR$:IF R$="" THEN  combat_17 
  IF R$="Y" OR R$="y" THEN  combat_18 
  IF R$="N" OR R$="n" THEN  combat_19 
- IF R$="T" OR R$="t" THEN GOSUB  combat_9 :GOTO  combat_20 
+ IF R$="T" OR R$="t" THEN GOSUB  combat_chg_time :GOTO  combat_20 
  PING:GOTO  combat_17 
 combat_19
  REM tour
@@ -257,7 +257,7 @@ combat_58
  CLS:PRINT@13,8;CHR$(145)" YOU FLEE !!"CHR$(144)
  PRINT@13,10;"BACK TO MAZE":PRINT:NF=NF+20
  FORJ=1TO5:ZAP:WAIT5:NEXT:SHOOT:WAIT5
- GOSUB  combat_61  : FR=FRE("") : RELEASE : LOAD("LABY")
+ GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
 combat_60
  PRINT@15,12;CHR$(131)"  FAIL  ":SHOOT:WAITTI*4
 combat_59
@@ -609,7 +609,7 @@ combat_130
  L=21:GOSUB  combat_5 
  PING
  CA=0
- GOSUB  combat_61  : FR=FRE("") : RELEASE : LOAD("LABY")
+ GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
 combat_132
  REM PROMOTION NEW
  NI(P)=NI(P)+1:XP(P)=0:FORJ=1TO5:PING:WAIT2*J:NEXT
@@ -984,7 +984,7 @@ combat_193
  GOSUB  combat_11 ' affichage monstres
  RETURN
  REM Lecture TITEMS.BIN
-combat_1
+combat_load_items
  CLS:PRINT @ 8,12;CHR$(145);CHR$(135);"++ PLEASE WAIT ++ ";CHR$(144):
  DIM ITEM$(55), CM(23,5)
  LOAD "TITEMS.BIN"
@@ -1013,7 +1013,7 @@ combat_196
  NEXTJ
  NEXTI
  RETURN
-combat_0
+combat_load
  GOSUB combat_197  ' chargement
  REM LOAD"TEAM.BIN"
  O1=#A000
@@ -1062,7 +1062,7 @@ combat_0
  O1=O1+1:PM=PEEK(O1):GOSUB combat_198 
  REM IF KEY$<> " " THEN 48297
  RETURN
-combat_61
+combat_save
  CLS:PRINT @ 8,12;CHR$(148);CHR$(131);"++ BACK TO MAZE ++ ";CHR$(144)
  O1=#A000:GOSUB combat_199 
  O1=O1+1:POKEO1,1
@@ -1119,7 +1119,7 @@ combat_199
 combat_198
  CU=CU+2:PRINT@CU,9;S$
  RETURN
-combat_3
+combat_read_data
  REM TABLEAUX
  TIME=10:DFF=0:ENC=6:GU$=CHR$(34)
  FOR I=1TO4:READ OK$(I):NEXTI
