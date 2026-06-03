@@ -1,4 +1,5 @@
 #labels
+#optimize
  REM {++ ORIC 2014 + TYRANN 3 VO MAXIMUS +}
  POKE 48035,0
  PAPER0:INK6:POKE#26A,PEEK(#26A) AND 254
@@ -166,7 +167,7 @@ FinBoucleCombat
  GOSUB  AfficheEquipe 
 RecommencerOuRetraite
  GETA$:IF A$<"1" OR A$>"2" THEN  RecommencerOuRetraite 
- IF A$="1" THEN RELEASE : GOTO  RetourProgAppelant 
+ IF A$="1" THEN GOTO  RetourProgAppelant
  CLS:PRINT@15,5;"Pleutre !":ZAP
  PRINT@5,8;"Memoire restante:";:PRINT FRE(""):PING:RELEASE:END
  REM |SOUS PROGS COMBAT
