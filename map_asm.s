@@ -76,6 +76,7 @@ depl_perso_est_interdit .dsb 1
 
 _main
 .(
+	jsr SaveZeroPage
 	lda #4					; début de répétition touche après 4*30 = 120 ms
 	sta $24E
 	lda #1					; répétition d'une touche toutes les 30 ms
@@ -123,11 +124,52 @@ sortie_main
 	lda #4
 	sta $24F
 	jsr $ec21               ; back to text mode
-	rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
+
+	jsr _get
+	jsr RestoreZeroPage
+	; test bascule combat
+	ldy #$0         ; grab string pointer
+	lda #<ProgCombat
+	sta (sp),y
+	iny
+	lda #>ProgCombat
+	sta (sp),y
+	dey
+	jsr _SwitchToCommand
+
+	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
-.)	
-	
-	
+.)
+
+ProgCombat
+	.asc "COMBAT.COM"
+	.byt 0
+
+ZeroPageCopy
+	.dsb $ff
+
+SaveZeroPage
+.(
+    ldy #0
+loop
+    lda $00,y
+    sta ZeroPageCopy,y
+    iny
+    bne loop
+	rts
+.)
+
+RestoreZeroPage
+.(
+    ldy #0
+loop
+    lda ZeroPageCopy,y
+	sta $00,y
+    iny
+    bne loop
+	rts
+.)
+
 ;-------------------------
 ;--- affiche hero   ------
 ;-------------------------
