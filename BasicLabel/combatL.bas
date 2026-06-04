@@ -1015,7 +1015,7 @@ combat_196
  RETURN
 combat_load
  GOSUB combat_197  ' chargement
- REM LOAD"TEAM.BIN"
+ LOAD"TEAM.BIN"
  O1=#A000
  O1=O1+1:VIL=PEEK(O1)
  REM PRINT"version " VIL
