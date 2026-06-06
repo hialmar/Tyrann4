@@ -1,4 +1,5 @@
 #labels
+#optimize
  REM {++ ORIC 2014 + TYRANN 3 VO MAXIMUS +}
  POKE 48035,0
  PAPER0:INK6:POKE#26A,PEEK(#26A) AND 254
@@ -430,7 +431,7 @@ combat_95
  RETURN
 combat_31
  REM EFFET ARME
- IF C6OK(TG(AO(P)))>4 OR VE(AO(P))> 80 THEN RT=1
+ IF C6OK(TG(AO(P)))>4 OR VE(AO(P))> 10 THEN RT=1
  IF RT=0 THEN PING:PRINT@15,14;" and fails ! ":GOTO  combat_96 
  SS=VIL+FNA(5)+BF(AO(P))
  IF EF(AO(P))>0 THEN SS=SS+((1+FNA(2))*(BF(AO(P))))
@@ -1137,17 +1138,16 @@ combat_read_data
  FORI=1TO5:READ SM$(I):NEXT
  RESTORE:RETURN
  DATA "OK","-Poison-","-Paral- ",">DEAD< "
- DATA Knight,Mercenary,Ranger,Wizard,Maester,Septon
- DATA None,MARTELL,BARATHEON,TYRELL
- DATA GREYJOY,ARRYN,LANNISTER,TULLY,STARK
+ DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
+ DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Greek, Mesopotamian
  DATA 7,6,5,5,4,4,3,3,2,2,1,1
  DATA 75,8, 70,6, 50,5, 80,4, 95,3, 55,2
- DATA 23,Mutant rat, Wolf-dog, Jackal, Goblin, Cut-throat, Beggar, Prowler, Swordsman
- DATA Ogre, Dothrakhi, Giant, Wildling, Lion, Bear
- DATA Fire Warlock, Dark Priestess, Mad Monk
- DATA Demon-Druid, Black Spirit, White Septon
- DATA Grey Elf, Damned Knight, White Walker
- DATA SLEEP, FIRE, STONE, VENOM, BLOOD,  LIGHTNING, LAVA, EARTHQUAKE
- DATA WATER, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, DEATH
- DATA FIRESWORD, STRENGTH, CHARM, VISION, FREEZE, ILLUSION, WIND, DRAGON
- DATA "I reduce your armor !","** fireballs **","blades rain !","I destroy your weapons !","Healing friends"
+ DATA 23,Serpents, Wolf-dog, Jackal, Beggar, Cut-throat, Beggar, Prowler, Swordsman
+ DATA Barbarian, Iberian, Pict, Wildling, Lion, Bear
+ DATA Mad Vestal, Dark Priestess, Mad Monk
+ DATA Druid, Black Spirit, Evil Priest
+ DATA Evil Goth, Damned Legionary, Evil Gladiator
+ DATA SOMNUS BLOW, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
+ DATA ESCULAPE RITE, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT
+ DATA FIRESWORD, STRENGTH, LUX DEI, VISION, FREEZE, ILLUSION, WIND, DRAGON
+ DATA "I reduce your armor !","** fire **","blades rain !","I destroy your weapons !","Healing friends"

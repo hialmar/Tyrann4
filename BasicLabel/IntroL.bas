@@ -1,7 +1,8 @@
 #labels
  REM {++++ ORIC - NEMAUSUS RPG - April 2018 ++++}
  REM { Maximus (denis SOL)
- REM GOTO 300' saute l'intro pour tester la suite
+ PRINT "PRESS S TO SKIP THE INTRO"
+ GETA$:IF A$="S" THEN IntroCreation ' saute l'intro pour tester la suite
  A=DEEK(#308):R=RND(-A)
  TEXT:CLS:PAPER0:INK3
  PRINT CHR$(17);CHR$(20)
@@ -53,7 +54,8 @@ Intro_0
  NEXT C, R:REM ++ Bonus des Roles
  PRINTSPC(8);CHR$(148);" ! GO ! < Press G >"CHR$(144)
 Intro_2
- GETA$:IFA$<>"G" THEN  Intro_2 
+ GETA$:IFA$<>"G" THEN  Intro_2
+IntroCreation
  REM creation du 1er héros (P)
  FORI=1TO6:BAG(P,I)=0:NEXTI:REM INITIALIZE BAG
 Intro_3

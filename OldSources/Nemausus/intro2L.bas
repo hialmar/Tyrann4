@@ -112,7 +112,7 @@ intro_4
  IF MI>64 AND MI<91 THEN MI=MI+32
  L$=CHR$(MI)
  NOM$(P)=NOM$(P)+L$
- NEXTREM
+ NEXT REM
  RETURN
 intro_1
  REM blue

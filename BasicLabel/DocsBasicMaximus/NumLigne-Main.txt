@@ -1,0 +1,63 @@
+NUMEROS DE LIGNE
+200 Centre texte (mode TEXT)
+300  Deplacement dans Laby
+1000 Dessin du Laby
+2600 Escalier
+2650 Portes spéciales
+2800 Boussole
+3000 Test des clés de porte
+3100 Passage secret
+3200 Lancement du combat
+
+4000 Village
+4400 Inspection Héros
+5000 Soins par Mestre Luwin
+5300 Visualiser l'equipe
+5500 Explorer Westeros
+5700 Donner Or
+5800 Donner Objet
+
+5600 Fond bleu
+5650 Fond rouge
+
+6000 Commerces
+
+21000 Campement
+
+30000 Pause, affiche Espace
+30100 Pause sans affichage
+30200 Pause saisie valeur Perso (1-6)
+
+30500 Rencontres personnages 
+
+40000 Réinitialise coffres, clés,...
+
+48000 Chargement sauvegarde
+49000 Sauvegarde
+
+50000 Chargement DATAS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

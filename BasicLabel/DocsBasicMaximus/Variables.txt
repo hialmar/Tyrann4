@@ -1,0 +1,152 @@
+{ +++  TYRANN 3 +++ 2014 +++ variables +++ }
+
+AA() : Agilité Animal
+A$: touche saisie au clavier
+ACT() & ACT$(): mémorise l'action choisie 1Arme 2Objet 3parade 4Sorts
+AG(P): Agilité du perso, pour ordre dans combat
+AMI  : ennemi rallié grace au sort CHARME (1 seul possible)
+AO() : Action Order: table de combat
+ARM  : type d'arme 1.poing 2.tir 3.Animal 4.filet
+ARM$(): banque d'armures et armes
+AU(P):  Arme Utilisée pour le combat
+
+B$(): messages d'infos
+BC(): Bouclier de combat (Classe d'armure + sorts)
+BS  : boussole Oui > 1 Non >0
+BET$():banque d'animaux pour Animalerie
+BF(P) : dégats d'arme utilisée pdt le combat
+BO  : Bourse donnée par Jamie à Riverrun
+BT(P): bête du perso, affichée par BET$(BT(P))
+
+C$() : nom des 7 carrieres: Chevalier,... pour afficher celle du perso: C$(CP(P))
+CF$():
+C(X,Y): cases du labyrinthe, tableau des cases
+C1AGI(): les caracteristiques des monstres des combats C1,C2,...
+C6OK() : condition monstre 0:mort 1:OK 2:poison 3:saigne 4:ami 5:endormi 6: filet
+CASE : ou CA mémorise la case active =C(X,Y) pour plus de lisibilité
+CA(P): Classe d'armure de 0 à 7 (0=pas d'armures)
+CAR$(): nom des 8 caracteristiques
+CB(20): trousseau de combats ville en cours (0non fait 1fait)
+CC(P):  Capacité de combat du perso
+CF(VIL,8): trousseau de coffres (0:fermé  1:ouvert)
+CL(VIL,4): 1 trousseau de clefs par ville 
+CM():  tableau de caras des Monstres
+CO(7): couleur des villes (voir DATA)
+CP(P):  7 carrieres (1 à 7)
+CR$(): couronnes: Winterfell, Dorne, ...
+CS(P): case du sac
+CT(P): capacité de Tir du perso, tirée aux dés (pour arc, fronde,...)
+CV   : nombre de combattants
+
+D()  : cases de droite du laby
+DFF  : difficulté des tests -30 à +30
+DR   : Dragon magique maxi:2
+
+EE() : couleur des villes
+EF() ; Epée Feu 0 ou 1
+ENC  : encre d'écriture
+EN(P): Endurance du perso, tirée aux dés
+ENC(I): Encre d'affichage des commerces
+EN$(): raccourci de ENNEMI$() nom des ennemis en combat
+ESP(): Espece pour différencier héros et ennemi dans combat
+ET(P): Etat: points de vie actuels
+ET   : Ennemy Target : cible du monstre tirée au sort pdt le tour de combat
+EV   : Ennemis Vivants: si=0 victoire !
+
+FO(P): Force du perso > tirée aux dés > définit son BF (bonus force)
+FC(P): Force de combat = bonus magique (sort ou potion)
+F()  : 2 cases en face
+FI   : Filet 0=absent 1=présent 1 seul par équipe (Ranger only)
+FU   : Filet en cours d'utilisation 
+FM(P): Force mentale, tirée aux dés, pour résistance aux sorts
+
+G()  : cases de gauche du laby
+GFT : cadeau de Tyrion 0:non donné   1: donné
+
+HO   : Honoraires du Soignant (Septon, Septa)
+HV   : Heros Vivants (compteur)
+
+I & J: réservées pour boucles
+IA() : Impact Animal : dégat des armes naturelles des animaux
+IG(6): Ingrédients de la potion du nord de la sorcière
+II   : reservé boucle d'effaçage écran central de combat
+IM(I): Impact des armes à rajouter au BF du perso + D10
+IN(P): Intelligence, tirée aux dés: pour sorts, intrigues,enygmes,...
+ITEM$(): banque de tous les items (armes, potions, ...) > utilise un numéro d'ordre de l'item, ex boussole=38
+
+L    : Ligne d'affichage ou ligne dans test laby
+
+
+M$(P): maison Lannister, Stark, ...
+MALUS: sort des monstres qui ramollit les armes
+MI(VIL,3): 3 missions par villes
+MO(I): Monstres du combat
+MP(P): maison du perso de 1 à 7 > affichée par M$(MP(P))
+MM$(): banque de monstres et ennemis
+MT(P): compteur individuel de Monstres Tués
+
+N$(P): nom des perso: maximus,... (saisis dans création)
+NB   : Nombre de Barreaux (portes de prisons ou grilles)
+N()  : Nombre d'article d'un commerce couplé avec couleur ENC()
+NC   : Niveau du Combat: déterminé par la case (-1, -2, ...)
+NE   : Nb d'Ennemis dans un combat, tiré au sort de 2 à 5
+NE() : Niveau Ennemi, utilisé pdt le combat
+NF   : Nombre de Fuites, compteur
+NI(P): NIveau du personnage
+NI   : Nombre d'Items (cumul des NS commerces)
+NM   : Nombre de Monstres
+NM() : Niveau du monstre (1,2,...)
+NO   : Numero Ordre des combats (indique quel combat)
+NP   : Nombre d ingredients Potion 
+NS   : Nombre Shop: nombre de commerces de la ville
+
+O    : Objet choisi pour être donné
+OO   : Indice de l'objet donné (pour trier la suite)
+O1   : adresse mémoire pour sauvegarde
+OBJ$(): banque d'objets du Bazar
+OC() : Objet de combat 
+OK(P): condition du personnage 1à4 affichée par OK$(OK(P))
+OK$(): texte de condition: OK, mort, paralysé,empoisonné
+OP(P): nombre d'Objets du Perso
+
+P     : le personnage actif
+POT$(): banque de Potions, utilisée pour l'Herboristerie
+PM    : Potion Magique après sa préparation PM=1
+PRIX(), PA(),PB(),PO(),PP(),PX(): tous les prix puis par commerces
+PROMO: valeur de la promotion de caracteristique
+PS, PS() et PS$(): Portes spéciales: valeur dans laby (2à5) point de départ et texte affiché
+PV(P): points de Vie du Perso
+
+RI(P): richesse du perso en ca (cerfs d'argent)
+RT   : Résultat du Test: jet d'un dé 0= raté 1=réussi
+
+S    : Sens, direction où vous allez de 1 à 4 (N,E,S,O)
+S$   : texte à afficher (titre, commerce, ville,...)
+SAD(P,I): Sac à dos du perso: 6 places
+SD:  selle de dragon (1 seule possible)
+SHOP$(): nom des commerces (armurerie,...)
+SM    : Sort du Monstre
+SN(P,I): trousseau de sorts
+SOC(P): sociabilité tirée aux dés, pour obtenir informations
+SPELL(): sorts
+SS : impact des coups portés au monstre (variable jetable)
+
+T,T1,T2,T$: variables temporaires pour tri à bulles
+TE() : Target Enenmy
+TL: Team Level déverrouille les villes (1 à 9)
+TST  :  quel test à faire ? (agilité, ...)
+
+VIL : numero du laby (1=Winterfel,...)
+VILLE$: nom du labyrinthe: Winterfell, ...
+
+VE(P)=AG(P)+JA (vitesse en cours de combat = agilité perso + JA (aléatoire 0 à 10)
+
+VV  : Booléen du village 1=dans le village 0=dans le laby
+
+WL(): arme main gauche (Weapon Left)
+WR(): arme main droite (Weapon Right)
+
+X,Y: coordonnées de l'équipe dans le laby
+XP(P): experience du perso
+
+

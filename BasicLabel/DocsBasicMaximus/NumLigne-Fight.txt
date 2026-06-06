@@ -1,0 +1,36 @@
+200  Tableau d'étoiles
+300  Centrage texte
+400  Pause
+500  Get A$
+600  Impossible
+700  Nettoie écran central
+800  Temporisation
+
+3000 Creation de NE ennemis
+3200 Initialisation (ordre de combat) Action Order AO()
+4000 Combat
+6500 Fin boucle de combat
+7000 Victoire ou défaite
+
+8100 affiche ennemis
+8300 affiche equipe
+8500 affiche inventaire
+8700 menu choix d'actions
+9000 choix armes
+9200 choix objet
+9500 cibler 1 perso
+9600 cibler 1 ennemi
+
+10000 affiche nourriture
+10100 grégeois et sorts collectifs
+10300 mort d'un ennemi: compteurs
+10500 Ordre de combat par agilité + jet de dé AO() 
+
+15000 TESTS
+25000 Sorts (3x8)
+31000 Sorts du Sorcier(1.1,..)
+32000 Sorts du Mestre (2.1,..)
+33000 Sorts du Septon (3.1,..)
+36000 Ennemi retourné Ami
+
+40000 ennemi mort
