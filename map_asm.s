@@ -67,6 +67,8 @@ est_affiche_texte .dsb 1
 scroll_est_interdit .dsb 1
 ;	$17	:	drapeau : 1 deplacement perso  interdit , 0, déplacement perso autorisé
 depl_perso_est_interdit .dsb 1
+;   $50 : drapeau sortie victorieuse de la carte = $80 sinon = $20
+sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 ;
 ;
 
@@ -81,8 +83,8 @@ _main
 	sta $24E
 	lda #1					; répétition d'une touche toutes les 30 ms
 	sta $24F
+	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile)
 	jsr impl_car			; Implante jeu de caractères redéfinis
-	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile) 
 	lda #10					; cache le curseur et vire le son des touches
 	sta $26A
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
@@ -178,6 +180,11 @@ aff_hero
 	lda direction_scroll				; direction demandée
 	cmp #$38			; a-t-on frappé une touche autre qu'une des 4 flêches
 	beq fin_aff_perso
+	lda scroll_est_interdit
+	beq check_mer
+	lda depl_perso_est_interdit
+	bne fin_aff_perso
+check_mer
 	lda tuile_sous_pos_perso
 	bne mer_01
 	jsr choix_perso
@@ -267,11 +274,11 @@ chck_around
 		cmp #$38
 		beq sortie_scroll_direct		; inutile de regarder si autre touche que flêchée
 ; Ensuite on regarde si on est déjà en mer auquel cas, pas de contrainte de bord de mer
-
-		lda tuile_sous_pos_perso					; valeur tuile à la position du perso initialisée à #$50 (tuile NEMAUSUS)
-		beq around_sortie ; sortie_scroll_direct		; si on est en mer, pas de contrainte de proximité
-		cmp #$01
-		beq around_sortie ; sortie_scroll_direct		; deux valeurs de tuiles pour la mer : $00 et $01
+;
+;		lda tuile_sous_pos_perso					; valeur tuile à la position du perso initialisée à #$50 (tuile NEMAUSUS)
+;		beq around_sortie ; sortie_scroll_direct		; si on est en mer, pas de contrainte de proximité
+;		cmp #$01
+;		beq around_sortie ; sortie_scroll_direct		; deux valeurs de tuiles pour la mer : $00 et $01
 
 ; puis déterminons la position perso dans la carte
 		lda ordo_perso_fen					; ordonnée perso dans fenête hires
@@ -284,6 +291,7 @@ chck_around
 		sta rang_map
 		
 ; que nous utilisons ensuite pour regarder autour du perso
+sens_1
 		lda direction_scroll					; mémoire touche pressée
 		cmp #$ac				; recherche contenu tuile à gauche
 		bne sens_2
@@ -330,7 +338,10 @@ around_sortie
 sortie_scroll_direct		
 		rts
 check_ville_bateau		
-		lda tuile_sous_pos_perso				; valeur tuile à la position du perso 				
+		lda tuile_sous_pos_perso				; valeur tuile à la position du perso
+		beq around_sortie
+		cmp #TRUE
+		beq around_sortie
 		cmp #$5e			; villes portuaires codées entre #$5e et #$63
 		bmi no_scroll		; si pas port 
 		lda a_un_bateau				; si port check bateau
@@ -451,7 +462,7 @@ deplac_droite
 		cmp #$bc					; touche flèche droite ==> deplacement vers la droite
 		bne deplac_bas		
 		lda absc_perso_fen
-		cmp #LARGEUR_FENETRE   ;cmp #$15
+		cmp #LARGEUR_FENETRE   ;cmp #15
 		beq no_depl
 		inc absc_perso_fen
 		inc index_perso
@@ -566,8 +577,8 @@ autre_ligne
 	sta tuile_sous_pos_perso					; repère tuile dans tuile_sous_pos_perso	
 	
 sortie_fenetre
-	lda #FALSE
-	sta scroll_est_interdit					; autorise scroll pour prochaine boucle, jusqu'aux différents checks
+	; lda #FALSE
+	; sta scroll_est_interdit					; autorise scroll pour prochaine boucle, jusqu'aux différents checks
 	rts	
 .)	
 
@@ -592,7 +603,7 @@ init_div_var
 	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
 	lda #CENTRE_ABS
 	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
-	lda #$51		; repère tuile Nemausus
+	lda #$55		; repère tuile Nemausus
 	sta tuile_sous_pos_perso			; sous position perso au départ
 	lda #FALSE
 	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
@@ -603,6 +614,8 @@ init_div_var
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
 	lda #TRUE	        ; TEMPO
 	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
+	lda #$20
+	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 	rts
 .)	
 
@@ -685,15 +698,20 @@ adr_compo
 ;--------------------------------------------------	
 aff__tuile
 .(
-			lda rang_fenetre
-			cmp index_perso					; n'affiche pas la tuile si c'est celle qui est sous le perso
-			beq pas_daff
+			lda index_perso
+			cmp rang_fenetre					; n'affiche pas la tuile si c'est celle qui est sous le perso
+			beq chck_68; beq pas_daff
+aff_t
 			ldx #0				; 0 pour indexer le premier 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères supérieurs (dont n° d'ordre stocké en $00 et $01)
 			ldx #2				; 2 pour indexer le 3 ème 1/4 de tuile
 			jsr aff_demi_t			; les 2 caractères inférieurs (dont n° d'ordre stocké en $02 et $03)
 pas_daff			
-			rts	
+			rts
+chck_68
+			cmp #$68
+			beq aff_t
+			bne pas_daff
 .)	
 
 ;----------------------------------------------------
@@ -826,6 +844,10 @@ rens_adr_car
 ;------------------------------------------------------ spécifique pour mon test
 wait_key
 .(
+		lda direction_scroll			;pour test
+		cmp #$86		;sortie victorieuse
+		beq end_key		;sur ecran 'Episode II' (sera a supprimer)
+
 		lda $208
 		cmp #$38
 		beq wait_key
@@ -864,16 +886,16 @@ impl_car
 	ldx #$00
 lp1_impl	
 	lda dta_car_redef_p1,x
-	sta $b900,x
+	sta $9d00,x
 	inx
 	cpx #$FC
 	bne lp1_impl
 	ldx #$00
 lp2_impl	
 	lda dta_car_redef_p2,x
-	sta	$b9fc,x
+	sta	$9dfc,x
 	inx
-	cpx #$54
+	cpx #$5a
 	bne lp2_impl	
 	rts
 .)	
@@ -1005,8 +1027,8 @@ aff_text
 .(
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	sec				; prépare retenue pour soustraction
-	sbc #$50		; la première ville est numéroté #$50 (la dernière : #$64)
-	bmi hadrian_wall	; si pas sur vile, test suivant
+	sbc #$55		; la première ville est numéroté #$50 (la dernière : #$64)
+	bmi hadrian_wall	; si pas sur ville, test suivant
 	asl				; prépare index
 	tax				; 
 	lda ptr_v,x			; Partie basse adresse premier byte chaine nom (ie: $a0,"narbone",0) 
@@ -1108,10 +1130,17 @@ suite_hw
 	jsr write_phrase		
 	jsr hit_key
 	jsr eff_text
+;sotie vers ecran HIRES ;-)
+	lda #$80
+	sta sortie_victorieuse				;drapeau mur atteint
+	lda #$86
+	sta direction_scroll				; simule appui sur 'Y' pour sortie carte
+	rts
+;-----------------------------------------------------
 
 druid_hut	
 	lda tuile_sous_pos_perso
-	cmp #$4e				; valeur tuile camp Druides
+	cmp #$53				; valeur tuile camp Druides
 	beq suite_dh
 	jmp herb_
 suite_dh	
@@ -1194,11 +1223,11 @@ suite_dh
 	jsr write_phrase		
 	jsr hit_key
 	jsr eff_text	
-
+	rts
 herb_
 
 	lda tuile_sous_pos_perso
-	cmp #$4F				; valeur tuile montagne et plante mortelle
+	cmp #$54				; valeur tuile montagne et plante mortelle
 	bne _kraken
 	ldx #0
 	lda t_herb_1,x
@@ -1219,6 +1248,7 @@ herb_
 	jsr write_phrase
 	jsr hit_key
 	jsr eff_text
+	rts
 
 _kraken
 	lda tuile_sous_pos_perso					; il faut être en mer
@@ -1351,9 +1381,9 @@ _L05
 _L06
 	.byt $01,$00,$0E,$15,$15,$10,$10,$10,$02,$00,$01,$00,$01,$00,$00,$04,$10,$15,$16,$0B,$05,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00
 _L07
-	.byt $00,$00,$04,$0B,$10,$10,$10,$10,$08,$00,$00,$00,$00,$00,$10,$15,$15,$22,$34,$08,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00
+	.byt $00,$00,$04,$0B,$10,$10,$10,$10,$08,$00,$00,$00,$00,$00,$10,$15,$15,$4f,$34,$08,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00
 _L08
-	.byt $01,$00,$00,$0A,$10,$10,$15,$15,$64,$00,$00,$02,$00,$0A,$10,$15,$15,$5D,$38,$08,$00,$00,$01,$00,$01,$00,$01,$00,$00,$00,$03,$09
+	.byt $01,$00,$00,$0A,$10,$10,$15,$15,$64,$00,$00,$02,$00,$0A,$10,$15,$15,$4e,$38,$08,$00,$00,$01,$00,$01,$00,$01,$00,$00,$00,$03,$09
 _L09
 	.byt $00,$01,$00,$0E,$15,$15,$15,$10,$08,$00,$00,$10,$0D,$15,$15,$15,$36,$2C,$16,$10,$00,$01,$00,$01,$00,$01,$00,$00,$03,$0E,$15,$15
 _L0a
@@ -1363,13 +1393,13 @@ _L0b
 _L0c
 	.byt $00,$04,$10,$0B,$05,$00,$00,$01,$00,$00,$09,$10,$10,$10,$1F,$15,$15,$15,$1F,$15,$10,$08,$00,$01,$00,$00,$10,$10,$15,$15,$15,$10
 _L0d
-	.byt $01,$00,$00,$00,$00,$00,$01,$00,$01,$00,$00,$04,$0B,$36,$2c,$15,$36,$39,$5C,$39,$0C,$00,$00,$01,$00,$03,$10,$15,$15,$10,$10,$10
+	.byt $01,$00,$00,$00,$00,$00,$01,$00,$01,$00,$00,$04,$0B,$36,$2c,$15,$36,$39,$5D,$39,$0C,$00,$00,$01,$00,$03,$10,$15,$15,$10,$10,$10
 _L0e
 	.byt $00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$09,$09,$1F,$10,$36,$3A,$17,$10,$32,$3B,$00,$00,$00,$03,$10,$15,$15,$10,$10,$10,$15
 _L0f
-	.byt $00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$0A,$10,$22,$34,$10,$0B,$0B,$00,$0B,$00,$00,$00,$09,$0E,$10,$10,$15,$15,$10,$10,$15,$15
+	.byt $00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$0A,$10,$4f,$34,$10,$0B,$0B,$00,$0B,$00,$00,$00,$09,$0E,$10,$10,$15,$15,$10,$10,$15,$15
 _L10
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$00,$03,$10,$10,$63,$00,$00,$00,$00,$00,$00,$00,$00,$60,$10,$10,$10,$10,$10,$10,$58,$15,$15,$15
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$00,$03,$10,$10,$63,$00,$00,$00,$00,$00,$00,$00,$00,$60,$10,$10,$10,$10,$10,$10,$59,$15,$15,$15
 _L11
 	.byt $01,$00,$01,$00,$01,$00,$01,$00,$00,$0B,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$03,$17,$10,$10,$10,$10,$10,$15,$16,$15,$10,$10
 _L12
@@ -1377,41 +1407,41 @@ _L12
 _L13
 	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$00,$00,$00,$00,$0F,$10,$09,$0E,$15,$15,$17,$10,$15,$15,$10,$10,$10,$16,$10,$10,$15
 _L14
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$09,$0E,$10,$09,$09,$15,$15,$15,$15,$15,$10,$2E,$55,$10,$15,$10,$26,$24,$34,$10,$15,$15
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$09,$0E,$10,$09,$09,$15,$15,$15,$15,$15,$10,$25,$58,$10,$15,$10,$26,$24,$34,$10,$15,$15
 _L15
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$0F,$10,$10,$15,$15,$4E,$15,$15,$15,$10,$10,$15,$32,$18,$32,$1B,$19,$10,$10,$15,$15,$15
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$0F,$10,$10,$15,$15,$53,$15,$15,$15,$10,$10,$15,$32,$50,$32,$1B,$19,$10,$10,$15,$15,$15
 _L16
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$00,$0B,$0F,$15,$15,$15,$15,$15,$10,$10,$10,$15,$28,$54,$10,$16,$10,$15,$15,$11,$12
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$00,$0B,$0F,$15,$15,$15,$15,$15,$10,$10,$10,$15,$28,$39,$10,$16,$10,$15,$15,$11,$12
 _L17
 	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$00,$0B,$15,$15,$15,$15,$15,$10,$10,$10,$15,$32,$24,$18,$15,$11,$12,$12,$12
 _L18
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$0F,$10,$15,$10,$15,$10,$10,$10,$10,$10,$22,$34,$11,$12,$12,$12,$12
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$00,$0F,$10,$15,$10,$15,$10,$10,$10,$10,$10,$4f,$34,$11,$12,$12,$12,$12
 _L19
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$5F,$30,$30,$30,$30,$38,$10,$36,$30,$53,$10,$12,$37,$56,$38,$12
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$5F,$30,$30,$30,$30,$38,$10,$36,$30,$57,$10,$12,$37,$30,$38,$12
 _L1a
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$10,$10,$10,$10,$10,$33,$24,$35,$11,$2E,$30,$30,$2C,$12,$57,$12
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$10,$10,$10,$10,$10,$33,$24,$35,$11,$2E,$30,$30,$2C,$12,$11,$12
 _L1b
 	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$04,$10,$15,$15,$10,$14,$12,$11,$12,$17,$10,$12,$12,$12,$12,$12
 _L1c
-	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$0D,$0A,$10,$15,$10,$10,$14,$12,$12,$17,$12,$12,$12,$4F,$14,$15
+	.byt $01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$0D,$0A,$10,$15,$10,$10,$14,$12,$12,$17,$12,$12,$12,$54,$14,$15
 _L1d
-	.byt $01,$00,$01,$00,$00,$00,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$36,$52,$39,$10,$15,$15,$11,$12,$12,$17,$12,$12,$12,$12,$12,$15
+	.byt $01,$00,$01,$00,$00,$00,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$36,$56,$39,$10,$15,$15,$11,$12,$12,$17,$12,$12,$12,$12,$12,$15
 _L1e
-	.byt $01,$00,$01,$00,$03,$0E,$0D,$00,$00,$00,$00,$00,$01,$00,$00,$0A,$20,$10,$32,$18,$10,$11,$12,$12,$50,$2E,$38,$12,$36,$1D,$3D,$3D
+	.byt $01,$00,$01,$00,$03,$0E,$0D,$00,$00,$00,$00,$00,$01,$00,$00,$0A,$20,$10,$32,$50,$10,$11,$12,$12,$55,$2E,$38,$12,$36,$1D,$3D,$3D
 _L1f
-	.byt $01,$00,$00,$0A,$5B,$38,$15,$15,$15,$0D,$09,$00,$00,$00,$00,$0E,$16,$10,$10,$3F,$51,$38,$36,$30,$2B,$35,$2A,$36,$31,$05,$00,$00
+	.byt $01,$00,$00,$0A,$5B,$38,$15,$15,$15,$0D,$09,$00,$00,$00,$00,$0E,$16,$10,$10,$3F,$30,$38,$36,$30,$2B,$35,$2A,$36,$31,$05,$00,$00
 _L20
 	.byt $01,$00,$00,$0A,$10,$3F,$38,$15,$11,$14,$10,$37,$39,$0D,$09,$26,$12,$11,$10,$10,$10,$3F,$5E,$0B,$00,$00,$32,$35,$05,$00,$01,$00
 _L21
 	.byt $01,$00,$00,$15,$10,$10,$3F,$38,$10,$37,$1A,$34,$32,$24,$24,$34,$14,$12,$12,$11,$10,$1F,$00,$00,$00,$00,$00,$00,$00,$00,$01,$00
 _L22
-	.byt $01,$00,$00,$15,$10,$10,$10,$23,$24,$34,$10,$10,$10,$10,$10,$10,$15,$15,$14,$14,$42,$3E,$00,$01,$00,$01,$00,$00,$01,$00,$01,$00
+	.byt $01,$00,$00,$15,$10,$10,$10,$23,$24,$34,$10,$10,$10,$10,$10,$10,$15,$15,$14,$14,$42,$52,$00,$01,$00,$01,$00,$00,$01,$00,$01,$00
 _L23
 	.byt $01,$00,$00,$15,$10,$36,$2B,$34,$10,$10,$10,$14,$11,$11,$10,$10,$10,$10,$10,$10,$17,$10,$0D,$00,$00,$01,$00,$01,$01,$00,$01,$00
 _L24
 	.byt $01,$00,$03,$10,$26,$35,$10,$10,$10,$10,$10,$10,$10,$12,$12,$11,$10,$12,$10,$36,$31,$0C,$05,$00,$00,$01,$00,$01,$01,$00,$01,$00
 _L25
-	.byt $01,$00,$0E,$10,$16,$10,$10,$10,$11,$10,$10,$11,$12,$10,$14,$12,$11,$36,$59,$31,$0B,$00,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
+	.byt $01,$00,$0E,$10,$16,$10,$10,$10,$11,$10,$10,$11,$12,$10,$14,$12,$11,$36,$5a,$31,$0B,$00,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L26
 	.byt $00,$03,$10,$26,$34,$10,$10,$10,$10,$10,$14,$10,$10,$10,$10,$10,$36,$31,$05,$00,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L27
@@ -1421,20 +1451,20 @@ _L28
 _L29
 	.byt $00,$04,$33,$24,$1B,$30,$38,$10,$10,$10,$10,$10,$10,$10,$10,$17,$08,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L2a
-	.byt $01,$00,$10,$10,$10,$10,$2A,$10,$10,$10,$26,$24,$1C,$38,$22,$35,$15,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
+	.byt $01,$00,$10,$10,$10,$10,$2A,$10,$10,$10,$26,$24,$1C,$38,$4f,$35,$15,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L2b
-	.byt $00,$0A,$10,$10,$10,$10,$32,$18,$10,$26,$34,$10,$10,$28,$31,$61,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
+	.byt $00,$0A,$10,$10,$10,$10,$32,$50,$10,$26,$34,$10,$10,$28,$31,$61,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L2c
 	.byt $00,$04,$0B,$0B,$0F,$10,$10,$2F,$1A,$34,$10,$10,$10,$11,$14,$08,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L2d
-	.byt $01,$00,$00,$00,$00,$0F,$5A,$19,$10,$10,$10,$10,$14,$15,$0B,$05,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
+	.byt $01,$00,$00,$00,$00,$0F,$5B,$51,$10,$10,$10,$10,$14,$15,$0B,$05,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L2e
 	.byt $01,$00,$01,$00,$00,$04,$10,$10,$0C,$0B,$0B,$0F,$10,$05,$00,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L2f
 	.byt $01,$00,$01,$00,$01,$00,$04,$05,$00,$00,$00,$00,$00,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$01,$00,$01,$00
 _L30
 	.byt $01,$00,$01,$00,$01,$00,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00
-	
+
 ptr_Lignes
 
 	.byt <_L00,>_L00,<_L01,>_L01,<_L02,>_L02,<_L03,>_L03,<_L04,>_L04,<_L05,>_L05,<_L06,>_L06,<_L07,>_L07,<_L08,>_L08,<_L09,>_L09
@@ -1442,259 +1472,262 @@ ptr_Lignes
 	.byt <_L14,>_L14,<_L15,>_L15,<_L16,>_L16,<_L17,>_L17,<_L18,>_L18,<_L19,>_L19,<_L1a,>_L1a,<_L1b,>_L1b,<_L1c,>_L1c,<_L1d,>_L1d
 	.byt <_L1e,>_L1e,<_L1f,>_L1f,<_L20,>_L20,<_L21,>_L21,<_L22,>_L22,<_L23,>_L23,<_L24,>_L24,<_L25,>_L25,<_L26,>_L26,<_L27,>_L27
 	.byt <_L28,>_L28,<_L29,>_L29,<_L2a,>_L2a,<_L2b,>_L2b,<_L2c,>_L2c,<_L2d,>_L2d,<_L2e,>_L2e,<_L2f,>_L2f,<_L30,>_L30
-	
-	
+
+
+
 ; -----------------------------------------------------------------------------
 ;    Table adresses car modifiés dans 2nd jeu de car mode Hires (1/4 de tuile)
-; ----------------------------------------------------------------------------- ici, pas besoin de pointeurs d'adresses car pas d'addition 
+; ----------------------------------------------------------------------------- ici, pas besoin de pointeurs d'adresses car pas d'addition
 ;																				pour trouver l'adresse du car n, il suffit de décaler à gauche
-;																				le registre contenant le n° du car pour trouver l'adresse.		   
+;																				le registre contenant le n° du car pour trouver l'adresse.
 sous_tuile
 	.byt $9d,$00,$9d,$06,$9d,$0c,$9d,$12,$9d,$18,$9d,$1e,$9d,$24,$9d,$2a,$9d,$30,$9d,$36,
 	.byt $9d,$3c,$9d,$42,$9d,$48,$9d,$4e,$9d,$54,$9d,$5a,$9d,$60,$9d,$66,$9d,$6c,$9d,$72,
 	.byt $9d,$78,$9d,$7e,$9d,$84,$9d,$8a,$9d,$90,$9d,$96,$9d,$9c,$9d,$a2,$9d,$a8,$9d,$ae,
 	.byt $9d,$b4,$9d,$ba,$9d,$c0,$9d,$c6,$9d,$cc,$9d,$d2,$9d,$d8,$9d,$de,$9d,$e4,$9d,$ea,
-	.byt $9d,$f0,$9d,$f6,$9d,$fc,$9e,$02,$9e,$08,$9e,$0e,$9e,$14,$9e,$1a,$9e,$20,$9e,$26,	
-	.byt $9e,$2c,$9e,$32,$9e,$38,$9e,$3e,$9e,$44,$9e,$4a	
+	.byt $9d,$f0,$9d,$f6,$9d,$fc,$9e,$02,$9e,$08,$9e,$0e,$9e,$14,$9e,$1a,$9e,$20,$9e,$26,
+	.byt $9e,$2c,$9e,$32,$9e,$38,$9e,$3e,$9e,$44,$9e,$4a,$9e,$50
 
-	
-	
+
+
 ; --------------------------------------------------------------------
-;       Table redéfinition  des tuiles (N)d'ordre des 4 car redafinis 
+;       Table redéfinition  des tuiles (N)d'ordre des 4 car redafinis
 ; --------------------------------------------------------------------
 
-	
-_t00 
+
+_t00
 		.byt $03,$01,$00,$01
-_t01 
+_t01
 		.byt $00,$01,$00,$02
-_t02 
+_t02
 		.byt $00,$01,$04,$02
-_t03 
+_t03
 		.byt $00,$01,$00,$04
-_t04 
+_t04
 		.byt $00,$04,$00,$02
-_t05 
+_t05
 		.byt $04,$01,$00,$02
-_t06 
+_t06
 		.byt $04,$01,$00,$04
-_t07 
+_t07
 		.byt $00,$04,$04,$02
-_t08 
+_t08
 		.byt $04,$01,$04,$02
-_t09 
-		.byt $00,$01,$04,$04		
-_t0A 
+_t09
+		.byt $00,$01,$04,$04
+_t0A
 		.byt $00,$04,$00,$04
-_t0B 
+_t0B
 		.byt $04,$04,$00,$02
-_t0C 
+_t0C
 		.byt $04,$04,$04,$02
-_t0D 
-		.byt $04,$01,$04,$04		
-_t0E 
+_t0D
+		.byt $04,$01,$04,$04
+_t0E
 		.byt $00,$04,$04,$04
-_t0F 
+_t0F
 		.byt $04,$04,$00,$04
-_t10 
+_t10
 		.byt $04,$04,$04,$04
-_t11 
+_t11
 		.byt $04,$04,$0B,$0C
-_t12 
+_t12
 		.byt $0B,$0C,$0B,$0C
-_t13 
+_t13
 		.byt $04,$04,$04,$0B
-_t14 
+_t14
 		.byt $0B,$0C,$04,$04
-_t15 
+_t15
 		.byt $0D,$0E,$0F,$10
-_t16 
+_t16
 		.byt $11,$04,$11,$04
-_t17 
+_t17
 		.byt $04,$11,$04,$11
-_t18 
+_t18
 		.byt $12,$04,$11,$04
-_t19 
+_t19
 		.byt $11,$04,$12,$04
-_t1A 
-		.byt $04,$17,$14,$16		
-_t1B 
+_t1A
+		.byt $04,$17,$14,$16
+_t1B
 		.byt $18,$04,$15,$14
-_t1C 
+_t1C
 		.byt $14,$18,$04,$15
-_t1D 
+_t1D
 		.byt $17,$14,$16,$04
-_t1E 
+_t1E
 		.byt $11,$04,$15,$18
-_t1F 
+_t1F
 		.byt $04,$11,$17,$16
-_t20 
+_t20
 		.byt $17,$16,$11,$04
-_t21 
+_t21
 		.byt $14,$12,$04,$11
-_t22 
+_t22
 		.byt $04,$13,$04,$11
-_t23 
+_t23
 		.byt $13,$14,$11,$04
-_t24 
+_t24
 		.byt $14,$14,$04,$04
-_t25 
+_t25
 		.byt $04,$11,$04,$15
-_t26 
+_t26
 		.byt $17,$14,$11,$04
-_t27 
+_t27
 		.byt $15,$18,$04,$13
-_t28 
+_t28
 		.byt $11,$04,$15,$14
-_t29 
+_t29
 		.byt $11,$04,$16,$04
-_t2A 
-		.byt $15,$18,$04,$11		
-_t2B 
-		.byt $04,$17,$14,$16			
-_t2C 
-		.byt $11,$04,$16,$04		
-_t2D 
-		.byt $04,$11,$14,$12		
-_t2E 
-		.byt $04,$11,$04,$13		
-_t2F 
-		.byt $11,$04,$13,$14		
-_t30 
-		.byt $04,$04,$14,$14		
-_t31 
-		.byt $04,$11,$14,$16		
-_t32 
-		.byt $04,$15,$04,$04		
-_t33 
-		.byt $15,$14,$04,$04		
-_t34 
-		.byt $16,$04,$04,$04		
-_t35 
-		.byt $14,$16,$04,$04		
-_t36 
-		.byt $04,$04,$04,$17		
-_t37 
-		.byt $04,$04,$17,$14		
-_t38 
-		.byt $04,$04,$18,$04		
-_t39 
-		.byt $04,$04,$14,$18		
-_t3A 
+_t2A
+		.byt $15,$18,$04,$11
+_t2B
+		.byt $04,$17,$14,$16
+_t2C
+		.byt $11,$04,$16,$04
+_t2D
+		.byt $04,$11,$14,$12
+_t2E
+		.byt $04,$11,$04,$13
+_t2F
+		.byt $11,$04,$13,$14
+_t30
+		.byt $04,$04,$14,$14
+_t31
+		.byt $04,$11,$14,$16
+_t32
+		.byt $04,$15,$04,$04
+_t33
+		.byt $15,$14,$04,$04
+_t34
+		.byt $16,$04,$04,$04
+_t35
+		.byt $14,$16,$04,$04
+_t36
+		.byt $04,$04,$04,$17
+_t37
+		.byt $04,$04,$17,$14
+_t38
+		.byt $04,$04,$18,$04
+_t39
+		.byt $04,$04,$14,$18
+_t3A
 		.byt $17,$16,$16,$04
-_t3B 
+_t3B
 		.byt $14,$01,$04,$04
-_t3C 
+_t3C
 		.byt $00,$01,$18,$04
-_t3D 
+_t3D
 		.byt $14,$14,$00,$02
-_t3E 
+_t3E
 		.byt $11,$01,$16,$02
-_t3F 
+_t3F
 		.byt $15,$18,$04,$15
-_t40 
+_t40
 		.byt $18,$04,$15,$18
-_t41 
+_t41
 		.byt $21,$21,$04,$04
-_t42 
-		.byt $0B,$0C,$04,$17		
-_t43 
-		.byt $22,$22,$04,$04		
-_t44 
+_t42
+		.byt $0B,$0C,$04,$17
+_t43
+		.byt $22,$22,$04,$04
+_t44
 		.byt $22,$23,$04,$15
-_t45 
+_t45
 		.byt $05,$06,$07,$08
-_t46 
+_t46
 		.byt $05,$06,$09,$0A
-_t47 
-		.byt $34,$35,$36,$37		
-_t48 
+_t47
+		.byt $34,$35,$36,$37
+_t48
 		.byt $19,$1A,$1B,$1C
-_t49 
+_t49
 		.byt $1D,$1E,$1F,$20
-_t4A 
-		.byt $24,$25,$26,$27		
-_t4B 
-		.byt $28,$29,$2A,$2B		
-_t4C 
-		.byt $2C,$2D,$2E,$2F		
-_t4D 
+_t4A
+		.byt $24,$25,$26,$27
+_t4B
+		.byt $28,$29,$2A,$2B
+_t4C
+		.byt $2C,$2D,$2E,$2F
+_t4D
 		.byt $30,$31,$32,$33
-		
-; A partir d'ici, tuiles "Spéciales"		
-		
-_t4E 
+_t4E							; 5 nouvelles tuiles
+		.byt $04,$11,$17,$38
+_t4F
+		.byt $04,$17,$04,$11
+_t50
+		.byt $18,$04,$11,$04
+_t51
+		.byt $11,$04,$16,$04
+_t52
+		.byt $11,$01,$16,$02
+
+
+; A partir d'ici, tuiles "Spéciales"
+
+_t53
 		.byt $0D,$0E,$0F,$10	; forêt spéciale proposition camps de druides
-_t4F 
-		.byt $0B,$0C,$0B,$0C	; Pleine montagne spéciale proposition: seul trésor suffisant pour acheter un bateau
-_t50 
+_t54
+		.byt $0B,$0C,$0B,$0C	; Pleine montagne spéciale proposition: plante pour druide
+_t55
 		.byt $05,$06,$07,$08	; NEMAUSUS	(Nîmes)
-		
-; SI   #$50 < code < #$5E  ==> villes 	sans possibilite achat bateau	
 
-_t51 
-		.byt $05,$06,$07,$08	; TOLOSA (Toulouse)
-_t52 
+; SI   #$55 < code < #$5E  ==> villes 	sans possibilite achat bateau
+
+
+_t56
 		.byt $05,$06,$07,$08	; BURDIGALA (Bordeaux)
-_t53 
+_t57
 		.byt $05,$06,$07,$08	; LUGDUNUM (Lyon)
-_t54 
-		.byt $05,$06,$07,$08	; AUGUSTODUNUM
-_t55 
+_t58
 		.byt $05,$06,$07,$08	; LUTECIA (Paris)
-_t56 
-		.byt $05,$06,$07,$08	; LOUSONA (Lausane)
-_t57 
-		.byt $05,$06,$07,$08	; OCTODURUS
-_t58 
+_t59
 		.byt $05,$06,$07,$08	; AGRIPPINA (Köln))
-_t59 
-		.byt $05,$06,$07,$08	; BACINO (Barcelone)		
-_t5A 
-		.byt $05,$06,$07,$08	; GASES (Cadiz)		
-_t5B 
+_t5A
+		.byt $05,$06,$07,$08	; BACINO (Barcelone)
+_t5B
+		.byt $05,$06,$07,$08	; GASES (Cadiz)
+_t5C
 		.byt $05,$06,$07,$08	; BRIGANTIUM ( A Coruña)
-_t5C 
+_t5D
 		.byt $05,$06,$07,$08	; LONDINIUM (London)
-_t5D 
-		.byt $05,$06,$07,$08	; LINDUM ( Lincoln)	
-_t5E 
+_t5E
 		.byt $05,$06,$09,$0A	; NARBO MARTIUS (Narbone)
-_t5F 
-		.byt $05,$06,$09,$0A	; MEDIOLANUM SANTONUM (Saintes)	
-_t60 
-		.byt $05,$06,$09,$0A	; GESORIACUM ( Boulogne)	
-_t61 
-		.byt $05,$06,$09,$0A	; CATHAGO NOVA (Cartagena)	
-_t62 
-		.byt $05,$06,$09,$0A	; OLISIPA (Lisboa)	
-_t63 
-		.byt $05,$06,$09,$0A	; ISCA DUMNONIORUM (Exeter)	
-_t64 
+_t5F
+		.byt $05,$06,$09,$0A	; MEDIOLANUM SANTONUM (Saintes)
+_t60
+		.byt $05,$06,$09,$0A	; GESORIACUM ( Boulogne)
+_t61
+		.byt $05,$06,$09,$0A	; CATHAGO NOVA (Cartagena)
+_t62
+		.byt $05,$06,$09,$0A	; OLISIPA (Lisboa)
+_t63
+		.byt $05,$06,$09,$0A	; ISCA DUMNONIORUM (Exeter)
+_t64
 		.byt $05,$06,$09,$0A	; EBLANA POLIS (Dublin)
-	
-		
 
-ptr_t ;(pointeurs t pour tuiles)	
-	
-	.byt <_t00,>_t00,<_t01,>_t01,<_t02,>_t02,<_t03,>_t03,<_t04,>_t04,<_t05,>_t05	
-	.byt <_t06,>_t06,<_t07,>_t07,<_t08,>_t08,<_t09,>_t09,<_t0A,>_t0A,<_t0B,>_t0B	
-	.byt <_t0C,>_t0C,<_t0D,>_t0D,<_t0E,>_t0E,<_t0F,>_t0F,<_t10,>_t10,<_t11,>_t11	
+
+
+ptr_t ;(pointeurs t pour tuiles)
+
+	.byt <_t00,>_t00,<_t01,>_t01,<_t02,>_t02,<_t03,>_t03,<_t04,>_t04,<_t05,>_t05
+	.byt <_t06,>_t06,<_t07,>_t07,<_t08,>_t08,<_t09,>_t09,<_t0A,>_t0A,<_t0B,>_t0B
+	.byt <_t0C,>_t0C,<_t0D,>_t0D,<_t0E,>_t0E,<_t0F,>_t0F,<_t10,>_t10,<_t11,>_t11
 	.byt <_t12,>_t12,<_t13,>_t13,<_t14,>_t14,<_t15,>_t15,<_t16,>_t16,<_t17,>_t17
 	.byt <_t18,>_t18,<_t19,>_t19,<_t1A,>_t1A,<_t1B,>_t1B,<_t1C,>_t1C,<_t1D,>_t1D
 	.byt <_t1E,>_t1E,<_t1F,>_t1F,<_t20,>_t20,<_t21,>_t21,<_t22,>_t22,<_t23,>_t23
 	.byt <_t24,>_t24,<_t25,>_t25,<_t26,>_t26,<_t27,>_t27,<_t28,>_t28,<_t29,>_t29
-	.byt <_t2A,>_t2A,<_t2B,>_t2B,<_t2C,>_t2C,<_t2D,>_t2D,<_t2E,>_t2E,<_t2F,>_t2F	
-	.byt <_t30,>_t30,<_t31,>_t31,<_t32,>_t32,<_t33,>_t33,<_t34,>_t34,<_t35,>_t35	
+	.byt <_t2A,>_t2A,<_t2B,>_t2B,<_t2C,>_t2C,<_t2D,>_t2D,<_t2E,>_t2E,<_t2F,>_t2F
+	.byt <_t30,>_t30,<_t31,>_t31,<_t32,>_t32,<_t33,>_t33,<_t34,>_t34,<_t35,>_t35
 	.byt <_t36,>_t36,<_t37,>_t37,<_t38,>_t38,<_t39,>_t39,<_t3A,>_t3A,<_t3B,>_t3B
 	.byt <_t3C,>_t3C,<_t3D,>_t3D,<_t3E,>_t3E,<_t3F,>_t3F,<_t40,>_t40,<_t41,>_t41
-	.byt <_t42,>_t42,<_t43,>_t43,<_t44,>_t44,<_t45,>_t45,<_t46,>_t46,<_t47,>_t47	
+	.byt <_t42,>_t42,<_t43,>_t43,<_t44,>_t44,<_t45,>_t45,<_t46,>_t46,<_t47,>_t47
 	.byt <_t48,>_t48,<_t49,>_t49,<_t4A,>_t4A,<_t4B,>_t4B,<_t4C,>_t4C,<_t4D,>_t4D
-	.byt <_t4E,>_t4E,<_t4F,>_t4F,<_t50,>_t50,<_t51,>_t51,<_t52,>_t52,<_t53,>_t53	
-	.byt <_t54,>_t54,<_t55,>_t55,<_t56,>_t56,<_t57,>_t57,<_t58,>_t58,<_t59,>_t59	
-	.byt <_t5A,>_t5A,<_t5B,>_t5B,<_t5C,>_t5C,<_t5D,>_t5D,<_t5E,>_t5E,<_t5F,>_t5F	
-	.byt <_t60,>_t60,<_t61,>_t61,<_t62,>_t62,<_t63,>_t63,<_t64,>_t64	
-	
+	.byt <_t4E,>_t4E,<_t4F,>_t4F,<_t50,>_t50,<_t51,>_t51,<_t52,>_t52,<_t53,>_t53
+	.byt <_t54,>_t54,<_t55,>_t55,<_t56,>_t56,<_t57,>_t57,<_t58,>_t58,<_t59,>_t59
+	.byt <_t5A,>_t5A,<_t5B,>_t5B,<_t5C,>_t5C,<_t5D,>_t5D,<_t5E,>_t5E,<_t5F,>_t5F
+	.byt <_t60,>_t60,<_t61,>_t61,<_t62,>_t62,<_t63,>_t63,<_t64,>_t64
+
 
 ; *************  DATA NOMS des Villes  *************
 
@@ -1702,235 +1735,219 @@ v_00
 	.byt $a0					; longeur $08 lettres
 	.asc 3,"NEMAUSUS",0			; Nîmes
 v_01
-	.byt $a1					; $06
-	.asc 3,"TOLOSA",0 			; Toulouse	
+	.byt $9f					; $09
+	.asc 3,"BURDIGALA",0 		; Bordeaux
 v_02
-	.byt $9f					; $09	
-	.asc 3,"BURDIGALA",0 		; Bordeaux	
+	.byt $a0					; $08
+	.asc 3,"LUGDUNUM",0 		; Lyon
 v_03
-	.byt $a0					; $08	
-	.asc 3,"LUGDUNUM",0 		; Lyon	
+	.byt $a0					; $07
+	.asc 3,"LUTECIA",0 			; Paris
 v_04
-	.byt $9d					; $0c	
-	.asc 3,"AUGUSTODUNUM",0	
+	.byt $9f					; $09
+	.asc 3,"AGRIPPINA",0 		; Köln
 v_05
-	.byt $a0					; $07	
-	.asc 3,"LUTECIA",0 			; Paris	
+	.byt $a1					; $06
+	.asc 3,"BACINO",0 			; Barcelone
 v_06
-	.byt $a0					; $07	
-	.asc 3,"LOUSONA",0 			; Lausane	
+	.byt $a1					; $05
+	.asc 3,"GADES",0 			; Cadiz
 v_07
-	.byt $9f					; $09	
-	.asc 3,"OCTODURUS",0	
+	.byt $9f					; $0a
+	.asc 3,"BRIGANTIUM",0 		; A Coruña
 v_08
-	.byt $9f					; $09	
-	.asc 3,"AGRIPPINA",0 		; Köln	
+	.byt $9f					; $09
+	.asc 3,"LONDINIUM",0 		; London
 v_09
-	.byt $a1					; $06	
-	.asc 3,"BACINO",0 			; Barcelone			
+	.byt $9d					; $0d
+	.asc 3,"NARBO MARTIUS",0 	; Narbone
 v_0A
-	.byt $a1					; $05	
-	.asc 3,"GADES",0 			; Cadiz			
+	.byt $9a					; $13
+	.asc 3,"MEDIOLANUM SANTONUM",0 ; Saintes
 v_0B
-	.byt $9f					; $0a	
-	.asc 3,"BRIGANTIUM",0 		; A Coruña	
+	.byt $9f					; $0a
+	.asc 3,"GESORIACUM",0 		; Boulogne
 v_0C
-	.byt $9f					; $09	
-	.asc 3,"LONDINIUM",0 		; London	
+	.byt $9d					; $0d
+	.asc 3,"CARTHAGO NOVA",0 	; Cartagena
 v_0D
-	.byt $a1					; $06	
-	.asc 3,"LINDUM",0 			; Lincoln		
+	.byt $a0					; $07
+	.asc 3,"OLISIPA",0 			; Lisboa
 v_0E
-	.byt $9d					; $0d		
-	.asc 3,"NARBO MARTIUS",0 	; Narbone	
+	.byt $9c					; $10
+	.asc 3,"ISCA DUMNONIORUM",0 ; Exeter
 v_0F
-	.byt $9a					; $13	
-	.asc 3,"MEDIOLANUM SANTONUM",0 ; Saintes		
-v_10
-	.byt $9f					; $0a	
-	.asc 3,"GESORIACUM",0 		; Boulogne		
-v_11
-	.byt $9d					; $0d	
-	.asc 3,"CARTHAGO NOVA",0 	; Cartagena		
-v_12
-	.byt $a0					; $07	
-	.asc 3,"OLISIPA",0 			; Lisboa		
-v_13
-	.byt $9c					; $10	
-	.asc 3,"ISCA DUMNONIORUM",0 ; Exeter		
-v_14
-	.byt $a1					; $6	
-	.asc 3,"EBLANA",0 			; Dublin	
-	
-ptr_v ;(pointeurs v pour villes)	
-	
+	.byt $a1					; $6
+	.asc 3,"EBLANA",0 			; Dublin
+
+ptr_v ;(pointeurs v pour villes)
+
 	.byt <v_00,>v_00,<v_01,>v_01,<v_02,>v_02,<v_03,>v_03,<v_04,>v_04,<v_05,>v_05
 	.byt <v_06,>v_06,<v_07,>v_07,<v_08,>v_08,<v_09,>v_09,<v_0A,>v_0A,<v_0B,>v_0B
-	.byt <v_0C,>v_0C,<v_0D,>v_0D,<v_0E,>v_0E,<v_0F,>v_0F,<v_10,>v_10,<v_11,>v_11
-	.byt <v_12,>v_12,<v_13,>v_13,<v_14,>v_14
+	.byt <v_0C,>v_0C,<v_0D,>v_0D,<v_0E,>v_0E,<v_0F,>v_0F
 
-
+;--------------------------------------------------------------
 t_h_wall_1
 	.byt $9c
 	.asc "Congratulations!",0
-t_h_wall_2	
-	.byt $bc 
+t_h_wall_2
+	.byt $bc
 	.asc "You have reached fort Borcovicus",0
-t_h_wall_3	
+t_h_wall_3
 	.byt $94
 	.asc "and completed the first part of",0
-t_h_wall_4	
+t_h_wall_4
 	.byt $c6
 	.asc "your mission!",0
-t_h_wall_5	
-	.byt $96	
+t_h_wall_5
+	.byt $96
 	.asc "See you soon for episode two:",0
-t_h_wall_6	
+t_h_wall_6
 	.byt $c0
 	.asc "MISSIO: Beyond the Wall",0
-	
+;--------------------------------------------------------------
 t_druid_hut_1
 	.byt $93
 	.asc "You are in front of a druid's hut.",0
-t_druid_hut_2	
-	.byt $bf	
+t_druid_hut_2
+	.byt $bf
 	.asc "Do you knock on the door?",0
-t_druid_hut_3	
-	.byt $96	
+t_druid_hut_3
+	.byt $96
 	.asc "Your magical skill is too low.",0
-t_druid_hut_4	
-	.byt $c3	
+t_druid_hut_4
+	.byt $c3
 	.asc "He refuses to open.",0
-t_druid_hut_5	
-	.byt $93	
+t_druid_hut_5
+	.byt $93
 	.asc "He asks you for Aconitum napellus",0
-t_druid_hut_6	
-	.byt $bc	
+t_druid_hut_6
+	.byt $bc
 	.asc "in exchange for his best spell.",0
-t_druid_hut_7	
-	.byt $91	
+t_druid_hut_7
+	.byt $91
 	.asc "He thanks you for the Aconitum napellus",0
-t_druid_hut_8	
+t_druid_hut_8
 	.byt $ba
 	.asc "and teaches you the KRAKENSLEEP spell",0
-	
-	
+;--------------------------------------------------------------
+
 t_herb_1
 	.byt $97
 	.asc "You find Aconitum napellus;",0
-t_herb_2	
-	.byt $c5	
+t_herb_2
+	.byt $c5
 	.asc "do you pick it?",0
-	
+;--------------------------------------------------------------
 t_kraken_1
 	.byt $94
 	.asc "A raging kraken is preventing you",0
-t_kraken_2	
-	.byt $be	
+t_kraken_2
+	.byt $be
 	.asc "from going any further north.",0
-t_kraken_3	
-	.byt $95	
+t_kraken_3
+	.byt $95
 	.asc "The spell appeases the kraken.",0
-t_kraken_4	
-	.byt $c4	
+t_kraken_4
+	.byt $c4
 	.asc "It lets you pass.",0
 
-	
+
 ; -----------------------------------------------
-;       Table redéfinition  2nd jeu de car 
+;       Table redéfinition  2nd jeu de car
 ; -----------------------------------------------
 
 dta_car_redef_p1
-;00 en $b900
+;00 en $9d00
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $fe	;1,1,1,1,1,1,1,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
-	.byt $40	;0,1,0,0,0,0,0,0	
+	.byt $40	;0,1,0,0,0,0,0,0
 
-;01 en $b906
+;01 en $9d06
 	.byt $ff	;1,1,1,1,1,1,1,1
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
-	.byt $40	;0,1,0,0,0,0,0,0	
+	.byt $40	;0,1,0,0,0,0,0,0
 
 
-;02 en $b90c
+;02 en $9d0c
 	.byt $fb	;1,1,1,1,1,0,1,1
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
-	
-;03 en $b912
+
+;03 en $9d12
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $ff	;1,1,1,1,1,1,1,1
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
-	.byt $40	;0,1,0,0,0,0,0,0	
-	
-;04 en $b918
+	.byt $40	;0,1,0,0,0,0,0,0
+
+;04 en $9d18
 	.byt $6a	;0,1,1,0,1,0,1,0
 	.byt $55	;0,1,0,1,0,1,0,1
 	.byt $6a	;0,1,1,0,1,0,1,0
 	.byt $55	;0,1,0,1,0,1,0,1
 	.byt $6a	;0,1,1,0,1,0,1,0
-	.byt $55	;0,1,0,1,0,1,0,1	
-	
-;05 en $b91e
+	.byt $55	;0,1,0,1,0,1,0,1
+
+;05 en $9d1e
 	.byt $6a	;0,1,1,0,1,0,1,0
 	.byt $55	;0,1,0,1,0,1,0,1
 	.byt $6f	;0,1,1,0,1,1,1,1
 	.byt $c6 	;1,1,0,0,0,1,1,0
 	.byt $6a	;0,1,1,0,1,0,1,0
-	.byt $f3 	;1,1,1,1,0,0,1,1	
-	
-;06 en $b924
+	.byt $f3 	;1,1,1,1,0,0,1,1
+
+;06 en $9d24
 	.byt $6a	;0,1,1,0,1,0,1,0
 	.byt $55	;0,1,0,1,0,1,0,1
 	.byt $7a 	;0,1,1,1,1,0,1,0
 	.byt $dc 	;1,1,0,1,1,1,0,0
 	.byt $7e 	;0,1,1,1,1,1,1,0
-	.byt $cd 	;1,1,0,0,1,1,0,1	
-	
-;07  en $b92a
-	.byt $ff 	;1,1,1,1,1,1,1,1
-	.byt $73 	;0,1,1,1,0,0,1,1
-	.byt $fe 	;1,1,1,1,1,1,1,0
-	.byt $7e 	;0,1,1,1,1,1,1,0
-	.byt $fe 	;1,1,1,1,1,1,1,0
-	.byt $55	;0,1,0,1,0,1,0,1	
-	
-;08  en $b930
-	.byt $ff 	;1,1,1,1,1,1,1,1
-	.byt $73 	;0,1,1,1,0,0,1,1
-	.byt $df 	;1,1,0,1,1,1,1,1
-	.byt $5f 	;0,1,0,1,1,1,1,1
-	.byt $df 	;1,1,0,1,1,1,1,1
-	.byt $55	;0,1,0,1,0,1,0,1	
-	
-;09  en $b936
-	.byt $c0 	;1,1,0,0,0,0,0,0
-	.byt $73 	;0,1,1,1,0,0,1,1
-	.byt $c1 	;1,1,0,0,0,0,0,1
-	.byt $7e 	;0,1,1,1,1,1,1,0
-	.byt $c1 	;1,1,0,0,0,0,0,1
-	.byt $55	;0,1,0,1,0,1,0,1	
-	
-;0A  en $b93c
-	.byt $c0 	;1,1,0,0,0,0,0,0
-	.byt $73 	;0,1,1,1,0,0,1,1
-	.byt $e0 	;1,1,1,0,0,0,0,0
-	.byt $5f 	;0,1,0,1,1,1,1,1
-	.byt $e0 	;1,1,1,0,0,0,0,0
-	.byt $55	;0,1,0,1,0,1,0,1	
+	.byt $cd 	;1,1,0,0,1,1,0,1
 
-;0B  en $b942
+;07  en $9d2a
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $fe 	;1,1,1,1,1,1,1,0
+	.byt $7e 	;0,1,1,1,1,1,1,0
+	.byt $fe 	;1,1,1,1,1,1,1,0
+	.byt $55	;0,1,0,1,0,1,0,1
+
+;08  en $9d30
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $df 	;1,1,0,1,1,1,1,1
+	.byt $5f 	;0,1,0,1,1,1,1,1
+	.byt $df 	;1,1,0,1,1,1,1,1
+	.byt $55	;0,1,0,1,0,1,0,1
+
+;09  en $9d36
+	.byt $c0 	;1,1,0,0,0,0,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $c1 	;1,1,0,0,0,0,0,1
+	.byt $7e 	;0,1,1,1,1,1,1,0
+	.byt $c1 	;1,1,0,0,0,0,0,1
+	.byt $55	;0,1,0,1,0,1,0,1
+
+;0A  en $9d3c
+	.byt $c0 	;1,1,0,0,0,0,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $5f 	;0,1,0,1,1,1,1,1
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $55	;0,1,0,1,0,1,0,1
+
+;0B  en $9d42
 	.byt $ff 	;1,1,1,1,1,1,1,1
 	.byt $43 	;0,1,0,0,0,0,1,1
 	.byt $f8 	;1,1,1,1,1,0,0,0
@@ -1938,7 +1955,7 @@ dta_car_redef_p1
 	.byt $c4 	;1,1,0,0,0,1,0,0
 	.byt $7f 	;0,1,1,1,1,1,1,1
 
-;0C  en $b948
+;0C  en $9d48
 	.byt $cf 	;1,1,0,0,1,1,1,1
 	.byt $78 	;0,1,1,1,1,0,0,0
 	.byt $c3 	;1,1,0,0,0,0,1,1
@@ -1946,79 +1963,79 @@ dta_car_redef_p1
 	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $7f 	;0,1,1,1,1,1,1,1
 
-;0D  en $b94e
+;0D  en $9d4e
 	.byt $68 	;0,1,1,0,1,0,0,0
 	.byt $51 	;0,1,0,1,0,0,0,1
 	.byt $63 	;0,1,1,0,0,0,1,1
 	.byt $51 	;0,1,0,1,0,0,0,1
 	.byt $62 	;0,1,1,0,0,0,1,0
 	.byt $47 	;0,1,0,0,0,1,1,1
-	
-;0E  en $b954
+
+;0E  en $9d54
 	.byt $62 	;0,1,1,0,0,0,1,0
 	.byt $71 	;0,1,1,1,0,0,0,1
 	.byt $68 	;0,1,1,0,1,0,0,0
 	.byt $71 	;0,1,1,1,0,0,0,1
 	.byt $78 	;0,1,1,1,1,0,0,0
-	.byt $54 	;0,1,0,1,0,1,0,0	
-	
-;0F  en $b95a
+	.byt $54 	;0,1,0,1,0,1,0,0
+
+;0F  en $9d5a
 	.byt $63 	;0,1,1,0,0,0,1,1
 	.byt $45 	;0,1,0,0,0,1,0,1
 	.byt $60 	;0,1,1,0,0,0,0,0
 	.byt $51 	;0,1,0,1,0,0,0,1
 	.byt $68 	;0,1,1,0,1,0,0,0
-	.byt $51 	;0,1,0,1,0,0,0,1	
-	
-;10  en $b960
+	.byt $51 	;0,1,0,1,0,0,0,1
+
+;10  en $9d60
 	.byt $69 	;0,1,1,0,1,0,0,1
 	.byt $5c 	;0,1,0,1,1,1,0,0
 	.byt $61 	;0,1,1,0,0,0,0,1
 	.byt $72 	;0,1,1,1,0,0,1,0
 	.byt $61 	;0,1,1,0,0,0,0,1
-	.byt $72 	;0,1,1,1,0,0,1,0	
-	
-;11  en $b966
+	.byt $72 	;0,1,1,1,0,0,1,0
+
+;11  en $9d66
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
-	.byt $de 	;1,1,0,1,1,1,1,0		
-	
-;12  en $b96c
+	.byt $de 	;1,1,0,1,1,1,1,0
+
+;12  en $9d6c
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
-	.byt $de 	;1,1,0,1,1,1,1,0	
-	
-;13  en $b972
+	.byt $de 	;1,1,0,1,1,1,1,0
+
+;13  en $9d72
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $de 	;1,1,0,1,1,1,1,0
-	.byt $de 	;1,1,0,1,1,1,1,0	
-	
-;14  en $b978
+	.byt $de 	;1,1,0,1,1,1,1,0
+
+;14  en $9d78
 	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $ff 	;1,1,1,1,1,1,1,1
 	.byt $ff 	;1,1,1,1,1,1,1,1
 	.byt $ff 	;1,1,1,1,1,1,1,1
 	.byt $c0 	;1,1,0,0,0,0,0,0
-	.byt $55 	;0,1,0,1,0,1,0,1	
-	
-;15  en $b97e
+	.byt $55 	;0,1,0,1,0,1,0,1
+
+;15  en $9d7e
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $c0 	;1,1,0,0,0,0,0,0
-	.byt $55 	;0,1,0,1,0,1,0,1	
-	
-;16  en $b984
+	.byt $55 	;0,1,0,1,0,1,0,1
+
+;16  en $9d84
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
@@ -2026,95 +2043,95 @@ dta_car_redef_p1
 	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $55 	;0,1,0,1,0,1,0,1
 
-;17  en $b98a
+;17  en $9d8a
 	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
-	
-;18  en $b990
-	.byt $c0 	;1,1,0,0,0,0,0,0 
+
+;18  en $9d90
+	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
-	.byt $de 	;1,1,0,1,1,1,1,0	
-	
-;19  en $b996
+	.byt $de 	;1,1,0,1,1,1,1,0
+
+;19  en $9d96
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
-	.byt $c1 	;1,1,0,0,0,0,0,1	
-	
-;1A  en $b99c
+	.byt $c1 	;1,1,0,0,0,0,0,1
+
+;1A  en $9d9c
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
-	.byt $d8 	;1,1,0,1,1,0,0,0	
-	
-;1B  en $b9a2
+	.byt $d8 	;1,1,0,1,1,0,0,0
+
+;1B  en $9da2
 	.byt $c2 	;1,1,0,0,0,0,1,0
 	.byt $c5 	;1,1,0,0,0,1,0,1
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c7 	;1,1,0,0,0,1,1,1
 	.byt $c4 	;1,1,0,0,0,1,0,0
-	.byt $cc 	;1,1,0,0,1,1,0,0	
-	
-;1C  en $b9a8
+	.byt $cc 	;1,1,0,0,1,1,0,0
+
+;1C  en $9da8
 	.byt $f4 	;1,1,1,1,0,1,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $d0 	;1,1,0,1,0,0,0,0
 	.byt $c8 	;1,1,0,0,1,0,0,0
-	.byt $dc 	;1,1,0,1,1,1,0,0	
-	
-;1D  en $b9ae
+	.byt $dc 	;1,1,0,1,1,1,0,0
+
+;1D  en $9dae
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c3 	;1,1,0,0,0,0,1,1
-	.byt $c7 	;1,1,0,0,0,1,1,1	
-	
-;1E  en $b9b4
+	.byt $c7 	;1,1,0,0,0,1,1,1
+
+;1E  en $9db4
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $f8 	;1,1,1,1,1,0,0,0
-	.byt $ec 	;1,1,1,0,1,1,0,0	
-	
-;1F  en $b9ba
+	.byt $ec 	;1,1,1,0,1,1,0,0
+
+;1F  en $9dba
 	.byt $cb 	;1,1,0,0,1,0,1,1
 	.byt $d1 	;1,1,0,1,0,0,0,1
 	.byt $c1	;1,1,0,0,0,0,0,1
 	.byt $c2 	;1,1,0,0,0,0,1,0
 	.byt $c4 	;1,1,0,0,0,1,0,0
-	.byt $cc 	;1,1,0,0,1,1,0,0	
-	
-;20  en $b9c0
+	.byt $cc 	;1,1,0,0,1,1,0,0
+
+;20  en $9dc0
 	.byt $f4 	;1,1,1,1,0,1,0,0
 	.byt $e8 	;1,1,1,0,1,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
 	.byt $d8 	;1,1,0,1,1,0,0,0
-	.byt $f8 	;1,1,1,1,1,0,0,0	
-	
-;21  en $b9c6
+	.byt $f8 	;1,1,1,1,1,0,0,0
+
+;21  en $9dc6
 	.byt $6a 	;0,1,1,0,1,0,1,0
 	.byt $55 	;0,1,0,1,0,1,0,1
 	.byt $76 	;0,1,1,1,0,1,1,0
 	.byt $f6 	;1,1,1,1,0,1,1,0
 	.byt $db 	;1,1,0,1,1,0,1,1
-	.byt $76 	;0,1,1,1,0,1,1,0	
-	
-;22  en $b9cc
+	.byt $76 	;0,1,1,1,0,1,1,0
+
+;22  en $9dcc
 	.byt $76 	;0,1,1,1,0,1,1,0
 	.byt $f6 	;1,1,1,1,0,1,1,0
 	.byt $db 	;1,1,0,1,1,0,1,1
@@ -2122,7 +2139,7 @@ dta_car_redef_p1
 	.byt $6a 	;0,1,1,0,1,0,1,0
 	.byt $55 	;0,1,0,1,0,1,0,1
 
-;23  en $b9d2
+;23  en $9dd2
 	.byt $76 	;0,1,1,1,0,1,1,0
 	.byt $f6 	;1,1,1,1,0,1,1,0
 	.byt $db 	;1,1,0,1,1,0,1,1
@@ -2130,7 +2147,7 @@ dta_car_redef_p1
 	.byt $de 	;1,1,0,1,1,1,1,0
 	.byt $de 	;1,1,0,1,1,1,1,0
 
-;24  en $b9d8
+;24  en $9dd8
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
@@ -2138,7 +2155,7 @@ dta_car_redef_p1
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c6 	;1,1,0,0,0,1,1,0
 
-;25  en $b9de
+;25  en $9dde
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
 	.byt $c0 	;1,1,0,0,0,0,0,0
@@ -2146,7 +2163,7 @@ dta_car_redef_p1
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 
-;26  en $b9e4
+;26  en $9de4
 	.byt $cb 	;1,1,0,0,1,0,1,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
@@ -2154,7 +2171,7 @@ dta_car_redef_p1
 	.byt $c4 	;1,1,0,0,0,1,0,0
 	.byt $ce 	;1,1,0,0,1,1,1,0
 
-;27  en $b9ea
+;27  en $9dea
 	.byt $d0 	;1,1,0,1,0,0,0,0
 	.byt $e8 	;1,1,1,0,1,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
@@ -2162,72 +2179,40 @@ dta_car_redef_p1
 	.byt $c8 	;1,1,0,0,1,0,0,0
 	.byt $cc 	;1,1,0,0,1,1,0,0
 
-;28  en $b9f0
+;28  en $9df0
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c7 	;1,1,0,0,0,1,1,1
-	.byt $cd 	;1,1,0,0,1,1,0,1	
-	
-;29  en $b9f6
+	.byt $cd 	;1,1,0,0,1,1,0,1
+
+;29  en $9df6
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
 	.byt $c0 	;1,1,0,0,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
-	.byt $f8 	;1,1,1,1,1,0,0,0	
+	.byt $f8 	;1,1,1,1,1,0,0,0
 
-dta_car_redef_p2	
-;2A  en $b9fc
+dta_car_redef_p2
+;2A  en $9dfc
 	.byt $cb 	;1,1,0,0,1,0,1,1
 	.byt $c5 	;1,1,0,0,0,1,0,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c6 	;1,1,0,0,0,1,1,0
-	.byt $c7 	;1,1,0,0,0,1,1,1	
-	
-;2B  en $ba02
+	.byt $c7 	;1,1,0,0,0,1,1,1
+
+;2B  en $9e02
 	.byt $f4 	;1,1,1,1,0,1,0,0
 	.byt $e2 	;1,1,1,0,0,0,1,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $d0 	;1,1,0,1,0,0,0,0
 	.byt $c8 	;1,1,0,0,1,0,0,0
-	.byt $cc 	;1,1,0,0,1,1,0,0	
-	
-;2C  en $ba08
-	.byt $c1 	;1,1,0,0,0,0,0,1
-	.byt $c3 	;1,1,0,0,0,0,1,1
-	.byt $c1 	;1,1,0,0,0,0,0,1
-	.byt $c1 	;1,1,0,0,0,0,0,1
-	.byt $c3 	;1,1,0,0,0,0,1,1
-	.byt $c7 	;1,1,0,0,0,1,1,1	
-	
-;2D  en $ba0e
-	.byt $e0 	;1,1,1,0,0,0,0,0
-	.byt $f0 	;1,1,1,1,0,0,0,0
-	.byt $e0 	;1,1,1,0,0,0,0,0
-	.byt $e0 	;1,1,1,0,0,0,0,0
-	.byt $f0 	;1,1,1,1,0,0,0,0
-	.byt $f8 	;1,1,1,1,1,0,0,0	
-	
-;2E  en $ba14
-	.byt $cb 	;1,1,0,0,1,0,1,1
-	.byt $c5 	;1,1,0,0,0,1,0,1
-	.byt $c3 	;1,1,0,0,0,0,1,1
-	.byt $c2 	;1,1,0,0,0,0,1,0
-	.byt $c2 	;1,1,0,0,0,0,1,0
-	.byt $c6 	;1,1,0,0,0,1,1,0	
-	
-;2F  en $ba1a
-	.byt $f4 	;1,1,1,1,0,1,0,0
-	.byt $e4 	;1,1,1,0,0,1,0,0     ;1,1,1,0,0,0,1,0
-	.byt $f0 	;1,1,1,1,0,0,0,0
-	.byt $d0 	;1,1,0,1,0,0,0,0
-	.byt $d0 	;1,1,0,1,0,0,0,0
-	.byt $d0 	;1,1,0,1,0,0,0,0     ;1,1,0,0,0,0,0,0
+	.byt $cc 	;1,1,0,0,1,1,0,0
 
-;30  en $ba20
+;2C  en $9e08
 	.byt $c1 	;1,1,0,0,0,0,0,1
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c1 	;1,1,0,0,0,0,0,1
@@ -2235,7 +2220,7 @@ dta_car_redef_p2
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c7 	;1,1,0,0,0,1,1,1
 
-;31  en $ba26
+;2D  en $9e0e
 	.byt $e0 	;1,1,1,0,0,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
 	.byt $e0 	;1,1,1,0,0,0,0,0
@@ -2243,50 +2228,92 @@ dta_car_redef_p2
 	.byt $f0 	;1,1,1,1,0,0,0,0
 	.byt $f8 	;1,1,1,1,1,0,0,0
 
-;32  en $ba2c
+;2E  en $9e14
 	.byt $cb 	;1,1,0,0,1,0,1,1
-	.byt $c9 	;1,1,0,0,1,0,0,1      ;1,1,0,1,0,0,0,1
+	.byt $c5 	;1,1,0,0,0,1,0,1
 	.byt $c3 	;1,1,0,0,0,0,1,1
 	.byt $c2 	;1,1,0,0,0,0,1,0
 	.byt $c2 	;1,1,0,0,0,0,1,0
-	.byt $c2 	;1,1,0,0,0,0,1,0       ;1,1,0,0,0,0,0,0
+	.byt $c6 	;1,1,0,0,0,1,1,0
 
-;33  en $ba32
+;2F  en $9e1a
+	.byt $f4 	;1,1,1,1,0,1,0,0
+	.byt $e4 	;1,1,1,0,0,1,0,0
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $d0 	;1,1,0,1,0,0,0,0
+	.byt $d0 	;1,1,0,1,0,0,0,0
+	.byt $d0 	;1,1,0,1,0,0,0,0
+
+;30  en $9e20
+	.byt $c1 	;1,1,0,0,0,0,0,1
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	.byt $c1 	;1,1,0,0,0,0,0,1
+	.byt $c1 	;1,1,0,0,0,0,0,1
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	.byt $c7 	;1,1,0,0,0,1,1,1
+
+;31  en $9e26
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $f8 	;1,1,1,1,1,0,0,0
+
+;32  en $9e2c
+	.byt $cb 	;1,1,0,0,1,0,1,1
+	.byt $c9 	;1,1,0,0,1,0,0,1
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	.byt $c2 	;1,1,0,0,0,0,1,0
+	.byt $c2 	;1,1,0,0,0,0,1,0
+	.byt $c2 	;1,1,0,0,0,0,1,0
+
+;33  en $9e32
 	.byt $f4 	;1,1,1,1,0,1,0,0
 	.byt $e8 	;1,1,1,0,1,0,0,0
 	.byt $f0 	;1,1,1,1,0,0,0,0
 	.byt $d0 	;1,1,0,1,0,0,0,0
 	.byt $d0 	;1,1,0,1,0,0,0,0
 	.byt $d8 	;1,1,0,1,1,0,0,0
-	
-;34  en $ba38
+
+;34  en $9e38
 	.byt $ff 	;1,1,1,1,1,1,1,1
 	.byt $41 	;0,1,0,0,0,0,0,1
 	.byt $41 	;0,1,0,0,0,0,0,1
 	.byt $61 	;0,1,1,0,0,0,0,1
 	.byt $55 	;0,1,0,1,0,1,0,1
-	.byt $5f 	;0,1,0,1,1,1,1,1	
-	
-;35  en $ba3e
+	.byt $5f 	;0,1,0,1,1,1,1,1
+
+;35  en $9e3e
 	.byt $df 	;1,1,0,1,1,1,1,1
 	.byt $40 	;0,1,0,0,0,0,0,0
 	.byt $40 	;0,1,0,0,0,0,0,0
 	.byt $40 	;0,1,0,0,0,0,0,0
 	.byt $47 	;0,1,0,0,0,1,1,1
-	.byt $7c 	;0,1,1,1,1,1,0,0	
-	
-;36  en $ba44
+	.byt $7c 	;0,1,1,1,1,1,0,0
+
+;36  en $9e44
 	.byt $4f 	;0,1,0,0,1,1,1,1
 	.byt $40 	;0,1,0,0,0,0,0,0
 	.byt $fe 	;1,1,1,1,1,1,1,0
 	.byt $40 	;0,1,0,0,0,0,0,0
 	.byt $40 	;0,1,0,0,0,0,0,0
-	.byt $40 	;0,1,0,0,0,0,0,0	
-	
-;37  en $ba4a
+	.byt $40 	;0,1,0,0,0,0,0,0
+
+;37  en $9e4a
 	.byt $70	;0,1,1,1,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
 	.byt $40	;0,1,0,0,0,0,0,0
-	.byt $40	;0,1,0,0,0,0,0,0	
+	.byt $40	;0,1,0,0,0,0,0,0
+
+;38  en $9e50
+	.byt $DE	;1,1,0,1,1,1,1,0
+	.byt $ff	;1,1,1,1,1,1,1,1
+	.byt $ff	;1,1,1,1,1,1,1,1
+	.byt $ff	;1,1,1,1,1,1,1,1
+	.byt $c0	;1,1,0,0,0,0,0,0
+	.byt $55	;0,1,0,1,0,1,0,1
+
+
