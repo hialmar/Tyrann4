@@ -323,7 +323,7 @@ combat_33
 combat_74
  WAIT 5*TI:GOSUB  combat_7 :GOTO  combat_80 
 combat_72
- IF OC(AO(P))=25 THEN PRINT @6,10;N$(AO(P))" use Warg vision ":ZO=1:GOTO  combat_80 
+ IF OC(AO(P))=25 THEN PRINT @6,10;N$(AO(P))" use spirit vision ":ZO=1:GOTO  combat_80
  IF OC(AO(P))=26 THEN PRINT @6,10;N$(AO(P))" use freezing potion":GOSUB  combat_81 :GOTO  combat_80 
  IF OC(AO(P))=32 OR OC(AO(P))=33 THEN PRINT @6,10;N$(AO(P))" explode ";IT$(OC(AO(P))):GOSUB  combat_82 :GOSUB  combat_83 
 combat_80
@@ -431,7 +431,7 @@ combat_95
  RETURN
 combat_31
  REM EFFET ARME
- IF C6OK(TG(AO(P)))>4 OR VE(AO(P))> 10 THEN RT=1
+ IF C6OK(TG(AO(P)))>4 OR VE(AO(P))> 30 THEN RT=1
  IF RT=0 THEN PING:PRINT@15,14;" and fails ! ":GOTO  combat_96 
  SS=VIL+FNA(5)+BF(AO(P))
  IF EF(AO(P))>0 THEN SS=SS+((1+FNA(2))*(BF(AO(P))))
@@ -848,7 +848,7 @@ combat_165
  FORI=1TO6
  IF OK(I)<>4 THEN ET(I)=PV(I)
  NEXT
- S$="A team healthy again !"
+ S$="A healthy team again !"
  RETURN
 combat_166
  REM 2,6 ECRAN
@@ -896,13 +896,13 @@ combat_172
 combat_173
  REM 3.4VISION
  TST=4:DFF=50:GOSUB  combat_30 :IF RT=0 THEN  combat_169 
- PRINT @10,12;" uses Warg vision":ZO=1:GOSUB  combat_11 :WAIT TI*12
+ PRINT @10,12;" uses spirit vision":ZO=1:GOSUB  combat_11 :WAIT TI*12
  RETURN
 combat_174
  REM 3.5GLACE
  TST=4:DFF=25:GOSUB  combat_30 :IF RT=0 THEN  combat_169 
 combat_81
- ECHEC=0:L=13:PRINT @10,12;" The North's Blow  !! ":WAIT TI*10
+ ECHEC=0:L=13:PRINT @10,12;" The Cold wind blows!! ":WAIT TI*10
  FORI=1TONE
  IF C6OK(I)<1 THEN  combat_187 
  SS=FM(AO(P))-C5(I)+FNA(VIL):L=L+1
