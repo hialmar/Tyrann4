@@ -77,7 +77,7 @@ laisser_passer .dsb 1
 numero_lieu .dsb 1
 
 ;   $50 : drapeau sortie victorieuse de la carte = $80 sinon = $20
-sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
+sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 ;
 ;
 
