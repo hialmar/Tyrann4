@@ -1552,7 +1552,7 @@ get_value
 ;------------------------------------------------
 
 det_index
-	lda $0e
+	lda tuile_sous_pos_perso
 	beq traite_mer
 	cmp #$01
 	beq traite_mer
