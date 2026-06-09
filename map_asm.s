@@ -81,7 +81,7 @@ sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon =
 ;
 ;
 
-;;; STOP : 24 octets utilisés en page 0
+;;; STOP : 27 octets utilisés en page 0
 
 	.text
 
