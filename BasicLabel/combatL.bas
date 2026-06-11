@@ -4,7 +4,8 @@
  POKE 48035,0
  PAPER0:INK6:POKE#26A,PEEK(#26A) AND 254
  A=DEEK(#308):R= RND(-A)
- GRAB : HIMEM 40959 : GOSUB  combat_load : GOSUB  combat_load_items  : POKE 48035,0
+ REM GRAB : HIMEM 40959 : GOSUB  combat_load : GOSUB  combat_load_items  : POKE 48035,0
+ GOSUB  combat_load : GOSUB  combat_load_items  : POKE 48035,0
  NO=CA-30 ' numero du combat
  IF NO<13 THEN NC=1:GOTO  combat_2  ' niveau du combat
  IF NO<18 THEN NC=2:GOTO  combat_2 
@@ -247,6 +248,7 @@ combat_55
  RETURN
 combat_12
  REM FUITE
+ FR=FRE("") : PRINT@15,11;CHR$(131) FR
  FF=1:PRINT@15,12;CHR$(131)"FLEE Y/N"
 combat_58
  GETA$
@@ -258,7 +260,8 @@ combat_58
  CLS:PRINT@13,8;CHR$(145)" YOU FLEE !!"CHR$(144)
  PRINT@13,10;"BACK TO MAZE":PRINT:NF=NF+20
  FORJ=1TO5:ZAP:WAIT5:NEXT:SHOOT:WAIT5
- GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
+ REM GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
+ GOSUB combat_save : FR=FRE("") : PRINT FR : LOAD("LABY")
 combat_60
  PRINT@15,12;CHR$(131)"  FAIL  ":SHOOT:WAITTI*4
 combat_59
@@ -610,7 +613,8 @@ combat_130
  L=21:GOSUB  combat_5 
  PING
  CA=0
- GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
+ REM GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
+ GOSUB  combat_save  : FR=FRE("") : PRINT FR : LOAD("LABY")
 combat_132
  REM PROMOTION NEW
  NI(P)=NI(P)+1:XP(P)=0:FORJ=1TO5:PING:WAIT2*J:NEXT
