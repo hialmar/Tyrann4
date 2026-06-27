@@ -7,32 +7,31 @@
  GOSUB Intro
 Dices
  REM DICES TESTS
- CLS:D=10:PAPER0:INK 3:P=1:TRY=1
+ CLS:D=10:PAPER0:INK 3
+ INPUT "DICE ROLL SPEED (1=FAST-3=SLOW)";VT
+ FOR P=1TO6
+ TRY=1
  GOSUB IntroCreation
- REM INPUT "HERO NAME:";NOM$:NOM$(1)=LEFT$(NO$,10)
- REM INPUT "CULTURE: (1-7)";CULT(1)
- REM INPUT "ROLE: (1-6)";ROLE(1)
- INPUT "VITESSE TIRAGE (1-3)";VT
  POKE#26A,PEEK(#26A) AND 254 'Vire le curseur
  DEF FN A(X)=INT(RND(1)*X)+1
 dices_14
  CLS:TT=0
- S$=" "+NOM$(P)+" the "+CULT$(ROLE(P))+" "
+ S$=" "+NOM$(P)+" the "+CULT$(CULT(P))+" "
  T=INT((40-LEN(S$))/2)
  PRINT @T,1;CHR$(148);S$;CHR$(144)
  S$=" > "+ROLE$(ROLE(P))+" < "
  T=INT((40-LEN(S$))/2)
  PRINT @T,2;CHR$(148);S$;CHR$(144)
- S$=" <  ROLL 2x10 DICES > | TRY:"+CHR$(144)
+ S$=" <  ROLL 2x10 DICES > - TRY:"+CHR$(144)
  PRINT@ 6,4;CHR$(148);S$;TRY
- PRINT@ 5,12;CHR$(148);"Ml - Rg - St - Ag - IQ - MS | HP ";CHR$(144)
+ PRINT@ 5,12;CHR$(148);"Ml - Rg - St - Ag - IQ - MS - HP ";CHR$(144)
  PRINT@ 1,11;"2D:"
  FOR C=1TO7
  GOSUB  dices_1 
  PRINT @12,5;" >                      "
  PRINT @12,5;" > ";CA$(C)
 dices_2
- GETA$:IFA$<>" " THEN  dices_2 
+ GETA$:IFA$<>" " THEN  dices_2
  PING:PRINT @13,20;"                "
  IF C<7 THEN GOSUB  dices_3 :PRINT@ C*5,11;DD
  ON C GOTO  dices_4 , dices_5 , dices_6 , dices_7 , dices_8 , dices_9 , dices_10 
@@ -79,6 +78,10 @@ dices_13
  PRINT@ I*5+1,16;BR(ROLE(P),I):WAITVT*40:PING
  PRINT@ I*5,17;CARAC(I)+BR(ROLE(P),I):WAITVT*40:PING
  NEXT I
+ ET(P)=HP(P)
+ RI(P)=FNA(150)+200
+ NEXT P
+ GOSUB Sauvegarde
  END:REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 dices_1
  REM ++  DICES ROLL  ++++++++
@@ -165,7 +168,7 @@ IntroCreation
 Intro_3
   TEXT:CLS:PRINT:PRINTSPC(12);CHR$(4);CHR$(27)"JCEO RPG";CHR$(4)
   PRINT
-  PRINT:S$=" ****** CREATE your 1st Hero ***** ":GOSUB  Intro_1 :PRINT
+  PRINT:S$=" ****** CREATE your Hero # "+STR$(P)+" ***** ":GOSUB  Intro_1 :PRINT
   PRINT:S$="HIS FIRSTNAME (10 letters max)":GOSUB  Intro_1
   INPUT NOM$(P)
   IF LEN(NOM$(P))< 2 THEN ZAP:GOTO  Intro_3
@@ -174,28 +177,28 @@ Intro_3
 Intro_6
   TEST=0:GOSUB  Intro_5
   PRINT @10,17;"WHICH Culture ? ";
-  GET CULT$:CULT=VAL(CULT$)
-  IF CU<1 OR CU>7 THEN ZAP:GOTO  Intro_6
-  CP(1)=CU:PRINT CU$(CP(1))
+  GET CULT$:CU=VAL(CULT$)
+  IF CU<1 OR CU(P)>7 THEN ZAP:GOTO  Intro_6
+  CULT(P)=CU:PRINT CU$(CULT(P))
   GOSUB  Intro_7 :IF OK$="N" THEN ZAP:GOTO  Intro_6
-  TEST=1:BOOL=0:SS$=SS$+" the "+CULT$(CP(1))
+  TEST=1:BOOL=0:SS$=SS$+" the "+CULT$(CULT(P))
 Intro_8
   GOSUB  Intro_5
   PRINT @10,16;"WHICH ROLE ? ";
-  GET RO$:ROLE=VAL(RO$)
+  GET RO$:RO=VAL(RO$)
   IF RO<1 OR RO>6 THEN ZAP:GOTO Intro_8
   IF RO<4 THEN  Intro_9
   IF RO=4 AND(CU=2ORCU=5ORCU=6)THENGOSUB Intro_10 :GOTO Intro_8
   IF RO=5 AND(CU<>2ANDCU<>5) THEN GOSUB  Intro_10 :GOTO Intro_8
   IF RO=6 AND(CU<>3ANDCU<>6) THEN GOSUB  Intro_10 :GOTO Intro_8
 Intro_9
-  RP(1)=RO:PRINT RO$(RP(1)):GOSUB  Intro_11
+  ROLE(P)=RO:PRINT RO$(ROLE(P)):GOSUB  Intro_11
   GOSUB  Intro_7 :IF OK$="N" THEN ZAP:TEXT:GOTO Intro_8
   RETURN ' +++++++++++++++  Sous programmes et DATA ++++++++++++++++++++
 Intro_10
   PRINT:PRINT:
   IF BOOL=1THEN Intro_12
-  S$= "  HEY !! "+CULT$(CP(1))+" cannot do that !  "
+  S$= "  HEY !! "+CULT$(CULT(P))+" cannot do that !  "
   BOOL=1:GOTO  Intro_13
 Intro_12
   S$= "         ARE YOU KIDDING ME ?     ":BOOL=0
@@ -243,12 +246,65 @@ Intro_5
   IFTEST=0THENXX=7ELSEXX=6
   FOR I=1TOXX:L=I+4
   IF TEST=0 THEN S$=CULT$(I)ELSE S$=ROLE$(I)
-  PRINT @10,L;"*":PRINT @31,L;"*"
+  PRINT @10,L;"*":PRINT @32,L;"*"
   PRINT @14,L;I;S$
   NEXT I
   PRINT"        *                     *"
   PRINT"        ***********************"
   RETURN
+
+Sauvegarde
+ S$="   SAUVEGARDES EN COURS - PATIENCE  ":GOSUB  Intro_1
+ VIL=1:TL=1:BS=0:FIL=0:SD=0:NP=0:PM=0' ni boussole, ni Filet, ni Selle
+ O1=#A000:POKE O1,0
+ O1=O1+1:POKEO1,1 'numero de version
+ O1=O1+1:POKEO1,85'X
+ O1=O1+1:POKEO1,2'Y
+ O1=O1+1:POKEO1,S
+ O1=O1+1:POKEO1,CA
+ O1=O1+1:POKEO1,VIL
+ FOR P=1TO6
+ O1=O1+1:POKEO1,LEN(NOM$(P))'Longueur du prenom
+ FORJ=1TOLEN(NOM$(P))
+ O1=O1+1:POKEO1,ASC(MID$(NOM$(P),J,1))'stockage du prenom
+ NEXTJ
+ O1=O1+1:DOKEO1,INT(RI(P)/10)' argent sur 2 octets
+ O1=O1+2:POKEO1,ROLE(P):REM + Role du Personnage
+ O1=O1+1:POKEO1,CULT(P):REM + Culture du Personnage
+ O1=O1+1:POKEO1,ML(P):REM + Capacite de Combat
+ O1=O1+1:POKEO1,RG(P):REM + Capacite de Tir
+ O1=O1+1:POKEO1,ST(P):REM + Force
+ O1=O1+1:POKEO1,AG(P):REM + Agilite
+ O1=O1+1:POKEO1,IQ(P):REM + Intelligence
+ O1=O1+1:POKEO1,MS(P):REM + Force Mentale
+ O1=O1+1:POKEO1,HP(P):REM > Points de Vie ou de Blessures
+ O1=O1+1:POKEO1,ET(P):REM > Etat des PV
+ O1=O1+1:OK(P)=1:POKEO1,OK(P):REM > Sante
+ O1=O1+1:NI(P)=1:POKEO1,NI(P):REM > Niveau du perso
+ O1=O1+1:XP(P)=0:DOKEO1,XP(P):REM > Experience
+ O1=O1+2:WR(P)=0:POKEO1,WR(P):REM > ARME DROITE (WEAPON RIGHT)
+ O1=O1+1:WL(P)=0:POKEO1,WL(P):REM > ARME G (WEAPON LEFT)
+ O1=O1+1:PT(P)=0:POKEO1,PT(P):REM > PROTECTION
+ O1=O1+1:CA(P)=0:POKEO1,CA(P):REM > Classe d'armure
+ O1=O1+1:BT(P)=0:POKEO1,BT(P):REM > BETE (ANIMAL)
+ FORI=1TO6:O1=O1+1:POKEO1,BAG(P,I):NEXTI:REM Sac a Dos
+ IF ROLE(P)>3 THEN FORI=1TO8:O1=O1+1:POKEO1,SN(P,I):NEXT'SORTS
+ NEXT P
+ O1=O1+1:POKEO1,BS'Boussole
+ O1=O1+1:POKEO1,FI'Filet
+ O1=O1+1:POKEO1,SD'Selle de Dragon: maitre des dragons (1 a 6)
+ FOR L=1TO9:FOR C=1TO4:O1=O1+1:CLEF(L,C)=0:POKEO1,CLEF(L,C):NEXT C,L:REM Trousseau de clefs
+ FORI=1TO6:O1=O1+1:POKEO1,IG(I):NEXT' tableau des 6 ingr�dients de la potion
+ FOR V=1TO9:FORM=1TO5:O1=O1+1:POKEO1,0:NEXT M,V' tableau coffres et combats � 0
+ O1=O1+1:POKEO1,0'DEdans (portes speciales franchies ou pas - bits 0-3) + Potion Magique (bit 6) + Wall (bit 7)
+ O1=O1+1:POKEO1,1'TL = Team Level
+ O1=O1+1:POKEO1,0'NP = Nombre d'ingredients de la Potion (NI utilise pour Items)
+ O1=O1+1:POKEO1,0'NF = Nombre de fuites
+ O1=O1+1:POKEO1,0'PM = Potion faite
+ PING
+ SAVEU "TEAM.BIN",A#A000,EO1
+ SAVEU "TEAM2.BIN",A#A000,EO1:REM Copie secours
+ RETURN
 
 
  DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal

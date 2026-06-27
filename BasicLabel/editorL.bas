@@ -314,5 +314,7 @@ editor_44
 editor_43
  CU=CU+2:PRINT@CU,9;S$:REM FR = FRE("")
  RETURN
- DATA Chevalier,Mercenaire,Ranger,Sorcier,Mestre,Septon
- DATA Aucune,MARTELL,BARATHEON,TYRELL,GREYJOY,ARRYN,LANNISTER,TULLY,STARK
+ REM DATA Chevalier,Mercenaire,Ranger,Sorcier,Mestre,Septon
+ REM DATA Aucune,MARTELL,BARATHEON,TYRELL,GREYJOY,ARRYN,LANNISTER,TULLY,STARK
+ DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
+ DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Thrace, Greek
