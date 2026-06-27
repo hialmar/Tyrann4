@@ -1092,6 +1092,9 @@ hires_et_atributs
 		rts	
 .)	
 
+	; insert 0s so that to move the specific code upwards of $2000
+	.dsb $2000-*
+
 ;************************************************
 ;******* Affiche différents textes   ************
 ;************************************************
@@ -1698,10 +1701,10 @@ ini_ad_v
 	sta nb_c_vide+2
 	rts
 .)
-	
 
-	
-				
+; insert 0s so that to move the data upwards of $3000
+	.dsb $3000-*
+
 ;************************************************
 ;******* table adresses écran HIRES  ************
 ;************************************************				
