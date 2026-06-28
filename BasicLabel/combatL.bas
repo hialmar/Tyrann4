@@ -1143,7 +1143,7 @@ combat_read_data
  RESTORE:RETURN
  DATA "OK","-Poison-","-Paral- ",">DEAD< "
  DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
- DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Greek, Mesopotamian
+ DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Iberian, Thrace
  DATA 7,6,5,5,4,4,3,3,2,2,1,1
  DATA 75,8, 70,6, 50,5, 80,4, 95,3, 55,2
  DATA 23,Serpents, Wolf-dog, Jackal, Beggar, Cut-throat, Beggar, Prowler, Swordsman
@@ -1151,7 +1151,7 @@ combat_read_data
  DATA Mad Vestal, Dark Priestess, Mad Monk
  DATA Druid, Black Spirit, Evil Priest
  DATA Evil Goth, Damned Legionary, Evil Gladiator
- DATA SOMNUS BLOW, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
- DATA ESCULAPE RITE, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT
+ DATA SOMNUS, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
+ DATA ESCULAPE R, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT
  DATA FIRESWORD, STRENGTH, LUX DEI, VISION, FREEZE, ILLUSION, WIND, DRAGON
  DATA "I reduce your armor !","** fire **","blades rain !","I destroy your weapons !","Healing friends"

@@ -958,7 +958,7 @@ suite_portail
 	lda #>t_portail_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 ;---------------------------------------------------
 key_1	
@@ -987,7 +987,7 @@ suite_clef
 	lda #>t_key_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	
 	ldx #$00
@@ -998,7 +998,7 @@ suite_clef
 	lda #>t_key_3+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 ;-------------------------------------------------------------
 phare_guard_guard
@@ -1026,7 +1026,7 @@ suite_phare_guard
 	lda #>t_phare_guard_4+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text	
 
 	ldx #$00
@@ -1037,7 +1037,7 @@ suite_phare_guard
 	lda #>t_phare_guard_5+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text		
 	rts
 ;-------------------------------------------------
@@ -1063,7 +1063,7 @@ suite_p_g
 	lda #>t_visit_phare_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text		
 	rts	
 ;-------------------------------------------------
@@ -1091,7 +1091,7 @@ ldx #$00
 	lda #>t_m_de_passe_2+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text	
 	rts
 
@@ -1120,7 +1120,7 @@ ldx #$00
 	lda #>t_beggar_2+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text	
 	rts	
 	
@@ -1149,7 +1149,7 @@ ldx #$00
 	lda #>t_garde_4+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 
 ldx #$00
@@ -1190,7 +1190,7 @@ suite_legat
 	lda #>t_legat_2+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 
 	ldx #$00
@@ -1210,7 +1210,7 @@ suite_legat
 	lda #>t_legat_4+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	rts	
 
@@ -1233,7 +1233,7 @@ legat_2
 	lda #>t_legat_6+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 
 	ldx #$00
@@ -1253,7 +1253,7 @@ legat_2
 	lda #>t_legat_8+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	lda #$01
 	sta $1f
@@ -1554,7 +1554,7 @@ garde_nsc
 	lda #>t_garde_2+1
 	sta write_phrase+2	
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text	
 	rts
 ;-------------------------------------	
@@ -1576,7 +1576,7 @@ phare_garde_nsc
 	lda #>t_phare_guard_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	rts			
 
@@ -1590,7 +1590,7 @@ no_pasaran
 	lda #>t_portail_3+1
 	sta write_phrase+2	
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	rts
 ;-------------------------------------
@@ -1603,7 +1603,6 @@ do_you_enter
 	lda #>t_do_you_1+1
 	sta write_phrase+2	
 	jsr write_phrase
-;	jsr hit_key	
 	rts
 ;-------------------------------------
 
@@ -1639,7 +1638,22 @@ ld_208
 	sta $0c
 release_	
 	rts
+.)
+;****************************************************	
+;****   routine attend appui et laché  any key   ****
+;****************************************************	
+hit_release_key
+.(
+	lda $208
+	cmp #$38
+	bne hit_release_key
+ld_208	
+	lda $208
+	cmp #$38
+	beq ld_208
+	rts
 .)	
+	
 ;************************************************
 ;*******       efface le texte       ************
 ;************************************************	
@@ -1852,13 +1866,13 @@ _L06
 _L07
 	.byt $1d,$14,$04,$00,$13,$03,$03,$03,$11,$00,$0d,$42,$00,$15,$17,$00,$00,$0c,$08,$00,$00,$00,$00,$00,$00,$00,$00,$00,$3f,$1d
 _L08
-	.byt $14,$13,$11,$00,$05,$00,$00,$00,$00,$00,$58,$00,$00,$19,$1b,$00,$00,$0c,$08,$04,$00,$13,$03,$13,$03,$03,$02,$00,$3f,$1d
+	.byt $14,$13,$11,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$19,$1b,$00,$00,$0c,$08,$04,$00,$13,$03,$13,$03,$03,$02,$00,$3f,$1d
 _L09
 	.byt $13,$11,$00,$00,$04,$00,$04,$00,$04,$00,$0c,$07,$00,$00,$00,$00,$59,$0c,$08,$12,$00,$12,$63,$12,$00,$00,$00,$00,$3f,$1d
 _L10
 	.byt $05,$00,$00,$13,$11,$00,$05,$00,$05,$00,$0c,$08,$00,$00,$00,$00,$14,$0c,$08,$05,$00,$05,$00,$01,$02,$01,$02,$01,$02,$04
 _L11
-	.byt $14,$00,$00,$12,$00,$00,$00,$00,$00,$00,$06,$06,$06,$06,$06,$06,$06,$06,$08,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
+	.byt $14,$00,$00,$12,$61,$00,$00,$58,$00,$00,$06,$06,$06,$06,$06,$06,$06,$06,$08,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
 _L12
 	.byt $01,$02,$00,$01,$02,$01,$03,$52,$02,$14,$0d,$0a,$0a,$0a,$0a,$0a,$0a,$0a,$42,$14,$00,$01,$02,$01,$02,$01,$02,$00,$14,$04
 _L13
@@ -1866,7 +1880,7 @@ _L13
 _L14
 	.byt $14,$00,$13,$02,$00,$04,$00,$13,$03,$04,$00,$12,$00,$12,$63,$13,$53,$03,$13,$02,$01,$03,$45,$02,$01,$02,$01,$13,$03,$04
 _L15
-	.byt $14,$00,$05,$00,$00,$01,$03,$11,$00,$01,$03,$11,$00,$05,$00,$12,$00,$61,$12,$00,$00,$00,$5f,$00,$00,$00,$00,$12,$63,$05
+	.byt $14,$00,$05,$00,$00,$01,$03,$11,$00,$01,$03,$11,$00,$05,$00,$12,$00,$00,$12,$00,$00,$00,$5f,$00,$00,$00,$00,$12,$63,$05
 _L16
 	.byt $14,$00,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$13,$02,$01,$02,$01,$02,$01,$02,$00,$05,$00,$04
 _L17
