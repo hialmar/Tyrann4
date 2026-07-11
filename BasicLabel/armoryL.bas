@@ -189,7 +189,7 @@ ville_83
  REM CHOIX
  S$=SH$(SH):N=N(SH):EN=CO(SH):GOSUB  ville_51 
  M$=" IMPOSSIBLE !":FD=145
- S$=CHR$(FD)+N$(P)+" "+C$(CP(P))+" "+STR$(RI(P))+" ss "+CHR$(144)
+ S$=CHR$(FD)+N$(P)+" "+C$(CP(P))+" "+STR$(RI(P))+" se "+CHR$(144)
  L=2:GOSUB ville_27 
  PRINT@6,3;" Your choice ";:GOSUB ville_39 
  IFCH>NTHEN ville_58 
@@ -202,56 +202,56 @@ ville_83
  IFOB(P,6)<>0THENM$=" BAG IS FULL! ":GOTO ville_58 
  REM ARMES
  IFSH>1THEN ville_59 
- IFCH>7THEN ville_60 
+ IFCH>6THEN ville_60
  IFPT(P)>0THEN M$=AL$:GOTO ville_58 
  IFCH>3THEN ville_61 
- IFCP(P)>2THEN ville_62 
+ IFCP(P)>2THEN ville_ERR_CLA 
  GOTO ville_63 
 ville_61
- IFCH>6THEN ville_64 
- IFCP(P)>4THEN ville_62 
+ IFCH>5THEN ville_64
+ IFCP(P)>4THEN ville_ERR_CLA 
  GOTO ville_63 
 ville_64
- IFCP(P)<5THEN ville_62 
+ IFCP(P)<5THEN ville_ERR_CLA 
 ville_63
- PT(P)=CH:CA(P)=8-CH
+ PT(P)=CH:CA(P)=7-CH
  M$=IT$(PT(P)):GOTO ville_65 
 ville_60
  IFWR(P)>0ANDWL(P)>0THEN M$=AL$:GOTO ville_58 
- IFCH>12THEN ville_66 
- IFCP(P)>2THEN ville_62 
- GOTO ville_67 
-ville_66
- IFCH>14THEN ville_68 
- IFCP(P)>4THEN  ville_62 
- GOTO ville_67 
-ville_68
- IFCH>17THEN ville_69 
- IFCP(P)<3THEN ville_62 
- IFCH=17AND(CP(P)<3ORCP(P)>3)THEN ville_62 
- GOTO ville_67 
-ville_69
- IFCH>18THEN ville_67 
- IFCP(P)<>3THEN ville_62 
+ IFCH>6THEN ville_SWD
+ IFCP(P)>2THEN ville_ERR_CLA 
+ GOTO ville_PGN 
+ville_SWD
+ IFCH>9THEN ville_BOW
+ IFCP(P)>4THEN  ville_ERR_CLA 
+ GOTO ville_PGN 
+ville_BOW
+ IFCH>11THEN ville_NET
+ IFCP(P)<3THEN ville_ERR_CLA 
+ IFCH=11AND(CP(P)<3ORCP(P)>3)THEN ville_ERR_CLA
+ GOTO ville_PGN 
+ville_NET
+ IFCH>12THEN ville_PGN
+ IFCP(P)<>3THEN ville_ERR_CLA 
  IFFI=1THEN M$=AL$:GOTO ville_58 ELSEFI=1
-ville_67
+ville_PGN
  M$=IT$(CH)
  IFWR(P)=0THENWR(P)=CHELSEWL(P)=CH
  GOTO ville_65 
 ville_59
  IFSH>2THEN ville_70 
  IFCP(P)=5ORCP(P)=6THEN ville_71 
- IFCH>2ANDCP(P)<4THEN ville_62 
- IFCP(P)=4ANDCH>7THEN ville_62 
+ IFCH>2ANDCP(P)<4THEN ville_ERR_CLA 
+ IFCP(P)=4ANDCH>7THEN ville_ERR_CLA 
 ville_71
  M$=IT$(CH+SS):GOSUB ville_72 
  GOTO ville_65 
 ville_70
  IFSH=4THEN ville_73 
- IFCH=9ANDCP(P)<5THEN ville_62 
+ IFCH=9ANDCP(P)<5THEN ville_ERR_CLA 
  IFCH=9THENIFBS=1THENM$=AL$:GOTO ville_58 ELSEBS=1
  IFCH=10ANDCP(P)=6THENIFSD=1THEN M$=AL$:GOTO ville_58 ELSESD=P
- IFCH=10ANDCP(P)<>6THEN ville_62 
+ IFCH=10ANDCP(P)<>6THEN ville_ERR_CLA 
  M$=IT$(CH+SS):GOSUB ville_72 
  GOTO ville_65 
 ville_73
@@ -309,7 +309,7 @@ ville_50
 ville_65
  REM VALIDE
  RI(P)=RI(P)-PR%(CH+SS):FD=148:GOTO ville_58 
-ville_62
+ville_ERR_CLA
  M$="Impossible for a "+C$(CP(P))
 ville_58
  T=INT((38-LEN(M$))/2)
