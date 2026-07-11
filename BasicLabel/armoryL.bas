@@ -3,7 +3,7 @@
  TEXT:LOAD "FONT.BIN":PAPER0:INK6
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  DIM SN(6,9)
- GOSUB  ville_0 :GOSUB  ville_1 :PING:CG=0
+ GOSUB ville_DAT :GOSUB  ville_LOAD :PING:CG=0
  X=2:Y=2:S=2
  'FORI=1TO9:FORJ=1TO4:CL(I,J)=1:NEXTJ,I'Toutes les cles
  'FORI=1TO6:PV(I)=ET(I):NEXTI
@@ -17,39 +17,7 @@ ville_27
  RETURN
  REM LABY
 ville_11
- CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_3  : LOAD "LABY"
-ville_2
- REM VILLAGE
- X=2:Y=2:MENU=1:
- TEXT:CLS:PAPER 0:POKE48035,0:POKE#26A,PEEK(#26A) AND 254
- S$=" "+CR$(VI)+" ":L=17:GOSUB  ville_4
- PLOT 13,3,"YOUR CHOICE..."
- PLOT8,5,"1) TO THE SHOPS"
- PLOT8,6,"2) INSPECT A CHARACTER"
- PLOT8,7,"3) TEAM OVERVIEW"
- PLOT8,8,"4) MAESTER'S OFFICE"
- PRINT@8,9;"5) VISIT "+CR$(VILLE)
- PLOT8,10,"6) EXPLORE WESTEROS"
- IFVI>2THENPLOT8,11,"7) TO LABORATORY"
- PLOT8,13,"9) SAVE SCENARIO"
- PLOT8,15,"F)inish "
- GOSUB  ville_5 :GOSUB ville_6
-ville_16
- GET A$
- IFA$<>"3"ANDA$<>"5"THEN CG=1
- IF A$="1" THEN  ville_7
- IF A$="2" THEN A=VAL(A$):ENC=6:GOSUB  ville_8 :GOTO  ville_2 
- IF A$="3" THEN GOSUB  ville_9 :GOTO  ville_2 
- IF A$="4" THEN ville_10 
- IF A$="5" THEN X=2:Y=2:S=2:CA=50:GOTO  ville_11 
- IF A$="6" THEN ville_12 
- IF A$="7" ANDVI>2THEN ville_13 
- IF A$="9" THEN ZAP:GOSUB  ville_3 :PING: GOTO  ville_2 
- IFA$="F"THENPING:CLS:PLOT 3,10,"You are a coward, you know ?":END
- IFA$="M"THENS$=" >"+STR$(FRE(""))+" bytes":PLOT 18,15,S$
- IFA$="R"THEN GOSUB  ville_14 
- IFA$="B"THEN GOSUB  ville_15 
- GOTO  ville_16 
+ CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_SAVE  : LOAD "LABY"
 ville_8
  S$="INSPECT WHICH HERO ?  ":GOSUB  ville_17 :PRINT@6,3;S$
  GOSUB  ville_18 :P=A
@@ -115,34 +83,6 @@ ville_30
  NEXT
 ville_23
  ZAP:RETURN
-ville_10
- REM SOINS
- S$="CURING WHICH HERO ? ":GOSUB ville_17 :PRINT@9,3;S$
-ville_33
- GETP$:P=VAL(P$):IFP<1ORP>6THENPING:GOTO ville_33 
- ENC=2:S$="THE MESTER LUWIN":L=16:CLS:GOSUB ville_4 
- PRINT@5,5;"Welcome ";N$(P)"
- PRINT@5,7;"Your condition is: ";OK$(OK(P))
- S$="State:"+STR$(ET(P))+" /"+STR$(PV(P)):PLOT 5,9,S$
- IFOK(P)=1AND ET(P)=PV(P)THEN M$="You're fine !":HO=0
- IFOK(P)=2OROK(P)=3THENHO=NI(P)*50
- IFOK(P)=4THENHO=NI(P)*100
- IFOK(P)=1ANDET(P)<PV(P)THENHO=NI(P)*25
- IFHO=0THENPLOT7,11,M$:PING:WAIT TI*8:GOTO ville_2 
- PRINT@5,11;"FEES: ";HO;" se"
- PLOT5,13,"DO I CURE YOU (Y/N) ?"
-ville_35
- GETA$
- IFA$="N"THEN ville_2 
- IFA$="Y"THEN ville_34 
- GOTO ville_35 
-ville_34
- IFHO>RI(P)THENS$="Seven gods, you're too poor !":GOTO ville_36 
- RI(P)=RI(P)-HO:OK(P)=1:ET(P)=PV(P):HO=0:S$="Thanks Gods, You're healed!"
-ville_36
- PING:GOSUB ville_17 :PRINT@4,15;S$
- WAIT25*TI
- GOTO  ville_2 
 ville_9
  REM EQUIPE
  CLS:PRINT@8,1;CHR$(145)CHR$(128)" * TYRANN 3 - TEAM *  "CHR$(144)
@@ -167,26 +107,6 @@ ville_9
 ville_37
  GET A$:IF A$<>" " THEN  ville_37 
  RETURN
-ville_12
- EN=3:S$="EXPLORE WESTEROS":L=18:CLS:GOSUB  ville_4 :L=3:EN=128
- FORI=TLTO1STEP-1
- L=L+1:EN=128+EE(I)
- PRINT@3,L;CHR$(EN);
- SS$=". ":IF I=VILTHENSS$="->"
- PRINT@5,L;I;SS$;CR$(I);"..........."
- S$=M$(I):IF I=1THENS$=" THRONE"
- S$=S$++CHR$(128+EE(VI))
- PRINT@27,L;S$
- NEXTI
- S$="WHERE DO YOU WANT TO GO ?":GOSUB  ville_17 :PRINT@7,L+3;S$
-ville_38
- GETP$:CR=VAL(P$)
- IFCR=VIORP$=" "ORCR>TLORCR<1THEN ville_2 
- S$=" OK !! LET'S GO:  ":GOSUB  ville_17 :PRINT@7,L+3;S$
- L=L+5:S$=CR$(CR):GOSUB  ville_27 
- IFCR<1ORCR>TLTHEN PING:GOTO ville_38 
- FOR M=2TO5:TC(VIL,M)=0:NEXT M ' reinit combats mais pas coffres
- VI=CR:GOSUB ville_3 :GOTO ville_2 
 ville_19
  REM FOND BLEU
  S$=" "+CHR$(148)+CHR$(128)+S$+CHR$(134)+CHR$(144)+" "
@@ -254,7 +174,7 @@ ville_7
  PLOT12,18,"L > Leave shops"
 ville_53
  GETP$:P=VAL(P$)
- IFP$="L"THEN M$="":O$="":S$="":GOSUB ville_3 :GOTO ville_2 
+ IFP$="L"THEN M$="":O$="":S$="":GOSUB ville_SAVE : END
  IFP$="G"THEN GOSUB  ville_52 
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53 
 ville_56
@@ -336,7 +256,6 @@ ville_70
  GOTO ville_65 
 ville_73
  REM ANIMAL
- IFCH=1ANDMP(P)<8THEN M$="Not for Southerners":GOTO ville_58 
  IFBT(P)>0THEN M$=AL$:GOTO ville_58 
  M$=IT$(CH+SS)
  BT(P)=CH+SS
@@ -411,7 +330,7 @@ ville_54
  L=L+2
  FORI=1TO14:PRINT@2,I+9;"*":PRINT@39,I+9;"*":NEXTI
  PRINT@29,L;C$(CP(P))
- PRINT@28,L+1;RI(P)"ss"
+ PRINT@28,L+1;RI(P)"se"
  PRINT@29,L+8;"AC>";CA(P)
  FORI=1TO6
  IFSA(P,I)>0THENM$=IT$(SA(P,I))ELSEM$="............"
@@ -569,7 +488,7 @@ ville_94
  CH = VAL(S$)
  PRINT
  RETURN
-ville_1
+ville_LOAD
  GOSUB ville_96 
  LOAD"TEAM.BIN"
  O1=#A000
@@ -617,7 +536,7 @@ ville_1
  O1=O1+1:NF=PEEK(O1)
  O1=O1+1:PM=PEEK(O1)::GOSUB ville_97 
  RETURN
-ville_3
+ville_SAVE
  TEXT:CLS:PRINT@8,2;CHR$(145);CHR$(135);"++ PREPARING TEAM ++ ";CHR$(144)
  O1=#A000::GOSUB ville_98 
  O1=O1+1:POKEO1,1
@@ -674,7 +593,7 @@ ville_98
 ville_97
  CU=CU+2:PRINT@CU,9;S$:REM FR = FRE("")
  RETURN
-ville_0
+ville_DAT
  TI=20:HV=6:DF=0
  DIM IT$(55),PR%(55),IP$(10,2),TP$(2,15)
  GOSUB  ville_99
@@ -712,11 +631,10 @@ ville_100
  RETURN
  DATA "OK","-Poison- ","-Paral- ",">DEAD< "
  DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
- DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking
  DATA Celtic,Nemausus,1, Egyptian,Lugdunum,5, Gallic,Lutecia,3, Goth,Agrippina,2
  DATA Persian,Burdigala,5, Roman,Gesoriacum,6, Viking,Brigantium,1
  DATA Iberian,Bacino,4, Thrace,Londinium,7
- DATA ARMORY,19,7, BOTANICS,7,2, BAZAAR,10,3, ANIMALS,7,5
+ DATA ARMORY,13,7, BOTANICS,6,2, BAZAAR,7,3, ANIMALS,7,5
  DATA "royal leech","lily flower","kraken ink","rose of the Vale","oil of the Rock","trout liver"
  DATA SOMNUS, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
  DATA ESCULAPE R, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT
