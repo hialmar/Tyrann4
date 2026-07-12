@@ -149,22 +149,32 @@ sortie_main
 
 	jsr _get
 	jsr RestoreZeroPage
+sortie_main2
 	; test bascule combat
 	ldy #$0         ; grab string pointer
-	lda #<ProgCombat
+	lda #<ProgVille1
 	sta (sp),y
 	iny
-	lda #>ProgCombat
+	lda #>ProgVille1
 	sta (sp),y
 	dey
-	jsr _SwitchToCommand
-
+	;jsr _SwitchToCommand
+	jsr _DiscLoad
+	jmp _main
 	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
 .)
 
 ProgCombat
 	.asc "COMBAT.COM"
+	.byt 0
+
+ProgArmory
+	.asc "ARM.COM"
+	.byt 0
+
+ProgVille1
+	.asc "VILLE1.BIN"
 	.byt 0
 
 ZeroPageCopy
@@ -1834,6 +1844,7 @@ _L2f
 _L30
 	.byt $01,$00,$01,$00,$01,$00,$00,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00
 
+	.dsb $3700-*
 ptr_Lignes
 
 	.byt <_L00,>_L00,<_L01,>_L01,<_L02,>_L02,<_L03,>_L03,<_L04,>_L04,<_L05,>_L05,<_L06,>_L06,<_L07,>_L07,<_L08,>_L08,<_L09,>_L09
@@ -1843,7 +1854,7 @@ ptr_Lignes
 	.byt <_L28,>_L28,<_L29,>_L29,<_L2a,>_L2a,<_L2b,>_L2b,<_L2c,>_L2c,<_L2d,>_L2d,<_L2e,>_L2e,<_L2f,>_L2f,<_L30,>_L30
 
 
-
+	.dsb $3800-*
 ; -----------------------------------------------------------------------------
 ;    Table adresses car modifiés dans 2nd jeu de car mode Hires (1/4 de tuile)
 ; ----------------------------------------------------------------------------- ici, pas besoin de pointeurs d'adresses car pas d'addition
@@ -1858,7 +1869,7 @@ sous_tuile
 	.byt $9e,$2c,$9e,$32,$9e,$38,$9e,$3e,$9e,$44,$9e,$4a,$9e,$50
 
 
-
+	.dsb $3900-*
 ; --------------------------------------------------------------------
 ;       Table redéfinition  des tuiles (N)d'ordre des 4 car redafinis
 ; --------------------------------------------------------------------
@@ -2096,130 +2107,6 @@ ptr_t ;(pointeurs t pour tuiles)
 	.byt <_t54,>_t54,<_t55,>_t55,<_t56,>_t56,<_t57,>_t57,<_t58,>_t58,<_t59,>_t59
 	.byt <_t5A,>_t5A,<_t5B,>_t5B,<_t5C,>_t5C,<_t5D,>_t5D,<_t5E,>_t5E,<_t5F,>_t5F
 	.byt <_t60,>_t60,<_t61,>_t61,<_t62,>_t62,<_t63,>_t63,<_t64,>_t64
-
-
-; *************  DATA NOMS des Villes  *************
-
-v_00
-	.byt $9f					; longeur $08 lettres
-	.asc 3,"NEMAUSUS",0			; Nîmes
-v_01
-	.byt $9e					; $09
-	.asc 3,"BURDIGALA",0 		; Bordeaux
-v_02
-	.byt $9f					; $08
-	.asc 3,"LUGDUNUM",0 		; Lyon
-v_03
-	.byt $9f					; $07
-	.asc 3,"LUTETIA",0 			; Paris
-v_04
-	.byt $9e					; $09
-	.asc 3,"AGRIPPINA",0 		; Köln
-v_05
-	.byt $9f					; $06
-	.asc 3,"BACINO",0 			; Barcelone
-v_06
-	.byt $a1					; $05
-	.asc 3,"GADES",0 			; Cadiz
-v_07
-	.byt $9e					; $0a
-	.asc 3,"BRIGANTIUM",0 		; A Coruña
-v_08
-	.byt $9e					; $09
-	.asc 3,"LONDINIUM",0 		; London
-v_09
-	.byt $9c					; $0d
-	.asc 3,"NARBO MARTIUS",0 	; Narbone
-v_0A
-	.byt $9a					; $13
-	.asc 3,"MEDIOLANUM SANTONUM",0 ; Saintes
-v_0B
-	.byt $9e					; $0a
-	.asc 3,"GESORIACUM",0 		; Boulogne
-v_0C
-	.byt $9c					; $0d
-	.asc 3,"CARTHAGO NOVA",0 	; Cartagena
-v_0D
-	.byt $9f					; $07
-	.asc 3,"OLISIPO",0 			; Lisboa
-v_0E
-	.byt $9b					; $10
-	.asc 3,"ISCA DUMNONIORUM",0 ; Exeter
-v_0F
-	.byt $a1					; $6
-	.asc 3,"EBLANA",0 			; Dublin
-
-ptr_v ;(pointeurs v pour villes)
-
-	.byt <v_00,>v_00,<v_01,>v_01,<v_02,>v_02,<v_03,>v_03,<v_04,>v_04,<v_05,>v_05
-	.byt <v_06,>v_06,<v_07,>v_07,<v_08,>v_08,<v_09,>v_09,<v_0A,>v_0A,<v_0B,>v_0B
-	.byt <v_0C,>v_0C,<v_0D,>v_0D,<v_0E,>v_0E,<v_0F,>v_0F
-
-;--------------------------------------------------------------
-t_h_wall_1
-	.byt $9c
-	.asc "Congratulations!",0
-t_h_wall_2
-	.byt $bc
-	.asc "You have reached fort Borcovicus",0
-t_h_wall_3
-	.byt $94
-	.asc "and completed the first part of",0
-t_h_wall_4
-	.byt $c6
-	.asc "your mission!",0
-t_h_wall_5
-	.byt $96
-	.asc "See you soon for episode two:",0
-t_h_wall_6
-	.byt $c0
-	.asc "MISSIO: Beyond the Wall",0
-;--------------------------------------------------------------
-t_druid_hut_1
-	.byt $93
-	.asc "You are in front of a druid's hut.",0
-t_druid_hut_2
-	.byt $bf
-	.asc "Do you knock on the door?",0
-t_druid_hut_3
-	.byt $96
-	.asc "Your magical skill is too low.",0
-t_druid_hut_4
-	.byt $c3
-	.asc "He refuses to open.",0
-t_druid_hut_5
-	.byt $93
-	.asc "He asks you for Aconitum napellus",0
-t_druid_hut_6
-	.byt $bc
-	.asc "in exchange for his best spell.",0
-t_druid_hut_7
-	.byt $91
-	.asc "He thanks you for the Aconitum napellus",0
-t_druid_hut_8
-	.byt $ba
-	.asc "and teaches you the KRAKENSLEEP spell",0
-;--------------------------------------------------------------
-
-t_herb_1
-	.byt $97
-	.asc "You find Aconitum napellus;",0
-t_herb_2
-	.byt $c5
-	.asc "do you pick it?",0
-;--------------------------------------------------------------
-t_kraken_1
-	.byt $94
-	.asc "A raging kraken is preventing you",0
-t_kraken_2
-	.byt $be
-	.asc "from going any further north.",0
-t_kraken_3
-	.byt $95
-	.asc "The spell appeases the kraken.",0
-t_kraken_4
-	.byt $c4
-	.asc "It lets you pass.",0
 
 
 ; -----------------------------------------------
@@ -2685,6 +2572,132 @@ dta_car_redef_p2
 	.byt $c0	;1,1,0,0,0,0,0,0
 	.byt $55	;0,1,0,1,0,1,0,1
 
+
+
+; *************  DATA NOMS des Villes  *************
+
+v_00
+	.byt $9f					; longeur $08 lettres
+	.asc 3,"NEMAUSUS",0			; Nîmes
+v_01
+	.byt $9e					; $09
+	.asc 3,"BURDIGALA",0 		; Bordeaux
+v_02
+	.byt $9f					; $08
+	.asc 3,"LUGDUNUM",0 		; Lyon
+v_03
+	.byt $9f					; $07
+	.asc 3,"LUTETIA",0 			; Paris
+v_04
+	.byt $9e					; $09
+	.asc 3,"AGRIPPINA",0 		; Köln
+v_05
+	.byt $9f					; $06
+	.asc 3,"BACINO",0 			; Barcelone
+v_06
+	.byt $a1					; $05
+	.asc 3,"GADES",0 			; Cadiz
+v_07
+	.byt $9e					; $0a
+	.asc 3,"BRIGANTIUM",0 		; A Coruña
+v_08
+	.byt $9e					; $09
+	.asc 3,"LONDINIUM",0 		; London
+v_09
+	.byt $9c					; $0d
+	.asc 3,"NARBO MARTIUS",0 	; Narbone
+v_0A
+	.byt $9a					; $13
+	.asc 3,"MEDIOLANUM SANTONUM",0 ; Saintes
+v_0B
+	.byt $9e					; $0a
+	.asc 3,"GESORIACUM",0 		; Boulogne
+v_0C
+	.byt $9c					; $0d
+	.asc 3,"CARTHAGO NOVA",0 	; Cartagena
+v_0D
+	.byt $9f					; $07
+	.asc 3,"OLISIPO",0 			; Lisboa
+v_0E
+	.byt $9b					; $10
+	.asc 3,"ISCA DUMNONIORUM",0 ; Exeter
+v_0F
+	.byt $a1					; $6
+	.asc 3,"EBLANA",0 			; Dublin
+
+ptr_v ;(pointeurs v pour villes)
+
+	.byt <v_00,>v_00,<v_01,>v_01,<v_02,>v_02,<v_03,>v_03,<v_04,>v_04,<v_05,>v_05
+	.byt <v_06,>v_06,<v_07,>v_07,<v_08,>v_08,<v_09,>v_09,<v_0A,>v_0A,<v_0B,>v_0B
+	.byt <v_0C,>v_0C,<v_0D,>v_0D,<v_0E,>v_0E,<v_0F,>v_0F
+
+;--------------------------------------------------------------
+t_h_wall_1
+	.byt $9c
+	.asc "Congratulations!",0
+t_h_wall_2
+	.byt $bc
+	.asc "You have reached fort Borcovicus",0
+t_h_wall_3
+	.byt $94
+	.asc "and completed the first part of",0
+t_h_wall_4
+	.byt $c6
+	.asc "your mission!",0
+t_h_wall_5
+	.byt $96
+	.asc "See you soon for episode two:",0
+t_h_wall_6
+	.byt $c0
+	.asc "MISSIO: Beyond the Wall",0
+;--------------------------------------------------------------
+t_druid_hut_1
+	.byt $93
+	.asc "You are in front of a druid's hut.",0
+t_druid_hut_2
+	.byt $bf
+	.asc "Do you knock on the door?",0
+t_druid_hut_3
+	.byt $96
+	.asc "Your magical skill is too low.",0
+t_druid_hut_4
+	.byt $c3
+	.asc "He refuses to open.",0
+t_druid_hut_5
+	.byt $93
+	.asc "He asks you for Aconitum napellus",0
+t_druid_hut_6
+	.byt $bc
+	.asc "in exchange for his best spell.",0
+t_druid_hut_7
+	.byt $91
+	.asc "He thanks you for the Aconitum napellus",0
+t_druid_hut_8
+	.byt $ba
+	.asc "and teaches you the KRAKENSLEEP spell",0
+;--------------------------------------------------------------
+
+t_herb_1
+	.byt $97
+	.asc "You find Aconitum napellus;",0
+t_herb_2
+	.byt $c5
+	.asc "do you pick it?",0
+;--------------------------------------------------------------
+t_kraken_1
+	.byt $94
+	.asc "A raging kraken is preventing you",0
+t_kraken_2
+	.byt $be
+	.asc "from going any further north.",0
+t_kraken_3
+	.byt $95
+	.asc "The spell appeases the kraken.",0
+t_kraken_4
+	.byt $c4
+	.asc "It lets you pass.",0
+
+	.dsb $4100-*
 ; ------------------------------------
 dta_bandeau
 .byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4

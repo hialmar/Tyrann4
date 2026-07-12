@@ -1,0 +1,2356 @@
+; insert 0s so that to move the specific code upwards of $2000
+#define FALSE 	0
+#define TRUE 	1
+
+#define CENTRE_ORDO 3
+#define CENTRE_ABS  8
+
+#define LARGEUR_FENETRE 	$0f
+#define HAUTEUR_FENETRE		$07
+
+#define YELLOW_INK 	3
+#define CYAN_INK 	6
+
+#define BLACK_PAPER $10
+
+	.zero
+
+	*= $a0
+; *********** VARIABLES PAGE ZERO  ***********
+;
+;	$00	:	repère 1/4 haut gauche tuile en cours
+tuile_en_cours_coin_hg	.dsb 1
+;	$01	:	repère 1/4 haut droit tuile en cours
+tuile_en_cours_coin_hd	.dsb 1
+;	$02	:	repère 1/4 bas gauche tuile en cours
+tuile_en_cours_coin_bg	.dsb 1
+;	$03	:	repère 1/4 bas droit tuile en cours
+tuile_en_cours_coin_bd	.dsb 1
+;	$04	:	n° tuile personnage affichée (pour animation droite gauche avant, bateau..)
+tuile_perso_aff .dsb 1
+;Deux oordonnées coin haut gauche partie table affichée	dans fenêtre
+;	$05	:	N° ligne data MAp en haut gauche fenêtre,Mémorisée tant que pas de scroll
+ligne_hg_map .dsb 1
+;	$06	:	Rang dans la ligne Data Map en haut gauche fenêtre, Mémorisée tant que pas de scroll
+rang_hg_map .dsb 1
+;Deux coordonnées variables dans table DataMap utilisées lors de l'affichage d'une fenêtre
+;	$07	:	N° ligne data MAp
+ligne_map .dsb 1
+;	$08	:	Rang dans la ligne Data Map
+rang_map .dsb 1
+;	$09	:	Rang tuile dans fenêtre, utilisé comme index de la table d'adresses écran de la fanêtre ( de 0 a $69)
+rang_fenetre .dsb 1
+;	$0A	:	N° identifiant quelle tuile en cours d'affichage
+tuile_courante .dsb 1
+;	$0B	:	Direction scroll précedente( #$AC,$B4,$9C,$BC)
+direction_scroll_prec .dsb 1
+;	$0C	:	Direction scroll demandée( #$AC,$B4,$9C,$BC)
+direction_scroll .dsb 1
+;	$0D	:	Drapeau 1 si on a un bateau , 0 si pas de bateau
+a_un_bateau .dsb 1
+;	$0E	:	valeur tuile position perso (attention, ce N'EST PAS la valeur de la tuile qui represente le perso)
+tuile_sous_pos_perso .dsb 1
+;	$0F	:	ordonnée perso dans fenêtre Hires (varie de 1 à 7 , valeur initiale : 3)
+ordo_perso_fen .dsb 1
+;	$10	:	abscisse perso dans fenêtre Hires (varie de 1 à 15 , valeur initiale :7)
+absc_perso_fen .dsb 1
+;	$11	:	drapeau déplacer perso horizontalement dans fenêtre hires : 0 non 1 oui
+peut_bouger_horiz .dsb 1
+;	$12	:	Valeur variable index position perso dans table d'adresses ecran ( $00 à $69)
+index_perso .dsb 1
+;	$13	:	drapeau déplacer perso verticalement dans fenêtre hires : 0 non 1 oui
+peut_bouger_vert .dsb 1
+;	$14	:	drapeau : 1 on est en mer, 0 on est à terre
+est_en_mer .dsb 1
+;	$15	:	drapeau : 1 texte affiché , 0, pas de texte affiché
+est_affiche_texte .dsb 1
+;	$16	:	drapeau : 1 scroll interdit , 0, scroll autorisé
+scroll_est_interdit .dsb 1
+;	$17	:	drapeau : 1 deplacement perso  interdit , 0, déplacement perso autorisé
+depl_perso_est_interdit .dsb 1
+;	$18	:	drapeau : on a clef_1
+;	$19	: 	drapeau : on a clef_2
+;	$1a	:	drapeau : on a mot de passe :1
+mot_de_passe .dsb 1
+;	$1b :	drapeau : on a laissez-passer :1 on n'a pas laissez-passer : 0
+laisser_passer .dsb 1
+;	$1c :	N° lieu (GALLIA :0 HISPANIA :1 LUSITANIA :2 BRITANIA:3 GERMANIA :4 CALEDONIA:5 HIBERNIA :6 MARE NOSTRUM: 7 MARE EXTERNUM 8 MARE GERMANICUM 9
+numero_lieu .dsb 1
+
+;   $50 : drapeau sortie victorieuse de la carte = $80 sinon = $20
+sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon = $20
+;
+;
+
+;;; STOP : 27 octets utilisés en page 0
+
+	.text
+
+	*= $2000
+;************************************************
+;******* Affiche différents textes   ************
+;************************************************
+aff_text
+;--------------------------------------------------
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$52				; valeur tuile portail traversable avec clef_1
+	beq suite_portail
+	cmp #$53				; valeur tuile portail traversable avec clef_2
+	beq suite_portail	
+	jmp key_1
+suite_portail	
+	ldx #$00
+	lda t_portail_1,x
+	sta adr_ecr_txt+1
+	lda #<t_portail_1+1
+	sta write_phrase+1
+	lda #>t_portail_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	
+	ldx #$00
+	lda t_portail_2,x
+	sta adr_ecr_txt+1
+	lda #<t_portail_2+1
+	sta write_phrase+1
+	lda #>t_portail_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_key
+	jsr eff_text
+;---------------------------------------------------
+key_1	
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$54				; valeur tuile clef_1 
+	beq suite_clef
+	cmp #$55				; valeur tuile clef_2
+	beq suite_clef	
+	jmp voleur_
+suite_clef
+	jsr eff_tuile_spe	
+	ldx #$00
+	lda t_key_1,x
+	sta adr_ecr_txt+1
+	lda #<t_key_1+1
+	sta write_phrase+1
+	lda #>t_key_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	
+	ldx #$00
+	lda t_key_2,x
+	sta adr_ecr_txt+1
+	lda #<t_key_2+1
+	sta write_phrase+1
+	lda #>t_key_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_key
+	jsr eff_text
+	
+	ldx #$00
+	lda t_key_3,x
+	sta adr_ecr_txt+1
+	lda #<t_key_3+1
+	sta write_phrase+1
+	lda #>t_key_3+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_key
+	jsr eff_text
+;-------------------------------------------------------------
+voleur_
+
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$56				; valeur tuile pour rencontre voleur
+	beq suite_voleur
+	jmp _mot_de_passe
+suite_voleur	
+	ldx #$00
+	lda t_voleur_1,x
+	sta adr_ecr_txt+1
+	lda #<t_voleur_1+1
+	sta write_phrase+1
+	lda #>t_voleur_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	
+	ldx #$00
+	lda t_voleur_2,x
+	sta adr_ecr_txt+1
+	lda #<t_voleur_2+1
+	sta write_phrase+1
+	lda #>t_voleur_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_key
+	jsr eff_text
+;-------------------------------------------------
+_mot_de_passe
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$57				; valeur tuile pour patricienne donne mot de passe
+	beq suite_mot_passe
+	jmp garde_
+suite_mot_passe
+	jsr eff_tuile_spe
+	ldx #$00
+	lda t_m_de_passe_1,x
+	sta adr_ecr_txt+1
+	lda #<t_m_de_passe_1+1
+	sta write_phrase+1
+	lda #>t_m_de_passe_1+1
+	sta write_phrase+2
+	jsr write_phrase	
+
+	ldx #$00
+	lda t_m_de_passe_2,x
+	sta adr_ecr_txt+1
+	lda #<t_m_de_passe_2+1
+	sta write_phrase+1
+	lda #>t_m_de_passe_2+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_key
+	jsr eff_text	
+	rts
+;-------------------------------------------------
+garde_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$58				; valeur tuile pour garde 
+	beq suite_garde
+	jmp legat_
+suite_garde
+	jsr eff_tuile_spe
+	ldx #$00
+	lda t_garde_3,x
+	sta adr_ecr_txt+1
+	lda #<t_garde_3+1
+	sta write_phrase+1
+	lda #>t_garde_3+1
+	sta write_phrase+2
+	jsr write_phrase	
+
+ldx #$00
+	lda t_garde_4,x
+	sta adr_ecr_txt+1
+	lda #<t_garde_4+1
+	sta write_phrase+1
+	lda #>t_garde_4+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_key
+	jsr eff_text
+	
+ldx #$00
+	lda t_garde_5,x
+	sta adr_ecr_txt+1
+	lda #<t_garde_5+1
+	sta write_phrase+1
+	lda #>t_garde_5+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_key
+	jsr eff_text		
+	
+	rts	
+;-------------------------------------------------
+legat_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$59				; valeur tuile pour legat qui donne bourse
+	beq suite_legat
+	jmp entrance_	
+suite_legat
+	jsr eff_tuile_spe	
+	ldx #$00
+	lda t_legat_1,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_1+1
+	sta write_phrase+1
+	lda #>t_legat_1+1
+	sta write_phrase+2
+	jsr write_phrase	
+
+	ldx #$00
+	lda t_legat_2,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_2+1
+	sta write_phrase+1
+	lda #>t_legat_2+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_key
+	jsr eff_text
+
+	ldx #$00
+	lda t_legat_3,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_3+1
+	sta write_phrase+1
+	lda #>t_legat_3+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_key
+	jsr eff_text
+	rts
+;-------------------------------------------------	
+entrance_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$51				; valeur entrée ville
+	bne medicus_
+	ldx #$00
+	lda t_entrance_1,x
+	sta adr_ecr_txt+1
+	lda #<t_entrance_1+1
+	sta write_phrase+1
+	lda #>t_entrance_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	
+	ldx #$00
+	lda t_entrance_2,x
+	sta adr_ecr_txt+1
+	lda #<t_entrance_2+1
+	sta write_phrase+1
+	lda #>t_entrance_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_key
+	jsr eff_text
+	rts
+;-------------------------------------------------	
+medicus_	
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$5a				; valeur medicus
+	bne armurerie_
+	ldx #$00
+	lda t_medicus_1,x
+	sta adr_ecr_txt+1
+	lda #<t_medicus_1+1
+	sta write_phrase+1
+	lda #>t_medicus_1+1
+	sta write_phrase+2	
+	jsr write_phrase	
+	jsr do_you_enter
+	jsr hit_key
+	jsr eff_text
+	rts
+;-------------------------------------------------
+armurerie_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$5b				; valeur armurerie
+	bne herboriste_
+	ldx #$00
+	lda t_armurerie_1,x
+	sta adr_ecr_txt+1
+	lda #<t_armurerie_1+1
+	sta write_phrase+1
+	lda #>t_armurerie_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr do_you_enter
+	jsr hit_key
+	jsr eff_text
+	rts
+;-------------------------------------------------
+herboriste_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$5c				; valeur herboriste
+	bne animalerie_
+	ldx #$00
+	lda t_herboriste_1,x
+	sta adr_ecr_txt+1
+	lda #<t_herboriste_1+1
+	sta write_phrase+1
+	lda #>t_herboriste_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr do_you_enter
+	jsr hit_key
+	jsr eff_text
+	rts
+;-------------------------------------------------
+animalerie_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$5d				; valeur animalerie
+	bne taberna_
+	ldx #$00
+	lda t_animalerie_1,x
+	sta adr_ecr_txt+1
+	lda #<t_animalerie_1+1
+	sta write_phrase+1
+	lda #>t_animalerie_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr do_you_enter
+	jsr hit_key
+	jsr eff_text
+	rts
+;-------------------------------------------------	
+taberna_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$5e				; valeur auberge
+	bne bazar_
+	ldx #$00
+	lda t_taberna_1,x
+	sta adr_ecr_txt+1
+	lda #<t_taberna_1+1
+	sta write_phrase+1
+	lda #>t_taberna_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr do_you_enter
+	jsr hit_key
+	jsr eff_text
+;-------------------------------------------------	
+bazar_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$5f				; valeur Bazar
+	bne coffre_
+	ldx #$00
+	lda t_bazar_1,x
+	sta adr_ecr_txt+1
+	lda #<t_bazar_1+1
+	sta write_phrase+1
+	lda #>t_bazar_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr do_you_enter
+	jsr hit_key
+	jsr eff_text	
+;-------------------------------------------------
+coffre_
+	lda tuile_sous_pos_perso			; valeur tuile sous perso
+	cmp #$63				; valeur coffre
+	bne fin_txt
+	ldx #$00
+	lda t_coffre_1,x
+	sta adr_ecr_txt+1
+	lda #<t_coffre_1+1
+	sta write_phrase+1
+	lda #>t_coffre_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	
+	ldx #$00
+	lda t_coffre_2,x
+	sta adr_ecr_txt+1
+	lda #<t_coffre_2+1
+	sta write_phrase+1
+	lda #>t_coffre_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_key
+	lda $0c
+	cmp #$86
+	bne sk_ef
+	inc $1d
+	jsr eff_tuile_spe
+sk_ef	
+	lda #$38
+	sta $0c	
+	jsr eff_text
+;-------------------------------------------------		
+fin_txt	
+	rts
+	
+;****            routine modi fifie map retire tuile spéciale une fois découverte              ****	
+eff_tuile_spe
+		lda ordo_perso_fen
+		clc
+		adc $05
+		tax				; n° ligne perso dans x
+		lda $10
+		clc
+		adc $06
+		tay				; rang perso sur ligne dans y
+		txa
+		asl
+		tax
+		lda ptr_Lignes,x
+		sta adr_lign_eff+1
+		inx
+		lda ptr_Lignes,x
+		sta adr_lign_eff+2
+		lda #$00			; ref tuile chemin
+adr_lign_eff
+		sta $1111,y			; placée das la carte à l'emplacement de la tuile spéciale
+		sta tuile_sous_pos_perso				; rappel : $0e contient ref de tuile sous perso
+		rts	
+		
+		
+		
+		
+
+;********************************************************	
+;****            routine why no scroll               ****
+;********************************************************
+why_no_scoll
+		lda tuile_courante
+		cmp #$52	;portail 1 vous n'avez pas clef_1
+		bne chck_wns_58
+		jsr no_pasaran
+		rts
+chck_wns_58		
+		cmp #$58	; garde vousn 'avez pas mot de pass
+		bne chck_wns_53
+		jsr garde_nsc
+		rts
+chck_wns_53	
+		cmp #$53	;portail 2 vous n'avez pas clef_2		
+		bne fin_wns
+		jsr no_pasaran
+		rts
+		
+fin_wns
+;-------------------------------------
+garde_nsc
+	ldx #$00
+	lda t_garde_1,x
+	sta adr_ecr_txt+1
+	lda #<t_garde_1+1
+	sta write_phrase+1
+	lda #>t_garde_1+1
+	sta write_phrase+2	
+	jsr write_phrase	
+
+	ldx #$00
+	lda t_garde_2,x
+	sta adr_ecr_txt+1
+	lda #<t_garde_2+1
+	sta write_phrase+1
+	lda #>t_garde_2+1
+	sta write_phrase+2	
+	jsr write_phrase	
+	jsr hit_key
+	jsr eff_text	
+	rts
+;-------------------------------------
+no_pasaran
+	ldx #$00
+	lda t_portail_3,x
+	sta adr_ecr_txt+1
+	lda #<t_portail_3+1
+	sta write_phrase+1
+	lda #>t_portail_3+1
+	sta write_phrase+2	
+	jsr write_phrase	
+	jsr hit_key
+	jsr eff_text
+	rts
+;-------------------------------------
+do_you_enter
+	ldx #$00
+	lda t_do_you_1,x
+	sta adr_ecr_txt+1
+	lda #<t_do_you_1+1
+	sta write_phrase+1
+	lda #>t_do_you_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	rts
+;-------------------------------------
+
+	
+;********************************************************	
+;**** routine ecrit une phrase sur ligne écran text  ****
+;********************************************************
+write_phrase
+	lda $1111,x
+	beq end_phrase
+adr_ecr_txt
+	sta $bf11,x
+	inx	
+	bne write_phrase
+end_phrase
+	lda #$01
+	sta est_affiche_texte
+	rts
+;****************************************************	
+;****  routine attend appui sur 'Y' et laché  ****
+;****************************************************	
+hit_key
+.(
+	lda $208
+	cmp #$38
+	bne hit_key  ;beq hit_key
+ld_208	
+	lda $208
+	cmp #$38
+	beq ld_208
+	cmp #$86
+	bne release_
+	sta $0c
+release_	
+	rts
+.)	
+;************************************************
+;*******       efface le texte       ************
+;************************************************	
+eff_text
+	lda $15
+	beq out_eff_text
+	dec $15
+	ldx #$27
+	lda #$20
+lp_efface	
+	sta $BF90,x
+	sta $bfb8,x
+	dex
+	bne lp_efface
+out_eff_text
+	lda #$0
+	rts	
+;************************************************
+;*******  dessine cadre carte ville   ***********
+;************************************************
+cadre_plan
+	lda #$c0
+; en premier, les 2 bords horizontaux	
+	ldx #$15
+	stx lp_30h+1	;bord horizontal, ici bord haut
+	ldx #$a9
+	stx lp_30h+2
+	jsr draw_bord_h
+	ldx #$25
+	stx lp_30h+1	; bord horizontal, ici bord bas
+	ldx #$b7
+	stx lp_30h+2
+	jsr draw_bord_h	
+; puis les 2 bords verticaux
+	ldx #$15
+	stx lp_60_v+1	;bord vertical, ici gauche
+	ldx #$a9
+	stx lp_60_v+2
+	jsr draw_bord_v
+	ldx #$34
+	stx lp_60_v+1	; bord vertical, ici droite
+	ldx #$a9
+	stx lp_60_v+2
+	jsr draw_bord_v
+	rts
+; sous routine bords horizontaux	
+draw_bord_h
+	ldy #$6
+lp_06v
+	ldx #$1e
+lp_30h	
+	sta $1111,x
+	dex
+	bne lp_30h
+	jsr maj_adr_h_dcm ; Mise à Jour ADResses Horizontales Draw Cadre Map	
+	dey
+	bne lp_06v
+	rts
+;-------------------------------------------	
+maj_adr_h_dcm
+	pha
+	lda lp_30h+1
+	clc
+	adc #$28
+	sta lp_30h+1
+	bcc end_maj_h
+	inc lp_30h+2
+end_maj_h
+	pla
+	rts	
+;-------------------------------------------
+; sous routine bords verticaux	
+draw_bord_v
+	ldx #$60
+lp_60_v	
+	sta $2222
+	dex
+	beq out_lp_60
+	jsr maj_adr_v_dcm 	; Mise à Jour ADResses Verticales Draw Cadre Map
+	bne lp_60_v			; branchement forcé car on sort de maj par PLA C0 <> 0
+out_lp_60
+	rts
+;-------------------------------------------	
+maj_adr_v_dcm
+	pha
+	lda lp_60_v+1
+	clc
+	adc #$28
+	sta lp_60_v+1
+	bcc end_maj_v
+	inc lp_60_v+2
+end_maj_v
+	pla
+	rts		
+
+;******************************************************************
+;***  dessine image au dessus carte ville et ecrit nom ville  *****
+;******************************************************************
+bandeau
+	jsr ini_adr_dta_bd	
+	ldx #$00
+ad_dta_bandeau
+	lda $1111,x
+	cmp #$0a
+	beq end_af_bd
+ad_ec_bd	
+	sta $A000,x
+	inx
+	bne ad_dta_bandeau
+	jsr maj_adr_bd
+	jmp ad_dta_bandeau
+end_af_bd
+	jsr prt_nom_ville
+	rts	
+;--------------------------------------------------
+ini_adr_dta_bd
+	lda #<dta_bandeau
+	sta ad_dta_bandeau+1
+	lda #>dta_bandeau
+	sta ad_dta_bandeau+2
+	lda #$00
+	sta ad_ec_bd+1
+	lda #$A0
+	sta ad_ec_bd+2
+	rts	
+;--------------------------------------------------	
+maj_adr_bd
+	inc	ad_dta_bandeau+2
+	inc ad_ec_bd+2
+	rts
+	
+;************************************************
+;***            Ecrit nom  ville            *****
+;************************************************	
+prt_nom_ville	
+	jsr ini_adr_dta_nv
+	ldy #$0c
+prt_lign	
+	ldx #$10
+ad_dta_nv
+	lda $1111,x
+ad_ec_nv	
+	sta $BA9F,x
+	dex
+	bpl ad_dta_nv
+	jsr maj_adr_nv
+	dey
+	bpl prt_lign
+	rts	
+;------------------------------------------------
+ini_adr_dta_nv
+	lda #<dta_nom_ville
+	sta ad_dta_nv+1
+	lda #>dta_nom_ville
+	sta ad_dta_nv+2
+	lda #$c4
+	sta ad_ec_nv+1
+	lda #$ba
+	sta ad_ec_nv+2
+	rts	
+;------------------------------------------------
+maj_adr_nv
+	lda ad_dta_nv+1
+	clc
+	adc #$11
+	sta ad_dta_nv+1
+	bcc sk_ret1
+	inc ad_dta_nv+2
+sk_ret1
+	lda ad_ec_nv+1
+	clc
+	adc #$28
+	sta ad_ec_nv+1
+	bcc sk_ret2
+	inc ad_ec_nv+2
+sk_ret2
+	rts	
+
+	; insert 0s so that to move the data upwards of $3000
+	.dsb $3000-*
+
+;************************************************
+;******* table adresses écran HIRES  ************
+;************************************************				
+tab_adr_hires				
+	.byt $06,$aa,$08,$aa,$0a,$aa,$0c,$aa,$0e,$aa,$10,$aa,$12,$aa,$14,$aa,$16,$aa,$18,$aa,$1a,$aa,$1c,$aa,$1e,$aa,$20,$aa,$22,$aa
+	.byt $e6,$ab,$e8,$ab,$ea,$ab,$ec,$ab,$ee,$ab,$f0,$ab,$f2,$ab,$f4,$ab,$f6,$ab,$f8,$ab,$fa,$ab,$fc,$ab,$fe,$ab,$00,$ac,$02,$ac
+	.byt $c6,$ad,$c8,$ad,$ca,$ad,$cc,$ad,$ce,$ad,$d0,$ad,$d2,$ad,$d4,$ad,$d6,$ad,$d8,$ad,$da,$ad,$dc,$ad,$de,$ad,$e0,$ad,$e2,$ad				
+	.byt $a6,$af,$a8,$af,$aa,$af,$ac,$af,$ae,$af,$b0,$af,$b2,$af,$b4,$af,$b6,$af,$b8,$af,$ba,$af,$bc,$af,$be,$af,$c0,$af,$c2,$af
+	.byt $86,$b1,$88,$b1,$8a,$b1,$8c,$b1,$8e,$b1,$90,$b1,$92,$b1,$94,$b1,$96,$b1,$98,$b1,$9a,$b1,$9c,$b1,$9e,$b1,$a0,$b1,$a2,$b1
+	.byt $66,$b3,$68,$b3,$6a,$b3,$6c,$b3,$6e,$b3,$70,$b3,$72,$b3,$74,$b3,$76,$b3,$78,$b3,$7a,$b3,$7c,$b3,$7e,$b3,$80,$b3,$82,$b3
+	.byt $46,$b5,$48,$b5,$4a,$b5,$4c,$b5,$4e,$b5,$50,$b5,$52,$b5,$54,$b5,$56,$b5,$58,$b5,$5a,$b5,$5c,$b5,$5e,$b5,$60,$b5,$62,$b5
+				
+;*******************************************
+;*******    DATA PLAN VILLE_01   ************
+;*******************************************
+_L00
+	.byt $13,$02,$01,$02,$01,$02,$01,$02,$01,$13,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$03,$04
+_L01
+	.byt $12,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12
+_L02
+	.byt $12,$00,$13,$02,$01,$02,$01,$02,$01,$03,$03,$04,$00,$13,$03,$04,$00,$13,$03,$03,$03,$03,$03,$03,$03,$03,$03,$04,$00,$12
+_L03
+	.byt $05,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$05,$00,$12,$00,$12,$00,$12,$00,$1e,$00,$00,$06,$0e,$00,$00,$57,$12,$00,$05
+_L04
+	.byt $04,$00,$12,$00,$14,$14,$14,$14,$14,$14,$00,$00,$00,$12,$00,$12,$00,$12,$1f,$20,$00,$00,$0f,$10,$00,$00,$1e,$13,$03,$04
+_L05
+	.byt $05,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$04,$00,$12,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$1f,$20,$12,$00,$05
+_L06
+	.byt $04,$00,$01,$03,$02,$01,$02,$01,$02,$01,$03,$11,$00,$12,$00,$12,$00,$01,$52,$03,$03,$03,$03,$03,$03,$03,$03,$11,$00,$04
+_L07
+	.byt $05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
+_L08
+	.byt $13,$03,$02,$01,$02,$01,$02,$00,$13,$02,$01,$02,$01,$11,$00,$01,$03,$03,$04,$00,$04,$00,$04,$00,$04,$00,$00,$04,$00,$04
+_L09
+	.byt $12,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$12,$00,$12,$00,$12,$00,$00,$12,$00,$05
+_L10
+	.byt $13,$03,$02,$00,$01,$02,$01,$02,$11,$00,$13,$03,$04,$00,$13,$03,$04,$00,$01,$03,$03,$03,$03,$03,$03,$03,$03,$12,$00,$04
+_L11
+	.byt $05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$12,$00,$12,$63,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$05
+_L12
+	.byt $04,$00,$04,$00,$04,$00,$13,$03,$04,$00,$12,$00,$13,$03,$11,$00,$01,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$11,$00,$04
+_L13
+	.byt $05,$00,$05,$00,$12,$00,$12,$00,$12,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
+_L14
+	.byt $04,$00,$04,$00,$12,$00,$12,$00,$12,$00,$12,$00,$12,$00,$00,$13,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$04,$00,$04
+_L15
+	.byt $05,$00,$05,$00,$01,$03,$11,$00,$01,$03,$11,$00,$01,$03,$03,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$05
+_L16
+	.byt $04,$00,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$13,$03,$03,$03,$03,$03,$03,$03,$03,$03,$11,$00,$04
+_L17
+	.byt $05,$00,$05,$00,$13,$03,$03,$03,$03,$03,$03,$03,$45,$03,$03,$12,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
+_L18
+	.byt $04,$00,$04,$00,$12,$00,$00,$00,$00,$00,$00,$00,$5a,$00,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$04
+_L19
+	.byt $05,$00,$05,$00,$12,$00,$06,$06,$06,$06,$06,$06,$07,$00,$00,$12,$00,$00,$06,$0e,$00,$13,$03,$45,$45,$45,$04,$00,$00,$05
+_L20
+	.byt $04,$00,$04,$00,$12,$00,$0c,$0b,$0a,$0a,$0a,$0a,$42,$00,$00,$05,$00,$00,$0f,$10,$00,$05,$00,$5f,$5c,$5e,$12,$00,$00,$04
+_L21
+	.byt $05,$00,$05,$00,$12,$00,$0c,$08,$00,$00,$00,$00,$00,$00,$00,$58,$00,$00,$00,$00,$00,$00,$00,$00,$14,$00,$12,$00,$00,$05
+_L22
+	.byt $01,$03,$02,$00,$12,$00,$0c,$08,$00,$15,$16,$17,$00,$14,$14,$14,$00,$14,$14,$14,$00,$0c,$07,$00,$14,$00,$05,$00,$00,$04
+_L23
+	.byt $51,$00,$00,$00,$12,$00,$0c,$08,$59,$18,$1d,$1c,$00,$00,$00,$58,$00,$00,$00,$00,$00,$0c,$08,$00,$00,$00,$00,$00,$00,$05
+_L24
+	.byt $01,$03,$02,$00,$12,$00,$0c,$08,$00,$19,$1a,$1b,$00,$14,$14,$14,$00,$14,$14,$14,$00,$0c,$08,$00,$00,$00,$00,$00,$00,$04
+_L25
+	.byt $04,$63,$04,$00,$12,$00,$0c,$08,$00,$00,$00,$00,$00,$00,$00,$58,$00,$00,$00,$00,$00,$0d,$42,$00,$14,$00,$04,$00,$00,$05
+_L26
+	.byt $05,$00,$05,$00,$12,$00,$06,$06,$06,$06,$06,$06,$07,$00,$00,$04,$00,$00,$06,$0e,$00,$00,$00,$00,$14,$00,$05,$00,$00,$04
+_L27
+	.byt $04,$00,$04,$00,$12,$00,$0d,$0a,$0a,$0a,$0a,$0a,$42,$00,$00,$12,$00,$00,$0f,$10,$00,$04,$00,$00,$00,$00,$00,$00,$00,$05
+_L28
+	.byt $05,$00,$05,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$00,$00,$00,$01,$45,$45,$45,$45,$04,$00,$00,$04
+_L29
+	.byt $04,$00,$04,$00,$01,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$12,$00,$00,$04,$00,$00,$00,$5a,$5c,$5b,$5d,$12,$00,$00,$05
+_L30
+	.byt $05,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$01,$03,$45,$45,$45,$45,$45,$45,$11,$00,$00,$04
+_L31
+	.byt $04,$00,$04,$00,$13,$03,$04,$00,$13,$03,$04,$00,$13,$03,$03,$12,$00,$00,$00,$00,$5e,$5c,$5e,$5c,$5d,$5e,$00,$00,$00,$05
+_L32
+	.byt $05,$00,$05,$00,$12,$56,$12,$00,$12,$00,$12,$00,$12,$00,$63,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$04,$00,$00,$04
+_L33
+	.byt $04,$00,$04,$00,$12,$00,$12,$00,$12,$00,$12,$00,$12,$00,$00,$01,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$11,$00,$00,$05
+_L34
+	.byt $05,$00,$05,$00,$12,$00,$12,$00,$12,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12
+_L35
+	.byt $04,$00,$04,$00,$12,$00,$12,$63,$12,$00,$12,$00,$13,$03,$04,$00,$13,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$12
+_L36
+	.byt $05,$00,$05,$00,$05,$00,$01,$03,$11,$00,$01,$03,$11,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12
+_L37
+	.byt $04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01,$03,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12
+_L38
+	.byt $05,$00,$13,$03,$03,$03,$03,$03,$03,$03,$03,$03,$04,$00,$00,$00,$00,$00,$13,$03,$02,$01,$02,$01,$02,$01,$03,$04,$00,$05
+_L39
+	.byt $04,$00,$12,$00,$00,$00,$00,$00,$54,$00,$00,$00,$12,$00,$00,$00,$00,$00,$11,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$04
+_L40
+	.byt $05,$00,$12,$00,$14,$14,$14,$14,$14,$14,$00,$00,$12,$00,$35,$36,$00,$00,$00,$00,$14,$00,$14,$00,$14,$55,$14,$13,$03,$11
+_L41
+	.byt $04,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$38,$37,$00,$00,$04,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$04
+_L42
+	.byt $05,$00,$01,$03,$03,$03,$03,$03,$03,$03,$53,$03,$11,$00,$00,$00,$00,$00,$01,$03,$02,$01,$02,$01,$02,$01,$03,$11,$00,$05
+_L43
+	.byt $04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12
+_L44
+	.byt $01,$03,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$03,$11
+
+	.dsb $3700-*
+ptr_Lignes
+
+	.byt <_L00,>_L00,<_L01,>_L01,<_L02,>_L02,<_L03,>_L03,<_L04,>_L04,<_L05,>_L05,<_L06,>_L06,<_L07,>_L07,<_L08,>_L08,<_L09,>_L09
+	.byt <_L10,>_L10,<_L11,>_L11,<_L12,>_L12,<_L13,>_L13,<_L14,>_L14,<_L15,>_L15,<_L16,>_L16,<_L17,>_L17,<_L18,>_L18,<_L19,>_L19
+	.byt <_L20,>_L20,<_L21,>_L21,<_L22,>_L22,<_L23,>_L23,<_L24,>_L24,<_L25,>_L25,<_L26,>_L26,<_L27,>_L27,<_L28,>_L28,<_L29,>_L29
+	.byt <_L30,>_L30,<_L31,>_L31,<_L32,>_L32,<_L33,>_L33,<_L34,>_L34,<_L35,>_L35,<_L36,>_L36,<_L37,>_L37,<_L38,>_L38,<_L39,>_L39
+	.byt <_L40,>_L40,<_L41,>_L41,<_L42,>_L42,<_L43,>_L43,<_L44,>_L44
+
+	.dsb $3800-*
+; -----------------------------------------------------------------------------
+;    Table adresses car modifiés dans 2nd jeu de car mode Hires (1/4 de tuile)
+; -----------------------------------------------------------------------------
+
+sous_tuile
+	.byt $9d,$00,$9d,$06,$9d,$0c,$9d,$12,$9d,$18,$9d,$1e,$9d,$24,$9d,$2a,$9d,$30,$9d,$36
+	.byt $9d,$3c,$9d,$42,$9d,$48,$9d,$4e,$9d,$54,$9d,$5a,$9d,$60,$9d,$66,$9d,$6c,$9d,$72
+	.byt $9d,$78,$9d,$7e,$9d,$84,$9d,$8a,$9d,$90,$9d,$96,$9d,$9c,$9d,$a2,$9d,$a8,$9d,$ae
+	.byt $9d,$b4,$9d,$ba,$9d,$c0,$9d,$c6,$9d,$cc,$9d,$d2,$9d,$d8,$9d,$de,$9d,$e4,$9d,$ea
+	.byt $9d,$f0,$9d,$f6,$9d,$fc,$9e,$02,$9e,$08,$9e,$0e,$9e,$14,$9e,$1a,$9e,$20,$9e,$26
+	.byt $9e,$2c,$9e,$32,$9e,$38,$9e,$3e,$9e,$44,$9e,$4a,$9e,$50,$9e,$56,$9e,$5c,$9e,$62
+	.byt $9e,$68,$9e,$6e,$9e,$74,$9e,$7a,$9e,$80,$9e,$86,$9e,$8c,$9e,$92,$9e,$98,$9e,$9e
+	.byt $9e,$a4,$9e,$aa,$9e,$b0,$9e,$b6,$9e,$bc,$9e,$c2,$9e,$c8,$9e,$ce,$9e,$d4,$9e,$da
+	.byt $9e,$e0,$9e,$e6,$9e,$ec,$9e,$f2,$9e,$f8,$9e,$fe,$9f,$04,$9f,$0a,$9f,$10,$9f,$16
+	.byt $9f,$1c,$9f,$22,$9f,$28,$9f,$2e,$9f,$34,$9f,$3a,$9f,$40,$9f,$46,$9f,$4c,$9f,$52
+	.byt $9f,$58,$9f,$5e,$9f,$64,$9f,$6a,$9f,$70,$9f,$76,$9f,$7c,$9f,$82,$9f,$88,$9f,$8e,$9f,$94
+	.byt $9f,$9a,$9f,$a0,$9f,$a6,$9f,$ac,$9f,$b2,$9f,$b8,$9f,$be,$9f,$c4,$9f,$ca,$9f,$d0
+	.byt $9f,$d6,$9f,$dc,$9f,$e2,$9f,$e8,$9f,$ee,$9f,$f4
+
+
+	.dsb $3900-*
+; --------------------------------------------------------------------
+;    Table redéfinition  des tuiles (N)d'ordre des 4 car redefinis
+; --------------------------------------------------------------------
+
+; 1 tuile tuile chemin. On peut marcher dessus
+_t00
+		.byt $00,$00,$00,$00
+
+; 70 tuiles : maisons, immeubles, monument arbres... (on ne peut pas les traverser )
+
+_t01
+		.byt $01,$01,$02,$03
+_t02
+		.byt $01,$04,$03,$05
+_t03
+		.byt $01,$01,$06,$03
+_t04
+		.byt $07,$04,$07,$08
+_t05
+		.byt $07,$08,$02,$05
+_t06
+		.byt $09,$0a,$0b,$0c
+_t07
+		.byt $04,$00,$08,$00
+_t08
+		.byt $08,$00,$08,$00
+_t09
+		.byt $03,$05,$00,$00	; finalement non utilisée
+_t0a
+		.byt $06,$03,$00,$00
+_t0b
+		.byt $0d,$03,$08,$00
+_t0c
+		.byt $0e,$0f,$0e,$0f
+_t0d
+		.byt $02,$03,$00,$00
+_t0e
+		.byt $04,$00,$08,$04
+_t0f
+		.byt $02,$03,$00,$02
+_t10
+		.byt $05,$08,$03,$05
+_t11
+		.byt $07,$08,$03,$05
+_t12
+		.byt $07,$08,$07,$08
+_t13
+		.byt $01,$01,$07,$10
+_t14
+		.byt $11,$12,$13,$14
+_t15
+		.byt $15,$15,$15,$16
+_t16
+		.byt $15,$15,$17,$16
+_t17
+		.byt $15,$15,$17,$15
+_t18
+		.byt $15,$19,$15,$16
+_t19
+		.byt $15,$19,$15,$15
+_t1a
+		.byt $18,$19,$15,$15
+_t1b
+		.byt $18,$15,$15,$15
+_t1c
+		.byt $18,$15,$17,$15
+_t1d
+		.byt $18,$19,$17,$16
+_t1e
+		.byt $00,$00,$1a,$00
+_t1f
+		.byt $00,$1b,$00,$1c
+_t20
+		.byt $1d,$1e,$1f,$20
+_t21
+		.byt $40,$40,$41,$41
+_t22
+		.byt $21,$22,$23,$24
+_t23
+		.byt $21,$25,$26,$27
+_t24
+		.byt $28,$29,$2a,$2b
+_t25
+		.byt $2c,$2d,$2e,$2f
+_t26
+		.byt $30,$31,$32,$33
+_t27
+		.byt $30,$34,$35,$36
+_t28
+		.byt $37,$38,$39,$3a
+_t29
+		.byt $37,$3b,$3c,$3d
+_t2a
+		.byt $42,$43,$08,$08
+_t2b
+		.byt $44,$44,$08,$08
+_t2c
+		.byt $45,$46,$08,$47
+_t2d
+		.byt $40,$48,$41,$49
+_t2e
+		.byt $4a,$00,$4b,$00
+_t2f
+		.byt $4c,$00,$4d,$00
+_t30
+		.byt $4e,$00,$4f,$00
+_t31
+		.byt $50,$51,$08,$52
+_t32
+		.byt $53,$53,$08,$08
+_t33
+		.byt $54,$55,$00,$56
+_t34
+		.byt $57,$08,$58,$08
+_t35
+		.byt $0A,$5a,$5b,$5c
+_t36
+		.byt $00,$00,$5d,$5e
+_t37
+		.byt $5f,$60,$61,$5e
+_t38
+		.byt $00,$62,$00,$5e
+_t39
+		.byt $63,$63,$64,$65
+_t3a
+		.byt $63,$63,$66,$65
+_t3b
+		.byt $63,$63,$67,$63
+_t3c
+		.byt $63,$63,$64,$63
+_t3d
+		.byt $16,$63,$19,$63
+_t3e
+		.byt $16,$63,$63,$63
+_t3f
+		.byt $63,$00,$63,$00
+_t40
+		.byt $63,$00,$00,$00
+_t41
+		.byt $68,$69,$19,$18
+_t42
+		.byt $05,$00,$00,$00
+_t43
+		.byt $0b,$0b,$02,$03
+_t44
+		.byt $08,$00,$05,$00
+
+_t45
+		.byt $01,$01,$6a,$6b	; Portail echoppes ex :47, 4a, 4c, 4e, 50
+_t46
+		.byt $00,$00,$00,$00	; libre
+_t47
+		.byt $00,$00,$00,$00	; libre
+_t48
+		.byt $00,$00,$00,$00	; libre
+_t49
+		.byt $00,$00,$00,$00	; libre
+_t4a
+		.byt $00,$00,$00,$00	; libre
+_t4b
+		.byt $00,$00,$00,$00	; libre
+_t4c
+		.byt $00,$00,$00,$00	; libre
+_t4d
+		.byt $00,$00,$00,$00	; libre
+_t4e
+		.byt $00,$00,$00,$00	; libre
+_t4f
+		.byt $00,$00,$00,$00	; libre
+_t50
+		.byt $00,$00,$00,$00	; libre
+;à partir de 51 , 18  tuiles spéciales , gébéralement elles apparaissent en  noir comme les chemins
+; mais peuvent déclancher un évènement (rencontre, trouvaille ...)	et dans certains cas, on peut passer dessus ou à travers
+_t51
+		.byt $00,$00,$00,$00	; Entrée ville
+_t52
+		.byt $01,$01,$3e,$3f	; Portail_1
+_t53
+		.byt $01,$01,$3e,$3f	; Portail_2
+_t54
+		.byt $59,$00,$00,$00	; Clef_1
+_t55
+		.byt $00,$00,$00,$59	; Clef_2
+_t56
+		.byt $00,$00,$00,$00	; Voleur
+_t57
+		.byt $00,$00,$00,$00	; Mot de passe
+_t58
+		.byt $00,$00,$00,$00	; Garde
+_t59
+		.byt $00,$00,$00,$00	; Legat
+_t5a
+		.byt $00,$00,$00,$00	; Medicus
+_t5b
+		.byt $00,$00,$00,$00	; Armurerie
+_t5c
+		.byt $00,$00,$00,$00	; Herboriste
+_t5d
+		.byt $00,$00,$00,$00	; Animalerie
+_t5e
+		.byt $00,$00,$00,$00	; Taberna
+_t5f
+		.byt $00,$00,$00,$00	; Bazar
+_t60
+		.byt $00,$00,$00,$00	; libre
+_t61
+		.byt $00,$00,$00,$00	; libre
+_t62
+		.byt $00,$00,$00,$00	; libre
+_t63
+		.byt $7a,$7b,$7c,$7d	; Coffre
+
+_t64
+		.byt $7a,$7b,$7c,$7d	; Coffre
+
+
+; -----------------------------------------------
+;       Table des pointeurs adresse tuiles
+; ----------------------------------------------- 	évite d'additionner n fois 4 pour trouver la composition
+;													de la tuile n (rapidité scroll)
+ptr_t ;(pointeurs t pour tuiles)
+
+	.byt <_t00,>_t00,<_t01,>_t01,<_t02,>_t02,<_t03,>_t03,<_t04,>_t04,<_t05,>_t05
+	.byt <_t06,>_t06,<_t07,>_t07,<_t08,>_t08,<_t09,>_t09,<_t0a,>_t0a,<_t0b,>_t0b
+	.byt <_t0c,>_t0c,<_t0d,>_t0d,<_t0e,>_t0e,<_t0f,>_t0f,<_t10,>_t10,<_t11,>_t11
+	.byt <_t12,>_t12,<_t13,>_t13,<_t14,>_t14,<_t15,>_t15,<_t16,>_t16,<_t17,>_t17
+	.byt <_t18,>_t18,<_t19,>_t19,<_t1a,>_t1a,<_t1b,>_t1b,<_t1c,>_t1c,<_t1d,>_t1d
+	.byt <_t1e,>_t1e,<_t1f,>_t1f,<_t20,>_t20,<_t21,>_t21,<_t22,>_t22,<_t23,>_t23
+	.byt <_t24,>_t24,<_t25,>_t25,<_t26,>_t26,<_t27,>_t27,<_t28,>_t28,<_t29,>_t29
+	.byt <_t2a,>_t2a,<_t2b,>_t2b,<_t2c,>_t2c,<_t2d,>_t2d,<_t2e,>_t2e,<_t2f,>_t2f
+	.byt <_t30,>_t30,<_t31,>_t31,<_t32,>_t32,<_t33,>_t33,<_t34,>_t34,<_t35,>_t35
+	.byt <_t36,>_t36,<_t37,>_t37,<_t38,>_t38,<_t39,>_t39,<_t3a,>_t3a,<_t3b,>_t3b
+	.byt <_t3c,>_t3c,<_t3d,>_t3d,<_t3e,>_t3e,<_t3f,>_t3f,<_t40,>_t40,<_t41,>_t41
+	.byt <_t42,>_t42,<_t43,>_t43,<_t44,>_t44,<_t45,>_t45,<_t46,>_t46,<_t47,>_t47
+	.byt <_t48,>_t48,<_t49,>_t49,<_t4a,>_t4a,<_t4b,>_t4b,<_t4c,>_t4c,<_t4d,>_t4d
+	.byt <_t4e,>_t4e,<_t4f,>_t4f,<_t50,>_t50,<_t51,>_t51,<_t52,>_t52,<_t53,>_t53
+	.byt <_t54,>_t54,<_t55,>_t55,<_t56,>_t56,<_t57,>_t57,<_t58,>_t58,<_t59,>_t59
+	.byt <_t5a,>_t5a,<_t5b,>_t5b,<_t5c,>_t5c,<_t5d,>_t5d,<_t5e,>_t5e,<_t5f,>_t5f
+	.byt <_t60,>_t60,<_t61,>_t61,<_t62,>_t62,<_t63,>_t63,<_t64,>_t64
+
+
+; -----------------------------------------------
+;       Table redéfinition  2nd jeu de car 
+; -----------------------------------------------
+
+dta_car_redef_p1
+;00 en $9d00
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+
+;01 en $9d06
+	.byt $d5	;1,1,0,1,0,1,0,1
+	.byt $6a	;0,1,1,0,1,0,1,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $6a	;0,1,1,0,1,0,1,0
+	.byt $d5	;1,1,0,1,0,1,0,1
+	.byt $6a	;0,1,1,0,1,0,1,0
+
+
+;02 en $9d0c
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $e0	;1,1,1,0,0,0,0,0
+	.byt $49	;0,1,0,0,1,0,0,1
+	.byt $f8	;1,1,1,1,1,0,0,0
+	.byt $43	;0,1,0,0,0,0,1,1
+	.byt $fe	;1,1,1,1,1,1,1,0
+	
+;03 en $9d12
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $c0	;1,1,0,0,0,0,0,0
+	.byt $79	;0,1,1,1,1,0,0,1
+	.byt $c0	;1,1,0,0,0,0,0,0
+	.byt $73	;0,1,1,1,0,0,1,1
+	.byt $c6	;1,1,0,0,0,1,1,0
+	
+;04 en $9d18
+	.byt $60	;0,1,1,0,0,0,0,0
+	.byt $50	;0,1,0,1,0,0,0,0
+	.byt $68	;0,1,1,0,1,0,0,0
+	.byt $54	;0,1,0,1,0,1,0,0
+	.byt $6a	;0,1,1,0,1,0,1,0
+	.byt $55	;0,1,0,1,0,1,0,1
+	
+;05 en $9d1e
+	.byt $4a	;0,1,0,0,1,0,1,0
+	.byt $da	;1,1,0,1,1,0,1,0
+	.byt $72	;0,1,1,1,0,0,1,0
+	.byt $c6 	;1,1,0,0,0,1,1,0
+	.byt $7c	;0,1,1,1,1,1,0,0
+	.byt $c1 	;1,1,0,0,0,0,0,1
+	
+;06 en $9d24
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $e0	;1,1,1,0,0,0,0,0
+	.byt $6c 	;0,1,1,0,1,1,0,0
+	.byt $c8 	;1,1,0,0,1,0,0,0
+	.byt $7b 	;0,1,1,1,1,0,1,1
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	
+;07  en $9d2a
+	.byt $d5 	;1,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $d5 	;1,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $d5 	;1,1,0,1,0,1,0,1
+	.byt $6a	;0,1,1,0,1,0,1,0
+	
+;08  en $9d30
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55	;0,1,0,1,0,1,0,1
+	
+;09  en $9d36
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	
+;0A  en $9d3c
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $40	;0,1,0,0,0,0,0,0
+
+;0B  en $9d42
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+
+;0C  en $9d48
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $cc 	;1,1,0,0,1,1,0,0
+
+;0D  en $9d4e
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $6c 	;0,1,1,0,1,1,0,0
+	.byt $e8 	;1,1,1,0,1,0,0,0
+	.byt $6b 	;0,1,1,0,1,0,1,1
+	.byt $eb 	;1,1,1,0,1,0,1,1
+	
+;0E  en $9d54
+	.byt $d9 	;1,1,0,1,1,0,0,1
+	.byt $e6 	;1,1,1,0,0,1,1,0
+	.byt $d9 	;1,1,0,1,1,0,0,1
+	.byt $e6 	;1,1,1,0,0,1,1,0
+	.byt $d9 	;1,1,0,1,1,0,0,1
+	.byt $e6 	;1,1,1,0,0,1,1,0
+	
+;0F  en $9d5a
+	.byt $ec 	;1,1,1,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $ec 	;1,1,1,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $ec 	;1,1,1,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	
+;10  en $9d60
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $6c 	;0,1,1,0,1,1,0,0
+	.byt $e8 	;1,1,1,0,1,0,0,0
+	.byt $6b 	;0,1,1,0,1,0,1,1
+	.byt $ea 	;1,1,1,0,1,0,1,0
+	
+;11  en $9d66
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $66 	;0,1,1,0,0,1,1,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	
+;12  en $9d6c
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	
+;13  en $9d72
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $45 	;0,1,0,0,0,1,0,1
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;14  en $9d78
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $48 	;0,1,0,0,1,0,0,0
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $7d 	;0,1,1,1,1,1,0,1
+	.byt $7e 	;0,1,1,1,1,1,1,0
+	.byt $7d 	;0,1,1,1,1,1,0,1
+	
+;15  en $9d7e
+	.byt $77 	;0,1,1,1,0,1,1,1
+	.byt $dc 	;1,1,0,1,1,1,0,0
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $6e 	;0,1,1,0,1,1,1,0
+	.byt $c2 	;1,1,0,0,0,0,1,0
+	
+;16  en $9d84
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $fd 	;1,1,1,1,1,1,0,1
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $e7 	;1,1,1,0,0,1,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $ff 	;1,1,1,1,1,1,1,1
+
+;17  en $9d8a
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $fb 	;1,1,1,1,1,0,1,1
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $f7 	;1,1,1,1,0,1,1,1
+	.byt $48 	;0,1,0,0,1,0,0,0
+	.byt $cf 	;1,1,0,0,1,1,1,1
+	
+;18  en $9d90
+	.byt $40 	;0,1,0,0,0,0,0,0 
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $fe 	;1,1,1,1,1,1,1,0
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $fd 	;1,1,1,1,1,1,0,1
+	
+;19  en $9d96
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $e1 	;1,1,1,0,0,0,0,1
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	
+;1A  en $9d9c
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $51 	;0,1,0,1,0,0,0,1
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;1B  en $9da2
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $64 	;0,1,1,0,0,1,0,0
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $48 	;0,1,0,0,1,0,0,0
+	
+;1C  en $b9d8
+	.byt $52 	;0,1,0,1,0,0,1,0
+	.byt $62 	;0,1,1,0,0,0,1,0
+	.byt $64 	;0,1,1,0,0,1,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;1D  en $9dae
+	.byt $68 	;0,1,1,0,1,0,0,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $48 	;0,1,0,0,1,0,0,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6b 	;0,1,1,0,1,0,1,1
+	.byt $44 	;0,1,0,0,0,1,0,0
+	
+;1E  en $9db4
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $51 	;0,1,0,1,0,0,0,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	
+;1F  en $9dba
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $48	;0,1,0,0,1,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;20  en $9dc0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $78 	;0,1,1,1,1,0,0,0
+	.byt $5c 	;0,1,0,1,1,1,0,0
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $ea 	;1,1,1,0,1,0,1,0
+	
+;21  en $9dc6
+	.byt $4e 	;0,1,0,0,1,1,1,0
+	.byt $51 	;0,1,0,1,0,0,0,1
+	.byt $52 	;0,1,0,1,0,0,1,0
+	.byt $4d 	;0,1,0,0,1,1,0,1
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $47 	;0,1,0,0,0,1,1,1
+	
+;22  en $9dcc
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,1,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $68 	;0,1,1,0,1,0,0,0
+	.byt $76 	;0,1,1,1,0,1,1,0
+
+;23  en $9dd2
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+
+;24  en $9dd8
+	.byt $61 	;0,1,1,0,0,0,0,1
+	.byt $65 	;0,1,1,0,0,1,0,1
+	.byt $52 	;0,1,0,1,0,0,1,0
+	.byt $4b 	;0,1,0,0,1,0,1,1
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+
+;25  en $9dde
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+
+;26  en $9de4
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+
+;27  en $9dea
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $6c 	;0,1,1,0,1,1,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $69 	;0,1,1,0,1,0,0,1
+	.byt $56 	;0,1,0,1,0,1,1,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+
+;28  en $9df0
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $48 	;0,1,0,0,1,0,0,0
+	.byt $48 	;0,1,0,0,1,0,0,0
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	
+;29  en $9df6
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $78 	;0,1,1,1,1,0,0,0
+	.byt $78 	;0,1,1,1,1,0,0,0
+
+dta_car_redef_p2	
+;2A  en $9dfc
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	
+;2B  en $9e02
+	.byt $74 	;0,1,1,1,0,1,0,0
+	.byt $6e 	;0,1,1,0,1,1,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6d 	;0,1,1,0,1,1,0,1
+	.byt $52 	;0,1,0,1,0,0,1,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	
+;2C  en $9e08
+	.byt $4e 	;0,1,0,0,1,1,1,0
+	.byt $51 	;0,1,0,1,0,0,0,1
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $49 	;0,1,0,0,1,0,0,1
+	.byt $45 	;0,1,0,0,0,1,0,1
+	.byt $47 	;0,1,0,0,0,1,1,1
+	
+;2D  en $9e0e
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $68 	;0,1,1,0,1,0,0,0
+	.byt $74 	;0,1,1,1,0,1,0,0
+	.byt $7a 	;0,1,1,1,1,0,1,0
+	
+;2E  en $9e14
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $40 	;0,1,0,0,0,0,0,0	
+	
+;2F  en $9e1a
+	.byt $78 	;0,1,1,1,1,0,0,0	;0,1,1,1,1,0,0,0
+	.byt $6c 	;0,1,1,0,1,1,0,0    ;0,1,1,0,1,1,1,1 
+	.byt $4a 	;0,1,0,0,1,0,1,0    ;0,1,0,0,1,0,0,1
+	.byt $6c 	;0,1,1,0,1,1,0,0    ;0,1,1,0,1,1,0,1
+	.byt $48 	;0,1,0,0,1,0,0,0    ;0,1,0,0,1,0,1,0
+	.byt $78 	;0,1,1,1,1,0,0,0    ;0,1,1,1,1,0,0,0
+
+;30  en $9e20
+	.byt $5c 	;0,1,0,1,1,1,0,0
+	.byt $62 	;0,1,1,0,0,0,1,0
+	.byt $62 	;0,1,1,0,0,0,1,0
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $4f 	;0,1,0,0,1,1,1,1
+	.byt $4f 	;0,1,0,0,1,1,1,1
+
+;31  en $9e26
+	.byt $40 	;0,1,0,0,0,0,0,0	
+	.byt $40 	;0,1,0,0,0,0,0,0	
+	.byt $40 	;0,1,0,0,0,0,0,0	
+	.byt $50 	;0,1,0,1,0,0,0,0	
+	.byt $78 	;0,1,1,1,1,0,0,0	
+	.byt $6b 	;0,1,1,0,1,0,1,1	
+
+;32  en $9e2c
+	.byt $4f 	;0,1,0,0,1,1,1,1 	
+	.byt $4c 	;0,1,0,0,1,1,0,0 	
+	.byt $46 	;0,1,0,0,0,1,1,0 	
+	.byt $45 	;0,1,0,0,0,1,0,1 	
+	.byt $41 	;0,1,0,0,0,0,0,1 	
+	.byt $40 	;0,1,0,0,0,0,0,0 	
+
+;33  en $9e32
+	.byt $65 	;0,1,1,0,0,1,0,1 	
+	.byt $53 	;0,1,0,1,0,0,1,1 	
+	.byt $5c 	;0,1,0,1,1,1,0,0 	
+	.byt $50 	;0,1,0,1,0,0,0,0 	
+	.byt $48 	;0,1,0,0,1,0,0,0 	
+	.byt $70 	;0,1,1,1,0,0,0,0 	
+	
+;34  en $9e38
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $78 	;0,1,1,1,1,0,0,0	
+	
+;35  en $9e3e
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $41 	;0,1,0,0,0,0,0,1	
+	
+;36  en $9e44
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $69 	;0,1,1,0,1,0,0,1
+	.byt $66 	;0,1,1,0,0,1,1,0
+	.byt $48 	;0,1,0,0,1,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0	
+	
+;37  en $9e4a
+	.byt $5c 	;0,1,0,1,1,1,0,0
+	.byt $62 	;0,1,1,0,0,0,1,0
+	.byt $7a 	;0,1,1,1,1,0,1,0
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $4f 	;0,1,0,0,1,1,1,1
+	.byt $47 	;0,1,0,0,0,1,1,1	
+
+	
+;38 en $9e50
+	.byt $40	;0,1,0,0,0,0,0,0	
+	.byt $40	;0,1,0,0,0,0,0,0    
+	.byt $40	;0,1,0,0,0,0,0,0    
+	.byt $70	;0,1,1,1,0,0,0,0    
+	.byt $78	;0,1,1,1,1,0,0,0    
+	.byt $7c	;0,1,1,1,1,1,0,0    
+
+;39 en $9e56
+	.byt $4b	;0,1,0,0,1,0,1,1	
+	.byt $45	;0,1,0,0,0,1,0,1    
+	.byt $42	;0,1,0,0,0,0,1,0    
+	.byt $40	;0,1,0,0,0,0,0,0    
+	.byt $40	;0,1,0,0,0,0,0,0    
+	.byt $40	;0,1,0,0,0,0,0,0    
+
+
+;3A en $9e5c
+	.byt $7a	;0,1,1,1,1,0,1,0	
+	.byt $6a	;0,1,1,0,1,0,1,0    
+	.byt $7a	;0,1,1,1,1,0,1,0    
+	.byt $43	;0,1,0,0,0,1,0,1    
+	.byt $49	;0,1,0,0,1,0,0,1    
+	.byt $46	;0,1,0,0,0,1,1,0    
+	
+;3B en $9e62
+	.byt $40	;0,1,0,0,0,0,0,0		
+	.byt $40	;0,1,0,0,0,0,0,0    
+	.byt $40	;0,1,0,0,0,0,0,0    
+	.byt $60	;0,1,1,0,0,0,0,0    
+	.byt $76	;0,1,1,1,0,0,0,0    
+	.byt $7d	;0,1,1,1,0,1,1,0    
+	
+;3C en $9e68
+	.byt $47	;0,1,0,0,0,1,1,1
+	.byt $43	;0,1,0,0,0,0,1,1
+	.byt $40	;0,1,0,0,0,0,0,0	
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	
+;3D en $9e6e
+	.byt $79	;0,1,1,1,1,1,0,1	
+	.byt $6a	;0,1,0,1,1,0,1,0    
+	.byt $5c	;0,1,1,0,1,1,0,0    
+	.byt $4a 	;0,1,0,1,0,1,0,0    
+	.byt $52	;0,1,1,0,0,1,0,0    
+	.byt $4c 	;0,1,0,1,1,0,0,0    
+	
+;3E en $9e74
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $C0	;1,1,0,0,0,0,0,0
+	.byt $78 	;0,1,1,1,1,0,0,0
+	.byt $cf 	;1,1,0,0,1,1,1,1
+	.byt $78 	;0,1,1,1,1,0,0,0
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	
+;3F  en $9e7a
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $c0 	;1,1,0,0,0,0,0,0
+	.byt $7f 	;0,1,1,1,1,1,1,1
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $f8	;1,1,1,1,1,0,0,0
+	
+;40  en $9e80
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $7f 	;0,1,1,1,1,1,1,1
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $7f 	;0,1,1,1,1,1,1,1
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $7f	;0,1,1,1,1,1,1,1
+	
+;41  en $9e86
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $7f 	;0,1,1,1,1,1,1,1
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $7f	;0,1,1,1,1,1,1,1
+	
+;42  en $9e8c
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $4e 	;0,1,0,0,1,1,1,0
+	.byt $f3	;1,1,1,1,0,0,1,1
+
+;43  en $9e92
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $c2 	;1,1,0,0,0,0,1,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $c3 	;1,1,0,0,0,0,1,1
+
+;44  en $9e98
+	.byt $4f 	;0,1,0,0,1,1,1,1
+	.byt $c6 	;1,1,0,0,0,1,1,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $7c 	;0,1,1,1,1,1,0,0
+	.byt $cc 	;1,1,0,0,1,1,0,0
+
+;45  en $9e9e
+	.byt $7c 	;0,1,1,1,1,1,0,0
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $c1 	;1,1,0,0,0,0,0,1
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	
+;46  en $9ea4
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $c6 	;1,1,0,0,0,1,1,0
+	.byt $5c 	;0,1,0,1,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	
+;47  en $9eaa
+	.byt $6e 	;0,1,1,0,1,1,1,0
+	.byt $d1 	;1,1,0,1,0,0,0,1
+	.byt $6f 	;0,1,1,0,1,1,1,1
+	.byt $d8 	;1,1,0,1,1,0,0,0
+	.byt $77 	;0,1,1,1,0,1,1,1
+	.byt $c9 	;1,1,0,0,1,0,0,1
+	
+;48  en $9eb0
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $c9 	;1,1,0,0,1,0,0,1
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $c9 	;1,1,0,0,1,0,0,1
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $c9 	;1,1,0,0,1,0,0,1
+	
+;49  en $9eb6
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $d9 	;1,1,0,1,1,0,0,1
+	.byt $6f 	;0,1,1,0,1,1,1,1
+	.byt $d1 	;1,1,0,1,0,0,0,1
+	.byt $6f 	;0,1,1,0,1,1,1,1
+	.byt $f1 	;1,1,1,1,0,0,0,1
+	
+;4A  en $9ebc
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	
+;4B  en $9ec2
+	.byt $68 	;0,1,1,0,1,0,0,0
+	.byt $54 	;0,1,0,1,0,1,0,0
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $54 	;0,1,0,1,0,1,0,0
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	
+;4C  en $9ec8
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	
+;4D  en $9ece
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	
+;4E  en $9ed4
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $54 	;0,1,0,1,0,1,0,0
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $54 	;0,1,0,1,0,1,0,0
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $54 	;0,1,0,1,0,1,0,0
+
+;4F  en $9eda
+	.byt $68 	;0,1,1,0,1,0,0,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $68 	;0,1,1,0,1,0,0,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;50  en $9ee0
+	.byt $c1 	;1,1,0,0,0,0,0,1 
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $7c 	;0,1,1,1,1,1,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;51  en $9ee6
+	.byt $5c 	;0,1,0,1,1,1,0,0
+	.byt $c6 	;1,1,0,0,0,1,1,0
+	.byt $72 	;0,1,1,1,0,0,1,0
+	.byt $45 	;0,1,0,0,0,1,0,1
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	
+;52  en $9eec
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $54 	;0,1,0,1,0,1,0,0
+	
+;53  en $9ef2
+	.byt $4f 	;0,1,0,0,1,1,1,1
+	.byt $c6 	;1,1,0,0,0,1,1,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $7c 	;0,1,1,1,1,1,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+dta_car_redef_p3	
+
+;54  en $9ef8
+	.byt $4e 	;0,1,0,0,1,1,1,0
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $44 	;0,1,0,0,0,1,0,0
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	
+;55  en $9efe
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	.byt $46 	;0,1,0,0,0,1,1,0
+	.byt $50 	;0,1,0,1,0,0,0,0
+	
+;56  en $9f04
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $4a 	;0,1,0,0,1,0,1,0
+	.byt $45 	;0,1,0,0,0,1,0,1
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;57  en $9f0a
+	.byt $7a 	;0,1,1,1,1,0,1,0
+	.byt $e4 	;1,1,1,0,0,1,0,0
+	.byt $7a	;0,1,1,1,1,0,1,0
+	.byt $e4 	;1,1,1,0,0,1,0,0
+	.byt $7a 	;0,1,1,1,1,0,1,0
+	.byt $e4 	;1,1,1,0,0,1,0,0
+	
+;58  en $9f10
+	.byt $fb 	;1,1,1,1,1,0,1,1
+	.byt $66 	;0,1,1,0,0,1,1,0
+	.byt $fd 	;1,1,1,1,1,1,0,1
+	.byt $62 	;0,1,1,0,0,0,1,0
+	.byt $cd 	;1,1,0,1,1,1,0,1
+	.byt $73 	;0,1,1,1,0,0,1,1
+	
+;59  en $9f16
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $6f 	;0,1,1,0,1,1,1,1
+	.byt $71 	;0,1,1,1,0,0,0,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	
+;5A  en $9f1c
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $78 	;0,1,1,1,1,0,0,0
+	.byt $7c 	;0,1,1,1,1,1,0,0
+	.byt $7e 	;0,1,1,1,1,1,1,0
+
+;5B  en $9f22
+	.byt $4f 	;0,1,0,0,1,1,1,1
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $4b 	;0,1,0,0,1,0,1,1
+	.byt $45 	;0,1,0,0,0,1,0,1
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+
+;5C  en $9f28
+	.byt $5f 	;0,1,0,1,1,1,1,1
+	.byt $6d 	;0,1,1,0,1,1,0,1
+	.byt $76 	;0,1,1,1,0,1,1,0
+	.byt $7b 	;0,1,1,1,1,0,1,1
+	.byt $7d 	;0,1,1,1,1,1,0,1
+	.byt $5e 	;0,1,0,1,1,1,1,0
+
+;5D  en $9f2e
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+
+;5E  en $9f34
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+
+;5F  en $9f3a
+	.byt $5f 	;0,1,0,1,1,1,1,1
+	.byt $6f 	;0,1,1,0,1,1,1,1
+	.byt $77 	;0,1,1,1,0,1,1,1
+	.byt $7b 	;0,1,1,1,1,0,1,1
+	.byt $7d 	;0,1,1,1,1,1,0,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+
+;60  en $9f40
+	.byt $53 	;0,1,0,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $53 	;0,1,0,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $53 	;0,1,0,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	
+;61  en $9f46
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $73 	;0,1,1,1,0,0,1,1
+
+	
+;62  en $9f4c
+	.byt $6f 	;0,1,1,0,1,1,1,1
+	.byt $57 	;0,1,0,1,0,1,1,1
+	.byt $6b 	;0,1,1,0,1,0,1,1
+	.byt $4d 	;0,1,0,0,1,1,0,1
+	.byt $72 	;0,1,1,1,0,0,1,0
+	.byt $4e 	;0,1,0,0,1,1,1,0
+	
+;63  en $9f52
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $6e 	;0,1,1,0,1,1,1,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $77 	;0,1,1,1,0,1,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $7b 	;0,1,1,1,1,0,1,1
+	
+;64  en $9f58
+	.byt $5b 	;0,1,0,1,1,0,1,1
+	.byt $4d 	;0,1,0,0,1,1,0,1
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $fe 	;1,1,1,1,1,1,1,0
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $fd 	;1,1,1,1,1,1,0,1
+	
+;65  en $9f5e
+	.byt $5b 	;0,1,0,1,1,0,1,1
+	.byt $6d 	;0,1,1,0,1,1,0,1
+	.byt $5b 	;0,1,0,1,1,0,1,1
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	
+;66  en $9f64
+	.byt $5b 	;0,1,0,1,1,0,1,1
+	.byt $6d 	;0,1,1,0,1,1,0,1
+	.byt $5b 	;0,1,0,1,1,0,1,1
+	.byt $fe 	;1,1,1,1,1,1,1,0
+	.byt $42 	;0,1,0,0,0,0,1,0
+	.byt $fd 	;1,1,1,1,1,1,0,1	
+	
+;67  en $9fa
+	.byt $5a 	;0,1,0,1,1,0,1,0
+	.byt $6c 	;0,1,1,0,1,1,0,0     
+	.byt $5a 	;0,1,0,1,1,0,1,0
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $ff 	;1,1,1,1,1,1,1,1
+
+;68  en $9f70
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $61 	;0,1,1,0,0,0,0,1
+	.byt $55 	;0,1,0,1,0,1,0,1
+	.byt $5f 	;0,1,0,1,1,1,1,1
+	.byt $4f 	;0,1,0,0,1,1,1,1
+
+;69  en $9f76
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $7c 	;0,1,1,1,1,1,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	
+;6a  en $9f7c
+	.byt $7f 	;0,1,1,1,1,1,1,1
+	.byt $ff 	;1,1,1,1,1,1,1,1
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $cf 	;1,1,0,0,1,1,1,1
+	.byt $78 	;0,1,1,1,1,0,0,0
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	
+;6b  en $9f82
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $f0 	;1,1,1,1,0,0,0,0
+	.byt $47 	;0,1,0,0,0,1,1,1
+	.byt $fc 	;1,1,1,1,1,1,0,0
+	.byt $41 	;0,1,0,0,0,0,0,1
+	.byt $ff 	;1,1,1,1,1,1,1,1
+;6c  en $9f88
+	.byt $ef 	;1,1,1,0,1,1,1,1
+	.byt $6d 	;0,1,1,0,1,1,0,1
+	.byt $ef 	;1,1,1,0,1,1,1,1
+	.byt $6f 	;0,1,1,0,1,1,1,1
+	.byt $ef 	;1,1,1,0,1,1,1,1
+	.byt $6d 	;0,1,1,0,1,1,0,1
+	
+;6d  en $9f8e
+	.byt $fd 	;1,1,1,1,1,1,0,1
+	.byt $7d 	;0,1,1,1,1,1,0,1
+	.byt $fd 	;1,1,1,1,1,1,0,1
+	.byt $6d 	;0,1,1,0,1,1,0,1
+	.byt $fd 	;1,1,1,1,1,1,0,1
+	.byt $7d 	;0,1,1,1,1,1,0,1
+
+;6e  en $9fb94
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $ef 	;1,1,1,0,1,1,1,1
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $ef 	;1,1,1,0,1,1,1,1
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $ef 	;1,1,1,0,1,1,1,1
+	
+;6f  en $9f9a
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $c0 	;1,1,0,0,0,0,0,0
+	.byt $5e 	;0,1,0,1,1,1,1,0
+	.byt $f3 	;1,1,1,1,0,0,1,1
+	.byt $46 	;0,1,0,0,0,1,1,0
+	.byt $fc 	;1,1,1,1,1,1,0,0	
+	
+;70  en $9fa0
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $c0 	;1,1,0,0,0,0,0,0
+	.byt $7e 	;0,1,1,1,1,1,1,0
+	.byt $c3 	;1,1,0,0,0,0,1,1
+	.byt $46 	;0,1,1,1,0,1,1,0
+	.byt $e3 	;0,1,1,0,0,0,1,1
+
+;71  en $9fa6
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $78 	;0,1,1,1,1,0,0,0
+	.byt $7c 	;0,1,1,1,1,1,0,0
+	.byt $66 	;0,1,1,0,0,1,1,0
+	.byt $63 	;0,1,1,0,0,0,1,1
+
+;72  en $9fac
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $49 	;0,1,0,0,1,0,0,1
+	.byt $67 	;0,1,1,0,0,1,1,1
+	.byt $43 	;0,1,0,0,0,0,1,1
+	.byt $5b 	;0,1,0,1,1,0,1,1	
+	
+;73  en $9fb2
+	.byt $60 	;0,1,1,0,0,0,0,0
+	.byt $ef 	;1,1,1,0,1,1,1,1
+	.byt $68 	;0,1,1,0,1,0,0,0
+	.byt $eb 	;1,1,1,0,1,0,1,1
+	.byt $6a 	;0,1,1,0,1,0,1,0
+	.byt $ea 	;1,1,1,0,1,0,1,0
+
+;74  en $9fb8
+	.byt $40 	;0,1,0,0,0,0,0,0
+	.byt $e0 	;1,1,1,0,0,0,0,0
+	.byt $69 	;0,1,1,0,1,0,0,1
+	.byt $e8 	;1,1,1,0,1,0,0,0
+	.byt $6b 	;0,1,1,0,1,0,1,1
+	.byt $ea 	;1,1,1,0,1,0,1,0
+
+;75  en $9fbe
+	.byt $62 	;0,1,1,0,0,0,1,0
+	.byt $ed 	;1,1,1,0,1,1,0,1
+	.byt $62 	;0,1,1,0,0,0,1,0
+	.byt $eb 	;1,1,1,0,1,0,1,1
+	.byt $64 	;0,1,1,0,0,1,0,0
+	.byt $e7 	;1,1,1,0,0,1,1,1
+	
+;76  en $9fc4
+	.byt $61 	;0,1,1,0,0,0,0,1
+	.byt $70 	;0,1,1,1,0,0,0,0
+	.byt $58 	;0,1,0,1,1,0,0,0
+	.byt $4c 	;0,1,0,0,1,1,0,0
+	.byt $46 	;0,1,0,0,0,1,1,0
+	.byt $43 	;0,1,0,0,0,0,1,1
+
+;77  en $9fca
+	.byt $60	;0,1,1,0,0,0,0,0
+	.byt $53	;0,1,0,1,0,0,1,1
+	.byt $68	;0,1,1,0,1,0,0,0
+	.byt $55	;0,1,0,1,0,1,0,1
+	.byt $6a	;0,1,1,0,1,0,1,0
+	.byt $55	;0,1,0,1,0,1,0,1
+
+;78  en $9fd0
+	.byt $61 	;0,1,0,0,0,0,0,0
+	.byt $70 	;0,1,0,0,0,0,0,0
+	.byt $58 	;0,1,0,0,0,0,0,0
+	.byt $4a 	;0,1,0,0,0,0,0,0
+	.byt $46 	;0,1,0,0,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,0,0
+
+;79  en $9fd6
+	.byt $61 	;0,1,0,0,0,0,0,0
+	.byt $70 	;0,1,0,0,0,0,0,0
+	.byt $58 	;0,1,0,0,0,0,0,0
+	.byt $4a 	;0,1,0,0,0,0,0,0
+	.byt $46 	;0,1,0,0,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,0,0
+
+;7A en $9fdc 	coffre (1/4)
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $4f	;0,1,0,0,1,1,1,1
+	.byt $e0	;1,1,1,0,0,0,0,0
+	.byt $59	;0,1,0,1,1,0,0,1
+
+;7B en $9fe2	coffre (2/4)
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $74	;0,1,1,1,0,1,0,0
+	.byt $d1	;1,1,0,1,0,0,0,1
+	.byt $6e	;0,1,1,0,1,1,1,0
+
+;7C en $9fe8 	coffre (3/4)
+	.byt $44	;0,1,0,0,0,1,0,0
+	.byt $e6	;1,1,1,0,0,1,1,0
+	.byt $e0	;1,1,1,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+
+;7D en $9fee 	coffre (4/4)
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $d1	;1,1,0,1,0,0,0,1
+	.byt $d1	;1,1,0,1,0,0,0,1
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	.byt $40	;0,1,0,0,0,0,0,0
+	
+;7e  en $9ff4
+	.byt $61 	;0,1,0,0,0,0,0,0
+	.byt $70 	;0,1,0,0,0,0,0,0
+	.byt $58 	;0,1,0,0,0,0,0,0
+	.byt $4a 	;0,1,0,0,0,0,0,0
+	.byt $46 	;0,1,0,0,0,0,0,0
+	.byt $43 	;0,1,0,0,0,0,0,0	
+	
+;7f  en $9ffa
+;	.byt $61 	;0,1,0,0,0,0,0,0
+;	.byt $70 	;0,1,0,0,0,0,0,0
+;	.byt $58 	;0,1,0,0,0,0,0,0
+;	.byt $4a 	;0,1,0,0,0,0,0,0
+;	.byt $46 	;0,1,0,0,0,0,0,0
+;	.byt $43 	;0,1,0,0,0,0,0,0	
+
+
+
+; -----------------------------------------------------------------------------
+;                   proposition de textes pour tuiles spéciales
+; -----------------------------------------------------------------------------
+
+t_portail_1
+	.byt $99
+	.asc "You've got the right key",0
+t_portail_2	
+	.byt $c6 
+	.asc "You can cross.",0
+t_portail_3
+	.byt $96
+	.asc "You don't have the right key.",0	
+; ------------------------------------	
+t_key_1
+	.byt $9d
+	.asc "You've found a key.",0 ;(key_1)
+t_key_2	
+	.byt $c3	
+	.asc "Now all you have to do",0
+t_key_3	
+	.byt $9a	
+	.asc "is find the right door.",0
+; ------------------------------------	
+t_voleur_1
+	.byt $9a
+	.asc "A pickpocket skillfully;",0
+t_voleur_2	
+	.byt $c2	
+	.asc "steals from Carpophorus.",0
+; ------------------------------------	
+t_m_de_passe_1
+	.byt $96
+	.asc "Understanding your situation,",0
+t_m_de_passe_2	
+	.byt $bc	
+	.asc "a patrician says: 'Festina lente'.",0
+; ------------------------------------
+t_garde_1
+	.byt $9a
+	.asc "A guard says 'Festina'.",0
+t_garde_2
+	.byt $bd
+	.asc "And is waiting for your answer.",0
+t_garde_3
+	.byt $9a
+	.asc "A guard says 'Festina'.",0
+t_garde_4
+	.byt $c5
+	.asc "You say 'Lente'",0
+t_garde_5
+	.byt $9a
+	.asc "the guard lets you in.",0		
+; ------------------------------------
+t_legat_1
+	.byt $94
+	.asc "On orders received from Antoninus,",0
+t_legat_2
+	.byt $bf	
+	.asc "the legate gives you a purse",0
+t_legat_3
+	.byt $9b	
+	.asc "of 20,000 sesterces.",0	
+; ------------------------------------	
+t_entrance_1
+	.byt $99	
+	.asc "The entrance to the city,",0
+t_entrance_2	
+	.byt $c3	
+	.asc "do you want to leave?",0
+; ------------------------------------	
+t_do_you_1
+	.byt $c6	
+	.asc "do you enter?",0
+; ------------------------------------	
+t_medicus_1
+	.byt $a1	
+	.asc "MEDICUS",0
+; ------------------------------------
+t_armurerie_1
+	.byt $9d	
+	.asc "FABER ARMORUM",0
+; ------------------------------------	
+t_herboriste_1
+	.byt $a0	
+	.asc "HERBARIUS",0
+; ------------------------------------	
+t_animalerie_1
+	.byt $9d	
+	.asc "OMNIA ANIMALIA",0
+; ------------------------------------	
+t_taberna_1
+	.byt $a1	
+	.asc "TABERNA",0
+; ------------------------------------
+t_bazar_1
+	.byt $a2	
+	.asc "bazar",0
+; ------------------------------------		
+t_coffre_1
+	.byt $9d	
+	.asc "You find a chest,",0
+t_coffre_2
+	.byt $c6	
+	.asc "do you take it?",0
+; ------------------------------------
+	.dsb $4100-*
+dta_bandeau	
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$3,$60,$40,$48,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$3,$40,$41,$67,$47,$6E,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$3,$40,$4A,$7F,$43,$7E,$60,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$3,$40,$5A,$7C,$41,$7F,$70,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$3,$40,$4F,$7F,$60,$40,$40,$57,$60,$40,$4F,$68,$40,$40,$7F,$7E,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$7,$40,$5F,$7E,$70,$3,$42,$6F,$78,$40,$7F,$6A,$7,$41,$7F,$7B,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0,$4,$40,$40,$13,$0,$67,$7F,$7D,$41,$7F,$7F,$7C,$41,$7F,$7C,$40,$42,$5F,$10,$4,$0,$4,$0,$4,$0,$4,$0,$4,$0
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$7,$40,$47,$7F,$70,$40,$7F,$7E,$68,$3,$47,$5F,$60,$40,$4F,$7D,$7,$43,$7F,$7A,$60,$41,$7F,$7C,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$3,$40,$4F,$7F,$58,$40,$7F,$7F,$58,$40,$47,$7E,$40,$40,$41,$6D,$40,$43,$7F,$7D,$60,$43,$7F,$76,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$7,$40,$5F,$7F,$6C,$40,$5B,$7E,$70,$3,$57,$70,$40,$40,$41,$7B,$50,$41,$D0,$C4,$7,$47,$7F,$7B,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$3,$40,$5F,$7F,$54,$40,$43,$6A,$0,$3,$5B,$78,$40,$40,$40,$7F,$50,$40,$4E,$68,$40,$47,$7F,$75,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$7,$40,$5F,$7F,$6C,$40,$43,$6A,$0,$3,$5E,$60,$40,$40,$40,$45,$70,$7,$4E,$68,$40,$47,$7F,$7B,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$0,$4,$0,$4,$3,$40,$4D,$75,$58,$40,$43,$6A,$0,$3,$5D,$70,$40,$40,$40,$5D,$70,$40,$4E,$68,$40,$43,$5D,$56,$0,$4,$0,$4,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$7,$40,$43,$7F,$78,$40,$41,$75,$40,$40,$43,$6A,$0,$3,$5F,$60,$40,$40,$40,$4F,$40,$7,$4E,$68,$40,$40,$5D,$50,$40,$43,$7F,$78,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$3,$40,$47,$7F,$6C,$40,$41,$75,$40,$40,$43,$6A,$40,$41,$6F,$40,$40,$40,$40,$47,$54,$40,$4E,$68,$40,$40,$5D,$50,$40,$47,$7F,$6C,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$7,$40,$4F,$7F,$76,$40,$41,$75,$40,$40,$43,$6A,$3,$41,$68,$40,$40,$40,$40,$48,$7C,$7,$4E,$68,$40,$40,$5D,$50,$40,$4F,$7F,$76,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$3,$40,$4F,$7F,$6A,$40,$41,$75,$40,$40,$43,$6A,$40,$41,$7F,$60,$40,$40,$40,$47,$7C,$40,$4E,$68,$40,$40,$5D,$50,$40,$4F,$7F,$6A,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$7,$40,$4F,$7F,$76,$40,$41,$75,$40,$40,$43,$6A,$40,$4,$FF,$40,$40,$40,$3,$47,$78,$7,$4E,$68,$40,$40,$5D,$50,$40,$4F,$7F,$76,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$3,$40,$46,$7A,$6C,$40,$41,$75,$40,$40,$43,$6A,$40,$40,$5E,$40,$40,$40,$40,$41,$78,$40,$4E,$68,$40,$40,$5D,$50,$40,$46,$7A,$6C,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$7,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$3,$43,$53,$40,$40,$40,$40,$46,$56,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$3,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$43,$77,$40,$40,$40,$40,$47,$5E,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$7,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$3,$41,$7E,$40,$40,$40,$40,$43,$7C,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$3,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$40,$7C,$70,$40,$40,$40,$49,$78,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$7,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$3,$43,$4B,$60,$40,$40,$40,$4E,$77,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$3,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$43,$7F,$48,$40,$40,$40,$57,$7E,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$7,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$3,$41,$7F,$70,$40,$40,$40,$5F,$7C,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$40,$3,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$40,$4D,$70,$40,$40,$40,$5F,$60,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$7,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$3,$7F,$68,$40,$40,$40,$7F,$78,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$3,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$43,$7F,$5A,$40,$40,$42,$73,$7E,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$7,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$3,$7B,$7E,$40,$40,$43,$7A,$78,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$3,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$40,$47,$76,$60,$40,$4B,$5F,$40,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$7,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$3,$5F,$66,$60,$40,$4B,$6F,$78,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$0,$4,$0,$4
+	.byt $0,$4,$0,$4,$40,$3,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$40,$5F,$7F,$70,$40,$4D,$7B,$70,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$40,$0,$4,$0
+	.byt $0,$4,$0,$4,$40,$7,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$40,$3,$7D,$70,$40,$5D,$78,$40,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$40,$0,$4,$0
+	.byt $0,$4,$0,$4,$40,$3,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$40,$43,$7F,$70,$40,$4F,$7E,$40,$40,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$40,$0,$4,$0
+	.byt $0,$4,$0,$4,$40,$7,$40,$7A,$60,$40,$41,$75,$40,$40,$43,$6A,$40,$3,$47,$73,$60,$40,$4E,$5F,$40,$7,$4E,$68,$40,$40,$5D,$50,$40,$40,$7A,$60,$40,$0,$4,$0
+	.byt $0,$4,$0,$4,$40,$40,$3,$7F,$60,$40,$41,$7F,$40,$40,$43,$7E,$40,$40,$40,$4F,$7C,$41,$7F,$60,$40,$40,$4F,$78,$40,$40,$5F,$70,$40,$40,$7F,$60,$40,$0,$4,$0
+	.byt $0,$4,$0,$4,$7,$40,$43,$7F,$78,$40,$43,$7F,$70,$40,$47,$7F,$60,$40,$3,$5F,$4F,$7F,$63,$70,$40,$7,$7F,$7C,$40,$41,$7F,$78,$40,$43,$7F,$78,$40,$0,$4,$0
+	.byt $0,$4,$0,$4,$3,$40,$4F,$7F,$7E,$40,$4F,$7F,$7C,$40,$5F,$7F,$78,$40,$40,$41,$7C,$41,$7C,$40,$40,$43,$7F,$7F,$40,$47,$7F,$7E,$40,$4F,$7F,$7E,$40,$0,$4,$0
+	.byt $0,$4,$0,$4,$40,$40,$C0,$C0,$C0,$C0,$C0,$C0,$FC,$C0,$C0,$87,$78,$40,$3,$47,$40,$40,$47,$40,$7,$43,$7F,$7F,$84,$C7,$E0,$C0,$C0,$C0,$C0,$87,$60,$0,$4,$0
+	.byt $0,$4,$0,$7,$40,$44,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$44,$40,$3,$43,$78,$43,$78,$40,$7,$44,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$44,$0,$4,$0
+	.byt $0,$4,$0,$7,$40,$47,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7C,$40,$3,$4E,$40,$40,$4E,$40,$7,$47,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7C,$0,$4,$0
+	.byt $0,$4,$0,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$3,$48,$40,$40,$42,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$0,$4,$0,$4,$0a
+
+;--------------------------------------------------	
+dta_nom_ville
+
+	.byt $1,$43,$60,$58,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $3,$43,$70,$58,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $1,$43,$78,$58,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $3,$43,$58,$58,$4F,$61,$77,$67,$61,$7E,$4E,$4E,$4F,$47,$47,$47,$60
+	.byt $1,$43,$5C,$58,$5F,$71,$7F,$7F,$73,$7F,$4E,$4E,$5F,$67,$47,$4F,$70
+	.byt $3,$43,$4C,$58,$58,$79,$79,$79,$72,$47,$4E,$4E,$58,$67,$47,$4C,$50
+	.byt $1,$43,$4E,$58,$78,$79,$71,$71,$70,$47,$4E,$4E,$5C,$47,$47,$4E,$40
+	.byt $3,$43,$46,$58,$7F,$79,$71,$71,$71,$7F,$4E,$4E,$5F,$47,$47,$4F,$60
+	.byt $1,$43,$43,$58,$7F,$79,$71,$71,$73,$7F,$4E,$4E,$47,$77,$47,$43,$78
+	.byt $3,$43,$43,$58,$78,$41,$71,$71,$73,$67,$4E,$4E,$41,$77,$47,$40,$78
+	.byt $1,$43,$41,$78,$7C,$49,$71,$71,$73,$67,$4E,$5E,$51,$77,$4F,$48,$78
+	.byt $3,$43,$41,$78,$5F,$79,$71,$71,$73,$7F,$4F,$7E,$5F,$77,$7F,$4F,$78
+	.byt $1,$43,$40,$78,$4F,$71,$71,$71,$71,$7F,$47,$6E,$4F,$43,$77,$47,$60	
