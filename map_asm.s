@@ -68,14 +68,23 @@ scroll_est_interdit .dsb 1
 ;	$17	:	drapeau : 1 deplacement perso  interdit , 0, déplacement perso autorisé
 depl_perso_est_interdit .dsb 1
 ;	$18	:	drapeau : on a clef_1
+on_a_clef_1 .dsb 1
 ;	$19	: 	drapeau : on a clef_2
+on_a_clef_2 .dsb 1
 ;	$1a	:	drapeau : on a mot de passe :1
 mot_de_passe .dsb 1
 ;	$1b :	drapeau : on a laissez-passer :1 on n'a pas laissez-passer : 0
 laisser_passer .dsb 1
 ;	$1c :	N° lieu (GALLIA :0 HISPANIA :1 LUSITANIA :2 BRITANIA:3 GERMANIA :4 CALEDONIA:5 HIBERNIA :6 MARE NOSTRUM: 7 MARE EXTERNUM 8 MARE GERMANICUM 9
 numero_lieu .dsb 1
-
+;	$1d :	Nombre de coffres ramassés et non ouverts
+nb_coffres_non_ouverts .dsb 1
+;	$1e :	Drapeau pass donné par legat Londinium  pour centurion fort (initialisé à 0 uniquement sur carte générale si nouvelle partie)
+mot_de_passe_londinium .dsb 1
+;	$1f :	Drapeau poudre de corne de taureau =1 pas de poudre =0
+poudre_de_taureau .dsb 1
+;	$20 :	drapeau mot de passe pour phare (Brigantium)
+mot_de_passe_phare .dsb 1
 ;   $50 : drapeau sortie victorieuse de la carte = $80 sinon = $20
 sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 ;

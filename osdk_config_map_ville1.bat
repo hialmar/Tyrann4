@@ -3,8 +3,7 @@
 ::
 :: Set the build paremeters
 ::
-SET OSDKADDR=$2000
-SET OSDKNAME=ville1
-SET OSDKTAPNAME=ville1
-SET OSDKHEAD=-S1 -a0
-SET OSDKFILE=map_ville1
+SET OSDKADDR=$600
+SET OSDKNAME=map
+SET OSDKTAPNAME=map
+SET OSDKFILE=map_asm sedoric_io
