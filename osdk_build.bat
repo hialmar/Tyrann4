@@ -66,12 +66,11 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 Copy BUILD\map.tap BUILD\map.pat.tap
 Copy BUILD\symbols BUILD\symbols_map
 
-SET OSDKLINK=-B
 CALL osdk_config_map_ville1.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_ville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\symbols BUILD\symbols_ville1
-SET OSDKLINK=
+
 
 Goto Tap2dsk
 

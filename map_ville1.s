@@ -115,7 +115,6 @@ _main
 main_loop
 	; sei
 	jsr scrl_fenetre		; Affiche/ scrolle les 105 tuiles dans la fenetre
-	jsr prt_nom_lieu		; affiche lieu géographique (pays, mer...)
 	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
 	jsr	aff_text
 	; cli
@@ -258,20 +257,23 @@ choix_perso
 		cmp #$9c
 		beq vers_haut			; Si flêche vers le haut
 		cmp #$b4
-		beq vers_haut			; Si flêche vers le bas, mème pesro (vue de face)
+		beq vers_bas			; Si flêche vers le bas, mème pesro (vue de face)
 		cmp #$ac
 		beq vers_droite			; si flêche gauche perso regarde à gauche
 		cmp #$bc
 		beq vers_gauche			; si flêche droite, perso regarde vers droite
 		bne fin_ch_perso		; Saut incontionnel
 vers_haut
-		lda #$4c
+		lda #$26
+		bne fin_ch_perso		; Saut incontionnel
+vers_bas
+		lda #$28
 		bne fin_ch_perso		; Saut incontionnel
 vers_droite
-		lda #$48				; n° tuile perso regarde à gauche
+		lda #$24				; n° tuile perso regarde à gauche
 		bne fin_ch_perso		; Saut incontionnel
 vers_gauche
-		lda #$4a				; n° tuile perso regarde à droite
+		lda #$22				; n° tuile perso regarde à droite
 fin_ch_perso
 		sta tuile_perso_aff					; mémoire tuile perso affichée
 		rts
@@ -290,12 +292,6 @@ chck_around
 		lda direction_scroll
 		cmp #$38
 		beq sortie_scroll_direct		; inutile de regarder si autre touche que flêchée
-; Ensuite on regarde si on est déjà en mer auquel cas, pas de contrainte de bord de mer
-;
-;		lda tuile_sous_pos_perso					; valeur tuile à la position du perso initialisée à #$50 (tuile NEMAUSUS)
-;		beq around_sortie ; sortie_scroll_direct		; si on est en mer, pas de contrainte de proximité
-;		cmp #$01
-;		beq around_sortie ; sortie_scroll_direct		; deux valeurs de tuiles pour la mer : $00 et $01
 
 ; puis déterminons la position perso dans la carte
 		lda ordo_perso_fen					; ordonnée perso dans fenête hires
@@ -308,46 +304,50 @@ chck_around
 		sta rang_map
 
 ; que nous utilisons ensuite pour regarder autour du perso
-sens_1
 		lda direction_scroll					; mémoire touche pressée
 		cmp #$ac				; recherche contenu tuile à gauche
 		bne sens_2
-		lda rang_map			; rang_map contient rang perso dans ligne map
-		beq no_scroll			; le perso etait en bord gauche
 		dec rang_map			; supprimer si retour
-		bmi no_scroll			; le perso était en bord gauche map
+		bpl suite_chck_around_1	; bmi no_scroll, plus simple, donne un "Branch out of range"
+		jmp no_scroll			; le perso était en bord gauche map
+suite_chck_around_1
 		jsr rech_tab_map		; en sortie  repère tuile dans $0a
 		lda tuile_courante
-		beq check_ville_bateau	; si bord de mer à gauche, est-on dans ville portuaire
-		bne around_sortie		; saut inconditionnel
+		beq around_sortie		; si00 c'est un chemin,on peut soit scroller soit avancer
+		bne tuile_speciale			; sinon test situile spéciale
 sens_2
 		cmp #$bc				; recherche contenu tuile à droite
 		bne sens_3
 		lda rang_map
 		cmp #$1f				; rang tuile en bord droit de map
-		beq no_scroll			; si perso en bord droit, pas de scroll
+		bne suite_chck_around_2 ; Le beq no_scroll, plus simple, donne un "Branch out of range"
+		jmp no_scroll			; si perso en bord droit, pas de scroll
+suite_chck_around_2
 		inc rang_map					; si non, on regarde ce qu'il y a à droite
 		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
 		lda tuile_courante
-		beq check_ville_bateau
-		bne around_sortie
+		beq around_sortie		; si00 c'est un chemin
+		bne tuile_speciale
 sens_3
 		cmp #$9c				; recherche contenu tuile au dessus
 		bne sens_4
-		lda ligne_map
-		beq no_scroll
 		dec ligne_map			; a supprimer si retour
-		bmi no_scroll
+		bpl suite_sens_3		;Modif dûe à un "branch out of range"
+		jmp no_scroll
+;		bmi no_scroll
+suite_sens_3
 		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
 		lda tuile_courante
-		beq check_ville_bateau
-		bne around_sortie
+		beq around_sortie		; si00 c'est un chemin
+		bne tuile_speciale
 sens_4
 		cmp #$b4				; recherche contenu tuile en dessous
 		bne around_sortie
 		lda ligne_map
 		cmp #$30
-		beq no_scroll
+		bne cont_b4
+		jmp no_scroll
+cont_b4
 		inc ligne_map
 		jsr rech_tab_map		; en sortie  repère tuile dans tuile_courante
 		lda tuile_courante
@@ -373,64 +373,40 @@ tuile_speciale
 chck_54		; clef_1
 		lda tuile_courante
 		cmp #$54
-		bne chck_56
-		lda #$01
+		bne chck_58
+		lda #TRUE
 		sta on_a_clef_1					; met à 1 drapeau clef 1
 		bne around_sortie
-chck_56							; a port  guard ask for laissez-passer
-		lda tuile_courante
-		cmp #$56				;
-		bne chck_58
-		lda $20
-		bne around_sortie		; test:   $1g =1 => on a mdp visite phare	=> scroll et/ou delplacement autorisés
-		jsr  why_no_scoll
-		beq no_scroll			; branchement forcé par sortie sp précédent
-
 chck_58		; a guard ask for pass word
-		lda $0a
+		lda tuile_courante
 		cmp #$58				;
 		bne chck_57
-		lda $1a
+		lda mot_de_passe
 		bne around_sortie		; test:   $1a =1 => on a mot de passe	=> scroll et/ou delplacement autorisés
-		jsr  why_no_scoll
+		jsr why_no_scoll
 		beq no_scroll			; branchement forcé par sortie sp précédent
-chck_57							; mot de passe lu sur mur
-		lda $0a
+chck_57		; patricienne donne mdp
+		lda tuile_courante
 		cmp #$57
-		bne chck_60
-		lda #$01
-		sta $1a					; met à 1 drapeau mot de passe
-		bne around_sortie
-chck_60							; la visite turris herculis donne accès au 2nd discours Legat
-		lda $0a
-		cmp #$60
-		bne chck_61
-		lda #$01
-		sta $1b					; met à 1 drapeau laissez-passer
-		bne around_sortie
-chck_61							; le beggar doone le mdp pour visite phare
-		lda $0a
-		cmp #$61
 		bne chck_55
-		lda #$01
-		sta $20					; met à 1 drapeau mot de passe pour phare
+		lda #TRUE
+		sta mot_de_passe					; met à 1 drapeau mote de passe
 		bne around_sortie
 chck_55		; clef_2
-		lda $0a
+		lda tuile_courante
 		cmp #$55
 		bne chck_53
-		lda #$01
-		sta $19					; met à 1 drapeau clef 2
+		lda #TRUE
+		sta on_a_clef_2			; met à 1 drapeau clef 2
 		bne around_sortie
 chck_53		; have you the rigth key for gate 2?
-		lda $0a
+		lda tuile_courante
 		cmp #$53
 		bne around_sortie
-		lda $19
+		lda on_a_clef_2
 		bne around_sortie		; test: $19 =1 => on a la clef_2	=> scroll et/ou delplacement autorisés
-		jsr  why_no_scoll
+		jsr why_no_scoll
 		beq no_scroll			; branchement forcé par sortie sp précédent
-
 no_scroll
 		lda #TRUE
 		sta scroll_est_interdit				;mets à 1 drapeau scroll interdit (pour une boucle, dans la direction demandée)
@@ -673,21 +649,21 @@ sortie_fenetre
 ;-----------------------------------------------------------------------------
 init_div_var
 .(
-	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
+	lda #$14		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
-	lda #$10
+	lda #$ff
 	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
-	lda #$4C
+	lda #$22
 	sta tuile_perso_aff			; code tuile perso affichée
-	lda #$34
+	lda #$2d
 	sta index_perso			; valeur index perso dans table adresses hires fenêtre
-	lda #$9C
+	lda #$bc
 	sta direction_scroll			;  valeurs => ddirection scroll demandée
-	lda #CENTRE_ORDO
+	lda #$03
 	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
-	lda #CENTRE_ABS
+	lda #$01
 	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
-	lda #$55		; repère tuile Nemausus
+	lda #0		; repère tuile Nemausus
 	sta tuile_sous_pos_perso			; sous position perso au départ
 	lda #FALSE
 	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
@@ -696,11 +672,11 @@ init_div_var
 	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	lda #TRUE	        ; TEMPO
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
+	sta on_a_clef_1
+	sta on_a_clef_2
+	sta mot_de_passe
+	sta laisser_passer
 	sta numero_lieu         ; indique lieu <> Gallia (0)
-	lda #$20
-	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 	rts
 .)
 
@@ -1010,8 +986,15 @@ lp2_impl
 	lda dta_car_redef_p2,x
 	sta	$9dfc,x
 	inx
-	cpx #$5a
+	cpx #$FC
 	bne lp2_impl
+	ldx #$00
+lp3_impl
+	lda dta_car_redef_p3,x
+	sta	$9ef8,x
+	inx
+	cpx #$fc			;dernier car en $9ff4
+	bne lp3_impl
 	rts
 .)
 
@@ -1135,10 +1118,8 @@ hires_et_atributs
 		rts
 .)
 
-
-
-
-	*= $2000
+	; insert 0s so that to move the specific code upwards of $2000
+	.dsb $2000-*
 ;************************************************
 ;******* Affiche différents textes   ************
 ;************************************************
@@ -1168,7 +1149,7 @@ suite_portail
 	lda #>t_portail_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 ;---------------------------------------------------
 key_1	
@@ -1197,7 +1178,7 @@ suite_clef
 	lda #>t_key_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	
 	ldx #$00
@@ -1208,7 +1189,7 @@ suite_clef
 	lda #>t_key_3+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 ;-------------------------------------------------------------
 voleur_
@@ -1235,7 +1216,7 @@ suite_voleur
 	lda #>t_voleur_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 ;-------------------------------------------------
 _mot_de_passe
@@ -1262,7 +1243,7 @@ suite_mot_passe
 	lda #>t_m_de_passe_2+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text	
 	rts
 ;-------------------------------------------------
@@ -1290,7 +1271,7 @@ ldx #$00
 	lda #>t_garde_4+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	
 ldx #$00
@@ -1301,7 +1282,7 @@ ldx #$00
 	lda #>t_garde_5+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text		
 	
 	rts	
@@ -1330,7 +1311,7 @@ suite_legat
 	lda #>t_legat_2+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 
 	ldx #$00
@@ -1341,7 +1322,7 @@ suite_legat
 	lda #>t_legat_3+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	rts
 ;-------------------------------------------------	
@@ -1634,7 +1615,21 @@ ld_208
 	sta $0c
 release_	
 	rts
-.)	
+.)
+;****************************************************
+;****   routine attend appui et laché  any key   ****
+;****************************************************
+hit_release_key
+.(
+	lda $208
+	cmp #$38
+	bne hit_release_key
+ld_208
+	lda $208
+	cmp #$38
+	beq ld_208
+	rts
+.)
 ;************************************************
 ;*******       efface le texte       ************
 ;************************************************	
@@ -1772,11 +1767,11 @@ maj_adr_bd
 prt_nom_ville	
 	jsr ini_adr_dta_nv
 	ldy #$0c
-prt_lign	
+prt_lign
 	ldx #$10
 ad_dta_nv
 	lda $1111,x
-ad_ec_nv	
+ad_ec_nv
 	sta $BA9F,x
 	dex
 	bpl ad_dta_nv

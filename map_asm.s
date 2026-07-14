@@ -168,8 +168,8 @@ sortie_main2
 	sta (sp),y
 	dey
 	;jsr _SwitchToCommand
-	jsr _DiscLoad
-	jmp _main
+	;jsr _DiscLoad
+	;jmp _main
 	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
 .)
@@ -183,7 +183,7 @@ ProgArmory
 	.byt 0
 
 ProgVille1
-	.asc "VILLE1.BIN"
+	.asc "VILLE1.COM"
 	.byt 0
 
 ZeroPageCopy
