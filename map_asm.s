@@ -167,7 +167,7 @@ sortie_main2
 	lda #>ProgVille1
 	sta (sp),y
 	dey
-	;jsr _SwitchToCommand
+	jsr _SwitchToCommand
 	;jsr _DiscLoad
 	;jmp _main
 	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie

@@ -86,7 +86,7 @@
 06f3 fin_temporisation
 06eb temporisation_2
 06ed temporisation_1
-070b sortie_main
+0711 sortie_main
 0bf0 wait_key
 08cb chck_around
 099a chck_bords
@@ -94,11 +94,11 @@
 23ec eff_text
 49dc _get
 086a RestoreZeroPage
-072f sortie_main2
-0754 ProgVille1
-4a56 _DiscLoad
-0741 ProgCombat
-074c ProgArmory
+0735 sortie_main2
+0757 ProgMap
+4a9b _SwitchToCommand
+0744 ProgCombat
+074f ProgArmory
 075f ZeroPageCopy
 0860 loop
 086c loop
@@ -441,9 +441,9 @@
 4a07 _SPStorage
 4a08 _BackupSP
 4a0d _DiscSave
+4a56 _DiscLoad
 4a74 _Sedoric
 4a80 sedoricloop1
-4a9b _SwitchToCommand
 4aa7 sedoricloop2
 4bc0 osdk_check
 4bc4 osdk_end

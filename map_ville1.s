@@ -135,6 +135,9 @@ fin_temporisation
 	cmp#$86					; Y pour sortir
 	beq sortie_main
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
+	lda direction_scroll
+	cmp#$86					; Y pour sortir
+	beq sortie_main
 	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
 	jsr chck_mvt_perso_fenetre
@@ -164,15 +167,15 @@ sortie_main
 sortie_main2
 	; test bascule combat
 	ldy #$0         ; grab string pointer
-	lda #<ProgVille1
+	lda #<ProgMap
 	sta (sp),y
 	iny
-	lda #>ProgVille1
+	lda #>ProgMap
 	sta (sp),y
 	dey
-	;jsr _SwitchToCommand
-	jsr _DiscLoad
-	jmp _main
+	jsr _SwitchToCommand
+	;jsr _DiscLoad
+	;jmp _main
 	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
 .)
@@ -185,8 +188,8 @@ ProgArmory
 	.asc "ARM.COM"
 	.byt 0
 
-ProgVille1
-	.asc "VILLE1.BIN"
+ProgMap
+	.asc "MAP.COM"
 	.byt 0
 
 ZeroPageCopy
@@ -905,39 +908,6 @@ rens_adr_car
 ;------------------------------------------------------ spécifique pour mon test
 wait_key
 .(
-;		lda direction_scroll			;pour test
-;		cmp #$86		;sortie victorieuse
-;		beq end_key		;sur ecran 'Episode II' (sera a supprimer)
-;
-;		lda $208
-;		cmp #$38
-;		beq wait_key
-;		cmp #$ac
-;		bne next_key_1
-;		beq end_key
-;next_key_1
-;		cmp #$bc
-;		bne next_key_2
-;		beq end_key
-;next_key_2
-;		cmp #$9c
-;		bne next_key_3
-;		beq end_key
-;next_key_3
-;		cmp #$b4
-;		bne next_key_4
-;		beq end_key
-;next_key_4
-;		cmp #$86
-;		bne no_key
-;		beq end_key
-;no_key
-;		lda #$38
-;end_key
-;		sta direction_scroll
-;		rts
-
-
 		lda $208
 		cmp #$38
 		beq wait_key
@@ -1004,14 +974,14 @@ lp3_impl
 hires_et_atributs
 .(
 		jsr $EC33
-		lda #YELLOW_INK
+		lda #CYAN_INK
 		sta $Aa01
 		sta $Aa51
 		sta $AaA1
 		sta $AaF1
 		sta $Ab41
 		sta $Ab91
-		lda #CYAN_INK
+		lda #YELLOW_INK
 		sta $Aa29
 		sta $Aa79
 		sta $Aac9
@@ -1019,14 +989,14 @@ hires_et_atributs
 		sta $Ab69
 		sta $Abb9
 
-		lda #YELLOW_INK
+		lda #CYAN_INK
 		sta $Abe1
 		sta $Ac31
 		sta $Ac81
 		sta $Acd1
 		sta $Ad21
 		sta $Ad71
-		lda #CYAN_INK
+		lda #YELLOW_INK
 		sta $Ac09
 		sta $Ac59
 		sta $Aca9
@@ -1034,14 +1004,14 @@ hires_et_atributs
 		sta $Ad49
 		sta $Ad99
 
-		lda #YELLOW_INK
+		lda #CYAN_INK
 		sta $Adc1
 		sta $Ae11
 		sta $Ae61
 		sta $Aeb1
 		sta $Af01
 		sta $Af51
-		lda #CYAN_INK
+		lda #YELLOW_INK
 		sta $Ade9
 		sta $Ae39
 		sta $Ae89
@@ -1049,14 +1019,14 @@ hires_et_atributs
 		sta $Af29
 		sta $Af79
 
-		lda #YELLOW_INK
+		lda #CYAN_INK
 		sta $Afa1
 		sta $Aff1
 		sta $b041
 		sta $b091
 		sta $b0e1
 		sta $b131
-		lda #CYAN_INK
+		lda #YELLOW_INK
 		sta $Afc9
 		sta $b019
 		sta $b069
@@ -1064,14 +1034,14 @@ hires_et_atributs
 		sta $b109
 		sta $b159
 
-		lda #YELLOW_INK
+		lda #CYAN_INK
 		sta $b181
 		sta $b1d1
 		sta $b221
 		sta $b271
 		sta $b2c1
 		sta $b311
-		lda #CYAN_INK
+		lda #YELLOW_INK
 		sta $b1a9
 		sta $b1f9
 		sta $b249
@@ -1079,14 +1049,14 @@ hires_et_atributs
 		sta $b2e9
 		sta $b339
 
-		lda #YELLOW_INK
+		lda #CYAN_INK
 		sta $b361
 		sta $b3b1
 		sta $b401
 		sta $b451
 		sta $b4a1
 		sta $b4f1
-		lda #CYAN_INK
+		lda #YELLOW_INK
 		sta $b389
 		sta $b3d9
 		sta $b429
@@ -1094,14 +1064,14 @@ hires_et_atributs
 		sta $b4c9
 		sta $b519
 
-		lda #YELLOW_INK
+		lda #CYAN_INK
 		sta $b541
 		sta $b591
 		sta $b5e1
 		sta $b631
 		sta $b681
 		sta $b6d1
-		lda #CYAN_INK
+		lda #YELLOW_INK
 		sta $b569
 		sta $b5b9
 		sta $b609
@@ -1473,14 +1443,14 @@ coffre_
 	sta write_phrase+2	
 	jsr write_phrase
 	jsr hit_key
-	lda $0c
+	lda direction_scroll
 	cmp #$86
 	bne sk_ef
-	inc $1d
+	inc nb_coffres_non_ouverts
 	jsr eff_tuile_spe
 sk_ef	
 	lda #$38
-	sta $0c	
+	sta direction_scroll
 	jsr eff_text
 ;-------------------------------------------------		
 fin_txt	
@@ -1490,11 +1460,11 @@ fin_txt
 eff_tuile_spe
 		lda ordo_perso_fen
 		clc
-		adc $05
+		adc ligne_hg_map
 		tax				; n° ligne perso dans x
-		lda $10
+		lda absc_perso_fen
 		clc
-		adc $06
+		adc rang_hg_map
 		tay				; rang perso sur ligne dans y
 		txa
 		asl
@@ -1612,7 +1582,7 @@ ld_208
 	beq ld_208
 	cmp #$86
 	bne release_
-	sta $0c
+	sta direction_scroll
 release_	
 	rts
 .)
@@ -1634,9 +1604,9 @@ ld_208
 ;*******       efface le texte       ************
 ;************************************************	
 eff_text
-	lda $15
+	lda est_affiche_texte
 	beq out_eff_text
-	dec $15
+	dec est_affiche_texte
 	ldx #$27
 	lda #$20
 lp_efface	
