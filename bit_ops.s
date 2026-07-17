@@ -4,6 +4,7 @@ TableBit
 ; common code
 ; loads the bit number to apply/test in X and the array offset in Y
 calculXY
+.(
 	; k is already in A lda tmp1 ; load k
 	lsr ; divide A by 8
 	lsr
@@ -13,6 +14,7 @@ calculXY
 	and #%111 ; A mod 8
 	tax ; transfers the result to x
 	rts
+.)
 
 ; extern void  SetBit( unsigned char A[ ],  unsigned char k );
 _SetBit

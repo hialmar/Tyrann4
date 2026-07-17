@@ -88,11 +88,12 @@ void loadCharacters(void)
 			// 48030 O1=O1+1:DD=PEEK(O1)
 			namelen = *ptr; ptr++;
 			// 48040 FORJ=1TODD:O1=O1+1:N$(P)=N$(P)+CHR$(PEEK(O1)):NEXTJ
-			if (namelen > 10)
-				namelen = 10;
 			for(i=0;i<namelen;i++) {
-				characters[perso].nom[i]=*ptr; ptr++;
+				if (i < 10)
+				    characters[perso].nom[i]=*ptr;
+				ptr++;
 			}
+			if (i>10) i=10;
 			characters[perso].nom[i]=0;
 			memcpy((char*)&(characters[perso].ri), ptr, 21);
 			ptr+=21;

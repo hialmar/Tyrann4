@@ -1,0 +1,451 @@
+;struct character {
+;	char 		  nom[11]; // nom
+    .align 256
+character_name .dsb 6*16
+; 96 bytes
+;	unsigned int  ri; // richesses (nom => 2 octets)
+character_ri .dsb 6*2
+;	unsigned char cp; // carrière perso
+character_cp .dsb 6
+;	unsigned char mp; // maison
+character_mp .dsb 6
+;	unsigned char cc; // capacité de combat
+character_cc .dsb 6
+;	unsigned char ct; // capacité de tir
+character_ct .dsb 6
+;	unsigned char fo; // force
+character_fo .dsb 6
+;	unsigned char ag; // agilité
+character_ag .dsb 6
+;	unsigned char in; // intelligence
+character_in .dsb 6
+;	unsigned char fm; // force mentale
+character_fm .dsb 6
+;	unsigned char pv; // points de vie ou de blessures
+character_pv .dsb 6
+;	unsigned char et; // état des PV
+character_et .dsb 6
+;	unsigned char ok; // santé
+character_ok .dsb 6
+;	unsigned char ni; // niveau (nom => 16 octets)
+character_ni .dsb 6
+;	unsigned int  xp; // expérience
+character_xp .dsb 6*2
+;	unsigned char wr; // arme droite (weapon right)
+character_wr .dsb 6
+;	unsigned char wl; // arme gauche
+character_wl .dsb 6
+;	unsigned char pt; // armure
+character_pt .dsb 6
+;	unsigned char ca; // classe d'armure
+character_ca .dsb 6
+;	unsigned char bt; // bête (nom => 23 octets)
+character_bt .dsb 6
+; 6*21 = 126 bytes + 96 = 222 bytes
+
+;char s = 1; // direction (est)
+team_s .dsb 1
+;unsigned char x = 2; // coords
+team_x .dsb 1
+;unsigned char y = 2;
+team_y .dsb 1
+;
+;struct character characters[6];
+;
+;unsigned char boussole;
+team_boussole .dsb 1
+;unsigned char filet;
+team_filet .dsb 1
+;unsigned char selle_dragon; a virer ?
+team_selle .dsb 1
+;
+
+; 228 bytes
+
+;unsigned char ingredients[6]; // ingrédients
+team_ingredients .dsb 6
+;
+;unsigned char ville=0; // ville courante
+team_ville .dsb 1
+;
+
+; 235 bytes
+;unsigned char dedans; // tableau de bits pour gérer le côté des portes et le mur à la fin
+team_dedans .dsb 1
+;
+;unsigned char tl; // top level  villes visitables.
+team_tl .dsb 1
+;unsigned char np; // nombre d'ingredients de la potion
+team_np .dsb 1
+;unsigned char nf; // nombre de fuites
+team_nf .dsb 1
+;unsigned char pm; // potion faite ?
+team_pm .dsb 1
+;
+;unsigned char out=1; // sur la carte ?
+team_out .dsb 1
+;
+;char ca = 0; // case courante
+team_ca .dsb 1
+;
+;char * teamfilename = "TEAM.BIN"; // fichier contenant l'équipe
+;
+;char io_needed = 1;
+team_io_needed .dsb 1
+
+; 243 bytes
+
+;	char *ptr; tmp0
+;	unsigned char version;
+team_version .dsb 1
+
+; 244 bytes
+
+.align 256
+;	unsigned char sad[6]; // sac à dos
+character_sad .dsb 6*8
+;	unsigned char sp[8]; // sorts
+character_sp .dsb 6*8
+;};
+
+
+;unsigned char cles[9][4]; // trousseau de clefs (32 octets)
+team_cles .dsb 9*4
+;
+;unsigned char combats_coffres[9][5]; // combats et coffres sous forme de tableaux de bits
+team_combats_coffres .dsb 9*5
+;
+
+
+;void loadCharacters(void)
+;{
+
+;	char namelen=0; // longueur d'un nom
+team_namelen .dsb 1
+;	char perso; // numéro de perso
+team_perso .dsb 1
+;	char i; // compteur
+team_i .dsb 1
+;	char j; // compteur
+team_j .dsb 1
+;	char ret;
+team_ret .dsb 1
+
+
+load_characters
+.(
+;	// 48000 PRINT SPC(9);"Veuillez Patienter..."
+;	// POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+;	poke(48035,0);
+    lda #0
+    sta 48035
+;	poke(0x26a,peek(0x26a)&254);
+    lda $26a
+    and #254
+    sta $26a
+;	puts("         Veuillez Patienter...\n");
+	ldx #0
+	lda t_load_wait_1,x
+	sta adr_ecr_txt+1
+	lda #<t_load_wait_1+1
+	sta write_phrase+1
+	lda #>t_load_wait_1+1
+	sta write_phrase+2
+	jsr write_phrase
+;	// 48005 CLOAD"TEAM"
+;	if (io_needed) {
+    lda team_io_needed
+    beq skip_load
+;		//printf("Chargement de %s\n", teamfilename);
+	ldy #0         ; grab string pointer
+	lda #<t_team_filemane
+	sta (sp),y
+	iny
+	lda #>t_team_filemane
+	sta (sp),y
+	dey
+	jsr _DiscLoad
+;		ret = DiscLoad(teamfilename);
+;		//printf("Retour %d\n", ret);
+;	} else {
+;		ret = 0;
+;	}
+;	if (ret==0) {
+skip_load
+;		// 48010 O1=#A000
+;		// 48015 O1=O1+1:VIL=PEEK(O1):PRINT SPC(9);"...";
+;		ptr = (char*)0xa001;
+        lda #1
+        sta $tmp0+1
+        lda #$a0
+        sta $tmp0
+;		printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
+;		version = *ptr; ptr++;
+        ldy #0
+        lda (tmp0),y
+        sta team_version
+        iny
+;		x = *ptr; ptr++;
+        lda (tmp0),y
+        sta team_x
+        iny
+;		y = *ptr; ptr++;
+        lda (tmp0),y
+        sta team_y
+        iny
+;		s = *ptr; ptr++;
+        lda (tmp0),y
+        sta team_s
+        iny
+;		ca = *ptr; ptr++;
+        lda (tmp0),y
+        sta team_ca
+        iny
+;		ville = *ptr; ptr++;
+        lda (tmp0),y
+        sta team_ville
+        iny
+;		printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
+;		// test
+;		if (x==0 || x > 100) {
+;			x = 2; y = 2; s = 1; ville = 4;
+;			// printf("x=%d y=%d s=%d ca=%d\n", x, y, s, ca);
+;		}
+;		ink(eencre[ville-1]);
+;		printf("ville: %d\n", ville);
+;		puts("         ...\n");
+;		// 48020 FOR P=1TO6
+        lda #0
+        sta team_perso
+        lda #<character_name
+        sta tmp1 ; ptr to character name start
+        lda #>character_name
+        sta tmp1+1
+        lda #<character_sad
+        sta tmp2 ; ptr to character bag start
+        lda #>character_sad
+        sta tmp2+1
+        lda #<character_sp
+        sta tmp3 ; ptr to character spell start
+        lda #>character_sp
+        sta tmp3+1 ; ptr to character spell start
+ read_characters
+;		for(perso=0;perso<6;perso++) {
+;			// 48030 O1=O1+1:DD=PEEK(O1)
+;			namelen = *ptr; ptr++;
+        jsr get_next_byte
+        sta team_namelen
+;			// 48040 FORJ=1TODD:O1=O1+1:N$(P)=N$(P)+CHR$(PEEK(O1)):NEXTJ
+;			for(i=0;i<namelen;i++) {
+        ldx #0
+loop_read_write_name
+;				if (i < 10)
+;				    characters[perso].nom[i]=*ptr;
+        jsr get_next_byte
+        sty tmp5
+        ldy #0
+        sta (tmp1),y
+        inc tmp1
+        ldy tmp5
+        inx
+        txa
+        cmp team_namelen
+        beq read_name_over
+        cmp #15
+        bmi loop_read_write_name
+loop_read_rest_of_name
+;				ptr++;
+;			}
+        jsr get_next_byte
+        inx
+        txa
+        cmp team_namelen
+        bmi loop_read_rest_of_name
+read_name_over
+;			if (i>10) i=10;
+;			characters[perso].nom[i]=0;
+        lda #0
+        sty tmp5
+        ldy #0
+        sta (tmp1),y
+        ldy tmp5
+        inc tmp1
+        inx
+        txa
+        cmp #16
+        bmi read_name_over
+;			memcpy((char*)&(characters[perso].ri), ptr, 21);
+;			ptr+=21;
+;#ifdef debug
+;			printf("...\n");
+;			printf("perso %d : longueur %d nom %s\n", perso, namelen, characters[perso].nom);
+;			printf("richesse %d0\n", characters[perso].ri);
+        ldx team_perso
+        jsr get_next_byte
+        sta characters_ri,x
+;			printf("classe %d\n", characters[perso].cp);
+        jsr get_next_byte
+        sta characters_cp,x
+;			printf("taper sur une touche pour continuer\n");
+;			printf("maison %d\n", characters[perso].mp);
+        jsr get_next_byte
+        sta characters_mp,x
+;			printf("CC %d\n", characters[perso].cc);
+        jsr get_next_byte
+        sta characters_cc,x
+;			printf("CT %d\n", characters[perso].ct);
+        jsr get_next_byte
+        sta characters_ct,x
+;			printf("FO %d\n", characters[perso].fo);
+        jsr get_next_byte
+        sta characters_fo,x
+;			printf("AG %d\n", characters[perso].ag);
+        jsr get_next_byte
+        sta characters_ag,x
+;			printf("IN %d\n", characters[perso].in);
+        jsr get_next_byte
+        sta characters_in,x
+;			printf("FM %d\n", characters[perso].fm);
+        jsr get_next_byte
+        sta characters_fm,x
+;			a = (char)getchar();
+;			printf("PV %d\n", characters[perso].pv);
+        jsr get_next_byte
+        sta characters_pv,x
+;			printf("etat %d\n", characters[perso].et);
+        jsr get_next_byte
+        sta characters_et,x
+;			printf("OK %d\n", characters[perso].ok);
+        jsr get_next_byte
+        sta characters_ok,x
+;			printf("NI %d\n", characters[perso].ni);
+        jsr get_next_byte
+        sta characters_ni,x
+;			printf("XP %d\n", characters[perso].xp);
+        jsr get_next_byte
+        sta characters_xp,x
+;			printf("WR %d\n", characters[perso].wr);
+        jsr get_next_byte
+        sta characters_wr,x
+;			printf("WL %d\n", characters[perso].wl);
+        jsr get_next_byte
+        sta characters_wl,x
+;			printf("Armure %d\n", characters[perso].pt);
+        jsr get_next_byte
+        sta characters_pt,x
+;			printf("CA %d\n", characters[perso].ca);
+        jsr get_next_byte
+        sta characters_bt,x
+;			printf("bete %d\n", characters[perso].bt);
+;			a = (char)getchar();
+;#endif
+;			// 48230 FORI=1TO6:O1=O1+1:SAD(P,I)=PEEK(O1):NEXTI
+;			memcpy((char*)&(characters[perso].sad), ptr, 6);
+        ldx #0
+read_sad
+        jsr get_next_byte
+        sty tmp5
+        ldy #0
+        sta (tmp1),y
+        inc tmp1
+        ldy tmp5
+        inx
+        txa
+        cmp #6
+        bne read_sad
+;			ptr+=6;
+;#ifdef debug
+;			for(i=0;i<6;i++) {
+;				printf("SAD(%d) : %d\n", i, characters[perso].sad[i]);
+;			}
+;#endif
+;			//printf("taper sur une touche pour continuer\n");
+;        	//a = (char)getchar();
+;			// 48235 IF CP(P)>3 THEN FORI=1TO8:O1=O1+1:SN(P,I)=PEEK(O1):NEXT
+;			if (characters[perso].cp>3) {
+;				memcpy((char*)&(characters[perso].sp), ptr, 8);
+;				ptr+=8;
+;#ifdef debug
+;				for(i=0;i<8;i++) {
+;					printf("SP(%d) : %d\n", i, characters[perso].sp[i]);
+;				}
+;#endif
+;			}
+;			// 48240 PRINT "...";:NEXT P
+;		}
+;
+;		// 48250 O1=O1+1:BS=PEEK(O1)
+;		boussole = *ptr; ptr++;
+;		//printf("Boussole %d\n", boussole);
+;		// 48260 O1=O1+1:FI=PEEK(O1)
+;		filet = *ptr; ptr++;
+;		//printf("filet %d\n", filet);
+;		selle_dragon = *ptr; ptr++;
+;		//printf("selle dragon %d\n", selle_dragon);
+;		// 48270 FOR L=1TO8:FOR C=1TO4:O1=O1+1:CLEF(L,C)=PEEK(O1):NEXT C,L
+;		memcpy((char*)cles, ptr, 36);
+;		ptr+=36;
+;#ifdef debug
+;		for(i=0;i<9;i++) {
+;			for (j=0;j<4;j++) {
+;				printf("cle(%d,%d) = %d\n", i, j, cles[i][j]);
+;			}
+;		}
+;		puts("taper sur une touche pour continuer\n");
+;        a = (char)getchar();
+;#endif
+;		// 48290 FOR I=1TO6:O1=O1+1:INGREDIENT(I)=PEEK(O1):NEXT
+;		memcpy((char*)ingredients, ptr, 6);
+;		ptr+=6;
+;#ifdef debug
+;		for(i=0;i<6;i++) {
+;			printf("ingredients(%d) = %d\n", i, ingredients[i]);
+;		}
+;#endif
+;		memcpy((char*)combats_coffres, ptr, 45);
+;		ptr+=45;
+;		dedans=*ptr;
+;		ptr++;
+;		tl=*ptr;
+;		ptr++;
+;		//printf("tl %d\n", tl);
+;		np=*ptr;
+;		ptr++;
+;		nf=*ptr;
+;		ptr++;
+;		pm=*ptr;
+;		ptr++;
+;		out=1;//*ptr;
+;		printf("out : %d", out);
+;		ptr++;
+;		printf("longueur %d\n", (int) (ptr - 0xa000));
+;	} else {
+;		printf("Erreur lors du chargement de TEAM.BIN\n");
+;		exit(1);
+;	}
+;}
+.)
+
+; y contains the offset
+; the next byte will be in acc
+; if y goes over then we increment the byte at tmp0+1
+get_next_byte
+.(
+    lda (tmp0),y
+    iny
+    bne fin
+    inc tmp0+1
+    ldy #0
+fin
+    rts
+.)
+
+t_load_wait_1
+	.byt $9a
+	.asc "Loading - Please wait.",0
+t_voleur_2
+	.byt $c2
+	.asc "steals from Carpophorus.",0
+
+t_team_filemane
+	.asc "TEAM.BIN",0
