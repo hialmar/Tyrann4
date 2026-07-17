@@ -435,7 +435,7 @@ chck_bords
 		cmp #$BC					; touche flèche droite ==> tuile suivante
 		bne autre_touche_1
 		lda rang_hg_map
-		cmp #$10					; au départ rang_hg_map = #$10 (rang tuile au bord gauche fénêtre) on ne peut atteindre la tuile suivante
+		cmp #$0E					; au départ rang_hg_map = #$10 (rang tuile au bord gauche fénêtre) on ne peut atteindre la tuile suivante
 									; car le bord droit du plan est au bord droit de la fenêtre (largeur plan :#$10+#$0F = #$1f tuiles)
 		beq end_chck_bords_nsc		; dans ce cas, scroll horizontal interdit il faut checker déplacement horizontal perso dans fenêtre
 		lda absc_perso_fen						; rang (abscisse) perso dans fenètre
@@ -457,7 +457,7 @@ autre_touche_2
 		cmp #$B4					; touche flèche BAS ==> tuile ligne de dessous
 		bne autre_touche_3
 		lda ligne_hg_map
-		cmp #$2A
+		cmp #$26
 		beq end_chck_bords_nsc
 		lda ordo_perso_fen						; hauteur (ordonnée) perso dans fenètre
 		cmp #CENTRE_ORDO					; si perso pas au centre
