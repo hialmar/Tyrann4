@@ -377,6 +377,7 @@ lp_2_sextets
 ;pour faire seulement 10 additions par tuile  (2 x 5) au lieu de 20 (4 x 5)
 
 aff_2_sextets
+.(
 +adr_car_1
 					lda 1111,y
 +adr_screen_1
@@ -386,6 +387,7 @@ aff_2_sextets
 +adr_screen_2
 					sta $2222
 					rts
+.)
 
 ;-------------------------------------------------
 ;--- MàJ adresses écran HIRES  dans une tuile ----
@@ -484,9 +486,10 @@ end_key
 ;**** routine ecrit une phrase sur ligne écran text  ****
 ;********************************************************
 write_phrase
+.(
 	lda $1111,x
 	beq end_phrase
-adr_ecr_txt
++adr_ecr_txt
 	sta $bf11,x
 	inx
 	bne write_phrase
@@ -494,6 +497,7 @@ end_phrase
 	lda #$01
 	sta est_affiche_texte
 	rts
+.)
 
 ;****************************************************
 ;****  routine attend appui sur 'Y' et laché  ****
