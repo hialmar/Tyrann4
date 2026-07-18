@@ -1,119 +1,128 @@
+; -------------------------------------------------------------------------
+; ----------  routines de chargement/sauvegarde de l'équipe
+; -------------------------------------------------------------------------
+   .zero
+	*= $a0
+; TODO : à virer
+est_affiche_texte .dsb 1
+
+   .text
 ;struct character {
 ;	char 		  nom[11]; // nom
     .align 256
-character_name .dsb 6*16
+_character_name .dsb 6*16
 ; 96 bytes
 ;	unsigned int  ri; // richesses (nom => 2 octets)
-character_ri .dsb 6*2
+_character_ri .dsb 6*2
 ;	unsigned char cp; // carrière perso
-character_cp .dsb 6
+_character_cp .dsb 6
 ;	unsigned char mp; // maison
-character_mp .dsb 6
+_character_mp .dsb 6
 ;	unsigned char cc; // capacité de combat
-character_cc .dsb 6
+_character_cc .dsb 6
 ;	unsigned char ct; // capacité de tir
-character_ct .dsb 6
+_character_ct .dsb 6
 ;	unsigned char fo; // force
-character_fo .dsb 6
+_character_fo .dsb 6
 ;	unsigned char ag; // agilité
-character_ag .dsb 6
+_character_ag .dsb 6
 ;	unsigned char in; // intelligence
-character_in .dsb 6
+_character_in .dsb 6
 ;	unsigned char fm; // force mentale
-character_fm .dsb 6
+_character_fm .dsb 6
 ;	unsigned char pv; // points de vie ou de blessures
-character_pv .dsb 6
+_character_pv .dsb 6
 ;	unsigned char et; // état des PV
-character_et .dsb 6
+_character_et .dsb 6
 ;	unsigned char ok; // santé
-character_ok .dsb 6
+_character_ok .dsb 6
 ;	unsigned char ni; // niveau (nom => 16 octets)
-character_ni .dsb 6
+_character_ni .dsb 6
 ;	unsigned int  xp; // expérience
-character_xp .dsb 6*2
+_character_xp .dsb 6*2
 ;	unsigned char wr; // arme droite (weapon right)
-character_wr .dsb 6
+_character_wr .dsb 6
 ;	unsigned char wl; // arme gauche
-character_wl .dsb 6
+_character_wl .dsb 6
 ;	unsigned char pt; // armure
-character_pt .dsb 6
+_character_pt .dsb 6
 ;	unsigned char ca; // classe d'armure
-character_ca .dsb 6
+_character_ca .dsb 6
 ;	unsigned char bt; // bête (nom => 23 octets)
-character_bt .dsb 6
+_character_bt .dsb 6
 ; 6*21 = 126 bytes + 96 = 222 bytes
 
 ;char s = 1; // direction (est)
-team_s .dsb 1
+_team_s .dsb 1
 ;unsigned char x = 2; // coords
-team_x .dsb 1
+_team_x .dsb 1
 ;unsigned char y = 2;
-team_y .dsb 1
+_team_y .dsb 1
 ;
 ;struct character characters[6];
 ;
 ;unsigned char boussole;
-team_boussole .dsb 1
+_team_boussole .dsb 1
 ;unsigned char filet;
-team_filet .dsb 1
+_team_filet .dsb 1
 ;unsigned char selle_dragon; a virer ?
-team_selle .dsb 1
+_team_selle .dsb 1
 ;
 
 ; 228 bytes
 
 ;unsigned char ingredients[6]; // ingrédients
-team_ingredients .dsb 6
+_team_ingredients .dsb 6
 ;
 ;unsigned char ville=0; // ville courante
-team_ville .dsb 1
+_team_ville .dsb 1
 ;
 
 ; 235 bytes
 ;unsigned char dedans; // tableau de bits pour gérer le côté des portes et le mur à la fin
-team_dedans .dsb 1
+_team_dedans .dsb 1
 ;
 ;unsigned char tl; // top level  villes visitables.
-team_tl .dsb 1
+_team_tl .dsb 1
 ;unsigned char np; // nombre d'ingredients de la potion
-team_np .dsb 1
+_team_np .dsb 1
 ;unsigned char nf; // nombre de fuites
-team_nf .dsb 1
+_team_nf .dsb 1
 ;unsigned char pm; // potion faite ?
-team_pm .dsb 1
+_team_pm .dsb 1
 ;
 ;unsigned char out=1; // sur la carte ?
-team_out .dsb 1
+_team_out .dsb 1
 ;
 ;char ca = 0; // case courante
-team_ca .dsb 1
+_team_ca .dsb 1
 ;
-;char * teamfilename = "TEAM.BIN"; // fichier contenant l'équipe
+;char * _teamfilename = "TEAM.BIN"; // fichier contenant l'équipe
 ;
 ;char io_needed = 1;
-team_io_needed .dsb 1
+_team_io_needed .dsb 1
 
 ; 243 bytes
 
 ;	char *ptr; tmp0
 ;	unsigned char version;
-team_version .dsb 1
+_team_version .dsb 1
 
 ; 244 bytes
 
 .align 256
 ;	unsigned char sad[6]; // sac à dos
-character_sad .dsb 6*8
+_character_sad .dsb 6*8
 ;	unsigned char sp[8]; // sorts
-character_sp .dsb 6*8
+_character_sp .dsb 6*8
 ;};
 
 
-;unsigned char cles[9][4]; // trousseau de clefs (32 octets)
-team_cles .dsb 9*4
+;unsigned char cles[9][4]; // trousseau de clefs (36 octets)
+_team_cles .dsb 9*4
 ;
 ;unsigned char combats_coffres[9][5]; // combats et coffres sous forme de tableaux de bits
-team_combats_coffres .dsb 9*5
+_team_combats_coffres .dsb 9*5
 ;
 
 
@@ -121,18 +130,18 @@ team_combats_coffres .dsb 9*5
 ;{
 
 ;	char namelen=0; // longueur d'un nom
-team_namelen .dsb 1
+_team_namelen .dsb 1
 ;	char perso; // numéro de perso
-team_perso .dsb 1
+_team_perso .dsb 1
 ;	char i; // compteur
-team_i .dsb 1
+_team_i .dsb 1
 ;	char j; // compteur
-team_j .dsb 1
+_team_j .dsb 1
 ;	char ret;
-team_ret .dsb 1
+_team_ret .dsb 1
 
 
-load_characters
+_load_t4_characters
 .(
 ;	// 48000 PRINT SPC(9);"Veuillez Patienter..."
 ;	// POKE 48035,0:POKE#26A,PEEK(#26A)AND254
@@ -154,9 +163,9 @@ load_characters
 	jsr write_phrase
 ;	// 48005 CLOAD"TEAM"
 ;	if (io_needed) {
-    lda team_io_needed
+    lda _team_io_needed
     beq skip_load
-;		//printf("Chargement de %s\n", teamfilename);
+;		//printf("Chargement de %s\n", _teamfilename);
 	ldy #0         ; grab string pointer
 	lda #<t_team_filemane
 	sta (sp),y
@@ -176,34 +185,34 @@ skip_load
 ;		// 48015 O1=O1+1:VIL=PEEK(O1):PRINT SPC(9);"...";
 ;		ptr = (char*)0xa001;
         lda #1
-        sta $tmp0+1
+        sta tmp0
         lda #$a0
-        sta $tmp0
+        sta tmp0+1
 ;		printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
 ;		version = *ptr; ptr++;
         ldy #0
         lda (tmp0),y
-        sta team_version
+        sta _team_version
         iny
 ;		x = *ptr; ptr++;
         lda (tmp0),y
-        sta team_x
+        sta _team_x
         iny
 ;		y = *ptr; ptr++;
         lda (tmp0),y
-        sta team_y
+        sta _team_y
         iny
 ;		s = *ptr; ptr++;
         lda (tmp0),y
-        sta team_s
+        sta _team_s
         iny
 ;		ca = *ptr; ptr++;
         lda (tmp0),y
-        sta team_ca
+        sta _team_ca
         iny
 ;		ville = *ptr; ptr++;
         lda (tmp0),y
-        sta team_ville
+        sta _team_ville
         iny
 ;		printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
 ;		// test
@@ -216,25 +225,34 @@ skip_load
 ;		puts("         ...\n");
 ;		// 48020 FOR P=1TO6
         lda #0
-        sta team_perso
-        lda #<character_name
+        sta _team_perso
+        lda #<_character_name
         sta tmp1 ; ptr to character name start
-        lda #>character_name
+        lda #>_character_name
         sta tmp1+1
-        lda #<character_sad
+        lda #<_character_sad
         sta tmp2 ; ptr to character bag start
-        lda #>character_sad
+        lda #>_character_sad
         sta tmp2+1
-        lda #<character_sp
+        lda #<_character_sp
         sta tmp3 ; ptr to character spell start
-        lda #>character_sp
+        lda #>_character_sp
         sta tmp3+1 ; ptr to character spell start
- read_characters
+        lda #<_character_ri
+        sta tmp4 ; ptr to character ri start
+        lda #>_character_ri
+        sta tmp4+1 ; ptr to character ri start
+        lda #<_character_xp
+        sta tmp6 ; ptr to character xp start
+        lda #>_character_xp
+        sta tmp6+1 ; ptr to character xp start
+
 ;		for(perso=0;perso<6;perso++) {
 ;			// 48030 O1=O1+1:DD=PEEK(O1)
 ;			namelen = *ptr; ptr++;
+read_characters
         jsr get_next_byte
-        sta team_namelen
+        sta _team_namelen
 ;			// 48040 FORJ=1TODD:O1=O1+1:N$(P)=N$(P)+CHR$(PEEK(O1)):NEXTJ
 ;			for(i=0;i<namelen;i++) {
         ldx #0
@@ -249,7 +267,7 @@ loop_read_write_name
         ldy tmp5
         inx
         txa
-        cmp team_namelen
+        cmp _team_namelen
         beq read_name_over
         cmp #15
         bmi loop_read_write_name
@@ -259,7 +277,7 @@ loop_read_rest_of_name
         jsr get_next_byte
         inx
         txa
-        cmp team_namelen
+        cmp _team_namelen
         bmi loop_read_rest_of_name
 read_name_over
 ;			if (i>10) i=10;
@@ -280,74 +298,94 @@ read_name_over
 ;			printf("...\n");
 ;			printf("perso %d : longueur %d nom %s\n", perso, namelen, characters[perso].nom);
 ;			printf("richesse %d0\n", characters[perso].ri);
-        ldx team_perso
         jsr get_next_byte
-        sta characters_ri,x
-;			printf("classe %d\n", characters[perso].cp);
+        sty tmp5
+        ldy #0
+        sta (tmp4),y
+        inc tmp4
+        ldy tmp5
         jsr get_next_byte
-        sta characters_cp,x
+        sty tmp5
+        ldy #0
+        sta (tmp4),y
+        inc tmp4
+        ldy tmp5
+        ldx _team_perso
+;			printf("classe %d\n", _characters[perso].cp);
+        jsr get_next_byte
+        sta _character_cp,x
 ;			printf("taper sur une touche pour continuer\n");
-;			printf("maison %d\n", characters[perso].mp);
+;			printf("maison %d\n", _characters[perso].mp);
         jsr get_next_byte
-        sta characters_mp,x
-;			printf("CC %d\n", characters[perso].cc);
+        sta _character_mp,x
+;			printf("CC %d\n", _characters[perso].cc);
         jsr get_next_byte
-        sta characters_cc,x
-;			printf("CT %d\n", characters[perso].ct);
+        sta _character_cc,x
+;			printf("CT %d\n", _characters[perso].ct);
         jsr get_next_byte
-        sta characters_ct,x
-;			printf("FO %d\n", characters[perso].fo);
+        sta _character_ct,x
+;			printf("FO %d\n", _characters[perso].fo);
         jsr get_next_byte
-        sta characters_fo,x
-;			printf("AG %d\n", characters[perso].ag);
+        sta _character_fo,x
+;			printf("AG %d\n", _characters[perso].ag);
         jsr get_next_byte
-        sta characters_ag,x
-;			printf("IN %d\n", characters[perso].in);
+        sta _character_ag,x
+;			printf("IN %d\n", _characters[perso].in);
         jsr get_next_byte
-        sta characters_in,x
-;			printf("FM %d\n", characters[perso].fm);
+        sta _character_in,x
+;			printf("FM %d\n", _characters[perso].fm);
         jsr get_next_byte
-        sta characters_fm,x
+        sta _character_fm,x
 ;			a = (char)getchar();
-;			printf("PV %d\n", characters[perso].pv);
+;			printf("PV %d\n", _characters[perso].pv);
         jsr get_next_byte
-        sta characters_pv,x
-;			printf("etat %d\n", characters[perso].et);
+        sta _character_pv,x
+;			printf("etat %d\n", _characters[perso].et);
         jsr get_next_byte
-        sta characters_et,x
-;			printf("OK %d\n", characters[perso].ok);
+        sta _character_et,x
+;			printf("OK %d\n", _characters[perso].ok);
         jsr get_next_byte
-        sta characters_ok,x
-;			printf("NI %d\n", characters[perso].ni);
+        sta _character_ok,x
+;			printf("NI %d\n", _characters[perso].ni);
         jsr get_next_byte
-        sta characters_ni,x
-;			printf("XP %d\n", characters[perso].xp);
+        sta _character_ni,x
+;			printf("XP %d\n", _characters[perso].xp);
         jsr get_next_byte
-        sta characters_xp,x
-;			printf("WR %d\n", characters[perso].wr);
+        sty tmp5
+        ldy #0
+        sta (tmp6),y
+        inc tmp6
+        ldy tmp5
         jsr get_next_byte
-        sta characters_wr,x
-;			printf("WL %d\n", characters[perso].wl);
+        sty tmp5
+        ldy #0
+        sta (tmp6),y
+        inc tmp6
+        ldy tmp5
+;			printf("WR %d\n", _characters[perso].wr);
         jsr get_next_byte
-        sta characters_wl,x
-;			printf("Armure %d\n", characters[perso].pt);
+        sta _character_wr,x
+;			printf("WL %d\n", _characters[perso].wl);
         jsr get_next_byte
-        sta characters_pt,x
-;			printf("CA %d\n", characters[perso].ca);
+        sta _character_wl,x
+;			printf("Armure %d\n", _characters[perso].pt);
         jsr get_next_byte
-        sta characters_bt,x
-;			printf("bete %d\n", characters[perso].bt);
+        sta _character_pt,x
+;			printf("CA %d\n", _characters[perso].ca);
+        jsr get_next_byte
+        sta _character_bt,x
+;			printf("bete %d\n", _characters[perso].bt);
 ;			a = (char)getchar();
 ;#endif
 ;			// 48230 FORI=1TO6:O1=O1+1:SAD(P,I)=PEEK(O1):NEXTI
-;			memcpy((char*)&(characters[perso].sad), ptr, 6);
+;			memcpy((char*)&(_characters[perso].sad), ptr, 6);
         ldx #0
 read_sad
         jsr get_next_byte
         sty tmp5
         ldy #0
         sta (tmp1),y
-        inc tmp1
+        inc tmp2
         ldy tmp5
         inx
         txa
@@ -356,34 +394,68 @@ read_sad
 ;			ptr+=6;
 ;#ifdef debug
 ;			for(i=0;i<6;i++) {
-;				printf("SAD(%d) : %d\n", i, characters[perso].sad[i]);
+;				printf("SAD(%d) : %d\n", i, _characters[perso].sad[i]);
 ;			}
 ;#endif
 ;			//printf("taper sur une touche pour continuer\n");
 ;        	//a = (char)getchar();
 ;			// 48235 IF CP(P)>3 THEN FORI=1TO8:O1=O1+1:SN(P,I)=PEEK(O1):NEXT
-;			if (characters[perso].cp>3) {
-;				memcpy((char*)&(characters[perso].sp), ptr, 8);
+read_sp
+        ldx _team_perso
+        lda _character_cp,x
+        cmp #3
+        bmi skip_load_save_sp
+;			if (_characters[perso].cp>3) {
+;				memcpy((char*)&(_characters[perso].sp), ptr, 8);
 ;				ptr+=8;
 ;#ifdef debug
 ;				for(i=0;i<8;i++) {
-;					printf("SP(%d) : %d\n", i, characters[perso].sp[i]);
+;					printf("SP(%d) : %d\n", i, _characters[perso].sp[i]);
 ;				}
 ;#endif
-;			}
-;			// 48240 PRINT "...";:NEXT P
+        jsr get_next_byte
+        sty tmp5
+        ldy #0
+        sta (tmp1),y
+ skip_load_save_sp
+        inc tmp3
+        ldy tmp5
+        inx
+        txa
+        cmp #8
+ ;			}
+        bne read_sp
+ ;			// 48240 PRINT "...";:NEXT P
 ;		}
-;
+        inc _team_perso
+        cmp #6
+        bpl end_characters
+        jmp read_characters
+end_characters
 ;		// 48250 O1=O1+1:BS=PEEK(O1)
 ;		boussole = *ptr; ptr++;
+        jsr get_next_byte
+        sta _team_boussole
 ;		//printf("Boussole %d\n", boussole);
 ;		// 48260 O1=O1+1:FI=PEEK(O1)
+        jsr get_next_byte
+        sta _team_filet
 ;		filet = *ptr; ptr++;
 ;		//printf("filet %d\n", filet);
 ;		selle_dragon = *ptr; ptr++;
+        jsr get_next_byte
+        sta _team_selle
 ;		//printf("selle dragon %d\n", selle_dragon);
-;		// 48270 FOR L=1TO8:FOR C=1TO4:O1=O1+1:CLEF(L,C)=PEEK(O1):NEXT C,L
+;		// 48270 FOR L=1TO9:FOR C=1TO4:O1=O1+1:CLEF(L,C)=PEEK(O1):NEXT C,L
 ;		memcpy((char*)cles, ptr, 36);
+        ldx #0
+read_cles
+        jsr get_next_byte
+        sta _team_cles,x
+        inx
+        txa
+        cmp #36
+        bne read_cles
 ;		ptr+=36;
 ;#ifdef debug
 ;		for(i=0;i<9;i++) {
@@ -396,6 +468,14 @@ read_sad
 ;#endif
 ;		// 48290 FOR I=1TO6:O1=O1+1:INGREDIENT(I)=PEEK(O1):NEXT
 ;		memcpy((char*)ingredients, ptr, 6);
+        ldx #0
+read_ingredients
+        jsr get_next_byte
+        sta _team_ingredients,x
+        inx
+        txa
+        cmp #6
+        bne read_ingredients
 ;		ptr+=6;
 ;#ifdef debug
 ;		for(i=0;i<6;i++) {
@@ -403,19 +483,40 @@ read_sad
 ;		}
 ;#endif
 ;		memcpy((char*)combats_coffres, ptr, 45);
+        ldx #0
+read_combats_coffres
+        jsr get_next_byte
+        sta _team_combats_coffres,x
+        inx
+        txa
+        cmp #45
+        bne read_combats_coffres
 ;		ptr+=45;
 ;		dedans=*ptr;
+        jsr get_next_byte
+        sta _team_dedans
 ;		ptr++;
 ;		tl=*ptr;
+        jsr get_next_byte
+        sta _team_tl
 ;		ptr++;
 ;		//printf("tl %d\n", tl);
 ;		np=*ptr;
+        jsr get_next_byte
+        sta _team_np
 ;		ptr++;
 ;		nf=*ptr;
+        jsr get_next_byte
+        sta _team_nf
 ;		ptr++;
 ;		pm=*ptr;
+        jsr get_next_byte
+        sta _team_pm
 ;		ptr++;
 ;		out=1;//*ptr;
+        ; jsr get_next_byte
+        lda #1
+        sta _team_pm
 ;		printf("out : %d", out);
 ;		ptr++;
 ;		printf("longueur %d\n", (int) (ptr - 0xa000));
@@ -424,6 +525,7 @@ read_sad
 ;		exit(1);
 ;	}
 ;}
+        rts
 .)
 
 ; y contains the offset
@@ -449,3 +551,24 @@ t_voleur_2
 
 t_team_filemane
 	.asc "TEAM.BIN",0
+
+
+; TODO : à virer
+
+
+;********************************************************
+;**** routine ecrit une phrase sur ligne écran text  ****
+;********************************************************
+write_phrase
+.(
+	lda $1111,x
+	beq end_phrase
++adr_ecr_txt
+	sta $bf11,x
+	inx
+	bne write_phrase
+end_phrase
+	lda #$01
+	sta est_affiche_texte
+	rts
+.)
