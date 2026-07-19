@@ -39,9 +39,9 @@ extern unsigned char out;
 extern char io_needed;
 extern char eencre[];
 
-char *classe[] = { "Chevalier","Mercenaire","Ranger","Sorcier","Mestre","Septon" };
+char *classe[] = { "Legionary","Gladiator","Scout","Druid","Sem-Priest","Vestal" };
 char *etat[] = { "OK", "-Empoi-  ", "-Paral-  ", ">MORT<  " };
-char *maisons[] = { "MARTELL","BARATHEON","TYRELL","GREYJOY","ARRYN","LANNISTER","TULLY","STARK"};
+char *maisons[] = { "Celtic","Egyptian","Gallic","Goth","Persian","Roman","Viking","Iberian"};
 
 char *sorts[] = { "SOMMEIL","FEU","PIERRE","VENIN","SANG","FOUDRE", "LAVE", "SEISME",
 				  "EAU", "SERUM", "MUSCLE", "BOUCLIER", "ELIXIR", "ECRAN", "VIE", "MORT",
@@ -373,8 +373,8 @@ void printTeamFull(void)
 		if (characters[i].mp != 1) printAtXY (17,7+3*i, maisons[characters[i].mp-2]);
 		printAtXY (27,7+3*i, classe[characters[i].cp-1]);
 		printAtXY (37,7+3*i, itoa(characters[i].ni));
-		printAtXY (6,7+3*i+1, itoa(characters[i].ri*10));
-		printAtXY (13,7+3*i+1, "ca");
+		printAtXY (6,7+3*i+1, itoa(characters[i].ri));
+		printAtXY (13,7+3*i+1, "0 se");
 		printAtXY (18,7+3*i+1, itoa(characters[i].cc));
 		printAtXY (21,7+3*i+1, itoa(characters[i].ct));
 		printAtXY (24,7+3*i+1, itoa(characters[i].fo));
@@ -400,12 +400,12 @@ void main()
 {
 		io_needed=1;
         loadCharacters();
-
-        printTeamFull();
-        inspect();
-
         team_io_needed=0;
         load_t4_characters();
+
+        loadTextesItems();
+        printTeamFull();
+        inspect();
 
         // printT4TeamFull();
 }

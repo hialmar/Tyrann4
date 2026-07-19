@@ -516,8 +516,8 @@ void printTeamFull(void)
 		if (characters[i].mp != 1) printAtXY (17,7+3*i, maisons[characters[i].mp-2]);		
 		printAtXY (27,7+3*i, classe[characters[i].cp-1]);
 		printAtXY (37,7+3*i, itoa(characters[i].ni));
-		printAtXY (6,7+3*i+1, itoa(characters[i].ri*10));
-		printAtXY (13,7+3*i+1, "ca");
+		printAtXY (6,7+3*i+1, itoa(characters[i].ri));
+		printAtXY (13,7+3*i+1, "0 ca");
 		printAtXY (18,7+3*i+1, itoa(characters[i].cc));
 		printAtXY (21,7+3*i+1, itoa(characters[i].ct));
 		printAtXY (24,7+3*i+1, itoa(characters[i].fo));
