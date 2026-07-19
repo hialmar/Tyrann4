@@ -104,7 +104,6 @@ _team_io_needed .dsb 1
 
 ; 243 bytes
 
-;	char *ptr; tmp0
 ;	unsigned char version;
 _team_version .dsb 1
 
@@ -129,18 +128,29 @@ _team_combats_coffres .dsb 9*5
 ;void loadCharacters(void)
 ;{
 
-;	char namelen=0; // longueur d'un nom
-_team_namelen .dsb 1
-;	char perso; // numéro de perso
-_team_perso .dsb 1
-;	char i; // compteur
-_team_i .dsb 1
-;	char j; // compteur
-_team_j .dsb 1
-;	char ret;
-_team_ret .dsb 1
-
-
+#define zone_mem tmp0
+#define index_name tmp1
+#define index_sad tmp2
+#define index_sp tmp3
+#define index_ri tmp4
+#define index_xp tmp5
+#define team_namelen tmp6
+#define team_perso tmp7
+#define ret_load reg0
+#define index reg1
+; ----------
+; Charge l'équipe
+; tmp0 adresse début HIRES qui stocke les données
+; tmp1 indice tableau noms
+; tmp2 indice tableau sac
+; tmp3 indice tableau sorts
+; tmp4 indice tableau richesses
+; tmp5 indice tableau xp
+; tmp6 longueur nom
+; tmp7 num perso courant
+; tmp8 retour chargement
+; tmp9 indice lecture
+;
 _load_t4_characters
 .(
 ;	// 48000 PRINT SPC(9);"Veuillez Patienter..."
@@ -185,33 +195,33 @@ skip_load
 ;		// 48015 O1=O1+1:VIL=PEEK(O1):PRINT SPC(9);"...";
 ;		ptr = (char*)0xa001;
         lda #1
-        sta tmp0
+        sta zone_mem
         lda #$a0
-        sta tmp0+1
+        sta zone_mem+1
 ;		printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
 ;		version = *ptr; ptr++;
         ldy #0
-        lda (tmp0),y
+        lda (zone_mem),y
         sta _team_version
         iny
 ;		x = *ptr; ptr++;
-        lda (tmp0),y
+        lda (zone_mem),y
         sta _team_x
         iny
 ;		y = *ptr; ptr++;
-        lda (tmp0),y
+        lda (zone_mem),y
         sta _team_y
         iny
 ;		s = *ptr; ptr++;
-        lda (tmp0),y
+        lda (zone_mem),y
         sta _team_s
         iny
 ;		ca = *ptr; ptr++;
-        lda (tmp0),y
+        lda (zone_mem),y
         sta _team_ca
         iny
 ;		ville = *ptr; ptr++;
-        lda (tmp0),y
+        lda (zone_mem),y
         sta _team_ville
         iny
 ;		printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
@@ -225,73 +235,56 @@ skip_load
 ;		puts("         ...\n");
 ;		// 48020 FOR P=1TO6
         lda #0
-        sta _team_perso
-        lda #<_character_name
-        sta tmp1 ; ptr to character name start
-        lda #>_character_name
-        sta tmp1+1
-        lda #<_character_sad
-        sta tmp2 ; ptr to character bag start
-        lda #>_character_sad
-        sta tmp2+1
-        lda #<_character_sp
-        sta tmp3 ; ptr to character spell start
-        lda #>_character_sp
-        sta tmp3+1 ; ptr to character spell start
-        lda #<_character_ri
-        sta tmp4 ; ptr to character ri start
-        lda #>_character_ri
-        sta tmp4+1 ; ptr to character ri start
-        lda #<_character_xp
-        sta tmp6 ; ptr to character xp start
-        lda #>_character_xp
-        sta tmp6+1 ; ptr to character xp start
-
+        sta team_perso
+        sta index_name
+        sta index_sad
+        sta index_sp
+        sta index_ri
+        sta index_xp
 ;		for(perso=0;perso<6;perso++) {
 ;			// 48030 O1=O1+1:DD=PEEK(O1)
 ;			namelen = *ptr; ptr++;
 read_characters
         jsr get_next_byte
-        sta _team_namelen
+        sta team_namelen
 ;			// 48040 FORJ=1TODD:O1=O1+1:N$(P)=N$(P)+CHR$(PEEK(O1)):NEXTJ
 ;			for(i=0;i<namelen;i++) {
-        ldx #0
+        lda #0
+        sta index
 loop_read_write_name
 ;				if (i < 10)
 ;				    characters[perso].nom[i]=*ptr;
         jsr get_next_byte
-        sty tmp5
-        ldy #0
-        sta (tmp1),y
-        inc tmp1
-        ldy tmp5
-        inx
-        txa
-        cmp _team_namelen
+        ldx index_name
+        sta _character_name,x
+        inc index_name
+        inc index
+        lda index
+        cmp team_namelen
         beq read_name_over
         cmp #15
         bmi loop_read_write_name
-loop_read_rest_of_name
+        ; name is too long, we skip the rest
+        ldx index
+loop_skip_rest_of_name
 ;				ptr++;
 ;			}
         jsr get_next_byte
         inx
         txa
-        cmp _team_namelen
-        bmi loop_read_rest_of_name
+        cmp team_namelen
+        bmi loop_skip_rest_of_name
 read_name_over
 ;			if (i>10) i=10;
 ;			characters[perso].nom[i]=0;
         lda #0
-        sty tmp5
-        ldy #0
-        sta (tmp1),y
-        ldy tmp5
-        inc tmp1
-        inx
-        txa
+        ldx index_name
+        sta _character_name,x
+        inc index_name
+        inc index
+        lda index
         cmp #16
-        bmi read_name_over
+        bne read_name_over
 ;			memcpy((char*)&(characters[perso].ri), ptr, 21);
 ;			ptr+=21;
 ;#ifdef debug
@@ -299,18 +292,14 @@ read_name_over
 ;			printf("perso %d : longueur %d nom %s\n", perso, namelen, characters[perso].nom);
 ;			printf("richesse %d0\n", characters[perso].ri);
         jsr get_next_byte
-        sty tmp5
-        ldy #0
-        sta (tmp4),y
-        inc tmp4
-        ldy tmp5
+        ldx index_ri
+        sta _character_ri,x
+        inc index_ri
         jsr get_next_byte
-        sty tmp5
-        ldy #0
-        sta (tmp4),y
-        inc tmp4
-        ldy tmp5
-        ldx _team_perso
+        ldx index_ri
+        sta _character_ri,x
+        inc index_ri
+        ldx team_perso
 ;			printf("classe %d\n", _characters[perso].cp);
         jsr get_next_byte
         sta _character_cp,x
@@ -351,18 +340,15 @@ read_name_over
         sta _character_ni,x
 ;			printf("XP %d\n", _characters[perso].xp);
         jsr get_next_byte
-        sty tmp5
-        ldy #0
-        sta (tmp6),y
-        inc tmp6
-        ldy tmp5
+        ldx index_xp
+        sta _character_xp,x
+        inc index_xp
         jsr get_next_byte
-        sty tmp5
-        ldy #0
-        sta (tmp6),y
-        inc tmp6
-        ldy tmp5
+        ldx index_xp
+        sta _character_xp,x
+        inc index_xp
 ;			printf("WR %d\n", _characters[perso].wr);
+        ldx team_perso
         jsr get_next_byte
         sta _character_wr,x
 ;			printf("WL %d\n", _characters[perso].wl);
@@ -373,22 +359,23 @@ read_name_over
         sta _character_pt,x
 ;			printf("CA %d\n", _characters[perso].ca);
         jsr get_next_byte
-        sta _character_bt,x
+        sta _character_ca,x
 ;			printf("bete %d\n", _characters[perso].bt);
+        jsr get_next_byte
+        sta _character_bt,x
 ;			a = (char)getchar();
 ;#endif
 ;			// 48230 FORI=1TO6:O1=O1+1:SAD(P,I)=PEEK(O1):NEXTI
 ;			memcpy((char*)&(_characters[perso].sad), ptr, 6);
-        ldx #0
+        lda #0
+        sta index
 read_sad
         jsr get_next_byte
-        sty tmp5
-        ldy #0
-        sta (tmp1),y
-        inc tmp2
-        ldy tmp5
-        inx
-        txa
+        ldx index_sad
+        sta _character_sad,x
+        inc index_sad
+        inc index
+        lda index
         cmp #6
         bne read_sad
 ;			ptr+=6;
@@ -400,10 +387,12 @@ read_sad
 ;			//printf("taper sur une touche pour continuer\n");
 ;        	//a = (char)getchar();
 ;			// 48235 IF CP(P)>3 THEN FORI=1TO8:O1=O1+1:SN(P,I)=PEEK(O1):NEXT
+        lda #0
+        sta index
 read_sp
-        ldx _team_perso
+        ldx team_perso
         lda _character_cp,x
-        cmp #3
+        cmp #4
         bmi skip_load_save_sp
 ;			if (_characters[perso].cp>3) {
 ;				memcpy((char*)&(_characters[perso].sp), ptr, 8);
@@ -414,22 +403,21 @@ read_sp
 ;				}
 ;#endif
         jsr get_next_byte
-        sty tmp5
-        ldy #0
-        sta (tmp1),y
+        ldx index_sp
+        sta _character_sp,x
  skip_load_save_sp
-        inc tmp3
-        ldy tmp5
-        inx
-        txa
+        inc index_sp
+        inc index
+        lda index
         cmp #8
  ;			}
         bne read_sp
  ;			// 48240 PRINT "...";:NEXT P
 ;		}
-        inc _team_perso
+        inc team_perso
+        lda team_perso
         cmp #6
-        bpl end_characters
+        beq end_characters
         jmp read_characters
 end_characters
 ;		// 48250 O1=O1+1:BS=PEEK(O1)
@@ -516,7 +504,7 @@ read_combats_coffres
 ;		out=1;//*ptr;
         ; jsr get_next_byte
         lda #1
-        sta _team_pm
+        sta _team_out
 ;		printf("out : %d", out);
 ;		ptr++;
 ;		printf("longueur %d\n", (int) (ptr - 0xa000));
@@ -530,13 +518,13 @@ read_combats_coffres
 
 ; y contains the offset
 ; the next byte will be in acc
-; if y goes over then we increment the byte at tmp0+1
+; if y goes over then we increment the byte at zone_mem+1
 get_next_byte
 .(
-    lda (tmp0),y
+    lda (zone_mem),y
     iny
     bne fin
-    inc tmp0+1
+    inc zone_mem+1
     ldy #0
 fin
     rts
