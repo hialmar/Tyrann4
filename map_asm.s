@@ -97,6 +97,9 @@ sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon =
 _main
 .(
 	jsr SaveZeroPage
+	lda #1
+	sta _team_io_needed
+	jsr _load_t4_characters
 	lda #4					; début de répétition touche après 4*30 = 120 ms
 	sta $24E
 	lda #1					; répétition d'une touche toutes les 30 ms
@@ -157,14 +160,19 @@ sortie_main
 ;	jsr $ec21
 
 	jsr _get
-	jsr RestoreZeroPage
 sortie_main2
+	lda ligne_hg_map
+	sta _team_x
+	lda rang_hg_map
+	sta _team_y
+	jsr _save_t4_characters
 	; test bascule combat
+	jsr RestoreZeroPage
 	ldy #$0         ; grab string pointer
-	lda #<ProgVille1
+	lda #<ProgArmory
 	sta (sp),y
 	iny
-	lda #>ProgVille1
+	lda #>ProgArmory
 	sta (sp),y
 	dey
 	jsr _SwitchToCommand
@@ -423,9 +431,9 @@ no_scroll
 ;-----------------------------------------------------------------------------		
 init_div_var
 .(
-	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
+	lda _team_x		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
-	lda #$10
+	lda _team_y
 	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
 	lda #$4C
 	sta tuile_perso_aff			; code tuile perso affichée

@@ -698,7 +698,6 @@
 5fe9 _DiscSave
 5861 _lo
 5862 _hi
-00a0 est_affiche_texte
 5a00 _character_name
 5a60 _character_ri
 5a6c _character_cp
@@ -773,6 +772,7 @@
 5f32 write_ingredients
 5f40 write_combats_coffres
 5f9a skip_save
+00a0 est_affiche_texte
 5fde end_phrase
 5fe3 _SPStorage
 6050 _Sedoric
