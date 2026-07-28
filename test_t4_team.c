@@ -270,8 +270,8 @@ void inspect(void)
 	printAtXY(32, 6, itoa(characters[i].pv));
 	// affichage bourse
 	printAtXY(5,  8, "Bourse:");
-	printAtXY(13, 8, itoa(characters[i].ri*10));
-	printAtXY(21, 8, "Cerfs d'Argent");
+	printAtXY(13, 8, itoa(characters[i].ri));
+	printAtXY(21, 8, "0 Cerfs d'Argent");
 
 	// affichage de l'équipement porté
 	printAtXY(5,  10, "Arme D:");
@@ -396,16 +396,24 @@ void printTeamFull(void)
 
 extern void load_t4_characters();
 
+extern void save_t4_characters();
+
 void main()
 {
+		backupPageZero();
 		io_needed=1;
         loadCharacters();
-        team_io_needed=0;
+        team_io_needed=1;
         load_t4_characters();
 
         loadTextesItems();
         printTeamFull();
         inspect();
+        team_io_needed=1;
+        save_t4_characters();
+
+        restorePageZero();
+        SwitchToCommand("DIR");
 
         // printT4TeamFull();
 }

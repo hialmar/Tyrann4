@@ -530,12 +530,412 @@ fin
     rts
 .)
 
+
+; y contains the offset
+; the next byte to put is in acc
+; if y goes over then we increment the byte at zone_mem+1
+put_next_byte
+.(
+    sta (zone_mem),y
+    iny
+    bne fin
+    inc zone_mem+1
+    ldy #0
+fin
+    rts
+.)
+
+
+
+; ----------
+; Sauve l'équipe
+; tmp0 adresse début HIRES ou stocker les données temporaires
+; tmp1 indice tableau noms
+; tmp2 indice tableau sac
+; tmp3 indice tableau sorts
+; tmp4 indice tableau richesses
+; tmp5 indice tableau xp
+; tmp6 longueur nom
+; tmp7 num perso courant
+; tmp8 retour chargement
+; tmp9 indice lecture
+;
+_save_t4_characters
+.(
+;	// 48000 PRINT SPC(9);"Veuillez Patienter..."
+;	// POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+;	poke(48035,0);
+    lda #0
+    sta 48035
+;	poke(0x26a,peek(0x26a)&254);
+    lda $26a
+    and #254
+    sta $26a
+;	puts("         Veuillez Patienter...\n");
+	ldx #0
+	lda t_save_wait_1,x
+	sta adr_ecr_txt+1
+	lda #<t_save_wait_1+1
+	sta write_phrase+1
+	lda #>t_save_wait_1+1
+	sta write_phrase+2
+	jsr write_phrase
+
+        lda #1
+        sta zone_mem
+        lda #$a0
+        sta zone_mem+1
+
+        ldy #0
+        lda _team_version
+        sta (zone_mem),y
+        iny
+;		x = *ptr; ptr++;
+        lda _team_x
+        sta (zone_mem),y
+        iny
+;		y = *ptr; ptr++;
+        lda _team_y
+        sta (zone_mem),y
+        iny
+;		s = *ptr; ptr++;
+        lda _team_s
+        sta (zone_mem),y
+        iny
+;		ca = *ptr; ptr++;
+        lda _team_ca
+        sta (zone_mem),y
+        iny
+;		ville = *ptr; ptr++;
+        lda _team_ville
+        sta (zone_mem),y
+        iny
+;		printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
+;		// test
+;		if (x==0 || x > 100) {
+;			x = 2; y = 2; s = 1; ville = 4;
+;			// printf("x=%d y=%d s=%d ca=%d\n", x, y, s, ca);
+;		}
+;		ink(eencre[ville-1]);
+;		printf("ville: %d\n", ville);
+;		puts("         ...\n");
+;		// 48020 FOR P=1TO6
+        lda #0
+        sta team_perso
+        sta index_name
+        sta index_sad
+        sta index_sp
+        sta index_ri
+        sta index_xp
+        sta team_namelen
+;		for(perso=0;perso<6;perso++) {
+;			// 48030 O1=O1+1:DD=PEEK(O1)
+;			namelen = *ptr; ptr++;
+write_characters
+        ; compute current character name length
+        lda #0
+        sta team_namelen
+        ldx index_name
+loop_compute_namelen
+        lda _character_name,x
+        inx
+        inc team_namelen
+        cmp #0
+        bne loop_compute_namelen
+        ldx team_namelen
+        dex ; we counted a 0
+        txa
+        jsr put_next_byte
+;			// 48040 FORJ=1TODD:O1=O1+1:N$(P)=N$(P)+CHR$(PEEK(O1)):NEXTJ
+;			for(i=0;i<namelen;i++) {
+        ; write the name
+        ldx index_name
+        lda #0
+        sta index
+loop_write_name
+        lda _character_name,x
+        beq loop_skip_remaining
+        jsr put_next_byte
+        inx
+        inc index_name
+        inc index
+        bne loop_write_name ; inconditionnel car index != 0
+loop_skip_remaining
+        lda index
+        cmp #15
+        beq read_name_over
+        inc index
+        inc index_name
+        bne loop_skip_remaining ; inconditionnel car index_name != 0
+read_name_over
+        inc index_name ; on saute le 15ème car
+;			printf("richesse %d0\n", characters[perso].ri);
+        ldx index_ri
+        lda _character_ri,x
+        jsr put_next_byte
+        inc index_ri
+        ldx index_ri
+        lda _character_ri,x
+        jsr put_next_byte
+        inc index_ri
+        ldx team_perso
+;			printf("classe %d\n", _characters[perso].cp);
+        lda _character_cp,x
+        jsr put_next_byte
+;			printf("taper sur une touche pour continuer\n");
+;			printf("maison %d\n", _characters[perso].mp);
+        lda _character_mp,x
+        jsr put_next_byte
+;			printf("CC %d\n", _characters[perso].cc);
+        lda _character_cc,x
+        jsr put_next_byte
+;    	printf("CT %d\n", _characters[perso].ct);
+        lda _character_ct,x
+        jsr put_next_byte
+;			printf("FO %d\n", _characters[perso].fo);
+        lda _character_fo,x
+        jsr put_next_byte
+;			printf("AG %d\n", _characters[perso].ag);
+        lda _character_ag,x
+        jsr put_next_byte
+;			printf("IN %d\n", _characters[perso].in);
+        lda _character_in,x
+        jsr put_next_byte
+;			printf("FM %d\n", _characters[perso].fm);
+        lda _character_fm,x
+        jsr put_next_byte
+;			a = (char)getchar();
+;			printf("PV %d\n", _characters[perso].pv);
+        lda _character_pv,x
+        jsr put_next_byte
+;			printf("etat %d\n", _characters[perso].et);
+        lda _character_et,x
+        jsr put_next_byte
+;			printf("OK %d\n", _characters[perso].ok);
+        lda _character_ok,x
+        jsr put_next_byte
+;			printf("NI %d\n", _characters[perso].ni);
+        lda _character_ni,x
+        jsr put_next_byte
+;			printf("XP %d\n", _characters[perso].xp);
+        ldx index_xp
+        lda _character_xp,x
+        inc index_xp
+        jsr put_next_byte
+        ldx index_xp
+        lda _character_xp,x
+        inc index_xp
+;			printf("WR %d\n", _characters[perso].wr);
+        jsr put_next_byte
+        ldx team_perso
+        lda _character_wr,x
+;			printf("WL %d\n", _characters[perso].wl);
+        jsr put_next_byte
+        lda _character_wl,x
+;			printf("Armure %d\n", _characters[perso].pt);
+        jsr put_next_byte
+        lda _character_pt,x
+;			printf("CA %d\n", _characters[perso].ca);
+        jsr put_next_byte
+        lda _character_ca,x
+;			printf("bete %d\n", _characters[perso].bt);
+        jsr put_next_byte
+        lda _character_bt,x
+        jsr put_next_byte
+;			a = (char)getchar();
+;#endif
+;			// 48230 FORI=1TO6:O1=O1+1:SAD(P,I)=PEEK(O1):NEXTI
+;			memcpy((char*)&(_characters[perso].sad), ptr, 6);
+        lda #0
+        sta index
+write_sad
+        ldx index_sad
+        lda _character_sad,x
+        jsr put_next_byte
+        inc index_sad
+        inc index
+        lda index
+        cmp #6
+        bne write_sad
+;			ptr+=6;
+;#ifdef debug
+;			for(i=0;i<6;i++) {
+;				printf("SAD(%d) : %d\n", i, _characters[perso].sad[i]);
+;			}
+;#endif
+;			//printf("taper sur une touche pour continuer\n");
+;        	//a = (char)getchar();
+;			// 48235 IF CP(P)>3 THEN FORI=1TO8:O1=O1+1:SN(P,I)=PEEK(O1):NEXT
+        lda #0
+        sta index
+write_sp
+        ldx team_perso
+        lda _character_cp,x
+        cmp #4
+        bmi skip_save_sp
+;			if (_characters[perso].cp>3) {
+;				memcpy((char*)&(_characters[perso].sp), ptr, 8);
+;				ptr+=8;
+;#ifdef debug
+;				for(i=0;i<8;i++) {
+;					printf("SP(%d) : %d\n", i, _characters[perso].sp[i]);
+;				}
+;#endif
+        ldx index_sp
+        lda _character_sp,x
+        jsr put_next_byte
+ skip_save_sp
+        inc index_sp
+        inc index
+        lda index
+        cmp #8
+ ;			}
+        bne write_sp
+ ;			// 48240 PRINT "...";:NEXT P
+;		}
+        inc team_perso
+        lda team_perso
+        cmp #6
+        beq end_characters
+        jmp write_characters
+end_characters
+;		// 48250 O1=O1+1:BS=PEEK(O1)
+;		boussole = *ptr; ptr++;
+        lda _team_boussole
+        jsr put_next_byte
+;		//printf("Boussole %d\n", boussole);
+;		// 48260 O1=O1+1:FI=PEEK(O1)
+        lda _team_filet
+        jsr put_next_byte
+;		filet = *ptr; ptr++;
+;		//printf("filet %d\n", filet);
+;		selle_dragon = *ptr; ptr++;
+        lda _team_selle
+        jsr put_next_byte
+;		//printf("selle dragon %d\n", selle_dragon);
+;		// 48270 FOR L=1TO9:FOR C=1TO4:O1=O1+1:CLEF(L,C)=PEEK(O1):NEXT C,L
+;		memcpy((char*)cles, ptr, 36);
+        ldx #0
+write_cles
+        lda _team_cles,x
+        jsr put_next_byte
+        inx
+        txa
+        cmp #36
+        bne write_cles
+;		ptr+=36;
+;#ifdef debug
+;		for(i=0;i<9;i++) {
+;			for (j=0;j<4;j++) {
+;				printf("cle(%d,%d) = %d\n", i, j, cles[i][j]);
+;			}
+;		}
+;		puts("taper sur une touche pour continuer\n");
+;        a = (char)getchar();
+;#endif
+;		// 48290 FOR I=1TO6:O1=O1+1:INGREDIENT(I)=PEEK(O1):NEXT
+;		memcpy((char*)ingredients, ptr, 6);
+        ldx #0
+write_ingredients
+        lda _team_ingredients,x
+        jsr put_next_byte
+        inx
+        txa
+        cmp #6
+        bne write_ingredients
+;		ptr+=6;
+;#ifdef debug
+;		for(i=0;i<6;i++) {
+;			printf("ingredients(%d) = %d\n", i, ingredients[i]);
+;		}
+;#endif
+;		memcpy((char*)combats_coffres, ptr, 45);
+        ldx #0
+write_combats_coffres
+        lda _team_combats_coffres,x
+        jsr put_next_byte
+        inx
+        txa
+        cmp #45
+        bne write_combats_coffres
+;		ptr+=45;
+;		dedans=*ptr;
+        lda _team_dedans
+        jsr put_next_byte
+;		ptr++;
+;		tl=*ptr;
+        lda _team_tl
+        jsr put_next_byte
+;		ptr++;
+;		//printf("tl %d\n", tl);
+;		np=*ptr;
+        lda _team_np
+        jsr put_next_byte
+;		ptr++;
+;		nf=*ptr;
+        lda _team_nf
+        jsr put_next_byte
+;		ptr++;
+;		pm=*ptr;
+        lda _team_pm
+        jsr put_next_byte
+;		ptr++;
+;		out=1;//*ptr;
+        ; jsr get_next_byte
+        lda _team_out
+        jsr put_next_byte
+;		printf("out : %d", out);
+;		ptr++;
+;		printf("longueur %d\n", (int) (ptr - 0xa000));
+;	} else {
+;		printf("Erreur lors du chargement de TEAM.BIN\n");
+;		exit(1);
+;	}
+;}
+    lda _team_io_needed
+    beq skip_save
+    ; y contient la partie basse de l'adresse de fin
+    sty zone_mem
+;		//printf("Sauvegarde de %s\n", _teamfilename);
+	ldy #0         ; grab string pointer
+	lda #<t_team_filemane
+	sta (sp),y
+	iny
+	lda #>t_team_filemane
+	sta (sp),y
+    iny
+    ; adresse début
+    lda #0
+    sta (sp),y
+    iny
+    lda #$a0
+    sta (sp),y
+    iny
+    ; adresse fin
+    lda tmp0
+    sta (sp),y
+    iny
+    lda tmp0+1
+    sta (sp),y
+	dey
+	jsr _DiscSave
+;		//printf("Retour %d\n", ret);
+;	} else {
+;		ret = 0;
+;	}
+;	if (ret==0) {
+skip_save
+        rts
+.)
+
+
+
 t_load_wait_1
 	.byt $9a
 	.asc "Loading - Please wait.",0
-t_voleur_2
-	.byt $c2
-	.asc "steals from Carpophorus.",0
+t_save_wait_1
+	.byt $9a
+	.asc "Saving - Please wait.",0
 
 t_team_filemane
 	.asc "TEAM.BIN",0
