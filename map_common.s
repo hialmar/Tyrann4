@@ -468,8 +468,8 @@ next_key_2
 next_key_3
 		cmp #$b4
 ;		bne next_key_4
-		bne wait_key
-		beq end_key
+		;bne wait_key
+		;beq end_key
 ;next_key_4
 ;		cmp #$86
 ;		bne no_key

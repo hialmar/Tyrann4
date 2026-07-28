@@ -398,19 +398,34 @@ extern void load_t4_characters();
 
 extern void save_t4_characters();
 
+extern void wait_key();
+
+extern char *direction_scroll = (char*)0xa0;
+
 void main()
 {
+        int val;
 		backupPageZero();
-		io_needed=1;
-        loadCharacters();
-        team_io_needed=1;
-        load_t4_characters();
+//		io_needed=1;
+//        loadCharacters();
+//        team_io_needed=1;
+//        load_t4_characters();
+//
+//        loadTextesItems();
+//        printTeamFull();
+//        inspect();
 
-        loadTextesItems();
-        printTeamFull();
-        inspect();
-        team_io_needed=1;
-        save_t4_characters();
+        cls();
+
+        while(1) {
+            printf("Tape une touche\n");
+            wait_key();
+            val = peek(0xa0);
+            printf("Code: 0x%x\n", val);
+        }
+
+//        team_io_needed=1;
+//        save_t4_characters();
 
         restorePageZero();
         SwitchToCommand("DIR");

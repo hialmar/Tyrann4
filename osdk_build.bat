@@ -8,7 +8,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 
 :: Goto Basic
 :: Goto Dialog
-:: Goto Camp
+Goto Camp
 :: Goto Map
 Goto MapAsm
 :: Goto Tuile
@@ -31,6 +31,8 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 CALL osdk_config_camp.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_camp.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+
+Goto MapAsm
 
 :Dialog
 
@@ -221,7 +223,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann III" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t4_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann III" -i"DIR" BUILD\combat.tap BUILD\camp.tap BUILD\ville.tap BUILD\dialog.tap BUILD\cpzerop.tap BUILD\map.tap BUILD\ville1.tap BUILD\t4team.tap t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann III" -i"DIR" BUILD\combat.tap BUILD\camp.tap BUILD\ville.tap BUILD\cpzerop.tap BUILD\map.tap BUILD\ville1.tap BUILD\t4team.tap t4_prog.dsk
 
 pause
 

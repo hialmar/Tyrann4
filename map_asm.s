@@ -134,6 +134,12 @@ fin_temporisation
 	lda direction_scroll
 	cmp#$86					; Y pour sortir
 	beq sortie_main
+	cmp#$ba					; C pour camper
+	beq sortie_main
+	cmp#$99					; F pour combattre
+	beq sortie_main
+	cmp#$b6					; S pour stopper
+	beq sortie_main
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
 	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
@@ -157,7 +163,6 @@ sortie_main
 	sta laisser_passer
 	lda #$cc
 	sta numero_lieu
-;	jsr $ec21
 
 	jsr _get
 sortie_main2
@@ -192,6 +197,10 @@ ProgArmory
 
 ProgVille1
 	.asc "VILLE1.COM"
+	.byt 0
+
+ProgCamp
+	.asc "CAMP.COM"
 	.byt 0
 
 ZeroPageCopy
