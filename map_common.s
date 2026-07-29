@@ -467,13 +467,25 @@ next_key_2
 		beq end_key
 next_key_3
 		cmp #$b4
-;		bne next_key_4
+		bne next_key_4
 		;bne wait_key
-		;beq end_key
-;next_key_4
-;		cmp #$86
-;		bne no_key
-;		beq end_key
+		beq end_key
+next_key_4
+		cmp #$86
+		bne next_key_5
+		beq end_key
+next_key_5
+		cmp #$ba
+		bne next_key_6
+		beq end_key	
+next_key_6
+		cmp #$99
+		bne next_key_7
+		beq end_key	
+next_key_7
+		cmp #$b6
+		bne wait_key
+		beq end_key	
 ;no_key
 ;		lda #$38
 end_key

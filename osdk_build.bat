@@ -8,7 +8,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 
 :: Goto Basic
 :: Goto Dialog
-Goto Camp
+:: Goto Camp
 :: Goto Map
 Goto MapAsm
 :: Goto Tuile
@@ -67,6 +67,8 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\map.tap BUILD\map.pat.tap
 Copy BUILD\symbols BUILD\symbols_map
+
+Goto Tap2dsk
 
 CALL osdk_config_map_ville1.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
