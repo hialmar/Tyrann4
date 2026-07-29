@@ -94,6 +94,8 @@ sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon =
 
 	.text
 
+next_prog .dsb 2
+
 _main
 .(
 	jsr SaveZeroPage
@@ -133,13 +135,13 @@ fin_temporisation
 	; sei
 	lda direction_scroll
 	cmp#$86					; Y pour sortir
-	beq sortie_main
+	beq sortie_main_ville
 	cmp#$ba					; C pour camper
-	beq sortie_main
+	beq sortie_main_camp
 	cmp#$99					; F pour combattre
-	beq sortie_main
+	beq sortie_main_fight
 	cmp#$b6					; S pour stopper
-	beq sortie_main
+	beq sortie_main_stop
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
 	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
@@ -148,6 +150,42 @@ fin_temporisation
 	jsr	eff_text
 	; cli
 	jmp main_loop
+sortie_main_ville
+	ldy #$0         ; grab string pointer
+	lda #<ProgVille1
+	sta next_prog
+	iny
+	lda #>ProgVille1
+	sta next_prog+1
+	dey
+	jmp sortie_main
+sortie_main_camp
+	ldy #$0         ; grab string pointer
+	lda #<ProgCamp
+	sta next_prog
+	iny
+	lda #>ProgCamp
+	sta next_prog+1
+	dey
+	jmp sortie_main
+sortie_main_fight	
+	ldy #$0         ; grab string pointer
+	lda #<ProgCombat
+	sta next_prog
+	iny
+	lda #>ProgCombat
+	sta next_prog+1
+	dey
+	jmp sortie_main
+sortie_main_stop
+	ldy #$0         ; grab string pointer
+	lda #<ProgDir
+	sta next_prog
+	iny
+	lda #>ProgDir
+	sta next_prog+1
+	dey
+	jmp sortie_main
 sortie_main
 	lda #3					; ré-affiche le curseur et remet le son des touches
 	sta $26A
@@ -174,10 +212,10 @@ sortie_main2
 	; test bascule combat
 	jsr RestoreZeroPage
 	ldy #$0         ; grab string pointer
-	lda #<ProgArmory
+	lda next_prog
 	sta (sp),y
 	iny
-	lda #>ProgArmory
+	lda next_prog+1
 	sta (sp),y
 	dey
 	jsr _SwitchToCommand
@@ -201,6 +239,10 @@ ProgVille1
 
 ProgCamp
 	.asc "CAMP.COM"
+	.byt 0
+
+ProgDir
+	.asc "CLS"
 	.byt 0
 
 ZeroPageCopy
