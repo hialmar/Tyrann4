@@ -243,7 +243,7 @@ skip_anim
 	sta direction_scroll_prec
 	ldx index_perso				;
 	jsr maj_adr_scr_next_tuile			; en entrée x contient rang tuile dans  table adresses Hires
-	ldx  tuile_perso_aff
+	ldx tuile_perso_aff
 	jsr cherche_et_aff_tuile			; en entrée : X contient la reference de la tuile
 fin_aff_perso
 ;	lda #FALSE
@@ -424,7 +424,7 @@ no_scroll
 ;-----------------------------------------------------------------------------
 init_div_var
 .(
-	lda #$14		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
+	lda #$14		; coordonnées pour l'entrée (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
 	lda #$ff
 	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll

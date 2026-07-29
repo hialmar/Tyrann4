@@ -60,7 +60,8 @@ _team_y .dsb 1
 _team_boussole .dsb 1
 ;unsigned char filet;
 _team_filet .dsb 1
-;unsigned char selle_dragon; a virer ?
+;unsigned char selle_dragon
+; T4 bateau
 _team_selle .dsb 1
 ;
 
@@ -112,10 +113,12 @@ _character_sp .dsb 6*8
 ;};
 
 
-;unsigned char cles[9][4]; // trousseau de clefs (36 octets)
+;unsigned char cles[9][4]; // trousseau de clefs (36 octets) 
+; T4 16 villes * 2 octets = 32 octets + 4 octets globaux
 _team_cles .dsb 9*4
 ;
-;unsigned char combats_coffres[9][5]; // combats et coffres sous forme de tableaux de bits
+;unsigned char combats_coffres[9][5]; // combats et coffres sous forme de tableaux de bits (45 octets)
+; T4 16 villes * 2 octets = 32 octets + 13 octets globaux
 _team_combats_coffres .dsb 9*5
 ;
 
