@@ -68,6 +68,9 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 Copy BUILD\map.tap BUILD\map.pat.tap
 Copy BUILD\symbols BUILD\symbols_map
 
+Call sed -i s/\\/\//g BUILD\symbols_ext
+Call sed -i s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
+
 Goto Tap2dsk
 
 CALL osdk_config_map_ville1.bat

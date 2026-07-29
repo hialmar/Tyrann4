@@ -158,7 +158,7 @@ sortie_main_ville
 	lda #>ProgVille1
 	sta next_prog+1
 	dey
-	jmp sortie_main
+	jsr _jump_to_next_prog
 sortie_main_camp
 	ldy #$0         ; grab string pointer
 	lda #<ProgCamp
@@ -167,7 +167,7 @@ sortie_main_camp
 	lda #>ProgCamp
 	sta next_prog+1
 	dey
-	jmp sortie_main
+	jsr _jump_to_next_prog
 sortie_main_fight	
 	ldy #$0         ; grab string pointer
 	lda #<ProgCombat
@@ -176,7 +176,7 @@ sortie_main_fight
 	lda #>ProgCombat
 	sta next_prog+1
 	dey
-	jmp sortie_main
+	jsr _jump_to_next_prog
 sortie_main_stop
 	ldy #$0         ; grab string pointer
 	lda #<ProgDir
@@ -185,8 +185,12 @@ sortie_main_stop
 	lda #>ProgDir
 	sta next_prog+1
 	dey
-	jmp sortie_main
-sortie_main
+	jsr _jump_to_next_prog
+	rts
+.)
+
+_jump_to_next_prog
+.(
 	lda #3					; ré-affiche le curseur et remet le son des touches
 	sta $26A
 	lda #32					; remet la répétition des touches normale
@@ -224,6 +228,7 @@ sortie_main2
 	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
 .)
+
 
 ProgCombat
 	.asc "COMBAT.COM"
@@ -656,6 +661,30 @@ hires_et_atributs
 		rts	
 .)	
 
+gestion_ville
+.(
+	; gestion des villes _team_ville contient le numéro de la ville
+	; direction_scroll doit contenir #$86 Y
+	lda direction_scroll
+	cmp #$86
+	bne return
+	lda _team_ville
+	asl				; prépare index
+	tax				; 
+	lda ptr_v_prog,x			; Partie basse adresse premier byte chaine nom (ie: $a0,"narbone",0) 
+	sta next_prog		
+	inx
+	lda ptr_v_prog,x			; Partie haute premier byte chaine nom (ie :$a0,"narbone",0) 
+	sta next_prog+1
+	inc _team_ville ; la première ville est numérotée 1
+	jsr _jump_to_next_prog
+	rts ; ne sert à rien normalement
+return
+	lda #0
+	sta _team_ville ; on reste dehors
+	rts
+.)	
+
 ;************************************************
 ;******* Affiche différents textes   ************
 ;************************************************
@@ -665,6 +694,7 @@ aff_text
 	sec				; prépare retenue pour soustraction
 	sbc #$55		; la première ville est numéroté #$50 (la dernière : #$64)
 	bmi hadrian_wall	; si pas sur ville, test suivant
+	sta _team_ville
 	asl				; prépare index
 	tax				; 
 	lda ptr_v,x			; Partie basse adresse premier byte chaine nom (ie: $a0,"narbone",0) 
@@ -693,6 +723,7 @@ lp_ask
 	bne suite_ask
 	inc est_affiche_texte		;flag indiquant que quelquechose est ecrit en bas écran (pour que la routine Eff_texte le teste et agisse ou pas)
 	jsr hit_key
+	jsr gestion_ville
 	rts
 ;	jmp fin_txt
 suite_ask	
@@ -2114,6 +2145,47 @@ ptr_v ;(pointeurs v pour villes)
 	.byt <v_00,>v_00,<v_01,>v_01,<v_02,>v_02,<v_03,>v_03,<v_04,>v_04,<v_05,>v_05
 	.byt <v_06,>v_06,<v_07,>v_07,<v_08,>v_08,<v_09,>v_09,<v_0A,>v_0A,<v_0B,>v_0B
 	.byt <v_0C,>v_0C,<v_0D,>v_0D,<v_0E,>v_0E,<v_0F,>v_0F
+
+
+v_00_prog
+	.asc "VILLE1.COM",0			; Nîmes
+v_01_prog
+	.asc "VILLE2.COM",0 		; Bordeaux
+v_02_prog
+	.asc "VILLE3.COM",0 		; Lyon
+v_03_prog
+	.asc "VILLE4.COM",0 		; Paris
+v_04_prog
+	.asc "VILLE5.COM",0 		; Köln
+v_05_prog
+	.asc "VILLE6.COM",0 		; Barcelone
+v_06_prog
+	.asc "VILLE7.COM",0 		; Cadiz
+v_07_prog
+	.asc "VILLE8.COM",0 		; A Coruña
+v_08_prog
+	.asc "VILLE9.COM",0 		; London
+v_09_prog
+	.asc "VILLE10.COM",0 		; Narbone
+v_0A_prog
+	.asc "VILLE11.COM",0 		 ; Saintes
+v_0B_prog
+	.asc "VILLE12.COM",0 		; Boulogne
+v_0C_prog
+	.asc "VILLE13.COM",0 	 	; Cartagena
+v_0D_prog
+	.asc "VILLE14.COM",0 		; Lisboa
+v_0E_prog
+	.asc "VILLE15.COM",0 		; Exeter
+v_0F_prog
+	.asc "VILLE16.COM",0 		; Dublin
+
+ptr_v_prog ;(pointeurs v pour villes)
+
+	.byt <v_00_prog,>v_00_prog,<v_01_prog,>v_01_prog,<v_02_prog,>v_02_prog,<v_03_prog,>v_03_prog,<v_04_prog,>v_04_prog,<v_05_prog,>v_05_prog
+	.byt <v_06_prog,>v_06_prog,<v_07_prog,>v_07_prog,<v_08_prog,>v_08_prog,<v_09_prog,>v_09_prog,<v_0A_prog,>v_0A_prog,<v_0B_prog,>v_0B_prog
+	.byt <v_0C_prog,>v_0C_prog,<v_0D_prog,>v_0D_prog,<v_0E_prog,>v_0E_prog,<v_0F_prog,>v_0F_prog
+
 
 ;--------------------------------------------------------------
 t_h_wall_1
