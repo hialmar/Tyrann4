@@ -478,11 +478,12 @@ void inspect(void)
 	}
 }
 
+#pragma optimize(push, 1)
 void printTeamFull(void)
 {
 	char i, encre, a;
 	cls();
-	ink(eencre[ville-1]);
+	ink(eencre[ville==0?0:ville-1]);
 	// affichage des titres
 	printTitle(8,2, A_BGRED, " * TYRANN 3 - TEAM * ", 23);
 	printTitle(2,4, A_BGRED, "CHARACTER   HOUSE  CAREER  LVL ", 35);
@@ -515,7 +516,7 @@ void printTeamFull(void)
 		printAtXY (27,7+3*i, classe[characters[i].cp-1]);
 		printAtXY (37,7+3*i, itoa(characters[i].ni));
 		printAtXY (6,7+3*i+1, itoa(characters[i].ri));
-		printAtXY (13,7+3*i+1, "0 se");
+		printAtXY (12,7+3*i+1, "0 s");
 		printAtXY (18,7+3*i+1, itoa(characters[i].cc));
 		printAtXY (21,7+3*i+1, itoa(characters[i].ct));
 		printAtXY (24,7+3*i+1, itoa(characters[i].fo));
@@ -534,6 +535,7 @@ void printTeamFull(void)
 			ping();
 	}
 }
+#pragma optimize(pop) 
 
 void chest(void)
 {
@@ -575,13 +577,13 @@ void chest(void)
 	ping();
 	printAtXY(6,12, "He finds ");
 	if(ca==21) {
-		cles[ville-1][0]=1;
+		cles[ville==0?0:ville-1][0]=1;
 		printAtXY(20,12, "An iron key"); // clé 1
 		wait(500);
 		ca=0;
 		return;
 	} else if(ca==26) {
-		cles[ville-1][3]=1;
+		cles[ville==0?0:ville-1][3]=1;
 		printAtXY(20,12, "A golden key"); // clé 4 (prison)
 		wait(500);
 		ca=0;
@@ -753,7 +755,7 @@ void camping(void)
 	while(1) {
 		text();cls();
 		ptr = (char*)0x26a; *ptr = *ptr & 254; // Vire le curseur 
-		ink(eencre[ville-1]);
+		ink(eencre[ville==0?0:ville-1]);
 		printFrame(15);
 		printTitle(8,2, A_BGRED, "<  ++   CAMP   ++  >", 21);
 		printAtXY(9,6, "1. Inspect a hero");
@@ -799,7 +801,7 @@ void main()
 		char j;
 		unsigned int *seed;
 		backupPageZero();
-		io_needed=0;
+		io_needed=1;
         loadCharacters();
         loadTextesItems();
 		seed = (unsigned int *) 630; // timer

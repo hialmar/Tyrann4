@@ -26,3 +26,4 @@
 #define CLIP_BOTTOM	160
 
 #define USE_ACCURATE_CLIPPING
+
