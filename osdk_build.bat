@@ -79,6 +79,13 @@ Copy BUILD\symbols BUILD\symbols_ville1
 Call sed -isbak s/\\/\//g BUILD\symbols_ext
 Call sed -isbak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
 
+Copy sed.exe ased.exe
+Copy sedoric_io.s asedoric_io.s
+
+Del sed*
+
+Copy ased.exe sed.exe 
+Copy asedoric_io.s sedoric_io.s 
 
 Goto Tap2dsk
 
