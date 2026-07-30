@@ -1,74 +1,27 @@
-; -------------------------------------------------------------------------
-; ----------  routine teste si bords de carte en bord de fenêtre ----------
-; -----           et si le perso est au centre de la fenêtre         ------
-; -------------------------------------------------------------------------
-chck_bords
+
+ZeroPageCopy
+	.dsb $ff
+
+SaveZeroPage
 .(
-; en entrée :	direction_scroll contient #38 si pas de touches flêchée pressée
-;				direction_scroll contient valeur touche fléchée pressée sinon
-; en sortie :	idem
-		lda scroll_est_interdit						; si scroll déjà interdit par bord de mer
-		bne sort_direct
-		lda direction_scroll
-		cmp #$38				 	; si 38, pas touche fléchée enfoncée
-		beq sort_direct
-;vers droite
-		cmp #$BC					; touche flèche droite ==> tuile suivante
-		bne autre_touche_1
-		lda rang_hg_map
-		cmp #$0E					; au départ rang_hg_map = #$10 (rang tuile au bord gauche fénêtre) on ne peut atteindre la tuile suivante
-									; car le bord droit du plan est au bord droit de la fenêtre (largeur plan :#$10+#$0F = #$1f tuiles)
-		beq end_chck_bords_nsc		; dans ce cas, scroll horizontal interdit il faut checker déplacement horizontal perso dans fenêtre
-		lda absc_perso_fen						; rang (abscisse) perso dans fenètre
-		cmp #CENTRE_ABS					; si perso pas au centre
-		bne end_chck_bords_nsc		; pas de scroll fenètre
-		inc rang_hg_map						; Maj rang tuile DataMAP en bord gauche de fenêtre
-		bne end_chck_bords			; saut inconditionnel
-autre_touche_1
-		cmp #$AC					; touche flèche gauche ==> tuile précedente
-		bne autre_touche_2
-		lda rang_hg_map
-		bmi end_chck_bords_nsc   	;
-		lda absc_perso_fen						; rang (abscisse) perso dans fenètre
-		cmp #CENTRE_ABS					; si perso pas au centre
-		bne end_chck_bords_nsc		; pas de scroll fenètre
-		dec rang_hg_map
-		bpl end_chck_bords
-autre_touche_2
-		cmp #$B4					; touche flèche BAS ==> tuile ligne de dessous
-		bne autre_touche_3
-		lda ligne_hg_map
-		cmp #$26
-		beq end_chck_bords_nsc
-		lda ordo_perso_fen						; hauteur (ordonnée) perso dans fenètre
-		cmp #CENTRE_ORDO					; si perso pas au centre
-		bne end_chck_bords_nsc		; pas de scroll fenètre
-		inc ligne_hg_map
-		bne end_chck_bords
-autre_touche_3
-		cmp #$9C				; touche flèche haut ==> tuile ligne de dessus
-		bne end_chck_bords
-		lda ligne_hg_map
-		beq end_chck_bords_nsc
-		lda ordo_perso_fen						; hauteur (ordonnée) perso dans fenètre
-		cmp #CENTRE_ORDO					; si perso pas au centre
-		bne end_chck_bords_nsc		; pas de scroll fenètre
-		dec ligne_hg_map
-end_chck_bords
-		lda #FALSE
-		sta scroll_est_interdit					; ré-autorise scroll (pour une boucle, dans la direction demandée)
-		lda #TRUE
-		sta depl_perso_est_interdit					; interdit deplacement perso (pour une boucle, dans la direstion demandée)
-		rts
-end_chck_bords_nsc
-		lda #TRUE
-		sta scroll_est_interdit					; interdit scroll (pour une boucle, dans la direstion demandée)
-;		lda #FALSE
-;		sta depl_perso_est_interdit					; autorise deplacement perso (pour une boucle, dans la direstion demandée)
-;		lda #$38				; pour simuler aucune touche enfoncée donc interdire scroll carte
-;		sta direction_scroll
-sort_direct
-		rts
+    ldy #0
+loop
+    lda $00,y
+    sta ZeroPageCopy,y
+    iny
+    bne loop
+	rts
+.)
+
+RestoreZeroPage
+.(
+    ldy #0
+loop
+    lda ZeroPageCopy,y
+	sta $00,y
+    iny
+    bne loop
+	rts
 .)
 
 ; ---------------------------------------------------------------------------------------------

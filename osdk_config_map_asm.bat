@@ -8,5 +8,5 @@ SET OSDKCOMP=-O1
 SET OSDKADDR=$600
 SET OSDKNAME=map
 SET OSDKTAPNAME=map
-SET OSDKFILE=map_asm t4_team sedoric_io
+SET OSDKFILE=map_asm t4_team sedoric_io bit_ops
 

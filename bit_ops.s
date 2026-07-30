@@ -28,6 +28,9 @@ _SetBit
 	iny
 	lda (sp),y ; k
 	sta tmp1
+.)	
+_SetBitInternal	
+.(
 	jsr calculXY
 	lda (tmp0),y
 	ora TableBit,x
@@ -47,6 +50,9 @@ _InvertBit
 	iny
 	lda (sp),y ; k
 	sta tmp1
+.)	
+_InvertBitInternal	
+.(
 	jsr calculXY
 	lda (tmp0),y
 	eor TableBit,x
@@ -66,6 +72,9 @@ _TestBit
 	iny
 	lda (sp),y ; k
 	sta tmp1
+.)	
+_TestBitInternal	
+.(	
 	jsr calculXY
 	lda (tmp0),y
 	and TableBit,x
