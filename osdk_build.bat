@@ -29,7 +29,8 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 :: Same for Camp
 ::
 
-SET OSDK=C:\OSDK
+::SET OSDK=C:\OSDK
+SET OSDK=C:\OSDK_2_0
 
 CALL osdk_config_camp.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
