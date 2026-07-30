@@ -76,8 +76,8 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_ville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\symbols BUILD\symbols_ville1
 
-Call sed -i s/\\/\//g BUILD\symbols_ext
-Call sed -i s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
+Call sed -isbak s/\\/\//g BUILD\symbols_ext
+Call sed -isbak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
 
 
 Goto Tap2dsk
