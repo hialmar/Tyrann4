@@ -19,8 +19,8 @@ TItems_0
  REM STORE ITEM$,"T-ITEMS",S
  SAVEO "TITEMS.BIN",A#A000,EO1
  PRINT"OBJETS OK":PING:ZAP:END
- DATA Lorica Segmantata, Lorica Squamata, Lorica Hamata, Leather Armor, Scutum, Linen Tunic
- DATA Gladius, Pilum, Hammer, Bow, Sling, Net, Pugio
+ DATA Lorica Segmantata, Lorica Squamata, Lorica Hamata, Leather Armor, Scutum, Linen Tunic:REM 1-6 
+ DATA Gladius, Pilum, Hammer, Bow, Sling, Net, Pugio:REM 7-9 AC, 10-Bow, 11-Sling, 12-Net, 13-Pugio 
  DATA Unguent, Divine wood, Vital juice, Ebony Potion, Divine Potion, Freezing Potion
  DATA Wineskin, Loaf of bread, Ale, Dry fish, Boar leg, Crowbar, Compass
  DATA Wolf, Panther, Mastiff, Eagle, Hawk, Wild dog, Wild Cat

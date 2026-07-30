@@ -446,54 +446,6 @@ rens_adr_car
 .)
 
 
-;------------------------------------------------------
-; -----  routine attend appui touche puis relacher ---
-;------------------------------------------------------ spécifique pour mon test
-wait_key
-.(
-		lda $208
-		cmp #$38
-		beq wait_key
-		cmp #$ac
-		bne next_key_1
-		beq end_key
-next_key_1
-		cmp #$bc
-		bne next_key_2
-		beq end_key
-next_key_2
-		cmp #$9c
-		bne next_key_3
-		beq end_key
-next_key_3
-		cmp #$b4
-		bne next_key_4
-		;bne wait_key
-		beq end_key
-next_key_4
-		cmp #$86
-		bne next_key_5
-		beq end_key
-next_key_5
-		cmp #$ba
-		bne next_key_6
-		beq end_key	
-next_key_6
-		cmp #$99
-		bne next_key_7
-		beq end_key	
-next_key_7
-		cmp #$b6
-		bne wait_key
-		beq end_key	
-;no_key
-;		lda #$38
-end_key
-		sta direction_scroll
-		rts
-.)
-
-
 ;********************************************************
 ;**** routine ecrit une phrase sur ligne écran text  ****
 ;********************************************************

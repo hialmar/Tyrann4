@@ -166,7 +166,7 @@ combat_13
  GOSUB  combat_7 
 combat_43
  GETA$:IF A$<"1" OR A$>"2" THEN  combat_43 
- IF A$="1" THEN RELEASE : LOAD "LABY"
+ IF A$="1" THEN RELEASE : LOAD "MAP"
  CLS:PRINT@15,5;"Coward !":ZAP:RELEASE:END
  REM |SOUS PROGS
 combat_11
@@ -260,8 +260,8 @@ combat_58
  CLS:PRINT@13,8;CHR$(145)" YOU FLEE !!"CHR$(144)
  PRINT@13,10;"BACK TO MAZE":PRINT:NF=NF+20
  FORJ=1TO5:ZAP:WAIT5:NEXT:SHOOT:WAIT5
- REM GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
- GOSUB combat_save : FR=FRE("") : PRINT FR : LOAD("LABY")
+ REM GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("MAP")
+ GOSUB combat_save : FR=FRE("") : PRINT FR : LOAD("MAP")
 combat_60
  PRINT@15,12;CHR$(131)"  FAIL  ":SHOOT:WAITTI*4
 combat_59
@@ -279,7 +279,7 @@ combat_62
 combat_63
  IF A$="3" THEN IF BT(P)>0 THEN BF(P)= IA(BT(P)-36):AU(P)=BT(P) ELSE  combat_64 
 combat_65
- IF AU(P)=18 AND FU=1 THEN PRINT@25,16;" NET in USE ":WAIT 5*TI:GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
+ IF AU(P)=12 AND FU=1 THEN PRINT@25,16;" NET in USE ":WAIT 5*TI:GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
  BF(P)=BF(P)+INT(FO(P)/10)+FC(P):GOSUB  combat_66 
  WAIT 5*TI
  RETURN
@@ -423,13 +423,12 @@ combat_94
  RETURN
 combat_28
  REM ARMES
- IF AU(AO(P))>19 THEN ARM=3:TST=3:ACT$=" casts "+IT$(BT(AO(P)))+" on ":GOTO  combat_95 
- IF AU(AO(P))>7  AND AU(AO(P))<15 OR AU(AO(P))=19 THEN TST=1:ARM=1:GOTO  combat_95 
- IF AU(AO(P))>14 AND AU(AO(P))<18 THEN TST=2:ARM=2
- IF AU(AO(P))=15 THEN ACT$=" shoots a bolt on ":DFF=20:GOTO  combat_95 
- IF AU(AO(P))=16 THEN ACT$=" shoots an arrow on ":DFF=10:GOTO  combat_95 
- IF AU(AO(P))=17 THEN ACT$=" shoots a stone on ":DFF=-5:GOTO  combat_95 
- IF AU(AO(P))=18 THEN TST=3:DFF=15:ARM=4:ACT$=" throws the net on "
+ IF AU(AO(P))>13 THEN ARM=3:TST=3:ACT$=" casts "+IT$(BT(AO(P)))+" on ":GOTO  combat_95 
+ IF AU(AO(P))>6  AND AU(AO(P))<10 OR AU(AO(P))=13 THEN TST=1:ARM=1:GOTO  combat_95 
+ IF AU(AO(P))>9 AND AU(AO(P))<13 THEN TST=2:ARM=2
+ IF AU(AO(P))=10 THEN ACT$=" shoots an arrow on ":DFF=10:GOTO  combat_95 
+ IF AU(AO(P))=11 THEN ACT$=" shoots a stone on ":DFF=-5:GOTO  combat_95 
+ IF AU(AO(P))=12 THEN TST=3:DFF=15:ARM=4:ACT$=" throws the net on "
 combat_95
  RETURN
 combat_31
@@ -591,8 +590,8 @@ combat_42
  ENC=4:S$="RESULTS OF THE BATTLE":L=22:GOSUB  combat_128 
  PING:PRINT@14,4;"!  YOU WIN  !"
  PRINT@6,6;"Each survivor wins at least:"
- XP=DC*5:PO=DC*3:PRINT@6,8;"> Points:";XP
- PRINT@6,9;"> Money:";PO;" sd"
+ XP=DC*5:PO=DC*3:PRINT@6,8;"> Exp Points:";XP
+ PRINT@6,9;"> Money:";PO;" Sesterces"
  FU=0
  FOR P=1TO6
  IF OK(P)>2 THEN  combat_129 
@@ -613,8 +612,8 @@ combat_130
  L=21:GOSUB  combat_5 
  PING
  CA=0
- REM GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("LABY")
- GOSUB  combat_save  : FR=FRE("") : PRINT FR : LOAD("LABY")
+ REM GOSUB  combat_save  : FR=FRE("") : RELEASE : LOAD("MAP")
+ GOSUB  combat_save  : FR=FRE("") : PRINT FR : LOAD("MAP")
 combat_132
  REM PROMOTION NEW
  NI(P)=NI(P)+1:XP(P)=0:FORJ=1TO5:PING:WAIT2*J:NEXT

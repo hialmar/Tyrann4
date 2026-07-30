@@ -62,7 +62,7 @@ _team_boussole .dsb 1
 _team_filet .dsb 1
 ;unsigned char selle_dragon
 ; T4 bateau
-_team_selle .dsb 1
+_team_boat .dsb 1
 ;
 
 ; 228 bytes
@@ -430,7 +430,7 @@ end_characters
 ;		//printf("filet %d\n", filet);
 ;		selle_dragon = *ptr; ptr++;
         jsr get_next_byte
-        sta _team_selle
+        sta _team_boat
 ;		//printf("selle dragon %d\n", selle_dragon);
 ;		// 48270 FOR L=1TO9:FOR C=1TO4:O1=O1+1:CLEF(L,C)=PEEK(O1):NEXT C,L
 ;		memcpy((char*)cles, ptr, 36);
@@ -808,7 +808,7 @@ end_characters
 ;		filet = *ptr; ptr++;
 ;		//printf("filet %d\n", filet);
 ;		selle_dragon = *ptr; ptr++;
-        lda _team_selle
+        lda _team_boat
         jsr put_next_byte
 ;		//printf("selle dragon %d\n", selle_dragon);
 ;		// 48270 FOR L=1TO9:FOR C=1TO4:O1=O1+1:CLEF(L,C)=PEEK(O1):NEXT C,L
