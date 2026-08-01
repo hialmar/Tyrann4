@@ -9,7 +9,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 SET OSDKGDBPORT=6502
 
 cd c:\osdk_2_0\Oricutron\
-CALL oricutron.exe -t c:\Tyrann4\tyrann4.dsk -s c:\Tyrann4\BUILD\symbols_map --gdb_port 6502
+CALL oricutron.exe -t c:\Tyrann4\T4.dsk -s c:\Tyrann4\BUILD\symbols_map --gdb_port 6502
 cd c:\Tyrann4
 Goto End
 ::

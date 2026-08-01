@@ -214,6 +214,8 @@ sortie_main2
 	sta _team_y
 	lda a_un_bateau
 	sta _team_boat
+	lda #1
+	sta _team_io_needed
 	jsr _save_t4_characters
 	; test bascule combat
 	jsr RestoreZeroPage

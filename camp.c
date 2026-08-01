@@ -36,7 +36,6 @@ extern unsigned char filet;
 extern unsigned char selle_dragon;
 
 extern char io_needed;
-extern char eencre[];
 
 char *etat[] = { "OK", "-Poison- ", "-Paral- ", ">DEAD< " };
 char *classe[] = { "Legionary","Gladiator","Scout","Druid","Sem-Priest","Vestal" };
@@ -53,17 +52,11 @@ char tentatives = 0; // pour les coffres
 
 void loadTextesItems()
 {
-	char filename[16];
 	char ret, a;
 	char *ptr;
-	memset(filename, 0, 16);
-	sprintf(filename, "TITEMS.BIN", ville);
-	//printf("Chargement de %s\n", filename);
-    ret = DiscLoad(filename);        
-    //printf("Retour %d\n", ret);
+    ret = DiscLoad("TITEMS.BIN");
     if (ret==0) {
 		ptr = (char*)0xa000;
-		//printf("Nb NPC : %d\n", pmax);
 		loadTexts(ptr, textesItems);
 		#ifdef debug
 		printf("Fin des textes, on utilise %d caracteres sur %d\n", 
@@ -138,8 +131,8 @@ void money(char p)
 	}
 	// affiche les richesses du héros sélectionné
 	printAtXY(4,13, "Your Money :");
-	printAtXY(18,13, itoa(characters[p].ri));
-	printAtXY(26,13, "0 Sesterces");
+	printAtXY(18,13, itoa(characters[p].ri*10));
+	printAtXY(26,13, " Sesterces");
 	// demande la somme
 	printTitle(4,14, A_BGBLUE, "HOW MUCH ?", 17);
 	somme = 0;
@@ -412,8 +405,8 @@ void inspect(void)
 	printAtXY(32, 6, itoa(characters[i].pv));
 	// affichage bourse
 	printAtXY(5,  8, "Money:");
-	printAtXY(13, 8, itoa(characters[i].ri));
-	printAtXY(21, 8, "0 Sesterces");
+	printAtXY(13, 8, itoa(characters[i].ri*10));
+	printAtXY(21, 8, " Sesterces");
 	
 	// affichage de l'équipement porté
 	printAtXY(5,  10, "R Wpn:");
@@ -483,7 +476,7 @@ void printTeamFull(void)
 {
 	char i, encre, a;
 	cls();
-	ink(eencre[ville==0?0:ville-1]);
+	ink(A_FWWHITE);
 	// affichage des titres
 	printTitle(8,2, A_BGRED, " * TYRANN 3 - TEAM * ", 23);
 	printTitle(2,4, A_BGRED, "CHARACTER   HOUSE  CAREER  LVL ", 35);
@@ -515,8 +508,8 @@ void printTeamFull(void)
 		if (characters[i].mp != 1) printAtXY (17,7+3*i, maisons[characters[i].mp-2]);		
 		printAtXY (27,7+3*i, classe[characters[i].cp-1]);
 		printAtXY (37,7+3*i, itoa(characters[i].ni));
-		printAtXY (6,7+3*i+1, itoa(characters[i].ri));
-		printAtXY (12,7+3*i+1, "0 s");
+		printAtXY (6,7+3*i+1, itoa(characters[i].ri*10));
+		printAtXY (12,7+3*i+1, " s");
 		printAtXY (18,7+3*i+1, itoa(characters[i].cc));
 		printAtXY (21,7+3*i+1, itoa(characters[i].ct));
 		printAtXY (24,7+3*i+1, itoa(characters[i].fo));
@@ -755,7 +748,7 @@ void camping(void)
 	while(1) {
 		text();cls();
 		ptr = (char*)0x26a; *ptr = *ptr & 254; // Vire le curseur 
-		ink(eencre[ville==0?0:ville-1]);
+		ink(A_FWWHITE);
 		printFrame(15);
 		printTitle(8,2, A_BGRED, "<  ++   CAMP   ++  >", 21);
 		printAtXY(9,6, "1. Inspect a hero");

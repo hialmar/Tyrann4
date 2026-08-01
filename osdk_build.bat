@@ -10,7 +10,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Dialog
 :: Goto Camp
 :: Goto Map
-Goto MapAsm
+:: Goto MapAsm
 :: Goto Tuile
 :: Goto Tuiles
 
@@ -18,10 +18,6 @@ Goto MapAsm
 :: Set the build parameters : Laby
 :: Launch the compilation of files : Laby
 ::
-SET OSDKLINK=
-CALL osdk_config.bat
-CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_laby.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 
 :Camp
 
@@ -29,8 +25,8 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 :: Same for Camp
 ::
 
-::SET OSDK=C:\OSDK
-SET OSDK=C:\OSDK_2_0
+SET OSDK=C:\OSDK
+::SET OSDK=C:\OSDK_2_0
 
 CALL osdk_config_camp.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
@@ -48,9 +44,9 @@ Del sed*
 Copy ased.exe sed.exe 
 Copy asedoric_io.s sedoric_io.s 
 
-SET OSDK=C:\OSDK_2_0
+:: SET OSDK=C:\OSDK_2_0
 
-Goto Tap2dsk
+:: Goto Tap2dsk
 
 
 :Dialog
@@ -58,21 +54,10 @@ Goto Tap2dsk
 ::
 :: Same for Dialog
 ::
-CALL osdk_config_dialog.bat
-CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_dialog.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+:: CALL osdk_config_dialog.bat
+:: CALL %OSDK%\bin\make.bat %OSDKFILE%
+:: %OSDK%\bin\MemMap.exe build\symbols build\map_dialog.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 
-
-:Map
-
-::
-:: Same for Map
-::
-CALL osdk_config_map.bat
-CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
-
-Goto Tap2dsk
 
 :MapAsm
 
@@ -87,16 +72,10 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 Copy BUILD\map.tap BUILD\map.pat.tap
 Copy BUILD\symbols BUILD\symbols_map
 
+Call sed -i.bak s/\\/\//g BUILD\symbols_ext
+Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
+Call sed -i.bak s/C:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
 
-
-
-CALL osdk_config_map_ville1.bat
-CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_ville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
-Copy BUILD\symbols BUILD\symbols_ville1
-
-Call sed -isbak s/\\/\//g BUILD\symbols_ext
-Call sed -isbak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
 
 Copy sed.exe ased.exe
 Copy sedoric_io.s asedoric_io.s
@@ -106,7 +85,28 @@ Del sed*
 Copy ased.exe sed.exe 
 Copy asedoric_io.s sedoric_io.s 
 
-Goto Tap2dsk
+:: Goto Tap2dsk
+
+
+CALL osdk_config_map_ville1.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe build\symbols build\map_ville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_ville1
+
+Call sed -i.bak s/\\/\//g BUILD\symbols_ext
+Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
+Call sed -i.bak s/C:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
+
+
+Copy sed.exe ased.exe
+Copy sedoric_io.s asedoric_io.s
+
+Del sed*
+
+Copy ased.exe sed.exe 
+Copy asedoric_io.s sedoric_io.s 
+
+:: Goto Tap2dsk
 
 ::
 :: Same for TestT4Team
@@ -258,7 +258,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t4_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\combat.tap BUILD\camp.tap BUILD\ville.tap BUILD\cpzerop.tap BUILD\map.tap BUILD\ville1.tap BUILD\t4team.tap t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BasicLabel\BUILD\combat.tap BUILD\camp.tap BUILD\map.tap BUILD\ville1.tap BUILD\t4team.tap t4_prog.dsk
 
 pause
 

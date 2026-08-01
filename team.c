@@ -39,8 +39,6 @@ char * teamfilename = "TEAM.BIN"; // fichier contenant l'équipe
 
 char io_needed = 1;
 
-extern char eencre[];
-
 void loadCharacters(void)
 {
 	char namelen=0; // longueur d'un nom
@@ -54,7 +52,7 @@ void loadCharacters(void)
 	// POKE 48035,0:POKE#26A,PEEK(#26A)AND254
 	poke(48035,0);
 	poke(0x26a,peek(0x26a)&254);
-	puts("         Veuillez Patienter...\n");	
+	printAtXY(8,10, "Veuillez Patienter...\n");
 	// 48005 CLOAD"TEAM"
 	if (io_needed) {
 		//printf("Chargement de %s\n", teamfilename);
@@ -67,21 +65,27 @@ void loadCharacters(void)
 		// 48010 O1=#A000
 		// 48015 O1=O1+1:VIL=PEEK(O1):PRINT SPC(9);"...";
 		ptr = (char*)0xa001;
+#ifdef debug
 		printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
+#endif		
 		version = *ptr; ptr++;
 		x = *ptr; ptr++;
 		y = *ptr; ptr++;
 		s = *ptr; ptr++;
 		ca = *ptr; ptr++;
 		ville = *ptr; ptr++;
+#ifdef debug		
 		printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
+#endif		
 		// test
 		if (x==0 || x > 100) {
 			x = 2; y = 2; s = 1; ville = 4;
 			// printf("x=%d y=%d s=%d ca=%d\n", x, y, s, ca);
 		}
-		ink(eencre[ville-1]);
+		ink(A_FWWHITE);
+#ifdef debug		
 		printf("ville: %d\n", ville);
+#endif		
 		puts("         ...\n");
 		// 48020 FOR P=1TO6
 		for(perso=0;perso<6;perso++) {
@@ -188,11 +192,15 @@ void loadCharacters(void)
 		pm=*ptr;
 		ptr++;
 		out=1;//*ptr;
+#ifdef debug		
 		printf("out : %d", out);
+#endif		
 		ptr++;
+#ifdef debug		
 		printf("longueur %d\n", (int) (ptr - 0xa000));
+#endif		
 	} else {
-		printf("Erreur lors du chargement de TEAM.BIN\n");
+		printAtXY(4,10, "Erreur lors du chargement de TEAM.BIN\n");
 		exit(1);
 	}
 }
@@ -207,7 +215,8 @@ void saveCharacters(void)
 	char *ptr;
 	
 	// 49000 TEXT:CLS:PRINT @ 8,12;CHR$(145);CHR$(135);"++ PREPARE L EQUIPE ++ ";CHR$(144)
-	text(); cls(); printf("\n\n\n\n\n\n\n\n\n\n\n\n        ++ PREPARE L'EQUIPE ++ \n");
+	text(); cls(); 
+	printAtXY(8,10, "++ PREPARE L'EQUIPE ++ \n");
 	// 49010 O1=#A000
 	ptr = (char*)0xa001;
 	//printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
@@ -272,7 +281,9 @@ void saveCharacters(void)
 	*ptr = pm;
 	ptr++;
 	*ptr = out;
+#ifdef debug	
 	printf("out : %d", out);
+#endif	
 	ptr++;
 	//printf("fin (%x) longueur %d\n", (unsigned int) ptr, (int) (ptr - 0xa000));
 	if (io_needed) {

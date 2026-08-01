@@ -82,7 +82,7 @@ void printTitle(char x, char y, char couleur, char *texte, char lgTexte)
 	attribAtXY(x+1,y, couleur); // fond rouge
 	attribAtXY(x+2,y,A_FWWHITE); // encre blanche
 	printAtXY (x+3,y,texte);
-	attribAtXY(x+3+lgTexte,y,eencre[ville-1]);
+	attribAtXY(x+3+lgTexte,y,A_FWWHITE);
 	attribAtXY(x+3+lgTexte+1,y,A_BGBLACK); // fond noir
 	printAtXY (x+3+lgTexte+2,y," ");
 }
@@ -90,12 +90,11 @@ void printTitle(char x, char y, char couleur, char *texte, char lgTexte)
 void printFrame(int taille)
 {
 	char i;
-	ink(eencre[ville-1]);
-	putchar('\n'); //1
-	printf(" *************************************"); // haut
+	ink(A_FWWHITE);
+	printAtXY(2,2," *************************************"); // haut
 	for(i=0;i<taille;i++)
-	printf(" *                                   *"); // milieu
-	printf(" *************************************"); // bas
+	printAtXY(2,i+3," *                                   *"); // milieu
+	printAtXY(2,taille+3," *************************************"); // bas
 }
 
 char *loadTexts(char *ptr, char *tab[])
@@ -110,8 +109,8 @@ char *loadTexts(char *ptr, char *tab[])
 		//printf("Longueur texte %d : %d\n", t, longueur);
 		tab[t] = ptTextes;
 		if (ptTextes+longueur+1-textes > tmax) {
-			printf("Le tableau est trop petit, il faut au moins %d caracteres\n",
-				ptTextes+longueur+1-textes);
+			printAtXY(2,2,"Le tableau est trop petit. Il faut :");
+			printAtXY(2,3, itoa(ptTextes+longueur+1-textes));
 			//restorePageZero();
 			exit(1);
 		}
