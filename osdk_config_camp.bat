@@ -9,5 +9,5 @@ SET OSDKCOMP=-O3
 SET OSDKADDR=$600
 SET OSDKNAME=camp
 SET OSDKTAPNAME=camp
-SET OSDKFILE=camp common team sedoric_io
+SET OSDKFILE=common camp team sedoric_io
 

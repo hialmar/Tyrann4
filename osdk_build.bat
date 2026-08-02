@@ -25,8 +25,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Same for Camp
 ::
 
-SET OSDK=C:\OSDK
-::SET OSDK=C:\OSDK_2_0
+:: SET OSDK=C:\OSDK
+SET OSDK=C:\OSDK_2_0
 
 CALL osdk_config_camp.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
@@ -46,7 +46,7 @@ Copy asedoric_io.s sedoric_io.s
 
 :: SET OSDK=C:\OSDK_2_0
 
-:: Goto Tap2dsk
+Goto Tap2dsk
 
 
 :Dialog

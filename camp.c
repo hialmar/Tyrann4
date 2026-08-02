@@ -2,7 +2,7 @@
 #include "tyrann.h"
 
 #define TMAX 800
-char textes[TMAX];
+char textes[TMAX] = {0};
 int tmax = TMAX;
 
 extern char * ptTextes;
@@ -72,7 +72,7 @@ void printTeam(void)
 	char i,encre;
 	attribAtXY(0,20,A_FWWHITE);
 	attribAtXY(1,20,A_BGRED); // fond rouge
-	printAtXY(2,20,"CHARACTER      CAREER     HP  ST  AC"); 
+	printAtXY(2,20,"CHARACTER      CAREER    HP   ST  AC"); 
 	for(i=0;i<6;i++) {
 		switch(characters[i].cp) {
 			case 1:
@@ -478,8 +478,8 @@ void printTeamFull(void)
 	cls();
 	ink(A_FWWHITE);
 	// affichage des titres
-	printTitle(8,2, A_BGRED, " * TYRANN 3 - TEAM * ", 23);
-	printTitle(2,4, A_BGRED, "CHARACTER   HOUSE  CAREER  LVL ", 35);
+	printTitle(8,2, A_BGRED,  " * TYRANN 4 - TEAM * ", 23);
+	printTitle(2,4, A_BGRED,  "CHARACTER   ORIGIN    CAREER    LVL", 36);
 	printTitle(2,5, A_BGBLUE, " Money      Ml Rg St Dx Ig MS HP  ", 35);
 	// affichage persos
 	for(i=0;i<6;i++) {
@@ -510,13 +510,13 @@ void printTeamFull(void)
 		printAtXY (37,7+3*i, itoa(characters[i].ni));
 		printAtXY (6,7+3*i+1, itoa(characters[i].ri*10));
 		printAtXY (12,7+3*i+1, " s");
-		printAtXY (18,7+3*i+1, itoa(characters[i].cc));
-		printAtXY (21,7+3*i+1, itoa(characters[i].ct));
-		printAtXY (24,7+3*i+1, itoa(characters[i].fo));
-		printAtXY (27,7+3*i+1, itoa(characters[i].ag));
-		printAtXY (30,7+3*i+1, itoa(characters[i].in));
-		printAtXY (33,7+3*i+1, itoa(characters[i].fm));
-		printAtXY (36,7+3*i+1, itoa(characters[i].pv));
+		printAtXY (17,7+3*i+1, itoa(characters[i].cc));
+		printAtXY (20,7+3*i+1, itoa(characters[i].ct));
+		printAtXY (23,7+3*i+1, itoa(characters[i].fo));
+		printAtXY (26,7+3*i+1, itoa(characters[i].ag));
+		printAtXY (29,7+3*i+1, itoa(characters[i].in));
+		printAtXY (32,7+3*i+1, itoa(characters[i].fm));
+		printAtXY (35,7+3*i+1, itoa(characters[i].pv));
 	}
 	printTitle(2,25, A_BGBLUE, " Money      Ml Rg St Dx Ig MS HP  ", 35);
 	printTitle(2,26, A_BGRED, "            < SPACE >            ", 34);
