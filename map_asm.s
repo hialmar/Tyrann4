@@ -2253,9 +2253,9 @@ ptr_v ;(pointeurs v pour villes)
 v_00_prog
 	.asc "VILLE1.COM",0			; Nîmes
 v_01_prog
-	.asc "VILLE2.COM",0 		; Bordeaux
+	.asc "VILLE3.COM",0 		; Bordeaux
 v_02_prog
-	.asc "VILLE3.COM",0 		; Lyon
+	.asc "VILLE2.COM",0 		; Lyon
 v_03_prog
 	.asc "VILLE4.COM",0 		; Paris
 v_04_prog

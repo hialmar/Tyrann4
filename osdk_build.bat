@@ -10,7 +10,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Dialog
 :: Goto Camp
 :: Goto Map
-:: Goto MapAsm
+Goto MapAsm
 :: Goto Tuile
 :: Goto Tuiles
 Goto Ville2
@@ -86,7 +86,7 @@ Del sed*
 Copy ased.exe sed.exe 
 Copy asedoric_io.s sedoric_io.s 
 
-:: Goto Tap2dsk
+Goto Tap2dsk
 
 :Ville1
 
