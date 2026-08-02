@@ -5,6 +5,9 @@
 _main
 .(
 	jsr SaveZeroPage
+	lda #1
+	sta _team_io_needed
+	jsr _load_t4_characters
 	lda #4					; début de répétition touche après 4*30 = 120 ms
 	sta $24E
 	lda #1					; répétition d'une touche toutes les 30 ms

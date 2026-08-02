@@ -115,12 +115,24 @@ _character_sp .dsb 6*8
 
 ;unsigned char cles[9][4]; // trousseau de clefs (36 octets) 
 ; T4 16 villes * 2 octets = 32 octets + 4 octets globaux
-_team_cles .dsb 9*4
+_team_cles .dsb 16*2
+_team_tempo .dsb 4
 ;
 ;unsigned char combats_coffres[9][5]; // combats et coffres sous forme de tableaux de bits (45 octets)
 ; T4 16 villes * 2 octets = 32 octets + 13 octets globaux
-_team_combats_coffres .dsb 9*5
-;
+_team_combats_coffres .dsb 16*2
+; 13 octets for T4
+_team_ligne_hg_map .dsb 1
+_team_rang_hg_map .dsb 1
+_team_ligne_hg_ville .dsb 1
+_team_rang_hg_ville .dsb 1
+_team_tuile_perso_aff .dsb 1		; code tuile perso affichée
+_team_index_perso .dsb 1		; valeur index perso dans table adresses hires fenêtre
+_team_direction_scroll .dsb 1		;  valeurs => ddirection scroll demandée
+_team_tuile_sous_pos_perso .dsb 1			; sous position perso au départ
+_team_numero_lieu .dsb 1         ; indique lieu <> Gallia (0)
+_team_sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon = $20
+_team_end .dsb 3
 
 
 ;void loadCharacters(void)
@@ -182,6 +194,17 @@ _load_t4_characters
 	sta (sp),y
 	dey
 	jsr _DiscLoad
+        txa
+        beq skip_load
+        ldx #0
+	lda t_io_error_1,x
+	sta adr_ecr_txt+1
+	lda #<t_io_error_1+1
+	sta write_phrase+1
+	lda #>t_io_error_1+1
+	sta write_phrase+2
+	jsr write_phrase
+        rts
 ;		ret = DiscLoad(teamfilename);
 ;		//printf("Retour %d\n", ret);
 ;	} else {
@@ -579,12 +602,15 @@ _save_t4_characters
 	sta write_phrase+2
 	jsr write_phrase
 
-        lda #1
+        lda #0
         sta zone_mem
         lda #$a0
         sta zone_mem+1
 
         ldy #0
+        lda #0
+        sta (zone_mem),y
+        iny
         lda _team_version
         sta (zone_mem),y
         iny
@@ -917,6 +943,17 @@ write_combats_coffres
     sta (sp),y
 	dey
 	jsr _DiscSave
+        txa
+        beq skip_save
+        ldx #0
+	lda t_io_error_1,x
+	sta adr_ecr_txt+1
+	lda #<t_io_error_1+1
+	sta write_phrase+1
+	lda #>t_io_error_1+1
+	sta write_phrase+2
+	jsr write_phrase
+        rts
 ;		//printf("Retour %d\n", ret);
 ;	} else {
 ;		ret = 0;
@@ -931,6 +968,9 @@ skip_save
 t_load_wait_1
 	.byt $9a
 	.asc "Loading - Please wait.",0
+t_io_error_1
+	.byt $9f
+	.asc "Input/Output Error",0        
 t_save_wait_1
 	.byt $9a
 	.asc "Saving - Please wait.",0

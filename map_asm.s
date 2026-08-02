@@ -90,7 +90,7 @@ sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon =
 ;
 ;
 
-;;; STOP : 27 octets utilisés en page 0
+;;; STOP : 34 octets utilisés en page 0
 
 	.text
 
@@ -208,12 +208,28 @@ _jump_to_next_prog
 
 	jsr _get
 sortie_main2
-	lda ligne_hg_map
+	lda ordo_perso_fen
 	sta _team_x
-	lda rang_hg_map
+	lda absc_perso_fen
 	sta _team_y
 	lda a_un_bateau
 	sta _team_boat
+	lda ligne_hg_map
+	sta _team_ligne_hg_map
+	lda rang_hg_map
+	sta _team_rang_hg_map
+	lda tuile_perso_aff
+	sta _team_tuile_perso_aff		; code tuile perso affichée
+	lda index_perso
+	sta _team_index_perso		; valeur index perso dans table adresses hires fenêtre
+	lda direction_scroll
+	sta _team_direction_scroll		;  valeurs => ddirection scroll demandée
+	lda tuile_sous_pos_perso 
+	sta _team_tuile_sous_pos_perso			; sous position perso au départ
+	lda numero_lieu
+	sta _team_numero_lieu         ; indique lieu <> Gallia (0)
+	lda sortie_victorieuse
+	sta _team_sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 	lda #1
 	sta _team_io_needed
 	jsr _save_t4_characters
@@ -233,6 +249,44 @@ sortie_main2
 							; pour re-rentrer : CALL #2000
 .)
 
+
+;-----------------------------------------------------------------------------
+; -----                initialise divers variables dont:                   ---
+;	             coordonnées coin haut gauche partie table affichée      -----
+;                     tuile perso affichée / index position perso
+;-----------------------------------------------------------------------------		
+init_div_var
+.(
+	lda a_un_bateau
+	sta _team_boat
+	lda _team_ligne_hg_map
+	sta ligne_hg_map
+	lda _team_rang_hg_map
+	sta rang_hg_map
+	lda _team_tuile_perso_aff
+	sta tuile_perso_aff			; code tuile perso affichée
+	lda _team_index_perso
+	sta index_perso			; valeur index perso dans table adresses hires fenêtre
+	lda #$9C
+	sta direction_scroll			;  valeurs => ddirection scroll demandée
+	lda _team_x
+	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
+	lda _team_y
+	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
+	lda _team_tuile_sous_pos_perso		; repère tuile Nemausus
+	sta tuile_sous_pos_perso			; sous position perso au départ
+	lda #FALSE
+	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
+	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
+	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
+	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
+	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
+	lda _team_numero_lieu
+	sta numero_lieu         ; indique lieu <> Gallia (0)
+	lda _team_sortie_victorieuse
+	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
+	rts
+.)	
 
 ProgCombat
 	.asc "COMBAT.COM"
@@ -533,43 +587,6 @@ no_scroll
 
 #include "map_common.s"
 
-;-----------------------------------------------------------------------------
-; -----                initialise divers variables dont:                   ---
-;	             coordonnées coin haut gauche partie table affichée      -----
-;                     tuile perso affichée / index position perso
-;-----------------------------------------------------------------------------		
-init_div_var
-.(
-	lda _team_x		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
-	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
-	lda _team_y
-	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
-	lda #$4C
-	sta tuile_perso_aff			; code tuile perso affichée
-	lda #$34
-	sta index_perso			; valeur index perso dans table adresses hires fenêtre
-	lda #$9C
-	sta direction_scroll			;  valeurs => ddirection scroll demandée
-	lda #CENTRE_ORDO
-	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
-	lda #CENTRE_ABS
-	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
-	lda #$55		; repère tuile Nemausus
-	sta tuile_sous_pos_perso			; sous position perso au départ
-	lda #FALSE
-	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
-	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
-	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
-	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
-	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	lda #TRUE	        ; TEMPO
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
-	sta numero_lieu         ; indique lieu <> Gallia (0)
-	lda #$20
-	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
-	rts
-.)	
 
 ;************************************************
 ;***   implantation caractères redéfinis      ***
