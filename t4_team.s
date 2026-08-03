@@ -116,12 +116,16 @@ _character_sp .dsb 6*8
 ;unsigned char cles[9][4]; // trousseau de clefs (36 octets) 
 ; T4 16 villes * 2 octets = 32 octets + 4 octets globaux
 _team_cles .dsb 16*2
-_team_tempo .dsb 4
+; 4 bytes for T4
+_team_x_ville .dsb 1
+_team_y_ville .dsb 1
+_team_tuile_perso_aff_ville .dsb 1		; code tuile perso affichée
+_team_index_perso_ville .dsb 1		; valeur index perso dans table adresses hires fenêtre
 ;
 ;unsigned char combats_coffres[9][5]; // combats et coffres sous forme de tableaux de bits (45 octets)
 ; T4 16 villes * 2 octets = 32 octets + 13 octets globaux
 _team_combats_coffres .dsb 16*2
-; 13 octets for T4
+; 13 bytes for T4
 _team_ligne_hg_map .dsb 1
 _team_rang_hg_map .dsb 1
 _team_ligne_hg_ville .dsb 1
@@ -132,7 +136,9 @@ _team_direction_scroll .dsb 1		;  valeurs => ddirection scroll demandée
 _team_tuile_sous_pos_perso .dsb 1			; sous position perso au départ
 _team_numero_lieu .dsb 1         ; indique lieu <> Gallia (0)
 _team_sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon = $20
-_team_end .dsb 3
+_team_tuile_sous_pos_perso_ville .dsb 1 ; sous position perso au départ
+_team_numero_lieu_ville .dsb 1         ; indique lieu <> Gallia (0)
+_team_end .dsb 1
 
 
 ;void loadCharacters(void)
@@ -523,8 +529,8 @@ read_combats_coffres
         sta _team_pm
 ;		ptr++;
 ;		out=1;//*ptr;
-        ; jsr get_next_byte
-        lda #1
+        jsr get_next_byte
+        ; lda #1
         sta _team_out
 ;		printf("out : %d", out);
 ;		ptr++;

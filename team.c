@@ -64,10 +64,11 @@ void loadCharacters(void)
 	if (ret==0) {
 		// 48010 O1=#A000
 		// 48015 O1=O1+1:VIL=PEEK(O1):PRINT SPC(9);"...";
-		ptr = (char*)0xa001;
+		ptr = (char*)0xa000;
 #ifdef debug
 		printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
 #endif		
+		ptr++;
 		version = *ptr; ptr++;
 		x = *ptr; ptr++;
 		y = *ptr; ptr++;
@@ -186,7 +187,7 @@ void loadCharacters(void)
 		ptr++;
 		pm=*ptr;
 		ptr++;
-		out=1;//*ptr;
+		out=*ptr;
 #ifdef debug		
 		printf("out : %d", out);
 #endif		
@@ -213,8 +214,9 @@ void saveCharacters(void)
 	text(); cls(); 
 	printAtXY(8,10, "++ PREPARE L'EQUIPE ++ \n");
 	// 49010 O1=#A000
-	ptr = (char*)0xa001;
+	ptr = (char*)0xa000;
 	//printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
+	*ptr = 0; ptr++;
 	// nouvelle version
 	*ptr = 1; ptr++; // version 1 : passage a 9 villes
 	*ptr = x; ptr++;

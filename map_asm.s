@@ -245,6 +245,8 @@ _jump_to_next_prog
 ;-----------------------------------------------------------------------------		
 init_div_var
 .(
+	lda #0
+	sta _team_ville
 	lda #0 ; debug
 	beq load_from_team
 	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)

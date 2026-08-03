@@ -245,6 +245,7 @@ creation_28
  O1=O1+1:POKEO1,0'NP = Nombre d'ingredients de la Potion (NI utilise pour Items)
  O1=O1+1:POKEO1,0'NF = Nombre de fuites
  O1=O1+1:POKEO1,0'PM = Potion faite
+ O1=O1+1:POKEO1,1'OUT = On commence sur la carte
  PING
  SAVEU "TEAM.BIN",A#A000,EO1
  SAVEU "TEAM2.BIN",A#A000,EO1:REM Copie secours
