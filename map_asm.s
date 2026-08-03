@@ -134,8 +134,6 @@ temporisation_1
 fin_temporisation
 	; sei
 	lda direction_scroll
-	cmp#$86					; Y pour sortir
-	beq sortie_main_ville
 	cmp#$ba					; C pour camper
 	beq sortie_main_camp
 	cmp#$99					; F pour combattre
@@ -150,15 +148,6 @@ fin_temporisation
 	jsr	eff_text
 	; cli
 	jmp main_loop
-sortie_main_ville
-	ldy #$0         ; grab string pointer
-	lda #<ProgVille1
-	sta next_prog
-	iny
-	lda #>ProgVille1
-	sta next_prog+1
-	dey
-	jsr _jump_to_next_prog
 sortie_main_camp
 	ldy #$0         ; grab string pointer
 	lda #<ProgCamp
@@ -191,23 +180,6 @@ sortie_main_stop
 
 _jump_to_next_prog
 .(
-	lda #3					; ré-affiche le curseur et remet le son des touches
-	sta $26A
-	lda #32					; remet la répétition des touches normale
-	sta $24E
-	lda #4
-	sta $24F
-	jsr $ec21               ; back to text mode
-
-    lda #$4c
-	sta mot_de_passe
-	lda #$b0
-	sta laisser_passer
-	lda #$cc
-	sta numero_lieu
-
-	jsr _get
-sortie_main2
 	lda ordo_perso_fen
 	sta _team_x
 	lda absc_perso_fen
@@ -230,6 +202,22 @@ sortie_main2
 	sta _team_numero_lieu         ; indique lieu <> Gallia (0)
 	lda sortie_victorieuse
 	sta _team_sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
+
+	lda #3					; ré-affiche le curseur et remet le son des touches
+	sta $26A
+	lda #32					; remet la répétition des touches normale
+	sta $24E
+	lda #4
+	sta $24F
+	jsr $ec21               ; back to text mode
+    lda #$4c
+	sta mot_de_passe
+	lda #$b0
+	sta laisser_passer
+	lda #$cc
+	sta numero_lieu
+
+	jsr _get
 	lda #1
 	sta _team_io_needed
 	jsr _save_t4_characters
@@ -257,8 +245,40 @@ sortie_main2
 ;-----------------------------------------------------------------------------		
 init_div_var
 .(
-	lda a_un_bateau
-	sta _team_boat
+	lda #0 ; debug
+	beq load_from_team
+	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
+	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
+	lda #$10
+	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
+	lda #$4C
+	sta tuile_perso_aff			; code tuile perso affichée
+	lda #$34
+	sta index_perso			; valeur index perso dans table adresses hires fenêtre
+	lda #$9C
+	sta direction_scroll			;  valeurs => ddirection scroll demandée
+	lda #CENTRE_ORDO
+	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
+	lda #CENTRE_ABS
+	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
+	lda #$55		; repère tuile Nemausus
+	sta tuile_sous_pos_perso			; sous position perso au départ
+	lda #FALSE
+	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
+	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
+	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
+	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
+	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
+	lda #TRUE	        ; TEMPO
+	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
+	sta numero_lieu         ; indique lieu <> Gallia (0)
+	lda #$20
+	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
+	bne fin
+load_from_team
+	
+	lda _team_boat
+	sta a_un_bateau
 	lda _team_ligne_hg_map
 	sta ligne_hg_map
 	lda _team_rang_hg_map
@@ -285,6 +305,7 @@ init_div_var
 	sta numero_lieu         ; indique lieu <> Gallia (0)
 	lda _team_sortie_victorieuse
 	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
+fin	
 	rts
 .)	
 

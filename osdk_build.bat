@@ -13,7 +13,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 Goto MapAsm
 :: Goto Tuile
 :: Goto Tuiles
-Goto Ville2
+:: Goto Ville2
 
 ::
 :: Set the build parameters : Laby

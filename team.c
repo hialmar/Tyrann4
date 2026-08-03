@@ -76,12 +76,7 @@ void loadCharacters(void)
 		ville = *ptr; ptr++;
 #ifdef debug		
 		printf("x=%d y=%d s=%d ca=%d ville=%d\n", x, y, s, ca, ville);
-#endif		
-		// test
-		if (x==0 || x > 100) {
-			x = 2; y = 2; s = 1; ville = 4;
-			// printf("x=%d y=%d s=%d ca=%d\n", x, y, s, ca);
-		}
+#endif
 		ink(A_FWWHITE);
 #ifdef debug		
 		printf("ville: %d\n", ville);
