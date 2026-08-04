@@ -588,6 +588,7 @@ entrance_
 	sta write_phrase+2	
 	jsr write_phrase
 	jsr hit_key
+	jsr retour_map
 	jsr eff_text
 	rts
 ;-------------------------------------------------	
@@ -758,6 +759,26 @@ gestion_boutiques
 return
 	rts
 .)	
+
+retour_map
+.(
+	; gestion des villes _team_ville contient le numéro de la ville
+	; direction_scroll doit contenir #$86 Y
+	lda direction_scroll
+	cmp #$86
+	bne return
+	lda #<ProgMap
+	sta _next_prog
+	lda #>ProgMap
+	sta _next_prog+1
+	lda #1
+	sta _team_out
+	jsr _jump_to_next_prog
+	rts ; ne sert à rien normalement
+return
+	rts
+.)	
+
 
 
 v_00_prog
