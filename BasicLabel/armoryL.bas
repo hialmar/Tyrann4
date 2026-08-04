@@ -18,7 +18,9 @@ ville_27
  RETURN
  REM LABY
 ville_11
- CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_SAVE  : LOAD "LABY"
+ CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_SAVE
+ PROG$ = "VILLE"+MID$(STR$(VIL),2)
+ LOAD(PROG$)
 ville_BlueBg
  REM FOND BLEU
  S$=" "+CHR$(148)+CHR$(128)+S$+CHR$(134)+CHR$(144)+" "
@@ -51,7 +53,7 @@ ville_7
  PLOT12,18,"L > Leave shop"
 ville_53
  GETP$:P=VAL(P$)
- IFP$="L"THEN M$="":O$="":S$="":GOSUB ville_SAVE : END
+ IFP$="L"THEN M$="":O$="":S$="":GOTO ville_11
  IFP$="F"THEN END
  IFP$="B"THEN GOSUB ville_Boost
  IFP$="R"THEN GOSUB ville_ResetAll
