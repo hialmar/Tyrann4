@@ -273,10 +273,10 @@ ville_ResetAll
  REM REINITIALISE TOUT
  FORI=1TO9
  FORJ=1TO4:CL(I,J)=0:NEXTJ'cles
- FORM=1TO5:TC(VIL,M)=0:NEXT M ' coffres et combats
+ REM FORM=1TO5:TC(VIL,M)=0:NEXT M ' coffres et combats
  NEXTI
  FORI=1TO6:IG(I)=0:NEXTI:NP=0'ingredients potion
- X=2:Y=2:S=2:VILLE=1:TL=1
+ REM X=2:Y=2:S=2:VILLE=1:TL=1
  PLOT23,16,"REINIT..OK":ZAP
  RETURN
 ville_Boost
@@ -286,7 +286,7 @@ ville_Boost
  NEXTI
  FORI=1TO6:IG(I)=1'ingredients potion,
  NI(I)=15:XP(I)=0:RI(I)=10000:NEXTI:NP=6'persos
- X=2:Y=2:S=2:TL=9
+ REM X=2:Y=2:S=2:TL=9
  PLOT27,16,"BOOST..OK":ZAP
  RETURN
 ville_ReadChoice

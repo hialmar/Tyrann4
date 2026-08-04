@@ -247,7 +247,7 @@ init_div_var
 .(
 	lda #0
 	sta _team_ville
-	lda #0 ; debug
+	lda #1 ; debug
 	beq load_from_team
 	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll

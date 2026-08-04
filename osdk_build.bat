@@ -7,8 +7,8 @@
 IF "%OSDK%"=="" GOTO ErCfg
 
 :: Goto Camp
-:: Goto MapAsm
-Goto Ville1
+Goto MapAsm
+::Goto Ville1
 :: Goto Ville2
 
 ::
@@ -66,7 +66,7 @@ SET OSDKHEAD=
 CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
-Copy BUILD\map.tap BUILD\map.pat.tap
+Copy BUILD\map.tap BUILD\map.init.tap
 Copy BUILD\symbols BUILD\symbols_map
 
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
