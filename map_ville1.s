@@ -39,9 +39,9 @@ temporisation_1
 	bne temporisation_2
 fin_temporisation
 	; sei
-	lda direction_scroll
-	cmp#$86					; Y pour sortir
-	beq sortie_main
+	; lda direction_scroll
+	; cmp#$86					; Y pour sortir
+	; beq sortie_main
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
 	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
