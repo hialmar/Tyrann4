@@ -1,5 +1,5 @@
 #SYM V2
-0050 zp_compiler_save_start /Users/torguet/.wine/drive_c/osdk_2_0/lib/header.s:11
+0050 zp_compiler_save_start C:/osdk_2_0/lib/header.s:11
 0050 ap /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc:7
 0052 fp /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc:8
 0054 sp /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc:9
@@ -22,12 +22,12 @@
 0076 reg5 /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc:30
 0078 reg6 /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc:31
 007a reg7 /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc:32
-007c zp_compiler_save_end /Users/torguet/.wine/drive_c/osdk_2_0/lib/header.s:13
-0600 osdk_start /Users/torguet/.wine/drive_c/osdk_2_0/lib/header.s:18
-3c00 osdk_stack /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:17
-0611 exitldx /Users/torguet/.wine/drive_c/osdk_2_0/lib/header.s:91
+007c zp_compiler_save_end C:/osdk_2_0/lib/header.s:13
+0600 osdk_start C:/osdk_2_0/lib/header.s:18
+3c00 osdk_stack C:/osdk_2_0/lib/tail.s:17
+0611 exitldx C:/osdk_2_0/lib/header.s:91
 0617 _main /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:99
-0611 _exit /Users/torguet/.wine/drive_c/osdk_2_0/lib/header.s:90
+0611 _exit C:/osdk_2_0/lib/header.s:90
 00a0 tuile_en_cours_coin_hg /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:21
 00a1 tuile_en_cours_coin_hd /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:23
 00a2 tuile_en_cours_coin_bg /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:25
@@ -101,7 +101,7 @@
 35ab _team_tuile_sous_pos_perso /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:136
 35ac _team_numero_lieu /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:137
 35ad _team_sortie_victorieuse /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:138
-3b06 _get /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:30
+3b06 _get C:/osdk_2_0/lib/grsimple.s:30
 37be _save_t4_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:590
 0a5b RestoreZeroPage /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:16
 3ab3 _SwitchToCommand /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:109
@@ -561,23 +561,23 @@
 3a8c _Sedoric /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:81
 3a98 sedoricloop1 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:91
 3abf sedoricloop2 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:119
-3ad8 _hires /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:8
-3adb _text /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:9
-3ade _ping /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:10
-3ae1 _shoot /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:11
-3ae4 _zap /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:12
-3ae7 _explode /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:13
-3aea _kbdclick1 /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:14
-3aed _kbdclick2 /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:15
-3af0 _cls /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:16
-3af3 _lores0 /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:17
-3af6 _lores1 /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:18
-3af9 _key /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:21
-3b01 key001 /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s:25
-3b2d grexit2 /Users/torguet/.wine/drive_c/osdk_2_0/lib/ggeneral.s:25
-3b0e getXparm /Users/torguet/.wine/drive_c/osdk_2_0/lib/ggeneral.s:4
-3b17 getXloop /Users/torguet/.wine/drive_c/osdk_2_0/lib/ggeneral.s:9
-3b2a grexit /Users/torguet/.wine/drive_c/osdk_2_0/lib/ggeneral.s:23
+3ad8 _hires C:/osdk_2_0/lib/grsimple.s:8
+3adb _text C:/osdk_2_0/lib/grsimple.s:9
+3ade _ping C:/osdk_2_0/lib/grsimple.s:10
+3ae1 _shoot C:/osdk_2_0/lib/grsimple.s:11
+3ae4 _zap C:/osdk_2_0/lib/grsimple.s:12
+3ae7 _explode C:/osdk_2_0/lib/grsimple.s:13
+3aea _kbdclick1 C:/osdk_2_0/lib/grsimple.s:14
+3aed _kbdclick2 C:/osdk_2_0/lib/grsimple.s:15
+3af0 _cls C:/osdk_2_0/lib/grsimple.s:16
+3af3 _lores0 C:/osdk_2_0/lib/grsimple.s:17
+3af6 _lores1 C:/osdk_2_0/lib/grsimple.s:18
+3af9 _key C:/osdk_2_0/lib/grsimple.s:21
+3b01 key001 C:/osdk_2_0/lib/grsimple.s:25
+3b2d grexit2 C:/osdk_2_0/lib/ggeneral.s:25
+3b0e getXparm C:/osdk_2_0/lib/ggeneral.s:4
+3b17 getXloop C:/osdk_2_0/lib/ggeneral.s:9
+3b2a grexit C:/osdk_2_0/lib/ggeneral.s:23
 3b31 TableBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:1
 3b39 calculXY /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:6
 3b43 _SetBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:20
@@ -586,33 +586,33 @@
 3b6e _InvertBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:54
 3b79 _TestBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:64
 3b89 _TestBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:76
-3d00 osdk_end /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:22
-0600 __text_start /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3b95 __text_end /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3595 __text_size /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3b95 __data_start /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3b95 __data_end /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-0000 __data_size /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3c00 __bss_start /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3d00 __bss_end /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-0100 __bss_size /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3c00 __bss_clear_start /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-3d00 __bss_clear_end /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-0100 __bss_clear_size /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-0004 __zero_start /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-0052 __zero_end /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
-004e __zero_size /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s:32
+3d00 osdk_end C:/osdk_2_0/lib/tail.s:22
+0600 __text_start C:/osdk_2_0/lib/tail.s:32
+3b95 __text_end C:/osdk_2_0/lib/tail.s:32
+3595 __text_size C:/osdk_2_0/lib/tail.s:32
+3b95 __data_start C:/osdk_2_0/lib/tail.s:32
+3b95 __data_end C:/osdk_2_0/lib/tail.s:32
+0000 __data_size C:/osdk_2_0/lib/tail.s:32
+3c00 __bss_start C:/osdk_2_0/lib/tail.s:32
+3d00 __bss_end C:/osdk_2_0/lib/tail.s:32
+0100 __bss_size C:/osdk_2_0/lib/tail.s:32
+3c00 __bss_clear_start C:/osdk_2_0/lib/tail.s:32
+3d00 __bss_clear_end C:/osdk_2_0/lib/tail.s:32
+0100 __bss_clear_size C:/osdk_2_0/lib/tail.s:32
+0004 __zero_start C:/osdk_2_0/lib/tail.s:32
+0052 __zero_end C:/osdk_2_0/lib/tail.s:32
+004e __zero_size C:/osdk_2_0/lib/tail.s:32
 #FILES
-0 /Users/torguet/.wine/drive_c/osdk_2_0/lib/header.s
+0 C:/osdk_2_0/lib/header.s
 1 /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc
 2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s
 3 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s
 4 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s
 5 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s
-6 /Users/torguet/.wine/drive_c/osdk_2_0/lib/grsimple.s
-7 /Users/torguet/.wine/drive_c/osdk_2_0/lib/ggeneral.s
+6 C:/osdk_2_0/lib/grsimple.s
+7 C:/osdk_2_0/lib/ggeneral.s
 8 /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s
-9 /Users/torguet/.wine/drive_c/osdk_2_0/lib/tail.s
+9 C:/osdk_2_0/lib/tail.s
 #LINES
 0004 0:9
 0050 1:7

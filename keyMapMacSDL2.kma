@@ -1,0 +1,9 @@
+# SDL_key_symbol_for_host : SDL_key_symbol_for_oric
+# see http://www.libsdl.org/release/SDL-1.2.15/docs/html/sdlkey.html 
+58 : 47
+96 : 39
+217 : 59
+94 : 91
+36 : 93
+41 : 92
+59 : 46
