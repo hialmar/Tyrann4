@@ -298,8 +298,7 @@ loop_skip_rest_of_name
 ;			}
         jsr get_next_byte
         inx
-        txa
-        cmp team_namelen
+        cpx team_namelen
         bmi loop_skip_rest_of_name
 read_name_over
 ;			if (i>10) i=10;
@@ -468,8 +467,7 @@ read_cles
         jsr get_next_byte
         sta _team_cles,x
         inx
-        txa
-        cmp #36
+        cpx #36
         bne read_cles
 ;		ptr+=36;
 ;#ifdef debug
@@ -488,8 +486,7 @@ read_ingredients
         jsr get_next_byte
         sta _team_ingredients,x
         inx
-        txa
-        cmp #6
+        cpx #6
         bne read_ingredients
 ;		ptr+=6;
 ;#ifdef debug
@@ -503,8 +500,7 @@ read_combats_coffres
         jsr get_next_byte
         sta _team_combats_coffres,x
         inx
-        txa
-        cmp #45
+        cpx #45
         bne read_combats_coffres
 ;		ptr+=45;
 ;		dedans=*ptr;
@@ -850,8 +846,7 @@ write_cles
         lda _team_cles,x
         jsr put_next_byte
         inx
-        txa
-        cmp #36
+        cpx #36
         bne write_cles
 ;		ptr+=36;
 ;#ifdef debug
@@ -870,8 +865,7 @@ write_ingredients
         lda _team_ingredients,x
         jsr put_next_byte
         inx
-        txa
-        cmp #6
+        cpx #6
         bne write_ingredients
 ;		ptr+=6;
 ;#ifdef debug
@@ -885,8 +879,7 @@ write_combats_coffres
         lda _team_combats_coffres,x
         jsr put_next_byte
         inx
-        txa
-        cmp #45
+        cpx #45
         bne write_combats_coffres
 ;		ptr+=45;
 ;		dedans=*ptr;

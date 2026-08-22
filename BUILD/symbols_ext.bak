@@ -144,10 +144,10 @@
 2c83 _team_index_perso_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:123
 2cae _team_tuile_sous_pos_perso_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:139
 2caf _team_numero_lieu_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:140
-3206 _get C:/OSDK_2_0/lib/grsimple.s:30
-2ebe _save_t4_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:590
+31ff _get C:/OSDK_2_0/lib/grsimple.s:30
+2eba _save_t4_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:586
 0e0d RestoreZeroPage /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:16
-31b3 _SwitchToCommand /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:109
+31ac _SwitchToCommand /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:109
 2bf0 _team_out /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:91
 0bf3 load_from_ville /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:159
 0ca7 sortie_scroll_direct /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:271
@@ -484,77 +484,77 @@
 2cac _team_numero_lieu /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:137
 2cad _team_sortie_victorieuse /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:138
 2cb0 _team_end /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:141
-30d3 t_load_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:974
+30cc t_load_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:967
 2d00 skip_load /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:220
-3116 t_team_filemane /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:984
-316e _DiscLoad /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:60
-30eb t_io_error_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:977
+310f t_team_filemane /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:977
+3167 _DiscLoad /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:60
+30e4 t_io_error_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:970
 2d3c read_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:274
-2eaa get_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:549
+2ea6 get_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:545
 2d45 loop_read_write_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:281
-2d66 read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:304
+2d65 read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:303
 2d5d loop_skip_rest_of_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:296
-2e0d read_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:399
-2e23 read_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:419
-2e34 skip_load_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:435
-2e49 end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:449
-2e5d read_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:467
-2e6b read_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:487
-2e79 read_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:502
-2eb3 fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:556
-2eb4 put_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:564
-2ebd fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:571
-30ff t_save_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:980
-2f23 write_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:664
-2f29 loop_compute_namelen /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:669
-2f40 loop_write_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:685
-2f4f loop_skip_remaining /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:693
-2f5b read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:700
-2ff3 write_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:781
-3009 write_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:801
-301a skip_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:817
-302f end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:831
-3043 write_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:849
-3051 write_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:869
-305f write_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:884
-30d2 skip_save /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:968
-3125 _DiscSave /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:17
-311f _SPStorage /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:8
-3120 _BackupSP /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:10
-318c _Sedoric /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:81
-3198 sedoricloop1 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:91
-31bf sedoricloop2 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:119
-31d8 _hires C:/OSDK_2_0/lib/grsimple.s:8
-31db _text C:/OSDK_2_0/lib/grsimple.s:9
-31de _ping C:/OSDK_2_0/lib/grsimple.s:10
-31e1 _shoot C:/OSDK_2_0/lib/grsimple.s:11
-31e4 _zap C:/OSDK_2_0/lib/grsimple.s:12
-31e7 _explode C:/OSDK_2_0/lib/grsimple.s:13
-31ea _kbdclick1 C:/OSDK_2_0/lib/grsimple.s:14
-31ed _kbdclick2 C:/OSDK_2_0/lib/grsimple.s:15
-31f0 _cls C:/OSDK_2_0/lib/grsimple.s:16
-31f3 _lores0 C:/OSDK_2_0/lib/grsimple.s:17
-31f6 _lores1 C:/OSDK_2_0/lib/grsimple.s:18
-31f9 _key C:/OSDK_2_0/lib/grsimple.s:21
-3201 key001 C:/OSDK_2_0/lib/grsimple.s:25
-322d grexit2 C:/OSDK_2_0/lib/ggeneral.s:25
-320e getXparm C:/OSDK_2_0/lib/ggeneral.s:4
-3217 getXloop C:/OSDK_2_0/lib/ggeneral.s:9
-322a grexit C:/OSDK_2_0/lib/ggeneral.s:23
-3231 TableBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:1
-3239 calculXY /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:6
-3243 _SetBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:20
-3253 _SetBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:32
-325e _InvertBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:42
-326e _InvertBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:54
-3279 _TestBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:64
-3289 _TestBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:76
+2e0c read_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:398
+2e22 read_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:418
+2e33 skip_load_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:434
+2e48 end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:448
+2e5c read_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:466
+2e69 read_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:485
+2e76 read_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:499
+2eaf fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:552
+2eb0 put_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:560
+2eb9 fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:567
+30f8 t_save_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:973
+2f1f write_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:660
+2f25 loop_compute_namelen /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:665
+2f3c loop_write_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:681
+2f4b loop_skip_remaining /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:689
+2f57 read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:696
+2fef write_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:777
+3005 write_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:797
+3016 skip_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:813
+302b end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:827
+303f write_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:845
+304c write_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:864
+3059 write_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:878
+30cb skip_save /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:961
+311e _DiscSave /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:17
+3118 _SPStorage /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:8
+3119 _BackupSP /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:10
+3185 _Sedoric /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:81
+3191 sedoricloop1 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:91
+31b8 sedoricloop2 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:119
+31d1 _hires C:/OSDK_2_0/lib/grsimple.s:8
+31d4 _text C:/OSDK_2_0/lib/grsimple.s:9
+31d7 _ping C:/OSDK_2_0/lib/grsimple.s:10
+31da _shoot C:/OSDK_2_0/lib/grsimple.s:11
+31dd _zap C:/OSDK_2_0/lib/grsimple.s:12
+31e0 _explode C:/OSDK_2_0/lib/grsimple.s:13
+31e3 _kbdclick1 C:/OSDK_2_0/lib/grsimple.s:14
+31e6 _kbdclick2 C:/OSDK_2_0/lib/grsimple.s:15
+31e9 _cls C:/OSDK_2_0/lib/grsimple.s:16
+31ec _lores0 C:/OSDK_2_0/lib/grsimple.s:17
+31ef _lores1 C:/OSDK_2_0/lib/grsimple.s:18
+31f2 _key C:/OSDK_2_0/lib/grsimple.s:21
+31fa key001 C:/OSDK_2_0/lib/grsimple.s:25
+3226 grexit2 C:/OSDK_2_0/lib/ggeneral.s:25
+3207 getXparm C:/OSDK_2_0/lib/ggeneral.s:4
+3210 getXloop C:/OSDK_2_0/lib/ggeneral.s:9
+3223 grexit C:/OSDK_2_0/lib/ggeneral.s:23
+322a TableBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:1
+3232 calculXY /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:6
+323c _SetBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:20
+324c _SetBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:32
+3257 _InvertBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:42
+3267 _InvertBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:54
+3272 _TestBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:64
+3282 _TestBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:76
 3400 osdk_end C:/OSDK_2_0/lib/tail.s:22
 0600 __text_start C:/OSDK_2_0/lib/tail.s:32
-3295 __text_end C:/OSDK_2_0/lib/tail.s:32
-2c95 __text_size C:/OSDK_2_0/lib/tail.s:32
-3295 __data_start C:/OSDK_2_0/lib/tail.s:32
-3295 __data_end C:/OSDK_2_0/lib/tail.s:32
+328e __text_end C:/OSDK_2_0/lib/tail.s:32
+2c8e __text_size C:/OSDK_2_0/lib/tail.s:32
+328e __data_start C:/OSDK_2_0/lib/tail.s:32
+328e __data_end C:/OSDK_2_0/lib/tail.s:32
 0000 __data_size C:/OSDK_2_0/lib/tail.s:32
 3300 __bss_start C:/OSDK_2_0/lib/tail.s:32
 3400 __bss_end C:/OSDK_2_0/lib/tail.s:32
@@ -3169,568 +3169,561 @@
 2d5d 5:299
 2d60 5:300
 2d61 5:301
-2d62 5:302
-2d64 5:303
-2d66 5:307
-2d68 5:308
-2d6a 5:309
-2d6d 5:310
-2d6f 5:311
-2d71 5:312
-2d73 5:313
-2d75 5:314
-2d77 5:321
-2d7a 5:322
-2d7c 5:323
-2d7f 5:324
-2d81 5:325
-2d84 5:326
-2d86 5:327
-2d89 5:328
-2d8b 5:329
-2d8d 5:331
-2d90 5:332
-2d93 5:335
-2d96 5:336
-2d99 5:338
-2d9c 5:339
-2d9f 5:341
-2da2 5:342
-2da5 5:344
-2da8 5:345
-2dab 5:347
-2dae 5:348
-2db1 5:350
-2db4 5:351
-2db7 5:353
-2dba 5:354
-2dbd 5:357
-2dc0 5:358
-2dc3 5:360
-2dc6 5:361
-2dc9 5:363
-2dcc 5:364
-2dcf 5:366
-2dd2 5:367
-2dd5 5:369
-2dd8 5:370
-2dda 5:371
-2ddd 5:372
-2ddf 5:373
-2de2 5:374
-2de4 5:375
-2de7 5:376
-2de9 5:378
-2deb 5:379
-2dee 5:380
-2df1 5:382
-2df4 5:383
-2df7 5:385
-2dfa 5:386
-2dfd 5:388
-2e00 5:389
-2e03 5:391
-2e06 5:392
-2e09 5:397
-2e0b 5:398
-2e0d 5:400
-2e10 5:401
-2e12 5:402
-2e15 5:403
-2e17 5:404
-2e19 5:405
-2e1b 5:406
-2e1d 5:407
-2e1f 5:417
-2e21 5:418
-2e23 5:420
-2e25 5:421
-2e28 5:422
-2e2a 5:423
-2e2c 5:432
-2e2f 5:433
-2e31 5:434
-2e34 5:436
-2e36 5:437
-2e38 5:438
-2e3a 5:439
-2e3c 5:441
-2e3e 5:444
-2e40 5:445
-2e42 5:446
-2e44 5:447
-2e46 5:448
-2e49 5:452
-2e4c 5:453
-2e4f 5:456
-2e52 5:457
-2e55 5:461
-2e58 5:462
-2e5b 5:466
-2e5d 5:468
-2e60 5:469
+2d63 5:302
+2d65 5:306
+2d67 5:307
+2d69 5:308
+2d6c 5:309
+2d6e 5:310
+2d70 5:311
+2d72 5:312
+2d74 5:313
+2d76 5:320
+2d79 5:321
+2d7b 5:322
+2d7e 5:323
+2d80 5:324
+2d83 5:325
+2d85 5:326
+2d88 5:327
+2d8a 5:328
+2d8c 5:330
+2d8f 5:331
+2d92 5:334
+2d95 5:335
+2d98 5:337
+2d9b 5:338
+2d9e 5:340
+2da1 5:341
+2da4 5:343
+2da7 5:344
+2daa 5:346
+2dad 5:347
+2db0 5:349
+2db3 5:350
+2db6 5:352
+2db9 5:353
+2dbc 5:356
+2dbf 5:357
+2dc2 5:359
+2dc5 5:360
+2dc8 5:362
+2dcb 5:363
+2dce 5:365
+2dd1 5:366
+2dd4 5:368
+2dd7 5:369
+2dd9 5:370
+2ddc 5:371
+2dde 5:372
+2de1 5:373
+2de3 5:374
+2de6 5:375
+2de8 5:377
+2dea 5:378
+2ded 5:379
+2df0 5:381
+2df3 5:382
+2df6 5:384
+2df9 5:385
+2dfc 5:387
+2dff 5:388
+2e02 5:390
+2e05 5:391
+2e08 5:396
+2e0a 5:397
+2e0c 5:399
+2e0f 5:400
+2e11 5:401
+2e14 5:402
+2e16 5:403
+2e18 5:404
+2e1a 5:405
+2e1c 5:406
+2e1e 5:416
+2e20 5:417
+2e22 5:419
+2e24 5:420
+2e27 5:421
+2e29 5:422
+2e2b 5:431
+2e2e 5:432
+2e30 5:433
+2e33 5:435
+2e35 5:436
+2e37 5:437
+2e39 5:438
+2e3b 5:440
+2e3d 5:443
+2e3f 5:444
+2e41 5:445
+2e43 5:446
+2e45 5:447
+2e48 5:451
+2e4b 5:452
+2e4e 5:455
+2e51 5:456
+2e54 5:460
+2e57 5:461
+2e5a 5:465
+2e5c 5:467
+2e5f 5:468
+2e62 5:469
 2e63 5:470
-2e64 5:471
-2e65 5:472
-2e67 5:473
+2e65 5:471
+2e67 5:484
 2e69 5:486
-2e6b 5:488
-2e6e 5:489
-2e71 5:490
-2e72 5:491
-2e73 5:492
-2e75 5:493
-2e77 5:501
-2e79 5:503
-2e7c 5:504
-2e7f 5:505
-2e80 5:506
+2e6c 5:487
+2e6f 5:488
+2e70 5:489
+2e72 5:490
+2e74 5:498
+2e76 5:500
+2e79 5:501
+2e7c 5:502
+2e7d 5:503
+2e7f 5:504
 2e81 5:507
-2e83 5:508
-2e85 5:511
-2e88 5:512
-2e8b 5:515
-2e8e 5:516
-2e91 5:520
-2e94 5:521
-2e97 5:524
-2e9a 5:525
-2e9d 5:528
-2ea0 5:529
-2ea3 5:532
-2ea6 5:534
-2ea9 5:543
-2eaa 5:551
-2eac 5:552
-2ead 5:553
-2eaf 5:554
-2eb1 5:555
-2eb3 5:557
-2eb4 5:566
-2eb6 5:567
-2eb7 5:568
-2eb9 5:569
-2ebb 5:570
-2ebd 5:572
-2ebe 5:595
-2ec0 5:596
-2ec3 5:598
-2ec6 5:599
-2ec8 5:600
-2ecb 5:602
-2ecd 5:603
-2ed0 5:604
-2ed3 5:605
-2ed5 5:606
-2ed8 5:607
-2eda 5:608
-2edd 5:609
-2ee0 5:611
-2ee2 5:612
-2ee4 5:613
-2ee6 5:614
-2ee8 5:616
-2eea 5:617
-2eec 5:618
-2eee 5:619
-2eef 5:620
-2ef2 5:621
-2ef4 5:622
-2ef5 5:624
-2ef8 5:625
-2efa 5:626
-2efb 5:628
-2efe 5:629
-2f00 5:630
-2f01 5:632
-2f04 5:633
-2f06 5:634
-2f07 5:636
-2f0a 5:637
-2f0c 5:638
-2f0d 5:640
-2f10 5:641
-2f12 5:642
-2f13 5:653
-2f15 5:654
-2f17 5:655
-2f19 5:656
-2f1b 5:657
-2f1d 5:658
-2f1f 5:659
-2f21 5:660
-2f23 5:666
-2f25 5:667
-2f27 5:668
-2f29 5:670
-2f2c 5:671
-2f2d 5:672
-2f2f 5:673
-2f31 5:674
-2f33 5:675
-2f35 5:676
-2f36 5:677
-2f37 5:678
-2f3a 5:682
-2f3c 5:683
-2f3e 5:684
-2f40 5:686
-2f43 5:687
-2f45 5:688
-2f48 5:689
-2f49 5:690
-2f4b 5:691
-2f4d 5:692
-2f4f 5:694
-2f51 5:695
-2f53 5:696
-2f55 5:697
-2f57 5:698
+2e84 5:508
+2e87 5:511
+2e8a 5:512
+2e8d 5:516
+2e90 5:517
+2e93 5:520
+2e96 5:521
+2e99 5:524
+2e9c 5:525
+2e9f 5:528
+2ea2 5:530
+2ea5 5:539
+2ea6 5:547
+2ea8 5:548
+2ea9 5:549
+2eab 5:550
+2ead 5:551
+2eaf 5:553
+2eb0 5:562
+2eb2 5:563
+2eb3 5:564
+2eb5 5:565
+2eb7 5:566
+2eb9 5:568
+2eba 5:591
+2ebc 5:592
+2ebf 5:594
+2ec2 5:595
+2ec4 5:596
+2ec7 5:598
+2ec9 5:599
+2ecc 5:600
+2ecf 5:601
+2ed1 5:602
+2ed4 5:603
+2ed6 5:604
+2ed9 5:605
+2edc 5:607
+2ede 5:608
+2ee0 5:609
+2ee2 5:610
+2ee4 5:612
+2ee6 5:613
+2ee8 5:614
+2eea 5:615
+2eeb 5:616
+2eee 5:617
+2ef0 5:618
+2ef1 5:620
+2ef4 5:621
+2ef6 5:622
+2ef7 5:624
+2efa 5:625
+2efc 5:626
+2efd 5:628
+2f00 5:629
+2f02 5:630
+2f03 5:632
+2f06 5:633
+2f08 5:634
+2f09 5:636
+2f0c 5:637
+2f0e 5:638
+2f0f 5:649
+2f11 5:650
+2f13 5:651
+2f15 5:652
+2f17 5:653
+2f19 5:654
+2f1b 5:655
+2f1d 5:656
+2f1f 5:662
+2f21 5:663
+2f23 5:664
+2f25 5:666
+2f28 5:667
+2f29 5:668
+2f2b 5:669
+2f2d 5:670
+2f2f 5:671
+2f31 5:672
+2f32 5:673
+2f33 5:674
+2f36 5:678
+2f38 5:679
+2f3a 5:680
+2f3c 5:682
+2f3f 5:683
+2f41 5:684
+2f44 5:685
+2f45 5:686
+2f47 5:687
+2f49 5:688
+2f4b 5:690
+2f4d 5:691
+2f4f 5:692
+2f51 5:693
+2f53 5:694
+2f55 5:695
+2f57 5:697
 2f59 5:699
-2f5b 5:701
-2f5d 5:703
-2f5f 5:704
-2f62 5:705
-2f65 5:706
-2f67 5:707
-2f69 5:708
-2f6c 5:709
-2f6f 5:710
-2f71 5:711
-2f73 5:713
-2f76 5:714
-2f79 5:717
-2f7c 5:718
-2f7f 5:720
-2f82 5:721
-2f85 5:723
-2f88 5:724
-2f8b 5:726
-2f8e 5:727
-2f91 5:729
-2f94 5:730
-2f97 5:732
-2f9a 5:733
-2f9d 5:735
-2fa0 5:736
-2fa3 5:739
-2fa6 5:740
-2fa9 5:742
-2fac 5:743
-2faf 5:745
-2fb2 5:746
-2fb5 5:748
-2fb8 5:749
-2fbb 5:751
-2fbd 5:752
-2fc0 5:753
-2fc2 5:754
-2fc5 5:755
-2fc7 5:756
-2fca 5:757
-2fcc 5:759
-2fcf 5:760
-2fd1 5:761
-2fd4 5:763
-2fd7 5:764
-2fda 5:766
-2fdd 5:767
-2fe0 5:769
-2fe3 5:770
-2fe6 5:772
-2fe9 5:773
-2fec 5:774
-2fef 5:779
-2ff1 5:780
-2ff3 5:782
-2ff5 5:783
-2ff8 5:784
-2ffb 5:785
-2ffd 5:786
-2fff 5:787
-3001 5:788
-3003 5:789
-3005 5:799
-3007 5:800
-3009 5:802
-300b 5:803
-300e 5:804
-3010 5:805
-3012 5:814
-3014 5:815
-3017 5:816
-301a 5:818
-301c 5:819
-301e 5:820
-3020 5:821
+2f5b 5:700
+2f5e 5:701
+2f61 5:702
+2f63 5:703
+2f65 5:704
+2f68 5:705
+2f6b 5:706
+2f6d 5:707
+2f6f 5:709
+2f72 5:710
+2f75 5:713
+2f78 5:714
+2f7b 5:716
+2f7e 5:717
+2f81 5:719
+2f84 5:720
+2f87 5:722
+2f8a 5:723
+2f8d 5:725
+2f90 5:726
+2f93 5:728
+2f96 5:729
+2f99 5:731
+2f9c 5:732
+2f9f 5:735
+2fa2 5:736
+2fa5 5:738
+2fa8 5:739
+2fab 5:741
+2fae 5:742
+2fb1 5:744
+2fb4 5:745
+2fb7 5:747
+2fb9 5:748
+2fbc 5:749
+2fbe 5:750
+2fc1 5:751
+2fc3 5:752
+2fc6 5:753
+2fc8 5:755
+2fcb 5:756
+2fcd 5:757
+2fd0 5:759
+2fd3 5:760
+2fd6 5:762
+2fd9 5:763
+2fdc 5:765
+2fdf 5:766
+2fe2 5:768
+2fe5 5:769
+2fe8 5:770
+2feb 5:775
+2fed 5:776
+2fef 5:778
+2ff1 5:779
+2ff4 5:780
+2ff7 5:781
+2ff9 5:782
+2ffb 5:783
+2ffd 5:784
+2fff 5:785
+3001 5:795
+3003 5:796
+3005 5:798
+3007 5:799
+300a 5:800
+300c 5:801
+300e 5:810
+3010 5:811
+3013 5:812
+3016 5:814
+3018 5:815
+301a 5:816
+301c 5:817
+301e 5:819
+3020 5:822
 3022 5:823
-3024 5:826
-3026 5:827
-3028 5:828
-302a 5:829
-302c 5:830
-302f 5:834
-3032 5:835
-3035 5:838
-3038 5:839
-303b 5:843
-303e 5:844
-3041 5:848
-3043 5:850
-3046 5:851
-3049 5:852
-304a 5:853
-304b 5:854
-304d 5:855
-304f 5:868
-3051 5:870
-3054 5:871
-3057 5:872
-3058 5:873
-3059 5:874
-305b 5:875
-305d 5:883
-305f 5:885
-3062 5:886
-3065 5:887
-3066 5:888
-3067 5:889
-3069 5:890
-306b 5:893
-306e 5:894
-3071 5:897
-3074 5:898
-3077 5:902
-307a 5:903
-307d 5:906
-3080 5:907
-3083 5:910
-3086 5:911
-3089 5:915
-308c 5:916
-308f 5:925
-3092 5:926
-3094 5:928
-3096 5:930
-3098 5:931
-309a 5:932
-309c 5:933
-309d 5:934
-309f 5:935
-30a1 5:936
-30a2 5:938
-30a4 5:939
-30a6 5:940
-30a7 5:941
-30a9 5:942
-30ab 5:943
-30ac 5:945
-30ae 5:946
-30b0 5:947
-30b1 5:948
-30b3 5:949
-30b5 5:950
-30b6 5:951
-30b9 5:952
-30ba 5:953
-30bc 5:954
-30be 5:955
-30c1 5:956
-30c4 5:957
-30c6 5:958
-30c9 5:959
-30cb 5:960
-30ce 5:961
-30d1 5:962
-30d2 5:969
-30d3 5:975
-30d4 5:976
-30eb 5:978
-30ec 5:979
-30ff 5:981
-3100 5:982
-3116 5:985
-311f 6:8
-3120 6:12
-3121 6:13
-3124 6:14
-3125 6:19
-3126 6:20
-3128 6:21
-312a 6:22
-312c 6:23
-312d 6:24
-312f 6:25
-3131 6:27
-3134 6:28
-3136 6:29
-3139 6:32
-313b 6:33
-313d 6:34
-3140 6:35
-3141 6:36
-3143 6:37
-3146 6:38
-3147 6:39
-3149 6:40
-314c 6:41
-314d 6:42
-314f 6:43
-3152 6:45
-3154 6:46
-3157 6:47
-3159 6:48
-315c 6:49
-315e 6:50
-3161 6:51
-3164 6:52
-3167 6:53
-3168 6:54
-316b 6:55
-316d 6:56
-316e 6:62
-316f 6:63
-3171 6:64
-3173 6:65
-3175 6:66
-3176 6:67
-3178 6:68
-317a 6:70
-317d 6:72
-317f 6:73
-3182 6:74
-3185 6:75
-3186 6:76
-3189 6:77
-318b 6:78
-318c 6:83
-318e 6:84
-3190 6:85
-3192 6:86
-3193 6:87
-3195 6:88
-3197 6:89
-3198 6:92
-319a 6:93
-319d 6:94
-319e 6:95
-31a0 6:96
-31a2 6:97
-31a4 6:98
-31a7 6:100
-31a9 6:101
-31ab 6:102
-31ad 6:104
-31b0 6:105
-31b3 6:111
-31b5 6:112
-31b7 6:113
-31b9 6:114
-31ba 6:115
-31bc 6:116
-31be 6:117
-31bf 6:120
-31c1 6:121
-31c4 6:122
-31c5 6:123
-31c7 6:124
-31c9 6:125
-31cb 6:126
-31ce 6:128
-31d0 6:130
-31d1 6:132
-31d3 6:133
-31d5 6:135
-31d8 7:8
-31db 7:9
-31de 7:10
-31e1 7:11
-31e4 7:12
-31e7 7:13
-31ea 7:14
-31ed 7:15
-31f0 7:16
-31f3 7:17
-31f6 7:18
-31f9 7:22
-31fc 7:23
-31fe 7:24
-3201 7:26
-3203 7:27
-3206 7:31
-3209 7:32
-320b 7:33
-320e 8:5
-3210 8:6
-3213 8:7
-3215 8:8
-3217 8:10
-3219 8:11
-321c 8:12
-321d 8:13
-321e 8:14
-3220 8:15
-3223 8:16
-3224 8:17
-3225 8:18
-3227 8:19
-3229 8:20
-322a 8:24
-322d 8:26
-322e 8:27
-3230 8:28
-3231 9:2
-3239 9:9
-323a 9:10
-323b 9:11
-323c 9:12
-323d 9:13
-323f 9:14
-3241 9:15
-3242 9:16
-3243 9:22
-3245 9:23
-3247 9:24
-3249 9:25
-324a 9:26
-324c 9:27
-324e 9:28
-324f 9:29
-3251 9:30
-3253 9:34
-3256 9:35
-3258 9:36
-325b 9:37
-325d 9:38
-325e 9:44
-3260 9:45
-3262 9:46
-3264 9:47
-3265 9:48
-3267 9:49
-3269 9:50
-326a 9:51
-326c 9:52
-326e 9:56
-3271 9:57
-3273 9:58
-3276 9:59
-3278 9:60
-3279 9:66
-327b 9:67
-327d 9:68
-327f 9:69
-3280 9:70
-3282 9:71
-3284 9:72
-3285 9:73
-3287 9:74
-3289 9:78
-328c 9:79
-328e 9:80
-3291 9:81
-3292 9:82
-3294 9:83
-3295 10:15
+3024 5:824
+3026 5:825
+3028 5:826
+302b 5:830
+302e 5:831
+3031 5:834
+3034 5:835
+3037 5:839
+303a 5:840
+303d 5:844
+303f 5:846
+3042 5:847
+3045 5:848
+3046 5:849
+3048 5:850
+304a 5:863
+304c 5:865
+304f 5:866
+3052 5:867
+3053 5:868
+3055 5:869
+3057 5:877
+3059 5:879
+305c 5:880
+305f 5:881
+3060 5:882
+3062 5:883
+3064 5:886
+3067 5:887
+306a 5:890
+306d 5:891
+3070 5:895
+3073 5:896
+3076 5:899
+3079 5:900
+307c 5:903
+307f 5:904
+3082 5:908
+3085 5:909
+3088 5:918
+308b 5:919
+308d 5:921
+308f 5:923
+3091 5:924
+3093 5:925
+3095 5:926
+3096 5:927
+3098 5:928
+309a 5:929
+309b 5:931
+309d 5:932
+309f 5:933
+30a0 5:934
+30a2 5:935
+30a4 5:936
+30a5 5:938
+30a7 5:939
+30a9 5:940
+30aa 5:941
+30ac 5:942
+30ae 5:943
+30af 5:944
+30b2 5:945
+30b3 5:946
+30b5 5:947
+30b7 5:948
+30ba 5:949
+30bd 5:950
+30bf 5:951
+30c2 5:952
+30c4 5:953
+30c7 5:954
+30ca 5:955
+30cb 5:962
+30cc 5:968
+30cd 5:969
+30e4 5:971
+30e5 5:972
+30f8 5:974
+30f9 5:975
+310f 5:978
+3118 6:8
+3119 6:12
+311a 6:13
+311d 6:14
+311e 6:19
+311f 6:20
+3121 6:21
+3123 6:22
+3125 6:23
+3126 6:24
+3128 6:25
+312a 6:27
+312d 6:28
+312f 6:29
+3132 6:32
+3134 6:33
+3136 6:34
+3139 6:35
+313a 6:36
+313c 6:37
+313f 6:38
+3140 6:39
+3142 6:40
+3145 6:41
+3146 6:42
+3148 6:43
+314b 6:45
+314d 6:46
+3150 6:47
+3152 6:48
+3155 6:49
+3157 6:50
+315a 6:51
+315d 6:52
+3160 6:53
+3161 6:54
+3164 6:55
+3166 6:56
+3167 6:62
+3168 6:63
+316a 6:64
+316c 6:65
+316e 6:66
+316f 6:67
+3171 6:68
+3173 6:70
+3176 6:72
+3178 6:73
+317b 6:74
+317e 6:75
+317f 6:76
+3182 6:77
+3184 6:78
+3185 6:83
+3187 6:84
+3189 6:85
+318b 6:86
+318c 6:87
+318e 6:88
+3190 6:89
+3191 6:92
+3193 6:93
+3196 6:94
+3197 6:95
+3199 6:96
+319b 6:97
+319d 6:98
+31a0 6:100
+31a2 6:101
+31a4 6:102
+31a6 6:104
+31a9 6:105
+31ac 6:111
+31ae 6:112
+31b0 6:113
+31b2 6:114
+31b3 6:115
+31b5 6:116
+31b7 6:117
+31b8 6:120
+31ba 6:121
+31bd 6:122
+31be 6:123
+31c0 6:124
+31c2 6:125
+31c4 6:126
+31c7 6:128
+31c9 6:130
+31ca 6:132
+31cc 6:133
+31ce 6:135
+31d1 7:8
+31d4 7:9
+31d7 7:10
+31da 7:11
+31dd 7:12
+31e0 7:13
+31e3 7:14
+31e6 7:15
+31e9 7:16
+31ec 7:17
+31ef 7:18
+31f2 7:22
+31f5 7:23
+31f7 7:24
+31fa 7:26
+31fc 7:27
+31ff 7:31
+3202 7:32
+3204 7:33
+3207 8:5
+3209 8:6
+320c 8:7
+320e 8:8
+3210 8:10
+3212 8:11
+3215 8:12
+3216 8:13
+3217 8:14
+3219 8:15
+321c 8:16
+321d 8:17
+321e 8:18
+3220 8:19
+3222 8:20
+3223 8:24
+3226 8:26
+3227 8:27
+3229 8:28
+322a 9:2
+3232 9:9
+3233 9:10
+3234 9:11
+3235 9:12
+3236 9:13
+3238 9:14
+323a 9:15
+323b 9:16
+323c 9:22
+323e 9:23
+3240 9:24
+3242 9:25
+3243 9:26
+3245 9:27
+3247 9:28
+3248 9:29
+324a 9:30
+324c 9:34
+324f 9:35
+3251 9:36
+3254 9:37
+3256 9:38
+3257 9:44
+3259 9:45
+325b 9:46
+325d 9:47
+325e 9:48
+3260 9:49
+3262 9:50
+3263 9:51
+3265 9:52
+3267 9:56
+326a 9:57
+326c 9:58
+326f 9:59
+3271 9:60
+3272 9:66
+3274 9:67
+3276 9:68
+3278 9:69
+3279 9:70
+327b 9:71
+327d 9:72
+327e 9:73
+3280 9:74
+3282 9:78
+3285 9:79
+3287 9:80
+328a 9:81
+328b 9:82
+328d 9:83
+328e 10:15
 3300 10:18
 3400 10:31
