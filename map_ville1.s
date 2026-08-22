@@ -607,6 +607,7 @@ medicus_
 	jsr write_phrase	
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 	rts
 ;-------------------------------------------------

@@ -7,8 +7,8 @@
 IF "%OSDK%"=="" GOTO ErCfg
 
 :: Goto Camp
-Goto MapAsm
-::Goto Ville1
+:: Goto MapAsm
+Goto Ville1
 :: Goto Ville2
 
 ::
