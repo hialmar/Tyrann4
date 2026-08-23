@@ -32,7 +32,7 @@ combat_5
 combat_6
  GET A$:A=VAL(A$):IFA<1ORA>6THENPING:GOTO combat_6 
  RETURN
-combat_70
+combat_Impossible
  PING:PRINT @2,18;CHR$(148)" IMPOSSIBLE "CHR$(144)
  WAITTI*3:GOSUB  combat_7 
  ZAP:PRINT @2,18;"              "
@@ -211,7 +211,7 @@ combat_7
  NEXT I
  RETURN
 combat_14
- REM INVENTARY
+ REM INVENTORY
  L=7:E1=132:E2=132
  PRINT@2,L;CHR$(145)"*********************************** "CHR$(144)
  S$=" "+N$(P)+" - "+C$(CP(P))+" "
@@ -274,10 +274,10 @@ combat_53
 combat_64
  GET A$:IF A$<>"1"ANDA$<>"2"ANDA$<>"3" THEN  combat_64 
 combat_62
- IF A$="1" THEN BF(P)=IMPACT(WR(P)-7):AU(P)=WR(P):GOTO  combat_65 
- IF A$="2" THEN IF WL(P)>0 THEN BF(P)= IMPACT(WL(P)-7):AU(P)=WL(P) ELSE  combat_64 
+ IF A$="1" THEN BF(P)=IMPACT(WR(P)-6):AU(P)=WR(P):GOTO  combat_65 
+ IF A$="2" THEN IF WL(P)>0 THEN BF(P)= IMPACT(WL(P)-6):AU(P)=WL(P) ELSE  combat_64 
 combat_63
- IF A$="3" THEN IF BT(P)>0 THEN BF(P)= IA(BT(P)-36):AU(P)=BT(P) ELSE  combat_64 
+ IF A$="3" THEN IF BT(P)>0 THEN BF(P)= IA(BT(P)-29):AU(P)=BT(P) ELSE  combat_64 
 combat_65
  IF AU(P)=12 AND FU=1 THEN PRINT@25,16;" NET in USE ":WAIT 5*TI:GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
  BF(P)=BF(P)+INT(FO(P)/10)+FC(P):GOSUB  combat_66 
@@ -292,9 +292,9 @@ combat_67
  IF CH=0 THEN GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
  CH=CH-3:OC(P)=SAD(P,CH):CS(P)=CH
  PRINT@1,11+CH;CHR$(145):PRINT@27,11+CH;CHR$(144)
- IF OC(P)>19 AND OC(P)<25 THEN GOSUB  combat_68 :GOTO  combat_69 
+ IF OC(P)>15 AND OC(P)<20 THEN GOSUB  combat_68 :GOTO  combat_69 
  IF (OC(P)>24 AND OC(P)<34) THEN PING:GOTO  combat_69 
- GOSUB  combat_70 :GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
+ GOSUB  combat_Impossible :GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
  WAIT 5*TI
 combat_69
  RETURN
@@ -423,12 +423,13 @@ combat_94
  RETURN
 combat_28
  REM ARMES
- IF AU(AO(P))>13 THEN ARM=3:TST=3:ACT$=" casts "+IT$(BT(AO(P)))+" on ":GOTO  combat_95 
- IF AU(AO(P))>6  AND AU(AO(P))<10 OR AU(AO(P))=13 THEN TST=1:ARM=1:GOTO  combat_95 
- IF AU(AO(P))>9 AND AU(AO(P))<13 THEN TST=2:ARM=2
- IF AU(AO(P))=10 THEN ACT$=" shoots an arrow on ":DFF=10:GOTO  combat_95 
- IF AU(AO(P))=11 THEN ACT$=" shoots a stone on ":DFF=-5:GOTO  combat_95 
- IF AU(AO(P))=12 THEN TST=3:DFF=15:ARM=4:ACT$=" throws the net on "
+ IF AU(AO(P))>15 THEN ARM=3:TST=3:ACT$=" casts "+IT$(BT(AO(P)))+" on ":GOTO  combat_95 
+ IF AU(AO(P))>6  AND AU(AO(P))<11 OR AU(AO(P))=15 THEN TST=1:ARM=1:GOTO  combat_95 
+ IF AU(AO(P))>10 AND AU(AO(P))<15 THEN TST=2:ARM=2
+ IF AU(AO(P))=11 THEN ACT$=" shoots a bolt on ":DFF=20:GOTO combat_95
+ IF AU(AO(P))=12 THEN ACT$=" shoots an arrow on ":DFF=10:GOTO  combat_95 
+ IF AU(AO(P))=13 THEN ACT$=" shoots a stone on ":DFF=-5:GOTO  combat_95 
+ IF AU(AO(P))=14 THEN TST=3:DFF=15:ARM=4:ACT$=" throws the net on "
 combat_95
  RETURN
 combat_31
@@ -717,11 +718,11 @@ combat_140
  GOTO  combat_142 
 combat_141
  IF CH>3 THEN  combat_142 
- IF CH=3 AND AMI>0 THEN GOSUB  combat_70 :GOTO  combat_137 
+ IF CH=3 AND AMI>0 THEN GOSUB  combat_Impossible :GOTO  combat_137 
  RT=0
  FORJ=1TO6:IF WR(J)>14 OR WL(J)>14 THEN RT=1
  NEXTJ
- IF RT=0 THEN GOSUB  combat_70 :GOTO  combat_56 
+ IF RT=0 THEN GOSUB  combat_Impossible :GOTO  combat_56 
 combat_145
  IF CH<3 THEN GOSUB  combat_68  ELSE GOSUB  combat_66 
  IF CH<>1 THEN  combat_142 
@@ -729,7 +730,7 @@ combat_145
  IF WR(TG(P))>14 AND (WL(TG(P))=0 OR WL(TG(P))>14) THEN  combat_143 
  GOTO  combat_144 
 combat_143
- GOSUB  combat_70 :GOTO  combat_145 
+ GOSUB  combat_Impossible :GOTO  combat_145 
 combat_144
  GOSUB  combat_146 
 combat_142
@@ -745,7 +746,7 @@ combat_148
  GET A$:A=VAL(A$):IF A<>1 AND A<>2 THEN  combat_148 
 combat_147
  EF(TG(P))=A:IF A=1 THEN EF=WR(TG(P)) ELSE EF=WL(TG(P))
- IF EF>14 THEN GOSUB  combat_70 :GOTO  combat_146 
+ IF EF>14 THEN GOSUB  combat_Impossible :GOTO  combat_146 
  RETURN
 combat_34
  REM SPELLS
@@ -1135,7 +1136,7 @@ combat_read_data
  FORI=1TO6:READ C$(I):NEXTI:PRINT ".";
  FORI=1TO9:READ M$(I):NEXTI:PRINT ".";
  DIM IMPACT(19)
- FOR I=1TO 12:READ IMPACT(I):NEXTI
+ FOR I=1TO9:READ IMPACT(I):NEXTI
  FOR I=1TO6:READ AA(I),IA(I):NEXT I
  REM  Monstres
  READ NM:DIM MM$(NM)
@@ -1147,13 +1148,13 @@ combat_read_data
  DATA "OK","-Poison-","-Paral- ",">DEAD< "
  DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
  DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Iberian, Thrace
- DATA 7,6,5,5,4,4,3,3,2,2,1,1
+ DATA 3,4,4,3,4,3,2,1,1
  DATA 75,8, 70,6, 50,5, 80,4, 95,3, 55,2
  DATA 23,Serpents, Wolf-dog, Jackal, Beggar, Cut-throat, Beggar, Prowler, Swordsman
  DATA Barbarian, Iberian, Pict, Wildling, Lion, Bear
  DATA Mad Vestal, Dark Priestess, Mad Monk
  DATA Druid, Black Spirit, Evil Priest
- DATA Evil Goth, Damned Legionary, Evil Gladiator
+ DATA Evil Goth, Doomed Legionary, Evil Gladiator
  DATA SOMNUS, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
  DATA ESCULAPE R, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT
  DATA FIRESWORD, STRENGTH, LUX DEI, VISION, FREEZE, ILLUSION, WIND, DRAGON

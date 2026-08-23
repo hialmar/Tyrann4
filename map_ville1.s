@@ -645,6 +645,7 @@ herboriste_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 	rts
 ;-------------------------------------------------
@@ -663,6 +664,7 @@ animalerie_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 	rts
 ;-------------------------------------------------	
@@ -681,6 +683,7 @@ taberna_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 ;-------------------------------------------------	
 bazar_
@@ -698,6 +701,7 @@ bazar_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text	
 ;-------------------------------------------------
 coffre_
@@ -763,7 +767,7 @@ return
 
 retour_map
 .(
-	; gestion des villes _team_ville contient le numéro de la ville
+	; retour à la carte
 	; direction_scroll doit contenir #$86 Y
 	lda direction_scroll
 	cmp #$86
