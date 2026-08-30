@@ -191,7 +191,7 @@ void items(char p)
 				return; // on arrête tout
 			item = characters[p].sad[o];
 			// IF(IT>21ANDIT<27)OR(IT>33ANDIT<44)THENL=24
-			if ((item<=0)||(item>21 && item<27)||(item>33 && item<44)) {
+			if ((item<=0)||(item>17 && item<23)||(item>27 && item<37)) {
 				ping();
 				printAtXY(6,25, "       !IMPOSSIBLE!       ");
 				wait(250);

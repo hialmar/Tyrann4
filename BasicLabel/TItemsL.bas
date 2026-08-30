@@ -21,7 +21,7 @@ TItems_0
  PRINT"OBJETS OK":PING:ZAP:END
  DATA Lorica Segmantata, Lorica Squamata, Lorica Hamata, Lorica, Scutum, Tunica:REM 1-6 
  DATA Gladius, Spatha, Pilum, Fascina, Manu Ballista, Archus, Funda, Rete, Pugio:REM 7-10 AC, 11-CBow, 12-Bow, 13-Sling, 14-Net, 15-Pugio 
- DATA Unguent, Divine wood, Vital juice, Ebony Potion, Divine Potion, Visio Potion, Freezing Potion:REM 16-22
+ DATA Unguent, Divine wood, Ebony Potion, Vital juice, Divine Potion, Visio Potion, Freezing Potion:REM 16-22
  DATA Wineskin, Loaf of bread, Ale, Dry fish, Boar leg, Crowbar, Compass:REM 23-29
  DATA Wolf, Panther, Canis molossus, Eagle, Hawk, Wild dog, Wild Cat:REM 30-36
  DATA Crown, Jewel, Pearls, Diamonds, Pouch of coins:REM 37-41
