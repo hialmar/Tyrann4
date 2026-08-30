@@ -23,7 +23,7 @@ combat_128
  PRINT @ T,1;" ";CHR$(145);"< ";S$;" > ";CHR$(144)
  PRINT@2,I;"*************************************"
  RETURN
-combat_29
+combat_printS
  T=INT((42-LEN(S$))/2):PRINT @T,L;S$
  RETURN
 combat_5
@@ -37,7 +37,7 @@ combat_Impossible
  WAITTI*3:GOSUB  combat_7 
  ZAP:PRINT @2,18;"              "
  RETURN
-combat_8
+combat_clear
  FORII=1TO11:
  PRINT@1,7+II;CHR$(144)"                                         ":NEXTII
  RETURN
@@ -46,7 +46,7 @@ combat_131
  PRINT @3,10+J;"                                   ":NEXTJ
  RETURN
 combat_chg_time
- GOSUB  combat_8 :PRINT @9,12;"Time (1-3) Now:";TI/5;:INPUT TI
+ GOSUB  combat_clear :PRINT @9,12;"Time (1-3) Now:";TI/5;:INPUT TI
  IF TI<1 OR TI>3 THEN PING:GOTO  combat_chg_time 
  TI=5*TI
  RETURN
@@ -85,13 +85,12 @@ combat_18
  GOSUB  combat_11 
  GOSUB  combat_7 
  IF FF= 0 THEN GOSUB  combat_12 
- IF BUG=1 THEN  combat_13 
  FOR P=1TO6
  ACT(P)=3
  IF OK(P)<3 THEN GOSUB  combat_14  ELSE  combat_15 
  GOSUB  combat_16 
 combat_15
- GOSUB  combat_8 
+ GOSUB  combat_clear 
  NEXT P
 combat_20
  PRINT @8,12;"CHANGE YOUR CHOICES (Y/N)?"
@@ -106,7 +105,7 @@ combat_19
  REM tour
  IF DRAG>0 THEN DD=1:GOSUB  combat_21 
  FOR P=1TO6+NE
- ACT$=" attacks ":GOSUB  combat_8 
+ ACT$=" attacks ":GOSUB  combat_clear 
  PRINT@2,7;CHR$(145)"************** COMBAT ************** "CHR$(144)
  IF ESP(P)=0 AND EV>0 THEN GOTO  combat_22 
  REM HEROS
@@ -115,8 +114,8 @@ combat_19
 combat_24
  IF C2PV(TG(AO(P)))<=0 THEN  combat_23 
  GOSUB  combat_28 
- L=10:S$=N$(AO(P))+ACT$:GOSUB  combat_29 :WAIT TI*5
- L=12:S$=MM$(MO(TG(AO(P)))):ZAP:GOSUB  combat_29 :WAIT TI*5
+ L=10:S$=N$(AO(P))+ACT$:GOSUB  combat_printS :WAIT TI*5
+ L=12:S$=MM$(MO(TG(AO(P)))):ZAP:GOSUB  combat_printS :WAIT TI*5
  IF C6OK(TG(AO(P)))>2 THEN DFF=DFF+30
  GOSUB  combat_30 :DFF=FNA(VIL*3)
  'PRINT@6,6;"TST";TST;"SS";SS;"RT";RT;"  ":WAIT100
@@ -154,7 +153,6 @@ combat_23
  GOSUB  combat_39 
 combat_13
  UNTIL EV<1 OR HV<1
- IFBUG=1THENBUG=0:HIRES:ZAP:WAIT50:GOTO combat_40 
  FORP=1TO6:BC(P)=CA(P):NEXTP
  IFPD=1THEN GOSUB combat_41 :PD=0
  IF HV>0 THEN  combat_42 
@@ -166,8 +164,8 @@ combat_13
  GOSUB  combat_7 
 combat_43
  GETA$:IF A$<"1" OR A$>"2" THEN  combat_43 
- IF A$="1" THEN RELEASE : LOAD "MAP"
- CLS:PRINT@15,5;"Coward !":ZAP:RELEASE:END
+ IF A$="1" THEN LOAD "MAP"
+ CLS:PRINT@15,5;"Coward !":ZAP:END
  REM |SOUS PROGS
 combat_11
  REM ENNEMIS
@@ -252,7 +250,6 @@ combat_12
  FF=1:PRINT@15,12;CHR$(131)"FLEE Y/N"
 combat_58
  GETA$
- IF A$="B" THEN BUG=1:RETURN
  IF A$<>"Y" AND A$<>"N" THEN  combat_58 
  IF A$="N" THEN  combat_59 
  TEST=(VIL*2)+FNA(40)+10+NF
@@ -279,7 +276,7 @@ combat_62
 combat_63
  IF A$="3" THEN IF BT(P)>0 THEN BF(P)= IA(BT(P)-29):AU(P)=BT(P) ELSE  combat_64 
 combat_65
- IF AU(P)=12 AND FU=1 THEN PRINT@25,16;" NET in USE ":WAIT 5*TI:GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
+ IF AU(P)=14 AND FU=1 THEN PRINT@25,16;" NET in USE ":WAIT 5*TI:GOSUB  combat_clear :GOSUB  combat_14 :GOTO  combat_16 
  BF(P)=BF(P)+INT(FO(P)/10)+FC(P):GOSUB  combat_66 
  WAIT 5*TI
  RETURN
@@ -289,12 +286,12 @@ combat_54
  PRINT @29,16;"Which one?":PRINT @31,17;"0: None"
 combat_67
  GETA$:CH=VAL(A$):IF (CH>0 AND CH<4) OR CH>OP(P)+3  THEN  combat_67 
- IF CH=0 THEN GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
+ IF CH=0 THEN GOSUB  combat_clear :GOSUB  combat_14 :GOTO  combat_16 
  CH=CH-3:OC(P)=SAD(P,CH):CS(P)=CH
  PRINT@1,11+CH;CHR$(145):PRINT@27,11+CH;CHR$(144)
- IF OC(P)>15 AND OC(P)<20 THEN GOSUB  combat_68 :GOTO  combat_69 
- IF (OC(P)>24 AND OC(P)<34) THEN PING:GOTO  combat_69 
- GOSUB  combat_Impossible :GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_16 
+ IF OC(P)>15 AND OC(P)<21 THEN GOSUB  combat_68 :GOTO  combat_69 
+ IF (OC(P)>20 AND OC(P)<23) THEN PING:GOTO  combat_69 
+ GOSUB  combat_Impossible :GOSUB  combat_clear :GOSUB  combat_14 :GOTO  combat_16 
  WAIT 5*TI
 combat_69
  RETURN
@@ -317,18 +314,17 @@ combat_71
 combat_33
  REM ITEMS
  REM UTIL OBJET
- IF OC(AO(P))=25 OR OC(AO(P))=26 OR OC(AO(P))>31 THEN  combat_72 
- IF OC(AO(P))=20 OR OC(AO(P))=21 THEN GOSUB  combat_73 :GOTO  combat_74 
- IF OC(AO(P))=22 THEN GOSUB  combat_75 :GOSUB  combat_76 :GOTO  combat_74 
- IF OC(AO(P))=23 THEN GOSUB  combat_77 :GOTO  combat_74 
- IF OC(AO(P))=24 THEN GOSUB  combat_78 :GOTO  combat_74 
- IF OC(AO(P))>26 AND OC(AO(P))<32 THEN GOSUB  combat_79 
+ IF OC(AO(P))=21 OR OC(AO(P))=22 THEN  combat_72 
+ IF OC(AO(P))=16 OR OC(AO(P))=17 THEN GOSUB  combat_73 :GOTO  combat_74 
+ IF OC(AO(P))=18 THEN GOSUB  combat_75 :GOSUB  combat_76 :GOTO  combat_74 
+ IF OC(AO(P))=19 THEN GOSUB  combat_77 :GOTO  combat_74 
+ IF OC(AO(P))=20 THEN GOSUB  combat_78 :GOTO  combat_74 
+ IF OC(AO(P))>22 AND OC(AO(P))<28 THEN GOSUB  combat_Food 
 combat_74
  WAIT 5*TI:GOSUB  combat_7 :GOTO  combat_80 
 combat_72
- IF OC(AO(P))=25 THEN PRINT @6,10;N$(AO(P))" use spirit vision ":ZO=1:GOTO  combat_80
- IF OC(AO(P))=26 THEN PRINT @6,10;N$(AO(P))" use freezing potion":GOSUB  combat_81 :GOTO  combat_80 
- IF OC(AO(P))=32 OR OC(AO(P))=33 THEN PRINT @6,10;N$(AO(P))" explode ";IT$(OC(AO(P))):GOSUB  combat_82 :GOSUB  combat_83 
+ IF OC(AO(P))=21 THEN PRINT @6,10;N$(AO(P))" use visio ":ZO=1:GOTO  combat_80
+ IF OC(AO(P))=22 THEN PRINT @6,10;N$(AO(P))" use freezing potion":GOSUB  combat_81 :GOTO  combat_80  
 combat_80
  SAD(AO(P),CS(AO(P)))=0:WAITTI*5
  GOSUB  combat_84 
@@ -341,10 +337,10 @@ combat_83
  C6OK(REVEIL)=1:GOSUB  combat_11 
 combat_85
  RETURN
-combat_180
+combat_Cure
  REM CURE
  IF OK(TG(AO(P)))=4 THEN  combat_86 
- SS=FNA(4)+FNA(VIL)+3:IF OC(AO(P))=21 THEN SS=SS+4:OK(TG(AO(P)))=1
+ SS=FNA(4)+FNA(VIL)+3:IF OC(AO(P))=17 THEN SS=SS+4:OK(TG(AO(P)))=1
  ET(TG(AO(P)))=ET(TG(AO(P)))+SS:IF ET(TG(AO(P)))>PV(TG(AO(P))) THEN ET(TG(AO(P)))=PV(TG(AO(P)))
 combat_86
  RETURN
@@ -355,22 +351,22 @@ combat_76
  HV=HV+1:GOSUB  combat_7 
 combat_87
  RETURN
-combat_79
+combat_Food
  REM FOOD
- IF OC(AO(P))=27 THEN M$=" drinks water ":P1=4:P2=2:GOTO  combat_88 
- IF OC(AO(P))=28 THEN M$=" eats some bread ":P1=5:P2=3:GOTO  combat_88 
- IF OC(AO(P))=29 THEN M$=" sips some ale ":P1=8:P2=3:GOTO  combat_88 
- IF OC(AO(P))=30 THEN M$=" swallows fish ":P1=8:P2=4:GOTO  combat_88 
- IF OC(AO(P))=31 THEN M$=" devours boar meat ":P1=10:P2=6
+ IF OC(AO(P))=23 THEN M$=" drinks water ":P1=4:P2=2:GOTO  combat_88 
+ IF OC(AO(P))=24 THEN M$=" eats some bread ":P1=5:P2=3:GOTO  combat_88 
+ IF OC(AO(P))=25 THEN M$=" sips some ale ":P1=8:P2=3:GOTO  combat_88 
+ IF OC(AO(P))=26 THEN M$=" swallows fish ":P1=8:P2=4:GOTO  combat_88 
+ IF OC(AO(P))=27 THEN M$=" devours boar meat ":P1=10:P2=6
 combat_88
- SS=FNA(P1)+P2:S$=N$(AO(P))+M$:L=10:GOSUB  combat_29 
+ SS=FNA(P1)+P2:S$=N$(AO(P))+M$:L=10:GOSUB  combat_printS 
  ET(AO(P))=ET(AO(P))+SS:IF ET(AO(P))>PV(AO(P)) THEN ET(AO(P))=PV(AO(P))
  RETURN
 combat_82
  REM GREGEOIS & SORTS COLLECTIFS
- DG=6:IF OC(AO(P))=32 THEN DG=3
+ DG=6: REM IF OC(AO(P))=32 THEN DG=3
 combat_178
- FORJ=1TO5:SHOOT:WAIT15:PAPER J:NEXTJ:EXPLODE:PAPER0:GOSUB  combat_8 
+ FORJ=1TO5:SHOOT:WAIT15:PAPER J:NEXTJ:EXPLODE:PAPER0:GOSUB  combat_clear 
 combat_179
  IF EV=0 THEN  combat_89 
  LG=0:REVEIL=0
@@ -378,7 +374,7 @@ combat_179
  IF C6OK(I)<1 THEN  combat_90 
  IF C6OK(I)=5 THEN REVEIL=I:PING
  LG=LG+1
- SS=FNA(DG)+DG:IF C6OK>4 THEN SS=SS*3
+ SS=FNA(DG)+DG:IF C6OK(I)>4 THEN SS=SS*3
  S$=MM$(MO(I))+" looses "+STR$(SS)+" HP":GOSUB  combat_91 
  PRINT @3,9+LG;S$:WAIT TI*5
 combat_90
@@ -392,7 +388,7 @@ combat_91
  REM mort ?
  C2PV(I)=C2(I)-SS:IF C2(I)>0 THEN  combat_92 
  S$=S$+CHR$(129)+" and dies":IF C6OK(I)=6 THEN FU=0
- EV=EV-1:C6OK(I)=0:IF C6=4THENAMI=0
+ EV=EV-1:C6OK(I)=0:IF C6(I)=4THENAMI=0
  IFDD=1THENMT(SD)=MT(SD)+1ELSEMT(AO(P))=MT(AO(P))+1
 combat_92
  RETURN
@@ -502,7 +498,7 @@ combat_37
  IF RT=0 THEN S$=S$+" stays captured " ELSE S$=S$+" frees from the net "
  PRINT @2,12;CHR$(129);S$:WAIT 8*TI
  IF RT=1 THEN FU=0:C6OK(AO(P))=1:ZAP:GOSUB  combat_11 
- GOSUB  combat_8 
+ GOSUB  combat_clear 
  RETURN
 combat_38
  REM Enemy attack
@@ -510,8 +506,8 @@ combat_112
  TE=FNA(6):IF OK(TE)=4 THEN  combat_112 
  TE$=N$(TE):SS$=" attacks ":TST=1
  IF MO(AO(P))>14 THEN IF FNA(10)>7 THEN SS$=" casts a spell on":TST=4:IF MO(AO(P))> 20 THEN TE$="the team"
- L=10:S$=CHR$(129)+MM$(MO(AO(P)))+SS$:GOSUB  combat_29 :ZAP
- L=12:S$=CHR$(129)+TE$:GOSUB  combat_29 :WAITTI*10
+ L=10:S$=CHR$(129)+MM$(MO(AO(P)))+SS$:GOSUB  combat_printS :ZAP
+ L=12:S$=CHR$(129)+TE$:GOSUB  combat_printS :WAITTI*10
  DFF=(2*VIL)+FNA(10):GOSUB  combat_30 :IF RT=0 THEN SS$="and fails": GOTO  combat_113 
  IF TST=4 THEN GOTO  combat_114 
  SS=1+VIL+FNA(VIL)+CM(AO(P),4)-BC(TE)-PRD(TE)'FORMULA MONSTER ATTACK
@@ -521,7 +517,7 @@ combat_121
  ET(TE)=ET(TE)-SS:ZAP:WAIT TI*5
  IF ET(TE)<=0 THEN ET(TE)=0:OK(TE)=4:HV=HV-1
 combat_113
- L=14:S$=SS$:GOSUB  combat_29 :WAITTI*5
+ L=14:S$=SS$:GOSUB  combat_printS :WAITTI*5
  IF OK(TE)=4 THEN PRINT @15,16;"and s/he dies...":EXPLODE
  GOSUB  combat_7 
  GOTO  combat_115 
@@ -545,13 +541,13 @@ combat_120
  SS$="his protection decreases":BC(TE)=BC(TE)-1-FNA(2)
  IF BC(TE)<0 THEN BC(TE)=0
 combat_122
- L=14:S$=SS$:GOSUB  combat_29 :WAITTI*12
+ L=14:S$=SS$:GOSUB  combat_printS :WAITTI*12
  GOTO  combat_115 
 combat_116
  REM strong spells
  SM=FNA(5)
- GOSUB  combat_8 
- L=9:S$=SM$(SM):GOSUB  combat_29 :ZAP:WAITTI*20:LL=10
+ GOSUB  combat_clear 
+ L=9:S$=SM$(SM):GOSUB  combat_printS :ZAP:WAITTI*20:LL=10
  IF SM=4 THEN MALUS=MALUS+1+FNA(2):GOTO  combat_115 
  IF SM=5 THEN GOSUB  combat_124 :GOTO  combat_115 
  FORJ=1TO6
@@ -580,7 +576,7 @@ combat_124
  S$=" is cured"
  IF C6(J)<2 OR C6(J)>3 THEN  combat_127 
  C6(J)=1:C2=C2+5+FNA(8)
- S$=MM$(MO(J))+S$:GOSUB  combat_29 :WAIT TI*8:L=L+1
+ S$=MM$(MO(J))+S$:GOSUB  combat_printS :WAIT TI*8:L=L+1
 combat_127
  NEXTJ
  GOSUB  combat_11 
@@ -600,16 +596,16 @@ combat_42
  RI(P)=RI(P)+PO+(MT(P)*25)+FNA(10*VIL)
 combat_129
  IF MT(P)< NE THEN  combat_130 
- S$="Well done "+N$(P):L=11:GOSUB  combat_29 :WAITTI*8
- S$="who killed them all !":L=12:GOSUB  combat_29 :WAITTI*12
+ S$="Well done "+N$(P):L=11:GOSUB  combat_printS :WAITTI*8
+ S$="who killed them all !":L=12:GOSUB  combat_printS :WAITTI*12
  PRIME=(NE*100)+FNA(DC*20)
- S$="A special bounty of"+STR$(PRI)+" ss":L=14:GOSUB  combat_29 :WAITTI*12
+ S$="A special bounty of"+STR$(PRI)+" ss":L=14:GOSUB  combat_printS :WAITTI*12
  RI(P)=RI(P)+PRI:XP(P)=XP(P)+XP+(MT(P)*20)+FNA(10*VIL)
  L=16:GOSUB  combat_5 :GOSUB  combat_131 
 combat_130
  IF XP(P)>1000+(VIL*150) AND NI(P)<21 AND OK(P)<>4 THEN GOSUB  combat_132 
  NEXT P
- L=18:S$="LET'S MOVE ON !":GOSUB  combat_29 
+ L=18:S$="LET'S MOVE ON !":GOSUB  combat_printS 
  L=21:GOSUB  combat_5 
  PING
  CA=0
@@ -618,9 +614,9 @@ combat_130
 combat_132
  REM PROMOTION NEW
  NI(P)=NI(P)+1:XP(P)=0:FORJ=1TO5:PING:WAIT2*J:NEXT
- S$=CHR$(145)+C$(CP(P))+" "+N$(P)+" "+CHR$(144)+CHR$(132):L=11:GOSUB  combat_29 
- S$="rises to level :"+STR$(NI(P)):L=12:GOSUB  combat_29 
- S$="And earns some HP !":L=13:GOSUB  combat_29 :WAITTI*8
+ S$=CHR$(145)+C$(CP(P))+" "+N$(P)+" "+CHR$(144)+CHR$(132):L=11:GOSUB  combat_printS 
+ S$="rises to level :"+STR$(NI(P)):L=12:GOSUB  combat_printS 
+ S$="And earns some HP !":L=13:GOSUB  combat_printS :WAITTI*8
  S$=" 1   2   3   4   5   6"
  PLOT 7,15,S$
  S$="Ml  Rg  St  Dx  Ig  MS  "
@@ -643,14 +639,14 @@ combat_133
  RETURN
 combat_73
  L=11:S$=CHR$(130)+N$(AO(P))+" Heals "+N$(TG((AO(P))))
- GOSUB  combat_29 :GOSUB  combat_134 :WAITTI*5
- L=14:GOSUB combat_29 
+ GOSUB  combat_printS :GOSUB  combat_Mg_Cure :WAITTI*5
+ L=14:GOSUB combat_printS 
  RETURN
 combat_78
  REM Potion divine
- L=10:S$=N$(AO(P))+" uses divine Potion ":GOSUB  combat_29 
- L=13:S$=N$(TG((AO(P))))+" gets a colossal strength":GOSUB  combat_29 
- FC(TG(AO(P)))=50+FNA(VIL*6):GOSUB combat_135 
+ L=10:S$=N$(AO(P))+" uses divine Potion ":GOSUB  combat_printS 
+ L=13:S$=N$(TG((AO(P))))+" gets a colossal strength":GOSUB  combat_printS 
+ FC(TG(AO(P)))=50+FNA(6):GOSUB combat_135 
  PD=1:PP=1
  S$=N$(TG((AO(P)))):N$(TG((AO(P))))=LEFT$(S$,1)
  FORI=2TOLEN(S$)
@@ -673,12 +669,12 @@ combat_41
  NEXTP
  RETURN
 combat_75
- L=10:S$=N$(AO(P))+" uses Vital Essence ":GOSUB  combat_29 
- L=13:S$=N$(TG((AO(P))))+" revives":GOSUB  combat_29 
+ L=10:S$=N$(AO(P))+" uses Vital Essence ":GOSUB  combat_printS 
+ L=13:S$=N$(TG((AO(P))))+" revives":GOSUB  combat_printS 
  RETURN
 combat_77
- L=10:S$=N$(AO(P))+" uses "+IT$(24):GOSUB  combat_29 
- L=13:S$=N$(TG((AO(P))))+" is Invincible !":GOSUB  combat_29 
+ L=10:S$=N$(AO(P))+" uses "+IT$(19):GOSUB  combat_printS 
+ L=13:S$=N$(TG((AO(P))))+" is Invincible !":GOSUB  combat_printS 
  BC(TG(AO(P)))=50:ET(TG(AO(P)))=PV(TG(AO(P)))
  RETURN
 combat_135
@@ -698,14 +694,14 @@ combat_136
  RETURN
 combat_56
  REM SPELLS
- GOSUB  combat_8 :SS=NI(P):IFSS>8THENSS=8
+ GOSUB  combat_clear :SS=NI(P):IFSS>8THENSS=8
  PRINT @14,8;CHR$(129);" < MAGIC > ";CHR$(144)
  FOR I=1TOSS:PRINT@12,I+9;I;"- ";SPELL$(CP(P)-3,I)
  S$="("+STR$(SN(P,I))+" )":PRINT @26,I+9;S$:NEXT
  PRINT @5,9;"None - 0":
 combat_137
  GETA$:CH=VAL(A$):IF CH>NI(P) THEN  combat_137 
- IF CH=0 THEN GOSUB  combat_8 :GOSUB  combat_14 :GOTO  combat_138 
+ IF CH=0 THEN GOSUB  combat_clear :GOSUB  combat_14 :GOTO  combat_138 
  IF SN(P,CH)=0 THEN PING:GOTO  combat_137 
  SPELL(P)=CH
  ON CP(P)-3 GOTO  combat_139 , combat_140 , combat_141 
@@ -738,7 +734,7 @@ combat_142
 combat_138
  RETURN
 combat_146
- GOSUB  combat_8 
+ GOSUB  combat_clear 
  IF WL(TG(P))=0 THEN A=1:GOTO  combat_147  ELSE PRINT @4,10; "Enchant whose sword ?"
  PRINT @3,12;CHR$(132);"1.R:";IT$(WR(TG(P)));CHR$(131)
  PRINT @3,13;CHR$(132);"2.L:";IT$(WL(TG(P)));CHR$(131)
@@ -751,13 +747,13 @@ combat_147
 combat_34
  REM SPELLS
  H=CP(AO(P))-3
- L=10:S$=CHR$(134)+N$(AO(P))+" Casts "+SPELL$(H,SP(AO(P))):GOSUB  combat_29 
+ L=10:S$=CHR$(134)+N$(AO(P))+" Casts "+SPELL$(H,SP(AO(P))):GOSUB  combat_printS 
  SN(AO(P),SP(AO(P)))=SN(AO(P),SP(AO(P)))-1
  ON H GOTO  combat_149 , combat_150 , combat_151 
 combat_149
  IF SP(AO(P))<7 AND C6OK(TG(AO(P)))=0 THEN  combat_152 
  IF SP(AO(P))<7 THEN S$=" on  "+MM$(MO(TG(AO(P)))) ELSE S$="on the enemies"
- L=12:GOSUB  combat_29 :WAIT TI*10:S$="fails his invocation"
+ L=12:GOSUB  combat_printS :WAIT TI*10:S$="fails his invocation"
  ON SPELL(AO(P)) GOSUB  combat_153 , combat_154 , combat_155 , combat_156 , combat_157 , combat_158 , combat_159 , combat_160 
  GOTO  combat_152 
 combat_150
@@ -765,15 +761,15 @@ combat_150
  IF SP(AO(P))<5 OR SP(AO(P))=7 THEN S$=" on  "+N$(TG(AO(P)))
  IF SP(AO(P))=5 OR SP(AO(P))=6 THEN S$=" on the team"
  IF SP(AO(P))=8 THEN IF C6OK(TG(AO(P)))<>0 THEN S$=" on "+ MM$(MO(TG(AO(P)))) ELSE  combat_152 
- L=12:GOSUB  combat_29 :WAIT TI*10
+ L=12:GOSUB  combat_printS :WAIT TI*10
  ON SPELL(AO(P)) GOSUB  combat_161 , combat_162 , combat_163 , combat_164 , combat_165 , combat_166 , combat_167 , combat_168 
- GOSUB  combat_169 :GOSUB  combat_7 :GOSUB  combat_8 
+ GOSUB  combat_169 :GOSUB  combat_7 :GOSUB  combat_clear 
  GOTO  combat_152 
 combat_151
  IF SP(AO(P))=2 THEN S$=" on "+ N$(TG((AO(P))))
  IF SP(AO(P))=3 THEN IF C6OK(TG(AO(P)))<>0 THEN S$=" on "+ MM$(MO(TG(AO(P)))) ELSE  combat_152 
- IF SP(AO(P))=2 OR SP(AO(P))=3 THEN L=12:GOSUB  combat_29 :WAIT TI*10
- IF SP(AO(P))=8 AND SD<>AO(P) THEN S$=" you have no saddle! ":L=12:GOSUB  combat_29 :WAIT TI*10:GOTO combat_152 
+ IF SP(AO(P))=2 OR SP(AO(P))=3 THEN L=12:GOSUB  combat_printS :WAIT TI*10
+ IF SP(AO(P))=8 AND SD<>AO(P) THEN S$=" you have no saddle! ":L=12:GOSUB  combat_printS :WAIT TI*10:GOTO combat_152 
  S$="fails his invocation"
  ON SPELL(AO(P)) GOSUB  combat_170 , combat_171 , combat_172 , combat_173 , combat_174 , combat_175 , combat_176 , combat_177 
 combat_152
@@ -815,19 +811,19 @@ combat_158
 combat_159
  REM 1,7 LAVE
  TST=5:DFF=35:GOSUB  combat_30 :IF RT=0 THEN  combat_169 
- S$="A lava rain!!!":GOSUB  combat_169 :GOSUB  combat_8 
+ S$="A lava rain!!!":GOSUB  combat_169 :GOSUB  combat_clear 
  DG=10:GOSUB  combat_178 :RETURN
 combat_160
  REM 1,8 SEISME
  TST=5:DFF=40:GOSUB  combat_30 :IF RT=0 THEN  combat_169 
  EXPLODE:WAIT60:SHOOT
- S$="The ground opens and swallows them!":GOSUB  combat_169 :GOSUB  combat_8 
+ S$="The ground opens and swallows them!":GOSUB  combat_169 :GOSUB  combat_clear 
  DG=20:GOSUB  combat_179 :RETURN
  REM  MESTRE
 combat_161
  REM 2,1 EAU
-combat_134
- GOSUB  combat_180 
+combat_Mg_Cure
+ GOSUB  combat_Cure 
  S$="S/he is a little better"
  RETURN
 combat_162
@@ -879,9 +875,9 @@ combat_170
  REM 3.1EPEE-FEU
  TST=4:DFF=25:GOSUB  combat_30 :IF RT=0 THEN EF(TG((AO(P))))=0:GOTO  combat_169 
  IF EF(TG((AO(P))))=1 THEN EF=WR(TG((AO(P)))) ELSE EF=WL(TG((AO(P))))
- WAIT TI*10:L=12:S$="on "+IT$(EF)+" of "+N$(TG((AO(P)))):GOSUB  combat_29 
+ WAIT TI*10:L=12:S$="on "+IT$(EF)+" of "+N$(TG((AO(P)))):GOSUB  combat_printS 
  ZAP:PAPER1:WAIT TI*10:EXPLODE:PAPER0
- S$="...it inflames ...":GOSUB  combat_169 :WAIT TI*8:GOSUB  combat_8 
+ S$="...it inflames ...":GOSUB  combat_169 :WAIT TI*8:GOSUB  combat_clear 
  RETURN
 combat_171
  REM 3.2FORCE
@@ -932,26 +928,26 @@ combat_176
  PRINT @10,12;"the horde !":WAIT TI*8
  TST=5:DFF=35:GOSUB  combat_30 :IF RT=0 THEN  combat_169 
  EXPLODE:WAIT60:SHOOT
- S$="A tornado swipes the horde!":GOSUB  combat_169 :GOSUB  combat_8 
+ S$="A tornado swipes the horde!":GOSUB  combat_169 :GOSUB  combat_clear 
  DG=6:GOSUB  combat_179 
  RETURN
 combat_177
  REM 3,8DRAGOON
  DR=1
- S$="A Dragon is joining you":GOSUB  combat_169 :GOSUB  combat_8 
+ S$="A Dragon is joining you":GOSUB  combat_169 :GOSUB  combat_clear 
  RETURN
 combat_21
- GOSUB  combat_8 :S$=CHR$(129)+"! the Dragon rages ! "
+ GOSUB  combat_clear :S$=CHR$(129)+"! the Dragon rages ! "
  T=INT((41-LEN(S$))/2):PRINT@T,10;S$:WAIT TI*15
  DG=20:GOSUB  combat_178 
  RETURN
 combat_169
- L=14:GOSUB  combat_29 :WAIT TI*10
+ L=14:GOSUB  combat_printS :WAIT TI*10
  GOSUB  combat_11 
  RETURN
 combat_35
  REM CHARME
- GOSUB  combat_8 :S$=CHR$(134)+" YOUR FRIEND: "+MM$(MO(AMI)):T=INT((41-LEN(S$))/2)
+ GOSUB  combat_clear :S$=CHR$(134)+" YOUR FRIEND: "+MM$(MO(AMI)):T=INT((41-LEN(S$))/2)
  PRINT @T,7;S$:S$=CHR$(134)+MM$(MO(AMI))+" Attacks the horde "
  T=INT((41-LEN(S$))/2):PRINT@T,10;S$:WAIT TI*15
  TE=FNA(NE)
