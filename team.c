@@ -1,8 +1,8 @@
 
 #include "tyrann.h"
 
-unsigned char hi; // octet haut
-unsigned char lo; // octet bas
+unsigned char hi = 0; // octet haut
+unsigned char lo = 0; // octet bas
 
 // characters data
 
@@ -10,26 +10,26 @@ char s = 1; // direction (est)
 unsigned char x = 2; // coords
 unsigned char y = 2;
 
-struct character characters[6];
+struct character characters[6] = {0};
 
-unsigned char boussole;
-unsigned char filet;
-unsigned char selle_dragon;
+unsigned char boussole = 0;
+unsigned char filet = 0;
+unsigned char selle_dragon = 0;
 
-unsigned char cles[9][4]; // trousseau de clefs (32 octets)
+unsigned char cles[9][4] = {0}; // trousseau de clefs (32 octets)
 
-unsigned char ingredients[6]; // ingrédients
+unsigned char ingredients[6] = {0}; // ingrédients
 
 unsigned char ville=0; // ville courante
 
-unsigned char combats_coffres[9][5]; // combats et coffres sous forme de tableaux de bits
+unsigned char combats_coffres[9][5] = {0}; // combats et coffres sous forme de tableaux de bits
 
-unsigned char dedans; // tableau de bits pour gérer le côté des portes et le mur à la fin
+unsigned char dedans = 0; // tableau de bits pour gérer le côté des portes et le mur à la fin
 
-unsigned char tl; // top level  villes visitables.
-unsigned char np; // nombre d'ingredients de la potion
-unsigned char nf; // nombre de fuites
-unsigned char pm; // potion faite ?
+unsigned char tl = 0; // top level  villes visitables.
+unsigned char np = 0; // nombre d'ingredients de la potion
+unsigned char nf = 0; // nombre de fuites
+unsigned char pm = 0; // potion faite ?
 
 unsigned char out=1; // sur la carte ?
 
