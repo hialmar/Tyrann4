@@ -6,7 +6,7 @@
 ::
 IF "%OSDK%"=="" GOTO ErCfg
 
-Goto Camp
+:: Goto Camp
 :: Goto MapAsm
 Goto Ville1
 :: Goto Ville2
@@ -22,8 +22,8 @@ Goto Ville1
 :: Same for Camp
 ::
 
-:: SET OSDK=C:\OSDK
-SET OSDK=C:\OSDK_2_0
+SET OSDK=C:\OSDK
+:: SET OSDK=C:\OSDK_2_0
 
 CALL osdk_config_camp.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
@@ -41,7 +41,7 @@ Del sed*
 Copy ased.exe sed.exe 
 Copy asedoric_io.s sedoric_io.s 
 
-:: SET OSDK=C:\OSDK_2_0
+SET OSDK=C:\OSDK_2_0
 
 Goto Tap2dsk
 
@@ -66,7 +66,7 @@ SET OSDKHEAD=
 CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
-Copy BUILD\map.tap BUILD\map.init.tap
+Copy BUILD\map.tap BUILD\map_init.tap
 Copy BUILD\symbols BUILD\symbols_map
 
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
