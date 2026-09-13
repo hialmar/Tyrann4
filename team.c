@@ -212,13 +212,13 @@ void saveCharacters(void)
 	
 	// 49000 TEXT:CLS:PRINT @ 8,12;CHR$(145);CHR$(135);"++ PREPARE L EQUIPE ++ ";CHR$(144)
 	text(); cls(); 
-	printAtXY(8,10, "++ PREPARE L'EQUIPE ++ \n");
+	printAtXY(8,10, "++ PREPARE L'EQUIPE V2 ++ \n");
 	// 49010 O1=#A000
 	ptr = (char*)0xa000;
 	//printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);
 	*ptr = 0; ptr++;
 	// nouvelle version
-	*ptr = 1; ptr++; // version 1 : passage a 9 villes
+	*ptr = 2; ptr++; // version 2 : tyrann 4
 	*ptr = x; ptr++;
 	*ptr = y; ptr++;
 	*ptr = s; ptr++;

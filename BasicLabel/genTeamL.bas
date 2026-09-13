@@ -4,8 +4,8 @@
  GOSUB  dices_0
 Dices
  REM DICES TESTS
- CLS:D=10:PAPER0:INK 3
- FOR P=1TO6
+ CLS:D=10:VT=1:PAPER0:INK 3
+ P=1
  TRY=1
  GOSUB IntroCreation
  POKE#26A,PEEK(#26A) AND 254 'Vire le curseur
@@ -76,6 +76,26 @@ dices_13
  NEXT I
  ET(P)=HP(P)
  RI(P)=FNA(150)+200
+
+ REM fill with legio
+ FOR P=2TO6
+ PRINT "Legio"
+ PRINT P
+ NOM$(P) = "Legio"
+ CULT(P) = 6
+ ROLE(P) = 1
+ IF P=5 THEN ROLE(P)=3
+ IF P=6 THEN ROLE(P)=5 : CULT(P)=2
+ ML(P)= 20 + BC(CULT(P),1) + BR(ROLE(P),1)
+ RG(P)= 20 + BC(CULT(P),2) + BR(ROLE(P),2)
+ ST(P)= 20 + BC(CULT(P),3) + BR(ROLE(P),3)
+ AG(P)= 20 + BC(CULT(P),4) + BR(ROLE(P),4)
+ IQ(P)= 20 + BC(CULT(P),5) + BR(ROLE(P),5)
+ MS(P)= 20 + BC(CULT(P),6) + BR(ROLE(P),6)
+ HP(P)=6+FNA(4)+INT(ST(P)/10) + BC(CULT(P),7) + BR(ROLE(P),7)
+ ET(P)=HP(P)
+ RI(P)=FNA(150)+200
+ PRINT RI(P)
  NEXT P
  GOSUB Sauvegarde
  END:REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -117,14 +137,11 @@ IntroCreation
 Intro_3
   TEXT:CLS:PRINT:PRINTSPC(12);CHR$(4);CHR$(27)"JCEO RPG";CHR$(4)
   PRINT
-  IF P=1 THEN
   PRINT:S$=" ****** CREATE your Hero # "+STR$(P)+" ***** ":GOSUB  Intro_1 :PRINT
   PRINT:S$="HIS FIRSTNAME (10 letters max)":GOSUB  Intro_1
   INPUT NOM$(P)
   IF LEN(NOM$(P))< 2 THEN ZAP:GOTO  Intro_3
   IF LEN(NOM$(P))>10 THEN NOM$(P)=LEFT$(NOM$(P),10)
-  ELSE
-    NOM$(P)="Legionnay"
   GOSUB  Intro_4 :SS$=NOM$(P)
 Intro_6
   TEST=0:GOSUB  Intro_5
@@ -166,7 +183,7 @@ Intro_15
   IF OK$<>"N" AND OK$<>"Y" THEN  Intro_15
   RETURN
 Intro_4
-  REM lowercase forename
+  REM lowercase firstname
   S$=NOM$(P):NOM$(P)=LEFT$(S$,1)
   FORI=2TOLEN(S$)
   MI=ASC(MID$(S$,I,1))
@@ -279,23 +296,3 @@ Sauvegarde
  DATA  -2, 4, 0, 3, 0, 0,-1: REM Perse
  DATA   3, 0, 0, 0, 3, 0, 0: REM Roman
  DATA   3, 0, 4, 0,-3, 5, 3: REM Viking
- REM ***************  TEXTE INTRO  **************
- DATA "   Ave !    Great Hero of Roma      "
- DATA "The Empire  needs you  one more time"
- DATA "Our north Frontier, Antoninus's Wall"
- DATA "is  under  pressure  by  the  pictus"
- DATA "barbarians herds...."
- DATA "I want to increase the safety of the"
- DATA "civilized Britannia's people,   by a"
- DATA "strong offensive with the legions of"
- DATA "Nemausus.  "
- DATA "My father,  Antoninus Pius,  born in"
- DATA "this town, always said  they are the"
- DATA "most scary legions of all the Empire"
- DATA "You must explore the Caledonia land,"
- DATA "North of  Antoninus & Hadrian Walls,"
- DATA "Evaluate  enemy forces,  seek & find"
- DATA "their Chief .....and KILL HIM  !!!!!"
- DATA " . . . . "
- DATA "    * For the Glory of Roma *  "
- DATA "    ! Pray all the Gods now !  "

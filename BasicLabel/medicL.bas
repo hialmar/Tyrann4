@@ -242,7 +242,7 @@ ville_34
  IFHO>RI(P)THENS$="Seven gods, you're too poor !":GOTO ville_36 
  RI(P)=RI(P)-HO:OK(P)=1:ET(P)=PV(P):HO=0:S$="Thanks Gods, You're healed!"
 ville_36
- PING:GOSUB ville_17 :PRINT@4,15;S$
+ PING:GOSUB ville_RedBg :PRINT@4,15;S$
  WAIT25*TI
  GOTO ville_7 
 
@@ -300,7 +300,7 @@ ville_SAVE
  TEXT:CLS:PRINT@8,2;CHR$(145);CHR$(135);"++ PREPARING TEAM ++ ";CHR$(144)
  O1=#A000::GOSUB ville_98 
  POKEO1,0
- O1=O1+1:POKEO1,1
+ O1=O1+1:POKEO1,2'V2 : T4
  O1=O1+1:POKEO1,X
  O1=O1+1:POKEO1,Y
  O1=O1+1:POKEO1,S
