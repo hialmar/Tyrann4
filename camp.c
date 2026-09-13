@@ -115,6 +115,8 @@ void money(char p)
 	char a,i,j;
 	char titre[32];
 	int somme;
+	char *aff_somme;
+	int pos:
 	cls();
 	printFrame(18);
 	strcpy(titre, " < ");
@@ -131,7 +133,13 @@ void money(char p)
 	}
 	// affiche les richesses du héros sélectionné
 	printAtXY(4,13, "Your Money :");
-	printAtXY(18,13, itoa(characters[p].ri*10));
+	aff_somme = itoa(characters[p].ri);
+	pos = 18;
+	while(*(aff_somme+pos-18)!=0) {
+		printAtXY(pos,13, *(aff_somme+pos-18));
+		pos++;
+	}	
+
 	printAtXY(26,13, " Sesterces");
 	// demande la somme
 	printTitle(4,14, A_BGBLUE, "HOW MUCH ?", 17);
