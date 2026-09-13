@@ -18,6 +18,7 @@ _main
 	sta $26A
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
 							; mais pas que...
+	jsr initRandom 
 	jsr cadre_plan			; dessine un cadre blanc autour du plan de ville
 	jsr bandeau				; dessine image au dessus du plan
 main_loop
@@ -457,6 +458,14 @@ suite_voleur
 	lda #>t_voleur_2+1
 	sta write_phrase+2	
 	jsr write_phrase
+	; on vole 10 = 100 sesterces
+	sec
+	lda _character_ri
+	sbc #10
+	sta _character_ri
+	lda _character_ri+1
+	sbc #0
+	sta _character_ri+1
 	jsr hit_release_key
 	jsr eff_text
 ;-------------------------------------------------
@@ -485,7 +494,7 @@ suite_mot_passe
 	sta write_phrase+2
 	jsr write_phrase	
 	jsr hit_release_key
-	jsr eff_text	
+	jsr eff_text
 	rts
 ;-------------------------------------------------
 garde_
@@ -564,6 +573,14 @@ suite_legat
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
+	; on ajoute 20000 ses = 2000 = 7d0 en hex 
+	clc
+	lda _character_ri
+	adc #$d0
+	sta _character_ri
+	lda _character_ri+1
+	adc #$7
+	sta _character_ri+1
 	rts
 ;-------------------------------------------------	
 entrance_
@@ -729,7 +746,17 @@ coffre_
 	lda direction_scroll
 	cmp #$86
 	bne sk_ef
-	inc nb_coffres_non_ouverts
+	; inc nb_coffres_non_ouverts
+	; ajout d'une somme aléatoire
+	jsr _random
+	and #$64      ;;; en dur : on limite à 100 = 64 hex
+	clc
+	adc _character_ri
+	sta _character_ri
+	lda _character_ri+1
+	adc #0
+	sta _character_ri+1
+
 	jsr eff_tuile_spe
 sk_ef	
 	lda #$38
@@ -1294,7 +1321,7 @@ t_voleur_1
 	.asc "A pickpocket skillfully;",0
 t_voleur_2	
 	.byt $c2	
-	.asc "steals from Carpophorus.",0
+	.asc "steals from one of you.",0
 ; ------------------------------------	
 t_m_de_passe_1
 	.byt $96
@@ -1369,7 +1396,7 @@ t_coffre_1
 	.asc "You find a chest,",0
 t_coffre_2
 	.byt $c6	
-	.asc "do you take it?",0
+	.asc "do you open it?",0
 ; ------------------------------------
 
 dta_bandeau	
