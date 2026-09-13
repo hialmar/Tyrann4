@@ -126,7 +126,7 @@ _jump_to_next_prog
 init_div_var
 .(
 	lda _team_out
-	bne load_from_ville
+	beq load_from_ville
 	lda #$14		; coordonnées pour l'entrée (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
 	lda #$ff

@@ -247,7 +247,7 @@ init_div_var
 .(
 	lda #0
 	sta _team_ville
-	lda #1 ; debug
+	lda #0 ; 1 = debug, reinit
 	beq load_from_team
 	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
@@ -272,6 +272,7 @@ init_div_var
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
 	lda #TRUE	        ; TEMPO
+	sta _team_out
 	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	sta numero_lieu         ; indique lieu <> Gallia (0)
 	lda #$20
