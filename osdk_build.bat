@@ -6,9 +6,9 @@
 ::
 IF "%OSDK%"=="" GOTO ErCfg
 
-:: Goto Camp
+Goto Camp
 :: Goto MapAsm
-Goto Ville1
+:: Goto Ville1
 :: Goto Ville2
 
 ::
@@ -23,6 +23,9 @@ Goto Ville1
 ::
 
 SET OSDK=C:\OSDK
+
+echo "1.23"
+
 :: SET OSDK=C:\OSDK_2_0
 
 CALL osdk_config_camp.bat
@@ -149,7 +152,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t4_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BasicLabel\BUILD\combat.tap BUILD\camp.tap BUILD\map.tap BUILD\ville1.tap BUILD\ville2.tap  BUILD\t4team.tap t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\ville1.tap BUILD\ville2.tap t4_prog.dsk
 
 pause
 

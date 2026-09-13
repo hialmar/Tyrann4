@@ -247,7 +247,8 @@ init_div_var
 .(
 	lda #0
 	sta _team_ville
-	lda #0 ; 1 = debug, reinit
+	lda _team_version
+	cmp #2
 	beq load_from_team
 	lda #$1B		; coordonnées pour avoir Némausus au centre fénêtre (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
@@ -275,6 +276,8 @@ init_div_var
 	sta _team_out
 	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	sta numero_lieu         ; indique lieu <> Gallia (0)
+	lda #2
+	sta _team_version
 	lda #$20
 	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 	bne fin
