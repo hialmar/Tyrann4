@@ -117,6 +117,8 @@ void money(char p)
 	char a,i,j;
 	char titre[32];
 	int somme;
+	char *aff_somme;
+	int pos:
 	cls();
 	printFrame(18);
 	strcpy(titre, " < ");
