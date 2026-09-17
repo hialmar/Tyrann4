@@ -117,8 +117,6 @@ void money(char p)
 	char a,i,j;
 	char titre[32];
 	int somme;
-	char *aff_somme;
-	int pos:
 	cls();
 	printFrame(18);
 	strcpy(titre, " < ");
@@ -156,7 +154,26 @@ void money(char p)
 				somme = 0;
 				// on efface aussi ce qu'il y avait
 				printAtXY(27,14, "        ");
+				printAtXY(20,15, "Too much money");
+				printAtXY(20,16, "Press SPACE");
+				a = get();
+				printAtXY(20,15, "              ");
+				printAtXY(20,16, "           ");
 			}
+
+			// pas plus de 30000 pour éviter les cycles
+			if (somme > 30000 ) {
+				ping();
+				somme = 0;
+				// on efface aussi ce qu'il y avait
+				printAtXY(27,14, "        ");
+				printAtXY(20,15, "Too much money");
+				printAtXY(20,16, "Press SPACE");
+				a = get();
+				printAtXY(20,15, "              ");
+				printAtXY(20,16, "           ");
+			}
+
 			// on affiche la somme courante
 			printAtXY(27,14, t4_itoa(somme));
 		}	
@@ -169,14 +186,23 @@ void money(char p)
 			if (a<'0' || a>'6')
 				ping(); // ping si pas correct
 			else
-				break; // correct : on sort
-		}
-		i = a - '1';
-		if ((i>=0) && (i!=p)) {
-			// c'est correct on transfère
-			characters[i].ri+=somme/10;
-			characters[p].ri-=somme/10;
-			ping();
+				i = a - '1';
+				if ((i>=0) && (i!=p)) {
+					// c'est correct on transfère	
+					// attention a ne pas cycler
+					if (characters[i].ri<3000) {
+						characters[i].ri+=somme/10;
+						characters[p].ri-=somme/10;
+						break; // correct : on sort
+					} else {
+						printAtXY(5,15, "He is too rich!!!");
+						printAtXY(5,16, "Press SPACE");
+						a = get();
+						printAtXY(5,15, "                 ");
+						printTitle(4,16, A_BGBLUE, "TO WHOM ? (0:None)", 31);
+					}
+					ping();
+				}
 		}
 	}
 }
