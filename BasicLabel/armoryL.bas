@@ -36,12 +36,13 @@ ville_24
  PRINT@4,11;"Your money:";RI(P)"Sesterces"
  PRINT@12,18;"0 to Quit"
  S$="How much ?  ":GOSUB ville_RedBg :PRINT@3,14;S$;
- GOSUB ville_ReadChoice :DO=CH:IFDO> RI(P)THEN PING:GOTO ville_24 
+ GOSUB ville_ReadChoice :DO=CH:IFDO> RI(P) OR DO>30000 THEN PING:PRINT@12,18;"Too much ":WAIT200:GOTO ville_24 
  IFDO=0THEN ville_40 
  S$="To Whom ?  0:None":GOSUB ville_RedBg :PRINT@3,16;S$
 ville_41
  GETA$:A=VAL(A$):IFA>6 THENPING:GOTO  ville_41 
  IFA=0THEN ville_40
+ IF RI(A)>30000 THEN PING:PRINT@12,18;"Too rich ":WAIT200:GOTO ville_24
  RI(A)=RI(A)+DO:RI(P)=RI(P)-DO:PING:GOTO ville_24
 ville_40
  RETURN
