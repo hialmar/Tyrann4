@@ -189,9 +189,9 @@ ville_18
  RETURN
 ville_ResetAll
  REM REINITIALISE TOUT
- FORI=1TO9
+ FORI=1TO8
  FORJ=1TO4:CL(I,J)=0:NEXTJ'cles
- REM FORM=1TO5:TC(VIL,M)=0:NEXT M ' coffres et combats
+ IF I<6 THEN FORM=1TO5:TC(VIL,M)=0:NEXT M ' coffres et combats
  NEXTI
  FORI=1TO6:IG(I)=0:NEXTI:NP=0'ingredients potion
  REM X=2:Y=2:S=2:VILLE=1:TL=1

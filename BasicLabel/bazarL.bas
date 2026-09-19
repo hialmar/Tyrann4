@@ -11,7 +11,7 @@
  'FORP=1TO6:FORI=1TO9:NI(I)=9:SN(P,I)=5:NEXTI,P'Tous les sorts
  'FOR M=1TO5:TC(VIL,M)=0:NEXT M'Tous les coffres et combats actifs
  'FORI=1TO6:IG(I)=0:NEXT:IG(3)=1:TL=9:VIL=9:NP=2
- GOTO ville_7 
+ GOTO ville_7
 ville_27
  REM Centre
  T=INT((42-LEN(S$))/2):PRINT @T,L;S$
@@ -47,8 +47,8 @@ ville_41
 ville_40
  RETURN
 ville_7
- S$=" BOTANICS ":MENU=0:N=6:ENC=EE(VIL):GOSUB ville_51 
- AL$="ALREADY GOT ONE !"
+ S$=" BAZAR ":MENU=0:N=6:ENC=EE(VIL):GOSUB ville_51 
+ AL$="ALREADY EQUIPPED !"
  PLOT10,12,"Who wants to trade  ?"
  PLOT12,16,"G > Give money"
  PLOT12,18,"L > Leave shop"
@@ -69,25 +69,22 @@ ville_55
  IFA$="C"THEN RI(P)=RI(P)+10000:GOTO ville_56 
  IFA$="S"THENGOSUB ville_57 :GOTO ville_56 
  IFSH=0THEN ville_7 
- SH=2
+ SH=3
 ville_83
  REM CHOIX
- SH=2
+ SH=3
  S$=SH$(SH):N=N(SH):EN=CO(SH):GOSUB  ville_51 
  M$=" IMPOSSIBLE !":FD=145
  S$=CHR$(FD)+N$(P)+" "+C$(CP(P))+" "+STR$(RI(P))+" se "+CHR$(144)
  L=2:GOSUB ville_27 
  PRINT@6,3;" Your choice ";:GOSUB ville_ReadChoice 
  IFCH>NTHEN ville_58 
- IFCH=0THEN ville_56 
- SS=N(1)
+ IFCH=0THEN ville_56
+ SS=N(1)+N(2)
  IFPR%(CH+SS)>RI(P)THENM$=" TOO EXPENSIVE! ":GOTO ville_58 
  IFOB(P,6)<>0THENM$=" BAG IS FULL! ":GOTO ville_58 
-ville_59
- IFCP(P)=5ORCP(P)=6THEN ville_71 
- IFCH>2ANDCP(P)<4THEN ville_62 
- IFCP(P)=4ANDCH>7THEN ville_62 
-ville_71
+ville_73
+ IFCH=7THENBS=1
  M$=IT$(CH+SS):GOSUB ville_72 
  GOTO ville_65 
 ville_72
@@ -139,7 +136,7 @@ ville_50
 ville_65
  REM VALIDE
  RI(P)=RI(P)-PR%(CH+SS):FD=148:GOTO ville_58 
-ville_62
+ville_ERR_CLA
  M$="Impossible for a "+C$(CP(P))
 ville_58
  T=INT((38-LEN(M$))/2)
@@ -186,17 +183,17 @@ ville_51
  INK(EN):IFN<>6THENJ=N+4ELSEJ=N+2
  FORI=1TOJ:PRINT@2,I+1;"*":PRINT@39,I+1;"*":NEXTI
  FORI=1TON:L=I+2
- IFN<>6THEN ville_85 
+ IFN<>6THEN ville_PrintShops 
  T=34-LEN(STR$(RI(I)))
  IFOK(I)<3THENS$=C$(CP(I))ELSES$=OK$(OK(I))
- PRINT@4,L;I;N$(I);@18,L;S$;@T,L;RI(I);"se":GOTO ville_86 
-ville_85
- IFN<>NSTHEN ville_87 
- IF I=1 THEN PRINT@12,L;I;SH$(I+1)
- GOTO ville_86 
+ PRINT@4,L;I;N$(I);@18,L;S$;@T,L;RI(I);"se":GOTO ville_86
+ville_PrintShops
+ IFN<>NSTHEN ville_Items 
+ IF I=1 THEN PRINT@12,L;I;SH$(3)
+ GOTO ville_86
  REM ITEMS
-ville_87
- SH=2
+ville_Items
+ SH=3
  IFSH=1THENO$=IT$(I):PX=PR%(I)
  IFSH=2THENO$=IT$(I+N(1)):PX=PR%(I+N(1))
  IFSH=3THENO$=IT$(I+N(1)+N(2)):PX=PR%(I+N(1)+N(2))
@@ -249,7 +246,6 @@ ville_ResetAll
  FORJ=1TO4:CL(I,J)=0:NEXTJ'cles
  IF I<6 THEN FORM=1TO5:TC(VIL,M)=0:NEXT M ' coffres et combats
  NEXTI
- FORI=1TO6:IG(I)=0:NEXTI:NP=0'ingredients potion
  REM X=2:Y=2:S=2:VILLE=1:TL=1
  PLOT23,16,"REINIT..OK":ZAP
  RETURN
@@ -427,7 +423,7 @@ ville_100
  DATA Celtic,Nemausus,1, Egyptian,Lugdunum,5, Gallic,Lutecia,3, Goth,Agrippina,2
  DATA Persian,Burdigala,5, Roman,Gesoriacum,6, Viking,Brigantium,1
  DATA Iberian,Bacino,4, Thrace,Londinium,7
- DATA ARMORY,15,7, BOTANICS,7,2, BAZAAR,7,3, ANIMALS,7,5
+ DATA ARMORY,15,7, BOTANICS,7,2, BAZAAR,7,3, ANIMALS,7,7
  DATA "royal leech","lily flower","kraken ink","rose of the Vale","oil of the Rock","trout liver"
  DATA SOMNUS, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
  DATA ESCULAPE R, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT

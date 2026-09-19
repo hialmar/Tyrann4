@@ -33,67 +33,11 @@ echo "medicus.tap"
 echo "herborist.tap"
 %OSDK%\bin\bas2tap -b2t1 herboL.bas BUILD\herborist.tap
 
-@REM echo "L1King.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L1King.txt BUILD\L1King.tap
+echo "animalia.tap"
+%OSDK%\bin\bas2tap -b2t1 animalsL.bas BUILD\animalia.tap
 
-@REM echo "TXTPER1.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER1.txt BUILD\TXTPER1.tap
-
-@REM echo "L2Dorne.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L2Dorne.txt BUILD\L2Dorne.tap
-
-@REM echo "TXTPER2.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER2.txt BUILD\TXTPER2.tap
-
-@REM echo "L3Storm.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L3Storm.txt BUILD\L3Storm.tap
-
-@REM echo "TXTPER3.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER3.txt BUILD\TXTPER3.tap
-
-@REM echo "L4HighGa.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L4HighGa.txt BUILD\L4HighGa.tap
-
-@REM echo "TXTPER4.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER4.txt BUILD\TXTPER4.tap
-
-@REM echo "L5Pike.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L5Pike.txt BUILD\L5Pike.tap
-
-@REM echo "TXTPER5.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER5.txt BUILD\TXTPER5.tap
-
-@REM echo "L6Eyrie.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L6Eyrie.txt BUILD\L6Eyrie.tap
-
-@REM echo "TXTPER6.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER6.txt BUILD\TXTPER6.tap
-
-@REM echo "L7Caster.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L7Caster.txt BUILD\L7Caster.tap
-
-@REM echo "TXTPER7.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER7.txt BUILD\TXTPER7.tap
-
-@REM echo "L8River.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L8River.txt BUILD\L8River.tap
-
-@REM echo "TXTPER8.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER8.txt BUILD\TXTPER8.tap
-
-@REM echo "L9Winter.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 L9Winter.txt BUILD\L9Winter.tap
-
-@REM echo "TXTPER9.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER9.txt BUILD\TXTPER9.tap
-
-@REM echo "TXTPER10.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 TXTPER10.txt BUILD\TXTPER10.tap
-
-@REM :: %OSDK%\bin\header -a0 GoT.mid BUILD\Got.tap $0600
-
-@REM echo "TIMGPERSOS.tap"
-@REM %OSDK%\bin\bas2tap -b2t1 Timgpersos.bas BUILD\TIMGPERSOS.tap
+echo "bazar.tap"
+%OSDK%\bin\bas2tap -b2t1 bazarL.bas BUILD\bazar.tap
 
 echo "TITEMS.tap"
 %OSDK%\bin\bas2tap -b2t1 TItemsL.bas BUILD\TITEMS.tap
@@ -124,7 +68,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann III" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t3_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\combat.tap BUILD\cop.tap BUILD\medicus.tap BUILD\herborist.tap BUILD\creation.tap BUILD\ville.tap BUILD\editor.tap BUILD\monstres.tap BUILD\TPRIX.tap BUILD\TITEMS.tap BUILD\dices.tap BUILD\genteam.tap BUILD\intro.tap BUILD\armory.tap t4_bas_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\combat.tap BUILD\cop.tap BUILD\bazar.tap BUILD\animalia.tap BUILD\medicus.tap BUILD\herborist.tap BUILD\creation.tap BUILD\ville.tap BUILD\editor.tap BUILD\monstres.tap BUILD\TPRIX.tap BUILD\TITEMS.tap BUILD\dices.tap BUILD\genteam.tap BUILD\intro.tap BUILD\armory.tap t4_bas_prog.dsk
 
 pause
 
