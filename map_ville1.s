@@ -126,8 +126,30 @@ _jump_to_next_prog
 ;-----------------------------------------------------------------------------
 init_div_var
 .(
+	lda #FALSE
+	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
+	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
+	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
+	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
+	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
+	sta numero_lieu         ; indique lieu <> Gallia (0)
+	ldx #0 ; num ville
+	lda _team_cles,x
+	and #1
+	sta on_a_clef_1
+	lda _team_cles,x
+	and #2
+	sta on_a_clef_2
+	lda _team_cles,x
+	and #4
+	sta mot_de_passe
+	lda _team_cles,x
+	and #8
+	sta laisser_passer
+	lda _team_boat
+	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	lda _team_out
-	beq load_from_ville
+	beq load_from_team
 	lda #$14		; coordonnées pour l'entrée (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
 	lda #$ff
@@ -144,20 +166,8 @@ init_div_var
 	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
 	lda #0		; repère tuile Nemausus
 	sta tuile_sous_pos_perso			; sous position perso au départ
-	lda #FALSE
-	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
-	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
-	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
-	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
-	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	sta on_a_clef_1
-	sta on_a_clef_2
-	sta mot_de_passe
-	sta laisser_passer
-	sta numero_lieu         ; indique lieu <> Gallia (0)
 	rts
-load_from_ville
+load_from_team
 	lda _team_ligne_hg_ville		; coordonnées pour l'entrée (départ jeu)
 	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
 	lda _team_rang_hg_ville
@@ -174,18 +184,6 @@ load_from_ville
 	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
 	lda _team_tuile_sous_pos_perso_ville		; repère tuile Nemausus
 	sta tuile_sous_pos_perso			; sous position perso au départ
-	lda #FALSE
-	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
-	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
-	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
-	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
-	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	sta on_a_clef_1
-	sta on_a_clef_2
-	sta mot_de_passe
-	sta laisser_passer
-	sta numero_lieu         ; indique lieu <> Gallia (0)
 	rts
 .)
 
@@ -288,6 +286,10 @@ chck_54		; clef_1
 		bne chck_58
 		lda #TRUE
 		sta on_a_clef_1					; met à 1 drapeau clef 1
+		ldx #0 ; num ville
+		lda _team_cles,x
+		ora #1
+		sta _team_cles,x
 		bne around_sortie
 chck_58		; a guard ask for pass word
 		lda tuile_courante
@@ -303,6 +305,10 @@ chck_57		; patricienne donne mdp
 		bne chck_55
 		lda #TRUE
 		sta mot_de_passe					; met à 1 drapeau mote de passe
+		ldx #0 ; num ville
+		lda _team_cles,x
+		ora #4
+		sta _team_cles,x
 		bne around_sortie
 chck_55		; clef_2
 		lda tuile_courante
@@ -310,6 +316,10 @@ chck_55		; clef_2
 		bne chck_53
 		lda #TRUE
 		sta on_a_clef_2			; met à 1 drapeau clef 2
+		ldx #0 ; num ville
+		lda _team_cles,x
+		ora #2
+		sta _team_cles,x
 		bne around_sortie
 chck_53		; have you the rigth key for gate 2?
 		lda tuile_courante
@@ -542,7 +552,16 @@ legat_
 	beq suite_legat
 	jmp entrance_	
 suite_legat
-	jsr eff_tuile_spe	
+	jsr eff_tuile_spe
+	lda laisser_passer
+	beq suite_legat2
+	rts
+suite_legat2	
+	ldx #0 ; num ville
+	lda _team_cles,x
+	ora #8
+	sta _team_cles,x
+	sta laisser_passer	
 	ldx #$00
 	lda t_legat_1,x
 	sta adr_ecr_txt+1
