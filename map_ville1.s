@@ -146,6 +146,52 @@ init_div_var
 	lda _team_cles,x
 	and #8
 	sta laisser_passer
+	; cache les tuiles spéciales
+	; attention, si on les déplace il faudra changer ces adresses !!!
+	lda on_a_clef_1
+	beq suite_init1
+	ldx #8
+	lda #0
+	sta _L39,x
+suite_init1
+	lda on_a_clef_2
+	beq suite_init2
+	ldx #25
+	lda #0
+	sta _L40,x
+suite_init2
+	ldx #0 ; ville1
+	lda _team_combats_coffres,x
+	and #1
+	beq suite_init3
+	ldx #15
+	lda #0
+	sta _L11,x
+suite_init3
+	ldx #0 ; ville1
+	lda _team_combats_coffres,x
+	and #2
+	beq suite_init4
+	ldx #1
+	lda #0
+	sta _L25,x
+suite_init4
+	ldx #0 ; ville1
+	lda _team_combats_coffres,x
+	and #4
+	beq suite_init5
+	ldx #14
+	lda #0
+	sta _L32,x
+suite_init5
+	ldx #0 ; ville1
+	lda _team_combats_coffres,x
+	and #8
+	beq suite_init6
+	ldx #7
+	lda #0
+	sta _L35,x
+suite_init6
 	lda _team_boat
 	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	lda _team_out
@@ -486,6 +532,10 @@ _mot_de_passe
 	jmp garde_
 suite_mot_passe
 	jsr eff_tuile_spe
+	lda mot_de_passe
+	beq suite_mot_passe2
+	rts
+suite_mot_passe2
 	ldx #$00
 	lda t_m_de_passe_1,x
 	sta adr_ecr_txt+1
@@ -514,6 +564,10 @@ garde_
 	jmp legat_
 suite_garde
 	jsr eff_tuile_spe
+	lda laisser_passer
+	beq suite_garde2
+	rts
+suite_garde2
 	ldx #$00
 	lda t_garde_3,x
 	sta adr_ecr_txt+1
@@ -743,7 +797,9 @@ bazar_
 coffre_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$63				; valeur coffre
-	bne fin_txt
+	beq suite_coffre
+	rts
+suite_coffre	
 	ldx #$00
 	lda t_coffre_1,x
 	sta adr_ecr_txt+1
@@ -775,7 +831,34 @@ coffre_
 	lda _character_ri+1
 	adc #0
 	sta _character_ri+1
-
+	lda ligne_map
+	cmp #11
+	bne suite_coffre1
+	lda #1
+	sta op1
+suite_coffre1
+	lda ligne_map
+	cmp #25
+	bne suite_coffre2
+	lda #2
+	sta op1
+suite_coffre2
+	lda ligne_map
+	cmp #32
+	bne suite_coffre3
+	lda #4
+	sta op1
+suite_coffre3
+	lda ligne_map
+	cmp #35
+	bne suite_coffre4
+	lda #8
+	sta op1
+suite_coffre4
+	ldx #0; ville1
+	lda _team_combats_coffres,x
+	ora op1
+	sta _team_combats_coffres,x
 	jsr eff_tuile_spe
 sk_ef	
 	lda #$38
