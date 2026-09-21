@@ -746,13 +746,14 @@ read_name_over
 ;			printf("XP %d\n", _characters[perso].xp);
         ldx index_xp
         lda _character_xp,x
-        inc index_xp
         jsr put_next_byte
+        inc index_xp
         ldx index_xp
         lda _character_xp,x
+        jsr put_next_byte
         inc index_xp
 ;			printf("WR %d\n", _characters[perso].wr);
-        jsr put_next_byte
+
         ldx team_perso
         lda _character_wr,x
 ;			printf("WL %d\n", _characters[perso].wl);

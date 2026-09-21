@@ -24,561 +24,580 @@
 007a reg7 /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc:32
 007c zp_compiler_save_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/header.s:13
 0600 osdk_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/header.s:18
-3400 osdk_stack /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:17
+3c00 osdk_stack /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:17
 0611 exitldx /Users/torguet/.wine/drive_c/OSDK_2_0/lib/header.s:91
-0afd _main /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:5
+0617 _main /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:99
 0611 _exit /Users/torguet/.wine/drive_c/OSDK_2_0/lib/header.s:90
-00a0 tuile_en_cours_coin_hg /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:22
-00a1 tuile_en_cours_coin_hd /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:24
-00a2 tuile_en_cours_coin_bg /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:26
-00a3 tuile_en_cours_coin_bd /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:28
-00a4 tuile_perso_aff /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:30
-00a5 ligne_hg_map /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:33
-00a6 rang_hg_map /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:35
-00a7 ligne_map /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:38
-00a8 rang_map /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:40
-00a9 rang_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:42
-00aa tuile_courante /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:44
-00ab direction_scroll_prec /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:46
-00ac direction_scroll /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:48
-00ad a_un_bateau /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:50
-00ae tuile_sous_pos_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:52
-00af ordo_perso_fen /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:54
-00b0 absc_perso_fen /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:56
-00b1 peut_bouger_horiz /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:58
-00b2 index_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:60
-00b3 peut_bouger_vert /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:62
-00b4 est_en_mer /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:64
-00b5 est_affiche_texte /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:66
-00b6 scroll_est_interdit /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:68
-00b7 depl_perso_est_interdit /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:70
-00b8 on_a_clef_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:72
-00b9 on_a_clef_2 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:74
-00ba mot_de_passe /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:76
-00bb laisser_passer /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:78
-00bc numero_lieu /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:80
-00bd nb_coffres_non_ouverts /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:82
-00be mot_de_passe_londinium /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:84
-00bf poudre_de_taureau /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:86
-00c0 mot_de_passe_phare /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:88
-00c1 sortie_victorieuse /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:90
-0615 ProgCombat /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:98
-0620 ProgArmory /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:102
-0628 ProgMap /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:106
-0630 chck_bords /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:114
-0691 sort_direct /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:179
-064e autre_touche_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:136
-068d end_chck_bords_nsc /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:172
-0684 end_chck_bords /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:166
-0660 autre_touche_2 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:146
-0674 autre_touche_3 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:157
-0692 wait_key /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:186
-069f next_key_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:194
-06b1 end_key /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:208
-06a5 next_key_2 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:198
-06ab next_key_3 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:202
-06b4 aff_hero /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:218
-06e3 fin_aff_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:245
-06c2 chck_direction /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:227
-06cf anim_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:234
-06e4 choix_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:252
-06d5 skip_anim /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:238
-0fd8 maj_adr_scr_next_tuile /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:282
-0f9b cherche_et_aff_tuile /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:218
-06f8 vers_haut /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:264
-06fc vers_bas /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:267
-0700 vers_droite /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:270
-0704 vers_gauche /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:273
-0706 fin_ch_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:275
-0709 hires_et_atributs /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:283
-0830 eff_tuile_spe /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:401
-1b03 ptr_Lignes /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1144
-084e adr_lign_eff /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:420
-0854 do_you_enter /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:427
-1fc6 t_do_you_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1468
-1064 adr_ecr_txt /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:409
-105f write_phrase /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:405
-086a initRandom /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:441
-087d cadre_plan /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:459
-08b8 lp_30h /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:490
-08b4 draw_bord_h /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:486
-08d8 lp_60_v /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:514
-08d6 draw_bord_v /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:512
-08b6 lp_06v /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:488
-08c5 maj_adr_h_dcm /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:499
-08d4 end_maj_h /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:507
-08e3 out_lp_60 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:520
-08e4 maj_adr_v_dcm /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:523
-08f3 end_maj_v /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:531
-08f5 bandeau /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:539
-0911 ini_adr_dta_bd /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:557
-08fa ad_dta_bandeau /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:543
-090d end_af_bd /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:553
-0901 ad_ec_bd /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:547
-0926 maj_adr_bd /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:568
-1574 prt_nom_ville /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1003
-203c dta_bandeau /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1504
-092d tab_adr_hires /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:577
-09ff sous_tuile /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s:590
-0e8c SaveZeroPage /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:5
-2cf2 _team_io_needed /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:99
-2db1 _load_t4_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:170
-10a9 impl_car /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:392
-0bcb init_div_var /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:127
-0b29 main_loop /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:24
-0f20 scrl_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:121
-10d2 aff_text /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:424
-0b40 fin_temporisation /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:41
-0b38 temporisation_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:34
-0b3a temporisation_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:36
-0ca0 chck_around /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:245
-0ea4 chck_mvt_perso_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:31
-1093 eff_text /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:454
-0b52 sortie_main /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:54
-0b64 _next_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:67
-0b66 _jump_to_next_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:69
-2d80 _team_x_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:120
-2d81 _team_y_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:121
-2da6 _team_ligne_hg_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:131
-2da7 _team_rang_hg_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:132
-2d82 _team_tuile_perso_aff_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:122
-2d83 _team_index_perso_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:123
-2dae _team_tuile_sous_pos_perso_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:139
-2daf _team_numero_lieu_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:140
-331d _get /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:30
-2fba _save_t4_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:586
-0e98 RestoreZeroPage /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:16
-32ac _SwitchToCommand /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:109
-2d60 _team_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:118
-0c02 suite_init1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:156
-1a4f _L39 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1131
-0c0d suite_init2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:162
-1a6d _L40 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1133
-2d84 _team_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:127
-0c1d suite_init3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:170
-1707 _L11 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1075
-0c2d suite_init4 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:178
-18ab _L25 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1103
-0c3d suite_init5 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:186
-197d _L32 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1117
-0c4d suite_init6 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:194
-19d7 _L35 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1123
-2ce3 _team_boat /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:65
-2cf0 _team_out /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:91
-0c78 load_from_team /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:216
-0d14 sortie_scroll_direct /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:316
-0cca sens_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:274
-0cc1 suite_chck_around_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:269
-0d86 no_scroll /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:378
-0f79 rech_tab_map /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:189
-0d0e around_sortie /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:312
-0d15 tuile_speciale /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:319
-0ce2 sens_3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:287
-0cd7 suite_chck_around_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:281
-0cf6 sens_4 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:299
-0ced suite_sens_3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:294
-0d03 cont_b4 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:306
-0d26 chck_54 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:329
-150d why_no_scoll /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:941
-0d3c chck_58 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:340
-0d4b chck_57 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:348
-0d61 chck_55 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:359
-0d77 chck_53 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:370
-0d8d ZeroPageCopy /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:2
-0e8e loop /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:8
-0e9a loop /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:19
-0f1f sortie_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:108
-0ebc deplc_gauche /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:49
-0ecd deplac_droite /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:58
-0f1b no_depl /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:105
-0f05 out_depl_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:89
-0ede deplac_bas /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:67
-0ef4 deplac_haut /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:79
-0f78 sortie_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:176
-0f38 lp_L7 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:135
-0f3a lp_C15 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:137
-0f56 autre_ligne /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:153
-0f91 adr_ligne /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:205
-0fa6 find_compsants /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:237
-0fc1 aff__tuile /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:259
-1cf1 ptr_t /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1374
-0fb8 adr_compo /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:248
-0fd2 chck_68 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:271
-0fc7 aff_t /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:264
-0ffc aff_demi_t /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:314
-0fd1 pas_daff /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:269
-1010 adr_screen_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:336
-1016 adr_screen_2 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:340
-0ff8 skip_inc_ph /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:306
-1037 rens_adr_car /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:375
-1001 lp_2_sextets /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:318
-100d aff_2_sextets /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:332
-101a maj_scr_hires /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:348
-100d adr_car_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:334
-1013 adr_car_2 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:338
-1028 skip_ret_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:356
-1036 end_maj_adr_ecr /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:363
-106a end_phrase /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:413
-106f hit_key /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:422
-1076 ld_208 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:427
-1083 release_ /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:434
-1084 hit_release_key /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:440
-108b ld_208 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:445
-10a6 out_eff_text /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:466
-109d lp_efface /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:461
-10ab lp1_impl /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:395
-28ea dta_car_redef_p1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1579
-10b8 lp2_impl /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:402
-29e6 dta_car_redef_p2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1917
-10c5 lp3_impl /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:409
-2ae2 dta_car_redef_p3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:2256
-10d1 type_boutique /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:419
-10df suite_portail /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:433
-110f key_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:454
-1dbb t_portail_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1401
-1dd5 t_portail_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1404
-111c suite_clef /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:461
-116a voleur_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:494
-1e04 t_key_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1411
-1e19 t_key_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1414
-1e31 t_key_3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1417
-1173 suite_voleur /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:499
-11b4 _mot_de_passe /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:528
-1e4a t_voleur_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1421
-1e64 t_voleur_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1424
-2c60 _character_ri /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:11
-11bd suite_mot_passe /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:533
-11f6 garde_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:560
-11c5 suite_mot_passe2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:538
-1e7d t_m_de_passe_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1428
-1e9c t_m_de_passe_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1431
-11ff suite_garde /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:565
-1253 legat_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:603
-1207 suite_garde2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:570
-1efa t_garde_3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1441
-1f13 t_garde_4 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1444
-1f24 t_garde_5 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1447
-125c suite_legat /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:608
-12cd entrance_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:659
-1264 suite_legat2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:613
-1f3c t_legat_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1451
-1f60 t_legat_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1454
-1f7e t_legat_3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1457
-1307 medicus_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:685
-1f94 t_entrance_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1461
-1faf t_entrance_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1464
-14b7 retour_map /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:897
-1332 armurerie_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:704
-1fd5 t_medicus_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1472
-1492 gestion_boutiques /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:872
-135d herboriste_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:723
-1fde t_armurerie_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1476
-1388 animalerie_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:742
-1fed t_herboriste_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1480
-13b3 taberna_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:761
-1ff8 t_animalerie_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1484
-13dd bazar_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:779
-2008 t_taberna_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1488
-1407 coffre_ /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:797
-2011 t_bazar_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1492
-140e suite_coffre /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:802
-2018 t_coffre_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1496
-202b t_coffre_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1499
-148a sk_ef /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:863
-32d1 _random /Users/torguet/.wine/drive_c/OSDK_2_0/lib/rand.s:2
-145f suite_coffre1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:839
-1469 suite_coffre2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:845
-1473 suite_coffre3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:851
-147d suite_coffre4 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:857
-1491 fin_txt /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:868
-14b6 return /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:893
-1501 ptr_b_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:933
-14d0 return /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:912
-14d1 v_00_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:918
-14d9 v_01_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:920
-14e1 v_02_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:922
-14e9 v_03_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:924
-14f1 v_04_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:926
-14f9 v_05_prog /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:928
-1517 chck_wns_58 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:948
-1558 no_pasaran /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:984
-151f chck_wns_53 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:953
-1527 garde_nsc /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:960
-1527 fin_wns /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:958
-1ec0 t_garde_1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1435
-1ed9 t_garde_2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1438
-1de5 t_portail_3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1407
-158b ini_adr_dta_nv /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1020
-1579 prt_lign /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1007
-157b ad_dta_nv /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1009
-157e ad_ec_nv /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1011
-15a0 maj_adr_nv /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1031
-280d dta_nom_ville /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1557
-15ae sk_ret1 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1038
-15bc sk_ret2 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1045
-15bd _L00 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1053
-15db _L01 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1055
-15f9 _L02 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1057
-1617 _L03 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1059
-1635 _L04 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1061
-1653 _L05 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1063
-1671 _L06 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1065
-168f _L07 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1067
-16ad _L08 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1069
-16cb _L09 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1071
-16e9 _L10 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1073
-1725 _L12 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1077
-1743 _L13 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1079
-1761 _L14 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1081
-177f _L15 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1083
-179d _L16 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1085
-17bb _L17 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1087
-17d9 _L18 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1089
-17f7 _L19 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1091
-1815 _L20 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1093
-1833 _L21 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1095
-1851 _L22 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1097
-186f _L23 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1099
-188d _L24 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1101
-18c9 _L26 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1105
-18e7 _L27 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1107
-1905 _L28 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1109
-1923 _L29 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1111
-1941 _L30 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1113
-195f _L31 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1115
-199b _L33 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1119
-19b9 _L34 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1121
-19f5 _L36 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1125
-1a13 _L37 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1127
-1a31 _L38 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1129
-1a8b _L41 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1135
-1aa9 _L42 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1137
-1ac7 _L43 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1139
-1ae5 _L44 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1141
-1b5d _t00 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1159
-1b61 _t01 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1164
-1b65 _t02 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1166
-1b69 _t03 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1168
-1b6d _t04 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1170
-1b71 _t05 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1172
-1b75 _t06 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1174
-1b79 _t07 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1176
-1b7d _t08 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1178
-1b81 _t09 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1180
-1b85 _t0a /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1182
-1b89 _t0b /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1184
-1b8d _t0c /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1186
-1b91 _t0d /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1188
-1b95 _t0e /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1190
-1b99 _t0f /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1192
-1b9d _t10 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1194
-1ba1 _t11 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1196
-1ba5 _t12 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1198
-1ba9 _t13 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1200
-1bad _t14 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1202
-1bb1 _t15 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1204
-1bb5 _t16 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1206
-1bb9 _t17 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1208
-1bbd _t18 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1210
-1bc1 _t19 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1212
-1bc5 _t1a /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1214
-1bc9 _t1b /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1216
-1bcd _t1c /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1218
-1bd1 _t1d /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1220
-1bd5 _t1e /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1222
-1bd9 _t1f /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1224
-1bdd _t20 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1226
-1be1 _t21 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1228
-1be5 _t22 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1230
-1be9 _t23 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1232
-1bed _t24 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1234
-1bf1 _t25 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1236
-1bf5 _t26 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1238
-1bf9 _t27 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1240
-1bfd _t28 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1242
-1c01 _t29 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1244
-1c05 _t2a /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1246
-1c09 _t2b /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1248
-1c0d _t2c /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1250
-1c11 _t2d /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1252
-1c15 _t2e /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1254
-1c19 _t2f /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1256
-1c1d _t30 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1258
-1c21 _t31 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1260
-1c25 _t32 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1262
-1c29 _t33 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1264
-1c2d _t34 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1266
-1c31 _t35 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1268
-1c35 _t36 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1270
-1c39 _t37 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1272
-1c3d _t38 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1274
-1c41 _t39 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1276
-1c45 _t3a /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1278
-1c49 _t3b /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1280
-1c4d _t3c /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1282
-1c51 _t3d /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1284
-1c55 _t3e /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1286
-1c59 _t3f /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1288
-1c5d _t40 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1290
-1c61 _t41 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1292
-1c65 _t42 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1294
-1c69 _t43 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1296
-1c6d _t44 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1298
-1c71 _t45 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1301
-1c75 _t46 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1303
-1c79 _t47 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1305
-1c7d _t48 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1307
-1c81 _t49 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1309
-1c85 _t4a /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1311
-1c89 _t4b /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1313
-1c8d _t4c /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1315
-1c91 _t4d /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1317
-1c95 _t4e /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1319
-1c99 _t4f /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1321
-1c9d _t50 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1323
-1ca1 _t51 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1327
-1ca5 _t52 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1329
-1ca9 _t53 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1331
-1cad _t54 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1333
-1cb1 _t55 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1335
-1cb5 _t56 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1337
-1cb9 _t57 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1339
-1cbd _t58 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1341
-1cc1 _t59 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1343
-1cc5 _t5a /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1345
-1cc9 _t5b /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1347
-1ccd _t5c /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1349
-1cd1 _t5d /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1351
-1cd5 _t5e /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1353
-1cd9 _t5f /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1355
-1cdd _t60 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1357
-1ce1 _t61 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1359
-1ce5 _t62 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1361
-1ce9 _t63 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1363
-1ced _t64 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s:1366
-2c00 _character_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:8
-2c6c _character_cp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:13
-2c72 _character_mp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:15
-2c78 _character_cc /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:17
-2c7e _character_ct /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:19
-2c84 _character_fo /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:21
-2c8a _character_ag /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:23
-2c90 _character_in /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:25
-2c96 _character_fm /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:27
-2c9c _character_pv /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:29
-2ca2 _character_et /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:31
-2ca8 _character_ok /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:33
-2cae _character_ni /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:35
-2cb4 _character_xp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:37
-2cc0 _character_wr /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:39
-2cc6 _character_wl /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:41
-2ccc _character_pt /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:43
-2cd2 _character_ca /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:45
-2cd8 _character_bt /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:47
-2cde _team_s /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:51
-2cdf _team_x /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:53
-2ce0 _team_y /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:55
-2ce1 _team_boussole /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:60
-2ce2 _team_filet /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:62
-2ce4 _team_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:71
-2cea _team_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:74
-2ceb _team_dedans /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:79
-2cec _team_tl /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:82
-2ced _team_np /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:84
-2cee _team_nf /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:86
-2cef _team_pm /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:88
-2cf1 _team_ca /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:94
-2cf3 _team_version /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:104
-2d00 _character_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:110
-2d30 _character_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:112
-2da4 _team_ligne_hg_map /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:129
-2da5 _team_rang_hg_map /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:130
-2da8 _team_tuile_perso_aff /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:133
-2da9 _team_index_perso /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:134
-2daa _team_direction_scroll /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:135
-2dab _team_tuile_sous_pos_perso /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:136
-2dac _team_numero_lieu /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:137
-2dad _team_sortie_victorieuse /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:138
-2db0 _team_end /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:141
-31cc t_load_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:967
-2e00 skip_load /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:220
-320f t_team_filemane /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:977
-3267 _DiscLoad /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:60
-31e4 t_io_error_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:970
-2e3c read_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:274
-2fa6 get_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:545
-2e45 loop_read_write_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:281
-2e65 read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:303
-2e5d loop_skip_rest_of_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:296
-2f0c read_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:398
-2f22 read_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:418
-2f33 skip_load_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:434
-2f48 end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:448
-2f5c read_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:466
-2f69 read_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:485
-2f76 read_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:499
-2faf fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:552
-2fb0 put_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:560
-2fb9 fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:567
-31f8 t_save_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:973
-301f write_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:660
-3025 loop_compute_namelen /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:665
-303c loop_write_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:681
-304b loop_skip_remaining /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:689
-3057 read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:696
-30ef write_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:777
-3105 write_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:797
-3116 skip_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:813
-312b end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:827
-313f write_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:845
-314c write_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:864
-3159 write_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:878
-31cb skip_save /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:961
-321e _DiscSave /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:17
-3218 _SPStorage /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:8
-3219 _BackupSP /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:10
-3285 _Sedoric /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:81
-3291 sedoricloop1 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:91
-32b8 sedoricloop2 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:119
-32d1 _rand /Users/torguet/.wine/drive_c/OSDK_2_0/lib/rand.s:1
-32db _srandom /Users/torguet/.wine/drive_c/OSDK_2_0/lib/rand.s:9
-32ef _hires /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:8
-32f2 _text /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:9
-32f5 _ping /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:10
-32f8 _shoot /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:11
-32fb _zap /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:12
-32fe _explode /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:13
-3301 _kbdclick1 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:14
-3304 _kbdclick2 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:15
-3307 _cls /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:16
-330a _lores0 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:17
-330d _lores1 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:18
-3310 _key /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:21
-3318 key001 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:25
-3344 grexit2 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:25
-3325 getXparm /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:4
-332e getXloop /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:9
-3341 grexit /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:23
-3348 TableBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:1
-3350 calculXY /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:6
-335a _SetBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:20
-336a _SetBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:32
-3375 _InvertBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:42
-3385 _InvertBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:54
-3390 _TestBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:64
-33a0 _TestBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:76
-3500 osdk_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:22
+00a0 tuile_en_cours_coin_hg /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:21
+00a1 tuile_en_cours_coin_hd /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:23
+00a2 tuile_en_cours_coin_bg /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:25
+00a3 tuile_en_cours_coin_bd /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:27
+00a4 tuile_perso_aff /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:29
+00a5 ligne_hg_map /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:32
+00a6 rang_hg_map /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:34
+00a7 ligne_map /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:37
+00a8 rang_map /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:39
+00a9 rang_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:41
+00aa tuile_courante /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:43
+00ab direction_scroll_prec /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:45
+00ac direction_scroll /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:47
+00ad a_un_bateau /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:49
+00ae tuile_sous_pos_perso /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:51
+00af ordo_perso_fen /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:53
+00b0 absc_perso_fen /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:55
+00b1 peut_bouger_horiz /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:57
+00b2 index_perso /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:59
+00b3 peut_bouger_vert /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:61
+00b4 est_en_mer /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:63
+00b5 est_affiche_texte /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:65
+00b6 scroll_est_interdit /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:67
+00b7 depl_perso_est_interdit /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:69
+00b8 on_a_clef_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:71
+00b9 on_a_clef_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:73
+00ba mot_de_passe /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:75
+00bb laisser_passer /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:77
+00bc numero_lieu /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:79
+00bd nb_coffres_non_ouverts /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:81
+00be mot_de_passe_londinium /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:83
+00bf poudre_de_taureau /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:85
+00c0 mot_de_passe_phare /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:87
+00c1 sortie_victorieuse /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:89
+0615 next_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:97
+0a5a SaveZeroPage /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:5
+34f2 _team_io_needed /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:99
+35b1 _load_t4_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:170
+0c92 hires_et_atributs /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:644
+0c77 impl_car /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:622
+071f init_div_var /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:246
+1093 bandeau /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1126
+063d main_loop /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:116
+0aee scrl_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:121
+10c8 prt_nom_lieu /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1164
+07d9 aff_hero /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:341
+0e18 aff_text /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:838
+0657 fin_temporisation /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:134
+064f temporisation_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:127
+0651 temporisation_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:129
+0677 sortie_main_camp /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:151
+0688 sortie_main_fight /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:160
+0699 sortie_main_stop /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:169
+0db9 wait_key /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:765
+08b9 chck_around /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:507
+0857 chck_bords /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:430
+0a72 chck_mvt_perso_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:31
+0c61 eff_text /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:454
+07cc ProgCamp /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:330
+06ab _jump_to_next_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:181
+07ae ProgCombat /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:318
+07d5 ProgDir /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:334
+34df _team_x /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:53
+34e0 _team_y /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:55
+34e3 _team_boat /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:65
+35a4 _team_ligne_hg_map /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:129
+35a5 _team_rang_hg_map /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:130
+35a8 _team_tuile_perso_aff /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:133
+35a9 _team_index_perso /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:134
+35aa _team_direction_scroll /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:135
+35ab _team_tuile_sous_pos_perso /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:136
+35ac _team_numero_lieu /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:137
+35ad _team_sortie_victorieuse /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:138
+3aff _get /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:30
+37ba _save_t4_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:586
+0a66 RestoreZeroPage /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:16
+3aac _SwitchToCommand /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:109
+34ea _team_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:74
+34f3 _team_version /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:104
+076b load_from_team /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:284
+34f0 _team_out /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:91
+07ad fin /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:314
+07b9 ProgArmory /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:322
+07c1 ProgVille1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:326
+0820 fin_aff_perso /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:382
+07e7 check_mer /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:350
+07f0 mer_01 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:355
+0821 choix_perso /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:389
+0812 skip_anim /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:375
+07fb chck_direction /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:361
+0808 anim_perso /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:369
+0803 ratrappe_si_mer /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:366
+0ba6 maj_adr_scr_next_tuile /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:282
+0b69 cherche_et_aff_tuile /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:218
+084e mer_bateau /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:418
+0841 vers_haut /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:407
+0845 vers_droite /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:410
+0849 vers_gauche /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:413
+084b fin_ch_perso /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:415
+08b8 sort_direct /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:495
+0875 autre_touche_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:452
+08b4 end_chck_bords_nsc /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:488
+08ab end_chck_bords /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:482
+0887 autre_touche_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:462
+089b autre_touche_3 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:473
+0927 sortie_scroll_direct /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:579
+08cd sens_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:531
+08e4 sens_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:543
+0954 no_scroll /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:608
+0b47 rech_tab_map /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:189
+0928 check_ville_bateau /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:581
+0921 around_sortie /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:575
+08f9 sens_3 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:554
+090e sens_4 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:565
+093a ret_7_8 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:591
+0942 chk_bc /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:596
+0948 chk_9c /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:600
+094e chk_b4 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:604
+095b ZeroPageCopy /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:2
+0a5c loop /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:8
+0a68 loop /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:19
+0aed sortie_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:108
+0a8a deplc_gauche /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:49
+0a9b deplac_droite /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:58
+0ae9 no_depl /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:105
+0ad3 out_depl_perso /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:89
+0aac deplac_bas /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:67
+0ac2 deplac_haut /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:79
+0b46 sortie_fenetre /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:176
+0b06 lp_L7 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:135
+0b08 lp_C15 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:137
+0b24 autre_ligne /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:153
+1928 ptr_Lignes /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1511
+0b5f adr_ligne /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:205
+0b74 find_compsants /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:237
+0b8f aff__tuile /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:259
+1b90 ptr_t /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1753
+0b86 adr_compo /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:248
+0ba0 chck_68 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:271
+0b95 aff_t /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:264
+0bca aff_demi_t /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:314
+0b9f pas_daff /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:269
+1236 tab_adr_hires /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1399
+0bde adr_screen_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:336
+0be4 adr_screen_2 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:340
+0bc6 skip_inc_ph /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:306
+0c05 rens_adr_car /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:375
+0bcf lp_2_sextets /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:318
+0bdb aff_2_sextets /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:332
+0be8 maj_scr_hires /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:348
+0bdb adr_car_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:334
+0be1 adr_car_2 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:338
+0bf6 skip_ret_1 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:356
+0c04 end_maj_adr_ecr /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:363
+198a sous_tuile /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1525
+0c2d write_phrase /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:405
+0c38 end_phrase /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:413
+0c32 adr_ecr_txt /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:409
+0c3d hit_key /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:422
+0c44 ld_208 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:427
+0c51 release_ /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:434
+0c52 hit_release_key /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:440
+0c59 ld_208 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:445
+0c74 out_eff_text /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:466
+0c6b lp_efface /Users/torguet/.wine/drive_c/Tyrann4/map_common.s:461
+0c79 lp1_impl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:625
+1c5a dta_car_redef_p1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1778
+0c86 lp2_impl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:632
+1d56 dta_car_redef_p2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2116
+0dc6 next_key_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:773
+0df0 end_key /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:804
+0dcc next_key_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:777
+0dd2 next_key_3 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:781
+0dd8 next_key_4 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:786
+0dde next_key_5 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:790
+0de4 next_key_6 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:794
+0dea next_key_7 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:798
+0df3 gestion_ville /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:811
+0e12 return /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:829
+1f52 ptr_v_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2330
+0e81 hadrian_wall /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:883
+1e7b ptr_v /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2290
+0e39 adr_nom_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:855
+0e40 lp_nom_v /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:859
+0e45 adr_ecr_nom /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:862
+0e4b ask_enter /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:866
+0e4d lp_ask /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:868
+0e62 quest_enter /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:881
+0e5b suite_ask /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:876
+0e8a suite_hw /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:888
+0f23 druid_hut /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:957
+1f72 t_h_wall_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2338
+1f84 t_h_wall_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2341
+1fa6 t_h_wall_3 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2344
+1fc7 t_h_wall_4 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2347
+1fd6 t_h_wall_5 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2350
+1ff5 t_h_wall_6 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2353
+0f2c suite_dh /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:962
+0fed herb_ /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1043
+200e t_druid_hut_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2357
+2032 t_druid_hut_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2360
+204d t_druid_hut_3 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2363
+206d t_druid_hut_4 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2366
+2082 t_druid_hut_5 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2369
+20a5 t_druid_hut_6 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2372
+20c6 t_druid_hut_7 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2375
+20ef t_druid_hut_8 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2378
+1024 _kraken /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1069
+2116 t_herb_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2383
+2133 t_herb_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2386
+102c test_nord /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1074
+1092 fin_txt /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1118
+2144 t_kraken_1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2390
+2167 t_kraken_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2393
+2186 t_kraken_3 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2396
+21a6 t_kraken_4 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2399
+10ac ini_adr_dta_bd /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1144
+1098 ad_dta_bandeau /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1130
+10ab end_af_bd /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1140
+109f ad_ec_bd /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1134
+10c1 maj_adr_bd /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1155
+21b9 dta_bandeau /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2404
+1155 det_index /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1247
+10ea fin_ptr_nl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1185
+1108 ini_adr_dta_nl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1206
+1202 eff_nom /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1360
+10d7 nb_ligne /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1172
+10d9 prt_lign /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1174
+10db ad_dta_nl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1176
+10de ad_ec_nl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1178
+10eb maj_adr_nl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1189
+10f9 sk_ret1 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1196
+1107 sk_ret2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1203
+2a2a ptr_dta_lieux /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2461
+1151 get_value /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1241
+114b fin_ini_adnl /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1237
+115f traite_mer /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1253
+118d traite_terre /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1283
+117d test_mare_germa /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1271
+116e test_m_nostrum_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1262
+118a test_mare_exter /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1279
+118f test_germania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1285
+11c6 test_gallia /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1320
+119c test_hibernia /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1293
+11ab test_caledonia /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1302
+11b4 test_britania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1308
+11c3 test_brit_2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1317
+11e0 test_lusitania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1336
+11dd case_gallia /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1333
+11ef test_hispania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1345
+11fc last_case_b /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1353
+11ff last_case_g /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1356
+122b ini_ad_v /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1387
+1209 nb_l_vide /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1364
+120b nb_c_vide /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1366
+1219 end_vide /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1374
+121a maj_ad_vide /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1376
+1229 end_maj_vide /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1384
+1308 _L00 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1411
+1328 _L01 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1413
+1348 _L02 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1415
+1368 _L03 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1417
+1388 _L04 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1419
+13a8 _L05 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1421
+13c8 _L06 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1423
+13e8 _L07 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1425
+1408 _L08 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1427
+1428 _L09 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1429
+1448 _L0a /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1431
+1468 _L0b /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1433
+1488 _L0c /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1435
+14a8 _L0d /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1437
+14c8 _L0e /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1439
+14e8 _L0f /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1441
+1508 _L10 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1443
+1528 _L11 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1445
+1548 _L12 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1447
+1568 _L13 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1449
+1588 _L14 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1451
+15a8 _L15 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1453
+15c8 _L16 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1455
+15e8 _L17 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1457
+1608 _L18 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1459
+1628 _L19 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1461
+1648 _L1a /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1463
+1668 _L1b /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1465
+1688 _L1c /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1467
+16a8 _L1d /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1469
+16c8 _L1e /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1471
+16e8 _L1f /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1473
+1708 _L20 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1475
+1728 _L21 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1477
+1748 _L22 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1479
+1768 _L23 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1481
+1788 _L24 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1483
+17a8 _L25 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1485
+17c8 _L26 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1487
+17e8 _L27 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1489
+1808 _L28 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1491
+1828 _L29 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1493
+1848 _L2a /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1495
+1868 _L2b /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1497
+1888 _L2c /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1499
+18a8 _L2d /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1501
+18c8 _L2e /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1503
+18e8 _L2f /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1505
+1908 _L30 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1507
+19fc _t00 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1540
+1a00 _t01 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1542
+1a04 _t02 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1544
+1a08 _t03 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1546
+1a0c _t04 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1548
+1a10 _t05 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1550
+1a14 _t06 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1552
+1a18 _t07 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1554
+1a1c _t08 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1556
+1a20 _t09 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1558
+1a24 _t0A /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1560
+1a28 _t0B /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1562
+1a2c _t0C /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1564
+1a30 _t0D /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1566
+1a34 _t0E /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1568
+1a38 _t0F /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1570
+1a3c _t10 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1572
+1a40 _t11 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1574
+1a44 _t12 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1576
+1a48 _t13 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1578
+1a4c _t14 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1580
+1a50 _t15 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1582
+1a54 _t16 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1584
+1a58 _t17 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1586
+1a5c _t18 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1588
+1a60 _t19 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1590
+1a64 _t1A /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1592
+1a68 _t1B /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1594
+1a6c _t1C /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1596
+1a70 _t1D /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1598
+1a74 _t1E /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1600
+1a78 _t1F /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1602
+1a7c _t20 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1604
+1a80 _t21 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1606
+1a84 _t22 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1608
+1a88 _t23 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1610
+1a8c _t24 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1612
+1a90 _t25 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1614
+1a94 _t26 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1616
+1a98 _t27 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1618
+1a9c _t28 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1620
+1aa0 _t29 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1622
+1aa4 _t2A /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1624
+1aa8 _t2B /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1626
+1aac _t2C /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1628
+1ab0 _t2D /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1630
+1ab4 _t2E /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1632
+1ab8 _t2F /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1634
+1abc _t30 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1636
+1ac0 _t31 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1638
+1ac4 _t32 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1640
+1ac8 _t33 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1642
+1acc _t34 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1644
+1ad0 _t35 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1646
+1ad4 _t36 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1648
+1ad8 _t37 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1650
+1adc _t38 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1652
+1ae0 _t39 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1654
+1ae4 _t3A /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1656
+1ae8 _t3B /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1658
+1aec _t3C /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1660
+1af0 _t3D /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1662
+1af4 _t3E /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1664
+1af8 _t3F /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1666
+1afc _t40 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1668
+1b00 _t41 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1670
+1b04 _t42 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1672
+1b08 _t43 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1674
+1b0c _t44 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1676
+1b10 _t45 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1678
+1b14 _t46 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1680
+1b18 _t47 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1682
+1b1c _t48 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1684
+1b20 _t49 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1686
+1b24 _t4A /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1688
+1b28 _t4B /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1690
+1b2c _t4C /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1692
+1b30 _t4D /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1694
+1b34 _t4E /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1696
+1b38 _t4F /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1698
+1b3c _t50 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1700
+1b40 _t51 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1702
+1b44 _t52 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1704
+1b48 _t53 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1710
+1b4c _t54 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1712
+1b50 _t55 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1714
+1b54 _t56 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1720
+1b58 _t57 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1722
+1b5c _t58 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1724
+1b60 _t59 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1726
+1b64 _t5A /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1728
+1b68 _t5B /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1730
+1b6c _t5C /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1732
+1b70 _t5D /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1734
+1b74 _t5E /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1736
+1b78 _t5F /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1738
+1b7c _t60 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1740
+1b80 _t61 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1742
+1b84 _t62 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1744
+1b88 _t63 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1746
+1b8c _t64 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:1748
+1db0 v_00 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2241
+1dbb v_01 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2244
+1dc7 v_02 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2247
+1dd2 v_03 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2250
+1ddc v_04 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2253
+1de8 v_05 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2256
+1df1 v_06 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2259
+1df9 v_07 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2262
+1e06 v_08 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2265
+1e12 v_09 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2268
+1e22 v_0A /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2271
+1e38 v_0B /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2274
+1e45 v_0C /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2277
+1e55 v_0D /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2280
+1e5f v_0E /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2283
+1e72 v_0F /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2286
+1e9b v_00_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2297
+1ea6 v_01_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2299
+1eb1 v_02_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2301
+1ebc v_03_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2303
+1ec7 v_04_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2305
+1ed2 v_05_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2307
+1edd v_06_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2309
+1ee8 v_07_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2311
+1ef3 v_08_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2313
+1efe v_09_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2315
+1f0a v_0A_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2317
+1f16 v_0B_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2319
+1f22 v_0C_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2321
+1f2e v_0D_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2323
+1f3a v_0E_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2325
+1f46 v_0F_prog /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2327
+2a3e d_gallia /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2475
+2abf d_hispania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2494
+2bbe d_lusitania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2517
+2c93 d_britania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2536
+2d4c d_Germania /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2556
+2e21 d_caledonia /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2575
+2ef6 d_hibernia /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2594
+2fa2 d_Mare_n /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2612
+30c3 d_Mare_e /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2629
+320b d_Mare_g /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s:2647
+3400 _character_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:8
+3460 _character_ri /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:11
+346c _character_cp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:13
+3472 _character_mp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:15
+3478 _character_cc /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:17
+347e _character_ct /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:19
+3484 _character_fo /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:21
+348a _character_ag /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:23
+3490 _character_in /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:25
+3496 _character_fm /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:27
+349c _character_pv /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:29
+34a2 _character_et /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:31
+34a8 _character_ok /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:33
+34ae _character_ni /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:35
+34b4 _character_xp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:37
+34c0 _character_wr /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:39
+34c6 _character_wl /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:41
+34cc _character_pt /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:43
+34d2 _character_ca /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:45
+34d8 _character_bt /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:47
+34de _team_s /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:51
+34e1 _team_boussole /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:60
+34e2 _team_filet /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:62
+34e4 _team_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:71
+34eb _team_dedans /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:79
+34ec _team_tl /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:82
+34ed _team_np /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:84
+34ee _team_nf /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:86
+34ef _team_pm /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:88
+34f1 _team_ca /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:94
+3500 _character_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:110
+3530 _character_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:112
+3560 _team_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:118
+3580 _team_x_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:120
+3581 _team_y_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:121
+3582 _team_tuile_perso_aff_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:122
+3583 _team_index_perso_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:123
+3584 _team_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:127
+35a6 _team_ligne_hg_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:131
+35a7 _team_rang_hg_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:132
+35ae _team_tuile_sous_pos_perso_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:139
+35af _team_numero_lieu_ville /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:140
+35b0 _team_end /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:141
+39cc t_load_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:968
+3600 skip_load /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:220
+3a0f t_team_filemane /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:978
+3a67 _DiscLoad /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:60
+39e4 t_io_error_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:971
+363c read_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:274
+37a6 get_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:545
+3645 loop_read_write_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:281
+3665 read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:303
+365d loop_skip_rest_of_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:296
+370c read_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:398
+3722 read_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:418
+3733 skip_load_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:434
+3748 end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:448
+375c read_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:466
+3769 read_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:485
+3776 read_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:499
+37af fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:552
+37b0 put_next_byte /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:560
+37b9 fin /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:567
+39f8 t_save_wait_1 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:974
+381f write_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:660
+3825 loop_compute_namelen /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:665
+383c loop_write_name /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:681
+384b loop_skip_remaining /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:689
+3857 read_name_over /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:696
+38ef write_sad /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:778
+3905 write_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:798
+3916 skip_save_sp /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:814
+392b end_characters /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:828
+393f write_cles /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:846
+394c write_ingredients /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:865
+3959 write_combats_coffres /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:879
+39cb skip_save /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s:962
+3a1e _DiscSave /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:17
+3a18 _SPStorage /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:8
+3a19 _BackupSP /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:10
+3a85 _Sedoric /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:81
+3a91 sedoricloop1 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:91
+3ab8 sedoricloop2 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s:119
+3ad1 _hires /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:8
+3ad4 _text /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:9
+3ad7 _ping /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:10
+3ada _shoot /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:11
+3add _zap /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:12
+3ae0 _explode /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:13
+3ae3 _kbdclick1 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:14
+3ae6 _kbdclick2 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:15
+3ae9 _cls /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:16
+3aec _lores0 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:17
+3aef _lores1 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:18
+3af2 _key /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:21
+3afa key001 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s:25
+3b26 grexit2 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:25
+3b07 getXparm /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:4
+3b10 getXloop /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:9
+3b23 grexit /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s:23
+3b2a TableBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:1
+3b32 calculXY /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:6
+3b3c _SetBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:20
+3b4c _SetBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:32
+3b57 _InvertBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:42
+3b67 _InvertBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:54
+3b72 _TestBit /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:64
+3b82 _TestBitInternal /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s:76
+3d00 osdk_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:22
 0600 __text_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-33ac __text_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-2dac __text_size /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-33ac __data_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-33ac __data_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+3b8e __text_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+358e __text_size /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+3b8e __data_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+3b8e __data_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
 0000 __data_size /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-3400 __bss_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-3500 __bss_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+3c00 __bss_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+3d00 __bss_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
 0100 __bss_size /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-3400 __bss_clear_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
-3500 __bss_clear_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+3c00 __bss_clear_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
+3d00 __bss_clear_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
 0100 __bss_clear_size /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
 0004 __zero_start /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
 0052 __zero_end /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s:32
@@ -586,16 +605,14 @@
 #FILES
 0 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/header.s
 1 /Users/torguet/.wine/drive_c/Tyrann4/zp_crt.inc
-2 /Users/torguet/.wine/drive_c/Tyrann4/map_common_ville.s
-3 /Users/torguet/.wine/drive_c/Tyrann4/map_ville1.s
-4 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s
-5 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s
-6 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s
-7 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/rand.s
-8 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s
-9 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s
-10 /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s
-11 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s
+2 /Users/torguet/.wine/drive_c/Tyrann4/map_asm.s
+3 /Users/torguet/.wine/drive_c/Tyrann4/map_common.s
+4 /Users/torguet/.wine/drive_c/Tyrann4/t4_team.s
+5 /Users/torguet/.wine/drive_c/Tyrann4/sedoric_io.s
+6 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/grsimple.s
+7 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/ggeneral.s
+8 /Users/torguet/.wine/drive_c/Tyrann4/bit_ops.s
+9 /Users/torguet/.wine/drive_c/OSDK_2_0/lib/tail.s
 #LINES
 0004 0:9
 0050 1:7
@@ -620,42 +637,42 @@
 0076 1:30
 0078 1:31
 007a 1:32
-007c 2:18
-00a0 2:22
-00a1 2:24
-00a2 2:26
-00a3 2:28
-00a4 2:30
-00a5 2:33
-00a6 2:35
-00a7 2:38
-00a8 2:40
-00a9 2:42
-00aa 2:44
-00ab 2:46
-00ac 2:48
-00ad 2:50
-00ae 2:52
-00af 2:54
-00b0 2:56
-00b1 2:58
-00b2 2:60
-00b3 2:62
-00b4 2:64
-00b5 2:66
-00b6 2:68
-00b7 2:70
-00b8 2:72
-00b9 2:74
-00ba 2:76
-00bb 2:78
-00bc 2:80
-00bd 2:82
-00be 2:84
-00bf 2:86
-00c0 2:88
-00c1 2:90
-00c2 2:96
+007c 2:17
+00a0 2:21
+00a1 2:23
+00a2 2:25
+00a3 2:27
+00a4 2:29
+00a5 2:32
+00a6 2:34
+00a7 2:37
+00a8 2:39
+00a9 2:41
+00aa 2:43
+00ab 2:45
+00ac 2:47
+00ad 2:49
+00ae 2:51
+00af 2:53
+00b0 2:55
+00b1 2:57
+00b2 2:59
+00b3 2:61
+00b4 2:63
+00b5 2:65
+00b6 2:67
+00b7 2:69
+00b8 2:71
+00b9 2:73
+00ba 2:75
+00bb 2:77
+00bc 2:79
+00bd 2:81
+00be 2:83
+00bf 2:85
+00c0 2:87
+00c1 2:89
+00c2 2:95
 0600 0:80
 0601 0:81
 0603 0:82
@@ -667,3220 +684,2816 @@
 0611 0:92
 0613 0:93
 0614 0:94
-0615 2:99
-061f 2:100
-0620 2:103
-0627 2:104
-0628 2:107
-062f 2:108
-0630 2:119
-0632 2:120
-0634 2:121
-0636 2:122
-0638 2:123
-063a 2:125
-063c 2:126
-063e 2:127
-0640 2:128
-0642 2:130
-0644 2:131
-0646 2:132
-0648 2:133
-064a 2:134
-064c 2:135
-064e 2:137
-0650 2:138
-0652 2:139
-0654 2:140
-0656 2:141
-0658 2:142
-065a 2:143
-065c 2:144
-065e 2:145
-0660 2:147
-0662 2:148
-0664 2:149
-0666 2:150
-0668 2:151
-066a 2:152
-066c 2:153
-066e 2:154
-0670 2:155
-0672 2:156
-0674 2:158
-0676 2:159
-0678 2:160
-067a 2:161
-067c 2:162
-067e 2:163
-0680 2:164
-0682 2:165
-0684 2:167
-0686 2:168
-0688 2:169
-068a 2:170
-068c 2:171
-068d 2:173
-068f 2:174
-0691 2:180
-0692 2:188
-0695 2:189
-0697 2:190
-0699 2:191
-069b 2:192
-069d 2:193
-069f 2:195
-06a1 2:196
-06a3 2:197
-06a5 2:199
-06a7 2:200
-06a9 2:201
-06ab 2:203
-06ad 2:204
-06af 2:205
-06b1 2:209
-06b3 2:210
-06b4 2:220
-06b6 2:221
-06b8 2:222
-06ba 2:223
-06bc 2:224
-06be 2:225
-06c0 2:226
-06c2 2:228
-06c4 2:229
-06c6 2:230
-06c8 2:231
-06ca 2:232
-06cd 2:233
-06cf 2:235
-06d1 2:236
-06d3 2:237
-06d5 2:239
-06d7 2:240
-06d9 2:241
-06db 2:242
-06de 2:243
-06e0 2:244
-06e3 2:248
-06e4 2:254
-06e6 2:255
-06e8 2:256
-06ea 2:257
-06ec 2:258
-06ee 2:259
-06f0 2:260
-06f2 2:261
-06f4 2:262
-06f6 2:263
-06f8 2:265
-06fa 2:266
-06fc 2:268
-06fe 2:269
-0700 2:271
-0702 2:272
-0704 2:274
-0706 2:276
-0708 2:277
-0709 2:285
-070c 2:286
-070e 2:287
-0711 2:288
-0714 2:289
-0717 2:290
-071a 2:291
-071d 2:292
-0720 2:293
-0722 2:294
-0725 2:295
-0728 2:296
-072b 2:297
-072e 2:298
-0731 2:299
-0734 2:301
-0736 2:302
-0739 2:303
-073c 2:304
-073f 2:305
-0742 2:306
-0745 2:307
-0748 2:308
-074a 2:309
-074d 2:310
-0750 2:311
-0753 2:312
-0756 2:313
-0759 2:314
-075c 2:316
-075e 2:317
-0761 2:318
-0764 2:319
-0767 2:320
-076a 2:321
-076d 2:322
-0770 2:323
-0772 2:324
-0775 2:325
-0778 2:326
-077b 2:327
-077e 2:328
-0781 2:329
-0784 2:331
-0786 2:332
-0789 2:333
-078c 2:334
-078f 2:335
-0792 2:336
-0795 2:337
-0798 2:338
-079a 2:339
-079d 2:340
-07a0 2:341
-07a3 2:342
-07a6 2:343
-07a9 2:344
-07ac 2:346
-07ae 2:347
-07b1 2:348
-07b4 2:349
-07b7 2:350
-07ba 2:351
-07bd 2:352
-07c0 2:353
-07c2 2:354
-07c5 2:355
-07c8 2:356
-07cb 2:357
-07ce 2:358
-07d1 2:359
-07d4 2:361
-07d6 2:362
-07d9 2:363
-07dc 2:364
-07df 2:365
-07e2 2:366
-07e5 2:367
-07e8 2:368
-07ea 2:369
-07ed 2:370
-07f0 2:371
-07f3 2:372
-07f6 2:373
-07f9 2:374
-07fc 2:376
-07fe 2:377
-0801 2:378
-0804 2:379
-0807 2:380
-080a 2:381
-080d 2:382
-0810 2:383
-0812 2:384
-0815 2:385
-0818 2:386
-081b 2:387
-081e 2:388
-0821 2:389
-0824 2:392
-0826 2:393
-0829 2:394
-082c 2:395
-082f 2:397
-0830 2:403
-0832 2:404
-0833 2:405
-0835 2:406
-0836 2:407
-0838 2:408
-0839 2:409
-083b 2:410
-083c 2:411
-083d 2:412
-083e 2:413
-083f 2:414
-0842 2:415
-0845 2:416
-0846 2:417
-0849 2:418
-084c 2:419
-084e 2:421
-0851 2:422
-0853 2:423
-0854 2:429
-0856 2:430
-0859 2:431
-085c 2:432
-085e 2:433
-0861 2:434
-0863 2:435
-0866 2:436
-0869 2:437
-086a 2:443
-086d 2:444
-086f 2:445
-0871 2:446
-0874 2:447
-0876 2:448
-0878 2:449
-087a 2:450
-087c 2:451
-087d 2:461
-087f 2:463
-0881 2:464
-0884 2:465
-0886 2:466
-0889 2:467
-088c 2:468
-088e 2:469
-0891 2:470
-0893 2:471
-0896 2:472
-0899 2:474
-089b 2:475
-089e 2:476
-08a0 2:477
+0615 2:97
+0617 2:101
+061a 2:102
+061c 2:103
+061f 2:104
+0622 2:105
+0624 2:106
+0627 2:107
+0629 2:108
+062c 2:109
+062f 2:110
+0632 2:111
+0634 2:112
+0637 2:113
+063a 2:115
+063d 2:118
+0640 2:119
+0643 2:120
+0646 2:121
+0649 2:124
+064b 2:125
+064d 2:126
+064f 2:128
+0651 2:130
+0652 2:131
+0654 2:132
+0655 2:133
+0657 2:136
+0659 2:137
+065b 2:138
+065d 2:139
+065f 2:140
+0661 2:141
+0663 2:142
+0665 2:143
+0668 2:144
+066b 2:145
+066e 2:146
+0671 2:148
+0674 2:150
+0677 2:152
+0679 2:153
+067b 2:154
+067e 2:155
+067f 2:156
+0681 2:157
+0684 2:158
+0685 2:159
+0688 2:161
+068a 2:162
+068c 2:163
+068f 2:164
+0690 2:165
+0692 2:166
+0695 2:167
+0696 2:168
+0699 2:170
+069b 2:171
+069d 2:172
+06a0 2:173
+06a1 2:174
+06a3 2:175
+06a6 2:176
+06a7 2:177
+06aa 2:178
+06ab 2:183
+06ad 2:184
+06b0 2:185
+06b2 2:186
+06b5 2:187
+06b7 2:188
+06ba 2:189
+06bc 2:190
+06bf 2:191
+06c1 2:192
+06c4 2:193
+06c6 2:194
+06c9 2:195
+06cb 2:196
+06ce 2:197
+06d0 2:198
+06d3 2:199
+06d5 2:200
+06d8 2:201
+06da 2:202
+06dd 2:203
+06df 2:204
+06e2 2:206
+06e4 2:207
+06e7 2:208
+06e9 2:209
+06ec 2:210
+06ee 2:211
+06f1 2:212
+06f4 2:213
+06f6 2:214
+06f8 2:215
+06fa 2:216
+06fc 2:217
+06fe 2:218
+0700 2:220
+0703 2:221
+0705 2:222
+0708 2:223
+070b 2:225
+070e 2:226
+0710 2:227
+0713 2:228
+0715 2:229
+0716 2:230
+0719 2:231
+071b 2:232
+071c 2:233
+071f 2:248
+0721 2:249
+0724 2:250
+0727 2:251
+0729 2:252
+072b 2:253
+072d 2:254
+072f 2:255
+0731 2:256
+0733 2:257
+0735 2:258
+0737 2:259
+0739 2:260
+073b 2:261
+073d 2:262
+073f 2:263
+0741 2:264
+0743 2:265
+0745 2:266
+0747 2:267
+0749 2:268
+074b 2:269
+074d 2:270
+074f 2:271
+0751 2:272
+0753 2:273
+0755 2:274
+0757 2:275
+0759 2:276
+075c 2:277
+075e 2:278
+0760 2:279
+0762 2:280
+0765 2:281
+0767 2:282
+0769 2:283
+076b 2:286
+076e 2:287
+0770 2:288
+0773 2:289
+0775 2:290
+0778 2:291
+077a 2:292
+077d 2:293
+077f 2:294
+0782 2:295
+0784 2:296
+0786 2:297
+0788 2:298
+078b 2:299
+078d 2:300
+0790 2:301
+0792 2:302
+0795 2:303
+0797 2:304
+0799 2:305
+079b 2:306
+079d 2:307
+079f 2:308
+07a1 2:309
+07a3 2:310
+07a6 2:311
+07a8 2:312
+07ab 2:313
+07ad 2:315
+07ae 2:319
+07b8 2:320
+07b9 2:323
+07c0 2:324
+07c1 2:327
+07cb 2:328
+07cc 2:331
+07d4 2:332
+07d5 2:335
+07d8 2:336
+07d9 2:343
+07db 2:344
+07dd 2:345
+07df 2:346
+07e1 2:347
+07e3 2:348
+07e5 2:349
+07e7 2:351
+07e9 2:352
+07eb 2:353
+07ee 2:354
+07f0 2:356
+07f2 2:357
+07f4 2:358
+07f6 2:359
+07f9 2:360
+07fb 2:362
+07fd 2:363
+07ff 2:364
+0801 2:365
+0803 2:367
+0806 2:368
+0808 2:370
+080a 2:371
+080c 2:372
+080e 2:373
+0810 2:374
+0812 2:376
+0814 2:377
+0816 2:378
+0818 2:379
+081b 2:380
+081d 2:381
+0820 2:385
+0821 2:391
+0823 2:392
+0825 2:393
+0827 2:394
+0829 2:395
+082b 2:396
+082d 2:397
+082f 2:398
+0831 2:399
+0833 2:400
+0835 2:401
+0837 2:402
+0839 2:403
+083b 2:404
+083d 2:405
+083f 2:406
+0841 2:408
+0843 2:409
+0845 2:411
+0847 2:412
+0849 2:414
+084b 2:416
+084d 2:417
+084e 2:419
+0850 2:420
+0852 2:421
+0854 2:422
+0856 2:423
+0857 2:435
+0859 2:436
+085b 2:437
+085d 2:438
+085f 2:439
+0861 2:441
+0863 2:442
+0865 2:443
+0867 2:444
+0869 2:446
+086b 2:447
+086d 2:448
+086f 2:449
+0871 2:450
+0873 2:451
+0875 2:453
+0877 2:454
+0879 2:455
+087b 2:456
+087d 2:457
+087f 2:458
+0881 2:459
+0883 2:460
+0885 2:461
+0887 2:463
+0889 2:464
+088b 2:465
+088d 2:466
+088f 2:467
+0891 2:468
+0893 2:469
+0895 2:470
+0897 2:471
+0899 2:472
+089b 2:474
+089d 2:475
+089f 2:476
+08a1 2:477
 08a3 2:478
-08a6 2:479
-08a8 2:480
-08ab 2:481
-08ad 2:482
-08b0 2:483
-08b3 2:484
-08b4 2:487
-08b6 2:489
-08b8 2:491
-08bb 2:492
-08bc 2:493
-08be 2:494
-08c1 2:495
-08c2 2:496
-08c4 2:497
-08c5 2:500
-08c6 2:501
-08c9 2:502
-08ca 2:503
-08cc 2:504
-08cf 2:505
-08d1 2:506
-08d4 2:508
-08d5 2:509
-08d6 2:513
-08d8 2:515
-08db 2:516
-08dc 2:517
-08de 2:518
-08e1 2:519
-08e3 2:521
-08e4 2:524
-08e5 2:525
-08e8 2:526
-08e9 2:527
-08eb 2:528
-08ee 2:529
-08f0 2:530
-08f3 2:532
-08f4 2:533
-08f5 2:541
-08f8 2:542
-08fa 2:544
-08fd 2:545
-08ff 2:546
-0901 2:548
-0904 2:549
-0905 2:550
-0907 2:551
-090a 2:552
-090d 2:554
-0910 2:555
-0911 2:558
-0913 2:559
-0916 2:560
-0918 2:561
-091b 2:562
-091d 2:563
-0920 2:564
-0922 2:565
-0925 2:566
-0926 2:569
-0929 2:570
-092c 2:571
-092d 2:578
-094b 2:579
-0969 2:580
-0987 2:581
-09a5 2:582
-09c3 2:583
-09e1 2:584
-09ff 2:591
-0a13 2:592
-0a27 2:593
-0a3b 2:594
-0a4f 2:595
-0a63 2:596
-0a77 2:597
-0a8b 2:598
-0a9f 2:599
-0ab3 2:600
-0ac7 2:601
-0add 2:602
-0af1 2:603
-0afd 3:7
-0b00 3:8
-0b02 3:9
-0b05 3:10
-0b08 3:11
-0b0a 3:12
-0b0d 3:13
-0b0f 3:14
-0b12 3:15
-0b15 3:16
-0b18 3:17
-0b1a 3:18
-0b1d 3:19
-0b20 3:21
-0b23 3:22
-0b26 3:23
-0b29 3:26
-0b2c 3:27
-0b2f 3:28
-0b32 3:31
-0b34 3:32
-0b36 3:33
-0b38 3:35
-0b3a 3:37
-0b3b 3:38
-0b3d 3:39
-0b3e 3:40
-0b40 3:46
-0b43 3:47
-0b46 3:48
-0b49 3:49
-0b4c 3:51
-0b4f 3:53
-0b52 3:55
-0b54 3:56
-0b56 3:57
-0b59 3:58
-0b5a 3:59
-0b5c 3:60
-0b5f 3:61
-0b60 3:62
-0b63 3:63
-0b64 3:67
-0b66 3:71
-0b68 3:72
-0b6b 3:73
-0b6d 3:74
-0b70 3:75
-0b72 3:76
-0b75 3:77
-0b77 3:78
-0b7a 3:79
-0b7c 3:80
-0b7f 3:81
-0b81 3:82
-0b84 3:83
-0b86 3:84
-0b89 3:85
-0b8b 3:86
-0b8e 3:88
-0b90 3:89
-0b93 3:90
-0b95 3:91
-0b98 3:92
-0b9a 3:93
-0b9d 3:94
-0ba0 3:95
-0ba2 3:96
-0ba4 3:97
-0ba6 3:98
-0ba8 3:99
-0baa 3:100
-0bac 3:102
-0baf 3:103
-0bb1 3:104
-0bb4 3:105
-0bb7 3:107
-0bba 3:108
-0bbc 3:109
-0bbf 3:110
-0bc1 3:111
-0bc2 3:112
-0bc5 3:113
-0bc7 3:114
-0bc8 3:115
-0bcb 3:129
-0bcd 3:130
-0bcf 3:131
-0bd1 3:132
-0bd3 3:133
-0bd5 3:134
-0bd7 3:135
-0bd9 3:136
-0bdb 3:137
-0bde 3:138
-0be0 3:139
-0be2 3:140
-0be5 3:141
-0be7 3:142
-0be9 3:143
-0bec 3:144
-0bee 3:145
-0bf0 3:146
-0bf3 3:147
-0bf5 3:148
-0bf7 3:151
-0bf9 3:152
-0bfb 3:153
-0bfd 3:154
-0bff 3:155
-0c02 3:157
-0c04 3:158
-0c06 3:159
-0c08 3:160
-0c0a 3:161
-0c0d 3:163
-0c0f 3:164
-0c12 3:165
-0c14 3:166
-0c16 3:167
-0c18 3:168
-0c1a 3:169
-0c1d 3:171
-0c1f 3:172
-0c22 3:173
-0c24 3:174
-0c26 3:175
-0c28 3:176
-0c2a 3:177
-0c2d 3:179
-0c2f 3:180
-0c32 3:181
-0c34 3:182
-0c36 3:183
-0c38 3:184
-0c3a 3:185
-0c3d 3:187
-0c3f 3:188
-0c42 3:189
-0c44 3:190
-0c46 3:191
-0c48 3:192
-0c4a 3:193
-0c4d 3:195
-0c50 3:196
-0c52 3:197
-0c55 3:198
-0c57 3:199
-0c59 3:200
-0c5b 3:201
-0c5d 3:202
-0c5f 3:203
-0c61 3:204
-0c63 3:205
-0c65 3:206
-0c67 3:207
-0c69 3:208
-0c6b 3:209
-0c6d 3:210
-0c6f 3:211
-0c71 3:212
-0c73 3:213
-0c75 3:214
-0c77 3:215
-0c78 3:217
-0c7b 3:218
-0c7d 3:219
-0c80 3:220
-0c82 3:221
-0c85 3:222
-0c87 3:223
-0c8a 3:224
-0c8c 3:225
-0c8e 3:226
-0c90 3:227
-0c93 3:228
-0c95 3:229
-0c98 3:230
-0c9a 3:231
-0c9d 3:232
-0c9f 3:233
-0ca0 3:248
-0ca2 3:249
-0ca4 3:250
-0ca6 3:253
-0ca8 3:254
-0ca9 3:255
-0cab 3:256
-0cad 3:257
-0caf 3:258
-0cb0 3:259
-0cb2 3:260
-0cb4 3:263
-0cb6 3:264
-0cb8 3:265
-0cba 3:266
-0cbc 3:267
-0cbe 3:268
-0cc1 3:270
-0cc4 3:271
-0cc6 3:272
-0cc8 3:273
-0cca 3:275
-0ccc 3:276
-0cce 3:277
-0cd0 3:278
-0cd2 3:279
-0cd4 3:280
-0cd7 3:282
-0cd9 3:283
-0cdc 3:284
-0cde 3:285
-0ce0 3:286
-0ce2 3:288
-0ce4 3:289
-0ce6 3:290
-0ce8 3:291
-0cea 3:292
-0ced 3:295
-0cf0 3:296
-0cf2 3:297
-0cf4 3:298
-0cf6 3:300
-0cf8 3:301
-0cfa 3:302
-0cfc 3:303
-0cfe 3:304
-0d00 3:305
-0d03 3:307
-0d05 3:308
-0d08 3:309
-0d0a 3:310
-0d0c 3:311
-0d0e 3:313
-0d10 3:314
-0d12 3:315
-0d14 3:317
-0d15 3:320
-0d17 3:321
-0d19 3:322
-0d1b 3:324
-0d1d 3:325
-0d1f 3:326
-0d21 3:327
-0d24 3:328
-0d26 3:330
-0d28 3:331
-0d2a 3:332
-0d2c 3:333
-0d2e 3:334
-0d30 3:335
-0d32 3:336
-0d35 3:337
-0d37 3:338
-0d3a 3:339
-0d3c 3:341
-0d3e 3:342
-0d40 3:343
-0d42 3:344
-0d44 3:345
-0d46 3:346
-0d49 3:347
-0d4b 3:349
-0d4d 3:350
-0d4f 3:351
-0d51 3:352
-0d53 3:353
-0d55 3:354
-0d57 3:355
-0d5a 3:356
-0d5c 3:357
-0d5f 3:358
-0d61 3:360
-0d63 3:361
-0d65 3:362
-0d67 3:363
-0d69 3:364
-0d6b 3:365
-0d6d 3:366
-0d70 3:367
-0d72 3:368
-0d75 3:369
-0d77 3:371
-0d79 3:372
-0d7b 3:373
-0d7d 3:374
-0d7f 3:375
-0d81 3:376
-0d84 3:377
-0d86 3:379
-0d88 3:380
-0d8a 3:381
-0d8c 3:382
-0d8d 4:3
-0e8c 4:7
-0e8e 4:9
-0e91 4:10
-0e94 4:11
-0e95 4:12
-0e97 4:13
-0e98 4:18
-0e9a 4:20
-0e9d 4:21
-0ea0 4:22
-0ea1 4:23
-0ea3 4:24
-0ea4 4:33
-0ea6 4:34
-0ea8 4:35
-0eaa 4:36
-0eac 4:39
-0eae 4:40
-0eb1 4:41
-0eb3 4:42
-0eb6 4:45
-0eb8 4:46
-0eba 4:47
-0ebc 4:50
-0ebe 4:51
-0ec0 4:52
-0ec2 4:53
-0ec4 4:54
-0ec6 4:55
-0ec8 4:56
-0eca 4:57
-0ecd 4:59
-0ecf 4:60
-0ed1 4:61
-0ed3 4:62
-0ed5 4:63
-0ed7 4:64
-0ed9 4:65
-0edb 4:66
-0ede 4:68
-0ee0 4:69
-0ee2 4:70
-0ee4 4:71
-0ee6 4:72
-0ee8 4:73
-0eea 4:74
-0eec 4:75
-0eed 4:76
-0eef 4:77
-0ef1 4:78
-0ef4 4:80
-0ef6 4:81
-0ef8 4:82
-0efa 4:83
-0efc 4:84
-0efe 4:85
-0f00 4:86
-0f01 4:87
-0f03 4:88
-0f05 4:91
-0f07 4:92
-0f08 4:93
-0f0a 4:94
-0f0c 4:95
-0f0e 4:96
-0f0f 4:97
-0f11 4:98
-0f13 4:99
-0f16 4:100
-0f18 4:101
-0f1a 4:104
-0f1b 4:106
-0f1d 4:107
-0f1f 4:109
-0f20 4:123
-0f22 4:124
-0f24 4:125
-0f26 4:126
-0f28 4:127
-0f2a 4:128
-0f2c 4:129
-0f2e 4:130
-0f30 4:131
-0f32 4:132
-0f34 4:133
-0f36 4:134
-0f38 4:136
-0f3a 4:138
-0f3c 4:139
-0f3e 4:140
-0f3f 4:141
-0f42 4:142
-0f44 4:143
-0f46 4:144
-0f47 4:145
-0f48 4:146
-0f4a 4:147
-0f4d 4:148
-0f4f 4:149
-0f52 4:150
-0f53 4:151
-0f54 4:152
-0f56 4:154
-0f58 4:155
-0f5a 4:156
-0f5c 4:157
-0f5e 4:158
-0f5f 4:159
-0f61 4:161
-0f63 4:164
-0f65 4:165
-0f66 4:166
-0f68 4:167
-0f6a 4:168
-0f6c 4:169
-0f6d 4:170
-0f6f 4:171
-0f71 4:172
-0f74 4:173
-0f76 4:174
-0f78 4:179
-0f79 4:191
-0f7a 4:192
-0f7b 4:193
-0f7c 4:194
-0f7d 4:195
-0f7f 4:196
-0f81 4:197
-0f82 4:198
-0f83 4:199
-0f84 4:200
-0f87 4:201
-0f8a 4:202
-0f8b 4:203
-0f8e 4:204
-0f91 4:206
-0f94 4:207
-0f96 4:208
-0f97 4:209
-0f98 4:210
-0f99 4:211
-0f9a 4:212
-0f9b 4:222
-0f9c 4:223
-0f9d 4:224
-0fa0 4:225
-0fa3 4:226
-0fa4 4:227
-0fa5 4:228
-0fa6 4:239
-0fa7 4:240
-0fa8 4:241
-0fa9 4:242
-0fac 4:243
-0faf 4:244
-0fb0 4:245
-0fb3 4:246
-0fb6 4:247
-0fb8 4:249
-0fbb 4:250
-0fbd 4:251
-0fbe 4:252
-0fc0 4:253
-0fc1 4:261
-0fc3 4:262
-0fc5 4:263
-0fc7 4:265
-0fc9 4:266
-0fcc 4:267
-0fce 4:268
-0fd1 4:270
-0fd2 4:272
-0fd4 4:273
-0fd6 4:274
-0fd8 4:285
-0fd9 4:286
-0fda 4:287
-0fdb 4:288
-0fdc 4:289
-0fdf 4:290
-0fe2 4:291
-0fe3 4:292
-0fe4 4:293
-0fe5 4:294
-0fe8 4:295
-0fe9 4:296
-0fea 4:297
-0feb 4:298
-0fec 4:299
-0fef 4:300
-0ff2 4:301
-0ff3 4:302
-0ff5 4:303
-0ff6 4:304
-0ff7 4:305
-0ff8 4:307
-0ffb 4:308
-0ffc 4:316
-0fff 4:317
-1001 4:319
-1004 4:320
-1007 4:321
-1008 4:322
-100a 4:323
-100c 4:324
-100d 4:335
-1010 4:337
-1013 4:339
-1016 4:341
-1019 4:342
-101a 4:350
-101b 4:351
-101e 4:352
-1020 4:353
-1023 4:354
-1025 4:355
-1028 4:357
-1029 4:358
-102c 4:359
-102e 4:360
-1031 4:361
-1033 4:362
-1036 4:364
-1037 4:377
-1038 4:378
-1039 4:379
-103b 4:380
-103c 4:381
-103d 4:382
-1040 4:383
-1043 4:384
-1044 4:385
-1047 4:386
-104a 4:387
-104b 4:388
-104c 4:389
-104d 4:390
-104f 4:391
-1050 4:392
-1051 4:393
-1054 4:394
-1057 4:395
-1058 4:396
-105b 4:397
-105e 4:398
-105f 4:407
-1062 4:408
-1064 4:410
-1067 4:411
-1068 4:412
-106a 4:414
-106c 4:415
-106e 4:416
-106f 4:424
-1072 4:425
-1074 4:426
-1076 4:428
-1079 4:429
-107b 4:430
-107d 4:431
-107f 4:432
-1081 4:433
-1083 4:435
-1084 4:442
-1087 4:443
-1089 4:444
-108b 4:446
-108e 4:447
-1090 4:448
-1092 4:449
-1093 4:456
-1095 4:457
-1097 4:458
-1099 4:459
-109b 4:460
-109d 4:462
-10a0 4:463
-10a3 4:464
-10a4 4:465
-10a6 4:467
-10a8 4:468
-10a9 3:394
-10ab 3:396
-10ae 3:397
-10b1 3:398
-10b2 3:399
-10b4 3:400
-10b6 3:401
-10b8 3:403
-10bb 3:404
-10be 3:405
-10bf 3:406
-10c1 3:407
-10c3 3:408
-10c5 3:410
-10c8 3:411
-10cb 3:412
-10cc 3:413
-10ce 3:414
-10d0 3:415
-10d1 3:419
-10d2 3:427
-10d4 3:428
-10d6 3:429
-10d8 3:430
-10da 3:431
-10dc 3:432
-10df 3:434
-10e1 3:435
-10e4 3:436
-10e7 3:437
-10e9 3:438
-10ec 3:439
-10ee 3:440
-10f1 3:441
-10f4 3:443
-10f6 3:444
-10f9 3:445
-10fc 3:446
-10fe 3:447
-1101 3:448
-1103 3:449
-1106 3:450
-1109 3:451
-110c 3:452
-110f 3:455
-1111 3:456
-1113 3:457
-1115 3:458
-1117 3:459
-1119 3:460
-111c 3:462
-111f 3:463
-1121 3:464
-1124 3:465
-1127 3:466
-1129 3:467
-112c 3:468
-112e 3:469
-1131 3:470
-1134 3:472
-1136 3:473
-1139 3:474
-113c 3:475
-113e 3:476
-1141 3:477
-1143 3:478
-1146 3:479
-1149 3:480
-114c 3:481
-114f 3:483
-1151 3:484
-1154 3:485
-1157 3:486
-1159 3:487
-115c 3:488
-115e 3:489
-1161 3:490
-1164 3:491
-1167 3:492
-116a 3:495
-116c 3:496
-116e 3:497
-1170 3:498
-1173 3:500
-1175 3:501
-1178 3:502
-117b 3:503
-117d 3:504
-1180 3:505
-1182 3:506
-1185 3:507
-1188 3:509
-118a 3:510
-118d 3:511
-1190 3:512
-1192 3:513
-1195 3:514
-1197 3:515
-119a 3:516
-119d 3:518
-119e 3:519
-11a1 3:520
-11a3 3:521
-11a6 3:522
-11a9 3:523
-11ab 3:524
-11ae 3:525
-11b1 3:526
-11b4 3:529
-11b6 3:530
-11b8 3:531
-11ba 3:532
-11bd 3:534
-11c0 3:535
-11c2 3:536
-11c4 3:537
-11c5 3:539
-11c7 3:540
-11ca 3:541
-11cd 3:542
-11cf 3:543
-11d2 3:544
-11d4 3:545
-11d7 3:546
-11da 3:548
-11dc 3:549
-11df 3:550
-11e2 3:551
-11e4 3:552
-11e7 3:553
-11e9 3:554
-11ec 3:555
-11ef 3:556
-11f2 3:557
-11f5 3:558
-11f6 3:561
-11f8 3:562
-11fa 3:563
-11fc 3:564
-11ff 3:566
-1202 3:567
-1204 3:568
-1206 3:569
-1207 3:571
-1209 3:572
-120c 3:573
-120f 3:574
-1211 3:575
-1214 3:576
-1216 3:577
-1219 3:578
-121c 3:580
-121e 3:581
-1221 3:582
-1224 3:583
-1226 3:584
-1229 3:585
-122b 3:586
-122e 3:587
-1231 3:588
-1234 3:589
-1237 3:591
-1239 3:592
-123c 3:593
-123f 3:594
-1241 3:595
-1244 3:596
-1246 3:597
-1249 3:598
-124c 3:599
-124f 3:600
-1252 3:601
-1253 3:604
-1255 3:605
-1257 3:606
-1259 3:607
-125c 3:609
-125f 3:610
-1261 3:611
-1263 3:612
-1264 3:614
-1266 3:615
-1269 3:616
-126b 3:617
-126e 3:618
-1270 3:619
-1272 3:620
-1275 3:621
-1278 3:622
-127a 3:623
-127d 3:624
-127f 3:625
-1282 3:626
-1285 3:628
-1287 3:629
-128a 3:630
-128d 3:631
-128f 3:632
-1292 3:633
-1294 3:634
-1297 3:635
-129a 3:636
-129d 3:637
-12a0 3:639
-12a2 3:640
-12a5 3:641
-12a8 3:642
-12aa 3:643
-12ad 3:644
-12af 3:645
-12b2 3:646
-12b5 3:647
-12b8 3:648
-12bb 3:650
-12bc 3:651
-12bf 3:652
-12c1 3:653
-12c4 3:654
-12c7 3:655
-12c9 3:656
-12cc 3:657
-12cd 3:660
-12cf 3:661
-12d1 3:662
-12d3 3:663
-12d5 3:664
-12d8 3:665
-12db 3:666
-12dd 3:667
-12e0 3:668
-12e2 3:669
-12e5 3:670
-12e8 3:672
-12ea 3:673
-12ed 3:674
-12f0 3:675
-12f2 3:676
-12f5 3:677
-12f7 3:678
-12fa 3:679
-12fd 3:680
-1300 3:681
-1303 3:682
-1306 3:683
-1307 3:686
-1309 3:687
-130b 3:688
-130d 3:689
-1310 3:690
-1312 3:691
-1315 3:692
-1318 3:693
-131a 3:694
-131d 3:695
-131f 3:696
-1322 3:697
-1325 3:698
-1328 3:699
-132b 3:700
-132e 3:701
-1331 3:702
-1332 3:705
-1334 3:706
-1336 3:707
-1338 3:708
-133b 3:709
-133d 3:710
-1340 3:711
-1343 3:712
-1345 3:713
-1348 3:714
-134a 3:715
-134d 3:716
-1350 3:717
-1353 3:718
-1356 3:719
-1359 3:720
-135c 3:721
-135d 3:724
-135f 3:725
-1361 3:726
-1363 3:727
-1366 3:728
-1368 3:729
-136b 3:730
-136e 3:731
-1370 3:732
-1373 3:733
-1375 3:734
-1378 3:735
-137b 3:736
-137e 3:737
-1381 3:738
-1384 3:739
-1387 3:740
-1388 3:743
-138a 3:744
-138c 3:745
-138e 3:746
-1391 3:747
-1393 3:748
-1396 3:749
-1399 3:750
-139b 3:751
-139e 3:752
-13a0 3:753
-13a3 3:754
-13a6 3:755
-13a9 3:756
-13ac 3:757
-13af 3:758
-13b2 3:759
-13b3 3:762
-13b5 3:763
-13b7 3:764
-13b9 3:765
-13bc 3:766
-13be 3:767
-13c1 3:768
-13c4 3:769
-13c6 3:770
-13c9 3:771
-13cb 3:772
-13ce 3:773
-13d1 3:774
-13d4 3:775
-13d7 3:776
-13da 3:777
-13dd 3:780
-13df 3:781
-13e1 3:782
-13e3 3:783
-13e6 3:784
-13e8 3:785
-13eb 3:786
-13ee 3:787
-13f0 3:788
-13f3 3:789
-13f5 3:790
-13f8 3:791
-13fb 3:792
-13fe 3:793
-1401 3:794
-1404 3:795
-1407 3:798
-1409 3:799
-140b 3:800
-140d 3:801
-140e 3:803
-1410 3:804
-1413 3:805
-1416 3:806
-1418 3:807
-141b 3:808
-141d 3:809
-1420 3:810
-1423 3:812
-1425 3:813
-1428 3:814
-142b 3:815
-142d 3:816
-1430 3:817
-1432 3:818
-1435 3:819
-1438 3:820
-143b 3:821
-143d 3:822
-143f 3:823
-1441 3:826
-1444 3:827
-1446 3:828
-1447 3:829
-144a 3:830
-144d 3:831
-1450 3:832
-1452 3:833
-1455 3:834
-1457 3:835
-1459 3:836
-145b 3:837
-145d 3:838
-145f 3:840
-1461 3:841
-1463 3:842
-1465 3:843
-1467 3:844
-1469 3:846
-146b 3:847
-146d 3:848
-146f 3:849
-1471 3:850
-1473 3:852
-1475 3:853
-1477 3:854
-1479 3:855
-147b 3:856
-147d 3:858
-147f 3:859
-1482 3:860
-1484 3:861
-1487 3:862
-148a 3:864
-148c 3:865
-148e 3:866
-1491 3:869
-1492 3:876
-1494 3:877
-1496 3:878
-1498 3:879
-1499 3:880
-149c 3:881
-149e 3:882
-149f 3:883
-14a0 3:884
-14a3 3:885
-14a6 3:886
-14a7 3:887
-14aa 3:888
-14ad 3:889
-14af 3:890
-14b2 3:891
-14b5 3:892
-14b6 3:894
-14b7 3:901
-14b9 3:902
-14bb 3:903
-14bd 3:904
-14bf 3:905
-14c2 3:906
-14c4 3:907
-14c7 3:908
-14c9 3:909
-14cc 3:910
-14cf 3:911
-14d0 3:913
-14d1 3:919
-14d9 3:921
-14e1 3:923
-14e9 3:925
-14f1 3:927
-14f9 3:929
-1501 3:934
-150d 3:943
-150f 3:944
-1511 3:945
-1513 3:946
-1516 3:947
-1517 3:949
-1519 3:950
-151b 3:951
-151e 3:952
-151f 3:954
-1521 3:955
-1523 3:956
-1526 3:957
-1527 3:961
-1529 3:962
-152c 3:963
-152f 3:964
-1531 3:965
-1534 3:966
-1536 3:967
-1539 3:968
-153c 3:970
-153e 3:971
-1541 3:972
-1544 3:973
-1546 3:974
-1549 3:975
-154b 3:976
-154e 3:977
-1551 3:978
-1554 3:979
-1557 3:980
-1558 3:986
-155a 3:987
-155d 3:988
-1560 3:989
-1562 3:990
-1565 3:991
-1567 3:992
-156a 3:993
-156d 3:994
-1570 3:995
-1573 3:996
-1574 3:1005
-1577 3:1006
-1579 3:1008
-157b 3:1010
-157e 3:1012
-1581 3:1013
-1582 3:1014
-1584 3:1015
-1587 3:1016
-1588 3:1017
-158a 3:1018
-158b 3:1021
-158d 3:1022
-1590 3:1023
-1592 3:1024
-1595 3:1025
-1597 3:1026
-159a 3:1027
-159c 3:1028
-159f 3:1029
-15a0 3:1032
-15a3 3:1033
-15a4 3:1034
-15a6 3:1035
-15a9 3:1036
-15ab 3:1037
-15ae 3:1039
-15b1 3:1040
-15b2 3:1041
-15b4 3:1042
-15b7 3:1043
-15b9 3:1044
-15bc 3:1046
-15bd 3:1054
-15db 3:1056
-15f9 3:1058
-1617 3:1060
-1635 3:1062
-1653 3:1064
-1671 3:1066
-168f 3:1068
-16ad 3:1070
-16cb 3:1072
-16e9 3:1074
-1707 3:1076
-1725 3:1078
-1743 3:1080
-1761 3:1082
-177f 3:1084
-179d 3:1086
-17bb 3:1088
-17d9 3:1090
-17f7 3:1092
-1815 3:1094
-1833 3:1096
-1851 3:1098
-186f 3:1100
-188d 3:1102
-18ab 3:1104
-18c9 3:1106
-18e7 3:1108
-1905 3:1110
-1923 3:1112
-1941 3:1114
-195f 3:1116
-197d 3:1118
-199b 3:1120
-19b9 3:1122
-19d7 3:1124
-19f5 3:1126
-1a13 3:1128
-1a31 3:1130
-1a4f 3:1132
-1a6d 3:1134
-1a8b 3:1136
-1aa9 3:1138
-1ac7 3:1140
-1ae5 3:1142
-1b03 3:1146
-1b17 3:1147
-1b2b 3:1148
-1b3f 3:1149
-1b53 3:1150
-1b5d 3:1160
-1b61 3:1165
-1b65 3:1167
-1b69 3:1169
-1b6d 3:1171
-1b71 3:1173
-1b75 3:1175
-1b79 3:1177
-1b7d 3:1179
-1b81 3:1181
-1b85 3:1183
-1b89 3:1185
-1b8d 3:1187
-1b91 3:1189
-1b95 3:1191
-1b99 3:1193
-1b9d 3:1195
-1ba1 3:1197
-1ba5 3:1199
-1ba9 3:1201
-1bad 3:1203
-1bb1 3:1205
-1bb5 3:1207
-1bb9 3:1209
-1bbd 3:1211
-1bc1 3:1213
-1bc5 3:1215
-1bc9 3:1217
-1bcd 3:1219
-1bd1 3:1221
-1bd5 3:1223
-1bd9 3:1225
-1bdd 3:1227
-1be1 3:1229
-1be5 3:1231
-1be9 3:1233
-1bed 3:1235
-1bf1 3:1237
-1bf5 3:1239
-1bf9 3:1241
-1bfd 3:1243
-1c01 3:1245
-1c05 3:1247
-1c09 3:1249
-1c0d 3:1251
-1c11 3:1253
-1c15 3:1255
-1c19 3:1257
-1c1d 3:1259
-1c21 3:1261
-1c25 3:1263
-1c29 3:1265
-1c2d 3:1267
-1c31 3:1269
-1c35 3:1271
-1c39 3:1273
-1c3d 3:1275
-1c41 3:1277
-1c45 3:1279
-1c49 3:1281
-1c4d 3:1283
-1c51 3:1285
-1c55 3:1287
-1c59 3:1289
-1c5d 3:1291
-1c61 3:1293
-1c65 3:1295
-1c69 3:1297
-1c6d 3:1299
-1c71 3:1302
-1c75 3:1304
-1c79 3:1306
-1c7d 3:1308
-1c81 3:1310
-1c85 3:1312
-1c89 3:1314
-1c8d 3:1316
-1c91 3:1318
-1c95 3:1320
-1c99 3:1322
-1c9d 3:1324
-1ca1 3:1328
-1ca5 3:1330
-1ca9 3:1332
-1cad 3:1334
-1cb1 3:1336
-1cb5 3:1338
-1cb9 3:1340
-1cbd 3:1342
-1cc1 3:1344
-1cc5 3:1346
-1cc9 3:1348
-1ccd 3:1350
-1cd1 3:1352
-1cd5 3:1354
-1cd9 3:1356
-1cdd 3:1358
-1ce1 3:1360
-1ce5 3:1362
-1ce9 3:1364
-1ced 3:1367
-1cf1 3:1376
-1cfd 3:1377
-1d09 3:1378
-1d15 3:1379
-1d21 3:1380
-1d2d 3:1381
-1d39 3:1382
-1d45 3:1383
-1d51 3:1384
-1d5d 3:1385
-1d69 3:1386
-1d75 3:1387
-1d81 3:1388
-1d8d 3:1389
-1d99 3:1390
-1da5 3:1391
-1db1 3:1392
-1dbb 3:1402
-1dbc 3:1403
-1dd5 3:1405
-1dd6 3:1406
-1de5 3:1408
-1de6 3:1409
-1e04 3:1412
-1e05 3:1413
-1e19 3:1415
-1e1a 3:1416
-1e31 3:1418
-1e32 3:1419
-1e4a 3:1422
-1e4b 3:1423
-1e64 3:1425
-1e65 3:1426
-1e7d 3:1429
-1e7e 3:1430
-1e9c 3:1432
-1e9d 3:1433
-1ec0 3:1436
-1ec1 3:1437
-1ed9 3:1439
-1eda 3:1440
-1efa 3:1442
-1efb 3:1443
-1f13 3:1445
-1f14 3:1446
-1f24 3:1448
-1f25 3:1449
-1f3c 3:1452
-1f3d 3:1453
-1f60 3:1455
-1f61 3:1456
-1f7e 3:1458
-1f7f 3:1459
-1f94 3:1462
-1f95 3:1463
-1faf 3:1465
-1fb0 3:1466
-1fc6 3:1469
-1fc7 3:1470
-1fd5 3:1473
-1fd6 3:1474
-1fde 3:1477
-1fdf 3:1478
-1fed 3:1481
-1fee 3:1482
-1ff8 3:1485
-1ff9 3:1486
-2008 3:1489
-2009 3:1490
-2011 3:1493
-2012 3:1494
-2018 3:1497
-2019 3:1498
-202b 3:1500
-202c 3:1501
-203c 3:1505
-2064 3:1506
-208c 3:1507
-20b4 3:1508
-20dc 3:1509
-2104 3:1510
-212c 3:1511
-2154 3:1512
-217c 3:1513
-21a4 3:1514
-21cc 3:1515
-21f4 3:1516
-221c 3:1517
-2244 3:1518
-226c 3:1519
-2294 3:1520
-22bc 3:1521
-22e4 3:1522
-230c 3:1523
-2334 3:1524
-235c 3:1525
-2384 3:1526
-23ac 3:1527
-23d4 3:1528
-23fc 3:1529
-2424 3:1530
-244c 3:1531
-2474 3:1532
-249c 3:1533
-24c4 3:1534
-24ec 3:1535
-2514 3:1536
-253c 3:1537
-2564 3:1538
-258c 3:1539
-25b4 3:1540
-25dc 3:1541
-2604 3:1542
-262c 3:1543
-2654 3:1544
-267c 3:1545
-26a4 3:1546
-26cc 3:1547
-26f4 3:1548
-271c 3:1549
-2744 3:1550
-276c 3:1551
-2794 3:1552
-27bc 3:1553
-27e4 3:1554
-280d 3:1559
-281e 3:1560
-282f 3:1561
-2840 3:1562
-2851 3:1563
-2862 3:1564
-2873 3:1565
-2884 3:1566
-2895 3:1567
-28a6 3:1568
-28b7 3:1569
-28c8 3:1570
-28d9 3:1571
-28ea 3:1581
-28eb 3:1582
-28ec 3:1583
-28ed 3:1584
-28ee 3:1585
-28ef 3:1586
-28f0 3:1589
-28f1 3:1590
-28f2 3:1591
-28f3 3:1592
-28f4 3:1593
-28f5 3:1594
-28f6 3:1598
-28f7 3:1599
-28f8 3:1600
-28f9 3:1601
-28fa 3:1602
-28fb 3:1603
-28fc 3:1606
-28fd 3:1607
-28fe 3:1608
-28ff 3:1609
-2900 3:1610
-2901 3:1611
-2902 3:1614
-2903 3:1615
-2904 3:1616
-2905 3:1617
-2906 3:1618
-2907 3:1619
-2908 3:1622
-2909 3:1623
-290a 3:1624
-290b 3:1625
-290c 3:1626
-290d 3:1627
-290e 3:1630
-290f 3:1631
-2910 3:1632
-2911 3:1633
-2912 3:1634
-2913 3:1635
-2914 3:1638
-2915 3:1639
-2916 3:1640
-2917 3:1641
-2918 3:1642
-2919 3:1643
-291a 3:1646
-291b 3:1647
-291c 3:1648
-291d 3:1649
-291e 3:1650
-291f 3:1651
-2920 3:1654
-2921 3:1655
-2922 3:1656
-2923 3:1657
-2924 3:1658
-2925 3:1659
-2926 3:1662
-2927 3:1663
-2928 3:1664
-2929 3:1665
-292a 3:1666
-292b 3:1667
-292c 3:1670
-292d 3:1671
-292e 3:1672
-292f 3:1673
-2930 3:1674
-2931 3:1675
-2932 3:1678
-2933 3:1679
-2934 3:1680
-2935 3:1681
-2936 3:1682
-2937 3:1683
-2938 3:1686
-2939 3:1687
-293a 3:1688
-293b 3:1689
-293c 3:1690
-293d 3:1691
-293e 3:1694
-293f 3:1695
-2940 3:1696
-2941 3:1697
-2942 3:1698
-2943 3:1699
-2944 3:1702
-2945 3:1703
-2946 3:1704
-2947 3:1705
-2948 3:1706
-2949 3:1707
-294a 3:1710
-294b 3:1711
-294c 3:1712
-294d 3:1713
-294e 3:1714
-294f 3:1715
-2950 3:1718
-2951 3:1719
-2952 3:1720
-2953 3:1721
-2954 3:1722
-2955 3:1723
-2956 3:1726
-2957 3:1727
-2958 3:1728
-2959 3:1729
-295a 3:1730
-295b 3:1731
-295c 3:1734
-295d 3:1735
-295e 3:1736
-295f 3:1737
-2960 3:1738
-2961 3:1739
-2962 3:1742
-2963 3:1743
-2964 3:1744
-2965 3:1745
-2966 3:1746
-2967 3:1747
-2968 3:1750
-2969 3:1751
-296a 3:1752
-296b 3:1753
-296c 3:1754
-296d 3:1755
-296e 3:1758
-296f 3:1759
-2970 3:1760
-2971 3:1761
-2972 3:1762
-2973 3:1763
-2974 3:1766
-2975 3:1767
-2976 3:1768
-2977 3:1769
-2978 3:1770
-2979 3:1771
-297a 3:1774
-297b 3:1775
-297c 3:1776
-297d 3:1777
-297e 3:1778
-297f 3:1779
-2980 3:1782
-2981 3:1783
-2982 3:1784
-2983 3:1785
-2984 3:1786
-2985 3:1787
-2986 3:1790
-2987 3:1791
-2988 3:1792
-2989 3:1793
-298a 3:1794
-298b 3:1795
-298c 3:1798
-298d 3:1799
-298e 3:1800
-298f 3:1801
-2990 3:1802
-2991 3:1803
-2992 3:1806
-2993 3:1807
-2994 3:1808
-2995 3:1809
-2996 3:1810
-2997 3:1811
-2998 3:1814
-2999 3:1815
-299a 3:1816
-299b 3:1817
-299c 3:1818
-299d 3:1819
-299e 3:1822
-299f 3:1823
-29a0 3:1824
-29a1 3:1825
-29a2 3:1826
-29a3 3:1827
-29a4 3:1830
-29a5 3:1831
-29a6 3:1832
-29a7 3:1833
-29a8 3:1834
-29a9 3:1835
-29aa 3:1838
-29ab 3:1839
-29ac 3:1840
-29ad 3:1841
-29ae 3:1842
-29af 3:1843
-29b0 3:1846
-29b1 3:1847
-29b2 3:1848
-29b3 3:1849
-29b4 3:1850
-29b5 3:1851
-29b6 3:1854
-29b7 3:1855
-29b8 3:1856
-29b9 3:1857
-29ba 3:1858
-29bb 3:1859
-29bc 3:1862
-29bd 3:1863
-29be 3:1864
-29bf 3:1865
-29c0 3:1866
-29c1 3:1867
-29c2 3:1870
-29c3 3:1871
-29c4 3:1872
-29c5 3:1873
-29c6 3:1874
-29c7 3:1875
-29c8 3:1878
-29c9 3:1879
-29ca 3:1880
-29cb 3:1881
-29cc 3:1882
-29cd 3:1883
-29ce 3:1886
-29cf 3:1887
-29d0 3:1888
-29d1 3:1889
-29d2 3:1890
-29d3 3:1891
-29d4 3:1894
-29d5 3:1895
-29d6 3:1896
-29d7 3:1897
-29d8 3:1898
-29d9 3:1899
-29da 3:1902
-29db 3:1903
-29dc 3:1904
-29dd 3:1905
-29de 3:1906
-29df 3:1907
-29e0 3:1910
-29e1 3:1911
-29e2 3:1912
-29e3 3:1913
-29e4 3:1914
-29e5 3:1915
-29e6 3:1919
-29e7 3:1920
-29e8 3:1921
-29e9 3:1922
-29ea 3:1923
-29eb 3:1924
-29ec 3:1927
-29ed 3:1928
-29ee 3:1929
-29ef 3:1930
-29f0 3:1931
-29f1 3:1932
-29f2 3:1935
-29f3 3:1936
-29f4 3:1937
-29f5 3:1938
-29f6 3:1939
-29f7 3:1940
-29f8 3:1943
-29f9 3:1944
-29fa 3:1945
-29fb 3:1946
-29fc 3:1947
-29fd 3:1948
-29fe 3:1951
-29ff 3:1952
-2a00 3:1953
-2a01 3:1954
-2a02 3:1955
-2a03 3:1956
-2a04 3:1959
-2a05 3:1960
-2a06 3:1961
-2a07 3:1962
-2a08 3:1963
-2a09 3:1964
-2a0a 3:1967
-2a0b 3:1968
-2a0c 3:1969
-2a0d 3:1970
-2a0e 3:1971
-2a0f 3:1972
-2a10 3:1975
-2a11 3:1976
-2a12 3:1977
-2a13 3:1978
-2a14 3:1979
-2a15 3:1980
-2a16 3:1983
-2a17 3:1984
-2a18 3:1985
-2a19 3:1986
-2a1a 3:1987
-2a1b 3:1988
-2a1c 3:1991
-2a1d 3:1992
-2a1e 3:1993
-2a1f 3:1994
-2a20 3:1995
-2a21 3:1996
-2a22 3:1999
-2a23 3:2000
-2a24 3:2001
-2a25 3:2002
-2a26 3:2003
-2a27 3:2004
-2a28 3:2007
-2a29 3:2008
-2a2a 3:2009
-2a2b 3:2010
-2a2c 3:2011
-2a2d 3:2012
-2a2e 3:2015
-2a2f 3:2016
-2a30 3:2017
-2a31 3:2018
-2a32 3:2019
-2a33 3:2020
-2a34 3:2023
-2a35 3:2024
-2a36 3:2025
-2a37 3:2026
-2a38 3:2027
-2a39 3:2028
-2a3a 3:2032
-2a3b 3:2033
-2a3c 3:2034
-2a3d 3:2035
-2a3e 3:2036
-2a3f 3:2037
-2a40 3:2040
-2a41 3:2041
-2a42 3:2042
-2a43 3:2043
-2a44 3:2044
-2a45 3:2045
-2a46 3:2049
-2a47 3:2050
-2a48 3:2051
-2a49 3:2052
-2a4a 3:2053
-2a4b 3:2054
-2a4c 3:2057
-2a4d 3:2058
-2a4e 3:2059
-2a4f 3:2060
-2a50 3:2061
-2a51 3:2062
-2a52 3:2065
-2a53 3:2066
-2a54 3:2067
-2a55 3:2068
-2a56 3:2069
-2a57 3:2070
-2a58 3:2073
-2a59 3:2074
-2a5a 3:2075
-2a5b 3:2076
-2a5c 3:2077
-2a5d 3:2078
-2a5e 3:2081
-2a5f 3:2082
-2a60 3:2083
-2a61 3:2084
-2a62 3:2085
-2a63 3:2086
-2a64 3:2089
-2a65 3:2090
-2a66 3:2091
-2a67 3:2092
-2a68 3:2093
-2a69 3:2094
-2a6a 3:2097
-2a6b 3:2098
-2a6c 3:2099
-2a6d 3:2100
-2a6e 3:2101
-2a6f 3:2102
-2a70 3:2105
-2a71 3:2106
-2a72 3:2107
-2a73 3:2108
-2a74 3:2109
-2a75 3:2110
-2a76 3:2113
-2a77 3:2114
-2a78 3:2115
-2a79 3:2116
-2a7a 3:2117
-2a7b 3:2118
-2a7c 3:2121
-2a7d 3:2122
-2a7e 3:2123
-2a7f 3:2124
-2a80 3:2125
-2a81 3:2126
-2a82 3:2129
-2a83 3:2130
-2a84 3:2131
-2a85 3:2132
-2a86 3:2133
-2a87 3:2134
-2a88 3:2137
-2a89 3:2138
-2a8a 3:2139
-2a8b 3:2140
-2a8c 3:2141
-2a8d 3:2142
-2a8e 3:2145
-2a8f 3:2146
-2a90 3:2147
-2a91 3:2148
-2a92 3:2149
-2a93 3:2150
-2a94 3:2153
-2a95 3:2154
-2a96 3:2155
-2a97 3:2156
-2a98 3:2157
-2a99 3:2158
-2a9a 3:2161
-2a9b 3:2162
-2a9c 3:2163
-2a9d 3:2164
-2a9e 3:2165
-2a9f 3:2166
-2aa0 3:2169
-2aa1 3:2170
-2aa2 3:2171
-2aa3 3:2172
-2aa4 3:2173
-2aa5 3:2174
-2aa6 3:2177
-2aa7 3:2178
-2aa8 3:2179
-2aa9 3:2180
-2aaa 3:2181
-2aab 3:2182
-2aac 3:2185
-2aad 3:2186
-2aae 3:2187
-2aaf 3:2188
-2ab0 3:2189
-2ab1 3:2190
-2ab2 3:2193
-2ab3 3:2194
-2ab4 3:2195
-2ab5 3:2196
-2ab6 3:2197
-2ab7 3:2198
-2ab8 3:2201
-2ab9 3:2202
-2aba 3:2203
-2abb 3:2204
-2abc 3:2205
-2abd 3:2206
-2abe 3:2209
-2abf 3:2210
-2ac0 3:2211
-2ac1 3:2212
-2ac2 3:2213
-2ac3 3:2214
-2ac4 3:2217
-2ac5 3:2218
-2ac6 3:2219
-2ac7 3:2220
-2ac8 3:2221
-2ac9 3:2222
-2aca 3:2225
-2acb 3:2226
-2acc 3:2227
-2acd 3:2228
-2ace 3:2229
-2acf 3:2230
-2ad0 3:2233
-2ad1 3:2234
-2ad2 3:2235
-2ad3 3:2236
-2ad4 3:2237
-2ad5 3:2238
-2ad6 3:2241
-2ad7 3:2242
-2ad8 3:2243
-2ad9 3:2244
-2ada 3:2245
-2adb 3:2246
-2adc 3:2249
-2add 3:2250
-2ade 3:2251
-2adf 3:2252
-2ae0 3:2253
-2ae1 3:2254
-2ae2 3:2259
-2ae3 3:2260
-2ae4 3:2261
-2ae5 3:2262
-2ae6 3:2263
-2ae7 3:2264
-2ae8 3:2267
-2ae9 3:2268
-2aea 3:2269
-2aeb 3:2270
-2aec 3:2271
-2aed 3:2272
-2aee 3:2275
-2aef 3:2276
-2af0 3:2277
-2af1 3:2278
-2af2 3:2279
-2af3 3:2280
-2af4 3:2283
-2af5 3:2284
-2af6 3:2285
-2af7 3:2286
-2af8 3:2287
-2af9 3:2288
-2afa 3:2291
-2afb 3:2292
-2afc 3:2293
-2afd 3:2294
-2afe 3:2295
-2aff 3:2296
-2b00 3:2299
-2b01 3:2300
-2b02 3:2301
-2b03 3:2302
-2b04 3:2303
-2b05 3:2304
-2b06 3:2307
-2b07 3:2308
-2b08 3:2309
-2b09 3:2310
-2b0a 3:2311
-2b0b 3:2312
-2b0c 3:2315
-2b0d 3:2316
-2b0e 3:2317
-2b0f 3:2318
-2b10 3:2319
-2b11 3:2320
-2b12 3:2323
-2b13 3:2324
-2b14 3:2325
-2b15 3:2326
-2b16 3:2327
-2b17 3:2328
-2b18 3:2331
-2b19 3:2332
-2b1a 3:2333
-2b1b 3:2334
-2b1c 3:2335
-2b1d 3:2336
-2b1e 3:2339
-2b1f 3:2340
-2b20 3:2341
-2b21 3:2342
-2b22 3:2343
-2b23 3:2344
-2b24 3:2347
-2b25 3:2348
-2b26 3:2349
-2b27 3:2350
-2b28 3:2351
-2b29 3:2352
-2b2a 3:2355
-2b2b 3:2356
-2b2c 3:2357
-2b2d 3:2358
-2b2e 3:2359
-2b2f 3:2360
-2b30 3:2363
-2b31 3:2364
-2b32 3:2365
-2b33 3:2366
-2b34 3:2367
-2b35 3:2368
-2b36 3:2372
-2b37 3:2373
-2b38 3:2374
-2b39 3:2375
-2b3a 3:2376
-2b3b 3:2377
-2b3c 3:2380
-2b3d 3:2381
-2b3e 3:2382
-2b3f 3:2383
-2b40 3:2384
-2b41 3:2385
-2b42 3:2388
-2b43 3:2389
-2b44 3:2390
-2b45 3:2391
-2b46 3:2392
-2b47 3:2393
-2b48 3:2396
-2b49 3:2397
-2b4a 3:2398
-2b4b 3:2399
-2b4c 3:2400
-2b4d 3:2401
-2b4e 3:2404
-2b4f 3:2405
-2b50 3:2406
-2b51 3:2407
-2b52 3:2408
-2b53 3:2409
-2b54 3:2412
-2b55 3:2413
-2b56 3:2414
-2b57 3:2415
-2b58 3:2416
-2b59 3:2417
-2b5a 3:2420
-2b5b 3:2421
-2b5c 3:2422
-2b5d 3:2423
-2b5e 3:2424
-2b5f 3:2425
-2b60 3:2428
-2b61 3:2429
-2b62 3:2430
-2b63 3:2431
-2b64 3:2432
-2b65 3:2433
-2b66 3:2436
-2b67 3:2437
-2b68 3:2438
-2b69 3:2439
-2b6a 3:2440
-2b6b 3:2441
-2b6c 3:2444
-2b6d 3:2445
-2b6e 3:2446
-2b6f 3:2447
-2b70 3:2448
-2b71 3:2449
-2b72 3:2451
-2b73 3:2452
-2b74 3:2453
-2b75 3:2454
-2b76 3:2455
-2b77 3:2456
-2b78 3:2459
-2b79 3:2460
-2b7a 3:2461
-2b7b 3:2462
-2b7c 3:2463
-2b7d 3:2464
-2b7e 3:2467
-2b7f 3:2468
-2b80 3:2469
-2b81 3:2470
-2b82 3:2471
-2b83 3:2472
-2b84 3:2475
-2b85 3:2476
-2b86 3:2477
-2b87 3:2478
-2b88 3:2479
-2b89 3:2480
-2b8a 3:2483
-2b8b 3:2484
-2b8c 3:2485
-2b8d 3:2486
-2b8e 3:2487
-2b8f 3:2488
-2b90 3:2491
-2b91 3:2492
-2b92 3:2493
-2b93 3:2494
-2b94 3:2495
-2b95 3:2496
-2b96 3:2499
-2b97 3:2500
-2b98 3:2501
-2b99 3:2502
-2b9a 3:2503
-2b9b 3:2504
-2b9c 3:2507
-2b9d 3:2508
-2b9e 3:2509
-2b9f 3:2510
-2ba0 3:2511
-2ba1 3:2512
-2ba2 3:2515
-2ba3 3:2516
-2ba4 3:2517
-2ba5 3:2518
-2ba6 3:2519
-2ba7 3:2520
-2ba8 3:2523
-2ba9 3:2524
-2baa 3:2525
-2bab 3:2526
-2bac 3:2527
-2bad 3:2528
-2bae 3:2531
-2baf 3:2532
-2bb0 3:2533
-2bb1 3:2534
-2bb2 3:2535
-2bb3 3:2536
-2bb4 3:2539
-2bb5 3:2540
-2bb6 3:2541
-2bb7 3:2542
-2bb8 3:2543
-2bb9 3:2544
-2bba 3:2547
-2bbb 3:2548
-2bbc 3:2549
-2bbd 3:2550
-2bbe 3:2551
-2bbf 3:2552
-2bc0 3:2555
-2bc1 3:2556
-2bc2 3:2557
-2bc3 3:2558
-2bc4 3:2559
-2bc5 3:2560
-2bc6 3:2563
-2bc7 3:2564
-2bc8 3:2565
-2bc9 3:2566
-2bca 3:2567
-2bcb 3:2568
-2bcc 3:2571
-2bcd 3:2572
-2bce 3:2573
-2bcf 3:2574
-2bd0 3:2575
-2bd1 3:2576
-2bd2 3:2579
-2bd3 3:2580
-2bd4 3:2581
-2bd5 3:2582
-2bd6 3:2583
-2bd7 3:2584
-2bd8 3:2587
-2bd9 3:2588
-2bda 3:2589
-2bdb 3:2590
-2bdc 3:2591
-2bdd 3:2592
-2bde 3:2595
-2bdf 3:2596
-2be0 3:2597
-2be1 3:2598
-2be2 3:2599
-2be3 3:2600
-2be4 5:7
-2c00 5:8
-2c60 5:11
-2c6c 5:13
-2c72 5:15
-2c78 5:17
-2c7e 5:19
-2c84 5:21
-2c8a 5:23
-2c90 5:25
-2c96 5:27
-2c9c 5:29
-2ca2 5:31
-2ca8 5:33
-2cae 5:35
-2cb4 5:37
-2cc0 5:39
-2cc6 5:41
-2ccc 5:43
-2cd2 5:45
-2cd8 5:47
-2cde 5:51
-2cdf 5:53
-2ce0 5:55
-2ce1 5:60
-2ce2 5:62
-2ce3 5:65
-2ce4 5:71
-2cea 5:74
-2ceb 5:79
-2cec 5:82
-2ced 5:84
-2cee 5:86
-2cef 5:88
-2cf0 5:91
-2cf1 5:94
-2cf2 5:99
-2cf3 5:104
-2cf4 5:108
-2d00 5:110
-2d30 5:112
-2d60 5:118
-2d80 5:120
-2d81 5:121
-2d82 5:122
-2d83 5:123
-2d84 5:127
-2da4 5:129
-2da5 5:130
-2da6 5:131
-2da7 5:132
-2da8 5:133
-2da9 5:134
-2daa 5:135
-2dab 5:136
-2dac 5:137
-2dad 5:138
-2dae 5:139
-2daf 5:140
-2db0 5:141
-2db1 5:175
-2db3 5:176
-2db6 5:178
-2db9 5:179
-2dbb 5:180
-2dbe 5:182
-2dc0 5:183
-2dc3 5:184
-2dc6 5:185
-2dc8 5:186
-2dcb 5:187
-2dcd 5:188
-2dd0 5:189
-2dd3 5:192
-2dd6 5:193
-2dd8 5:195
-2dda 5:196
-2ddc 5:197
-2dde 5:198
-2ddf 5:199
-2de1 5:200
-2de3 5:201
-2de4 5:202
-2de7 5:203
-2de8 5:204
-2dea 5:205
-2dec 5:206
-2def 5:207
-2df2 5:208
-2df4 5:209
-2df7 5:210
-2df9 5:211
-2dfc 5:212
-2dff 5:213
-2e00 5:224
-2e02 5:225
-2e04 5:226
-2e06 5:227
-2e08 5:230
-2e0a 5:231
-2e0c 5:232
-2e0f 5:233
-2e10 5:235
-2e12 5:236
-2e15 5:237
-2e16 5:239
-2e18 5:240
-2e1b 5:241
-2e1c 5:243
-2e1e 5:244
-2e21 5:245
-2e22 5:247
-2e24 5:248
-2e27 5:249
-2e28 5:251
-2e2a 5:252
-2e2d 5:253
-2e2e 5:264
-2e30 5:265
-2e32 5:266
-2e34 5:267
-2e36 5:268
-2e38 5:269
-2e3a 5:270
-2e3c 5:275
-2e3f 5:276
-2e41 5:279
-2e43 5:280
-2e45 5:284
-2e48 5:285
-2e4a 5:286
-2e4d 5:287
-2e4f 5:288
-2e51 5:289
-2e53 5:290
-2e55 5:291
-2e57 5:292
-2e59 5:293
-2e5b 5:295
-2e5d 5:299
-2e60 5:300
-2e61 5:301
-2e63 5:302
-2e65 5:306
-2e67 5:307
-2e69 5:308
-2e6c 5:309
-2e6e 5:310
-2e70 5:311
-2e72 5:312
-2e74 5:313
-2e76 5:320
-2e79 5:321
-2e7b 5:322
-2e7e 5:323
-2e80 5:324
-2e83 5:325
-2e85 5:326
-2e88 5:327
-2e8a 5:328
-2e8c 5:330
-2e8f 5:331
-2e92 5:334
-2e95 5:335
-2e98 5:337
-2e9b 5:338
-2e9e 5:340
-2ea1 5:341
-2ea4 5:343
-2ea7 5:344
-2eaa 5:346
-2ead 5:347
-2eb0 5:349
-2eb3 5:350
-2eb6 5:352
-2eb9 5:353
-2ebc 5:356
-2ebf 5:357
-2ec2 5:359
-2ec5 5:360
-2ec8 5:362
-2ecb 5:363
-2ece 5:365
-2ed1 5:366
-2ed4 5:368
-2ed7 5:369
-2ed9 5:370
-2edc 5:371
-2ede 5:372
-2ee1 5:373
-2ee3 5:374
-2ee6 5:375
-2ee8 5:377
-2eea 5:378
-2eed 5:379
-2ef0 5:381
-2ef3 5:382
-2ef6 5:384
-2ef9 5:385
-2efc 5:387
-2eff 5:388
-2f02 5:390
-2f05 5:391
-2f08 5:396
-2f0a 5:397
-2f0c 5:399
-2f0f 5:400
-2f11 5:401
-2f14 5:402
-2f16 5:403
-2f18 5:404
-2f1a 5:405
-2f1c 5:406
-2f1e 5:416
-2f20 5:417
-2f22 5:419
-2f24 5:420
-2f27 5:421
-2f29 5:422
-2f2b 5:431
-2f2e 5:432
-2f30 5:433
-2f33 5:435
-2f35 5:436
-2f37 5:437
-2f39 5:438
-2f3b 5:440
-2f3d 5:443
-2f3f 5:444
-2f41 5:445
-2f43 5:446
-2f45 5:447
-2f48 5:451
-2f4b 5:452
-2f4e 5:455
-2f51 5:456
-2f54 5:460
-2f57 5:461
-2f5a 5:465
-2f5c 5:467
-2f5f 5:468
-2f62 5:469
-2f63 5:470
-2f65 5:471
-2f67 5:484
-2f69 5:486
-2f6c 5:487
-2f6f 5:488
-2f70 5:489
-2f72 5:490
-2f74 5:498
-2f76 5:500
-2f79 5:501
-2f7c 5:502
-2f7d 5:503
-2f7f 5:504
-2f81 5:507
-2f84 5:508
-2f87 5:511
-2f8a 5:512
-2f8d 5:516
-2f90 5:517
-2f93 5:520
-2f96 5:521
-2f99 5:524
-2f9c 5:525
-2f9f 5:528
-2fa2 5:530
-2fa5 5:539
-2fa6 5:547
-2fa8 5:548
-2fa9 5:549
-2fab 5:550
-2fad 5:551
-2faf 5:553
-2fb0 5:562
-2fb2 5:563
-2fb3 5:564
-2fb5 5:565
-2fb7 5:566
-2fb9 5:568
-2fba 5:591
-2fbc 5:592
-2fbf 5:594
-2fc2 5:595
-2fc4 5:596
-2fc7 5:598
-2fc9 5:599
-2fcc 5:600
-2fcf 5:601
-2fd1 5:602
-2fd4 5:603
-2fd6 5:604
-2fd9 5:605
-2fdc 5:607
-2fde 5:608
-2fe0 5:609
-2fe2 5:610
-2fe4 5:612
-2fe6 5:613
-2fe8 5:614
-2fea 5:615
-2feb 5:616
-2fee 5:617
-2ff0 5:618
-2ff1 5:620
-2ff4 5:621
-2ff6 5:622
-2ff7 5:624
-2ffa 5:625
-2ffc 5:626
-2ffd 5:628
-3000 5:629
-3002 5:630
-3003 5:632
-3006 5:633
-3008 5:634
-3009 5:636
-300c 5:637
-300e 5:638
-300f 5:649
-3011 5:650
-3013 5:651
-3015 5:652
-3017 5:653
-3019 5:654
-301b 5:655
-301d 5:656
-301f 5:662
-3021 5:663
-3023 5:664
-3025 5:666
-3028 5:667
-3029 5:668
-302b 5:669
-302d 5:670
-302f 5:671
-3031 5:672
-3032 5:673
-3033 5:674
-3036 5:678
-3038 5:679
-303a 5:680
-303c 5:682
-303f 5:683
-3041 5:684
-3044 5:685
-3045 5:686
-3047 5:687
-3049 5:688
-304b 5:690
-304d 5:691
-304f 5:692
-3051 5:693
-3053 5:694
-3055 5:695
-3057 5:697
-3059 5:699
-305b 5:700
-305e 5:701
-3061 5:702
-3063 5:703
-3065 5:704
-3068 5:705
-306b 5:706
-306d 5:707
-306f 5:709
-3072 5:710
-3075 5:713
-3078 5:714
-307b 5:716
-307e 5:717
-3081 5:719
-3084 5:720
-3087 5:722
-308a 5:723
-308d 5:725
-3090 5:726
-3093 5:728
-3096 5:729
-3099 5:731
-309c 5:732
-309f 5:735
-30a2 5:736
-30a5 5:738
-30a8 5:739
-30ab 5:741
-30ae 5:742
-30b1 5:744
-30b4 5:745
-30b7 5:747
-30b9 5:748
-30bc 5:749
-30be 5:750
-30c1 5:751
-30c3 5:752
-30c6 5:753
-30c8 5:755
-30cb 5:756
-30cd 5:757
-30d0 5:759
-30d3 5:760
-30d6 5:762
-30d9 5:763
-30dc 5:765
-30df 5:766
-30e2 5:768
-30e5 5:769
-30e8 5:770
-30eb 5:775
-30ed 5:776
-30ef 5:778
-30f1 5:779
-30f4 5:780
-30f7 5:781
-30f9 5:782
-30fb 5:783
-30fd 5:784
-30ff 5:785
-3101 5:795
-3103 5:796
-3105 5:798
-3107 5:799
-310a 5:800
-310c 5:801
-310e 5:810
-3110 5:811
-3113 5:812
-3116 5:814
-3118 5:815
-311a 5:816
-311c 5:817
-311e 5:819
-3120 5:822
-3122 5:823
-3124 5:824
-3126 5:825
-3128 5:826
-312b 5:830
-312e 5:831
-3131 5:834
-3134 5:835
-3137 5:839
-313a 5:840
-313d 5:844
-313f 5:846
-3142 5:847
-3145 5:848
-3146 5:849
-3148 5:850
-314a 5:863
-314c 5:865
-314f 5:866
-3152 5:867
-3153 5:868
-3155 5:869
-3157 5:877
-3159 5:879
-315c 5:880
-315f 5:881
-3160 5:882
-3162 5:883
-3164 5:886
-3167 5:887
-316a 5:890
-316d 5:891
-3170 5:895
-3173 5:896
-3176 5:899
-3179 5:900
-317c 5:903
-317f 5:904
-3182 5:908
-3185 5:909
-3188 5:918
-318b 5:919
-318d 5:921
-318f 5:923
-3191 5:924
-3193 5:925
-3195 5:926
-3196 5:927
-3198 5:928
-319a 5:929
-319b 5:931
-319d 5:932
-319f 5:933
-31a0 5:934
-31a2 5:935
-31a4 5:936
-31a5 5:938
-31a7 5:939
-31a9 5:940
-31aa 5:941
-31ac 5:942
-31ae 5:943
-31af 5:944
-31b2 5:945
-31b3 5:946
-31b5 5:947
-31b7 5:948
-31ba 5:949
-31bd 5:950
-31bf 5:951
-31c2 5:952
-31c4 5:953
-31c7 5:954
-31ca 5:955
-31cb 5:962
-31cc 5:968
-31cd 5:969
-31e4 5:971
-31e5 5:972
-31f8 5:974
-31f9 5:975
-320f 5:978
-3218 6:8
-3219 6:12
-321a 6:13
-321d 6:14
-321e 6:19
-321f 6:20
-3221 6:21
-3223 6:22
-3225 6:23
-3226 6:24
-3228 6:25
-322a 6:27
-322d 6:28
-322f 6:29
-3232 6:32
-3234 6:33
-3236 6:34
-3239 6:35
-323a 6:36
-323c 6:37
-323f 6:38
-3240 6:39
-3242 6:40
-3245 6:41
-3246 6:42
-3248 6:43
-324b 6:45
-324d 6:46
-3250 6:47
-3252 6:48
-3255 6:49
-3257 6:50
-325a 6:51
-325d 6:52
-3260 6:53
-3261 6:54
-3264 6:55
-3266 6:56
-3267 6:62
-3268 6:63
-326a 6:64
-326c 6:65
-326e 6:66
-326f 6:67
-3271 6:68
-3273 6:70
-3276 6:72
-3278 6:73
-327b 6:74
-327e 6:75
-327f 6:76
-3282 6:77
-3284 6:78
-3285 6:83
-3287 6:84
-3289 6:85
-328b 6:86
-328c 6:87
-328e 6:88
-3290 6:89
-3291 6:92
-3293 6:93
-3296 6:94
-3297 6:95
-3299 6:96
-329b 6:97
-329d 6:98
-32a0 6:100
-32a2 6:101
-32a4 6:102
-32a6 6:104
-32a9 6:105
-32ac 6:111
-32ae 6:112
-32b0 6:113
-32b2 6:114
-32b3 6:115
-32b5 6:116
-32b7 6:117
-32b8 6:120
-32ba 6:121
-32bd 6:122
-32be 6:123
-32c0 6:124
-32c2 6:125
-32c4 6:126
-32c7 6:128
-32c9 6:130
-32ca 6:132
-32cc 6:133
-32ce 6:135
-32d1 7:3
-32d3 7:4
-32d6 7:5
-32d8 7:6
-32da 7:7
-32db 7:10
-32dd 7:11
-32df 7:12
-32e1 7:13
-32e3 7:14
-32e4 7:15
-32e6 7:16
-32e8 7:17
-32ea 7:18
-32ec 7:19
-32ee 7:20
-32ef 8:8
-32f2 8:9
-32f5 8:10
-32f8 8:11
-32fb 8:12
-32fe 8:13
-3301 8:14
-3304 8:15
-3307 8:16
-330a 8:17
-330d 8:18
-3310 8:22
-3313 8:23
-3315 8:24
-3318 8:26
-331a 8:27
-331d 8:31
-3320 8:32
-3322 8:33
-3325 9:5
-3327 9:6
-332a 9:7
-332c 9:8
-332e 9:10
-3330 9:11
-3333 9:12
-3334 9:13
-3335 9:14
-3337 9:15
-333a 9:16
-333b 9:17
-333c 9:18
-333e 9:19
-3340 9:20
-3341 9:24
-3344 9:26
-3345 9:27
-3347 9:28
-3348 10:2
-3350 10:9
-3351 10:10
-3352 10:11
-3353 10:12
-3354 10:13
-3356 10:14
-3358 10:15
-3359 10:16
-335a 10:22
-335c 10:23
-335e 10:24
-3360 10:25
-3361 10:26
-3363 10:27
-3365 10:28
-3366 10:29
-3368 10:30
-336a 10:34
-336d 10:35
-336f 10:36
-3372 10:37
-3374 10:38
-3375 10:44
-3377 10:45
-3379 10:46
-337b 10:47
-337c 10:48
-337e 10:49
-3380 10:50
-3381 10:51
-3383 10:52
-3385 10:56
-3388 10:57
-338a 10:58
-338d 10:59
-338f 10:60
-3390 10:66
-3392 10:67
-3394 10:68
-3396 10:69
-3397 10:70
-3399 10:71
-339b 10:72
-339c 10:73
-339e 10:74
-33a0 10:78
-33a3 10:79
-33a5 10:80
-33a8 10:81
-33a9 10:82
-33ab 10:83
-33ac 11:15
-3400 11:18
-3500 11:31
+08a5 2:479
+08a7 2:480
+08a9 2:481
+08ab 2:483
+08ad 2:484
+08af 2:485
+08b1 2:486
+08b3 2:487
+08b4 2:489
+08b6 2:490
+08b8 2:496
+08b9 2:510
+08bb 2:511
+08bd 2:512
+08bf 2:521
+08c1 2:522
+08c2 2:523
+08c4 2:524
+08c6 2:525
+08c8 2:526
+08c9 2:527
+08cb 2:528
+08cd 2:532
+08cf 2:533
+08d1 2:534
+08d3 2:535
+08d5 2:536
+08d7 2:537
+08d9 2:538
+08db 2:539
+08de 2:540
+08e0 2:541
+08e2 2:542
+08e4 2:544
+08e6 2:545
+08e8 2:546
+08ea 2:547
+08ec 2:548
+08ee 2:549
+08f0 2:550
+08f3 2:551
+08f5 2:552
+08f7 2:553
+08f9 2:555
+08fb 2:556
+08fd 2:557
+08ff 2:558
+0901 2:559
+0903 2:560
+0905 2:561
+0908 2:562
+090a 2:563
+090c 2:564
+090e 2:566
+0910 2:567
+0912 2:568
+0914 2:569
+0916 2:570
+0918 2:571
+091a 2:572
+091d 2:573
+091f 2:574
+0921 2:576
+0923 2:577
+0925 2:578
+0927 2:580
+0928 2:582
+092a 2:583
+092c 2:584
+092e 2:585
+0930 2:586
+0932 2:587
+0934 2:588
+0936 2:589
+0938 2:590
+093a 2:592
+093c 2:593
+093e 2:594
+0940 2:595
+0942 2:597
+0944 2:598
+0946 2:599
+0948 2:601
+094a 2:602
+094c 2:603
+094e 2:605
+0950 2:606
+0952 2:607
+0954 2:609
+0956 2:610
+0958 2:611
+095a 2:612
+095b 3:3
+0a5a 3:7
+0a5c 3:9
+0a5f 3:10
+0a62 3:11
+0a63 3:12
+0a65 3:13
+0a66 3:18
+0a68 3:20
+0a6b 3:21
+0a6e 3:22
+0a6f 3:23
+0a71 3:24
+0a72 3:33
+0a74 3:34
+0a76 3:35
+0a78 3:36
+0a7a 3:39
+0a7c 3:40
+0a7f 3:41
+0a81 3:42
+0a84 3:45
+0a86 3:46
+0a88 3:47
+0a8a 3:50
+0a8c 3:51
+0a8e 3:52
+0a90 3:53
+0a92 3:54
+0a94 3:55
+0a96 3:56
+0a98 3:57
+0a9b 3:59
+0a9d 3:60
+0a9f 3:61
+0aa1 3:62
+0aa3 3:63
+0aa5 3:64
+0aa7 3:65
+0aa9 3:66
+0aac 3:68
+0aae 3:69
+0ab0 3:70
+0ab2 3:71
+0ab4 3:72
+0ab6 3:73
+0ab8 3:74
+0aba 3:75
+0abb 3:76
+0abd 3:77
+0abf 3:78
+0ac2 3:80
+0ac4 3:81
+0ac6 3:82
+0ac8 3:83
+0aca 3:84
+0acc 3:85
+0ace 3:86
+0acf 3:87
+0ad1 3:88
+0ad3 3:91
+0ad5 3:92
+0ad6 3:93
+0ad8 3:94
+0ada 3:95
+0adc 3:96
+0add 3:97
+0adf 3:98
+0ae1 3:99
+0ae4 3:100
+0ae6 3:101
+0ae8 3:104
+0ae9 3:106
+0aeb 3:107
+0aed 3:109
+0aee 3:123
+0af0 3:124
+0af2 3:125
+0af4 3:126
+0af6 3:127
+0af8 3:128
+0afa 3:129
+0afc 3:130
+0afe 3:131
+0b00 3:132
+0b02 3:133
+0b04 3:134
+0b06 3:136
+0b08 3:138
+0b0a 3:139
+0b0c 3:140
+0b0d 3:141
+0b10 3:142
+0b12 3:143
+0b14 3:144
+0b15 3:145
+0b16 3:146
+0b18 3:147
+0b1b 3:148
+0b1d 3:149
+0b20 3:150
+0b21 3:151
+0b22 3:152
+0b24 3:154
+0b26 3:155
+0b28 3:156
+0b2a 3:157
+0b2c 3:158
+0b2d 3:159
+0b2f 3:161
+0b31 3:164
+0b33 3:165
+0b34 3:166
+0b36 3:167
+0b38 3:168
+0b3a 3:169
+0b3b 3:170
+0b3d 3:171
+0b3f 3:172
+0b42 3:173
+0b44 3:174
+0b46 3:179
+0b47 3:191
+0b48 3:192
+0b49 3:193
+0b4a 3:194
+0b4b 3:195
+0b4d 3:196
+0b4f 3:197
+0b50 3:198
+0b51 3:199
+0b52 3:200
+0b55 3:201
+0b58 3:202
+0b59 3:203
+0b5c 3:204
+0b5f 3:206
+0b62 3:207
+0b64 3:208
+0b65 3:209
+0b66 3:210
+0b67 3:211
+0b68 3:212
+0b69 3:222
+0b6a 3:223
+0b6b 3:224
+0b6e 3:225
+0b71 3:226
+0b72 3:227
+0b73 3:228
+0b74 3:239
+0b75 3:240
+0b76 3:241
+0b77 3:242
+0b7a 3:243
+0b7d 3:244
+0b7e 3:245
+0b81 3:246
+0b84 3:247
+0b86 3:249
+0b89 3:250
+0b8b 3:251
+0b8c 3:252
+0b8e 3:253
+0b8f 3:261
+0b91 3:262
+0b93 3:263
+0b95 3:265
+0b97 3:266
+0b9a 3:267
+0b9c 3:268
+0b9f 3:270
+0ba0 3:272
+0ba2 3:273
+0ba4 3:274
+0ba6 3:285
+0ba7 3:286
+0ba8 3:287
+0ba9 3:288
+0baa 3:289
+0bad 3:290
+0bb0 3:291
+0bb1 3:292
+0bb2 3:293
+0bb3 3:294
+0bb6 3:295
+0bb7 3:296
+0bb8 3:297
+0bb9 3:298
+0bba 3:299
+0bbd 3:300
+0bc0 3:301
+0bc1 3:302
+0bc3 3:303
+0bc4 3:304
+0bc5 3:305
+0bc6 3:307
+0bc9 3:308
+0bca 3:316
+0bcd 3:317
+0bcf 3:319
+0bd2 3:320
+0bd5 3:321
+0bd6 3:322
+0bd8 3:323
+0bda 3:324
+0bdb 3:335
+0bde 3:337
+0be1 3:339
+0be4 3:341
+0be7 3:342
+0be8 3:350
+0be9 3:351
+0bec 3:352
+0bee 3:353
+0bf1 3:354
+0bf3 3:355
+0bf6 3:357
+0bf7 3:358
+0bfa 3:359
+0bfc 3:360
+0bff 3:361
+0c01 3:362
+0c04 3:364
+0c05 3:377
+0c06 3:378
+0c07 3:379
+0c09 3:380
+0c0a 3:381
+0c0b 3:382
+0c0e 3:383
+0c11 3:384
+0c12 3:385
+0c15 3:386
+0c18 3:387
+0c19 3:388
+0c1a 3:389
+0c1b 3:390
+0c1d 3:391
+0c1e 3:392
+0c1f 3:393
+0c22 3:394
+0c25 3:395
+0c26 3:396
+0c29 3:397
+0c2c 3:398
+0c2d 3:407
+0c30 3:408
+0c32 3:410
+0c35 3:411
+0c36 3:412
+0c38 3:414
+0c3a 3:415
+0c3c 3:416
+0c3d 3:424
+0c40 3:425
+0c42 3:426
+0c44 3:428
+0c47 3:429
+0c49 3:430
+0c4b 3:431
+0c4d 3:432
+0c4f 3:433
+0c51 3:435
+0c52 3:442
+0c55 3:443
+0c57 3:444
+0c59 3:446
+0c5c 3:447
+0c5e 3:448
+0c60 3:449
+0c61 3:456
+0c63 3:457
+0c65 3:458
+0c67 3:459
+0c69 3:460
+0c6b 3:462
+0c6e 3:463
+0c71 3:464
+0c72 3:465
+0c74 3:467
+0c76 3:468
+0c77 2:624
+0c79 2:626
+0c7c 2:627
+0c7f 2:628
+0c80 2:629
+0c82 2:630
+0c84 2:631
+0c86 2:633
+0c89 2:634
+0c8c 2:635
+0c8d 2:636
+0c8f 2:637
+0c91 2:638
+0c92 2:646
+0c95 2:647
+0c97 2:648
+0c9a 2:649
+0c9d 2:650
+0ca0 2:651
+0ca3 2:652
+0ca6 2:653
+0ca9 2:654
+0cab 2:655
+0cae 2:656
+0cb1 2:657
+0cb4 2:658
+0cb7 2:659
+0cba 2:660
+0cbd 2:662
+0cbf 2:663
+0cc2 2:664
+0cc5 2:665
+0cc8 2:666
+0ccb 2:667
+0cce 2:668
+0cd1 2:669
+0cd3 2:670
+0cd6 2:671
+0cd9 2:672
+0cdc 2:673
+0cdf 2:674
+0ce2 2:675
+0ce5 2:677
+0ce7 2:678
+0cea 2:679
+0ced 2:680
+0cf0 2:681
+0cf3 2:682
+0cf6 2:683
+0cf9 2:684
+0cfb 2:685
+0cfe 2:686
+0d01 2:687
+0d04 2:688
+0d07 2:689
+0d0a 2:690
+0d0d 2:692
+0d0f 2:693
+0d12 2:694
+0d15 2:695
+0d18 2:696
+0d1b 2:697
+0d1e 2:698
+0d21 2:699
+0d23 2:700
+0d26 2:701
+0d29 2:702
+0d2c 2:703
+0d2f 2:704
+0d32 2:705
+0d35 2:707
+0d37 2:708
+0d3a 2:709
+0d3d 2:710
+0d40 2:711
+0d43 2:712
+0d46 2:713
+0d49 2:714
+0d4b 2:715
+0d4e 2:716
+0d51 2:717
+0d54 2:718
+0d57 2:719
+0d5a 2:720
+0d5d 2:722
+0d5f 2:723
+0d62 2:724
+0d65 2:725
+0d68 2:726
+0d6b 2:727
+0d6e 2:728
+0d71 2:729
+0d73 2:730
+0d76 2:731
+0d79 2:732
+0d7c 2:733
+0d7f 2:734
+0d82 2:735
+0d85 2:737
+0d87 2:738
+0d8a 2:739
+0d8d 2:740
+0d90 2:741
+0d93 2:742
+0d96 2:743
+0d99 2:744
+0d9b 2:745
+0d9e 2:746
+0da1 2:747
+0da4 2:748
+0da7 2:749
+0daa 2:750
+0dad 2:753
+0daf 2:754
+0db2 2:755
+0db5 2:756
+0db8 2:758
+0db9 2:767
+0dbc 2:768
+0dbe 2:769
+0dc0 2:770
+0dc2 2:771
+0dc4 2:772
+0dc6 2:774
+0dc8 2:775
+0dca 2:776
+0dcc 2:778
+0dce 2:779
+0dd0 2:780
+0dd2 2:782
+0dd4 2:783
+0dd6 2:785
+0dd8 2:787
+0dda 2:788
+0ddc 2:789
+0dde 2:791
+0de0 2:792
+0de2 2:793
+0de4 2:795
+0de6 2:796
+0de8 2:797
+0dea 2:799
+0dec 2:800
+0dee 2:801
+0df0 2:805
+0df2 2:806
+0df3 2:815
+0df5 2:816
+0df7 2:817
+0df9 2:818
+0dfc 2:819
+0dfd 2:820
+0dfe 2:821
+0e01 2:822
+0e04 2:823
+0e05 2:824
+0e08 2:825
+0e0b 2:826
+0e0e 2:827
+0e11 2:828
+0e12 2:830
+0e14 2:831
+0e17 2:832
+0e18 2:840
+0e1a 2:841
+0e1b 2:842
+0e1d 2:843
+0e1f 2:844
+0e22 2:845
+0e23 2:846
+0e24 2:847
+0e27 2:848
+0e2a 2:849
+0e2d 2:850
+0e2e 2:851
+0e31 2:852
+0e34 2:853
+0e37 2:854
+0e39 2:856
+0e3c 2:857
+0e3f 2:858
+0e40 2:860
+0e43 2:861
+0e45 2:863
+0e48 2:864
+0e49 2:865
+0e4b 2:867
+0e4d 2:869
+0e50 2:870
+0e52 2:871
+0e54 2:872
+0e57 2:873
+0e5a 2:874
+0e5b 2:877
+0e5e 2:878
+0e5f 2:879
+0e61 2:880
+0e62 2:882
+0e81 2:884
+0e83 2:885
+0e85 2:886
+0e87 2:887
+0e8a 2:889
+0e8c 2:890
+0e8f 2:891
+0e92 2:892
+0e94 2:893
+0e97 2:894
+0e99 2:895
+0e9c 2:896
+0e9f 2:898
+0ea1 2:899
+0ea4 2:900
+0ea7 2:901
+0ea9 2:902
+0eac 2:903
+0eae 2:904
+0eb1 2:905
+0eb4 2:906
+0eb7 2:907
+0eba 2:910
+0ebc 2:911
+0ebf 2:912
+0ec2 2:913
+0ec4 2:914
+0ec7 2:915
+0ec9 2:916
+0ecc 2:917
+0ecf 2:919
+0ed1 2:920
+0ed4 2:921
+0ed7 2:922
+0ed9 2:923
+0edc 2:924
+0ede 2:925
+0ee1 2:926
+0ee4 2:927
+0ee7 2:928
+0eea 2:930
+0eec 2:931
+0eef 2:932
+0ef2 2:933
+0ef4 2:934
+0ef7 2:935
+0ef9 2:936
+0efc 2:937
+0eff 2:939
+0f01 2:940
+0f04 2:941
+0f07 2:942
+0f09 2:943
+0f0c 2:944
+0f0e 2:945
+0f11 2:946
+0f14 2:947
+0f17 2:948
+0f1a 2:950
+0f1c 2:951
+0f1e 2:952
+0f20 2:953
+0f22 2:954
+0f23 2:958
+0f25 2:959
+0f27 2:960
+0f29 2:961
+0f2c 2:963
+0f2e 2:964
+0f31 2:965
+0f34 2:966
+0f36 2:967
+0f39 2:968
+0f3b 2:969
+0f3e 2:970
+0f41 2:972
+0f43 2:973
+0f46 2:974
+0f49 2:975
+0f4b 2:976
+0f4e 2:977
+0f50 2:978
+0f53 2:979
+0f56 2:980
+0f59 2:981
+0f5c 2:983
+0f5e 2:984
+0f61 2:985
+0f64 2:986
+0f66 2:987
+0f69 2:988
+0f6b 2:989
+0f6e 2:990
+0f71 2:992
+0f73 2:993
+0f76 2:994
+0f79 2:995
+0f7b 2:996
+0f7e 2:997
+0f80 2:998
+0f83 2:999
+0f86 2:1000
+0f89 2:1001
+0f8c 2:1003
+0f8e 2:1004
+0f91 2:1005
+0f94 2:1006
+0f96 2:1007
+0f99 2:1008
+0f9b 2:1009
+0f9e 2:1010
+0fa1 2:1012
+0fa3 2:1013
+0fa6 2:1014
+0fa9 2:1015
+0fab 2:1016
+0fae 2:1017
+0fb0 2:1018
+0fb3 2:1019
+0fb6 2:1020
+0fb9 2:1021
+0fbc 2:1023
+0fbe 2:1024
+0fc1 2:1025
+0fc4 2:1026
+0fc6 2:1027
+0fc9 2:1028
+0fcb 2:1029
+0fce 2:1030
+0fd1 2:1032
+0fd3 2:1033
+0fd6 2:1034
+0fd9 2:1035
+0fdb 2:1036
+0fde 2:1037
+0fe0 2:1038
+0fe3 2:1039
+0fe6 2:1040
+0fe9 2:1041
+0fec 2:1042
+0fed 2:1045
+0fef 2:1046
+0ff1 2:1047
+0ff3 2:1048
+0ff5 2:1049
+0ff8 2:1050
+0ffb 2:1051
+0ffd 2:1052
+1000 2:1053
+1002 2:1054
+1005 2:1055
+1008 2:1057
+100a 2:1058
+100d 2:1059
+1010 2:1060
+1012 2:1061
+1015 2:1062
+1017 2:1063
+101a 2:1064
+101d 2:1065
+1020 2:1066
+1023 2:1067
+1024 2:1070
+1026 2:1071
+1028 2:1072
+102a 2:1073
+102c 2:1075
+102e 2:1076
+1030 2:1077
+1032 2:1079
+1034 2:1080
+1037 2:1081
+103a 2:1082
+103c 2:1083
+103f 2:1084
+1041 2:1085
+1044 2:1086
+1047 2:1088
+1049 2:1089
+104c 2:1090
+104f 2:1091
+1051 2:1092
+1054 2:1093
+1056 2:1094
+1059 2:1095
+105c 2:1096
+105f 2:1097
+1062 2:1099
+1064 2:1100
+1067 2:1101
+106a 2:1102
+106c 2:1103
+106f 2:1104
+1071 2:1105
+1074 2:1106
+1077 2:1108
+1079 2:1109
+107c 2:1110
+107f 2:1111
+1081 2:1112
+1084 2:1113
+1086 2:1114
+1089 2:1115
+108c 2:1116
+108f 2:1117
+1092 2:1119
+1093 2:1128
+1096 2:1129
+1098 2:1131
+109b 2:1132
+109d 2:1133
+109f 2:1135
+10a2 2:1136
+10a3 2:1137
+10a5 2:1138
+10a8 2:1139
+10ab 2:1141
+10ac 2:1145
+10ae 2:1146
+10b1 2:1147
+10b3 2:1148
+10b6 2:1149
+10b8 2:1150
+10bb 2:1151
+10bd 2:1152
+10c0 2:1153
+10c1 2:1156
+10c4 2:1157
+10c7 2:1158
+10c8 2:1166
+10cb 2:1167
+10cd 2:1168
+10cf 2:1169
+10d1 2:1170
+10d4 2:1171
+10d7 2:1173
+10d9 2:1175
+10db 2:1177
+10de 2:1179
+10e1 2:1180
+10e2 2:1181
+10e4 2:1182
+10e7 2:1183
+10e8 2:1184
+10ea 2:1186
+10eb 2:1190
+10ee 2:1191
+10ef 2:1192
+10f1 2:1193
+10f4 2:1194
+10f6 2:1195
+10f9 2:1197
+10fc 2:1198
+10fd 2:1199
+10ff 2:1200
+1102 2:1201
+1104 2:1202
+1107 2:1204
+1108 2:1207
+1109 2:1208
+110a 2:1209
+110b 2:1210
+110e 2:1211
+1111 2:1212
+1112 2:1213
+1115 2:1214
+1118 2:1215
+111a 2:1216
+111d 2:1217
+1120 2:1218
+1121 2:1219
+1124 2:1220
+1125 2:1221
+1127 2:1222
+112a 2:1223
+112b 2:1224
+112e 2:1225
+1131 2:1226
+1132 2:1227
+1134 2:1228
+1137 2:1229
+113a 2:1230
+113b 2:1231
+113d 2:1232
+1140 2:1233
+1143 2:1234
+1146 2:1235
+1148 2:1236
+114b 2:1238
+114d 2:1239
+1150 2:1240
+1151 2:1242
+1154 2:1243
+1155 2:1248
+1157 2:1249
+1159 2:1250
+115b 2:1251
+115d 2:1252
+115f 2:1254
+1161 2:1255
+1163 2:1256
+1165 2:1257
+1167 2:1258
+1169 2:1259
+116b 2:1260
+116d 2:1261
+116e 2:1263
+1170 2:1264
+1172 2:1265
+1174 2:1266
+1176 2:1267
+1178 2:1268
+117a 2:1269
+117c 2:1270
+117d 2:1272
+117f 2:1273
+1181 2:1274
+1183 2:1275
+1185 2:1276
+1187 2:1277
+1189 2:1278
+118a 2:1280
+118c 2:1281
+118d 2:1284
+118f 2:1286
+1191 2:1287
+1193 2:1288
+1195 2:1289
+1197 2:1290
+1199 2:1291
+119b 2:1292
+119c 2:1294
+119e 2:1295
+11a0 2:1296
+11a2 2:1297
+11a4 2:1298
+11a6 2:1299
+11a8 2:1300
+11aa 2:1301
+11ab 2:1303
+11ad 2:1304
+11af 2:1305
+11b1 2:1306
+11b3 2:1307
+11b4 2:1309
+11b6 2:1310
+11b8 2:1311
+11ba 2:1312
+11bc 2:1313
+11be 2:1314
+11c0 2:1315
+11c2 2:1316
+11c3 2:1318
+11c5 2:1319
+11c6 2:1321
+11c8 2:1322
+11ca 2:1323
+11cc 2:1324
+11ce 2:1325
+11d0 2:1326
+11d2 2:1327
+11d4 2:1328
+11d6 2:1329
+11d8 2:1330
+11da 2:1331
+11dc 2:1332
+11dd 2:1334
+11df 2:1335
+11e0 2:1337
+11e2 2:1338
+11e4 2:1339
+11e6 2:1340
+11e8 2:1341
+11ea 2:1342
+11ec 2:1343
+11ee 2:1344
+11ef 2:1346
+11f1 2:1347
+11f3 2:1348
+11f5 2:1349
+11f7 2:1350
+11f9 2:1351
+11fb 2:1352
+11fc 2:1354
+11fe 2:1355
+11ff 2:1357
+1201 2:1358
+1202 2:1361
+1205 2:1362
+1207 2:1363
+1209 2:1365
+120b 2:1367
+120e 2:1368
+120f 2:1369
+1211 2:1370
+1212 2:1371
+1214 2:1372
+1217 2:1373
+1219 2:1375
+121a 2:1377
+121b 2:1378
+121c 2:1379
+121f 2:1380
+1221 2:1381
+1224 2:1382
+1226 2:1383
+1229 2:1385
+122a 2:1386
+122b 2:1388
+122d 2:1389
+1230 2:1390
+1232 2:1391
+1235 2:1392
+1236 2:1400
+1254 2:1401
+1272 2:1402
+1290 2:1403
+12ae 2:1404
+12cc 2:1405
+12ea 2:1406
+1308 2:1412
+1328 2:1414
+1348 2:1416
+1368 2:1418
+1388 2:1420
+13a8 2:1422
+13c8 2:1424
+13e8 2:1426
+1408 2:1428
+1428 2:1430
+1448 2:1432
+1468 2:1434
+1488 2:1436
+14a8 2:1438
+14c8 2:1440
+14e8 2:1442
+1508 2:1444
+1528 2:1446
+1548 2:1448
+1568 2:1450
+1588 2:1452
+15a8 2:1454
+15c8 2:1456
+15e8 2:1458
+1608 2:1460
+1628 2:1462
+1648 2:1464
+1668 2:1466
+1688 2:1468
+16a8 2:1470
+16c8 2:1472
+16e8 2:1474
+1708 2:1476
+1728 2:1478
+1748 2:1480
+1768 2:1482
+1788 2:1484
+17a8 2:1486
+17c8 2:1488
+17e8 2:1490
+1808 2:1492
+1828 2:1494
+1848 2:1496
+1868 2:1498
+1888 2:1500
+18a8 2:1502
+18c8 2:1504
+18e8 2:1506
+1908 2:1508
+1928 2:1512
+193c 2:1513
+1950 2:1514
+1964 2:1515
+1978 2:1516
+198a 2:1526
+199e 2:1527
+19b2 2:1528
+19c6 2:1529
+19da 2:1530
+19ee 2:1531
+19fc 2:1541
+1a00 2:1543
+1a04 2:1545
+1a08 2:1547
+1a0c 2:1549
+1a10 2:1551
+1a14 2:1553
+1a18 2:1555
+1a1c 2:1557
+1a20 2:1559
+1a24 2:1561
+1a28 2:1563
+1a2c 2:1565
+1a30 2:1567
+1a34 2:1569
+1a38 2:1571
+1a3c 2:1573
+1a40 2:1575
+1a44 2:1577
+1a48 2:1579
+1a4c 2:1581
+1a50 2:1583
+1a54 2:1585
+1a58 2:1587
+1a5c 2:1589
+1a60 2:1591
+1a64 2:1593
+1a68 2:1595
+1a6c 2:1597
+1a70 2:1599
+1a74 2:1601
+1a78 2:1603
+1a7c 2:1605
+1a80 2:1607
+1a84 2:1609
+1a88 2:1611
+1a8c 2:1613
+1a90 2:1615
+1a94 2:1617
+1a98 2:1619
+1a9c 2:1621
+1aa0 2:1623
+1aa4 2:1625
+1aa8 2:1627
+1aac 2:1629
+1ab0 2:1631
+1ab4 2:1633
+1ab8 2:1635
+1abc 2:1637
+1ac0 2:1639
+1ac4 2:1641
+1ac8 2:1643
+1acc 2:1645
+1ad0 2:1647
+1ad4 2:1649
+1ad8 2:1651
+1adc 2:1653
+1ae0 2:1655
+1ae4 2:1657
+1ae8 2:1659
+1aec 2:1661
+1af0 2:1663
+1af4 2:1665
+1af8 2:1667
+1afc 2:1669
+1b00 2:1671
+1b04 2:1673
+1b08 2:1675
+1b0c 2:1677
+1b10 2:1679
+1b14 2:1681
+1b18 2:1683
+1b1c 2:1685
+1b20 2:1687
+1b24 2:1689
+1b28 2:1691
+1b2c 2:1693
+1b30 2:1695
+1b34 2:1697
+1b38 2:1699
+1b3c 2:1701
+1b40 2:1703
+1b44 2:1705
+1b48 2:1711
+1b4c 2:1713
+1b50 2:1715
+1b54 2:1721
+1b58 2:1723
+1b5c 2:1725
+1b60 2:1727
+1b64 2:1729
+1b68 2:1731
+1b6c 2:1733
+1b70 2:1735
+1b74 2:1737
+1b78 2:1739
+1b7c 2:1741
+1b80 2:1743
+1b84 2:1745
+1b88 2:1747
+1b8c 2:1749
+1b90 2:1755
+1b9c 2:1756
+1ba8 2:1757
+1bb4 2:1758
+1bc0 2:1759
+1bcc 2:1760
+1bd8 2:1761
+1be4 2:1762
+1bf0 2:1763
+1bfc 2:1764
+1c08 2:1765
+1c14 2:1766
+1c20 2:1767
+1c2c 2:1768
+1c38 2:1769
+1c44 2:1770
+1c50 2:1771
+1c5a 2:1780
+1c5b 2:1781
+1c5c 2:1782
+1c5d 2:1783
+1c5e 2:1784
+1c5f 2:1785
+1c60 2:1788
+1c61 2:1789
+1c62 2:1790
+1c63 2:1791
+1c64 2:1792
+1c65 2:1793
+1c66 2:1797
+1c67 2:1798
+1c68 2:1799
+1c69 2:1800
+1c6a 2:1801
+1c6b 2:1802
+1c6c 2:1805
+1c6d 2:1806
+1c6e 2:1807
+1c6f 2:1808
+1c70 2:1809
+1c71 2:1810
+1c72 2:1813
+1c73 2:1814
+1c74 2:1815
+1c75 2:1816
+1c76 2:1817
+1c77 2:1818
+1c78 2:1821
+1c79 2:1822
+1c7a 2:1823
+1c7b 2:1824
+1c7c 2:1825
+1c7d 2:1826
+1c7e 2:1829
+1c7f 2:1830
+1c80 2:1831
+1c81 2:1832
+1c82 2:1833
+1c83 2:1834
+1c84 2:1837
+1c85 2:1838
+1c86 2:1839
+1c87 2:1840
+1c88 2:1841
+1c89 2:1842
+1c8a 2:1845
+1c8b 2:1846
+1c8c 2:1847
+1c8d 2:1848
+1c8e 2:1849
+1c8f 2:1850
+1c90 2:1853
+1c91 2:1854
+1c92 2:1855
+1c93 2:1856
+1c94 2:1857
+1c95 2:1858
+1c96 2:1861
+1c97 2:1862
+1c98 2:1863
+1c99 2:1864
+1c9a 2:1865
+1c9b 2:1866
+1c9c 2:1869
+1c9d 2:1870
+1c9e 2:1871
+1c9f 2:1872
+1ca0 2:1873
+1ca1 2:1874
+1ca2 2:1877
+1ca3 2:1878
+1ca4 2:1879
+1ca5 2:1880
+1ca6 2:1881
+1ca7 2:1882
+1ca8 2:1885
+1ca9 2:1886
+1caa 2:1887
+1cab 2:1888
+1cac 2:1889
+1cad 2:1890
+1cae 2:1893
+1caf 2:1894
+1cb0 2:1895
+1cb1 2:1896
+1cb2 2:1897
+1cb3 2:1898
+1cb4 2:1901
+1cb5 2:1902
+1cb6 2:1903
+1cb7 2:1904
+1cb8 2:1905
+1cb9 2:1906
+1cba 2:1909
+1cbb 2:1910
+1cbc 2:1911
+1cbd 2:1912
+1cbe 2:1913
+1cbf 2:1914
+1cc0 2:1917
+1cc1 2:1918
+1cc2 2:1919
+1cc3 2:1920
+1cc4 2:1921
+1cc5 2:1922
+1cc6 2:1925
+1cc7 2:1926
+1cc8 2:1927
+1cc9 2:1928
+1cca 2:1929
+1ccb 2:1930
+1ccc 2:1933
+1ccd 2:1934
+1cce 2:1935
+1ccf 2:1936
+1cd0 2:1937
+1cd1 2:1938
+1cd2 2:1941
+1cd3 2:1942
+1cd4 2:1943
+1cd5 2:1944
+1cd6 2:1945
+1cd7 2:1946
+1cd8 2:1949
+1cd9 2:1950
+1cda 2:1951
+1cdb 2:1952
+1cdc 2:1953
+1cdd 2:1954
+1cde 2:1957
+1cdf 2:1958
+1ce0 2:1959
+1ce1 2:1960
+1ce2 2:1961
+1ce3 2:1962
+1ce4 2:1965
+1ce5 2:1966
+1ce6 2:1967
+1ce7 2:1968
+1ce8 2:1969
+1ce9 2:1970
+1cea 2:1973
+1ceb 2:1974
+1cec 2:1975
+1ced 2:1976
+1cee 2:1977
+1cef 2:1978
+1cf0 2:1981
+1cf1 2:1982
+1cf2 2:1983
+1cf3 2:1984
+1cf4 2:1985
+1cf5 2:1986
+1cf6 2:1989
+1cf7 2:1990
+1cf8 2:1991
+1cf9 2:1992
+1cfa 2:1993
+1cfb 2:1994
+1cfc 2:1997
+1cfd 2:1998
+1cfe 2:1999
+1cff 2:2000
+1d00 2:2001
+1d01 2:2002
+1d02 2:2005
+1d03 2:2006
+1d04 2:2007
+1d05 2:2008
+1d06 2:2009
+1d07 2:2010
+1d08 2:2013
+1d09 2:2014
+1d0a 2:2015
+1d0b 2:2016
+1d0c 2:2017
+1d0d 2:2018
+1d0e 2:2021
+1d0f 2:2022
+1d10 2:2023
+1d11 2:2024
+1d12 2:2025
+1d13 2:2026
+1d14 2:2029
+1d15 2:2030
+1d16 2:2031
+1d17 2:2032
+1d18 2:2033
+1d19 2:2034
+1d1a 2:2037
+1d1b 2:2038
+1d1c 2:2039
+1d1d 2:2040
+1d1e 2:2041
+1d1f 2:2042
+1d20 2:2045
+1d21 2:2046
+1d22 2:2047
+1d23 2:2048
+1d24 2:2049
+1d25 2:2050
+1d26 2:2053
+1d27 2:2054
+1d28 2:2055
+1d29 2:2056
+1d2a 2:2057
+1d2b 2:2058
+1d2c 2:2061
+1d2d 2:2062
+1d2e 2:2063
+1d2f 2:2064
+1d30 2:2065
+1d31 2:2066
+1d32 2:2069
+1d33 2:2070
+1d34 2:2071
+1d35 2:2072
+1d36 2:2073
+1d37 2:2074
+1d38 2:2077
+1d39 2:2078
+1d3a 2:2079
+1d3b 2:2080
+1d3c 2:2081
+1d3d 2:2082
+1d3e 2:2085
+1d3f 2:2086
+1d40 2:2087
+1d41 2:2088
+1d42 2:2089
+1d43 2:2090
+1d44 2:2093
+1d45 2:2094
+1d46 2:2095
+1d47 2:2096
+1d48 2:2097
+1d49 2:2098
+1d4a 2:2101
+1d4b 2:2102
+1d4c 2:2103
+1d4d 2:2104
+1d4e 2:2105
+1d4f 2:2106
+1d50 2:2109
+1d51 2:2110
+1d52 2:2111
+1d53 2:2112
+1d54 2:2113
+1d55 2:2114
+1d56 2:2118
+1d57 2:2119
+1d58 2:2120
+1d59 2:2121
+1d5a 2:2122
+1d5b 2:2123
+1d5c 2:2126
+1d5d 2:2127
+1d5e 2:2128
+1d5f 2:2129
+1d60 2:2130
+1d61 2:2131
+1d62 2:2134
+1d63 2:2135
+1d64 2:2136
+1d65 2:2137
+1d66 2:2138
+1d67 2:2139
+1d68 2:2142
+1d69 2:2143
+1d6a 2:2144
+1d6b 2:2145
+1d6c 2:2146
+1d6d 2:2147
+1d6e 2:2150
+1d6f 2:2151
+1d70 2:2152
+1d71 2:2153
+1d72 2:2154
+1d73 2:2155
+1d74 2:2158
+1d75 2:2159
+1d76 2:2160
+1d77 2:2161
+1d78 2:2162
+1d79 2:2163
+1d7a 2:2166
+1d7b 2:2167
+1d7c 2:2168
+1d7d 2:2169
+1d7e 2:2170
+1d7f 2:2171
+1d80 2:2174
+1d81 2:2175
+1d82 2:2176
+1d83 2:2177
+1d84 2:2178
+1d85 2:2179
+1d86 2:2182
+1d87 2:2183
+1d88 2:2184
+1d89 2:2185
+1d8a 2:2186
+1d8b 2:2187
+1d8c 2:2190
+1d8d 2:2191
+1d8e 2:2192
+1d8f 2:2193
+1d90 2:2194
+1d91 2:2195
+1d92 2:2198
+1d93 2:2199
+1d94 2:2200
+1d95 2:2201
+1d96 2:2202
+1d97 2:2203
+1d98 2:2206
+1d99 2:2207
+1d9a 2:2208
+1d9b 2:2209
+1d9c 2:2210
+1d9d 2:2211
+1d9e 2:2214
+1d9f 2:2215
+1da0 2:2216
+1da1 2:2217
+1da2 2:2218
+1da3 2:2219
+1da4 2:2222
+1da5 2:2223
+1da6 2:2224
+1da7 2:2225
+1da8 2:2226
+1da9 2:2227
+1daa 2:2230
+1dab 2:2231
+1dac 2:2232
+1dad 2:2233
+1dae 2:2234
+1daf 2:2235
+1db0 2:2242
+1db1 2:2243
+1dbb 2:2245
+1dbc 2:2246
+1dc7 2:2248
+1dc8 2:2249
+1dd2 2:2251
+1dd3 2:2252
+1ddc 2:2254
+1ddd 2:2255
+1de8 2:2257
+1de9 2:2258
+1df1 2:2260
+1df2 2:2261
+1df9 2:2263
+1dfa 2:2264
+1e06 2:2266
+1e07 2:2267
+1e12 2:2269
+1e13 2:2270
+1e22 2:2272
+1e23 2:2273
+1e38 2:2275
+1e39 2:2276
+1e45 2:2278
+1e46 2:2279
+1e55 2:2281
+1e56 2:2282
+1e5f 2:2284
+1e60 2:2285
+1e72 2:2287
+1e73 2:2288
+1e7b 2:2292
+1e87 2:2293
+1e93 2:2294
+1e9b 2:2298
+1ea6 2:2300
+1eb1 2:2302
+1ebc 2:2304
+1ec7 2:2306
+1ed2 2:2308
+1edd 2:2310
+1ee8 2:2312
+1ef3 2:2314
+1efe 2:2316
+1f0a 2:2318
+1f16 2:2320
+1f22 2:2322
+1f2e 2:2324
+1f3a 2:2326
+1f46 2:2328
+1f52 2:2332
+1f5e 2:2333
+1f6a 2:2334
+1f72 2:2339
+1f73 2:2340
+1f84 2:2342
+1f85 2:2343
+1fa6 2:2345
+1fa7 2:2346
+1fc7 2:2348
+1fc8 2:2349
+1fd6 2:2351
+1fd7 2:2352
+1ff5 2:2354
+1ff6 2:2355
+200e 2:2358
+200f 2:2359
+2032 2:2361
+2033 2:2362
+204d 2:2364
+204e 2:2365
+206d 2:2367
+206e 2:2368
+2082 2:2370
+2083 2:2371
+20a5 2:2373
+20a6 2:2374
+20c6 2:2376
+20c7 2:2377
+20ef 2:2379
+20f0 2:2380
+2116 2:2384
+2117 2:2385
+2133 2:2387
+2134 2:2388
+2144 2:2391
+2145 2:2392
+2167 2:2394
+2168 2:2395
+2186 2:2397
+2187 2:2398
+21a6 2:2400
+21a7 2:2401
+21b9 2:2405
+21e1 2:2406
+2209 2:2407
+2231 2:2408
+2259 2:2409
+2281 2:2410
+22a9 2:2411
+22d1 2:2412
+22f9 2:2413
+2321 2:2414
+2349 2:2415
+2371 2:2416
+2399 2:2417
+23c1 2:2418
+23e9 2:2419
+2411 2:2420
+2439 2:2421
+2461 2:2422
+2489 2:2423
+24b1 2:2424
+24d9 2:2425
+2501 2:2426
+2529 2:2427
+2551 2:2428
+2579 2:2429
+25a1 2:2430
+25c9 2:2431
+25f1 2:2432
+2619 2:2433
+2641 2:2434
+2669 2:2435
+2691 2:2436
+26b9 2:2437
+26e1 2:2438
+2709 2:2439
+2731 2:2440
+2759 2:2441
+2781 2:2442
+27a9 2:2443
+27d1 2:2444
+27f9 2:2445
+2821 2:2446
+2849 2:2447
+2871 2:2448
+2899 2:2449
+28c1 2:2450
+28e9 2:2451
+2911 2:2452
+2939 2:2453
+2961 2:2454
+2989 2:2455
+29b1 2:2456
+29d9 2:2457
+2a01 2:2458
+2a2a 2:2463
+2a2c 2:2464
+2a2e 2:2465
+2a30 2:2466
+2a32 2:2467
+2a34 2:2468
+2a36 2:2469
+2a38 2:2470
+2a3a 2:2471
+2a3c 2:2472
+2a3e 2:2477
+2a41 2:2478
+2a4a 2:2479
+2a53 2:2480
+2a5c 2:2481
+2a65 2:2482
+2a6e 2:2483
+2a77 2:2484
+2a80 2:2485
+2a89 2:2486
+2a92 2:2487
+2a9b 2:2488
+2aa4 2:2489
+2aad 2:2490
+2ab6 2:2491
+2abf 2:2496
+2ac2 2:2497
+2ad0 2:2498
+2ade 2:2499
+2aec 2:2500
+2afa 2:2501
+2b08 2:2502
+2b16 2:2503
+2b24 2:2504
+2b32 2:2505
+2b40 2:2506
+2b4e 2:2507
+2b5c 2:2508
+2b6a 2:2509
+2b78 2:2510
+2b86 2:2511
+2b94 2:2512
+2ba2 2:2513
+2bb0 2:2514
+2bbe 2:2519
+2bc1 2:2520
+2bd0 2:2521
+2bdf 2:2522
+2bee 2:2523
+2bfd 2:2524
+2c0c 2:2525
+2c1b 2:2526
+2c2a 2:2527
+2c39 2:2528
+2c48 2:2529
+2c57 2:2530
+2c66 2:2531
+2c75 2:2532
+2c84 2:2533
+2c93 2:2538
+2c96 2:2539
+2ca3 2:2540
+2cb0 2:2541
+2cbd 2:2542
+2cca 2:2543
+2cd7 2:2544
+2ce4 2:2545
+2cf1 2:2546
+2cfe 2:2547
+2d0b 2:2548
+2d18 2:2549
+2d25 2:2550
+2d32 2:2551
+2d3f 2:2552
+2d4c 2:2558
+2d4f 2:2559
+2d5e 2:2560
+2d6d 2:2561
+2d7c 2:2562
+2d8b 2:2563
+2d9a 2:2564
+2da9 2:2565
+2db8 2:2566
+2dc7 2:2567
+2dd6 2:2568
+2de5 2:2569
+2df4 2:2570
+2e03 2:2571
+2e12 2:2572
+2e21 2:2577
+2e24 2:2578
+2e33 2:2579
+2e42 2:2580
+2e51 2:2581
+2e60 2:2582
+2e6f 2:2583
+2e7e 2:2584
+2e8d 2:2585
+2e9c 2:2586
+2eab 2:2587
+2eba 2:2588
+2ec9 2:2589
+2ed8 2:2590
+2ee7 2:2591
+2ef6 2:2596
+2ef9 2:2597
+2f06 2:2598
+2f13 2:2599
+2f20 2:2600
+2f2d 2:2601
+2f3a 2:2602
+2f47 2:2603
+2f54 2:2604
+2f61 2:2605
+2f6e 2:2606
+2f7b 2:2607
+2f88 2:2608
+2f95 2:2609
+2fa2 2:2614
+2fa5 2:2615
+2fbb 2:2616
+2fd1 2:2617
+2fe7 2:2618
+2ffd 2:2619
+3013 2:2620
+3029 2:2621
+303f 2:2622
+3055 2:2623
+306b 2:2624
+3081 2:2625
+3097 2:2626
+30ad 2:2627
+30c3 2:2631
+30c6 2:2632
+30df 2:2633
+30f8 2:2634
+3111 2:2635
+312a 2:2636
+3143 2:2637
+315c 2:2638
+3175 2:2639
+318e 2:2640
+31a7 2:2641
+31c0 2:2642
+31d9 2:2643
+31f2 2:2644
+320b 2:2649
+320e 2:2650
+322a 2:2651
+3246 2:2652
+3262 2:2653
+327e 2:2654
+329a 2:2655
+32b6 2:2656
+32d2 2:2657
+32ee 2:2658
+330a 2:2659
+3326 2:2660
+3342 2:2661
+335e 2:2662
+337a 2:2663
+3396 2:2664
+33b2 2:2665
+33ce 2:2666
+33ea 4:7
+3400 4:8
+3460 4:11
+346c 4:13
+3472 4:15
+3478 4:17
+347e 4:19
+3484 4:21
+348a 4:23
+3490 4:25
+3496 4:27
+349c 4:29
+34a2 4:31
+34a8 4:33
+34ae 4:35
+34b4 4:37
+34c0 4:39
+34c6 4:41
+34cc 4:43
+34d2 4:45
+34d8 4:47
+34de 4:51
+34df 4:53
+34e0 4:55
+34e1 4:60
+34e2 4:62
+34e3 4:65
+34e4 4:71
+34ea 4:74
+34eb 4:79
+34ec 4:82
+34ed 4:84
+34ee 4:86
+34ef 4:88
+34f0 4:91
+34f1 4:94
+34f2 4:99
+34f3 4:104
+34f4 4:108
+3500 4:110
+3530 4:112
+3560 4:118
+3580 4:120
+3581 4:121
+3582 4:122
+3583 4:123
+3584 4:127
+35a4 4:129
+35a5 4:130
+35a6 4:131
+35a7 4:132
+35a8 4:133
+35a9 4:134
+35aa 4:135
+35ab 4:136
+35ac 4:137
+35ad 4:138
+35ae 4:139
+35af 4:140
+35b0 4:141
+35b1 4:175
+35b3 4:176
+35b6 4:178
+35b9 4:179
+35bb 4:180
+35be 4:182
+35c0 4:183
+35c3 4:184
+35c6 4:185
+35c8 4:186
+35cb 4:187
+35cd 4:188
+35d0 4:189
+35d3 4:192
+35d6 4:193
+35d8 4:195
+35da 4:196
+35dc 4:197
+35de 4:198
+35df 4:199
+35e1 4:200
+35e3 4:201
+35e4 4:202
+35e7 4:203
+35e8 4:204
+35ea 4:205
+35ec 4:206
+35ef 4:207
+35f2 4:208
+35f4 4:209
+35f7 4:210
+35f9 4:211
+35fc 4:212
+35ff 4:213
+3600 4:224
+3602 4:225
+3604 4:226
+3606 4:227
+3608 4:230
+360a 4:231
+360c 4:232
+360f 4:233
+3610 4:235
+3612 4:236
+3615 4:237
+3616 4:239
+3618 4:240
+361b 4:241
+361c 4:243
+361e 4:244
+3621 4:245
+3622 4:247
+3624 4:248
+3627 4:249
+3628 4:251
+362a 4:252
+362d 4:253
+362e 4:264
+3630 4:265
+3632 4:266
+3634 4:267
+3636 4:268
+3638 4:269
+363a 4:270
+363c 4:275
+363f 4:276
+3641 4:279
+3643 4:280
+3645 4:284
+3648 4:285
+364a 4:286
+364d 4:287
+364f 4:288
+3651 4:289
+3653 4:290
+3655 4:291
+3657 4:292
+3659 4:293
+365b 4:295
+365d 4:299
+3660 4:300
+3661 4:301
+3663 4:302
+3665 4:306
+3667 4:307
+3669 4:308
+366c 4:309
+366e 4:310
+3670 4:311
+3672 4:312
+3674 4:313
+3676 4:320
+3679 4:321
+367b 4:322
+367e 4:323
+3680 4:324
+3683 4:325
+3685 4:326
+3688 4:327
+368a 4:328
+368c 4:330
+368f 4:331
+3692 4:334
+3695 4:335
+3698 4:337
+369b 4:338
+369e 4:340
+36a1 4:341
+36a4 4:343
+36a7 4:344
+36aa 4:346
+36ad 4:347
+36b0 4:349
+36b3 4:350
+36b6 4:352
+36b9 4:353
+36bc 4:356
+36bf 4:357
+36c2 4:359
+36c5 4:360
+36c8 4:362
+36cb 4:363
+36ce 4:365
+36d1 4:366
+36d4 4:368
+36d7 4:369
+36d9 4:370
+36dc 4:371
+36de 4:372
+36e1 4:373
+36e3 4:374
+36e6 4:375
+36e8 4:377
+36ea 4:378
+36ed 4:379
+36f0 4:381
+36f3 4:382
+36f6 4:384
+36f9 4:385
+36fc 4:387
+36ff 4:388
+3702 4:390
+3705 4:391
+3708 4:396
+370a 4:397
+370c 4:399
+370f 4:400
+3711 4:401
+3714 4:402
+3716 4:403
+3718 4:404
+371a 4:405
+371c 4:406
+371e 4:416
+3720 4:417
+3722 4:419
+3724 4:420
+3727 4:421
+3729 4:422
+372b 4:431
+372e 4:432
+3730 4:433
+3733 4:435
+3735 4:436
+3737 4:437
+3739 4:438
+373b 4:440
+373d 4:443
+373f 4:444
+3741 4:445
+3743 4:446
+3745 4:447
+3748 4:451
+374b 4:452
+374e 4:455
+3751 4:456
+3754 4:460
+3757 4:461
+375a 4:465
+375c 4:467
+375f 4:468
+3762 4:469
+3763 4:470
+3765 4:471
+3767 4:484
+3769 4:486
+376c 4:487
+376f 4:488
+3770 4:489
+3772 4:490
+3774 4:498
+3776 4:500
+3779 4:501
+377c 4:502
+377d 4:503
+377f 4:504
+3781 4:507
+3784 4:508
+3787 4:511
+378a 4:512
+378d 4:516
+3790 4:517
+3793 4:520
+3796 4:521
+3799 4:524
+379c 4:525
+379f 4:528
+37a2 4:530
+37a5 4:539
+37a6 4:547
+37a8 4:548
+37a9 4:549
+37ab 4:550
+37ad 4:551
+37af 4:553
+37b0 4:562
+37b2 4:563
+37b3 4:564
+37b5 4:565
+37b7 4:566
+37b9 4:568
+37ba 4:591
+37bc 4:592
+37bf 4:594
+37c2 4:595
+37c4 4:596
+37c7 4:598
+37c9 4:599
+37cc 4:600
+37cf 4:601
+37d1 4:602
+37d4 4:603
+37d6 4:604
+37d9 4:605
+37dc 4:607
+37de 4:608
+37e0 4:609
+37e2 4:610
+37e4 4:612
+37e6 4:613
+37e8 4:614
+37ea 4:615
+37eb 4:616
+37ee 4:617
+37f0 4:618
+37f1 4:620
+37f4 4:621
+37f6 4:622
+37f7 4:624
+37fa 4:625
+37fc 4:626
+37fd 4:628
+3800 4:629
+3802 4:630
+3803 4:632
+3806 4:633
+3808 4:634
+3809 4:636
+380c 4:637
+380e 4:638
+380f 4:649
+3811 4:650
+3813 4:651
+3815 4:652
+3817 4:653
+3819 4:654
+381b 4:655
+381d 4:656
+381f 4:662
+3821 4:663
+3823 4:664
+3825 4:666
+3828 4:667
+3829 4:668
+382b 4:669
+382d 4:670
+382f 4:671
+3831 4:672
+3832 4:673
+3833 4:674
+3836 4:678
+3838 4:679
+383a 4:680
+383c 4:682
+383f 4:683
+3841 4:684
+3844 4:685
+3845 4:686
+3847 4:687
+3849 4:688
+384b 4:690
+384d 4:691
+384f 4:692
+3851 4:693
+3853 4:694
+3855 4:695
+3857 4:697
+3859 4:699
+385b 4:700
+385e 4:701
+3861 4:702
+3863 4:703
+3865 4:704
+3868 4:705
+386b 4:706
+386d 4:707
+386f 4:709
+3872 4:710
+3875 4:713
+3878 4:714
+387b 4:716
+387e 4:717
+3881 4:719
+3884 4:720
+3887 4:722
+388a 4:723
+388d 4:725
+3890 4:726
+3893 4:728
+3896 4:729
+3899 4:731
+389c 4:732
+389f 4:735
+38a2 4:736
+38a5 4:738
+38a8 4:739
+38ab 4:741
+38ae 4:742
+38b1 4:744
+38b4 4:745
+38b7 4:747
+38b9 4:748
+38bc 4:749
+38bf 4:750
+38c1 4:751
+38c3 4:752
+38c6 4:753
+38c9 4:754
+38cb 4:757
+38cd 4:758
+38d0 4:760
+38d3 4:761
+38d6 4:763
+38d9 4:764
+38dc 4:766
+38df 4:767
+38e2 4:769
+38e5 4:770
+38e8 4:771
+38eb 4:776
+38ed 4:777
+38ef 4:779
+38f1 4:780
+38f4 4:781
+38f7 4:782
+38f9 4:783
+38fb 4:784
+38fd 4:785
+38ff 4:786
+3901 4:796
+3903 4:797
+3905 4:799
+3907 4:800
+390a 4:801
+390c 4:802
+390e 4:811
+3910 4:812
+3913 4:813
+3916 4:815
+3918 4:816
+391a 4:817
+391c 4:818
+391e 4:820
+3920 4:823
+3922 4:824
+3924 4:825
+3926 4:826
+3928 4:827
+392b 4:831
+392e 4:832
+3931 4:835
+3934 4:836
+3937 4:840
+393a 4:841
+393d 4:845
+393f 4:847
+3942 4:848
+3945 4:849
+3946 4:850
+3948 4:851
+394a 4:864
+394c 4:866
+394f 4:867
+3952 4:868
+3953 4:869
+3955 4:870
+3957 4:878
+3959 4:880
+395c 4:881
+395f 4:882
+3960 4:883
+3962 4:884
+3964 4:887
+3967 4:888
+396a 4:891
+396d 4:892
+3970 4:896
+3973 4:897
+3976 4:900
+3979 4:901
+397c 4:904
+397f 4:905
+3982 4:909
+3985 4:910
+3988 4:919
+398b 4:920
+398d 4:922
+398f 4:924
+3991 4:925
+3993 4:926
+3995 4:927
+3996 4:928
+3998 4:929
+399a 4:930
+399b 4:932
+399d 4:933
+399f 4:934
+39a0 4:935
+39a2 4:936
+39a4 4:937
+39a5 4:939
+39a7 4:940
+39a9 4:941
+39aa 4:942
+39ac 4:943
+39ae 4:944
+39af 4:945
+39b2 4:946
+39b3 4:947
+39b5 4:948
+39b7 4:949
+39ba 4:950
+39bd 4:951
+39bf 4:952
+39c2 4:953
+39c4 4:954
+39c7 4:955
+39ca 4:956
+39cb 4:963
+39cc 4:969
+39cd 4:970
+39e4 4:972
+39e5 4:973
+39f8 4:975
+39f9 4:976
+3a0f 4:979
+3a18 5:8
+3a19 5:12
+3a1a 5:13
+3a1d 5:14
+3a1e 5:19
+3a1f 5:20
+3a21 5:21
+3a23 5:22
+3a25 5:23
+3a26 5:24
+3a28 5:25
+3a2a 5:27
+3a2d 5:28
+3a2f 5:29
+3a32 5:32
+3a34 5:33
+3a36 5:34
+3a39 5:35
+3a3a 5:36
+3a3c 5:37
+3a3f 5:38
+3a40 5:39
+3a42 5:40
+3a45 5:41
+3a46 5:42
+3a48 5:43
+3a4b 5:45
+3a4d 5:46
+3a50 5:47
+3a52 5:48
+3a55 5:49
+3a57 5:50
+3a5a 5:51
+3a5d 5:52
+3a60 5:53
+3a61 5:54
+3a64 5:55
+3a66 5:56
+3a67 5:62
+3a68 5:63
+3a6a 5:64
+3a6c 5:65
+3a6e 5:66
+3a6f 5:67
+3a71 5:68
+3a73 5:70
+3a76 5:72
+3a78 5:73
+3a7b 5:74
+3a7e 5:75
+3a7f 5:76
+3a82 5:77
+3a84 5:78
+3a85 5:83
+3a87 5:84
+3a89 5:85
+3a8b 5:86
+3a8c 5:87
+3a8e 5:88
+3a90 5:89
+3a91 5:92
+3a93 5:93
+3a96 5:94
+3a97 5:95
+3a99 5:96
+3a9b 5:97
+3a9d 5:98
+3aa0 5:100
+3aa2 5:101
+3aa4 5:102
+3aa6 5:104
+3aa9 5:105
+3aac 5:111
+3aae 5:112
+3ab0 5:113
+3ab2 5:114
+3ab3 5:115
+3ab5 5:116
+3ab7 5:117
+3ab8 5:120
+3aba 5:121
+3abd 5:122
+3abe 5:123
+3ac0 5:124
+3ac2 5:125
+3ac4 5:126
+3ac7 5:128
+3ac9 5:130
+3aca 5:132
+3acc 5:133
+3ace 5:135
+3ad1 6:8
+3ad4 6:9
+3ad7 6:10
+3ada 6:11
+3add 6:12
+3ae0 6:13
+3ae3 6:14
+3ae6 6:15
+3ae9 6:16
+3aec 6:17
+3aef 6:18
+3af2 6:22
+3af5 6:23
+3af7 6:24
+3afa 6:26
+3afc 6:27
+3aff 6:31
+3b02 6:32
+3b04 6:33
+3b07 7:5
+3b09 7:6
+3b0c 7:7
+3b0e 7:8
+3b10 7:10
+3b12 7:11
+3b15 7:12
+3b16 7:13
+3b17 7:14
+3b19 7:15
+3b1c 7:16
+3b1d 7:17
+3b1e 7:18
+3b20 7:19
+3b22 7:20
+3b23 7:24
+3b26 7:26
+3b27 7:27
+3b29 7:28
+3b2a 8:2
+3b32 8:9
+3b33 8:10
+3b34 8:11
+3b35 8:12
+3b36 8:13
+3b38 8:14
+3b3a 8:15
+3b3b 8:16
+3b3c 8:22
+3b3e 8:23
+3b40 8:24
+3b42 8:25
+3b43 8:26
+3b45 8:27
+3b47 8:28
+3b48 8:29
+3b4a 8:30
+3b4c 8:34
+3b4f 8:35
+3b51 8:36
+3b54 8:37
+3b56 8:38
+3b57 8:44
+3b59 8:45
+3b5b 8:46
+3b5d 8:47
+3b5e 8:48
+3b60 8:49
+3b62 8:50
+3b63 8:51
+3b65 8:52
+3b67 8:56
+3b6a 8:57
+3b6c 8:58
+3b6f 8:59
+3b71 8:60
+3b72 8:66
+3b74 8:67
+3b76 8:68
+3b78 8:69
+3b79 8:70
+3b7b 8:71
+3b7d 8:72
+3b7e 8:73
+3b80 8:74
+3b82 8:78
+3b85 8:79
+3b87 8:80
+3b8a 8:81
+3b8b 8:82
+3b8d 8:83
+3b8e 9:15
+3c00 9:18
+3d00 9:31

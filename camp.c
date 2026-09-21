@@ -425,7 +425,7 @@ void inspect(void)
 	printAtXY(22, 4, "Lvl:");
 	printAtXY(27, 4, itoa(characters[i].ni));
 	printAtXY(29, 4, "XP:");
-	printAtXY(33, 4, itoa(characters[i].xp));
+	printAtXY(33, 4, t4_itoa(characters[i].xp));
 	
 	// affichage santé, pv
 	printAtXY(5,  6, "Health:");
