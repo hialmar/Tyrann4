@@ -105,7 +105,57 @@ Recruit_Elancia5
  PV(P)=15
  ET(P)=PV(P)
  RI(P)=300
+ WR(P)=14
+ WL(P)=12
+ PT(P)=4
+ CA(P)=3
+ BT(P)=30
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
  RETURN
+Recruit_Kaeso 
+ FORP=1TO6
+   IF N$(P)="Kaeso" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
+ NEXT P
+ HIRES:LOAD"KAESO.HRS"
+ PRINT "PRESS SPACE"
+Recruit_Kaeso2
+ GETA$:IF A$<>" " THEN Recruit_Kaeso2 
+Recruit_Kaeso3
+ ENC=2:S$="Recruit Kaeso ? ":L=16:CLS:GOSUB ville_4 
+ PLOT5,13,"DO YOU WANT TO RECRUIT ME (Y/N) ?"
+Recruit_Kaeso4
+ GETA$
+ IFA$="N"THEN ville_7 
+ IFA$="Y"THEN GOSUB Recruit_Kaeso5 
+ GOTO ville_7 
+Recruit_Kaeso5
+ GOSUB ville_5
+ PLOT5,26,"REPLACE WHOM ?"
+ GETP$:P=VAL(P$)
+ IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
+ N$(P)="Kaeso"
+ CULT(P) = 6
+ CP(P)= 1
+ CC(P)= 32
+ CT(P)= 26
+ FO(P)= 33
+ AG(P)= 25
+ IN(P)= 21
+ FM(P)= 21
+ PV(P)=16
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=9
+ PT(P)=4
+ CA(P)=3
+ BT(P)=32
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+ RETURN 
 ville_sleep
  REM SLEEP
  ENC=2:S$="THE BEDROOMS ":L=16:CLS:GOSUB ville_4 
