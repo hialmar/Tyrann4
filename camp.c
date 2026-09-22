@@ -412,7 +412,7 @@ void inspect(void)
 	strcat(titre, characters[i].nom);
 	if(characters[i].mp != 1) {
 		strcat(titre, " ");
-		strcat(titre, culture[characters[i].mp-2]);
+		strcat(titre, culture[characters[i].mp-1]);
 	}
 	strcat(titre, " > ");
 	j = strlen(titre);
@@ -425,7 +425,7 @@ void inspect(void)
 	printAtXY(22, 4, "Lvl:");
 	printAtXY(27, 4, itoa(characters[i].ni));
 	printAtXY(29, 4, "XP:");
-	printAtXY(33, 4, t4_itoa(characters[i].xp));
+	printAtXY(33, 4, t4_itoa(characters[i].xp*1));
 	
 	// affichage santé, pv
 	printAtXY(5,  6, "Health:");
