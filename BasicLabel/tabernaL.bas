@@ -73,6 +73,92 @@ ville_53
  IFP$="A"ANDVIL=3THEN GOSUB  Recruit_Astrid 
  IFP$="V"ANDVIL=3THEN GOSUB  Recruit_Viggo 
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53 
+Recruit_Astrid 
+ FORP=1TO6
+   IF N$(P)="Astrid" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
+ NEXT P
+ HIRES:LOAD"ASTRID.HRS"
+ PRINT "PRESS SPACE"
+Recruit_Astrid2
+ GETA$:IF A$<>" " THEN Recruit_Astrid2 
+Recruit_Astrid3
+ ENC=2:S$="Recruit Astrid ? ":L=16:CLS:GOSUB ville_4 
+ PLOT5,13,"DO YOU WANT TO RECRUIT ME (Y/N) ?"
+Recruit_Astrid4
+ GETA$
+ IFA$="N"THEN ville_7 
+ IFA$="Y"THEN GOSUB Recruit_Astrid5 
+ GOTO ville_7 
+Recruit_Astrid5
+ GOSUB ville_5
+ PLOT5,26,"REPLACE WHOM ?"
+ GETP$:P=VAL(P$)
+ IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
+ N$(P)="Astrid"
+ CULT(P) = 7
+ CP(P)= 5
+ CC(P)= 18
+ CT(P)= 20
+ FO(P)= 20
+ AG(P)= 32
+ IN(P)= 35
+ FM(P)= 35
+ PV(P)=15
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=13
+ WL(P)=15
+ PT(P)=6
+ CA(P)=1
+ BT(P)=36
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+ RETURN
+
+Recruit_Viggo 
+ FORP=1TO6
+   IF N$(P)="Viggo" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
+ NEXT P
+ HIRES:LOAD"VIGGO.HRS"
+ PRINT "PRESS SPACE"
+Recruit_Viggo2
+ GETA$:IF A$<>" " THEN Recruit_Viggo2 
+Recruit_Viggo3
+ ENC=2:S$="Recruit Viggo ? ":L=16:CLS:GOSUB ville_4 
+ PLOT5,13,"DO YOU WANT TO RECRUIT ME (Y/N) ?"
+Recruit_Viggo4
+ GETA$
+ IFA$="N"THEN ville_7 
+ IFA$="Y"THEN GOSUB Recruit_Viggo5 
+ GOTO ville_7 
+Recruit_Viggo5
+ GOSUB ville_5
+ PLOT5,26,"REPLACE WHOM ?"
+ GETP$:P=VAL(P$)
+ IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
+ N$(P)="Viggo"
+ CULT(P) = 7
+ CP(P)= 1
+ CC(P)= 30
+ CT(P)= 28
+ FO(P)= 32
+ AG(P)= 28
+ IN(P)= 20
+ FM(P)= 20
+ PV(P)=16
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=10
+ PT(P)=4
+ CA(P)=3
+ BT(P)=31
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+ RETURN 
+
 Recruit_Elancia 
  FORP=1TO6
    IF N$(P)="Elancia" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
