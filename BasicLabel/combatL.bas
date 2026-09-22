@@ -235,6 +235,7 @@ combat_16
  IF OP(P)>0 THEN PRINT@29,12;CHR$(131)"U)SE ITEM"
  PRINT@29,13;CHR$(131)"P)ARRY"
  IF CP(P)>3 THEN PRINT@29,14;CHR$(131)"S)PELL"
+ FR=FRE("")
 combat_57
  GET A$
  IF A$="A" AND ARM=1 THEN ACT(P)=1:GOTO  combat_53 
@@ -1142,7 +1143,7 @@ combat_read_data
  FORI=1TO5:READ SM$(I):NEXT
  RESTORE:RETURN
  DATA "OK","-Poison-","-Paral- ",">DEAD< "
- DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
+ DATA Legionary, Gladiator, Scout, Druid, Priest, Vestal
  DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Iberian, Thrace
  DATA 3,4,4,3,4,3,2,1,1
  DATA 75,8, 70,6, 50,5, 80,4, 95,3, 55,2

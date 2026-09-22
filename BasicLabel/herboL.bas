@@ -52,6 +52,7 @@ ville_7
  PLOT10,12,"Who wants to trade  ?"
  PLOT12,16,"G > Give money"
  PLOT12,18,"L > Leave shop"
+ FR=FRE("")
 ville_53
  GETP$:P=VAL(P$)
  IFP$="L"THEN M$="":O$="":S$="":GOTO ville_11
@@ -423,7 +424,7 @@ ville_100
  NEXT
  RETURN
  DATA "OK","-Poison- ","-Paral- ",">DEAD< "
- DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
+ DATA Legionary, Gladiator, Scout, Druid, Priest, Vestal
  DATA Celtic,Nemausus,1, Egyptian,Lugdunum,5, Gallic,Lutecia,3, Goth,Agrippina,2
  DATA Persian,Burdigala,5, Roman,Gesoriacum,6, Viking,Brigantium,1
  DATA Iberian,Bacino,4, Thrace,Londinium,7

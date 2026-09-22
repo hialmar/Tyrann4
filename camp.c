@@ -38,7 +38,7 @@ extern unsigned char selle_dragon;
 extern char io_needed;
 
 char *etat[] = { "OK", "-Poison- ", "-Paral- ", ">DEAD< " };
-char *classe[] = { "Legionary","Gladiator","Scout","Druid","Sem-Priest","Vestal" };
+char *classe[] = { "Legionary","Gladiator","Scout","Druid","Priest","Vestal" };
 char *culture[] = { "Celtic","Egyptian","Gallic","Goth","Persian","Roman","Viking","Iberian"};
 
 char *sorts[] = { "SOMNUS","FIRE","STONE","VENOM","BLOOD","MAXIMA FULGUR", "LAVA", "EARTHQUAKE",

@@ -54,8 +54,9 @@ ville_7
  PLOT12,16,"S > Sleep in a bedroom"
  PLOT12,18,"L > Leave Taberna"
  IFVIL=1ANDT4INF(4)+TVDO(2)=20THENPLOT12,20,"E > Recruit Elancia":PLOT12,22,"K > Recruit Kaeso"
- IFVIL=1ANDT4INF(4)+TVDO(2)=22THENPLOT12,20,"M > Recruit Maele":PLOT12,22,"C > Recruit Carpo"
+ IFVIL=1ANDT4INF(4)+TVDO(2)=22THENPLOT12,20,"M > Recruit Maelle":PLOT12,22,"C > Recruit Carpo"
  IFVIL=3THENPLOT12,20,"A > Recruit Astrid":PLOT12,22,"V > Recruit Viggo"
+ FR=FRE("")
 ville_53
  GETP$:P=VAL(P$)
  IFP$="L"THEN M$="":O$="":S$="":GOTO ville_11
@@ -67,7 +68,7 @@ ville_53
  IFP$="S"THEN GOSUB  ville_sleep 
  IFP$="E"ANDVIL=1ANDT4INF(4)+TVDO(2)=20THEN GOSUB  Recruit_Elancia 
  IFP$="K"ANDVIL=1ANDT4INF(4)+TVDO(2)=20THEN GOSUB  Recruit_Kaeso 
- IFP$="M"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Maele 
+ IFP$="M"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Maelle 
  IFP$="C"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Carpo 
  IFP$="A"ANDVIL=3THEN GOSUB  Recruit_Astrid 
  IFP$="V"ANDVIL=3THEN GOSUB  Recruit_Viggo 
@@ -114,6 +115,48 @@ Recruit_Elancia5
  SAD(P,1)=23
  SAD(P,2)=24
  RETURN
+Recruit_Carpo 
+ FORP=1TO6
+   IF N$(P)="Carpophorus" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
+ NEXT P
+ HIRES:LOAD"CARPO.HRS"
+ PRINT "PRESS SPACE"
+Recruit_Carpo2
+ GETA$:IF A$<>" " THEN Recruit_Carpo2 
+Recruit_Carpo3
+ ENC=2:S$="Recruit Carpophorus ? ":L=16:CLS:GOSUB ville_4 
+ PLOT5,13,"DO YOU WANT TO RECRUIT ME (Y/N) ?"
+Recruit_Carpo4
+ GETA$
+ IFA$="N"THEN ville_7 
+ IFA$="Y"THEN GOSUB Recruit_Carpo5 
+ GOTO ville_7 
+Recruit_Carpo5
+ GOSUB ville_5
+ PLOT5,26,"REPLACE WHOM ?"
+ GETP$:P=VAL(P$)
+ IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
+ N$(P)="Carpophorus"
+ CULT(P) = 6
+ CP(P)= 2
+ CC(P)= 35
+ CT(P)= 25
+ FO(P)= 36
+ AG(P)= 26
+ IN(P)= 18
+ FM(P)= 18
+ PV(P)=16
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=10
+ PT(P)=4
+ CA(P)=3
+ BT(P)=31
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+ RETURN 
 Recruit_Kaeso 
  FORP=1TO6
    IF N$(P)="Kaeso" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
@@ -156,6 +199,49 @@ Recruit_Kaeso5
  SAD(P,1)=23
  SAD(P,2)=24
  RETURN 
+Recruit_Maelle 
+ FORP=1TO6
+   IF N$(P)="Maelle" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
+ NEXT P
+ HIRES:LOAD"MAELLE.HRS"
+ PRINT "PRESS SPACE"
+Recruit_Maelle2
+ GETA$:IF A$<>" " THEN Recruit_Maelle2 
+Recruit_Maelle3
+ ENC=2:S$="Recruit Maele ? ":L=16:CLS:GOSUB ville_4 
+ PLOT5,13,"DO YOU WANT TO RECRUIT ME (Y/N) ?"
+Recruit_Maelle4
+ GETA$
+ IFA$="N"THEN ville_7 
+ IFA$="Y"THEN GOSUB Recruit_Maelle5 
+ GOTO ville_7 
+Recruit_Maelle5
+ GOSUB ville_5
+ PLOT5,26,"REPLACE WHOM ?"
+ GETP$:P=VAL(P$)
+ IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
+ N$(P)="Maelle"
+ CULT(P) = 1
+ CP(P)= 4
+ CC(P)= 20
+ CT(P)= 29
+ FO(P)= 21
+ AG(P)= 28
+ IN(P)= 30
+ FM(P)= 32
+ PV(P)=15
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=12
+ PT(P)=4
+ CA(P)=3
+ BT(P)=33
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=16
+ SAD(P,2)=19
+ RETURN
+
 ville_sleep
  REM SLEEP
  ENC=2:S$="THE BEDROOMS ":L=16:CLS:GOSUB ville_4 
@@ -553,7 +639,7 @@ ville_100
  NEXT
  RETURN
  DATA "OK","-Poison- ","-Paral- ",">DEAD< "
- DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
+ DATA Legionary, Gladiator, Scout, Druid, Priest, Vestal
  DATA Celtic,Nemausus,1, Egyptian,Lugdunum,5, Gallic,Lutecia,3, Goth,Agrippina,2
  DATA Persian,Burdigala,5, Roman,Gesoriacum,6, Viking,Brigantium,1
  DATA Iberian,Bacino,4, Thrace,Londinium,7

@@ -158,7 +158,7 @@ Intro_8
   IF RO<1 OR RO>6 THEN ZAP:GOTO Intro_8
   IF RO<4 THEN  Intro_9
   IF RO=4 AND(CU=2ORCU=5ORCU=6)THENGOSUB Intro_10 :GOTO Intro_8
-  IF RO=5 AND(CU<>2ANDCU<>5) THEN GOSUB  Intro_10 :GOTO Intro_8
+  IF RO=5 THEN GOSUB  Intro_10 :GOTO Intro_8
   IF RO=6 AND(CU<>3ANDCU<>6) THEN GOSUB  Intro_10 :GOTO Intro_8
 Intro_9
   ROLE(P)=RO:PRINT RO$(ROLE(P)):GOSUB  Intro_11
@@ -276,7 +276,7 @@ Sauvegarde
  RETURN
 
 
- DATA Legionary, Gladiator, Scout, Druid, Sem-Priest, Vestal
+ DATA Legionary, Gladiator, Scout, Druid, Priest, Vestal
  DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking
  DATA Melee Skill, Range Skill, Strength
  DATA Agility, Intelligence
@@ -286,7 +286,7 @@ Sauvegarde
  DATA   9, 2, 5, 5, 0, 6, 4: REM Gladiator
  DATA   4, 8, 4, 8, 2, 6, 3: REM Scout (Eclaireur)
  DATA   0, 4, 4, 6, 6, 6, 2: REM Druid
- DATA  -2,-2, 2, 8, 4, 6, 1: REM Sem-Priest
+ DATA  -2,-2, 2, 8, 4, 6, 1: REM Priest
  DATA  -4,-4, 0, 9, 9, 9,-1: REM Vestal
  REM   Ml Rg St  Ag IQ MS HP  les 7 bonus de culture
  DATA   2, 0, 0, 1, 1, 1, 1: REM Celtic
