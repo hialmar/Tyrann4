@@ -351,7 +351,7 @@ chck_57		; patricienne donne mdp
 		bne chck_55
 		lda #TRUE
 		sta mot_de_passe					; met à 1 drapeau mote de passe
-		ldx #0 ; num ville
+		ldx #2 ; ville2
 		lda _team_cles,x
 		ora #4
 		sta _team_cles,x
@@ -557,7 +557,7 @@ suite_legat
 	beq suite_legat2
 	rts
 suite_legat2	
-	ldx #1 ; num ville
+	ldx #2 ; num ville
 	lda _team_cles,x
 	ora #8
 	sta _team_cles,x
