@@ -133,7 +133,7 @@ init_div_var
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
 	sta numero_lieu         ; indique lieu <> Gallia (0)
-	ldx #0 ; num ville
+	ldx #0 ; ville1
 	lda _team_cles,x
 	and #1
 	sta on_a_clef_1

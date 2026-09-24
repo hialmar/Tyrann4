@@ -133,7 +133,7 @@ init_div_var
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
 	sta numero_lieu         ; indique lieu <> Gallia (0)
-	ldx #1 ; num ville
+	ldx #2 ; num ville
 	lda _team_cles,x
 	and #1
 	sta on_a_clef_1
@@ -161,7 +161,7 @@ suite_init1
 	lda #0
 	sta _L43,x
 suite_init2
-	ldx #1 ; ville2
+	ldx #2 ; ville2
 	lda _team_combats_coffres,x
 	and #1
 	beq suite_init3
@@ -169,7 +169,7 @@ suite_init2
 	lda #0
 	sta _L01,x
 suite_init3
-	ldx #1 ; ville2
+	ldx #2 ; ville2
 	lda _team_combats_coffres,x
 	and #2
 	beq suite_init4
@@ -177,7 +177,7 @@ suite_init3
 	lda #0
 	sta _L27,x
 suite_init4
-	ldx #1 ; ville2
+	ldx #2 ; ville2
 	lda _team_combats_coffres,x
 	and #4
 	beq suite_init5
@@ -185,7 +185,7 @@ suite_init4
 	lda #0
 	sta _L31,x
 suite_init5
-	ldx #1 ; ville2
+	ldx #2 ; ville2
 	lda _team_combats_coffres,x
 	and #8
 	beq suite_init6
@@ -332,7 +332,7 @@ chck_54		; clef_1
 		bne chck_58
 		lda #TRUE
 		sta on_a_clef_1					; met à 1 drapeau clef 1
-		ldx #1 ; num ville
+		ldx #2 ; ville2
 		lda _team_cles,x
 		ora #1
 		sta _team_cles,x
@@ -362,7 +362,7 @@ chck_55		; clef_2
 		bne chck_53
 		lda #TRUE
 		sta on_a_clef_2			; met à 1 drapeau clef 2
-		ldx #1 ; num ville
+		ldx #2 ; ville2
 		lda _team_cles,x
 		ora #2
 		sta _team_cles,x
@@ -778,30 +778,30 @@ suite_coffre
 	adc #0
 	sta _character_ri+1
 	lda ligne_map
-	cmp #11
+	cmp #1
 	bne suite_coffre1
 	lda #1
 	sta op1
 suite_coffre1
 	lda ligne_map
-	cmp #25
+	cmp #27
 	bne suite_coffre2
 	lda #2
 	sta op1
 suite_coffre2
 	lda ligne_map
-	cmp #32
+	cmp #31
 	bne suite_coffre3
 	lda #4
 	sta op1
 suite_coffre3
 	lda ligne_map
-	cmp #35
+	cmp #39
 	bne suite_coffre4
 	lda #8
 	sta op1
 suite_coffre4
-	ldx #1; ville2
+	ldx #2; ville2
 	lda _team_combats_coffres,x
 	ora op1
 	sta _team_combats_coffres,x
