@@ -5,6 +5,9 @@
 _main
 .(
 	jsr SaveZeroPage
+	lda #1
+	sta _team_io_needed
+	jsr _load_t4_characters
 	lda #4					; début de répétition touche après 4*30 = 120 ms
 	sta $24E
 	lda #1					; répétition d'une touche toutes les 30 ms
@@ -15,6 +18,7 @@ _main
 	sta $26A
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
 							; mais pas que...
+	jsr initRandom
 	jsr cadre_plan			; dessine un cadre blanc autour du plan de ville
 	jsr bandeau				; dessine image au dessus du plan
 main_loop
@@ -36,9 +40,9 @@ temporisation_1
 	bne temporisation_2
 fin_temporisation
 	; sei
-	lda direction_scroll
-	cmp#$86					; Y pour sortir
-	beq sortie_main
+	; lda direction_scroll
+	; cmp#$86					; Y pour sortir
+	; beq sortie_main
 	jsr wait_key			; scanne les 4 touches flèchées pour scroll
 	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
 	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
@@ -48,6 +52,39 @@ fin_temporisation
 	; cli
 	jmp main_loop
 sortie_main
+	ldy #$0         ; grab string pointer
+	lda #<ProgMap
+	sta _next_prog
+	iny
+	lda #>ProgMap
+	sta _next_prog+1
+	dey
+	jsr _jump_to_next_prog
+	rts ; jamais utilisé
+.)
+
+
+_next_prog .dsb 2
+
+_jump_to_next_prog
+.(
+	lda ordo_perso_fen
+	sta _team_x_ville
+	lda absc_perso_fen
+	sta _team_y_ville
+	lda ligne_hg_map
+	sta _team_ligne_hg_ville
+	lda rang_hg_map
+	sta _team_rang_hg_ville
+	lda tuile_perso_aff
+	sta _team_tuile_perso_aff_ville		; code tuile perso affichée
+	lda index_perso
+	sta _team_index_perso_ville		; valeur index perso dans table adresses hires fenêtre
+	lda tuile_sous_pos_perso 
+	sta _team_tuile_sous_pos_perso_ville			; sous position perso au départ
+	lda numero_lieu
+	sta _team_numero_lieu_ville         ; indique lieu <> Gallia (0)
+
 	lda #3					; ré-affiche le curseur et remet le son des touches
 	sta $26A
 	lda #32					; remet la répétition des touches normale
@@ -55,24 +92,24 @@ sortie_main
 	lda #4
 	sta $24F
 	jsr $ec21               ; back to text mode
-
     lda #$4c
 	sta mot_de_passe
 	lda #$b0
 	sta laisser_passer
 	lda #$cc
 	sta numero_lieu
-;	jsr $ec21
 
 	jsr _get
-	jsr RestoreZeroPage
-sortie_main2
+	lda #1
+	sta _team_io_needed
+	jsr _save_t4_characters
 	; test bascule combat
+	jsr RestoreZeroPage
 	ldy #$0         ; grab string pointer
-	lda #<ProgMap
+	lda _next_prog
 	sta (sp),y
 	iny
-	lda #>ProgMap
+	lda _next_prog+1
 	sta (sp),y
 	dey
 	jsr _SwitchToCommand
@@ -80,6 +117,121 @@ sortie_main2
 	;jmp _main
 	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
 							; pour re-rentrer : CALL #2000
+.)
+
+;-----------------------------------------------------------------------------
+; -----                initialise divers variables dont:                   ---
+;	             coordonnées coin haut gauche partie table affichée      -----
+;                     tuile perso affichée / index position perso
+;-----------------------------------------------------------------------------
+init_div_var
+.(
+	lda #FALSE
+	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
+	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
+	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
+	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
+	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
+	sta numero_lieu         ; indique lieu <> Gallia (0)
+	ldx #1 ; num ville
+	lda _team_cles,x
+	and #1
+	sta on_a_clef_1
+	lda _team_cles,x
+	and #2
+	sta on_a_clef_2
+	lda _team_cles,x
+	and #4
+	sta mot_de_passe
+	lda _team_cles,x
+	and #8
+	sta laisser_passer
+	; cache les tuiles spéciales
+	; attention, si on les déplace il faudra changer ces adresses !!!
+	;;;;;;; Spécifique, changer pos des clés et coffres
+	lda on_a_clef_1
+	beq suite_init1
+	ldx #7
+	lda #0
+	sta _L07,x
+suite_init1
+	lda on_a_clef_2
+	beq suite_init2
+	ldx #23
+	lda #0
+	sta _L43,x
+suite_init2
+	ldx #1 ; ville2
+	lda _team_combats_coffres,x
+	and #1
+	beq suite_init3
+	ldx #23
+	lda #0
+	sta _L01,x
+suite_init3
+	ldx #1 ; ville2
+	lda _team_combats_coffres,x
+	and #2
+	beq suite_init4
+	ldx #23
+	lda #0
+	sta _L27,x
+suite_init4
+	ldx #1 ; ville2
+	lda _team_combats_coffres,x
+	and #4
+	beq suite_init5
+	ldx #7
+	lda #0
+	sta _L31,x
+suite_init5
+	ldx #1 ; ville2
+	lda _team_combats_coffres,x
+	and #8
+	beq suite_init6
+	ldx #11
+	lda #0
+	sta _L39,x
+suite_init6
+	lda _team_boat
+	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
+	lda _team_out
+	beq load_from_team
+	lda #$14		; coordonnées pour l'entrée (départ jeu)
+	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
+	lda #$ff
+	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
+	lda #$22
+	sta tuile_perso_aff			; code tuile perso affichée
+	lda #$2d
+	sta index_perso			; valeur index perso dans table adresses hires fenêtre
+	lda #$bc
+	sta direction_scroll			;  valeurs => ddirection scroll demandée
+	lda #$03
+	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
+	lda #$01
+	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
+	lda #0		; repère tuile Nemausus
+	sta tuile_sous_pos_perso			; sous position perso au départ
+	rts
+load_from_team
+	lda _team_ligne_hg_ville		; coordonnées pour l'entrée (départ jeu)
+	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
+	lda _team_rang_hg_ville
+	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
+	lda _team_tuile_perso_aff_ville
+	sta tuile_perso_aff			; code tuile perso affichée
+	lda _team_index_perso_ville
+	sta index_perso			; valeur index perso dans table adresses hires fenêtre
+	lda #$bc
+	sta direction_scroll			;  valeurs => ddirection scroll demandée
+	lda _team_x_ville
+	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
+	lda _team_y_ville
+	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
+	lda _team_tuile_sous_pos_perso_ville		; repère tuile Nemausus
+	sta tuile_sous_pos_perso			; sous position perso au départ
+	rts
 .)
 
 
@@ -180,6 +332,10 @@ chck_54		; clef_1
 		bne chck_58
 		lda #TRUE
 		sta on_a_clef_1					; met à 1 drapeau clef 1
+		ldx #1 ; num ville
+		lda _team_cles,x
+		ora #1
+		sta _team_cles,x
 		bne around_sortie
 chck_58		; a guard ask for pass word
 		lda tuile_courante
@@ -195,6 +351,10 @@ chck_57		; patricienne donne mdp
 		bne chck_55
 		lda #TRUE
 		sta mot_de_passe					; met à 1 drapeau mote de passe
+		ldx #0 ; num ville
+		lda _team_cles,x
+		ora #4
+		sta _team_cles,x
 		bne around_sortie
 chck_55		; clef_2
 		lda tuile_courante
@@ -202,6 +362,10 @@ chck_55		; clef_2
 		bne chck_53
 		lda #TRUE
 		sta on_a_clef_2			; met à 1 drapeau clef 2
+		ldx #1 ; num ville
+		lda _team_cles,x
+		ora #2
+		sta _team_cles,x
 		bne around_sortie
 chck_53		; have you the rigth key for gate 2?
 		lda tuile_courante
@@ -219,45 +383,6 @@ no_scroll
 .)
 
 #include "map_common.s"
-
-;-----------------------------------------------------------------------------
-; -----                initialise divers variables dont:                   ---
-;	             coordonnées coin haut gauche partie table affichée      -----
-;                     tuile perso affichée / index position perso
-;-----------------------------------------------------------------------------
-init_div_var
-.(
-	lda #$14		; coordonnées pour l'entrée (départ jeu)
-	sta ligne_hg_map			; N° de ligne fixe tant que pas de scroll
-	lda #$ff
-	sta rang_hg_map			; rang ds ligne fixe tant que pas de scroll
-	lda #$22
-	sta tuile_perso_aff			; code tuile perso affichée
-	lda #$2d
-	sta index_perso			; valeur index perso dans table adresses hires fenêtre
-	lda #$bc
-	sta direction_scroll			;  valeurs => ddirection scroll demandée
-	lda #$03
-	sta ordo_perso_fen			; Abscisse perso dans fenêtre Hires
-	lda #$01
-	sta absc_perso_fen			; Ordonnée perso dans fenêtre Hires
-	lda #0		; repère tuile Nemausus
-	sta tuile_sous_pos_perso			; sous position perso au départ
-	lda #FALSE
-	sta peut_bouger_horiz			; drapeau deplacement horizontal perso dans fenêtre : 0 => pas de déplacement
-	sta peut_bouger_vert			; drapeau deplacement vertical  perso dans fenêtre : 0 => pas de déplacement
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
-	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
-	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
-	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	sta on_a_clef_1
-	sta on_a_clef_2
-	sta mot_de_passe
-	sta laisser_passer
-	sta numero_lieu         ; indique lieu <> Gallia (0)
-	rts
-.)
-
 
 ;************************************************
 ;***   implantation caractères redéfinis      ***
@@ -289,6 +414,7 @@ lp3_impl
 	rts
 .)
 
+type_boutique .dsb 1
 
 ;************************************************
 ;******* Affiche différents textes   ************
@@ -426,7 +552,16 @@ legat_
 	beq suite_legat
 	jmp entrance_	
 suite_legat
-	jsr eff_tuile_spe	
+	jsr eff_tuile_spe
+	lda laisser_passer
+	beq suite_legat2
+	rts
+suite_legat2	
+	ldx #1 ; num ville
+	lda _team_cles,x
+	ora #8
+	sta _team_cles,x
+	sta laisser_passer
 	ldx #$00
 	lda t_legat_1,x
 	sta adr_ecr_txt+1
@@ -457,14 +592,20 @@ suite_legat
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
+	; on ajoute 10000 ses = 1000 = 3e8 en hex 
+	clc
+	lda _character_ri
+	adc #$e8
+	sta _character_ri
+	lda _character_ri+1
+	adc #$3
+	sta _character_ri+1
 	rts
 ;-------------------------------------------------	
 entrance_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$51				; valeur entrée ville
-	beq suite_entrance
-	jmp medicus_
-suite_entrance	
+    bne medicus_
 	ldx #$00
 	lda t_entrance_1,x
 	sta adr_ecr_txt+1
@@ -483,6 +624,7 @@ suite_entrance
 	sta write_phrase+2	
 	jsr write_phrase
 	jsr hit_key
+	jsr retour_map
 	jsr eff_text
 	rts
 ;-------------------------------------------------	
@@ -490,6 +632,7 @@ medicus_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$5a				; valeur medicus
 	bne armurerie_
+	sta type_boutique
 	ldx #$00
 	lda t_medicus_1,x
 	sta adr_ecr_txt+1
@@ -500,6 +643,7 @@ medicus_
 	jsr write_phrase	
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 	rts
 ;-------------------------------------------------
@@ -507,6 +651,7 @@ armurerie_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$5b				; valeur armurerie
 	bne herboriste_
+	sta type_boutique
 	ldx #$00
 	lda t_armurerie_1,x
 	sta adr_ecr_txt+1
@@ -517,6 +662,7 @@ armurerie_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 	rts
 ;-------------------------------------------------
@@ -524,6 +670,7 @@ herboriste_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$5c				; valeur herboriste
 	bne animalerie_
+	sta type_boutique
 	ldx #$00
 	lda t_herboriste_1,x
 	sta adr_ecr_txt+1
@@ -534,6 +681,7 @@ herboriste_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 	rts
 ;-------------------------------------------------
@@ -541,6 +689,7 @@ animalerie_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$5d				; valeur animalerie
 	bne taberna_
+	sta type_boutique
 	ldx #$00
 	lda t_animalerie_1,x
 	sta adr_ecr_txt+1
@@ -551,6 +700,7 @@ animalerie_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 	rts
 ;-------------------------------------------------	
@@ -558,6 +708,7 @@ taberna_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$5e				; valeur auberge
 	bne bazar_
+	sta type_boutique
 	ldx #$00
 	lda t_taberna_1,x
 	sta adr_ecr_txt+1
@@ -568,12 +719,14 @@ taberna_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text
 ;-------------------------------------------------	
 bazar_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$5f				; valeur Bazar
 	bne coffre_
+	sta type_boutique
 	ldx #$00
 	lda t_bazar_1,x
 	sta adr_ecr_txt+1
@@ -584,12 +737,15 @@ bazar_
 	jsr write_phrase
 	jsr do_you_enter
 	jsr hit_key
+	jsr gestion_boutiques
 	jsr eff_text	
 ;-------------------------------------------------
 coffre_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$63				; valeur coffre
-	bne fin_txt
+	beq suite_coffre
+	rts
+suite_coffre
 	ldx #$00
 	lda t_coffre_1,x
 	sta adr_ecr_txt+1
@@ -611,7 +767,44 @@ coffre_
 	lda direction_scroll
 	cmp #$86
 	bne sk_ef
-	inc nb_coffres_non_ouverts
+	; inc nb_coffres_non_ouverts
+	; ajout d'une somme aléatoire
+	jsr _random
+	and #$64      ;;; en dur : on limite à 100 = 64 hex
+	clc
+	adc _character_ri
+	sta _character_ri
+	lda _character_ri+1
+	adc #0
+	sta _character_ri+1
+	lda ligne_map
+	cmp #11
+	bne suite_coffre1
+	lda #1
+	sta op1
+suite_coffre1
+	lda ligne_map
+	cmp #25
+	bne suite_coffre2
+	lda #2
+	sta op1
+suite_coffre2
+	lda ligne_map
+	cmp #32
+	bne suite_coffre3
+	lda #4
+	sta op1
+suite_coffre3
+	lda ligne_map
+	cmp #35
+	bne suite_coffre4
+	lda #8
+	sta op1
+suite_coffre4
+	ldx #1; ville2
+	lda _team_combats_coffres,x
+	ora op1
+	sta _team_combats_coffres,x
 	jsr eff_tuile_spe
 sk_ef	
 	lda #$38
@@ -621,6 +814,71 @@ sk_ef
 fin_txt	
 	rts
 .)
+
+gestion_boutiques
+.(
+	; gestion des villes _team_ville contient le numéro de la ville
+	; direction_scroll doit contenir #$86 Y
+	lda direction_scroll
+	cmp #$86
+	bne return
+	sec
+	lda type_boutique
+	sbc #$5a
+	asl				; prépare index
+	tax				; 
+	lda ptr_b_prog,x			; Partie basse adresse premier byte chaine nom 
+	sta _next_prog		
+	inx
+	lda ptr_b_prog,x			; Partie haute premier byte chaine nom 
+	sta _next_prog+1
+	lda #0
+	sta _team_out
+	jsr _jump_to_next_prog
+	rts ; ne sert à rien normalement
+return
+	rts
+.)	
+
+retour_map
+.(
+	; retour à la carte
+	; direction_scroll doit contenir #$86 Y
+	lda direction_scroll
+	cmp #$86
+	bne return
+	lda #<ProgMap
+	sta _next_prog
+	lda #>ProgMap
+	sta _next_prog+1
+	lda #1
+	sta _team_out
+	jsr _jump_to_next_prog
+	rts ; ne sert à rien normalement
+return
+	rts
+.)	
+
+
+
+v_00_prog
+	.asc "MED.COM",0		; Medicus
+v_01_prog
+	.asc "ARM.COM",0 		; Armurerie
+v_02_prog
+	.asc "HER.COM",0 		; Herboriste
+v_03_prog
+	.asc "ANI.COM",0 		; Animalerie
+v_04_prog
+	.asc "TAB.COM",0 		; Taberna
+v_05_prog
+	.asc "BAZ.COM",0 		; Bazar
+
+
+
+ptr_b_prog ;(pointeurs b pour boutiques)
+	.byt <v_00_prog,>v_00_prog,<v_01_prog,>v_01_prog,<v_02_prog,>v_02_prog,<v_03_prog,>v_03_prog,<v_04_prog,>v_04_prog,<v_05_prog,>v_05_prog
+
 
 
 ;********************************************************	

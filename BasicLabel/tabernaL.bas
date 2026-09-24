@@ -55,7 +55,7 @@ ville_7
  PLOT12,18,"L > Leave Taberna"
  IFVIL=1ANDT4INF(4)+TVDO(2)=20THENPLOT12,20,"E > Recruit Elancia":PLOT12,22,"K > Recruit Kaeso"
  IFVIL=1ANDT4INF(4)+TVDO(2)=22THENPLOT12,20,"M > Recruit Maelle":PLOT12,22,"C > Recruit Carpo"
- IFVIL=3THENPLOT12,20,"A > Recruit Astrid":PLOT12,22,"V > Recruit Viggo"
+ IFVIL=2THENPLOT12,20,"A > Recruit Astrid":PLOT12,22,"V > Recruit Viggo"
  FR=FRE("")
 ville_53
  GETP$:P=VAL(P$)
@@ -70,9 +70,10 @@ ville_53
  IFP$="K"ANDVIL=1ANDT4INF(4)+TVDO(2)=20THEN GOSUB  Recruit_Kaeso 
  IFP$="M"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Maelle 
  IFP$="C"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Carpo 
- IFP$="A"ANDVIL=3THEN GOSUB  Recruit_Astrid 
- IFP$="V"ANDVIL=3THEN GOSUB  Recruit_Viggo 
+ IFP$="A"ANDVIL=2THEN GOSUB  Recruit_Astrid 
+ IFP$="V"ANDVIL=2THEN GOSUB  Recruit_Viggo 
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53 
+ GOTO ville_56
 Recruit_Astrid 
  FORP=1TO6
    IF N$(P)="Astrid" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7

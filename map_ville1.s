@@ -18,7 +18,7 @@ _main
 	sta $26A
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
 							; mais pas que...
-	jsr initRandom 
+	jsr initRandom
 	jsr cadre_plan			; dessine un cadre blanc autour du plan de ville
 	jsr bandeau				; dessine image au dessus du plan
 main_loop
@@ -415,7 +415,6 @@ lp3_impl
 	rts
 .)
 
-
 type_boutique .dsb 1
 
 ;************************************************
@@ -615,8 +614,7 @@ suite_legat2
 	lda _team_cles,x
 	ora #8
 	sta _team_cles,x
-	sta laisser_passer	
-	ldx #$00
+	sta laisser_passer
 	lda t_legat_1,x
 	sta adr_ecr_txt+1
 	lda #<t_legat_1+1
@@ -799,7 +797,7 @@ coffre_
 	cmp #$63				; valeur coffre
 	beq suite_coffre
 	rts
-suite_coffre	
+suite_coffre
 	ldx #$00
 	lda t_coffre_1,x
 	sta adr_ecr_txt+1
