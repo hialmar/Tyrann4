@@ -9,6 +9,7 @@ Dices
  TRY=1
  GOSUB IntroCreation
  POKE#26A,PEEK(#26A) AND 254 'Vire le curseur
+ A=DEEK(#276):R=RND(-A)
  DEF FN A(X)=INT(RND(1)*X)+1
 dices_14
  CLS:TT=0
@@ -95,6 +96,7 @@ dices_13
  RI(P)=FNA(150)+200
  NEXT P
  GOSUB Sauvegarde
+ LOAD "MAP.COM"
  END:REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 dices_1
  REM ++  DICES ROLL  ++++++++
@@ -258,7 +260,7 @@ Sauvegarde
  NEXT P
  O1=O1+1:POKEO1,BS'Boussole
  O1=O1+1:POKEO1,FI'Filet
- O1=O1+1:POKEO1,SD'Selle de Dragon: maitre des dragons (1 a 6)
+ O1=O1+1:POKEO1,SD'Bateau
  FOR L=1TO9:FOR C=1TO4:O1=O1+1:CLEF(L,C)=0:POKEO1,CLEF(L,C):NEXT C,L:REM Trousseau de clefs
  FORI=1TO6:O1=O1+1:POKEO1,IG(I):NEXT' tableau des 6 ingr�dients de la potion
  FOR V=1TO9:FORM=1TO5:O1=O1+1:POKEO1,0:NEXT M,V' tableau coffres et combats � 0

@@ -210,10 +210,6 @@ _jump_to_next_prog
 	lda #4
 	sta $24F
 	jsr $ec21               ; back to text mode
-    lda #$4c
-	sta mot_de_passe
-	lda #$b0
-	sta laisser_passer
 	lda #$cc
 	sta numero_lieu
 
