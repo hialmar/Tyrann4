@@ -28,7 +28,7 @@ dices_14
  PRINT @12,5;" > ";CA$(C)
 dices_2
  GETA$:IFA$<>" " THEN  dices_2
- PING:PRINT @13,20;"                "
+ PRINT @13,20;"                "
  IF C<7 THEN GOSUB  dices_3 :PRINT@ C*5,11;DD
  ON C GOTO  dices_4 , dices_5 , dices_6 , dices_7 , dices_8 , dices_9 , dices_10 
 dices_4
@@ -51,7 +51,7 @@ dices_9
  PRINT@30,13;MS(P):GOTO  dices_11 
 dices_10
  HP(P)=6+FNA(4)+INT(ST(P)/10)
- ZAP:WAIT50:CARAC(7)=HP(P):PRINT@35,13;HP(P)
+ WAIT50:CARAC(7)=HP(P):PRINT@35,13;HP(P)
 dices_11
  NEXT C
  PRINT@ 34,11;"=";TT
@@ -61,26 +61,24 @@ dices_12
  IF TRY=3 THEN TRY=1:GOTO dices_13 
  IF A$= "Y" THEN  dices_13 
  IF A$<>"N" THEN  dices_12 
- ZAP:TRY=TRY+1:GOTO dices_14 
+ TRY=TRY+1:GOTO dices_14 
 dices_13
  PRINT@12,20;CHR$(145);"^  CULTURE BONUS  ^ ";CHR$(144)
  FORI=1TO7
- PRINT@ I*5+1,14;BC(CULT(P),I):WAITVT*40:PING
- PRINT@ I*5,15;CARAC(I)+BC(CULT(P),I):WAITVT*40:PING
+ PRINT@ I*5+1,14;BC(CULT(P),I):WAITVT*40
+ PRINT@ I*5,15;CARAC(I)+BC(CULT(P),I):WAITVT*40
  NEXT I
  
  PRINT@12,20;CHR$(148);"^   ROLE  BONUS  ^ ";CHR$(144)
  FORI=1TO7
- PRINT@ I*5+1,16;BR(ROLE(P),I):WAITVT*40:PING
- PRINT@ I*5,17;CARAC(I)+BR(ROLE(P),I):WAITVT*40:PING
+ PRINT@ I*5+1,16;BR(ROLE(P),I):WAITVT*40
+ PRINT@ I*5,17;CARAC(I)+BR(ROLE(P),I):WAITVT*40
  NEXT I
  ET(P)=HP(P)
  RI(P)=FNA(150)+200
 
  REM fill with legio
  FOR P=2TO6
- PRINT "Legio"
- PRINT P
  NOM$(P) = "Legio"
  CULT(P) = 6
  ROLE(P) = 1
@@ -95,7 +93,6 @@ dices_13
  HP(P)=6+FNA(4)+INT(ST(P)/10) + BC(CULT(P),7) + BR(ROLE(P),7)
  ET(P)=HP(P)
  RI(P)=FNA(150)+200
- PRINT RI(P)
  NEXT P
  GOSUB Sauvegarde
  END:REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -140,29 +137,29 @@ Intro_3
   PRINT:S$=" ****** CREATE your Hero # "+STR$(P)+" ***** ":GOSUB  Intro_1 :PRINT
   PRINT:S$="HIS FIRSTNAME (10 letters max)":GOSUB  Intro_1
   INPUT NOM$(P)
-  IF LEN(NOM$(P))< 2 THEN ZAP:GOTO  Intro_3
+  IF LEN(NOM$(P))< 2 THEN GOTO  Intro_3
   IF LEN(NOM$(P))>10 THEN NOM$(P)=LEFT$(NOM$(P),10)
   GOSUB  Intro_4 :SS$=NOM$(P)
 Intro_6
   TEST=0:GOSUB  Intro_5
   PRINT @10,17;"WHICH Culture ? ";
   GET CULT$:CU=VAL(CULT$)
-  IF CU<1 OR CU(P)>7 THEN ZAP:GOTO  Intro_6
+  IF CU<1 OR CU(P)>7 THEN GOTO  Intro_6
   CULT(P)=CU:PRINT CU$(CULT(P))
-  GOSUB  Intro_7 :IF OK$="N" THEN ZAP:GOTO  Intro_6
+  GOSUB  Intro_7 :IF OK$="N" THEN GOTO  Intro_6
   TEST=1:BOOL=0:SS$=SS$+" the "+CULT$(CULT(P))
 Intro_8
   GOSUB  Intro_5
   PRINT @10,16;"WHICH ROLE ? ";
   GET RO$:RO=VAL(RO$)
-  IF RO<1 OR RO>6 THEN ZAP:GOTO Intro_8
+  IF RO<1 OR RO>6 THEN GOTO Intro_8
   IF RO<4 THEN  Intro_9
   IF RO=4 AND(CU=2ORCU=5ORCU=6)THENGOSUB Intro_10 :GOTO Intro_8
   IF RO=5 THEN GOSUB  Intro_10 :GOTO Intro_8
   IF RO=6 AND(CU<>3ANDCU<>6) THEN GOSUB  Intro_10 :GOTO Intro_8
 Intro_9
   ROLE(P)=RO:PRINT RO$(ROLE(P)):GOSUB  Intro_11
-  GOSUB  Intro_7 :IF OK$="N" THEN ZAP:TEXT:GOTO Intro_8
+  GOSUB  Intro_7 :IF OK$="N" THEN TEXT:GOTO Intro_8
   RETURN ' +++++++++++++++  Sous programmes et DATA ++++++++++++++++++++
 Intro_10
   PRINT:PRINT:
@@ -172,11 +169,11 @@ Intro_10
 Intro_12
   S$= "         ARE YOU KIDDING ME ?     ":BOOL=0
 Intro_13
-  GOSUB Intro_14 :ZAP:WAIT200:PING
+  GOSUB Intro_14 :WAIT200:
   RETURN
 Intro_7
   REM OK ?
-  PING:WAIT 100
+  WAIT 100
   PRINT SPC(10);CHR$(148)" < OK ? Y/N > "CHR$(144)
 Intro_15
   OK$=KEY$:IF OK$="" THEN  Intro_15
@@ -270,7 +267,6 @@ Sauvegarde
  O1=O1+1:POKEO1,0'NP = Nombre d'ingredients de la Potion (NI utilise pour Items)
  O1=O1+1:POKEO1,0'NF = Nombre de fuites
  O1=O1+1:POKEO1,0'PM = Potion faite
- PING
  SAVEU "TEAM.BIN",A#A000,EO1
  SAVEU "TEAM2.BIN",A#A000,EO1:REM Copie secours
  RETURN

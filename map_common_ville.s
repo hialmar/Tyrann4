@@ -95,6 +95,123 @@ sortie_victorieuse .dsb 1 ; drapeau sortie victorieuse de la carte = $80 sinon =
 
 	.text
 
+
+_main
+.(
+	jsr SaveZeroPage
+	lda #1
+	sta _team_io_needed
+	jsr _load_t4_characters
+	lda #4					; début de répétition touche après 4*30 = 120 ms
+	sta $24E
+	lda #1					; répétition d'une touche toutes les 30 ms
+	sta $24F
+	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile)
+	jsr impl_car			; Implante jeu de caractères redéfinis
+	lda #10					; cache le curseur et vire le son des touches
+	sta $26A
+	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
+							; mais pas que...
+	jsr initRandom
+	jsr cadre_plan			; dessine un cadre blanc autour du plan de ville
+	jsr bandeau				; dessine image au dessus du plan
+main_loop
+	; sei
+	jsr scrl_fenetre		; Affiche/ scrolle les 105 tuiles dans la fenetre
+	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
+	jsr	aff_text
+	; cli
+
+	ldy depl_perso_est_interdit
+	bne fin_temporisation
+	ldy #$7f
+temporisation_2
+	ldx #$ff
+temporisation_1
+	dex
+	bne temporisation_1
+	dey
+	bne temporisation_2
+fin_temporisation
+	; sei
+	; lda direction_scroll
+	; cmp#$86					; Y pour sortir
+	; beq sortie_main
+	jsr wait_key			; scanne les 4 touches flèchées pour scroll
+	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
+	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
+	jsr chck_mvt_perso_fenetre
+	;	jsr $fb2a				;son clavier contrôle
+	jsr	eff_text
+	; cli
+	jmp main_loop
+sortie_main
+	ldy #$0         ; grab string pointer
+	lda #<ProgMap
+	sta _next_prog
+	iny
+	lda #>ProgMap
+	sta _next_prog+1
+	dey
+	jsr _jump_to_next_prog
+	rts ; jamais utilisé
+.)
+
+
+_next_prog .dsb 2
+
+
+type_boutique .dsb 1
+
+
+_jump_to_next_prog
+.(
+	lda ordo_perso_fen
+	sta _team_x_ville
+	lda absc_perso_fen
+	sta _team_y_ville
+	lda ligne_hg_map
+	sta _team_ligne_hg_ville
+	lda rang_hg_map
+	sta _team_rang_hg_ville
+	lda tuile_perso_aff
+	sta _team_tuile_perso_aff_ville		; code tuile perso affichée
+	lda index_perso
+	sta _team_index_perso_ville		; valeur index perso dans table adresses hires fenêtre
+	lda tuile_sous_pos_perso 
+	sta _team_tuile_sous_pos_perso_ville			; sous position perso au départ
+	lda numero_lieu
+	sta _team_numero_lieu_ville         ; indique lieu <> Gallia (0)
+
+	lda #3					; ré-affiche le curseur et remet le son des touches
+	sta $26A
+	lda #32					; remet la répétition des touches normale
+	sta $24E
+	lda #4
+	sta $24F
+	jsr $ec21               ; back to text mode
+
+	jsr _get
+	lda #1
+	sta _team_io_needed
+	jsr _save_t4_characters
+	; test bascule combat
+	jsr RestoreZeroPage
+	ldy #$0         ; grab string pointer
+	lda _next_prog
+	sta (sp),y
+	iny
+	lda _next_prog+1
+	sta (sp),y
+	dey
+	jsr _SwitchToCommand
+	;jsr _DiscLoad
+	;jmp _main
+	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
+							; pour re-rentrer : CALL #2000
+.)
+
+
 ProgCombat
 	.asc "COMBAT.COM"
 	.byt 0
@@ -450,6 +567,73 @@ initRandom
         sta $FA
         rts
 .)
+
+
+
+gestion_boutiques
+.(
+	; gestion des villes _team_ville contient le numéro de la ville
+	; direction_scroll doit contenir #$86 Y
+	lda direction_scroll
+	cmp #$86
+	bne return
+	sec
+	lda type_boutique
+	sbc #$5a
+	asl				; prépare index
+	tax				; 
+	lda ptr_b_prog,x			; Partie basse adresse premier byte chaine nom 
+	sta _next_prog		
+	inx
+	lda ptr_b_prog,x			; Partie haute premier byte chaine nom 
+	sta _next_prog+1
+	lda #0
+	sta _team_out
+	jsr _jump_to_next_prog
+	rts ; ne sert à rien normalement
+return
+	rts
+.)	
+
+retour_map
+.(
+	; retour à la carte
+	; direction_scroll doit contenir #$86 Y
+	lda direction_scroll
+	cmp #$86
+	bne return
+	lda #<ProgMap
+	sta _next_prog
+	lda #>ProgMap
+	sta _next_prog+1
+	lda #1
+	sta _team_out
+	jsr _jump_to_next_prog
+	rts ; ne sert à rien normalement
+return
+	rts
+.)	
+
+
+
+v_00_prog
+	.asc "MED.COM",0		; Medicus
+v_01_prog
+	.asc "ARM.COM",0 		; Armurerie
+v_02_prog
+	.asc "HER.COM",0 		; Herboriste
+v_03_prog
+	.asc "ANI.COM",0 		; Animalerie
+v_04_prog
+	.asc "TAB.COM",0 		; Taberna
+v_05_prog
+	.asc "BAZ.COM",0 		; Bazar
+
+
+
+ptr_b_prog ;(pointeurs b pour boutiques)
+	.byt <v_00_prog,>v_00_prog,<v_01_prog,>v_01_prog,<v_02_prog,>v_02_prog,<v_03_prog,>v_03_prog,<v_04_prog,>v_04_prog,<v_05_prog,>v_05_prog
+
 
 
 

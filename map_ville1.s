@@ -1,123 +1,8 @@
+#define VILLE 0
+
 #include "map_common_ville.s"
 
 	.text
-
-_main
-.(
-	jsr SaveZeroPage
-	lda #1
-	sta _team_io_needed
-	jsr _load_t4_characters
-	lda #4					; début de répétition touche après 4*30 = 120 ms
-	sta $24E
-	lda #1					; répétition d'une touche toutes les 30 ms
-	sta $24F
-	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile)
-	jsr impl_car			; Implante jeu de caractères redéfinis
-	lda #10					; cache le curseur et vire le son des touches
-	sta $26A
-	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
-							; mais pas que...
-	jsr initRandom
-	jsr cadre_plan			; dessine un cadre blanc autour du plan de ville
-	jsr bandeau				; dessine image au dessus du plan
-main_loop
-	; sei
-	jsr scrl_fenetre		; Affiche/ scrolle les 105 tuiles dans la fenetre
-	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
-	jsr	aff_text
-	; cli
-
-	ldy depl_perso_est_interdit
-	bne fin_temporisation
-	ldy #$7f
-temporisation_2
-	ldx #$ff
-temporisation_1
-	dex
-	bne temporisation_1
-	dey
-	bne temporisation_2
-fin_temporisation
-	; sei
-	; lda direction_scroll
-	; cmp#$86					; Y pour sortir
-	; beq sortie_main
-	jsr wait_key			; scanne les 4 touches flèchées pour scroll
-	jsr chck_around			; regarde valeur tuile sous et autour perso	pour validation (ou non) scroll
-	jsr chck_bords			; regarde si un bord de la carte est à un bord de la fenêtre
-	jsr chck_mvt_perso_fenetre
-	;	jsr $fb2a				;son clavier contrôle
-	jsr	eff_text
-	; cli
-	jmp main_loop
-sortie_main
-	ldy #$0         ; grab string pointer
-	lda #<ProgMap
-	sta _next_prog
-	iny
-	lda #>ProgMap
-	sta _next_prog+1
-	dey
-	jsr _jump_to_next_prog
-	rts ; jamais utilisé
-.)
-
-
-_next_prog .dsb 2
-
-_jump_to_next_prog
-.(
-	lda ordo_perso_fen
-	sta _team_x_ville
-	lda absc_perso_fen
-	sta _team_y_ville
-	lda ligne_hg_map
-	sta _team_ligne_hg_ville
-	lda rang_hg_map
-	sta _team_rang_hg_ville
-	lda tuile_perso_aff
-	sta _team_tuile_perso_aff_ville		; code tuile perso affichée
-	lda index_perso
-	sta _team_index_perso_ville		; valeur index perso dans table adresses hires fenêtre
-	lda tuile_sous_pos_perso 
-	sta _team_tuile_sous_pos_perso_ville			; sous position perso au départ
-	lda numero_lieu
-	sta _team_numero_lieu_ville         ; indique lieu <> Gallia (0)
-
-	lda #3					; ré-affiche le curseur et remet le son des touches
-	sta $26A
-	lda #32					; remet la répétition des touches normale
-	sta $24E
-	lda #4
-	sta $24F
-	jsr $ec21               ; back to text mode
-    lda #$4c
-	sta mot_de_passe
-	lda #$b0
-	sta laisser_passer
-	lda #$cc
-	sta numero_lieu
-
-	jsr _get
-	lda #1
-	sta _team_io_needed
-	jsr _save_t4_characters
-	; test bascule combat
-	jsr RestoreZeroPage
-	ldy #$0         ; grab string pointer
-	lda _next_prog
-	sta (sp),y
-	iny
-	lda _next_prog+1
-	sta (sp),y
-	dey
-	jsr _SwitchToCommand
-	;jsr _DiscLoad
-	;jmp _main
-	; rts						; sortie provisoire, rend la main au BASIC pour charger la FAKE ville et sortie
-							; pour re-rentrer : CALL #2000
-.)
 
 ;-----------------------------------------------------------------------------
 ; -----                initialise divers variables dont:                   ---
@@ -133,7 +18,7 @@ init_div_var
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
 	sta numero_lieu         ; indique lieu <> Gallia (0)
-	ldx #0 ; ville1
+	ldx #VILLE
 	lda _team_cles,x
 	and #1
 	sta on_a_clef_1
@@ -160,7 +45,7 @@ suite_init1
 	lda #0
 	sta _L40,x
 suite_init2
-	ldx #0 ; ville1
+	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #1
 	beq suite_init3
@@ -168,7 +53,7 @@ suite_init2
 	lda #0
 	sta _L11,x
 suite_init3
-	ldx #0 ; ville1
+	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #2
 	beq suite_init4
@@ -176,7 +61,7 @@ suite_init3
 	lda #0
 	sta _L25,x
 suite_init4
-	ldx #0 ; ville1
+	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #4
 	beq suite_init5
@@ -184,7 +69,7 @@ suite_init4
 	lda #0
 	sta _L32,x
 suite_init5
-	ldx #0 ; ville1
+	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #8
 	beq suite_init6
@@ -332,7 +217,7 @@ chck_54		; clef_1
 		bne chck_58
 		lda #TRUE
 		sta on_a_clef_1					; met à 1 drapeau clef 1
-		ldx #0 ; num ville
+		ldx #VILLE
 		lda _team_cles,x
 		ora #1
 		sta _team_cles,x
@@ -351,7 +236,7 @@ chck_57		; patricienne donne mdp
 		bne chck_55
 		lda #TRUE
 		sta mot_de_passe					; met à 1 drapeau mote de passe
-		ldx #0 ; num ville
+		ldx #VILLE
 		lda _team_cles,x
 		ora #4
 		sta _team_cles,x
@@ -362,7 +247,7 @@ chck_55		; clef_2
 		bne chck_53
 		lda #TRUE
 		sta on_a_clef_2			; met à 1 drapeau clef 2
-		ldx #0 ; num ville
+		ldx #VILLE
 		lda _team_cles,x
 		ora #2
 		sta _team_cles,x
@@ -414,8 +299,6 @@ lp3_impl
 	bne lp3_impl
 	rts
 .)
-
-type_boutique .dsb 1
 
 ;************************************************
 ;******* Affiche différents textes   ************
@@ -610,7 +493,7 @@ suite_legat
 	beq suite_legat2
 	rts
 suite_legat2	
-	ldx #0 ; num ville
+	ldx #VILLE
 	lda _team_cles,x
 	ora #8
 	sta _team_cles,x
@@ -853,7 +736,7 @@ suite_coffre3
 	lda #8
 	sta op1
 suite_coffre4
-	ldx #0; ville1
+	ldx #VILLE
 	lda _team_combats_coffres,x
 	ora op1
 	sta _team_combats_coffres,x
@@ -866,70 +749,6 @@ sk_ef
 fin_txt	
 	rts
 .)
-
-gestion_boutiques
-.(
-	; gestion des villes _team_ville contient le numéro de la ville
-	; direction_scroll doit contenir #$86 Y
-	lda direction_scroll
-	cmp #$86
-	bne return
-	sec
-	lda type_boutique
-	sbc #$5a
-	asl				; prépare index
-	tax				; 
-	lda ptr_b_prog,x			; Partie basse adresse premier byte chaine nom 
-	sta _next_prog		
-	inx
-	lda ptr_b_prog,x			; Partie haute premier byte chaine nom 
-	sta _next_prog+1
-	lda #0
-	sta _team_out
-	jsr _jump_to_next_prog
-	rts ; ne sert à rien normalement
-return
-	rts
-.)	
-
-retour_map
-.(
-	; retour à la carte
-	; direction_scroll doit contenir #$86 Y
-	lda direction_scroll
-	cmp #$86
-	bne return
-	lda #<ProgMap
-	sta _next_prog
-	lda #>ProgMap
-	sta _next_prog+1
-	lda #1
-	sta _team_out
-	jsr _jump_to_next_prog
-	rts ; ne sert à rien normalement
-return
-	rts
-.)	
-
-
-
-v_00_prog
-	.asc "MED.COM",0		; Medicus
-v_01_prog
-	.asc "ARM.COM",0 		; Armurerie
-v_02_prog
-	.asc "HER.COM",0 		; Herboriste
-v_03_prog
-	.asc "ANI.COM",0 		; Animalerie
-v_04_prog
-	.asc "TAB.COM",0 		; Taberna
-v_05_prog
-	.asc "BAZ.COM",0 		; Bazar
-
-
-
-ptr_b_prog ;(pointeurs b pour boutiques)
-	.byt <v_00_prog,>v_00_prog,<v_01_prog,>v_01_prog,<v_02_prog,>v_02_prog,<v_03_prog,>v_03_prog,<v_04_prog,>v_04_prog,<v_05_prog,>v_05_prog
 
 
 
