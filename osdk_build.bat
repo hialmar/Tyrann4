@@ -8,8 +8,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 
 :: Goto Camp
 :: Goto MapAsm
-Goto Ville1
-:: Goto Ville2
+:: Goto Ville1
+Goto Ville2
 
 ::
 :: Set the build parameters : Laby

@@ -47,6 +47,12 @@ suite_init1
 	lda #0
 	sta _L43,x
 suite_init2
+	lda mot_de_passe
+	beq suite_init2_2
+	ldx #13
+	lda #0
+	sta _L10,x
+suite_init2_2	
 	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #1
@@ -380,10 +386,6 @@ _mot_de_passe
 	jmp garde_
 suite_mot_passe
 	jsr eff_tuile_spe
-	lda mot_de_passe
-	beq suite_mot_passe2
-	rts
-suite_mot_passe2
 	ldx #$00
 	lda t_m_de_passe_1,x
 	sta adr_ecr_txt+1
@@ -412,10 +414,6 @@ garde_
 	jmp legat_
 suite_garde
 	jsr eff_tuile_spe
-	lda laisser_passer
-	beq suite_garde2
-	rts
-suite_garde2
 	ldx #$00
 	lda t_garde_2,x
 	sta adr_ecr_txt+1
