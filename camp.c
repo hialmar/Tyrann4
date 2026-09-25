@@ -211,7 +211,7 @@ void items(char p)
 {
 	char a,i,j, item,o;
 	char titre[32];
-	printTitle(4,25, A_BGBLUE, "What Item ? (0:None) ?", 24);
+	printTitle(4,25, A_BGBLUE, "What Item ? (0:None) ?  ", 24);
 	while(1) {
 		a = get();
 		if (a<'0' || a>'6')
