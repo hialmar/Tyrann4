@@ -8,6 +8,167 @@
 Dices
  REM DICES TESTS
  CLS:D=10:PAPER0:INK 3
+ PRINT "DO YOU WANT THE NOVEL TEAM (Y/N) ?"
+YesNo
+ GETA$
+ IFA$="N"THEN DicesSuite
+ IFA$="Y"THEN Recruit_Team
+ GOTO YesNo
+Recruit_Team
+Recruit_Kaeso 
+ HIRES:LOAD"KAESO.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ PRINT "PRESS SPACE"
+ P=1
+ NOM$(P)="Kaeso"
+ CULT(P) = 6
+ ROLE(P)= 1
+ CC(P)= 32
+ CT(P)= 26
+ FO(P)= 33
+ AG(P)= 25
+ IN(P)= 21
+ FM(P)= 21
+ PV(P)=16
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=9
+ PT(P)=4
+ CA(P)=3
+ BT(P)=32
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+Recruit_Maelle
+ P=2
+ HIRES:LOAD"MAELLE.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ PRINT "PRESS SPACE"
+ NOM$(P)="Maelle"
+ ROLE(P) = 1
+ CULT(P)= 4
+ CC(P)= 20
+ CT(P)= 29
+ FO(P)= 21
+ AG(P)= 28
+ IN(P)= 30
+ FM(P)= 32
+ PV(P)=15
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=12
+ PT(P)=4
+ CA(P)=3
+ BT(P)=33
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=16
+ SAD(P,2)=19
+Recruit_Elancia 
+ HIRES:LOAD"ELANCIA.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ PRINT "PRESS SPACE"
+ P=5
+ N$(P)="Elancia"
+ MP(P) = 6
+ CP(P)=3
+ CC(P)= 19
+ CT(P)= 32
+ FO(P)= 22
+ AG(P)= 30
+ IN(P)= 29
+ FM(P)= 26
+ PV(P)=15
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=14
+ WL(P)=12
+ PT(P)=4
+ CA(P)=3
+ BT(P)=30
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+Recruit_Carpo 
+ P=3
+ HIRES:LOAD"CARPO.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ PRINT "PRESS SPACE"
+ N$(P)="Carpo"
+ MP(P) = 6
+ CP(P)= 2
+ CC(P)= 35
+ CT(P)= 25
+ FO(P)= 36
+ AG(P)= 26
+ IN(P)= 18
+ FM(P)= 18
+ PV(P)=16
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=10
+ PT(P)=4
+ CA(P)=3
+ BT(P)=31
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24 
+Recruit_Astrid 
+ HIRES:LOAD"ASTRID.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ PRINT "PRESS SPACE"
+ P=6
+ N$(P)="Astrid"
+ MP(P) = 7
+ CP(P)= 5
+ CC(P)= 18
+ CT(P)= 20
+ FO(P)= 20
+ AG(P)= 32
+ IN(P)= 35
+ FM(P)= 35
+ PV(P)=15
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=13
+ WL(P)=15
+ PT(P)=6
+ CA(P)=1
+ BT(P)=36
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+Recruit_Viggo 
+ HIRES:LOAD"VIGGO.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ PRINT "PRESS SPACE"
+ P=4
+ N$(P)="Viggo"
+ MP(P) = 7
+ CP(P)= 1
+ CC(P)= 30
+ CT(P)= 28
+ FO(P)= 32
+ AG(P)= 28
+ IN(P)= 20
+ FM(P)= 20
+ PV(P)=16
+ ET(P)=PV(P)
+ RI(P)=300
+ WR(P)=7
+ WL(P)=10
+ PT(P)=4
+ CA(P)=3
+ BT(P)=31
+ FORI=1TO6:SAD(P,I)=0:NEXTI
+ SAD(P,1)=23
+ SAD(P,2)=24
+ GOSUB Sauvegarde
+ END:REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+DicesSuite 
  INPUT "DICE ROLL SPEED (1=FAST-3=SLOW)";VT
  FOR P=1TO6
  TRY=1
