@@ -5,8 +5,8 @@
  GOSUB  editor_1 
 editor_5
  REM EQUIPE
- L1$=" * TYRANN 3 - TEAM *  "
- L2$="CHARACTER   HOUSE     CAREER   LEV"
+ L1$=" * TYRANN 4 - TEAM *  "
+ L2$="CHARACTER   CULTURE    CAREER   LEV"
  L3$="Money       ML RC ST DX IG MS HP  "
  CLS:PRINT@8,1;CHR$(145)CHR$(128)+L1$+CHR$(144)
  L=3:PRINT@3,L;CHR$(145)CHR$(128)+L2$+CHR$(144)
@@ -22,7 +22,7 @@ editor_5
  PRINT@1,L;CHR$(ENC);I;N$(I);
  PRINT@17,L;M$(MP(I)):PRINT@27,L;C$(CP(I))
  PRINT@37,L;NI(I)
- PRINT@4,L+1;STR$(RI(I));" ca"
+ PRINT@4,L+1;STR$(RI(I));" s."
  S1$=STR$(CC(I))+STR$(CT(I))+STR$(FO(I))+STR$(AG(I))
  S2$=STR$(IN(I))+STR$(FM(I))+STR$(PV(I))
  S$=S1$+S2$
@@ -35,11 +35,12 @@ editor_5
 editor_17
  CLS:L=23:GOSUB  editor_6 'menu edition
  PRINT@6,3;"Fst Name:";N$(P)
- PRINT@6,5;"Lst Name: ";M$(MP(P))
+ PRINT@6,5;"Culture: ";M$(MP(P))
  PRINT@6,7;"Career:";C$(CP(P))
  PRINT@6,9;"Level:";NI(P)
- PRINT@6,11;"Health Pts:";PV(P)
- PRINT@6,13;"Purse:";RI(P);"s."
+ PRINT@6,11;"XP:";XP(P)
+ PRINT@6,13;"Hit Pts:";PV(P)
+ PRINT@6,14;"Purse:";RI(P);"s."
  PRINT@6,15;"Melee Combat   :";CC(P)
  PRINT@6,16;"Ranged Combat  :";CT(P)
  PRINT@6,17;"Strength ......:";FO(P)
@@ -65,7 +66,7 @@ editor_7
  UNTIL (LI<8ANDA$="M")ORA$="Q"OR(LI>7AND(ASC(A$)=8ORASC(A$)=9))
  IFA$="Q"THEN editor_5 
  PRINT@4,LI;"=>":IFLI<4THENPRINT@X,LI;MO$ELSEPRINT@X,LI;FL$
- IFLI<14 THEN ON L GOSUB  editor_10 , editor_11 , editor_12 , editor_13 , editor_14 , editor_15 
+ IFLI<15 THEN ON L GOSUB  editor_10 , editor_11 , editor_12 , editor_13 , editor_XP, editor_14 , editor_15 
  IFLI>14 THEN GOSUB  editor_16 
  IFL<4THEN editor_17 ELSE editor_18 
 editor_0
@@ -78,7 +79,7 @@ editor_2
  RETURN
 editor_3
  GETA$:IF A$="Q" OR A$="q" THEN END
- P=VAL(A$):IFP>6THENPING:GOTO  editor_3 
+ P=VAL(A$):IFP>6THENGOTO  editor_3 
  RETURN
 editor_19
  S$="< SPACE > ":GOSUB editor_2 
@@ -88,17 +89,17 @@ editor_8
  REM descend ou monte
  IFUP=1THEN  editor_20 
  L=L+1
- IFLI<14THENLI=LI+2ELSELI=LI+1
- IFL=13THENLI=3:L=1
+ IFLI<13THENLI=LI+2ELSELI=LI+1
+ IFL=14THENLI=3:L=1
  GOTO editor_21 
 editor_20
  L=L-1
- IF LI>15THENLI=LI-1ELSELI=LI-2
- IF L=0THENLI=20:L=12
+ IF LI>13THENLI=LI-1ELSELI=LI-2
+ IF L=0THENLI=20:L=13
 editor_21
  RETURN
 editor_10
- PRINT@22,4;"=>";:INPUTN$(P):PING
+ PRINT@11,4;"=>";:INPUTN$(P)
  IFLEN(N$(P))<2THENZAP:GOTO  editor_10 
  IFLEN(N$(P))>10THENN$(P)=LEFT$(N$(P),10)
  NN$=N$(P):N$(P)=LEFT$(NN$,1)
@@ -116,8 +117,8 @@ editor_11
  PRINT@25,4+I;I;M$(I):NEXT
 editor_22
  GETM$:M=VAL(M$)
- IFM<1ORM>9THENZAP:GOTO editor_22 
- MP(P)=M:PING
+ IFM<1ORM>9THENGOTO editor_22 
+ MP(P)=M
  RETURN
 editor_12
  REM CARRIERE
@@ -125,28 +126,33 @@ editor_12
  PRINT@25,6+I;I;C$(I):NEXT
 editor_23
  GETM$:C=VAL(M$)
- IFC<1ORC>6THENZAP:GOTO editor_23 
- CP(P)=C:PING
+ IFC<1ORC>6THENGOTO editor_23 
+ CP(P)=C
  RETURN
 editor_13
  REM LEVEL
  CPT=NI(P):MAX=8:MIN=1:BO=1:GOSUB  editor_24 
  NI(P)=CPT
- PRINT@13,9;NI(P)
+ PRINT@12,9;NI(P)
+ RETURN
+editor_XP
+ REM XP
+ CPT=XP(P):MAX=10000:MIN=1:BO=1000:GOSUB  editor_24 
+ XP(P)=CPT
+ PRINT@9,11;XP(P)
  RETURN
 editor_14
  REM HP
  CPT=PV(P):MAX=99:MIN=1:BO=1:GOSUB  editor_24 
  PV(P)=CPT
- PRINT@20,11;PV(P)
+ PRINT@14,13;PV(P)
  ET(P)=CPT
  RETURN
 editor_15
  REM MONEY
- CPT=RI(P):MAX=90000:MIN=1000:BO=1000:GOSUB  editor_24 
+ CPT=RI(P):MAX=60000:MIN=0:BO=1000:GOSUB  editor_24 
  RI(P)=CPT
- PRINT@14,13;RI(P)"c a "
- PING
+ PRINT@12,14;RI(P)"s. "
  RETURN
 editor_16
  REM CARACS
@@ -180,7 +186,7 @@ editor_37
  FM(P)=CPT
 editor_38
  PRINT@22,LI;CPT
- PING
+ 
  RETURN
 editor_24
  REM incrementeur
@@ -220,7 +226,7 @@ editor_41
  O1=#A000
  O1=O1+1:VER=PEEK(O1)
  REM PRINT"Version " VIL
- O1=O1+1:X=PEEK(O1)
+ O1=O1+1:XX=PEEK(O1)
  O1=O1+1:Y=PEEK(O1)
  O1=O1+1:S=PEEK(O1)
  O1=O1+1:CA=PEEK(O1)
@@ -260,16 +266,17 @@ editor_41
  O1=O1+1:NP=PEEK(O1)
  O1=O1+1:NF=PEEK(O1)
  O1=O1+1:PM=PEEK(O1)
- IF VER>1 THEN O1=O1+1:OUT=PEEK(O1):GOSUB editor_43 
- ELSE GOSUB editor_43
+ IF VER>1 THEN O1=O1+1:OUT=PEEK(O1)
+ GOSUB editor_43
  GOSUB editor_43 
  RETURN
 editor_40
  TEXT:CLS
  PRINT@8,2;CHR$(145);CHR$(135);"+ TEAM PREP + ";CHR$(144)
  O1=#A000::GOSUB editor_44 
+ POKEO1,0
  O1=O1+1:POKEO1,2
- O1=O1+1:POKEO1,X
+ O1=O1+1:POKEO1,XX
  O1=O1+1:POKEO1,Y
  O1=O1+1:POKEO1,S
  O1=O1+1:POKEO1,CA
@@ -311,7 +318,7 @@ editor_40
  O1=O1+1:POKEO1,NF
  O1=O1+1:POKEO1,PM
  O1=O1+1:POKEO1,OUT:GOSUB editor_43 
- PING:SAVEU "TEAM.BIN",A#A000,EO1:REM FR = FRE("")
+ :SAVEU "TEAM.BIN",A#A000,EO1:REM FR = FRE("")
  REM SAVEU "TEAM2.BIN",A#A000,EO1
  RETURN
 editor_42
@@ -323,5 +330,6 @@ editor_44
 editor_43
  CU=CU+2:PRINT@CU,9;S$:REM FR = FRE("")
  RETURN
- DATA Knight,Mercenary,Ranger,Sorcerer,Maestre,Septon
- DATA None,MARTELL,BARATHEON,TYRELL,GREYJOY,ARRYN,LANNISTER,TULLY,STARK
+ DATA Legionary, Gladiator, Scout, Druid, Priest, Vestal
+ DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking, Iberian, Thrace
+ 

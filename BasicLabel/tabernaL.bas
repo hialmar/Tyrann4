@@ -79,6 +79,7 @@ Recruit_Astrid
    IF N$(P)="Astrid" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
  NEXT P
  HIRES:LOAD"ASTRID.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
 Recruit_Astrid2
  GETA$:IF A$<>" " THEN Recruit_Astrid2 
@@ -96,7 +97,7 @@ Recruit_Astrid5
  GETP$:P=VAL(P$)
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
  N$(P)="Astrid"
- CULT(P) = 7
+ MP(P) = 7
  CP(P)= 5
  CC(P)= 18
  CT(P)= 20
@@ -122,6 +123,7 @@ Recruit_Viggo
    IF N$(P)="Viggo" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
  NEXT P
  HIRES:LOAD"VIGGO.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
 Recruit_Viggo2
  GETA$:IF A$<>" " THEN Recruit_Viggo2 
@@ -139,7 +141,7 @@ Recruit_Viggo5
  GETP$:P=VAL(P$)
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
  N$(P)="Viggo"
- CULT(P) = 7
+ MP(P) = 7
  CP(P)= 1
  CC(P)= 30
  CT(P)= 28
@@ -165,6 +167,7 @@ Recruit_Elancia
    IF N$(P)="Elancia" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
  NEXT P
  HIRES:LOAD"ELANCIA.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
 Recruit_Elancia2
  GETA$:IF A$<>" " THEN Recruit_Elancia2 
@@ -182,7 +185,7 @@ Recruit_Elancia5
  GETP$:P=VAL(P$)
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
  N$(P)="Elancia"
- CULT(P) = 6
+ MP(P) = 6
  CP(P)=3
  CC(P)= 19
  CT(P)= 32
@@ -204,9 +207,10 @@ Recruit_Elancia5
  RETURN
 Recruit_Carpo 
  FORP=1TO6
-   IF N$(P)="Carpophorus" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
+   IF N$(P)="Carpo" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
  NEXT P
  HIRES:LOAD"CARPO.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
 Recruit_Carpo2
  GETA$:IF A$<>" " THEN Recruit_Carpo2 
@@ -223,8 +227,8 @@ Recruit_Carpo5
  PLOT5,26,"REPLACE WHOM ?"
  GETP$:P=VAL(P$)
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
- N$(P)="Carpophorus"
- CULT(P) = 6
+ N$(P)="Carpo"
+ MP(P) = 6
  CP(P)= 2
  CC(P)= 35
  CT(P)= 25
@@ -249,6 +253,7 @@ Recruit_Kaeso
    IF N$(P)="Kaeso" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
  NEXT P
  HIRES:LOAD"KAESO.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
 Recruit_Kaeso2
  GETA$:IF A$<>" " THEN Recruit_Kaeso2 
@@ -266,7 +271,7 @@ Recruit_Kaeso5
  GETP$:P=VAL(P$)
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
  N$(P)="Kaeso"
- CULT(P) = 6
+ MP(P) = 6
  CP(P)= 1
  CC(P)= 32
  CT(P)= 26
@@ -291,6 +296,7 @@ Recruit_Maelle
    IF N$(P)="Maelle" THEN ZAP:PRINT"Already Recruited":WAIT500:GOTO ville_7
  NEXT P
  HIRES:LOAD"MAELLE.HRS"
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
 Recruit_Maelle2
  GETA$:IF A$<>" " THEN Recruit_Maelle2 
@@ -308,7 +314,7 @@ Recruit_Maelle5
  GETP$:P=VAL(P$)
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53
  N$(P)="Maelle"
- CULT(P) = 1
+ MP(P) = 1
  CP(P)= 4
  CC(P)= 20
  CT(P)= 29

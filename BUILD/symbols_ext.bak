@@ -24,561 +24,580 @@
 007a reg7 C:/Tyrann4/zp_crt.inc:32
 007c zp_compiler_save_end C:/OSDK_2_0/lib/header.s:13
 0600 osdk_start C:/OSDK_2_0/lib/header.s:18
-3400 osdk_stack C:/OSDK_2_0/lib/tail.s:17
+3c00 osdk_stack C:/OSDK_2_0/lib/tail.s:17
 0611 exitldx C:/OSDK_2_0/lib/header.s:91
-0615 _main C:/Tyrann4/map_common_ville.s:99
+0617 _main C:/Tyrann4/map_asm.s:99
 0611 _exit C:/OSDK_2_0/lib/header.s:90
-00a0 tuile_en_cours_coin_hg C:/Tyrann4/map_common_ville.s:22
-00a1 tuile_en_cours_coin_hd C:/Tyrann4/map_common_ville.s:24
-00a2 tuile_en_cours_coin_bg C:/Tyrann4/map_common_ville.s:26
-00a3 tuile_en_cours_coin_bd C:/Tyrann4/map_common_ville.s:28
-00a4 tuile_perso_aff C:/Tyrann4/map_common_ville.s:30
-00a5 ligne_hg_map C:/Tyrann4/map_common_ville.s:33
-00a6 rang_hg_map C:/Tyrann4/map_common_ville.s:35
-00a7 ligne_map C:/Tyrann4/map_common_ville.s:38
-00a8 rang_map C:/Tyrann4/map_common_ville.s:40
-00a9 rang_fenetre C:/Tyrann4/map_common_ville.s:42
-00aa tuile_courante C:/Tyrann4/map_common_ville.s:44
-00ab direction_scroll_prec C:/Tyrann4/map_common_ville.s:46
-00ac direction_scroll C:/Tyrann4/map_common_ville.s:48
-00ad a_un_bateau C:/Tyrann4/map_common_ville.s:50
-00ae tuile_sous_pos_perso C:/Tyrann4/map_common_ville.s:52
-00af ordo_perso_fen C:/Tyrann4/map_common_ville.s:54
-00b0 absc_perso_fen C:/Tyrann4/map_common_ville.s:56
-00b1 peut_bouger_horiz C:/Tyrann4/map_common_ville.s:58
-00b2 index_perso C:/Tyrann4/map_common_ville.s:60
-00b3 peut_bouger_vert C:/Tyrann4/map_common_ville.s:62
-00b4 est_en_mer C:/Tyrann4/map_common_ville.s:64
-00b5 est_affiche_texte C:/Tyrann4/map_common_ville.s:66
-00b6 scroll_est_interdit C:/Tyrann4/map_common_ville.s:68
-00b7 depl_perso_est_interdit C:/Tyrann4/map_common_ville.s:70
-00b8 on_a_clef_1 C:/Tyrann4/map_common_ville.s:72
-00b9 on_a_clef_2 C:/Tyrann4/map_common_ville.s:74
-00ba mot_de_passe C:/Tyrann4/map_common_ville.s:76
-00bb laisser_passer C:/Tyrann4/map_common_ville.s:78
-00bc numero_lieu C:/Tyrann4/map_common_ville.s:80
-00bd nb_coffres_non_ouverts C:/Tyrann4/map_common_ville.s:82
-00be mot_de_passe_londinium C:/Tyrann4/map_common_ville.s:84
-00bf poudre_de_taureau C:/Tyrann4/map_common_ville.s:86
-00c0 mot_de_passe_phare C:/Tyrann4/map_common_ville.s:88
-00c1 sortie_victorieuse C:/Tyrann4/map_common_ville.s:90
-0efc SaveZeroPage C:/Tyrann4/map_common.s:5
-2cf2 _team_io_needed C:/Tyrann4/t4_team.s:99
-2db1 _load_t4_characters C:/Tyrann4/t4_team.s:170
-07cc hires_et_atributs C:/Tyrann4/map_common_ville.s:400
-1119 impl_car C:/Tyrann4/map_ville1.s:277
-0c3b init_div_var C:/Tyrann4/map_ville1.s:12
-092d initRandom C:/Tyrann4/map_common_ville.s:558
-09bb cadre_plan C:/Tyrann4/map_common_ville.s:643
-0a33 bandeau C:/Tyrann4/map_common_ville.s:723
-0641 main_loop C:/Tyrann4/map_common_ville.s:118
-0f90 scrl_fenetre C:/Tyrann4/map_common.s:121
-0777 aff_hero C:/Tyrann4/map_common_ville.s:335
-1141 aff_text C:/Tyrann4/map_ville1.s:306
-0658 fin_temporisation C:/Tyrann4/map_common_ville.s:135
-0650 temporisation_2 C:/Tyrann4/map_common_ville.s:128
-0652 temporisation_1 C:/Tyrann4/map_common_ville.s:130
-0755 wait_key C:/Tyrann4/map_common_ville.s:303
-0d10 chck_around C:/Tyrann4/map_ville1.s:130
-06f3 chck_bords C:/Tyrann4/map_common_ville.s:231
-0f14 chck_mvt_perso_fenetre C:/Tyrann4/map_common.s:31
-1103 eff_text C:/Tyrann4/map_common.s:454
-066a sortie_main C:/Tyrann4/map_common_ville.s:148
-06eb ProgMap C:/Tyrann4/map_common_ville.s:223
-067c _next_prog C:/Tyrann4/map_common_ville.s:161
-067f _jump_to_next_prog C:/Tyrann4/map_common_ville.s:167
-067e type_boutique C:/Tyrann4/map_common_ville.s:164
-2d80 _team_x_ville C:/Tyrann4/t4_team.s:120
-2d81 _team_y_ville C:/Tyrann4/t4_team.s:121
-2da6 _team_ligne_hg_ville C:/Tyrann4/t4_team.s:131
-2da7 _team_rang_hg_ville C:/Tyrann4/t4_team.s:132
-2d82 _team_tuile_perso_aff_ville C:/Tyrann4/t4_team.s:122
-2d83 _team_index_perso_ville C:/Tyrann4/t4_team.s:123
-2dae _team_tuile_sous_pos_perso_ville C:/Tyrann4/t4_team.s:139
-2daf _team_numero_lieu_ville C:/Tyrann4/t4_team.s:140
-331d _get C:/OSDK_2_0/lib/grsimple.s:30
-2fba _save_t4_characters C:/Tyrann4/t4_team.s:586
-0f08 RestoreZeroPage C:/Tyrann4/map_common.s:16
-32ac _SwitchToCommand C:/Tyrann4/sedoric_io.s:109
-06d8 ProgCombat C:/Tyrann4/map_common_ville.s:215
-06e3 ProgArmory C:/Tyrann4/map_common_ville.s:219
-0754 sort_direct C:/Tyrann4/map_common_ville.s:296
-0711 autre_touche_1 C:/Tyrann4/map_common_ville.s:253
-0750 end_chck_bords_nsc C:/Tyrann4/map_common_ville.s:289
-0747 end_chck_bords C:/Tyrann4/map_common_ville.s:283
-0723 autre_touche_2 C:/Tyrann4/map_common_ville.s:263
-0737 autre_touche_3 C:/Tyrann4/map_common_ville.s:274
-0762 next_key_1 C:/Tyrann4/map_common_ville.s:311
-0774 end_key C:/Tyrann4/map_common_ville.s:325
-0768 next_key_2 C:/Tyrann4/map_common_ville.s:315
-076e next_key_3 C:/Tyrann4/map_common_ville.s:319
-07a6 fin_aff_perso C:/Tyrann4/map_common_ville.s:362
-0785 chck_direction C:/Tyrann4/map_common_ville.s:344
-0792 anim_perso C:/Tyrann4/map_common_ville.s:351
-07a7 choix_perso C:/Tyrann4/map_common_ville.s:369
-0798 skip_anim C:/Tyrann4/map_common_ville.s:355
-1048 maj_adr_scr_next_tuile C:/Tyrann4/map_common.s:282
-100b cherche_et_aff_tuile C:/Tyrann4/map_common.s:218
-07bb vers_haut C:/Tyrann4/map_common_ville.s:381
-07bf vers_bas C:/Tyrann4/map_common_ville.s:384
-07c3 vers_droite C:/Tyrann4/map_common_ville.s:387
-07c7 vers_gauche C:/Tyrann4/map_common_ville.s:390
-07c9 fin_ch_perso C:/Tyrann4/map_common_ville.s:392
-08f3 eff_tuile_spe C:/Tyrann4/map_common_ville.s:518
-1af5 ptr_Lignes C:/Tyrann4/map_ville1.s:961
-0911 adr_lign_eff C:/Tyrann4/map_common_ville.s:537
-0917 do_you_enter C:/Tyrann4/map_common_ville.s:544
-1fb8 t_do_you_1 C:/Tyrann4/map_ville1.s:1285
-10d4 adr_ecr_txt C:/Tyrann4/map_common.s:409
-10cf write_phrase C:/Tyrann4/map_common.s:405
-0940 gestion_boutiques C:/Tyrann4/map_common_ville.s:573
-0964 return C:/Tyrann4/map_common_ville.s:594
-09af ptr_b_prog C:/Tyrann4/map_common_ville.s:634
-2cf0 _team_out C:/Tyrann4/t4_team.s:91
-0965 retour_map C:/Tyrann4/map_common_ville.s:598
-097e return C:/Tyrann4/map_common_ville.s:613
-097f v_00_prog C:/Tyrann4/map_common_ville.s:619
-0987 v_01_prog C:/Tyrann4/map_common_ville.s:621
-098f v_02_prog C:/Tyrann4/map_common_ville.s:623
-0997 v_03_prog C:/Tyrann4/map_common_ville.s:625
-099f v_04_prog C:/Tyrann4/map_common_ville.s:627
-09a7 v_05_prog C:/Tyrann4/map_common_ville.s:629
-09f6 lp_30h C:/Tyrann4/map_common_ville.s:674
-09f2 draw_bord_h C:/Tyrann4/map_common_ville.s:670
-0a16 lp_60_v C:/Tyrann4/map_common_ville.s:698
-0a14 draw_bord_v C:/Tyrann4/map_common_ville.s:696
-09f4 lp_06v C:/Tyrann4/map_common_ville.s:672
-0a03 maj_adr_h_dcm C:/Tyrann4/map_common_ville.s:683
-0a12 end_maj_h C:/Tyrann4/map_common_ville.s:691
-0a21 out_lp_60 C:/Tyrann4/map_common_ville.s:704
-0a22 maj_adr_v_dcm C:/Tyrann4/map_common_ville.s:707
-0a31 end_maj_v C:/Tyrann4/map_common_ville.s:715
-0a4f ini_adr_dta_bd C:/Tyrann4/map_common_ville.s:741
-0a38 ad_dta_bandeau C:/Tyrann4/map_common_ville.s:727
-0a4b end_af_bd C:/Tyrann4/map_common_ville.s:737
-0a3f ad_ec_bd C:/Tyrann4/map_common_ville.s:731
-0a64 maj_adr_bd C:/Tyrann4/map_common_ville.s:752
-1566 prt_nom_ville C:/Tyrann4/map_ville1.s:820
-202e dta_bandeau C:/Tyrann4/map_ville1.s:1321
-0a6b tab_adr_hires C:/Tyrann4/map_common_ville.s:761
-0b3d sous_tuile C:/Tyrann4/map_common_ville.s:774
-2d60 _team_cles C:/Tyrann4/t4_team.s:118
-0c72 suite_init1 C:/Tyrann4/map_ville1.s:41
-1a41 _L39 C:/Tyrann4/map_ville1.s:948
-0c7d suite_init2 C:/Tyrann4/map_ville1.s:47
-1a5f _L40 C:/Tyrann4/map_ville1.s:950
-2d84 _team_combats_coffres C:/Tyrann4/t4_team.s:127
-0c8d suite_init3 C:/Tyrann4/map_ville1.s:55
-16f9 _L11 C:/Tyrann4/map_ville1.s:892
-0c9d suite_init4 C:/Tyrann4/map_ville1.s:63
-189d _L25 C:/Tyrann4/map_ville1.s:920
-0cad suite_init5 C:/Tyrann4/map_ville1.s:71
-196f _L32 C:/Tyrann4/map_ville1.s:934
-0cbd suite_init6 C:/Tyrann4/map_ville1.s:79
-19c9 _L35 C:/Tyrann4/map_ville1.s:940
-2ce3 _team_boat C:/Tyrann4/t4_team.s:65
-0ce8 load_from_team C:/Tyrann4/map_ville1.s:101
-0d84 sortie_scroll_direct C:/Tyrann4/map_ville1.s:201
-0d3a sens_2 C:/Tyrann4/map_ville1.s:159
-0d31 suite_chck_around_1 C:/Tyrann4/map_ville1.s:154
-0df6 no_scroll C:/Tyrann4/map_ville1.s:263
-0fe9 rech_tab_map C:/Tyrann4/map_common.s:189
-0d7e around_sortie C:/Tyrann4/map_ville1.s:197
-0d85 tuile_speciale C:/Tyrann4/map_ville1.s:204
-0d52 sens_3 C:/Tyrann4/map_ville1.s:172
-0d47 suite_chck_around_2 C:/Tyrann4/map_ville1.s:166
-0d66 sens_4 C:/Tyrann4/map_ville1.s:184
-0d5d suite_sens_3 C:/Tyrann4/map_ville1.s:179
-0d73 cont_b4 C:/Tyrann4/map_ville1.s:191
-0d96 chck_54 C:/Tyrann4/map_ville1.s:214
-14ff why_no_scoll C:/Tyrann4/map_ville1.s:758
-0dac chck_58 C:/Tyrann4/map_ville1.s:225
-0dbb chck_57 C:/Tyrann4/map_ville1.s:233
-0dd1 chck_55 C:/Tyrann4/map_ville1.s:244
-0de7 chck_53 C:/Tyrann4/map_ville1.s:255
-0dfd ZeroPageCopy C:/Tyrann4/map_common.s:2
-0efe loop C:/Tyrann4/map_common.s:8
-0f0a loop C:/Tyrann4/map_common.s:19
-0f8f sortie_perso C:/Tyrann4/map_common.s:108
-0f2c deplc_gauche C:/Tyrann4/map_common.s:49
-0f3d deplac_droite C:/Tyrann4/map_common.s:58
-0f8b no_depl C:/Tyrann4/map_common.s:105
-0f75 out_depl_perso C:/Tyrann4/map_common.s:89
-0f4e deplac_bas C:/Tyrann4/map_common.s:67
-0f64 deplac_haut C:/Tyrann4/map_common.s:79
-0fe8 sortie_fenetre C:/Tyrann4/map_common.s:176
-0fa8 lp_L7 C:/Tyrann4/map_common.s:135
-0faa lp_C15 C:/Tyrann4/map_common.s:137
-0fc6 autre_ligne C:/Tyrann4/map_common.s:153
-1001 adr_ligne C:/Tyrann4/map_common.s:205
-1016 find_compsants C:/Tyrann4/map_common.s:237
-1031 aff__tuile C:/Tyrann4/map_common.s:259
-1ce3 ptr_t C:/Tyrann4/map_ville1.s:1191
-1028 adr_compo C:/Tyrann4/map_common.s:248
-1042 chck_68 C:/Tyrann4/map_common.s:271
-1037 aff_t C:/Tyrann4/map_common.s:264
-106c aff_demi_t C:/Tyrann4/map_common.s:314
-1041 pas_daff C:/Tyrann4/map_common.s:269
-1080 adr_screen_1 C:/Tyrann4/map_common.s:336
-1086 adr_screen_2 C:/Tyrann4/map_common.s:340
-1068 skip_inc_ph C:/Tyrann4/map_common.s:306
-10a7 rens_adr_car C:/Tyrann4/map_common.s:375
-1071 lp_2_sextets C:/Tyrann4/map_common.s:318
-107d aff_2_sextets C:/Tyrann4/map_common.s:332
-108a maj_scr_hires C:/Tyrann4/map_common.s:348
-107d adr_car_1 C:/Tyrann4/map_common.s:334
-1083 adr_car_2 C:/Tyrann4/map_common.s:338
-1098 skip_ret_1 C:/Tyrann4/map_common.s:356
-10a6 end_maj_adr_ecr C:/Tyrann4/map_common.s:363
-10da end_phrase C:/Tyrann4/map_common.s:413
-10df hit_key C:/Tyrann4/map_common.s:422
-10e6 ld_208 C:/Tyrann4/map_common.s:427
-10f3 release_ C:/Tyrann4/map_common.s:434
-10f4 hit_release_key C:/Tyrann4/map_common.s:440
-10fb ld_208 C:/Tyrann4/map_common.s:445
-1116 out_eff_text C:/Tyrann4/map_common.s:466
-110d lp_efface C:/Tyrann4/map_common.s:461
-111b lp1_impl C:/Tyrann4/map_ville1.s:280
-28dc dta_car_redef_p1 C:/Tyrann4/map_ville1.s:1396
-1128 lp2_impl C:/Tyrann4/map_ville1.s:287
-29d8 dta_car_redef_p2 C:/Tyrann4/map_ville1.s:1734
-1135 lp3_impl C:/Tyrann4/map_ville1.s:294
-2ad4 dta_car_redef_p3 C:/Tyrann4/map_ville1.s:2073
-114e suite_portail C:/Tyrann4/map_ville1.s:315
-117e key_1 C:/Tyrann4/map_ville1.s:336
-1dad t_portail_1 C:/Tyrann4/map_ville1.s:1218
-1dc7 t_portail_2 C:/Tyrann4/map_ville1.s:1221
-118b suite_clef C:/Tyrann4/map_ville1.s:343
-11d9 voleur_ C:/Tyrann4/map_ville1.s:376
-1df6 t_key_1 C:/Tyrann4/map_ville1.s:1228
-1e0b t_key_2 C:/Tyrann4/map_ville1.s:1231
-1e23 t_key_3 C:/Tyrann4/map_ville1.s:1234
-11e2 suite_voleur C:/Tyrann4/map_ville1.s:381
-1223 _mot_de_passe C:/Tyrann4/map_ville1.s:410
-1e3c t_voleur_1 C:/Tyrann4/map_ville1.s:1238
-1e56 t_voleur_2 C:/Tyrann4/map_ville1.s:1241
-2c60 _character_ri C:/Tyrann4/t4_team.s:11
-122c suite_mot_passe C:/Tyrann4/map_ville1.s:415
-1265 garde_ C:/Tyrann4/map_ville1.s:442
-1234 suite_mot_passe2 C:/Tyrann4/map_ville1.s:420
-1e6f t_m_de_passe_1 C:/Tyrann4/map_ville1.s:1245
-1e8e t_m_de_passe_2 C:/Tyrann4/map_ville1.s:1248
-126e suite_garde C:/Tyrann4/map_ville1.s:447
-12c2 legat_ C:/Tyrann4/map_ville1.s:485
-1276 suite_garde2 C:/Tyrann4/map_ville1.s:452
-1eec t_garde_3 C:/Tyrann4/map_ville1.s:1258
-1f05 t_garde_4 C:/Tyrann4/map_ville1.s:1261
-1f16 t_garde_5 C:/Tyrann4/map_ville1.s:1264
-12cb suite_legat C:/Tyrann4/map_ville1.s:490
-133a entrance_ C:/Tyrann4/map_ville1.s:540
-12d3 suite_legat2 C:/Tyrann4/map_ville1.s:495
-1f2e t_legat_1 C:/Tyrann4/map_ville1.s:1268
-1f52 t_legat_2 C:/Tyrann4/map_ville1.s:1271
-1f70 t_legat_3 C:/Tyrann4/map_ville1.s:1274
-1374 medicus_ C:/Tyrann4/map_ville1.s:566
-1f86 t_entrance_1 C:/Tyrann4/map_ville1.s:1278
-1fa1 t_entrance_2 C:/Tyrann4/map_ville1.s:1281
-139f armurerie_ C:/Tyrann4/map_ville1.s:585
-1fc7 t_medicus_1 C:/Tyrann4/map_ville1.s:1289
-13ca herboriste_ C:/Tyrann4/map_ville1.s:604
-1fd0 t_armurerie_1 C:/Tyrann4/map_ville1.s:1293
-13f5 animalerie_ C:/Tyrann4/map_ville1.s:623
-1fdf t_herboriste_1 C:/Tyrann4/map_ville1.s:1297
-1420 taberna_ C:/Tyrann4/map_ville1.s:642
-1fea t_animalerie_1 C:/Tyrann4/map_ville1.s:1301
-144a bazar_ C:/Tyrann4/map_ville1.s:660
-1ffa t_taberna_1 C:/Tyrann4/map_ville1.s:1305
-1474 coffre_ C:/Tyrann4/map_ville1.s:678
-2003 t_bazar_1 C:/Tyrann4/map_ville1.s:1309
-147b suite_coffre C:/Tyrann4/map_ville1.s:683
-200a t_coffre_1 C:/Tyrann4/map_ville1.s:1313
-201d t_coffre_2 C:/Tyrann4/map_ville1.s:1316
-14f7 sk_ef C:/Tyrann4/map_ville1.s:744
-32d1 _random C:/OSDK_2_0/lib/rand.s:2
-14cc suite_coffre1 C:/Tyrann4/map_ville1.s:720
-14d6 suite_coffre2 C:/Tyrann4/map_ville1.s:726
-14e0 suite_coffre3 C:/Tyrann4/map_ville1.s:732
-14ea suite_coffre4 C:/Tyrann4/map_ville1.s:738
-14fe fin_txt C:/Tyrann4/map_ville1.s:749
-1509 chck_wns_58 C:/Tyrann4/map_ville1.s:765
-154a no_pasaran C:/Tyrann4/map_ville1.s:801
-1511 chck_wns_53 C:/Tyrann4/map_ville1.s:770
-1519 garde_nsc C:/Tyrann4/map_ville1.s:777
-1519 fin_wns C:/Tyrann4/map_ville1.s:775
-1eb2 t_garde_1 C:/Tyrann4/map_ville1.s:1252
-1ecb t_garde_2 C:/Tyrann4/map_ville1.s:1255
-1dd7 t_portail_3 C:/Tyrann4/map_ville1.s:1224
-157d ini_adr_dta_nv C:/Tyrann4/map_ville1.s:837
-156b prt_lign C:/Tyrann4/map_ville1.s:824
-156d ad_dta_nv C:/Tyrann4/map_ville1.s:826
-1570 ad_ec_nv C:/Tyrann4/map_ville1.s:828
-1592 maj_adr_nv C:/Tyrann4/map_ville1.s:848
-27ff dta_nom_ville C:/Tyrann4/map_ville1.s:1374
-15a0 sk_ret1 C:/Tyrann4/map_ville1.s:855
-15ae sk_ret2 C:/Tyrann4/map_ville1.s:862
-15af _L00 C:/Tyrann4/map_ville1.s:870
-15cd _L01 C:/Tyrann4/map_ville1.s:872
-15eb _L02 C:/Tyrann4/map_ville1.s:874
-1609 _L03 C:/Tyrann4/map_ville1.s:876
-1627 _L04 C:/Tyrann4/map_ville1.s:878
-1645 _L05 C:/Tyrann4/map_ville1.s:880
-1663 _L06 C:/Tyrann4/map_ville1.s:882
-1681 _L07 C:/Tyrann4/map_ville1.s:884
-169f _L08 C:/Tyrann4/map_ville1.s:886
-16bd _L09 C:/Tyrann4/map_ville1.s:888
-16db _L10 C:/Tyrann4/map_ville1.s:890
-1717 _L12 C:/Tyrann4/map_ville1.s:894
-1735 _L13 C:/Tyrann4/map_ville1.s:896
-1753 _L14 C:/Tyrann4/map_ville1.s:898
-1771 _L15 C:/Tyrann4/map_ville1.s:900
-178f _L16 C:/Tyrann4/map_ville1.s:902
-17ad _L17 C:/Tyrann4/map_ville1.s:904
-17cb _L18 C:/Tyrann4/map_ville1.s:906
-17e9 _L19 C:/Tyrann4/map_ville1.s:908
-1807 _L20 C:/Tyrann4/map_ville1.s:910
-1825 _L21 C:/Tyrann4/map_ville1.s:912
-1843 _L22 C:/Tyrann4/map_ville1.s:914
-1861 _L23 C:/Tyrann4/map_ville1.s:916
-187f _L24 C:/Tyrann4/map_ville1.s:918
-18bb _L26 C:/Tyrann4/map_ville1.s:922
-18d9 _L27 C:/Tyrann4/map_ville1.s:924
-18f7 _L28 C:/Tyrann4/map_ville1.s:926
-1915 _L29 C:/Tyrann4/map_ville1.s:928
-1933 _L30 C:/Tyrann4/map_ville1.s:930
-1951 _L31 C:/Tyrann4/map_ville1.s:932
-198d _L33 C:/Tyrann4/map_ville1.s:936
-19ab _L34 C:/Tyrann4/map_ville1.s:938
-19e7 _L36 C:/Tyrann4/map_ville1.s:942
-1a05 _L37 C:/Tyrann4/map_ville1.s:944
-1a23 _L38 C:/Tyrann4/map_ville1.s:946
-1a7d _L41 C:/Tyrann4/map_ville1.s:952
-1a9b _L42 C:/Tyrann4/map_ville1.s:954
-1ab9 _L43 C:/Tyrann4/map_ville1.s:956
-1ad7 _L44 C:/Tyrann4/map_ville1.s:958
-1b4f _t00 C:/Tyrann4/map_ville1.s:976
-1b53 _t01 C:/Tyrann4/map_ville1.s:981
-1b57 _t02 C:/Tyrann4/map_ville1.s:983
-1b5b _t03 C:/Tyrann4/map_ville1.s:985
-1b5f _t04 C:/Tyrann4/map_ville1.s:987
-1b63 _t05 C:/Tyrann4/map_ville1.s:989
-1b67 _t06 C:/Tyrann4/map_ville1.s:991
-1b6b _t07 C:/Tyrann4/map_ville1.s:993
-1b6f _t08 C:/Tyrann4/map_ville1.s:995
-1b73 _t09 C:/Tyrann4/map_ville1.s:997
-1b77 _t0a C:/Tyrann4/map_ville1.s:999
-1b7b _t0b C:/Tyrann4/map_ville1.s:1001
-1b7f _t0c C:/Tyrann4/map_ville1.s:1003
-1b83 _t0d C:/Tyrann4/map_ville1.s:1005
-1b87 _t0e C:/Tyrann4/map_ville1.s:1007
-1b8b _t0f C:/Tyrann4/map_ville1.s:1009
-1b8f _t10 C:/Tyrann4/map_ville1.s:1011
-1b93 _t11 C:/Tyrann4/map_ville1.s:1013
-1b97 _t12 C:/Tyrann4/map_ville1.s:1015
-1b9b _t13 C:/Tyrann4/map_ville1.s:1017
-1b9f _t14 C:/Tyrann4/map_ville1.s:1019
-1ba3 _t15 C:/Tyrann4/map_ville1.s:1021
-1ba7 _t16 C:/Tyrann4/map_ville1.s:1023
-1bab _t17 C:/Tyrann4/map_ville1.s:1025
-1baf _t18 C:/Tyrann4/map_ville1.s:1027
-1bb3 _t19 C:/Tyrann4/map_ville1.s:1029
-1bb7 _t1a C:/Tyrann4/map_ville1.s:1031
-1bbb _t1b C:/Tyrann4/map_ville1.s:1033
-1bbf _t1c C:/Tyrann4/map_ville1.s:1035
-1bc3 _t1d C:/Tyrann4/map_ville1.s:1037
-1bc7 _t1e C:/Tyrann4/map_ville1.s:1039
-1bcb _t1f C:/Tyrann4/map_ville1.s:1041
-1bcf _t20 C:/Tyrann4/map_ville1.s:1043
-1bd3 _t21 C:/Tyrann4/map_ville1.s:1045
-1bd7 _t22 C:/Tyrann4/map_ville1.s:1047
-1bdb _t23 C:/Tyrann4/map_ville1.s:1049
-1bdf _t24 C:/Tyrann4/map_ville1.s:1051
-1be3 _t25 C:/Tyrann4/map_ville1.s:1053
-1be7 _t26 C:/Tyrann4/map_ville1.s:1055
-1beb _t27 C:/Tyrann4/map_ville1.s:1057
-1bef _t28 C:/Tyrann4/map_ville1.s:1059
-1bf3 _t29 C:/Tyrann4/map_ville1.s:1061
-1bf7 _t2a C:/Tyrann4/map_ville1.s:1063
-1bfb _t2b C:/Tyrann4/map_ville1.s:1065
-1bff _t2c C:/Tyrann4/map_ville1.s:1067
-1c03 _t2d C:/Tyrann4/map_ville1.s:1069
-1c07 _t2e C:/Tyrann4/map_ville1.s:1071
-1c0b _t2f C:/Tyrann4/map_ville1.s:1073
-1c0f _t30 C:/Tyrann4/map_ville1.s:1075
-1c13 _t31 C:/Tyrann4/map_ville1.s:1077
-1c17 _t32 C:/Tyrann4/map_ville1.s:1079
-1c1b _t33 C:/Tyrann4/map_ville1.s:1081
-1c1f _t34 C:/Tyrann4/map_ville1.s:1083
-1c23 _t35 C:/Tyrann4/map_ville1.s:1085
-1c27 _t36 C:/Tyrann4/map_ville1.s:1087
-1c2b _t37 C:/Tyrann4/map_ville1.s:1089
-1c2f _t38 C:/Tyrann4/map_ville1.s:1091
-1c33 _t39 C:/Tyrann4/map_ville1.s:1093
-1c37 _t3a C:/Tyrann4/map_ville1.s:1095
-1c3b _t3b C:/Tyrann4/map_ville1.s:1097
-1c3f _t3c C:/Tyrann4/map_ville1.s:1099
-1c43 _t3d C:/Tyrann4/map_ville1.s:1101
-1c47 _t3e C:/Tyrann4/map_ville1.s:1103
-1c4b _t3f C:/Tyrann4/map_ville1.s:1105
-1c4f _t40 C:/Tyrann4/map_ville1.s:1107
-1c53 _t41 C:/Tyrann4/map_ville1.s:1109
-1c57 _t42 C:/Tyrann4/map_ville1.s:1111
-1c5b _t43 C:/Tyrann4/map_ville1.s:1113
-1c5f _t44 C:/Tyrann4/map_ville1.s:1115
-1c63 _t45 C:/Tyrann4/map_ville1.s:1118
-1c67 _t46 C:/Tyrann4/map_ville1.s:1120
-1c6b _t47 C:/Tyrann4/map_ville1.s:1122
-1c6f _t48 C:/Tyrann4/map_ville1.s:1124
-1c73 _t49 C:/Tyrann4/map_ville1.s:1126
-1c77 _t4a C:/Tyrann4/map_ville1.s:1128
-1c7b _t4b C:/Tyrann4/map_ville1.s:1130
-1c7f _t4c C:/Tyrann4/map_ville1.s:1132
-1c83 _t4d C:/Tyrann4/map_ville1.s:1134
-1c87 _t4e C:/Tyrann4/map_ville1.s:1136
-1c8b _t4f C:/Tyrann4/map_ville1.s:1138
-1c8f _t50 C:/Tyrann4/map_ville1.s:1140
-1c93 _t51 C:/Tyrann4/map_ville1.s:1144
-1c97 _t52 C:/Tyrann4/map_ville1.s:1146
-1c9b _t53 C:/Tyrann4/map_ville1.s:1148
-1c9f _t54 C:/Tyrann4/map_ville1.s:1150
-1ca3 _t55 C:/Tyrann4/map_ville1.s:1152
-1ca7 _t56 C:/Tyrann4/map_ville1.s:1154
-1cab _t57 C:/Tyrann4/map_ville1.s:1156
-1caf _t58 C:/Tyrann4/map_ville1.s:1158
-1cb3 _t59 C:/Tyrann4/map_ville1.s:1160
-1cb7 _t5a C:/Tyrann4/map_ville1.s:1162
-1cbb _t5b C:/Tyrann4/map_ville1.s:1164
-1cbf _t5c C:/Tyrann4/map_ville1.s:1166
-1cc3 _t5d C:/Tyrann4/map_ville1.s:1168
-1cc7 _t5e C:/Tyrann4/map_ville1.s:1170
-1ccb _t5f C:/Tyrann4/map_ville1.s:1172
-1ccf _t60 C:/Tyrann4/map_ville1.s:1174
-1cd3 _t61 C:/Tyrann4/map_ville1.s:1176
-1cd7 _t62 C:/Tyrann4/map_ville1.s:1178
-1cdb _t63 C:/Tyrann4/map_ville1.s:1180
-1cdf _t64 C:/Tyrann4/map_ville1.s:1183
-2c00 _character_name C:/Tyrann4/t4_team.s:8
-2c6c _character_cp C:/Tyrann4/t4_team.s:13
-2c72 _character_mp C:/Tyrann4/t4_team.s:15
-2c78 _character_cc C:/Tyrann4/t4_team.s:17
-2c7e _character_ct C:/Tyrann4/t4_team.s:19
-2c84 _character_fo C:/Tyrann4/t4_team.s:21
-2c8a _character_ag C:/Tyrann4/t4_team.s:23
-2c90 _character_in C:/Tyrann4/t4_team.s:25
-2c96 _character_fm C:/Tyrann4/t4_team.s:27
-2c9c _character_pv C:/Tyrann4/t4_team.s:29
-2ca2 _character_et C:/Tyrann4/t4_team.s:31
-2ca8 _character_ok C:/Tyrann4/t4_team.s:33
-2cae _character_ni C:/Tyrann4/t4_team.s:35
-2cb4 _character_xp C:/Tyrann4/t4_team.s:37
-2cc0 _character_wr C:/Tyrann4/t4_team.s:39
-2cc6 _character_wl C:/Tyrann4/t4_team.s:41
-2ccc _character_pt C:/Tyrann4/t4_team.s:43
-2cd2 _character_ca C:/Tyrann4/t4_team.s:45
-2cd8 _character_bt C:/Tyrann4/t4_team.s:47
-2cde _team_s C:/Tyrann4/t4_team.s:51
-2cdf _team_x C:/Tyrann4/t4_team.s:53
-2ce0 _team_y C:/Tyrann4/t4_team.s:55
-2ce1 _team_boussole C:/Tyrann4/t4_team.s:60
-2ce2 _team_filet C:/Tyrann4/t4_team.s:62
-2ce4 _team_ingredients C:/Tyrann4/t4_team.s:71
-2cea _team_ville C:/Tyrann4/t4_team.s:74
-2ceb _team_dedans C:/Tyrann4/t4_team.s:79
-2cec _team_tl C:/Tyrann4/t4_team.s:82
-2ced _team_np C:/Tyrann4/t4_team.s:84
-2cee _team_nf C:/Tyrann4/t4_team.s:86
-2cef _team_pm C:/Tyrann4/t4_team.s:88
-2cf1 _team_ca C:/Tyrann4/t4_team.s:94
-2cf3 _team_version C:/Tyrann4/t4_team.s:104
-2d00 _character_sad C:/Tyrann4/t4_team.s:110
-2d30 _character_sp C:/Tyrann4/t4_team.s:112
-2da4 _team_ligne_hg_map C:/Tyrann4/t4_team.s:129
-2da5 _team_rang_hg_map C:/Tyrann4/t4_team.s:130
-2da8 _team_tuile_perso_aff C:/Tyrann4/t4_team.s:133
-2da9 _team_index_perso C:/Tyrann4/t4_team.s:134
-2daa _team_direction_scroll C:/Tyrann4/t4_team.s:135
-2dab _team_tuile_sous_pos_perso C:/Tyrann4/t4_team.s:136
-2dac _team_numero_lieu C:/Tyrann4/t4_team.s:137
-2dad _team_sortie_victorieuse C:/Tyrann4/t4_team.s:138
-2db0 _team_end C:/Tyrann4/t4_team.s:141
-31cc t_load_wait_1 C:/Tyrann4/t4_team.s:968
-2e00 skip_load C:/Tyrann4/t4_team.s:220
-320f t_team_filemane C:/Tyrann4/t4_team.s:978
-3267 _DiscLoad C:/Tyrann4/sedoric_io.s:60
-31e4 t_io_error_1 C:/Tyrann4/t4_team.s:971
-2e3c read_characters C:/Tyrann4/t4_team.s:274
-2fa6 get_next_byte C:/Tyrann4/t4_team.s:545
-2e45 loop_read_write_name C:/Tyrann4/t4_team.s:281
-2e65 read_name_over C:/Tyrann4/t4_team.s:303
-2e5d loop_skip_rest_of_name C:/Tyrann4/t4_team.s:296
-2f0c read_sad C:/Tyrann4/t4_team.s:398
-2f22 read_sp C:/Tyrann4/t4_team.s:418
-2f33 skip_load_save_sp C:/Tyrann4/t4_team.s:434
-2f48 end_characters C:/Tyrann4/t4_team.s:448
-2f5c read_cles C:/Tyrann4/t4_team.s:466
-2f69 read_ingredients C:/Tyrann4/t4_team.s:485
-2f76 read_combats_coffres C:/Tyrann4/t4_team.s:499
-2faf fin C:/Tyrann4/t4_team.s:552
-2fb0 put_next_byte C:/Tyrann4/t4_team.s:560
-2fb9 fin C:/Tyrann4/t4_team.s:567
-31f8 t_save_wait_1 C:/Tyrann4/t4_team.s:974
-301f write_characters C:/Tyrann4/t4_team.s:660
-3025 loop_compute_namelen C:/Tyrann4/t4_team.s:665
-303c loop_write_name C:/Tyrann4/t4_team.s:681
-304b loop_skip_remaining C:/Tyrann4/t4_team.s:689
-3057 read_name_over C:/Tyrann4/t4_team.s:696
-30ef write_sad C:/Tyrann4/t4_team.s:778
-3105 write_sp C:/Tyrann4/t4_team.s:798
-3116 skip_save_sp C:/Tyrann4/t4_team.s:814
-312b end_characters C:/Tyrann4/t4_team.s:828
-313f write_cles C:/Tyrann4/t4_team.s:846
-314c write_ingredients C:/Tyrann4/t4_team.s:865
-3159 write_combats_coffres C:/Tyrann4/t4_team.s:879
-31cb skip_save C:/Tyrann4/t4_team.s:962
-321e _DiscSave C:/Tyrann4/sedoric_io.s:17
-3218 _SPStorage C:/Tyrann4/sedoric_io.s:8
-3219 _BackupSP C:/Tyrann4/sedoric_io.s:10
-3285 _Sedoric C:/Tyrann4/sedoric_io.s:81
-3291 sedoricloop1 C:/Tyrann4/sedoric_io.s:91
-32b8 sedoricloop2 C:/Tyrann4/sedoric_io.s:119
-32d1 _rand C:/OSDK_2_0/lib/rand.s:1
-32db _srandom C:/OSDK_2_0/lib/rand.s:9
-32ef _hires C:/OSDK_2_0/lib/grsimple.s:8
-32f2 _text C:/OSDK_2_0/lib/grsimple.s:9
-32f5 _ping C:/OSDK_2_0/lib/grsimple.s:10
-32f8 _shoot C:/OSDK_2_0/lib/grsimple.s:11
-32fb _zap C:/OSDK_2_0/lib/grsimple.s:12
-32fe _explode C:/OSDK_2_0/lib/grsimple.s:13
-3301 _kbdclick1 C:/OSDK_2_0/lib/grsimple.s:14
-3304 _kbdclick2 C:/OSDK_2_0/lib/grsimple.s:15
-3307 _cls C:/OSDK_2_0/lib/grsimple.s:16
-330a _lores0 C:/OSDK_2_0/lib/grsimple.s:17
-330d _lores1 C:/OSDK_2_0/lib/grsimple.s:18
-3310 _key C:/OSDK_2_0/lib/grsimple.s:21
-3318 key001 C:/OSDK_2_0/lib/grsimple.s:25
-3344 grexit2 C:/OSDK_2_0/lib/ggeneral.s:25
-3325 getXparm C:/OSDK_2_0/lib/ggeneral.s:4
-332e getXloop C:/OSDK_2_0/lib/ggeneral.s:9
-3341 grexit C:/OSDK_2_0/lib/ggeneral.s:23
-3348 TableBit C:/Tyrann4/bit_ops.s:1
-3350 calculXY C:/Tyrann4/bit_ops.s:6
-335a _SetBit C:/Tyrann4/bit_ops.s:20
-336a _SetBitInternal C:/Tyrann4/bit_ops.s:32
-3375 _InvertBit C:/Tyrann4/bit_ops.s:42
-3385 _InvertBitInternal C:/Tyrann4/bit_ops.s:54
-3390 _TestBit C:/Tyrann4/bit_ops.s:64
-33a0 _TestBitInternal C:/Tyrann4/bit_ops.s:76
-3500 osdk_end C:/OSDK_2_0/lib/tail.s:22
+00a0 tuile_en_cours_coin_hg C:/Tyrann4/map_asm.s:21
+00a1 tuile_en_cours_coin_hd C:/Tyrann4/map_asm.s:23
+00a2 tuile_en_cours_coin_bg C:/Tyrann4/map_asm.s:25
+00a3 tuile_en_cours_coin_bd C:/Tyrann4/map_asm.s:27
+00a4 tuile_perso_aff C:/Tyrann4/map_asm.s:29
+00a5 ligne_hg_map C:/Tyrann4/map_asm.s:32
+00a6 rang_hg_map C:/Tyrann4/map_asm.s:34
+00a7 ligne_map C:/Tyrann4/map_asm.s:37
+00a8 rang_map C:/Tyrann4/map_asm.s:39
+00a9 rang_fenetre C:/Tyrann4/map_asm.s:41
+00aa tuile_courante C:/Tyrann4/map_asm.s:43
+00ab direction_scroll_prec C:/Tyrann4/map_asm.s:45
+00ac direction_scroll C:/Tyrann4/map_asm.s:47
+00ad a_un_bateau C:/Tyrann4/map_asm.s:49
+00ae tuile_sous_pos_perso C:/Tyrann4/map_asm.s:51
+00af ordo_perso_fen C:/Tyrann4/map_asm.s:53
+00b0 absc_perso_fen C:/Tyrann4/map_asm.s:55
+00b1 peut_bouger_horiz C:/Tyrann4/map_asm.s:57
+00b2 index_perso C:/Tyrann4/map_asm.s:59
+00b3 peut_bouger_vert C:/Tyrann4/map_asm.s:61
+00b4 est_en_mer C:/Tyrann4/map_asm.s:63
+00b5 est_affiche_texte C:/Tyrann4/map_asm.s:65
+00b6 scroll_est_interdit C:/Tyrann4/map_asm.s:67
+00b7 depl_perso_est_interdit C:/Tyrann4/map_asm.s:69
+00b8 on_a_clef_1 C:/Tyrann4/map_asm.s:71
+00b9 on_a_clef_2 C:/Tyrann4/map_asm.s:73
+00ba mot_de_passe C:/Tyrann4/map_asm.s:75
+00bb laisser_passer C:/Tyrann4/map_asm.s:77
+00bc numero_lieu C:/Tyrann4/map_asm.s:79
+00bd nb_coffres_non_ouverts C:/Tyrann4/map_asm.s:81
+00be mot_de_passe_londinium C:/Tyrann4/map_asm.s:83
+00bf poudre_de_taureau C:/Tyrann4/map_asm.s:85
+00c0 mot_de_passe_phare C:/Tyrann4/map_asm.s:87
+00c1 sortie_victorieuse C:/Tyrann4/map_asm.s:89
+0615 next_prog C:/Tyrann4/map_asm.s:97
+0a52 SaveZeroPage C:/Tyrann4/map_common.s:5
+34f2 _team_io_needed C:/Tyrann4/t4_team.s:99
+35b1 _load_t4_characters C:/Tyrann4/t4_team.s:170
+0c8a hires_et_atributs C:/Tyrann4/map_asm.s:640
+0c6f impl_car C:/Tyrann4/map_asm.s:618
+0717 init_div_var C:/Tyrann4/map_asm.s:242
+108b bandeau C:/Tyrann4/map_asm.s:1122
+063d main_loop C:/Tyrann4/map_asm.s:116
+0ae6 scrl_fenetre C:/Tyrann4/map_common.s:121
+10c0 prt_nom_lieu C:/Tyrann4/map_asm.s:1160
+07d1 aff_hero C:/Tyrann4/map_asm.s:337
+0e10 aff_text C:/Tyrann4/map_asm.s:834
+0657 fin_temporisation C:/Tyrann4/map_asm.s:134
+064f temporisation_2 C:/Tyrann4/map_asm.s:127
+0651 temporisation_1 C:/Tyrann4/map_asm.s:129
+0677 sortie_main_camp C:/Tyrann4/map_asm.s:151
+0688 sortie_main_fight C:/Tyrann4/map_asm.s:160
+0699 sortie_main_stop C:/Tyrann4/map_asm.s:169
+0db1 wait_key C:/Tyrann4/map_asm.s:761
+08b1 chck_around C:/Tyrann4/map_asm.s:503
+084f chck_bords C:/Tyrann4/map_asm.s:426
+0a6a chck_mvt_perso_fenetre C:/Tyrann4/map_common.s:31
+0c59 eff_text C:/Tyrann4/map_common.s:454
+07c4 ProgCamp C:/Tyrann4/map_asm.s:326
+06ab _jump_to_next_prog C:/Tyrann4/map_asm.s:181
+07a6 ProgCombat C:/Tyrann4/map_asm.s:314
+07cd ProgDir C:/Tyrann4/map_asm.s:330
+34df _team_x C:/Tyrann4/t4_team.s:53
+34e0 _team_y C:/Tyrann4/t4_team.s:55
+34e3 _team_boat C:/Tyrann4/t4_team.s:65
+35a4 _team_ligne_hg_map C:/Tyrann4/t4_team.s:129
+35a5 _team_rang_hg_map C:/Tyrann4/t4_team.s:130
+35a8 _team_tuile_perso_aff C:/Tyrann4/t4_team.s:133
+35a9 _team_index_perso C:/Tyrann4/t4_team.s:134
+35aa _team_direction_scroll C:/Tyrann4/t4_team.s:135
+35ab _team_tuile_sous_pos_perso C:/Tyrann4/t4_team.s:136
+35ac _team_numero_lieu C:/Tyrann4/t4_team.s:137
+35ad _team_sortie_victorieuse C:/Tyrann4/t4_team.s:138
+3aff _get C:/OSDK_2_0/lib/grsimple.s:30
+37ba _save_t4_characters C:/Tyrann4/t4_team.s:586
+0a5e RestoreZeroPage C:/Tyrann4/map_common.s:16
+3aac _SwitchToCommand C:/Tyrann4/sedoric_io.s:109
+34ea _team_ville C:/Tyrann4/t4_team.s:74
+34f3 _team_version C:/Tyrann4/t4_team.s:104
+0763 load_from_team C:/Tyrann4/map_asm.s:280
+34f0 _team_out C:/Tyrann4/t4_team.s:91
+07a5 fin C:/Tyrann4/map_asm.s:310
+07b1 ProgArmory C:/Tyrann4/map_asm.s:318
+07b9 ProgVille1 C:/Tyrann4/map_asm.s:322
+0818 fin_aff_perso C:/Tyrann4/map_asm.s:378
+07df check_mer C:/Tyrann4/map_asm.s:346
+07e8 mer_01 C:/Tyrann4/map_asm.s:351
+0819 choix_perso C:/Tyrann4/map_asm.s:385
+080a skip_anim C:/Tyrann4/map_asm.s:371
+07f3 chck_direction C:/Tyrann4/map_asm.s:357
+0800 anim_perso C:/Tyrann4/map_asm.s:365
+07fb ratrappe_si_mer C:/Tyrann4/map_asm.s:362
+0b9e maj_adr_scr_next_tuile C:/Tyrann4/map_common.s:282
+0b61 cherche_et_aff_tuile C:/Tyrann4/map_common.s:218
+0846 mer_bateau C:/Tyrann4/map_asm.s:414
+0839 vers_haut C:/Tyrann4/map_asm.s:403
+083d vers_droite C:/Tyrann4/map_asm.s:406
+0841 vers_gauche C:/Tyrann4/map_asm.s:409
+0843 fin_ch_perso C:/Tyrann4/map_asm.s:411
+08b0 sort_direct C:/Tyrann4/map_asm.s:491
+086d autre_touche_1 C:/Tyrann4/map_asm.s:448
+08ac end_chck_bords_nsc C:/Tyrann4/map_asm.s:484
+08a3 end_chck_bords C:/Tyrann4/map_asm.s:478
+087f autre_touche_2 C:/Tyrann4/map_asm.s:458
+0893 autre_touche_3 C:/Tyrann4/map_asm.s:469
+091f sortie_scroll_direct C:/Tyrann4/map_asm.s:575
+08c5 sens_1 C:/Tyrann4/map_asm.s:527
+08dc sens_2 C:/Tyrann4/map_asm.s:539
+094c no_scroll C:/Tyrann4/map_asm.s:604
+0b3f rech_tab_map C:/Tyrann4/map_common.s:189
+0920 check_ville_bateau C:/Tyrann4/map_asm.s:577
+0919 around_sortie C:/Tyrann4/map_asm.s:571
+08f1 sens_3 C:/Tyrann4/map_asm.s:550
+0906 sens_4 C:/Tyrann4/map_asm.s:561
+0932 ret_7_8 C:/Tyrann4/map_asm.s:587
+093a chk_bc C:/Tyrann4/map_asm.s:592
+0940 chk_9c C:/Tyrann4/map_asm.s:596
+0946 chk_b4 C:/Tyrann4/map_asm.s:600
+0953 ZeroPageCopy C:/Tyrann4/map_common.s:2
+0a54 loop C:/Tyrann4/map_common.s:8
+0a60 loop C:/Tyrann4/map_common.s:19
+0ae5 sortie_perso C:/Tyrann4/map_common.s:108
+0a82 deplc_gauche C:/Tyrann4/map_common.s:49
+0a93 deplac_droite C:/Tyrann4/map_common.s:58
+0ae1 no_depl C:/Tyrann4/map_common.s:105
+0acb out_depl_perso C:/Tyrann4/map_common.s:89
+0aa4 deplac_bas C:/Tyrann4/map_common.s:67
+0aba deplac_haut C:/Tyrann4/map_common.s:79
+0b3e sortie_fenetre C:/Tyrann4/map_common.s:176
+0afe lp_L7 C:/Tyrann4/map_common.s:135
+0b00 lp_C15 C:/Tyrann4/map_common.s:137
+0b1c autre_ligne C:/Tyrann4/map_common.s:153
+1920 ptr_Lignes C:/Tyrann4/map_asm.s:1507
+0b57 adr_ligne C:/Tyrann4/map_common.s:205
+0b6c find_compsants C:/Tyrann4/map_common.s:237
+0b87 aff__tuile C:/Tyrann4/map_common.s:259
+1b88 ptr_t C:/Tyrann4/map_asm.s:1748
+0b7e adr_compo C:/Tyrann4/map_common.s:248
+0b98 chck_68 C:/Tyrann4/map_common.s:271
+0b8d aff_t C:/Tyrann4/map_common.s:264
+0bc2 aff_demi_t C:/Tyrann4/map_common.s:314
+0b97 pas_daff C:/Tyrann4/map_common.s:269
+122e tab_adr_hires C:/Tyrann4/map_asm.s:1395
+0bd6 adr_screen_1 C:/Tyrann4/map_common.s:336
+0bdc adr_screen_2 C:/Tyrann4/map_common.s:340
+0bbe skip_inc_ph C:/Tyrann4/map_common.s:306
+0bfd rens_adr_car C:/Tyrann4/map_common.s:375
+0bc7 lp_2_sextets C:/Tyrann4/map_common.s:318
+0bd3 aff_2_sextets C:/Tyrann4/map_common.s:332
+0be0 maj_scr_hires C:/Tyrann4/map_common.s:348
+0bd3 adr_car_1 C:/Tyrann4/map_common.s:334
+0bd9 adr_car_2 C:/Tyrann4/map_common.s:338
+0bee skip_ret_1 C:/Tyrann4/map_common.s:356
+0bfc end_maj_adr_ecr C:/Tyrann4/map_common.s:363
+1982 sous_tuile C:/Tyrann4/map_asm.s:1521
+0c25 write_phrase C:/Tyrann4/map_common.s:405
+0c30 end_phrase C:/Tyrann4/map_common.s:413
+0c2a adr_ecr_txt C:/Tyrann4/map_common.s:409
+0c35 hit_key C:/Tyrann4/map_common.s:422
+0c3c ld_208 C:/Tyrann4/map_common.s:427
+0c49 release_ C:/Tyrann4/map_common.s:434
+0c4a hit_release_key C:/Tyrann4/map_common.s:440
+0c51 ld_208 C:/Tyrann4/map_common.s:445
+0c6c out_eff_text C:/Tyrann4/map_common.s:466
+0c63 lp_efface C:/Tyrann4/map_common.s:461
+0c71 lp1_impl C:/Tyrann4/map_asm.s:621
+1c52 dta_car_redef_p1 C:/Tyrann4/map_asm.s:1773
+0c7e lp2_impl C:/Tyrann4/map_asm.s:628
+1d4e dta_car_redef_p2 C:/Tyrann4/map_asm.s:2111
+0dbe next_key_1 C:/Tyrann4/map_asm.s:769
+0de8 end_key C:/Tyrann4/map_asm.s:800
+0dc4 next_key_2 C:/Tyrann4/map_asm.s:773
+0dca next_key_3 C:/Tyrann4/map_asm.s:777
+0dd0 next_key_4 C:/Tyrann4/map_asm.s:782
+0dd6 next_key_5 C:/Tyrann4/map_asm.s:786
+0ddc next_key_6 C:/Tyrann4/map_asm.s:790
+0de2 next_key_7 C:/Tyrann4/map_asm.s:794
+0deb gestion_ville C:/Tyrann4/map_asm.s:807
+0e0a return C:/Tyrann4/map_asm.s:825
+1f4a ptr_v_prog C:/Tyrann4/map_asm.s:2325
+0e79 hadrian_wall C:/Tyrann4/map_asm.s:879
+1e73 ptr_v C:/Tyrann4/map_asm.s:2285
+0e31 adr_nom_1 C:/Tyrann4/map_asm.s:851
+0e38 lp_nom_v C:/Tyrann4/map_asm.s:855
+0e3d adr_ecr_nom C:/Tyrann4/map_asm.s:858
+0e43 ask_enter C:/Tyrann4/map_asm.s:862
+0e45 lp_ask C:/Tyrann4/map_asm.s:864
+0e5a quest_enter C:/Tyrann4/map_asm.s:877
+0e53 suite_ask C:/Tyrann4/map_asm.s:872
+0e82 suite_hw C:/Tyrann4/map_asm.s:884
+0f1b druid_hut C:/Tyrann4/map_asm.s:953
+1f6a t_h_wall_1 C:/Tyrann4/map_asm.s:2333
+1f7c t_h_wall_2 C:/Tyrann4/map_asm.s:2336
+1f9e t_h_wall_3 C:/Tyrann4/map_asm.s:2339
+1fbf t_h_wall_4 C:/Tyrann4/map_asm.s:2342
+1fce t_h_wall_5 C:/Tyrann4/map_asm.s:2345
+1fed t_h_wall_6 C:/Tyrann4/map_asm.s:2348
+0f24 suite_dh C:/Tyrann4/map_asm.s:958
+0fe5 herb_ C:/Tyrann4/map_asm.s:1039
+2006 t_druid_hut_1 C:/Tyrann4/map_asm.s:2352
+202a t_druid_hut_2 C:/Tyrann4/map_asm.s:2355
+2045 t_druid_hut_3 C:/Tyrann4/map_asm.s:2358
+2065 t_druid_hut_4 C:/Tyrann4/map_asm.s:2361
+207a t_druid_hut_5 C:/Tyrann4/map_asm.s:2364
+209d t_druid_hut_6 C:/Tyrann4/map_asm.s:2367
+20be t_druid_hut_7 C:/Tyrann4/map_asm.s:2370
+20e7 t_druid_hut_8 C:/Tyrann4/map_asm.s:2373
+101c _kraken C:/Tyrann4/map_asm.s:1065
+210e t_herb_1 C:/Tyrann4/map_asm.s:2378
+212b t_herb_2 C:/Tyrann4/map_asm.s:2381
+1024 test_nord C:/Tyrann4/map_asm.s:1070
+108a fin_txt C:/Tyrann4/map_asm.s:1114
+213c t_kraken_1 C:/Tyrann4/map_asm.s:2385
+215f t_kraken_2 C:/Tyrann4/map_asm.s:2388
+217e t_kraken_3 C:/Tyrann4/map_asm.s:2391
+219e t_kraken_4 C:/Tyrann4/map_asm.s:2394
+10a4 ini_adr_dta_bd C:/Tyrann4/map_asm.s:1140
+1090 ad_dta_bandeau C:/Tyrann4/map_asm.s:1126
+10a3 end_af_bd C:/Tyrann4/map_asm.s:1136
+1097 ad_ec_bd C:/Tyrann4/map_asm.s:1130
+10b9 maj_adr_bd C:/Tyrann4/map_asm.s:1151
+21b1 dta_bandeau C:/Tyrann4/map_asm.s:2399
+114d det_index C:/Tyrann4/map_asm.s:1243
+10e2 fin_ptr_nl C:/Tyrann4/map_asm.s:1181
+1100 ini_adr_dta_nl C:/Tyrann4/map_asm.s:1202
+11fa eff_nom C:/Tyrann4/map_asm.s:1356
+10cf nb_ligne C:/Tyrann4/map_asm.s:1168
+10d1 prt_lign C:/Tyrann4/map_asm.s:1170
+10d3 ad_dta_nl C:/Tyrann4/map_asm.s:1172
+10d6 ad_ec_nl C:/Tyrann4/map_asm.s:1174
+10e3 maj_adr_nl C:/Tyrann4/map_asm.s:1185
+10f1 sk_ret1 C:/Tyrann4/map_asm.s:1192
+10ff sk_ret2 C:/Tyrann4/map_asm.s:1199
+2a22 ptr_dta_lieux C:/Tyrann4/map_asm.s:2456
+1149 get_value C:/Tyrann4/map_asm.s:1237
+1143 fin_ini_adnl C:/Tyrann4/map_asm.s:1233
+1157 traite_mer C:/Tyrann4/map_asm.s:1249
+1185 traite_terre C:/Tyrann4/map_asm.s:1279
+1175 test_mare_germa C:/Tyrann4/map_asm.s:1267
+1166 test_m_nostrum_2 C:/Tyrann4/map_asm.s:1258
+1182 test_mare_exter C:/Tyrann4/map_asm.s:1275
+1187 test_germania C:/Tyrann4/map_asm.s:1281
+11be test_gallia C:/Tyrann4/map_asm.s:1316
+1194 test_hibernia C:/Tyrann4/map_asm.s:1289
+11a3 test_caledonia C:/Tyrann4/map_asm.s:1298
+11ac test_britania C:/Tyrann4/map_asm.s:1304
+11bb test_brit_2 C:/Tyrann4/map_asm.s:1313
+11d8 test_lusitania C:/Tyrann4/map_asm.s:1332
+11d5 case_gallia C:/Tyrann4/map_asm.s:1329
+11e7 test_hispania C:/Tyrann4/map_asm.s:1341
+11f4 last_case_b C:/Tyrann4/map_asm.s:1349
+11f7 last_case_g C:/Tyrann4/map_asm.s:1352
+1223 ini_ad_v C:/Tyrann4/map_asm.s:1383
+1201 nb_l_vide C:/Tyrann4/map_asm.s:1360
+1203 nb_c_vide C:/Tyrann4/map_asm.s:1362
+1211 end_vide C:/Tyrann4/map_asm.s:1370
+1212 maj_ad_vide C:/Tyrann4/map_asm.s:1372
+1221 end_maj_vide C:/Tyrann4/map_asm.s:1380
+1300 _L00 C:/Tyrann4/map_asm.s:1407
+1320 _L01 C:/Tyrann4/map_asm.s:1409
+1340 _L02 C:/Tyrann4/map_asm.s:1411
+1360 _L03 C:/Tyrann4/map_asm.s:1413
+1380 _L04 C:/Tyrann4/map_asm.s:1415
+13a0 _L05 C:/Tyrann4/map_asm.s:1417
+13c0 _L06 C:/Tyrann4/map_asm.s:1419
+13e0 _L07 C:/Tyrann4/map_asm.s:1421
+1400 _L08 C:/Tyrann4/map_asm.s:1423
+1420 _L09 C:/Tyrann4/map_asm.s:1425
+1440 _L0a C:/Tyrann4/map_asm.s:1427
+1460 _L0b C:/Tyrann4/map_asm.s:1429
+1480 _L0c C:/Tyrann4/map_asm.s:1431
+14a0 _L0d C:/Tyrann4/map_asm.s:1433
+14c0 _L0e C:/Tyrann4/map_asm.s:1435
+14e0 _L0f C:/Tyrann4/map_asm.s:1437
+1500 _L10 C:/Tyrann4/map_asm.s:1439
+1520 _L11 C:/Tyrann4/map_asm.s:1441
+1540 _L12 C:/Tyrann4/map_asm.s:1443
+1560 _L13 C:/Tyrann4/map_asm.s:1445
+1580 _L14 C:/Tyrann4/map_asm.s:1447
+15a0 _L15 C:/Tyrann4/map_asm.s:1449
+15c0 _L16 C:/Tyrann4/map_asm.s:1451
+15e0 _L17 C:/Tyrann4/map_asm.s:1453
+1600 _L18 C:/Tyrann4/map_asm.s:1455
+1620 _L19 C:/Tyrann4/map_asm.s:1457
+1640 _L1a C:/Tyrann4/map_asm.s:1459
+1660 _L1b C:/Tyrann4/map_asm.s:1461
+1680 _L1c C:/Tyrann4/map_asm.s:1463
+16a0 _L1d C:/Tyrann4/map_asm.s:1465
+16c0 _L1e C:/Tyrann4/map_asm.s:1467
+16e0 _L1f C:/Tyrann4/map_asm.s:1469
+1700 _L20 C:/Tyrann4/map_asm.s:1471
+1720 _L21 C:/Tyrann4/map_asm.s:1473
+1740 _L22 C:/Tyrann4/map_asm.s:1475
+1760 _L23 C:/Tyrann4/map_asm.s:1477
+1780 _L24 C:/Tyrann4/map_asm.s:1479
+17a0 _L25 C:/Tyrann4/map_asm.s:1481
+17c0 _L26 C:/Tyrann4/map_asm.s:1483
+17e0 _L27 C:/Tyrann4/map_asm.s:1485
+1800 _L28 C:/Tyrann4/map_asm.s:1487
+1820 _L29 C:/Tyrann4/map_asm.s:1489
+1840 _L2a C:/Tyrann4/map_asm.s:1491
+1860 _L2b C:/Tyrann4/map_asm.s:1493
+1880 _L2c C:/Tyrann4/map_asm.s:1495
+18a0 _L2d C:/Tyrann4/map_asm.s:1497
+18c0 _L2e C:/Tyrann4/map_asm.s:1499
+18e0 _L2f C:/Tyrann4/map_asm.s:1501
+1900 _L30 C:/Tyrann4/map_asm.s:1503
+19f4 _t00 C:/Tyrann4/map_asm.s:1536
+19f8 _t01 C:/Tyrann4/map_asm.s:1538
+19fc _t02 C:/Tyrann4/map_asm.s:1540
+1a00 _t03 C:/Tyrann4/map_asm.s:1542
+1a04 _t04 C:/Tyrann4/map_asm.s:1544
+1a08 _t05 C:/Tyrann4/map_asm.s:1546
+1a0c _t06 C:/Tyrann4/map_asm.s:1548
+1a10 _t07 C:/Tyrann4/map_asm.s:1550
+1a14 _t08 C:/Tyrann4/map_asm.s:1552
+1a18 _t09 C:/Tyrann4/map_asm.s:1554
+1a1c _t0A C:/Tyrann4/map_asm.s:1556
+1a20 _t0B C:/Tyrann4/map_asm.s:1558
+1a24 _t0C C:/Tyrann4/map_asm.s:1560
+1a28 _t0D C:/Tyrann4/map_asm.s:1562
+1a2c _t0E C:/Tyrann4/map_asm.s:1564
+1a30 _t0F C:/Tyrann4/map_asm.s:1566
+1a34 _t10 C:/Tyrann4/map_asm.s:1568
+1a38 _t11 C:/Tyrann4/map_asm.s:1570
+1a3c _t12 C:/Tyrann4/map_asm.s:1572
+1a40 _t13 C:/Tyrann4/map_asm.s:1574
+1a44 _t14 C:/Tyrann4/map_asm.s:1576
+1a48 _t15 C:/Tyrann4/map_asm.s:1578
+1a4c _t16 C:/Tyrann4/map_asm.s:1580
+1a50 _t17 C:/Tyrann4/map_asm.s:1582
+1a54 _t18 C:/Tyrann4/map_asm.s:1584
+1a58 _t19 C:/Tyrann4/map_asm.s:1586
+1a5c _t1A C:/Tyrann4/map_asm.s:1588
+1a60 _t1B C:/Tyrann4/map_asm.s:1590
+1a64 _t1C C:/Tyrann4/map_asm.s:1592
+1a68 _t1D C:/Tyrann4/map_asm.s:1594
+1a6c _t1E C:/Tyrann4/map_asm.s:1596
+1a70 _t1F C:/Tyrann4/map_asm.s:1598
+1a74 _t20 C:/Tyrann4/map_asm.s:1600
+1a78 _t21 C:/Tyrann4/map_asm.s:1602
+1a7c _t22 C:/Tyrann4/map_asm.s:1604
+1a80 _t23 C:/Tyrann4/map_asm.s:1606
+1a84 _t24 C:/Tyrann4/map_asm.s:1608
+1a88 _t25 C:/Tyrann4/map_asm.s:1610
+1a8c _t26 C:/Tyrann4/map_asm.s:1612
+1a90 _t27 C:/Tyrann4/map_asm.s:1614
+1a94 _t28 C:/Tyrann4/map_asm.s:1616
+1a98 _t29 C:/Tyrann4/map_asm.s:1618
+1a9c _t2A C:/Tyrann4/map_asm.s:1620
+1aa0 _t2B C:/Tyrann4/map_asm.s:1622
+1aa4 _t2C C:/Tyrann4/map_asm.s:1624
+1aa8 _t2D C:/Tyrann4/map_asm.s:1626
+1aac _t2E C:/Tyrann4/map_asm.s:1628
+1ab0 _t2F C:/Tyrann4/map_asm.s:1630
+1ab4 _t30 C:/Tyrann4/map_asm.s:1632
+1ab8 _t31 C:/Tyrann4/map_asm.s:1634
+1abc _t32 C:/Tyrann4/map_asm.s:1636
+1ac0 _t33 C:/Tyrann4/map_asm.s:1638
+1ac4 _t34 C:/Tyrann4/map_asm.s:1640
+1ac8 _t35 C:/Tyrann4/map_asm.s:1642
+1acc _t36 C:/Tyrann4/map_asm.s:1644
+1ad0 _t37 C:/Tyrann4/map_asm.s:1646
+1ad4 _t38 C:/Tyrann4/map_asm.s:1648
+1ad8 _t39 C:/Tyrann4/map_asm.s:1650
+1adc _t3A C:/Tyrann4/map_asm.s:1652
+1ae0 _t3B C:/Tyrann4/map_asm.s:1654
+1ae4 _t3C C:/Tyrann4/map_asm.s:1656
+1ae8 _t3D C:/Tyrann4/map_asm.s:1658
+1aec _t3E C:/Tyrann4/map_asm.s:1660
+1af0 _t3F C:/Tyrann4/map_asm.s:1662
+1af4 _t40 C:/Tyrann4/map_asm.s:1664
+1af8 _t41 C:/Tyrann4/map_asm.s:1666
+1afc _t42 C:/Tyrann4/map_asm.s:1668
+1b00 _t43 C:/Tyrann4/map_asm.s:1670
+1b04 _t44 C:/Tyrann4/map_asm.s:1672
+1b08 _t45 C:/Tyrann4/map_asm.s:1674
+1b0c _t46 C:/Tyrann4/map_asm.s:1676
+1b10 _t47 C:/Tyrann4/map_asm.s:1678
+1b14 _t48 C:/Tyrann4/map_asm.s:1680
+1b18 _t49 C:/Tyrann4/map_asm.s:1682
+1b1c _t4A C:/Tyrann4/map_asm.s:1684
+1b20 _t4B C:/Tyrann4/map_asm.s:1686
+1b24 _t4C C:/Tyrann4/map_asm.s:1688
+1b28 _t4D C:/Tyrann4/map_asm.s:1690
+1b2c _t4E C:/Tyrann4/map_asm.s:1692
+1b30 _t4F C:/Tyrann4/map_asm.s:1694
+1b34 _t50 C:/Tyrann4/map_asm.s:1696
+1b38 _t51 C:/Tyrann4/map_asm.s:1698
+1b3c _t52 C:/Tyrann4/map_asm.s:1700
+1b40 _t53 C:/Tyrann4/map_asm.s:1706
+1b44 _t54 C:/Tyrann4/map_asm.s:1708
+1b48 _t55 C:/Tyrann4/map_asm.s:1710
+1b4c _t56 C:/Tyrann4/map_asm.s:1715
+1b50 _t57 C:/Tyrann4/map_asm.s:1717
+1b54 _t58 C:/Tyrann4/map_asm.s:1719
+1b58 _t59 C:/Tyrann4/map_asm.s:1721
+1b5c _t5A C:/Tyrann4/map_asm.s:1723
+1b60 _t5B C:/Tyrann4/map_asm.s:1725
+1b64 _t5C C:/Tyrann4/map_asm.s:1727
+1b68 _t5D C:/Tyrann4/map_asm.s:1729
+1b6c _t5E C:/Tyrann4/map_asm.s:1731
+1b70 _t5F C:/Tyrann4/map_asm.s:1733
+1b74 _t60 C:/Tyrann4/map_asm.s:1735
+1b78 _t61 C:/Tyrann4/map_asm.s:1737
+1b7c _t62 C:/Tyrann4/map_asm.s:1739
+1b80 _t63 C:/Tyrann4/map_asm.s:1741
+1b84 _t64 C:/Tyrann4/map_asm.s:1743
+1da8 v_00 C:/Tyrann4/map_asm.s:2236
+1db3 v_01 C:/Tyrann4/map_asm.s:2239
+1dbe v_02 C:/Tyrann4/map_asm.s:2242
+1dca v_03 C:/Tyrann4/map_asm.s:2245
+1dd4 v_04 C:/Tyrann4/map_asm.s:2248
+1de0 v_05 C:/Tyrann4/map_asm.s:2251
+1de9 v_06 C:/Tyrann4/map_asm.s:2254
+1df1 v_07 C:/Tyrann4/map_asm.s:2257
+1dfe v_08 C:/Tyrann4/map_asm.s:2260
+1e0a v_09 C:/Tyrann4/map_asm.s:2263
+1e1a v_0A C:/Tyrann4/map_asm.s:2266
+1e30 v_0B C:/Tyrann4/map_asm.s:2269
+1e3d v_0C C:/Tyrann4/map_asm.s:2272
+1e4d v_0D C:/Tyrann4/map_asm.s:2275
+1e57 v_0E C:/Tyrann4/map_asm.s:2278
+1e6a v_0F C:/Tyrann4/map_asm.s:2281
+1e93 v_00_prog C:/Tyrann4/map_asm.s:2292
+1e9e v_01_prog C:/Tyrann4/map_asm.s:2294
+1ea9 v_02_prog C:/Tyrann4/map_asm.s:2296
+1eb4 v_03_prog C:/Tyrann4/map_asm.s:2298
+1ebf v_04_prog C:/Tyrann4/map_asm.s:2300
+1eca v_05_prog C:/Tyrann4/map_asm.s:2302
+1ed5 v_06_prog C:/Tyrann4/map_asm.s:2304
+1ee0 v_07_prog C:/Tyrann4/map_asm.s:2306
+1eeb v_08_prog C:/Tyrann4/map_asm.s:2308
+1ef6 v_09_prog C:/Tyrann4/map_asm.s:2310
+1f02 v_0A_prog C:/Tyrann4/map_asm.s:2312
+1f0e v_0B_prog C:/Tyrann4/map_asm.s:2314
+1f1a v_0C_prog C:/Tyrann4/map_asm.s:2316
+1f26 v_0D_prog C:/Tyrann4/map_asm.s:2318
+1f32 v_0E_prog C:/Tyrann4/map_asm.s:2320
+1f3e v_0F_prog C:/Tyrann4/map_asm.s:2322
+2a36 d_gallia C:/Tyrann4/map_asm.s:2470
+2ab7 d_hispania C:/Tyrann4/map_asm.s:2489
+2bb6 d_lusitania C:/Tyrann4/map_asm.s:2512
+2c8b d_britania C:/Tyrann4/map_asm.s:2531
+2d44 d_Germania C:/Tyrann4/map_asm.s:2551
+2e19 d_caledonia C:/Tyrann4/map_asm.s:2570
+2eee d_hibernia C:/Tyrann4/map_asm.s:2589
+2f9a d_Mare_n C:/Tyrann4/map_asm.s:2607
+30bb d_Mare_e C:/Tyrann4/map_asm.s:2624
+3203 d_Mare_g C:/Tyrann4/map_asm.s:2642
+3400 _character_name C:/Tyrann4/t4_team.s:8
+3460 _character_ri C:/Tyrann4/t4_team.s:11
+346c _character_cp C:/Tyrann4/t4_team.s:13
+3472 _character_mp C:/Tyrann4/t4_team.s:15
+3478 _character_cc C:/Tyrann4/t4_team.s:17
+347e _character_ct C:/Tyrann4/t4_team.s:19
+3484 _character_fo C:/Tyrann4/t4_team.s:21
+348a _character_ag C:/Tyrann4/t4_team.s:23
+3490 _character_in C:/Tyrann4/t4_team.s:25
+3496 _character_fm C:/Tyrann4/t4_team.s:27
+349c _character_pv C:/Tyrann4/t4_team.s:29
+34a2 _character_et C:/Tyrann4/t4_team.s:31
+34a8 _character_ok C:/Tyrann4/t4_team.s:33
+34ae _character_ni C:/Tyrann4/t4_team.s:35
+34b4 _character_xp C:/Tyrann4/t4_team.s:37
+34c0 _character_wr C:/Tyrann4/t4_team.s:39
+34c6 _character_wl C:/Tyrann4/t4_team.s:41
+34cc _character_pt C:/Tyrann4/t4_team.s:43
+34d2 _character_ca C:/Tyrann4/t4_team.s:45
+34d8 _character_bt C:/Tyrann4/t4_team.s:47
+34de _team_s C:/Tyrann4/t4_team.s:51
+34e1 _team_boussole C:/Tyrann4/t4_team.s:60
+34e2 _team_filet C:/Tyrann4/t4_team.s:62
+34e4 _team_ingredients C:/Tyrann4/t4_team.s:71
+34eb _team_dedans C:/Tyrann4/t4_team.s:79
+34ec _team_tl C:/Tyrann4/t4_team.s:82
+34ed _team_np C:/Tyrann4/t4_team.s:84
+34ee _team_nf C:/Tyrann4/t4_team.s:86
+34ef _team_pm C:/Tyrann4/t4_team.s:88
+34f1 _team_ca C:/Tyrann4/t4_team.s:94
+3500 _character_sad C:/Tyrann4/t4_team.s:110
+3530 _character_sp C:/Tyrann4/t4_team.s:112
+3560 _team_cles C:/Tyrann4/t4_team.s:118
+3580 _team_x_ville C:/Tyrann4/t4_team.s:120
+3581 _team_y_ville C:/Tyrann4/t4_team.s:121
+3582 _team_tuile_perso_aff_ville C:/Tyrann4/t4_team.s:122
+3583 _team_index_perso_ville C:/Tyrann4/t4_team.s:123
+3584 _team_combats_coffres C:/Tyrann4/t4_team.s:127
+35a6 _team_ligne_hg_ville C:/Tyrann4/t4_team.s:131
+35a7 _team_rang_hg_ville C:/Tyrann4/t4_team.s:132
+35ae _team_tuile_sous_pos_perso_ville C:/Tyrann4/t4_team.s:139
+35af _team_numero_lieu_ville C:/Tyrann4/t4_team.s:140
+35b0 _team_end C:/Tyrann4/t4_team.s:141
+39cc t_load_wait_1 C:/Tyrann4/t4_team.s:968
+3600 skip_load C:/Tyrann4/t4_team.s:220
+3a0f t_team_filemane C:/Tyrann4/t4_team.s:978
+3a67 _DiscLoad C:/Tyrann4/sedoric_io.s:60
+39e4 t_io_error_1 C:/Tyrann4/t4_team.s:971
+363c read_characters C:/Tyrann4/t4_team.s:274
+37a6 get_next_byte C:/Tyrann4/t4_team.s:545
+3645 loop_read_write_name C:/Tyrann4/t4_team.s:281
+3665 read_name_over C:/Tyrann4/t4_team.s:303
+365d loop_skip_rest_of_name C:/Tyrann4/t4_team.s:296
+370c read_sad C:/Tyrann4/t4_team.s:398
+3722 read_sp C:/Tyrann4/t4_team.s:418
+3733 skip_load_save_sp C:/Tyrann4/t4_team.s:434
+3748 end_characters C:/Tyrann4/t4_team.s:448
+375c read_cles C:/Tyrann4/t4_team.s:466
+3769 read_ingredients C:/Tyrann4/t4_team.s:485
+3776 read_combats_coffres C:/Tyrann4/t4_team.s:499
+37af fin C:/Tyrann4/t4_team.s:552
+37b0 put_next_byte C:/Tyrann4/t4_team.s:560
+37b9 fin C:/Tyrann4/t4_team.s:567
+39f8 t_save_wait_1 C:/Tyrann4/t4_team.s:974
+381f write_characters C:/Tyrann4/t4_team.s:660
+3825 loop_compute_namelen C:/Tyrann4/t4_team.s:665
+383c loop_write_name C:/Tyrann4/t4_team.s:681
+384b loop_skip_remaining C:/Tyrann4/t4_team.s:689
+3857 read_name_over C:/Tyrann4/t4_team.s:696
+38ef write_sad C:/Tyrann4/t4_team.s:778
+3905 write_sp C:/Tyrann4/t4_team.s:798
+3916 skip_save_sp C:/Tyrann4/t4_team.s:814
+392b end_characters C:/Tyrann4/t4_team.s:828
+393f write_cles C:/Tyrann4/t4_team.s:846
+394c write_ingredients C:/Tyrann4/t4_team.s:865
+3959 write_combats_coffres C:/Tyrann4/t4_team.s:879
+39cb skip_save C:/Tyrann4/t4_team.s:962
+3a1e _DiscSave C:/Tyrann4/sedoric_io.s:17
+3a18 _SPStorage C:/Tyrann4/sedoric_io.s:8
+3a19 _BackupSP C:/Tyrann4/sedoric_io.s:10
+3a85 _Sedoric C:/Tyrann4/sedoric_io.s:81
+3a91 sedoricloop1 C:/Tyrann4/sedoric_io.s:91
+3ab8 sedoricloop2 C:/Tyrann4/sedoric_io.s:119
+3ad1 _hires C:/OSDK_2_0/lib/grsimple.s:8
+3ad4 _text C:/OSDK_2_0/lib/grsimple.s:9
+3ad7 _ping C:/OSDK_2_0/lib/grsimple.s:10
+3ada _shoot C:/OSDK_2_0/lib/grsimple.s:11
+3add _zap C:/OSDK_2_0/lib/grsimple.s:12
+3ae0 _explode C:/OSDK_2_0/lib/grsimple.s:13
+3ae3 _kbdclick1 C:/OSDK_2_0/lib/grsimple.s:14
+3ae6 _kbdclick2 C:/OSDK_2_0/lib/grsimple.s:15
+3ae9 _cls C:/OSDK_2_0/lib/grsimple.s:16
+3aec _lores0 C:/OSDK_2_0/lib/grsimple.s:17
+3aef _lores1 C:/OSDK_2_0/lib/grsimple.s:18
+3af2 _key C:/OSDK_2_0/lib/grsimple.s:21
+3afa key001 C:/OSDK_2_0/lib/grsimple.s:25
+3b26 grexit2 C:/OSDK_2_0/lib/ggeneral.s:25
+3b07 getXparm C:/OSDK_2_0/lib/ggeneral.s:4
+3b10 getXloop C:/OSDK_2_0/lib/ggeneral.s:9
+3b23 grexit C:/OSDK_2_0/lib/ggeneral.s:23
+3b2a TableBit C:/Tyrann4/bit_ops.s:1
+3b32 calculXY C:/Tyrann4/bit_ops.s:6
+3b3c _SetBit C:/Tyrann4/bit_ops.s:20
+3b4c _SetBitInternal C:/Tyrann4/bit_ops.s:32
+3b57 _InvertBit C:/Tyrann4/bit_ops.s:42
+3b67 _InvertBitInternal C:/Tyrann4/bit_ops.s:54
+3b72 _TestBit C:/Tyrann4/bit_ops.s:64
+3b82 _TestBitInternal C:/Tyrann4/bit_ops.s:76
+3d00 osdk_end C:/OSDK_2_0/lib/tail.s:22
 0600 __text_start C:/OSDK_2_0/lib/tail.s:32
-33ac __text_end C:/OSDK_2_0/lib/tail.s:32
-2dac __text_size C:/OSDK_2_0/lib/tail.s:32
-33ac __data_start C:/OSDK_2_0/lib/tail.s:32
-33ac __data_end C:/OSDK_2_0/lib/tail.s:32
+3b8e __text_end C:/OSDK_2_0/lib/tail.s:32
+358e __text_size C:/OSDK_2_0/lib/tail.s:32
+3b8e __data_start C:/OSDK_2_0/lib/tail.s:32
+3b8e __data_end C:/OSDK_2_0/lib/tail.s:32
 0000 __data_size C:/OSDK_2_0/lib/tail.s:32
-3400 __bss_start C:/OSDK_2_0/lib/tail.s:32
-3500 __bss_end C:/OSDK_2_0/lib/tail.s:32
+3c00 __bss_start C:/OSDK_2_0/lib/tail.s:32
+3d00 __bss_end C:/OSDK_2_0/lib/tail.s:32
 0100 __bss_size C:/OSDK_2_0/lib/tail.s:32
-3400 __bss_clear_start C:/OSDK_2_0/lib/tail.s:32
-3500 __bss_clear_end C:/OSDK_2_0/lib/tail.s:32
+3c00 __bss_clear_start C:/OSDK_2_0/lib/tail.s:32
+3d00 __bss_clear_end C:/OSDK_2_0/lib/tail.s:32
 0100 __bss_clear_size C:/OSDK_2_0/lib/tail.s:32
 0004 __zero_start C:/OSDK_2_0/lib/tail.s:32
 0052 __zero_end C:/OSDK_2_0/lib/tail.s:32
@@ -586,16 +605,14 @@
 #FILES
 0 C:/OSDK_2_0/lib/header.s
 1 C:/Tyrann4/zp_crt.inc
-2 C:/Tyrann4/map_common_ville.s
-3 C:/Tyrann4/map_ville1.s
-4 C:/Tyrann4/map_common.s
-5 C:/Tyrann4/t4_team.s
-6 C:/Tyrann4/sedoric_io.s
-7 C:/OSDK_2_0/lib/rand.s
-8 C:/OSDK_2_0/lib/grsimple.s
-9 C:/OSDK_2_0/lib/ggeneral.s
-10 C:/Tyrann4/bit_ops.s
-11 C:/OSDK_2_0/lib/tail.s
+2 C:/Tyrann4/map_asm.s
+3 C:/Tyrann4/map_common.s
+4 C:/Tyrann4/t4_team.s
+5 C:/Tyrann4/sedoric_io.s
+6 C:/OSDK_2_0/lib/grsimple.s
+7 C:/OSDK_2_0/lib/ggeneral.s
+8 C:/Tyrann4/bit_ops.s
+9 C:/OSDK_2_0/lib/tail.s
 #LINES
 0004 0:9
 0050 1:7
@@ -620,42 +637,42 @@
 0076 1:30
 0078 1:31
 007a 1:32
-007c 2:18
-00a0 2:22
-00a1 2:24
-00a2 2:26
-00a3 2:28
-00a4 2:30
-00a5 2:33
-00a6 2:35
-00a7 2:38
-00a8 2:40
-00a9 2:42
-00aa 2:44
-00ab 2:46
-00ac 2:48
-00ad 2:50
-00ae 2:52
-00af 2:54
-00b0 2:56
-00b1 2:58
-00b2 2:60
-00b3 2:62
-00b4 2:64
-00b5 2:66
-00b6 2:68
-00b7 2:70
-00b8 2:72
-00b9 2:74
-00ba 2:76
-00bb 2:78
-00bc 2:80
-00bd 2:82
-00be 2:84
-00bf 2:86
-00c0 2:88
-00c1 2:90
-00c2 2:96
+007c 2:17
+00a0 2:21
+00a1 2:23
+00a2 2:25
+00a3 2:27
+00a4 2:29
+00a5 2:32
+00a6 2:34
+00a7 2:37
+00a8 2:39
+00a9 2:41
+00aa 2:43
+00ab 2:45
+00ac 2:47
+00ad 2:49
+00ae 2:51
+00af 2:53
+00b0 2:55
+00b1 2:57
+00b2 2:59
+00b3 2:61
+00b4 2:63
+00b5 2:65
+00b6 2:67
+00b7 2:69
+00b8 2:71
+00b9 2:73
+00ba 2:75
+00bb 2:77
+00bc 2:79
+00bd 2:81
+00be 2:83
+00bf 2:85
+00c0 2:87
+00c1 2:89
+00c2 2:95
 0600 0:80
 0601 0:81
 0603 0:82
@@ -667,3213 +684,2812 @@
 0611 0:92
 0613 0:93
 0614 0:94
-0615 2:101
-0618 2:102
-061a 2:103
-061d 2:104
-0620 2:105
-0622 2:106
-0625 2:107
-0627 2:108
-062a 2:109
-062d 2:110
-0630 2:111
-0632 2:112
-0635 2:113
-0638 2:115
-063b 2:116
-063e 2:117
-0641 2:120
-0644 2:121
-0647 2:122
-064a 2:125
-064c 2:126
-064e 2:127
-0650 2:129
+0615 2:97
+0617 2:101
+061a 2:102
+061c 2:103
+061f 2:104
+0622 2:105
+0624 2:106
+0627 2:107
+0629 2:108
+062c 2:109
+062f 2:110
+0632 2:111
+0634 2:112
+0637 2:113
+063a 2:115
+063d 2:118
+0640 2:119
+0643 2:120
+0646 2:121
+0649 2:124
+064b 2:125
+064d 2:126
+064f 2:128
+0651 2:130
 0652 2:131
-0653 2:132
+0654 2:132
 0655 2:133
-0656 2:134
-0658 2:140
-065b 2:141
-065e 2:142
-0661 2:143
-0664 2:145
-0667 2:147
-066a 2:149
-066c 2:150
-066e 2:151
-0671 2:152
-0672 2:153
-0674 2:154
-0677 2:155
-0678 2:156
-067b 2:157
-067c 2:161
-067e 2:164
-067f 2:169
-0681 2:170
-0684 2:171
-0686 2:172
-0689 2:173
-068b 2:174
-068e 2:175
-0690 2:176
-0693 2:177
-0695 2:178
-0698 2:179
-069a 2:180
-069d 2:181
-069f 2:182
-06a2 2:183
-06a4 2:184
-06a7 2:186
-06a9 2:187
-06ac 2:188
-06ae 2:189
-06b1 2:190
-06b3 2:191
-06b6 2:192
-06b9 2:194
-06bc 2:195
-06be 2:196
-06c1 2:197
-06c4 2:199
-06c7 2:200
-06c9 2:201
-06cc 2:202
-06ce 2:203
-06cf 2:204
-06d2 2:205
-06d4 2:206
-06d5 2:207
-06d8 2:216
-06e2 2:217
-06e3 2:220
-06ea 2:221
-06eb 2:224
-06f2 2:225
-06f3 2:236
-06f5 2:237
-06f7 2:238
-06f9 2:239
-06fb 2:240
-06fd 2:242
-06ff 2:243
-0701 2:244
-0703 2:245
-0705 2:247
-0707 2:248
-0709 2:249
-070b 2:250
-070d 2:251
-070f 2:252
-0711 2:254
-0713 2:255
-0715 2:256
-0717 2:257
-0719 2:258
-071b 2:259
-071d 2:260
-071f 2:261
-0721 2:262
-0723 2:264
-0725 2:265
-0727 2:266
-0729 2:267
-072b 2:268
-072d 2:269
-072f 2:270
-0731 2:271
-0733 2:272
-0735 2:273
-0737 2:275
-0739 2:276
-073b 2:277
-073d 2:278
-073f 2:279
-0741 2:280
-0743 2:281
-0745 2:282
-0747 2:284
-0749 2:285
-074b 2:286
-074d 2:287
-074f 2:288
-0750 2:290
-0752 2:291
-0754 2:297
-0755 2:305
-0758 2:306
-075a 2:307
-075c 2:308
-075e 2:309
-0760 2:310
-0762 2:312
-0764 2:313
-0766 2:314
-0768 2:316
-076a 2:317
-076c 2:318
-076e 2:320
-0770 2:321
-0772 2:322
-0774 2:326
-0776 2:327
-0777 2:337
-0779 2:338
-077b 2:339
-077d 2:340
-077f 2:341
-0781 2:342
-0783 2:343
-0785 2:345
-0787 2:346
-0789 2:347
-078b 2:348
-078d 2:349
-0790 2:350
-0792 2:352
-0794 2:353
-0796 2:354
-0798 2:356
-079a 2:357
-079c 2:358
-079e 2:359
-07a1 2:360
-07a3 2:361
-07a6 2:365
-07a7 2:371
-07a9 2:372
-07ab 2:373
-07ad 2:374
-07af 2:375
-07b1 2:376
-07b3 2:377
-07b5 2:378
-07b7 2:379
-07b9 2:380
-07bb 2:382
-07bd 2:383
-07bf 2:385
-07c1 2:386
-07c3 2:388
-07c5 2:389
-07c7 2:391
-07c9 2:393
-07cb 2:394
-07cc 2:402
-07cf 2:403
-07d1 2:404
-07d4 2:405
-07d7 2:406
-07da 2:407
-07dd 2:408
-07e0 2:409
-07e3 2:410
-07e5 2:411
-07e8 2:412
-07eb 2:413
-07ee 2:414
-07f1 2:415
-07f4 2:416
-07f7 2:418
-07f9 2:419
-07fc 2:420
-07ff 2:421
-0802 2:422
-0805 2:423
-0808 2:424
-080b 2:425
-080d 2:426
-0810 2:427
-0813 2:428
-0816 2:429
-0819 2:430
-081c 2:431
-081f 2:433
-0821 2:434
-0824 2:435
-0827 2:436
-082a 2:437
-082d 2:438
-0830 2:439
-0833 2:440
-0835 2:441
-0838 2:442
-083b 2:443
-083e 2:444
-0841 2:445
-0844 2:446
-0847 2:448
-0849 2:449
-084c 2:450
-084f 2:451
-0852 2:452
-0855 2:453
-0858 2:454
-085b 2:455
-085d 2:456
-0860 2:457
-0863 2:458
-0866 2:459
-0869 2:460
-086c 2:461
-086f 2:463
-0871 2:464
-0874 2:465
-0877 2:466
-087a 2:467
-087d 2:468
-0880 2:469
-0883 2:470
-0885 2:471
-0888 2:472
-088b 2:473
-088e 2:474
-0891 2:475
-0894 2:476
-0897 2:478
-0899 2:479
-089c 2:480
-089f 2:481
-08a2 2:482
-08a5 2:483
-08a8 2:484
-08ab 2:485
-08ad 2:486
-08b0 2:487
-08b3 2:488
-08b6 2:489
-08b9 2:490
-08bc 2:491
-08bf 2:493
-08c1 2:494
-08c4 2:495
-08c7 2:496
-08ca 2:497
-08cd 2:498
-08d0 2:499
-08d3 2:500
-08d5 2:501
-08d8 2:502
-08db 2:503
-08de 2:504
-08e1 2:505
-08e4 2:506
-08e7 2:509
-08e9 2:510
-08ec 2:511
-08ef 2:512
-08f2 2:514
-08f3 2:520
-08f5 2:521
-08f6 2:522
-08f8 2:523
-08f9 2:524
-08fb 2:525
-08fc 2:526
-08fe 2:527
-08ff 2:528
-0900 2:529
-0901 2:530
-0902 2:531
-0905 2:532
-0908 2:533
-0909 2:534
-090c 2:535
-090f 2:536
-0911 2:538
-0914 2:539
-0916 2:540
-0917 2:546
-0919 2:547
-091c 2:548
-091f 2:549
-0921 2:550
-0924 2:551
-0926 2:552
-0929 2:553
-092c 2:554
-092d 2:560
-0930 2:561
-0932 2:562
-0934 2:563
-0937 2:564
-0939 2:565
-093b 2:566
-093d 2:567
-093f 2:568
-0940 2:577
-0942 2:578
-0944 2:579
-0946 2:580
-0947 2:581
-094a 2:582
-094c 2:583
-094d 2:584
-094e 2:585
-0951 2:586
-0954 2:587
-0955 2:588
-0958 2:589
-095b 2:590
-095d 2:591
-0960 2:592
-0963 2:593
-0964 2:595
-0965 2:602
-0967 2:603
-0969 2:604
-096b 2:605
-096d 2:606
-0970 2:607
-0972 2:608
-0975 2:609
-0977 2:610
-097a 2:611
-097d 2:612
-097e 2:614
-097f 2:620
-0987 2:622
-098f 2:624
-0997 2:626
-099f 2:628
-09a7 2:630
-09af 2:635
-09bb 2:645
-09bd 2:647
-09bf 2:648
-09c2 2:649
-09c4 2:650
-09c7 2:651
-09ca 2:652
-09cc 2:653
-09cf 2:654
-09d1 2:655
-09d4 2:656
-09d7 2:658
-09d9 2:659
-09dc 2:660
-09de 2:661
-09e1 2:662
-09e4 2:663
-09e6 2:664
-09e9 2:665
-09eb 2:666
-09ee 2:667
-09f1 2:668
-09f2 2:671
-09f4 2:673
-09f6 2:675
-09f9 2:676
-09fa 2:677
-09fc 2:678
-09ff 2:679
-0a00 2:680
-0a02 2:681
-0a03 2:684
-0a04 2:685
-0a07 2:686
-0a08 2:687
-0a0a 2:688
-0a0d 2:689
-0a0f 2:690
-0a12 2:692
-0a13 2:693
-0a14 2:697
-0a16 2:699
-0a19 2:700
-0a1a 2:701
-0a1c 2:702
-0a1f 2:703
-0a21 2:705
-0a22 2:708
-0a23 2:709
-0a26 2:710
-0a27 2:711
-0a29 2:712
-0a2c 2:713
-0a2e 2:714
-0a31 2:716
-0a32 2:717
-0a33 2:725
-0a36 2:726
-0a38 2:728
-0a3b 2:729
-0a3d 2:730
-0a3f 2:732
-0a42 2:733
-0a43 2:734
-0a45 2:735
-0a48 2:736
-0a4b 2:738
-0a4e 2:739
-0a4f 2:742
-0a51 2:743
-0a54 2:744
-0a56 2:745
-0a59 2:746
-0a5b 2:747
-0a5e 2:748
-0a60 2:749
-0a63 2:750
-0a64 2:753
-0a67 2:754
-0a6a 2:755
-0a6b 2:762
-0a89 2:763
-0aa7 2:764
-0ac5 2:765
-0ae3 2:766
-0b01 2:767
-0b1f 2:768
-0b3d 2:775
-0b51 2:776
-0b65 2:777
-0b79 2:778
-0b8d 2:779
-0ba1 2:780
-0bb5 2:781
-0bc9 2:782
-0bdd 2:783
-0bf1 2:784
-0c05 2:785
-0c1b 2:786
-0c2f 2:787
-0c3b 3:14
-0c3d 3:15
-0c3f 3:16
-0c41 3:17
-0c43 3:18
-0c45 3:19
-0c47 3:20
-0c49 3:21
-0c4b 3:22
-0c4e 3:23
-0c50 3:24
-0c52 3:25
-0c55 3:26
-0c57 3:27
-0c59 3:28
-0c5c 3:29
-0c5e 3:30
-0c60 3:31
-0c63 3:32
-0c65 3:33
-0c67 3:36
-0c69 3:37
-0c6b 3:38
-0c6d 3:39
-0c6f 3:40
-0c72 3:42
-0c74 3:43
-0c76 3:44
-0c78 3:45
-0c7a 3:46
-0c7d 3:48
-0c7f 3:49
-0c82 3:50
-0c84 3:51
-0c86 3:52
-0c88 3:53
-0c8a 3:54
-0c8d 3:56
-0c8f 3:57
-0c92 3:58
-0c94 3:59
-0c96 3:60
-0c98 3:61
-0c9a 3:62
-0c9d 3:64
-0c9f 3:65
-0ca2 3:66
-0ca4 3:67
-0ca6 3:68
-0ca8 3:69
-0caa 3:70
-0cad 3:72
-0caf 3:73
-0cb2 3:74
-0cb4 3:75
-0cb6 3:76
-0cb8 3:77
-0cba 3:78
-0cbd 3:80
-0cc0 3:81
-0cc2 3:82
-0cc5 3:83
-0cc7 3:84
-0cc9 3:85
-0ccb 3:86
-0ccd 3:87
-0ccf 3:88
-0cd1 3:89
-0cd3 3:90
-0cd5 3:91
-0cd7 3:92
-0cd9 3:93
-0cdb 3:94
-0cdd 3:95
-0cdf 3:96
-0ce1 3:97
-0ce3 3:98
-0ce5 3:99
-0ce7 3:100
-0ce8 3:102
-0ceb 3:103
-0ced 3:104
-0cf0 3:105
-0cf2 3:106
-0cf5 3:107
-0cf7 3:108
-0cfa 3:109
-0cfc 3:110
-0cfe 3:111
-0d00 3:112
-0d03 3:113
-0d05 3:114
-0d08 3:115
-0d0a 3:116
-0d0d 3:117
-0d0f 3:118
-0d10 3:133
-0d12 3:134
-0d14 3:135
-0d16 3:138
-0d18 3:139
-0d19 3:140
-0d1b 3:141
-0d1d 3:142
-0d1f 3:143
-0d20 3:144
-0d22 3:145
-0d24 3:148
-0d26 3:149
-0d28 3:150
-0d2a 3:151
-0d2c 3:152
-0d2e 3:153
-0d31 3:155
-0d34 3:156
-0d36 3:157
-0d38 3:158
-0d3a 3:160
-0d3c 3:161
-0d3e 3:162
-0d40 3:163
-0d42 3:164
-0d44 3:165
-0d47 3:167
-0d49 3:168
-0d4c 3:169
-0d4e 3:170
-0d50 3:171
-0d52 3:173
-0d54 3:174
-0d56 3:175
-0d58 3:176
-0d5a 3:177
-0d5d 3:180
-0d60 3:181
-0d62 3:182
-0d64 3:183
-0d66 3:185
-0d68 3:186
-0d6a 3:187
-0d6c 3:188
-0d6e 3:189
-0d70 3:190
-0d73 3:192
-0d75 3:193
-0d78 3:194
-0d7a 3:195
-0d7c 3:196
-0d7e 3:198
-0d80 3:199
-0d82 3:200
-0d84 3:202
-0d85 3:205
-0d87 3:206
-0d89 3:207
-0d8b 3:209
-0d8d 3:210
-0d8f 3:211
-0d91 3:212
-0d94 3:213
-0d96 3:215
-0d98 3:216
-0d9a 3:217
-0d9c 3:218
-0d9e 3:219
-0da0 3:220
-0da2 3:221
-0da5 3:222
-0da7 3:223
-0daa 3:224
-0dac 3:226
-0dae 3:227
-0db0 3:228
-0db2 3:229
-0db4 3:230
-0db6 3:231
-0db9 3:232
-0dbb 3:234
-0dbd 3:235
-0dbf 3:236
-0dc1 3:237
-0dc3 3:238
-0dc5 3:239
-0dc7 3:240
-0dca 3:241
-0dcc 3:242
-0dcf 3:243
-0dd1 3:245
-0dd3 3:246
-0dd5 3:247
-0dd7 3:248
-0dd9 3:249
-0ddb 3:250
-0ddd 3:251
-0de0 3:252
-0de2 3:253
-0de5 3:254
-0de7 3:256
-0de9 3:257
-0deb 3:258
-0ded 3:259
-0def 3:260
-0df1 3:261
-0df4 3:262
-0df6 3:264
-0df8 3:265
-0dfa 3:266
-0dfc 3:267
-0dfd 4:3
-0efc 4:7
-0efe 4:9
-0f01 4:10
-0f04 4:11
-0f05 4:12
-0f07 4:13
-0f08 4:18
-0f0a 4:20
-0f0d 4:21
-0f10 4:22
-0f11 4:23
-0f13 4:24
-0f14 4:33
-0f16 4:34
-0f18 4:35
-0f1a 4:36
-0f1c 4:39
-0f1e 4:40
-0f21 4:41
-0f23 4:42
-0f26 4:45
-0f28 4:46
-0f2a 4:47
-0f2c 4:50
-0f2e 4:51
-0f30 4:52
-0f32 4:53
-0f34 4:54
-0f36 4:55
-0f38 4:56
-0f3a 4:57
-0f3d 4:59
-0f3f 4:60
-0f41 4:61
-0f43 4:62
-0f45 4:63
-0f47 4:64
-0f49 4:65
-0f4b 4:66
-0f4e 4:68
-0f50 4:69
-0f52 4:70
-0f54 4:71
-0f56 4:72
-0f58 4:73
-0f5a 4:74
-0f5c 4:75
-0f5d 4:76
-0f5f 4:77
-0f61 4:78
-0f64 4:80
-0f66 4:81
-0f68 4:82
-0f6a 4:83
-0f6c 4:84
-0f6e 4:85
-0f70 4:86
-0f71 4:87
-0f73 4:88
-0f75 4:91
-0f77 4:92
-0f78 4:93
-0f7a 4:94
-0f7c 4:95
-0f7e 4:96
-0f7f 4:97
-0f81 4:98
-0f83 4:99
-0f86 4:100
-0f88 4:101
-0f8a 4:104
-0f8b 4:106
-0f8d 4:107
-0f8f 4:109
-0f90 4:123
-0f92 4:124
-0f94 4:125
-0f96 4:126
-0f98 4:127
-0f9a 4:128
-0f9c 4:129
-0f9e 4:130
-0fa0 4:131
-0fa2 4:132
-0fa4 4:133
-0fa6 4:134
-0fa8 4:136
-0faa 4:138
-0fac 4:139
-0fae 4:140
-0faf 4:141
-0fb2 4:142
-0fb4 4:143
-0fb6 4:144
-0fb7 4:145
-0fb8 4:146
-0fba 4:147
-0fbd 4:148
-0fbf 4:149
-0fc2 4:150
-0fc3 4:151
-0fc4 4:152
-0fc6 4:154
-0fc8 4:155
-0fca 4:156
-0fcc 4:157
-0fce 4:158
-0fcf 4:159
-0fd1 4:161
-0fd3 4:164
-0fd5 4:165
-0fd6 4:166
-0fd8 4:167
-0fda 4:168
-0fdc 4:169
-0fdd 4:170
-0fdf 4:171
-0fe1 4:172
-0fe4 4:173
-0fe6 4:174
-0fe8 4:179
-0fe9 4:191
-0fea 4:192
-0feb 4:193
-0fec 4:194
-0fed 4:195
-0fef 4:196
-0ff1 4:197
-0ff2 4:198
-0ff3 4:199
-0ff4 4:200
-0ff7 4:201
-0ffa 4:202
-0ffb 4:203
-0ffe 4:204
-1001 4:206
-1004 4:207
-1006 4:208
-1007 4:209
-1008 4:210
-1009 4:211
-100a 4:212
-100b 4:222
-100c 4:223
-100d 4:224
-1010 4:225
-1013 4:226
-1014 4:227
-1015 4:228
-1016 4:239
-1017 4:240
-1018 4:241
-1019 4:242
-101c 4:243
-101f 4:244
-1020 4:245
-1023 4:246
-1026 4:247
-1028 4:249
-102b 4:250
-102d 4:251
-102e 4:252
-1030 4:253
-1031 4:261
-1033 4:262
-1035 4:263
-1037 4:265
-1039 4:266
-103c 4:267
-103e 4:268
-1041 4:270
-1042 4:272
-1044 4:273
-1046 4:274
-1048 4:285
-1049 4:286
-104a 4:287
-104b 4:288
-104c 4:289
-104f 4:290
-1052 4:291
-1053 4:292
-1054 4:293
-1055 4:294
-1058 4:295
-1059 4:296
-105a 4:297
-105b 4:298
-105c 4:299
-105f 4:300
-1062 4:301
-1063 4:302
-1065 4:303
-1066 4:304
-1067 4:305
-1068 4:307
-106b 4:308
-106c 4:316
-106f 4:317
-1071 4:319
-1074 4:320
-1077 4:321
-1078 4:322
-107a 4:323
-107c 4:324
-107d 4:335
-1080 4:337
-1083 4:339
-1086 4:341
-1089 4:342
-108a 4:350
-108b 4:351
-108e 4:352
-1090 4:353
-1093 4:354
-1095 4:355
-1098 4:357
-1099 4:358
-109c 4:359
-109e 4:360
-10a1 4:361
-10a3 4:362
-10a6 4:364
-10a7 4:377
-10a8 4:378
-10a9 4:379
-10ab 4:380
-10ac 4:381
-10ad 4:382
-10b0 4:383
-10b3 4:384
-10b4 4:385
-10b7 4:386
-10ba 4:387
-10bb 4:388
-10bc 4:389
-10bd 4:390
-10bf 4:391
-10c0 4:392
-10c1 4:393
-10c4 4:394
-10c7 4:395
-10c8 4:396
-10cb 4:397
-10ce 4:398
-10cf 4:407
-10d2 4:408
-10d4 4:410
-10d7 4:411
-10d8 4:412
-10da 4:414
-10dc 4:415
-10de 4:416
-10df 4:424
-10e2 4:425
-10e4 4:426
-10e6 4:428
-10e9 4:429
-10eb 4:430
-10ed 4:431
-10ef 4:432
-10f1 4:433
-10f3 4:435
-10f4 4:442
-10f7 4:443
-10f9 4:444
-10fb 4:446
-10fe 4:447
-1100 4:448
-1102 4:449
-1103 4:456
-1105 4:457
-1107 4:458
-1109 4:459
-110b 4:460
-110d 4:462
-1110 4:463
-1113 4:464
-1114 4:465
-1116 4:467
-1118 4:468
-1119 3:279
-111b 3:281
-111e 3:282
-1121 3:283
-1122 3:284
-1124 3:285
-1126 3:286
-1128 3:288
-112b 3:289
-112e 3:290
-112f 3:291
-1131 3:292
-1133 3:293
-1135 3:295
-1138 3:296
-113b 3:297
-113c 3:298
-113e 3:299
-1140 3:300
-1141 3:309
-1143 3:310
-1145 3:311
-1147 3:312
-1149 3:313
-114b 3:314
-114e 3:316
-1150 3:317
-1153 3:318
-1156 3:319
-1158 3:320
-115b 3:321
-115d 3:322
-1160 3:323
-1163 3:325
-1165 3:326
-1168 3:327
-116b 3:328
-116d 3:329
-1170 3:330
-1172 3:331
-1175 3:332
-1178 3:333
-117b 3:334
-117e 3:337
-1180 3:338
-1182 3:339
-1184 3:340
-1186 3:341
-1188 3:342
-118b 3:344
-118e 3:345
-1190 3:346
-1193 3:347
-1196 3:348
-1198 3:349
-119b 3:350
-119d 3:351
-11a0 3:352
-11a3 3:354
-11a5 3:355
-11a8 3:356
-11ab 3:357
-11ad 3:358
-11b0 3:359
-11b2 3:360
-11b5 3:361
-11b8 3:362
-11bb 3:363
-11be 3:365
-11c0 3:366
-11c3 3:367
-11c6 3:368
-11c8 3:369
-11cb 3:370
-11cd 3:371
-11d0 3:372
-11d3 3:373
-11d6 3:374
-11d9 3:377
-11db 3:378
-11dd 3:379
-11df 3:380
-11e2 3:382
-11e4 3:383
-11e7 3:384
-11ea 3:385
-11ec 3:386
-11ef 3:387
-11f1 3:388
-11f4 3:389
-11f7 3:391
-11f9 3:392
-11fc 3:393
-11ff 3:394
-1201 3:395
-1204 3:396
-1206 3:397
-1209 3:398
-120c 3:400
-120d 3:401
-1210 3:402
-1212 3:403
-1215 3:404
-1218 3:405
-121a 3:406
-121d 3:407
-1220 3:408
-1223 3:411
-1225 3:412
-1227 3:413
-1229 3:414
-122c 3:416
-122f 3:417
-1231 3:418
-1233 3:419
-1234 3:421
-1236 3:422
-1239 3:423
-123c 3:424
-123e 3:425
-1241 3:426
-1243 3:427
-1246 3:428
-1249 3:430
-124b 3:431
-124e 3:432
-1251 3:433
-1253 3:434
-1256 3:435
-1258 3:436
-125b 3:437
-125e 3:438
-1261 3:439
-1264 3:440
-1265 3:443
-1267 3:444
-1269 3:445
-126b 3:446
-126e 3:448
-1271 3:449
-1273 3:450
-1275 3:451
-1276 3:453
-1278 3:454
-127b 3:455
-127e 3:456
-1280 3:457
-1283 3:458
-1285 3:459
-1288 3:460
-128b 3:462
-128d 3:463
-1290 3:464
-1293 3:465
-1295 3:466
-1298 3:467
-129a 3:468
-129d 3:469
-12a0 3:470
-12a3 3:471
-12a6 3:473
-12a8 3:474
-12ab 3:475
-12ae 3:476
-12b0 3:477
-12b3 3:478
-12b5 3:479
-12b8 3:480
-12bb 3:481
-12be 3:482
-12c1 3:483
-12c2 3:486
-12c4 3:487
-12c6 3:488
-12c8 3:489
-12cb 3:491
-12ce 3:492
-12d0 3:493
-12d2 3:494
-12d3 3:496
-12d5 3:497
-12d8 3:498
-12da 3:499
-12dd 3:500
-12df 3:501
-12e2 3:502
-12e5 3:503
-12e7 3:504
-12ea 3:505
-12ec 3:506
-12ef 3:507
-12f2 3:509
-12f4 3:510
-12f7 3:511
-12fa 3:512
-12fc 3:513
-12ff 3:514
-1301 3:515
-1304 3:516
-1307 3:517
-130a 3:518
-130d 3:520
-130f 3:521
-1312 3:522
-1315 3:523
-1317 3:524
-131a 3:525
-131c 3:526
-131f 3:527
-1322 3:528
-1325 3:529
-1328 3:531
-1329 3:532
-132c 3:533
-132e 3:534
-1331 3:535
-1334 3:536
-1336 3:537
-1339 3:538
-133a 3:541
-133c 3:542
-133e 3:543
-1340 3:544
-1342 3:545
-1345 3:546
-1348 3:547
-134a 3:548
-134d 3:549
-134f 3:550
-1352 3:551
-1355 3:553
-1357 3:554
-135a 3:555
-135d 3:556
-135f 3:557
-1362 3:558
-1364 3:559
-1367 3:560
-136a 3:561
-136d 3:562
-1370 3:563
-1373 3:564
-1374 3:567
-1376 3:568
-1378 3:569
-137a 3:570
-137d 3:571
-137f 3:572
-1382 3:573
-1385 3:574
-1387 3:575
-138a 3:576
-138c 3:577
-138f 3:578
-1392 3:579
-1395 3:580
-1398 3:581
-139b 3:582
-139e 3:583
-139f 3:586
-13a1 3:587
-13a3 3:588
-13a5 3:589
-13a8 3:590
-13aa 3:591
-13ad 3:592
-13b0 3:593
-13b2 3:594
-13b5 3:595
-13b7 3:596
-13ba 3:597
-13bd 3:598
-13c0 3:599
-13c3 3:600
-13c6 3:601
-13c9 3:602
-13ca 3:605
-13cc 3:606
-13ce 3:607
-13d0 3:608
-13d3 3:609
-13d5 3:610
-13d8 3:611
-13db 3:612
-13dd 3:613
-13e0 3:614
-13e2 3:615
-13e5 3:616
-13e8 3:617
-13eb 3:618
-13ee 3:619
-13f1 3:620
-13f4 3:621
-13f5 3:624
-13f7 3:625
-13f9 3:626
-13fb 3:627
-13fe 3:628
-1400 3:629
-1403 3:630
-1406 3:631
-1408 3:632
-140b 3:633
-140d 3:634
-1410 3:635
-1413 3:636
-1416 3:637
-1419 3:638
-141c 3:639
-141f 3:640
-1420 3:643
-1422 3:644
-1424 3:645
-1426 3:646
-1429 3:647
-142b 3:648
-142e 3:649
-1431 3:650
-1433 3:651
-1436 3:652
-1438 3:653
-143b 3:654
-143e 3:655
-1441 3:656
-1444 3:657
-1447 3:658
-144a 3:661
-144c 3:662
-144e 3:663
-1450 3:664
-1453 3:665
-1455 3:666
-1458 3:667
-145b 3:668
-145d 3:669
-1460 3:670
-1462 3:671
-1465 3:672
-1468 3:673
-146b 3:674
-146e 3:675
-1471 3:676
-1474 3:679
-1476 3:680
-1478 3:681
-147a 3:682
-147b 3:684
-147d 3:685
-1480 3:686
-1483 3:687
-1485 3:688
-1488 3:689
-148a 3:690
-148d 3:691
-1490 3:693
-1492 3:694
-1495 3:695
-1498 3:696
-149a 3:697
-149d 3:698
-149f 3:699
-14a2 3:700
-14a5 3:701
-14a8 3:702
-14aa 3:703
-14ac 3:704
-14ae 3:707
-14b1 3:708
-14b3 3:709
-14b4 3:710
-14b7 3:711
-14ba 3:712
-14bd 3:713
-14bf 3:714
-14c2 3:715
-14c4 3:716
-14c6 3:717
-14c8 3:718
-14ca 3:719
-14cc 3:721
-14ce 3:722
-14d0 3:723
-14d2 3:724
-14d4 3:725
-14d6 3:727
-14d8 3:728
-14da 3:729
-14dc 3:730
-14de 3:731
-14e0 3:733
-14e2 3:734
-14e4 3:735
-14e6 3:736
-14e8 3:737
-14ea 3:739
-14ec 3:740
-14ef 3:741
-14f1 3:742
-14f4 3:743
-14f7 3:745
-14f9 3:746
-14fb 3:747
-14fe 3:750
-14ff 3:760
-1501 3:761
-1503 3:762
-1505 3:763
-1508 3:764
-1509 3:766
-150b 3:767
-150d 3:768
-1510 3:769
-1511 3:771
-1513 3:772
-1515 3:773
-1518 3:774
-1519 3:778
-151b 3:779
-151e 3:780
-1521 3:781
-1523 3:782
-1526 3:783
-1528 3:784
-152b 3:785
-152e 3:787
-1530 3:788
-1533 3:789
-1536 3:790
-1538 3:791
-153b 3:792
-153d 3:793
-1540 3:794
-1543 3:795
-1546 3:796
-1549 3:797
-154a 3:803
-154c 3:804
-154f 3:805
-1552 3:806
-1554 3:807
-1557 3:808
-1559 3:809
-155c 3:810
-155f 3:811
-1562 3:812
-1565 3:813
-1566 3:822
-1569 3:823
-156b 3:825
-156d 3:827
-1570 3:829
-1573 3:830
-1574 3:831
-1576 3:832
-1579 3:833
-157a 3:834
-157c 3:835
-157d 3:838
-157f 3:839
-1582 3:840
-1584 3:841
-1587 3:842
-1589 3:843
-158c 3:844
-158e 3:845
-1591 3:846
-1592 3:849
-1595 3:850
-1596 3:851
-1598 3:852
-159b 3:853
-159d 3:854
-15a0 3:856
-15a3 3:857
-15a4 3:858
-15a6 3:859
-15a9 3:860
-15ab 3:861
-15ae 3:863
-15af 3:871
-15cd 3:873
-15eb 3:875
-1609 3:877
-1627 3:879
-1645 3:881
-1663 3:883
-1681 3:885
-169f 3:887
-16bd 3:889
-16db 3:891
-16f9 3:893
-1717 3:895
-1735 3:897
-1753 3:899
-1771 3:901
-178f 3:903
-17ad 3:905
-17cb 3:907
-17e9 3:909
-1807 3:911
-1825 3:913
-1843 3:915
-1861 3:917
-187f 3:919
-189d 3:921
-18bb 3:923
-18d9 3:925
-18f7 3:927
-1915 3:929
-1933 3:931
-1951 3:933
-196f 3:935
-198d 3:937
-19ab 3:939
-19c9 3:941
-19e7 3:943
-1a05 3:945
-1a23 3:947
-1a41 3:949
-1a5f 3:951
-1a7d 3:953
-1a9b 3:955
-1ab9 3:957
-1ad7 3:959
-1af5 3:963
-1b09 3:964
-1b1d 3:965
-1b31 3:966
-1b45 3:967
-1b4f 3:977
-1b53 3:982
-1b57 3:984
-1b5b 3:986
-1b5f 3:988
-1b63 3:990
-1b67 3:992
-1b6b 3:994
-1b6f 3:996
-1b73 3:998
-1b77 3:1000
-1b7b 3:1002
-1b7f 3:1004
-1b83 3:1006
-1b87 3:1008
-1b8b 3:1010
-1b8f 3:1012
-1b93 3:1014
-1b97 3:1016
-1b9b 3:1018
-1b9f 3:1020
-1ba3 3:1022
-1ba7 3:1024
-1bab 3:1026
-1baf 3:1028
-1bb3 3:1030
-1bb7 3:1032
-1bbb 3:1034
-1bbf 3:1036
-1bc3 3:1038
-1bc7 3:1040
-1bcb 3:1042
-1bcf 3:1044
-1bd3 3:1046
-1bd7 3:1048
-1bdb 3:1050
-1bdf 3:1052
-1be3 3:1054
-1be7 3:1056
-1beb 3:1058
-1bef 3:1060
-1bf3 3:1062
-1bf7 3:1064
-1bfb 3:1066
-1bff 3:1068
-1c03 3:1070
-1c07 3:1072
-1c0b 3:1074
-1c0f 3:1076
-1c13 3:1078
-1c17 3:1080
-1c1b 3:1082
-1c1f 3:1084
-1c23 3:1086
-1c27 3:1088
-1c2b 3:1090
-1c2f 3:1092
-1c33 3:1094
-1c37 3:1096
-1c3b 3:1098
-1c3f 3:1100
-1c43 3:1102
-1c47 3:1104
-1c4b 3:1106
-1c4f 3:1108
-1c53 3:1110
-1c57 3:1112
-1c5b 3:1114
-1c5f 3:1116
-1c63 3:1119
-1c67 3:1121
-1c6b 3:1123
-1c6f 3:1125
-1c73 3:1127
-1c77 3:1129
-1c7b 3:1131
-1c7f 3:1133
-1c83 3:1135
-1c87 3:1137
-1c8b 3:1139
-1c8f 3:1141
-1c93 3:1145
-1c97 3:1147
-1c9b 3:1149
-1c9f 3:1151
-1ca3 3:1153
-1ca7 3:1155
-1cab 3:1157
-1caf 3:1159
-1cb3 3:1161
-1cb7 3:1163
-1cbb 3:1165
-1cbf 3:1167
-1cc3 3:1169
-1cc7 3:1171
-1ccb 3:1173
-1ccf 3:1175
-1cd3 3:1177
-1cd7 3:1179
-1cdb 3:1181
-1cdf 3:1184
-1ce3 3:1193
-1cef 3:1194
-1cfb 3:1195
-1d07 3:1196
-1d13 3:1197
-1d1f 3:1198
-1d2b 3:1199
-1d37 3:1200
-1d43 3:1201
-1d4f 3:1202
-1d5b 3:1203
-1d67 3:1204
-1d73 3:1205
-1d7f 3:1206
-1d8b 3:1207
-1d97 3:1208
-1da3 3:1209
-1dad 3:1219
-1dae 3:1220
-1dc7 3:1222
-1dc8 3:1223
-1dd7 3:1225
-1dd8 3:1226
-1df6 3:1229
-1df7 3:1230
-1e0b 3:1232
-1e0c 3:1233
-1e23 3:1235
-1e24 3:1236
-1e3c 3:1239
-1e3d 3:1240
-1e56 3:1242
-1e57 3:1243
-1e6f 3:1246
-1e70 3:1247
-1e8e 3:1249
-1e8f 3:1250
-1eb2 3:1253
-1eb3 3:1254
-1ecb 3:1256
-1ecc 3:1257
-1eec 3:1259
-1eed 3:1260
-1f05 3:1262
-1f06 3:1263
-1f16 3:1265
-1f17 3:1266
-1f2e 3:1269
-1f2f 3:1270
-1f52 3:1272
-1f53 3:1273
-1f70 3:1275
-1f71 3:1276
-1f86 3:1279
-1f87 3:1280
-1fa1 3:1282
-1fa2 3:1283
-1fb8 3:1286
-1fb9 3:1287
-1fc7 3:1290
-1fc8 3:1291
-1fd0 3:1294
-1fd1 3:1295
-1fdf 3:1298
-1fe0 3:1299
-1fea 3:1302
-1feb 3:1303
-1ffa 3:1306
-1ffb 3:1307
-2003 3:1310
-2004 3:1311
-200a 3:1314
-200b 3:1315
-201d 3:1317
-201e 3:1318
-202e 3:1322
-2056 3:1323
-207e 3:1324
-20a6 3:1325
-20ce 3:1326
-20f6 3:1327
-211e 3:1328
-2146 3:1329
-216e 3:1330
-2196 3:1331
-21be 3:1332
-21e6 3:1333
-220e 3:1334
-2236 3:1335
-225e 3:1336
-2286 3:1337
-22ae 3:1338
-22d6 3:1339
-22fe 3:1340
-2326 3:1341
-234e 3:1342
-2376 3:1343
-239e 3:1344
-23c6 3:1345
-23ee 3:1346
-2416 3:1347
-243e 3:1348
-2466 3:1349
-248e 3:1350
-24b6 3:1351
-24de 3:1352
-2506 3:1353
-252e 3:1354
-2556 3:1355
-257e 3:1356
-25a6 3:1357
-25ce 3:1358
-25f6 3:1359
-261e 3:1360
-2646 3:1361
-266e 3:1362
-2696 3:1363
-26be 3:1364
-26e6 3:1365
-270e 3:1366
-2736 3:1367
-275e 3:1368
-2786 3:1369
-27ae 3:1370
-27d6 3:1371
-27ff 3:1376
-2810 3:1377
-2821 3:1378
-2832 3:1379
-2843 3:1380
-2854 3:1381
-2865 3:1382
-2876 3:1383
-2887 3:1384
-2898 3:1385
-28a9 3:1386
-28ba 3:1387
-28cb 3:1388
-28dc 3:1398
-28dd 3:1399
-28de 3:1400
-28df 3:1401
-28e0 3:1402
-28e1 3:1403
-28e2 3:1406
-28e3 3:1407
-28e4 3:1408
-28e5 3:1409
-28e6 3:1410
-28e7 3:1411
-28e8 3:1415
-28e9 3:1416
-28ea 3:1417
-28eb 3:1418
-28ec 3:1419
-28ed 3:1420
-28ee 3:1423
-28ef 3:1424
-28f0 3:1425
-28f1 3:1426
-28f2 3:1427
-28f3 3:1428
-28f4 3:1431
-28f5 3:1432
-28f6 3:1433
-28f7 3:1434
-28f8 3:1435
-28f9 3:1436
-28fa 3:1439
-28fb 3:1440
-28fc 3:1441
-28fd 3:1442
-28fe 3:1443
-28ff 3:1444
-2900 3:1447
-2901 3:1448
-2902 3:1449
-2903 3:1450
-2904 3:1451
-2905 3:1452
-2906 3:1455
-2907 3:1456
-2908 3:1457
-2909 3:1458
-290a 3:1459
-290b 3:1460
-290c 3:1463
-290d 3:1464
-290e 3:1465
-290f 3:1466
-2910 3:1467
-2911 3:1468
-2912 3:1471
-2913 3:1472
-2914 3:1473
-2915 3:1474
-2916 3:1475
-2917 3:1476
-2918 3:1479
-2919 3:1480
-291a 3:1481
-291b 3:1482
-291c 3:1483
-291d 3:1484
-291e 3:1487
-291f 3:1488
-2920 3:1489
-2921 3:1490
-2922 3:1491
-2923 3:1492
-2924 3:1495
-2925 3:1496
-2926 3:1497
-2927 3:1498
-2928 3:1499
-2929 3:1500
-292a 3:1503
-292b 3:1504
-292c 3:1505
-292d 3:1506
-292e 3:1507
-292f 3:1508
-2930 3:1511
-2931 3:1512
-2932 3:1513
-2933 3:1514
-2934 3:1515
-2935 3:1516
-2936 3:1519
-2937 3:1520
-2938 3:1521
-2939 3:1522
-293a 3:1523
-293b 3:1524
-293c 3:1527
-293d 3:1528
-293e 3:1529
-293f 3:1530
-2940 3:1531
-2941 3:1532
-2942 3:1535
-2943 3:1536
-2944 3:1537
-2945 3:1538
-2946 3:1539
-2947 3:1540
-2948 3:1543
-2949 3:1544
-294a 3:1545
-294b 3:1546
-294c 3:1547
-294d 3:1548
-294e 3:1551
-294f 3:1552
-2950 3:1553
-2951 3:1554
-2952 3:1555
-2953 3:1556
-2954 3:1559
-2955 3:1560
-2956 3:1561
-2957 3:1562
-2958 3:1563
-2959 3:1564
-295a 3:1567
-295b 3:1568
-295c 3:1569
-295d 3:1570
-295e 3:1571
-295f 3:1572
-2960 3:1575
-2961 3:1576
-2962 3:1577
-2963 3:1578
-2964 3:1579
-2965 3:1580
-2966 3:1583
-2967 3:1584
-2968 3:1585
-2969 3:1586
-296a 3:1587
-296b 3:1588
-296c 3:1591
-296d 3:1592
-296e 3:1593
-296f 3:1594
-2970 3:1595
-2971 3:1596
-2972 3:1599
-2973 3:1600
-2974 3:1601
-2975 3:1602
-2976 3:1603
-2977 3:1604
-2978 3:1607
-2979 3:1608
-297a 3:1609
-297b 3:1610
-297c 3:1611
-297d 3:1612
-297e 3:1615
-297f 3:1616
-2980 3:1617
-2981 3:1618
-2982 3:1619
-2983 3:1620
-2984 3:1623
-2985 3:1624
-2986 3:1625
-2987 3:1626
-2988 3:1627
-2989 3:1628
-298a 3:1631
-298b 3:1632
-298c 3:1633
-298d 3:1634
-298e 3:1635
-298f 3:1636
-2990 3:1639
-2991 3:1640
-2992 3:1641
-2993 3:1642
-2994 3:1643
-2995 3:1644
-2996 3:1647
-2997 3:1648
-2998 3:1649
-2999 3:1650
-299a 3:1651
-299b 3:1652
-299c 3:1655
-299d 3:1656
-299e 3:1657
-299f 3:1658
-29a0 3:1659
-29a1 3:1660
-29a2 3:1663
-29a3 3:1664
-29a4 3:1665
-29a5 3:1666
-29a6 3:1667
-29a7 3:1668
-29a8 3:1671
-29a9 3:1672
-29aa 3:1673
-29ab 3:1674
-29ac 3:1675
-29ad 3:1676
-29ae 3:1679
-29af 3:1680
-29b0 3:1681
-29b1 3:1682
-29b2 3:1683
-29b3 3:1684
-29b4 3:1687
-29b5 3:1688
-29b6 3:1689
-29b7 3:1690
-29b8 3:1691
-29b9 3:1692
-29ba 3:1695
-29bb 3:1696
-29bc 3:1697
-29bd 3:1698
-29be 3:1699
-29bf 3:1700
-29c0 3:1703
-29c1 3:1704
-29c2 3:1705
-29c3 3:1706
-29c4 3:1707
-29c5 3:1708
-29c6 3:1711
-29c7 3:1712
-29c8 3:1713
-29c9 3:1714
-29ca 3:1715
-29cb 3:1716
-29cc 3:1719
-29cd 3:1720
-29ce 3:1721
-29cf 3:1722
-29d0 3:1723
-29d1 3:1724
-29d2 3:1727
-29d3 3:1728
-29d4 3:1729
-29d5 3:1730
-29d6 3:1731
-29d7 3:1732
-29d8 3:1736
-29d9 3:1737
-29da 3:1738
-29db 3:1739
-29dc 3:1740
-29dd 3:1741
-29de 3:1744
-29df 3:1745
-29e0 3:1746
-29e1 3:1747
-29e2 3:1748
-29e3 3:1749
-29e4 3:1752
-29e5 3:1753
-29e6 3:1754
-29e7 3:1755
-29e8 3:1756
-29e9 3:1757
-29ea 3:1760
-29eb 3:1761
-29ec 3:1762
-29ed 3:1763
-29ee 3:1764
-29ef 3:1765
-29f0 3:1768
-29f1 3:1769
-29f2 3:1770
-29f3 3:1771
-29f4 3:1772
-29f5 3:1773
-29f6 3:1776
-29f7 3:1777
-29f8 3:1778
-29f9 3:1779
-29fa 3:1780
-29fb 3:1781
-29fc 3:1784
-29fd 3:1785
-29fe 3:1786
-29ff 3:1787
-2a00 3:1788
-2a01 3:1789
-2a02 3:1792
-2a03 3:1793
-2a04 3:1794
-2a05 3:1795
-2a06 3:1796
-2a07 3:1797
-2a08 3:1800
-2a09 3:1801
-2a0a 3:1802
-2a0b 3:1803
-2a0c 3:1804
-2a0d 3:1805
-2a0e 3:1808
-2a0f 3:1809
-2a10 3:1810
-2a11 3:1811
-2a12 3:1812
-2a13 3:1813
-2a14 3:1816
-2a15 3:1817
-2a16 3:1818
-2a17 3:1819
-2a18 3:1820
-2a19 3:1821
-2a1a 3:1824
-2a1b 3:1825
-2a1c 3:1826
-2a1d 3:1827
-2a1e 3:1828
-2a1f 3:1829
-2a20 3:1832
-2a21 3:1833
-2a22 3:1834
-2a23 3:1835
-2a24 3:1836
-2a25 3:1837
-2a26 3:1840
-2a27 3:1841
-2a28 3:1842
-2a29 3:1843
-2a2a 3:1844
-2a2b 3:1845
-2a2c 3:1849
-2a2d 3:1850
-2a2e 3:1851
-2a2f 3:1852
-2a30 3:1853
-2a31 3:1854
-2a32 3:1857
-2a33 3:1858
-2a34 3:1859
-2a35 3:1860
-2a36 3:1861
-2a37 3:1862
-2a38 3:1866
-2a39 3:1867
-2a3a 3:1868
-2a3b 3:1869
-2a3c 3:1870
-2a3d 3:1871
-2a3e 3:1874
-2a3f 3:1875
-2a40 3:1876
-2a41 3:1877
-2a42 3:1878
-2a43 3:1879
-2a44 3:1882
-2a45 3:1883
-2a46 3:1884
-2a47 3:1885
-2a48 3:1886
-2a49 3:1887
-2a4a 3:1890
-2a4b 3:1891
-2a4c 3:1892
-2a4d 3:1893
-2a4e 3:1894
-2a4f 3:1895
-2a50 3:1898
-2a51 3:1899
-2a52 3:1900
-2a53 3:1901
-2a54 3:1902
-2a55 3:1903
-2a56 3:1906
-2a57 3:1907
-2a58 3:1908
-2a59 3:1909
-2a5a 3:1910
-2a5b 3:1911
-2a5c 3:1914
-2a5d 3:1915
-2a5e 3:1916
-2a5f 3:1917
-2a60 3:1918
-2a61 3:1919
-2a62 3:1922
-2a63 3:1923
-2a64 3:1924
-2a65 3:1925
-2a66 3:1926
-2a67 3:1927
-2a68 3:1930
-2a69 3:1931
-2a6a 3:1932
-2a6b 3:1933
-2a6c 3:1934
-2a6d 3:1935
-2a6e 3:1938
-2a6f 3:1939
-2a70 3:1940
-2a71 3:1941
-2a72 3:1942
-2a73 3:1943
-2a74 3:1946
-2a75 3:1947
-2a76 3:1948
-2a77 3:1949
-2a78 3:1950
-2a79 3:1951
-2a7a 3:1954
-2a7b 3:1955
-2a7c 3:1956
-2a7d 3:1957
-2a7e 3:1958
-2a7f 3:1959
-2a80 3:1962
-2a81 3:1963
-2a82 3:1964
-2a83 3:1965
-2a84 3:1966
-2a85 3:1967
-2a86 3:1970
-2a87 3:1971
-2a88 3:1972
-2a89 3:1973
-2a8a 3:1974
-2a8b 3:1975
-2a8c 3:1978
-2a8d 3:1979
-2a8e 3:1980
-2a8f 3:1981
-2a90 3:1982
-2a91 3:1983
-2a92 3:1986
-2a93 3:1987
-2a94 3:1988
-2a95 3:1989
-2a96 3:1990
-2a97 3:1991
-2a98 3:1994
-2a99 3:1995
-2a9a 3:1996
-2a9b 3:1997
-2a9c 3:1998
-2a9d 3:1999
-2a9e 3:2002
-2a9f 3:2003
-2aa0 3:2004
-2aa1 3:2005
-2aa2 3:2006
-2aa3 3:2007
-2aa4 3:2010
-2aa5 3:2011
-2aa6 3:2012
-2aa7 3:2013
-2aa8 3:2014
-2aa9 3:2015
-2aaa 3:2018
-2aab 3:2019
-2aac 3:2020
-2aad 3:2021
-2aae 3:2022
-2aaf 3:2023
-2ab0 3:2026
-2ab1 3:2027
-2ab2 3:2028
-2ab3 3:2029
-2ab4 3:2030
-2ab5 3:2031
-2ab6 3:2034
-2ab7 3:2035
-2ab8 3:2036
-2ab9 3:2037
-2aba 3:2038
-2abb 3:2039
-2abc 3:2042
-2abd 3:2043
-2abe 3:2044
-2abf 3:2045
-2ac0 3:2046
-2ac1 3:2047
-2ac2 3:2050
-2ac3 3:2051
-2ac4 3:2052
-2ac5 3:2053
-2ac6 3:2054
-2ac7 3:2055
-2ac8 3:2058
-2ac9 3:2059
-2aca 3:2060
-2acb 3:2061
-2acc 3:2062
-2acd 3:2063
-2ace 3:2066
-2acf 3:2067
-2ad0 3:2068
-2ad1 3:2069
-2ad2 3:2070
-2ad3 3:2071
-2ad4 3:2076
-2ad5 3:2077
-2ad6 3:2078
-2ad7 3:2079
-2ad8 3:2080
-2ad9 3:2081
-2ada 3:2084
-2adb 3:2085
-2adc 3:2086
-2add 3:2087
-2ade 3:2088
-2adf 3:2089
-2ae0 3:2092
-2ae1 3:2093
-2ae2 3:2094
-2ae3 3:2095
-2ae4 3:2096
-2ae5 3:2097
-2ae6 3:2100
-2ae7 3:2101
-2ae8 3:2102
-2ae9 3:2103
-2aea 3:2104
-2aeb 3:2105
-2aec 3:2108
-2aed 3:2109
-2aee 3:2110
-2aef 3:2111
-2af0 3:2112
-2af1 3:2113
-2af2 3:2116
-2af3 3:2117
-2af4 3:2118
-2af5 3:2119
-2af6 3:2120
-2af7 3:2121
-2af8 3:2124
-2af9 3:2125
-2afa 3:2126
-2afb 3:2127
-2afc 3:2128
-2afd 3:2129
-2afe 3:2132
-2aff 3:2133
-2b00 3:2134
-2b01 3:2135
-2b02 3:2136
-2b03 3:2137
-2b04 3:2140
-2b05 3:2141
-2b06 3:2142
-2b07 3:2143
-2b08 3:2144
-2b09 3:2145
-2b0a 3:2148
-2b0b 3:2149
-2b0c 3:2150
-2b0d 3:2151
-2b0e 3:2152
-2b0f 3:2153
-2b10 3:2156
-2b11 3:2157
-2b12 3:2158
-2b13 3:2159
-2b14 3:2160
-2b15 3:2161
-2b16 3:2164
-2b17 3:2165
-2b18 3:2166
-2b19 3:2167
-2b1a 3:2168
-2b1b 3:2169
-2b1c 3:2172
-2b1d 3:2173
-2b1e 3:2174
-2b1f 3:2175
-2b20 3:2176
-2b21 3:2177
-2b22 3:2180
-2b23 3:2181
-2b24 3:2182
-2b25 3:2183
-2b26 3:2184
-2b27 3:2185
-2b28 3:2189
-2b29 3:2190
-2b2a 3:2191
-2b2b 3:2192
-2b2c 3:2193
-2b2d 3:2194
-2b2e 3:2197
-2b2f 3:2198
-2b30 3:2199
-2b31 3:2200
-2b32 3:2201
-2b33 3:2202
-2b34 3:2205
-2b35 3:2206
-2b36 3:2207
-2b37 3:2208
-2b38 3:2209
-2b39 3:2210
-2b3a 3:2213
-2b3b 3:2214
-2b3c 3:2215
-2b3d 3:2216
-2b3e 3:2217
-2b3f 3:2218
-2b40 3:2221
-2b41 3:2222
-2b42 3:2223
-2b43 3:2224
-2b44 3:2225
-2b45 3:2226
-2b46 3:2229
-2b47 3:2230
-2b48 3:2231
-2b49 3:2232
-2b4a 3:2233
-2b4b 3:2234
-2b4c 3:2237
-2b4d 3:2238
-2b4e 3:2239
-2b4f 3:2240
-2b50 3:2241
-2b51 3:2242
-2b52 3:2245
-2b53 3:2246
-2b54 3:2247
-2b55 3:2248
-2b56 3:2249
-2b57 3:2250
-2b58 3:2253
-2b59 3:2254
-2b5a 3:2255
-2b5b 3:2256
-2b5c 3:2257
-2b5d 3:2258
-2b5e 3:2261
-2b5f 3:2262
-2b60 3:2263
-2b61 3:2264
-2b62 3:2265
-2b63 3:2266
-2b64 3:2268
-2b65 3:2269
-2b66 3:2270
-2b67 3:2271
-2b68 3:2272
-2b69 3:2273
-2b6a 3:2276
-2b6b 3:2277
-2b6c 3:2278
-2b6d 3:2279
-2b6e 3:2280
-2b6f 3:2281
-2b70 3:2284
-2b71 3:2285
-2b72 3:2286
-2b73 3:2287
-2b74 3:2288
-2b75 3:2289
-2b76 3:2292
-2b77 3:2293
-2b78 3:2294
-2b79 3:2295
-2b7a 3:2296
-2b7b 3:2297
-2b7c 3:2300
-2b7d 3:2301
-2b7e 3:2302
-2b7f 3:2303
-2b80 3:2304
-2b81 3:2305
-2b82 3:2308
-2b83 3:2309
-2b84 3:2310
-2b85 3:2311
-2b86 3:2312
-2b87 3:2313
-2b88 3:2316
-2b89 3:2317
-2b8a 3:2318
-2b8b 3:2319
-2b8c 3:2320
-2b8d 3:2321
-2b8e 3:2324
-2b8f 3:2325
-2b90 3:2326
-2b91 3:2327
-2b92 3:2328
-2b93 3:2329
-2b94 3:2332
-2b95 3:2333
-2b96 3:2334
-2b97 3:2335
-2b98 3:2336
-2b99 3:2337
-2b9a 3:2340
-2b9b 3:2341
-2b9c 3:2342
-2b9d 3:2343
-2b9e 3:2344
-2b9f 3:2345
-2ba0 3:2348
-2ba1 3:2349
-2ba2 3:2350
-2ba3 3:2351
-2ba4 3:2352
-2ba5 3:2353
-2ba6 3:2356
-2ba7 3:2357
-2ba8 3:2358
-2ba9 3:2359
-2baa 3:2360
-2bab 3:2361
-2bac 3:2364
-2bad 3:2365
-2bae 3:2366
-2baf 3:2367
-2bb0 3:2368
-2bb1 3:2369
-2bb2 3:2372
-2bb3 3:2373
-2bb4 3:2374
-2bb5 3:2375
-2bb6 3:2376
-2bb7 3:2377
-2bb8 3:2380
-2bb9 3:2381
-2bba 3:2382
-2bbb 3:2383
-2bbc 3:2384
-2bbd 3:2385
-2bbe 3:2388
-2bbf 3:2389
-2bc0 3:2390
-2bc1 3:2391
-2bc2 3:2392
-2bc3 3:2393
-2bc4 3:2396
-2bc5 3:2397
-2bc6 3:2398
-2bc7 3:2399
-2bc8 3:2400
-2bc9 3:2401
-2bca 3:2404
-2bcb 3:2405
-2bcc 3:2406
-2bcd 3:2407
-2bce 3:2408
-2bcf 3:2409
-2bd0 3:2412
-2bd1 3:2413
-2bd2 3:2414
-2bd3 3:2415
-2bd4 3:2416
-2bd5 3:2417
-2bd6 5:7
-2c00 5:8
-2c60 5:11
-2c6c 5:13
-2c72 5:15
-2c78 5:17
-2c7e 5:19
-2c84 5:21
-2c8a 5:23
-2c90 5:25
-2c96 5:27
-2c9c 5:29
-2ca2 5:31
-2ca8 5:33
-2cae 5:35
-2cb4 5:37
-2cc0 5:39
-2cc6 5:41
-2ccc 5:43
-2cd2 5:45
-2cd8 5:47
-2cde 5:51
-2cdf 5:53
-2ce0 5:55
-2ce1 5:60
-2ce2 5:62
-2ce3 5:65
-2ce4 5:71
-2cea 5:74
-2ceb 5:79
-2cec 5:82
-2ced 5:84
-2cee 5:86
-2cef 5:88
-2cf0 5:91
-2cf1 5:94
-2cf2 5:99
-2cf3 5:104
-2cf4 5:108
-2d00 5:110
-2d30 5:112
-2d60 5:118
-2d80 5:120
-2d81 5:121
-2d82 5:122
-2d83 5:123
-2d84 5:127
-2da4 5:129
-2da5 5:130
-2da6 5:131
-2da7 5:132
-2da8 5:133
-2da9 5:134
-2daa 5:135
-2dab 5:136
-2dac 5:137
-2dad 5:138
-2dae 5:139
-2daf 5:140
-2db0 5:141
-2db1 5:175
-2db3 5:176
-2db6 5:178
-2db9 5:179
-2dbb 5:180
-2dbe 5:182
-2dc0 5:183
-2dc3 5:184
-2dc6 5:185
-2dc8 5:186
-2dcb 5:187
-2dcd 5:188
-2dd0 5:189
-2dd3 5:192
-2dd6 5:193
-2dd8 5:195
-2dda 5:196
-2ddc 5:197
-2dde 5:198
-2ddf 5:199
-2de1 5:200
-2de3 5:201
-2de4 5:202
-2de7 5:203
-2de8 5:204
-2dea 5:205
-2dec 5:206
-2def 5:207
-2df2 5:208
-2df4 5:209
-2df7 5:210
-2df9 5:211
-2dfc 5:212
-2dff 5:213
-2e00 5:224
-2e02 5:225
-2e04 5:226
-2e06 5:227
-2e08 5:230
-2e0a 5:231
-2e0c 5:232
-2e0f 5:233
-2e10 5:235
-2e12 5:236
-2e15 5:237
-2e16 5:239
-2e18 5:240
-2e1b 5:241
-2e1c 5:243
-2e1e 5:244
-2e21 5:245
-2e22 5:247
-2e24 5:248
-2e27 5:249
-2e28 5:251
-2e2a 5:252
-2e2d 5:253
-2e2e 5:264
-2e30 5:265
-2e32 5:266
-2e34 5:267
-2e36 5:268
-2e38 5:269
-2e3a 5:270
-2e3c 5:275
-2e3f 5:276
-2e41 5:279
-2e43 5:280
-2e45 5:284
-2e48 5:285
-2e4a 5:286
-2e4d 5:287
-2e4f 5:288
-2e51 5:289
-2e53 5:290
-2e55 5:291
-2e57 5:292
-2e59 5:293
-2e5b 5:295
-2e5d 5:299
-2e60 5:300
-2e61 5:301
-2e63 5:302
-2e65 5:306
-2e67 5:307
-2e69 5:308
-2e6c 5:309
-2e6e 5:310
-2e70 5:311
-2e72 5:312
-2e74 5:313
-2e76 5:320
-2e79 5:321
-2e7b 5:322
-2e7e 5:323
-2e80 5:324
-2e83 5:325
-2e85 5:326
-2e88 5:327
-2e8a 5:328
-2e8c 5:330
-2e8f 5:331
-2e92 5:334
-2e95 5:335
-2e98 5:337
-2e9b 5:338
-2e9e 5:340
-2ea1 5:341
-2ea4 5:343
-2ea7 5:344
-2eaa 5:346
-2ead 5:347
-2eb0 5:349
-2eb3 5:350
-2eb6 5:352
-2eb9 5:353
-2ebc 5:356
-2ebf 5:357
-2ec2 5:359
-2ec5 5:360
-2ec8 5:362
-2ecb 5:363
-2ece 5:365
-2ed1 5:366
-2ed4 5:368
-2ed7 5:369
-2ed9 5:370
-2edc 5:371
-2ede 5:372
-2ee1 5:373
-2ee3 5:374
-2ee6 5:375
-2ee8 5:377
-2eea 5:378
-2eed 5:379
-2ef0 5:381
-2ef3 5:382
-2ef6 5:384
-2ef9 5:385
-2efc 5:387
-2eff 5:388
-2f02 5:390
-2f05 5:391
-2f08 5:396
-2f0a 5:397
-2f0c 5:399
-2f0f 5:400
-2f11 5:401
-2f14 5:402
-2f16 5:403
-2f18 5:404
-2f1a 5:405
-2f1c 5:406
-2f1e 5:416
-2f20 5:417
-2f22 5:419
-2f24 5:420
-2f27 5:421
-2f29 5:422
-2f2b 5:431
-2f2e 5:432
-2f30 5:433
-2f33 5:435
-2f35 5:436
-2f37 5:437
-2f39 5:438
-2f3b 5:440
-2f3d 5:443
-2f3f 5:444
-2f41 5:445
-2f43 5:446
-2f45 5:447
-2f48 5:451
-2f4b 5:452
-2f4e 5:455
-2f51 5:456
-2f54 5:460
-2f57 5:461
-2f5a 5:465
-2f5c 5:467
-2f5f 5:468
-2f62 5:469
-2f63 5:470
-2f65 5:471
-2f67 5:484
-2f69 5:486
-2f6c 5:487
-2f6f 5:488
-2f70 5:489
-2f72 5:490
-2f74 5:498
-2f76 5:500
-2f79 5:501
-2f7c 5:502
-2f7d 5:503
-2f7f 5:504
-2f81 5:507
-2f84 5:508
-2f87 5:511
-2f8a 5:512
-2f8d 5:516
-2f90 5:517
-2f93 5:520
-2f96 5:521
-2f99 5:524
-2f9c 5:525
-2f9f 5:528
-2fa2 5:530
-2fa5 5:539
-2fa6 5:547
-2fa8 5:548
-2fa9 5:549
-2fab 5:550
-2fad 5:551
-2faf 5:553
-2fb0 5:562
-2fb2 5:563
-2fb3 5:564
-2fb5 5:565
-2fb7 5:566
-2fb9 5:568
-2fba 5:591
-2fbc 5:592
-2fbf 5:594
-2fc2 5:595
-2fc4 5:596
-2fc7 5:598
-2fc9 5:599
-2fcc 5:600
-2fcf 5:601
-2fd1 5:602
-2fd4 5:603
-2fd6 5:604
-2fd9 5:605
-2fdc 5:607
-2fde 5:608
-2fe0 5:609
-2fe2 5:610
-2fe4 5:612
-2fe6 5:613
-2fe8 5:614
-2fea 5:615
-2feb 5:616
-2fee 5:617
-2ff0 5:618
-2ff1 5:620
-2ff4 5:621
-2ff6 5:622
-2ff7 5:624
-2ffa 5:625
-2ffc 5:626
-2ffd 5:628
-3000 5:629
-3002 5:630
-3003 5:632
-3006 5:633
-3008 5:634
-3009 5:636
-300c 5:637
-300e 5:638
-300f 5:649
-3011 5:650
-3013 5:651
-3015 5:652
-3017 5:653
-3019 5:654
-301b 5:655
-301d 5:656
-301f 5:662
-3021 5:663
-3023 5:664
-3025 5:666
-3028 5:667
-3029 5:668
-302b 5:669
-302d 5:670
-302f 5:671
-3031 5:672
-3032 5:673
-3033 5:674
-3036 5:678
-3038 5:679
-303a 5:680
-303c 5:682
-303f 5:683
-3041 5:684
-3044 5:685
-3045 5:686
-3047 5:687
-3049 5:688
-304b 5:690
-304d 5:691
-304f 5:692
-3051 5:693
-3053 5:694
-3055 5:695
-3057 5:697
-3059 5:699
-305b 5:700
-305e 5:701
-3061 5:702
-3063 5:703
-3065 5:704
-3068 5:705
-306b 5:706
-306d 5:707
-306f 5:709
-3072 5:710
-3075 5:713
-3078 5:714
-307b 5:716
-307e 5:717
-3081 5:719
-3084 5:720
-3087 5:722
-308a 5:723
-308d 5:725
-3090 5:726
-3093 5:728
-3096 5:729
-3099 5:731
-309c 5:732
-309f 5:735
-30a2 5:736
-30a5 5:738
-30a8 5:739
-30ab 5:741
-30ae 5:742
-30b1 5:744
-30b4 5:745
-30b7 5:747
-30b9 5:748
-30bc 5:749
-30bf 5:750
-30c1 5:751
-30c3 5:752
-30c6 5:753
-30c9 5:754
-30cb 5:757
-30cd 5:758
-30d0 5:760
-30d3 5:761
-30d6 5:763
-30d9 5:764
-30dc 5:766
-30df 5:767
-30e2 5:769
-30e5 5:770
-30e8 5:771
-30eb 5:776
-30ed 5:777
-30ef 5:779
-30f1 5:780
-30f4 5:781
-30f7 5:782
-30f9 5:783
-30fb 5:784
-30fd 5:785
-30ff 5:786
-3101 5:796
-3103 5:797
-3105 5:799
-3107 5:800
-310a 5:801
-310c 5:802
-310e 5:811
-3110 5:812
-3113 5:813
-3116 5:815
-3118 5:816
-311a 5:817
-311c 5:818
-311e 5:820
-3120 5:823
-3122 5:824
-3124 5:825
-3126 5:826
-3128 5:827
-312b 5:831
-312e 5:832
-3131 5:835
-3134 5:836
-3137 5:840
-313a 5:841
-313d 5:845
-313f 5:847
-3142 5:848
-3145 5:849
-3146 5:850
-3148 5:851
-314a 5:864
-314c 5:866
-314f 5:867
-3152 5:868
-3153 5:869
-3155 5:870
-3157 5:878
-3159 5:880
-315c 5:881
-315f 5:882
-3160 5:883
-3162 5:884
-3164 5:887
-3167 5:888
-316a 5:891
-316d 5:892
-3170 5:896
-3173 5:897
-3176 5:900
-3179 5:901
-317c 5:904
-317f 5:905
-3182 5:909
-3185 5:910
-3188 5:919
-318b 5:920
-318d 5:922
-318f 5:924
-3191 5:925
-3193 5:926
-3195 5:927
-3196 5:928
-3198 5:929
-319a 5:930
-319b 5:932
-319d 5:933
-319f 5:934
-31a0 5:935
-31a2 5:936
-31a4 5:937
-31a5 5:939
-31a7 5:940
-31a9 5:941
-31aa 5:942
-31ac 5:943
-31ae 5:944
-31af 5:945
-31b2 5:946
-31b3 5:947
-31b5 5:948
-31b7 5:949
-31ba 5:950
-31bd 5:951
-31bf 5:952
-31c2 5:953
-31c4 5:954
-31c7 5:955
-31ca 5:956
-31cb 5:963
-31cc 5:969
-31cd 5:970
-31e4 5:972
-31e5 5:973
-31f8 5:975
-31f9 5:976
-320f 5:979
-3218 6:8
-3219 6:12
-321a 6:13
-321d 6:14
-321e 6:19
-321f 6:20
-3221 6:21
-3223 6:22
-3225 6:23
-3226 6:24
-3228 6:25
-322a 6:27
-322d 6:28
-322f 6:29
-3232 6:32
-3234 6:33
-3236 6:34
-3239 6:35
-323a 6:36
-323c 6:37
-323f 6:38
-3240 6:39
-3242 6:40
-3245 6:41
-3246 6:42
-3248 6:43
-324b 6:45
-324d 6:46
-3250 6:47
-3252 6:48
-3255 6:49
-3257 6:50
-325a 6:51
-325d 6:52
-3260 6:53
-3261 6:54
-3264 6:55
-3266 6:56
-3267 6:62
-3268 6:63
-326a 6:64
-326c 6:65
-326e 6:66
-326f 6:67
-3271 6:68
-3273 6:70
-3276 6:72
-3278 6:73
-327b 6:74
-327e 6:75
-327f 6:76
-3282 6:77
-3284 6:78
-3285 6:83
-3287 6:84
-3289 6:85
-328b 6:86
-328c 6:87
-328e 6:88
-3290 6:89
-3291 6:92
-3293 6:93
-3296 6:94
-3297 6:95
-3299 6:96
-329b 6:97
-329d 6:98
-32a0 6:100
-32a2 6:101
-32a4 6:102
-32a6 6:104
-32a9 6:105
-32ac 6:111
-32ae 6:112
-32b0 6:113
-32b2 6:114
-32b3 6:115
-32b5 6:116
-32b7 6:117
-32b8 6:120
-32ba 6:121
-32bd 6:122
-32be 6:123
-32c0 6:124
-32c2 6:125
-32c4 6:126
-32c7 6:128
-32c9 6:130
-32ca 6:132
-32cc 6:133
-32ce 6:135
-32d1 7:3
-32d3 7:4
-32d6 7:5
-32d8 7:6
-32da 7:7
-32db 7:10
-32dd 7:11
-32df 7:12
-32e1 7:13
-32e3 7:14
-32e4 7:15
-32e6 7:16
-32e8 7:17
-32ea 7:18
-32ec 7:19
-32ee 7:20
-32ef 8:8
-32f2 8:9
-32f5 8:10
-32f8 8:11
-32fb 8:12
-32fe 8:13
-3301 8:14
-3304 8:15
-3307 8:16
-330a 8:17
-330d 8:18
-3310 8:22
-3313 8:23
-3315 8:24
-3318 8:26
-331a 8:27
-331d 8:31
-3320 8:32
-3322 8:33
-3325 9:5
-3327 9:6
-332a 9:7
-332c 9:8
-332e 9:10
-3330 9:11
-3333 9:12
-3334 9:13
-3335 9:14
-3337 9:15
-333a 9:16
-333b 9:17
-333c 9:18
-333e 9:19
-3340 9:20
-3341 9:24
-3344 9:26
-3345 9:27
-3347 9:28
-3348 10:2
-3350 10:9
-3351 10:10
-3352 10:11
-3353 10:12
-3354 10:13
-3356 10:14
-3358 10:15
-3359 10:16
-335a 10:22
-335c 10:23
-335e 10:24
-3360 10:25
-3361 10:26
-3363 10:27
-3365 10:28
-3366 10:29
-3368 10:30
-336a 10:34
-336d 10:35
-336f 10:36
-3372 10:37
-3374 10:38
-3375 10:44
-3377 10:45
-3379 10:46
-337b 10:47
-337c 10:48
-337e 10:49
-3380 10:50
-3381 10:51
-3383 10:52
-3385 10:56
-3388 10:57
-338a 10:58
-338d 10:59
-338f 10:60
-3390 10:66
-3392 10:67
-3394 10:68
-3396 10:69
-3397 10:70
-3399 10:71
-339b 10:72
-339c 10:73
-339e 10:74
-33a0 10:78
-33a3 10:79
-33a5 10:80
-33a8 10:81
-33a9 10:82
-33ab 10:83
-33ac 11:15
-3400 11:18
-3500 11:31
+0657 2:136
+0659 2:137
+065b 2:138
+065d 2:139
+065f 2:140
+0661 2:141
+0663 2:142
+0665 2:143
+0668 2:144
+066b 2:145
+066e 2:146
+0671 2:148
+0674 2:150
+0677 2:152
+0679 2:153
+067b 2:154
+067e 2:155
+067f 2:156
+0681 2:157
+0684 2:158
+0685 2:159
+0688 2:161
+068a 2:162
+068c 2:163
+068f 2:164
+0690 2:165
+0692 2:166
+0695 2:167
+0696 2:168
+0699 2:170
+069b 2:171
+069d 2:172
+06a0 2:173
+06a1 2:174
+06a3 2:175
+06a6 2:176
+06a7 2:177
+06aa 2:178
+06ab 2:183
+06ad 2:184
+06b0 2:185
+06b2 2:186
+06b5 2:187
+06b7 2:188
+06ba 2:189
+06bc 2:190
+06bf 2:191
+06c1 2:192
+06c4 2:193
+06c6 2:194
+06c9 2:195
+06cb 2:196
+06ce 2:197
+06d0 2:198
+06d3 2:199
+06d5 2:200
+06d8 2:201
+06da 2:202
+06dd 2:203
+06df 2:204
+06e2 2:206
+06e4 2:207
+06e7 2:208
+06e9 2:209
+06ec 2:210
+06ee 2:211
+06f1 2:212
+06f4 2:213
+06f6 2:214
+06f8 2:216
+06fb 2:217
+06fd 2:218
+0700 2:219
+0703 2:221
+0706 2:222
+0708 2:223
+070b 2:224
+070d 2:225
+070e 2:226
+0711 2:227
+0713 2:228
+0714 2:229
+0717 2:244
+0719 2:245
+071c 2:246
+071f 2:247
+0721 2:248
+0723 2:249
+0725 2:250
+0727 2:251
+0729 2:252
+072b 2:253
+072d 2:254
+072f 2:255
+0731 2:256
+0733 2:257
+0735 2:258
+0737 2:259
+0739 2:260
+073b 2:261
+073d 2:262
+073f 2:263
+0741 2:264
+0743 2:265
+0745 2:266
+0747 2:267
+0749 2:268
+074b 2:269
+074d 2:270
+074f 2:271
+0751 2:272
+0754 2:273
+0756 2:274
+0758 2:275
+075a 2:276
+075d 2:277
+075f 2:278
+0761 2:279
+0763 2:282
+0766 2:283
+0768 2:284
+076b 2:285
+076d 2:286
+0770 2:287
+0772 2:288
+0775 2:289
+0777 2:290
+077a 2:291
+077c 2:292
+077e 2:293
+0780 2:294
+0783 2:295
+0785 2:296
+0788 2:297
+078a 2:298
+078d 2:299
+078f 2:300
+0791 2:301
+0793 2:302
+0795 2:303
+0797 2:304
+0799 2:305
+079b 2:306
+079e 2:307
+07a0 2:308
+07a3 2:309
+07a5 2:311
+07a6 2:315
+07b0 2:316
+07b1 2:319
+07b8 2:320
+07b9 2:323
+07c3 2:324
+07c4 2:327
+07cc 2:328
+07cd 2:331
+07d0 2:332
+07d1 2:339
+07d3 2:340
+07d5 2:341
+07d7 2:342
+07d9 2:343
+07db 2:344
+07dd 2:345
+07df 2:347
+07e1 2:348
+07e3 2:349
+07e6 2:350
+07e8 2:352
+07ea 2:353
+07ec 2:354
+07ee 2:355
+07f1 2:356
+07f3 2:358
+07f5 2:359
+07f7 2:360
+07f9 2:361
+07fb 2:363
+07fe 2:364
+0800 2:366
+0802 2:367
+0804 2:368
+0806 2:369
+0808 2:370
+080a 2:372
+080c 2:373
+080e 2:374
+0810 2:375
+0813 2:376
+0815 2:377
+0818 2:381
+0819 2:387
+081b 2:388
+081d 2:389
+081f 2:390
+0821 2:391
+0823 2:392
+0825 2:393
+0827 2:394
+0829 2:395
+082b 2:396
+082d 2:397
+082f 2:398
+0831 2:399
+0833 2:400
+0835 2:401
+0837 2:402
+0839 2:404
+083b 2:405
+083d 2:407
+083f 2:408
+0841 2:410
+0843 2:412
+0845 2:413
+0846 2:415
+0848 2:416
+084a 2:417
+084c 2:418
+084e 2:419
+084f 2:431
+0851 2:432
+0853 2:433
+0855 2:434
+0857 2:435
+0859 2:437
+085b 2:438
+085d 2:439
+085f 2:440
+0861 2:442
+0863 2:443
+0865 2:444
+0867 2:445
+0869 2:446
+086b 2:447
+086d 2:449
+086f 2:450
+0871 2:451
+0873 2:452
+0875 2:453
+0877 2:454
+0879 2:455
+087b 2:456
+087d 2:457
+087f 2:459
+0881 2:460
+0883 2:461
+0885 2:462
+0887 2:463
+0889 2:464
+088b 2:465
+088d 2:466
+088f 2:467
+0891 2:468
+0893 2:470
+0895 2:471
+0897 2:472
+0899 2:473
+089b 2:474
+089d 2:475
+089f 2:476
+08a1 2:477
+08a3 2:479
+08a5 2:480
+08a7 2:481
+08a9 2:482
+08ab 2:483
+08ac 2:485
+08ae 2:486
+08b0 2:492
+08b1 2:506
+08b3 2:507
+08b5 2:508
+08b7 2:517
+08b9 2:518
+08ba 2:519
+08bc 2:520
+08be 2:521
+08c0 2:522
+08c1 2:523
+08c3 2:524
+08c5 2:528
+08c7 2:529
+08c9 2:530
+08cb 2:531
+08cd 2:532
+08cf 2:533
+08d1 2:534
+08d3 2:535
+08d6 2:536
+08d8 2:537
+08da 2:538
+08dc 2:540
+08de 2:541
+08e0 2:542
+08e2 2:543
+08e4 2:544
+08e6 2:545
+08e8 2:546
+08eb 2:547
+08ed 2:548
+08ef 2:549
+08f1 2:551
+08f3 2:552
+08f5 2:553
+08f7 2:554
+08f9 2:555
+08fb 2:556
+08fd 2:557
+0900 2:558
+0902 2:559
+0904 2:560
+0906 2:562
+0908 2:563
+090a 2:564
+090c 2:565
+090e 2:566
+0910 2:567
+0912 2:568
+0915 2:569
+0917 2:570
+0919 2:572
+091b 2:573
+091d 2:574
+091f 2:576
+0920 2:578
+0922 2:579
+0924 2:580
+0926 2:581
+0928 2:582
+092a 2:583
+092c 2:584
+092e 2:585
+0930 2:586
+0932 2:588
+0934 2:589
+0936 2:590
+0938 2:591
+093a 2:593
+093c 2:594
+093e 2:595
+0940 2:597
+0942 2:598
+0944 2:599
+0946 2:601
+0948 2:602
+094a 2:603
+094c 2:605
+094e 2:606
+0950 2:607
+0952 2:608
+0953 3:3
+0a52 3:7
+0a54 3:9
+0a57 3:10
+0a5a 3:11
+0a5b 3:12
+0a5d 3:13
+0a5e 3:18
+0a60 3:20
+0a63 3:21
+0a66 3:22
+0a67 3:23
+0a69 3:24
+0a6a 3:33
+0a6c 3:34
+0a6e 3:35
+0a70 3:36
+0a72 3:39
+0a74 3:40
+0a77 3:41
+0a79 3:42
+0a7c 3:45
+0a7e 3:46
+0a80 3:47
+0a82 3:50
+0a84 3:51
+0a86 3:52
+0a88 3:53
+0a8a 3:54
+0a8c 3:55
+0a8e 3:56
+0a90 3:57
+0a93 3:59
+0a95 3:60
+0a97 3:61
+0a99 3:62
+0a9b 3:63
+0a9d 3:64
+0a9f 3:65
+0aa1 3:66
+0aa4 3:68
+0aa6 3:69
+0aa8 3:70
+0aaa 3:71
+0aac 3:72
+0aae 3:73
+0ab0 3:74
+0ab2 3:75
+0ab3 3:76
+0ab5 3:77
+0ab7 3:78
+0aba 3:80
+0abc 3:81
+0abe 3:82
+0ac0 3:83
+0ac2 3:84
+0ac4 3:85
+0ac6 3:86
+0ac7 3:87
+0ac9 3:88
+0acb 3:91
+0acd 3:92
+0ace 3:93
+0ad0 3:94
+0ad2 3:95
+0ad4 3:96
+0ad5 3:97
+0ad7 3:98
+0ad9 3:99
+0adc 3:100
+0ade 3:101
+0ae0 3:104
+0ae1 3:106
+0ae3 3:107
+0ae5 3:109
+0ae6 3:123
+0ae8 3:124
+0aea 3:125
+0aec 3:126
+0aee 3:127
+0af0 3:128
+0af2 3:129
+0af4 3:130
+0af6 3:131
+0af8 3:132
+0afa 3:133
+0afc 3:134
+0afe 3:136
+0b00 3:138
+0b02 3:139
+0b04 3:140
+0b05 3:141
+0b08 3:142
+0b0a 3:143
+0b0c 3:144
+0b0d 3:145
+0b0e 3:146
+0b10 3:147
+0b13 3:148
+0b15 3:149
+0b18 3:150
+0b19 3:151
+0b1a 3:152
+0b1c 3:154
+0b1e 3:155
+0b20 3:156
+0b22 3:157
+0b24 3:158
+0b25 3:159
+0b27 3:161
+0b29 3:164
+0b2b 3:165
+0b2c 3:166
+0b2e 3:167
+0b30 3:168
+0b32 3:169
+0b33 3:170
+0b35 3:171
+0b37 3:172
+0b3a 3:173
+0b3c 3:174
+0b3e 3:179
+0b3f 3:191
+0b40 3:192
+0b41 3:193
+0b42 3:194
+0b43 3:195
+0b45 3:196
+0b47 3:197
+0b48 3:198
+0b49 3:199
+0b4a 3:200
+0b4d 3:201
+0b50 3:202
+0b51 3:203
+0b54 3:204
+0b57 3:206
+0b5a 3:207
+0b5c 3:208
+0b5d 3:209
+0b5e 3:210
+0b5f 3:211
+0b60 3:212
+0b61 3:222
+0b62 3:223
+0b63 3:224
+0b66 3:225
+0b69 3:226
+0b6a 3:227
+0b6b 3:228
+0b6c 3:239
+0b6d 3:240
+0b6e 3:241
+0b6f 3:242
+0b72 3:243
+0b75 3:244
+0b76 3:245
+0b79 3:246
+0b7c 3:247
+0b7e 3:249
+0b81 3:250
+0b83 3:251
+0b84 3:252
+0b86 3:253
+0b87 3:261
+0b89 3:262
+0b8b 3:263
+0b8d 3:265
+0b8f 3:266
+0b92 3:267
+0b94 3:268
+0b97 3:270
+0b98 3:272
+0b9a 3:273
+0b9c 3:274
+0b9e 3:285
+0b9f 3:286
+0ba0 3:287
+0ba1 3:288
+0ba2 3:289
+0ba5 3:290
+0ba8 3:291
+0ba9 3:292
+0baa 3:293
+0bab 3:294
+0bae 3:295
+0baf 3:296
+0bb0 3:297
+0bb1 3:298
+0bb2 3:299
+0bb5 3:300
+0bb8 3:301
+0bb9 3:302
+0bbb 3:303
+0bbc 3:304
+0bbd 3:305
+0bbe 3:307
+0bc1 3:308
+0bc2 3:316
+0bc5 3:317
+0bc7 3:319
+0bca 3:320
+0bcd 3:321
+0bce 3:322
+0bd0 3:323
+0bd2 3:324
+0bd3 3:335
+0bd6 3:337
+0bd9 3:339
+0bdc 3:341
+0bdf 3:342
+0be0 3:350
+0be1 3:351
+0be4 3:352
+0be6 3:353
+0be9 3:354
+0beb 3:355
+0bee 3:357
+0bef 3:358
+0bf2 3:359
+0bf4 3:360
+0bf7 3:361
+0bf9 3:362
+0bfc 3:364
+0bfd 3:377
+0bfe 3:378
+0bff 3:379
+0c01 3:380
+0c02 3:381
+0c03 3:382
+0c06 3:383
+0c09 3:384
+0c0a 3:385
+0c0d 3:386
+0c10 3:387
+0c11 3:388
+0c12 3:389
+0c13 3:390
+0c15 3:391
+0c16 3:392
+0c17 3:393
+0c1a 3:394
+0c1d 3:395
+0c1e 3:396
+0c21 3:397
+0c24 3:398
+0c25 3:407
+0c28 3:408
+0c2a 3:410
+0c2d 3:411
+0c2e 3:412
+0c30 3:414
+0c32 3:415
+0c34 3:416
+0c35 3:424
+0c38 3:425
+0c3a 3:426
+0c3c 3:428
+0c3f 3:429
+0c41 3:430
+0c43 3:431
+0c45 3:432
+0c47 3:433
+0c49 3:435
+0c4a 3:442
+0c4d 3:443
+0c4f 3:444
+0c51 3:446
+0c54 3:447
+0c56 3:448
+0c58 3:449
+0c59 3:456
+0c5b 3:457
+0c5d 3:458
+0c5f 3:459
+0c61 3:460
+0c63 3:462
+0c66 3:463
+0c69 3:464
+0c6a 3:465
+0c6c 3:467
+0c6e 3:468
+0c6f 2:620
+0c71 2:622
+0c74 2:623
+0c77 2:624
+0c78 2:625
+0c7a 2:626
+0c7c 2:627
+0c7e 2:629
+0c81 2:630
+0c84 2:631
+0c85 2:632
+0c87 2:633
+0c89 2:634
+0c8a 2:642
+0c8d 2:643
+0c8f 2:644
+0c92 2:645
+0c95 2:646
+0c98 2:647
+0c9b 2:648
+0c9e 2:649
+0ca1 2:650
+0ca3 2:651
+0ca6 2:652
+0ca9 2:653
+0cac 2:654
+0caf 2:655
+0cb2 2:656
+0cb5 2:658
+0cb7 2:659
+0cba 2:660
+0cbd 2:661
+0cc0 2:662
+0cc3 2:663
+0cc6 2:664
+0cc9 2:665
+0ccb 2:666
+0cce 2:667
+0cd1 2:668
+0cd4 2:669
+0cd7 2:670
+0cda 2:671
+0cdd 2:673
+0cdf 2:674
+0ce2 2:675
+0ce5 2:676
+0ce8 2:677
+0ceb 2:678
+0cee 2:679
+0cf1 2:680
+0cf3 2:681
+0cf6 2:682
+0cf9 2:683
+0cfc 2:684
+0cff 2:685
+0d02 2:686
+0d05 2:688
+0d07 2:689
+0d0a 2:690
+0d0d 2:691
+0d10 2:692
+0d13 2:693
+0d16 2:694
+0d19 2:695
+0d1b 2:696
+0d1e 2:697
+0d21 2:698
+0d24 2:699
+0d27 2:700
+0d2a 2:701
+0d2d 2:703
+0d2f 2:704
+0d32 2:705
+0d35 2:706
+0d38 2:707
+0d3b 2:708
+0d3e 2:709
+0d41 2:710
+0d43 2:711
+0d46 2:712
+0d49 2:713
+0d4c 2:714
+0d4f 2:715
+0d52 2:716
+0d55 2:718
+0d57 2:719
+0d5a 2:720
+0d5d 2:721
+0d60 2:722
+0d63 2:723
+0d66 2:724
+0d69 2:725
+0d6b 2:726
+0d6e 2:727
+0d71 2:728
+0d74 2:729
+0d77 2:730
+0d7a 2:731
+0d7d 2:733
+0d7f 2:734
+0d82 2:735
+0d85 2:736
+0d88 2:737
+0d8b 2:738
+0d8e 2:739
+0d91 2:740
+0d93 2:741
+0d96 2:742
+0d99 2:743
+0d9c 2:744
+0d9f 2:745
+0da2 2:746
+0da5 2:749
+0da7 2:750
+0daa 2:751
+0dad 2:752
+0db0 2:754
+0db1 2:763
+0db4 2:764
+0db6 2:765
+0db8 2:766
+0dba 2:767
+0dbc 2:768
+0dbe 2:770
+0dc0 2:771
+0dc2 2:772
+0dc4 2:774
+0dc6 2:775
+0dc8 2:776
+0dca 2:778
+0dcc 2:779
+0dce 2:781
+0dd0 2:783
+0dd2 2:784
+0dd4 2:785
+0dd6 2:787
+0dd8 2:788
+0dda 2:789
+0ddc 2:791
+0dde 2:792
+0de0 2:793
+0de2 2:795
+0de4 2:796
+0de6 2:797
+0de8 2:801
+0dea 2:802
+0deb 2:811
+0ded 2:812
+0def 2:813
+0df1 2:814
+0df4 2:815
+0df5 2:816
+0df6 2:817
+0df9 2:818
+0dfc 2:819
+0dfd 2:820
+0e00 2:821
+0e03 2:822
+0e06 2:823
+0e09 2:824
+0e0a 2:826
+0e0c 2:827
+0e0f 2:828
+0e10 2:836
+0e12 2:837
+0e13 2:838
+0e15 2:839
+0e17 2:840
+0e1a 2:841
+0e1b 2:842
+0e1c 2:843
+0e1f 2:844
+0e22 2:845
+0e25 2:846
+0e26 2:847
+0e29 2:848
+0e2c 2:849
+0e2f 2:850
+0e31 2:852
+0e34 2:853
+0e37 2:854
+0e38 2:856
+0e3b 2:857
+0e3d 2:859
+0e40 2:860
+0e41 2:861
+0e43 2:863
+0e45 2:865
+0e48 2:866
+0e4a 2:867
+0e4c 2:868
+0e4f 2:869
+0e52 2:870
+0e53 2:873
+0e56 2:874
+0e57 2:875
+0e59 2:876
+0e5a 2:878
+0e79 2:880
+0e7b 2:881
+0e7d 2:882
+0e7f 2:883
+0e82 2:885
+0e84 2:886
+0e87 2:887
+0e8a 2:888
+0e8c 2:889
+0e8f 2:890
+0e91 2:891
+0e94 2:892
+0e97 2:894
+0e99 2:895
+0e9c 2:896
+0e9f 2:897
+0ea1 2:898
+0ea4 2:899
+0ea6 2:900
+0ea9 2:901
+0eac 2:902
+0eaf 2:903
+0eb2 2:906
+0eb4 2:907
+0eb7 2:908
+0eba 2:909
+0ebc 2:910
+0ebf 2:911
+0ec1 2:912
+0ec4 2:913
+0ec7 2:915
+0ec9 2:916
+0ecc 2:917
+0ecf 2:918
+0ed1 2:919
+0ed4 2:920
+0ed6 2:921
+0ed9 2:922
+0edc 2:923
+0edf 2:924
+0ee2 2:926
+0ee4 2:927
+0ee7 2:928
+0eea 2:929
+0eec 2:930
+0eef 2:931
+0ef1 2:932
+0ef4 2:933
+0ef7 2:935
+0ef9 2:936
+0efc 2:937
+0eff 2:938
+0f01 2:939
+0f04 2:940
+0f06 2:941
+0f09 2:942
+0f0c 2:943
+0f0f 2:944
+0f12 2:946
+0f14 2:947
+0f16 2:948
+0f18 2:949
+0f1a 2:950
+0f1b 2:954
+0f1d 2:955
+0f1f 2:956
+0f21 2:957
+0f24 2:959
+0f26 2:960
+0f29 2:961
+0f2c 2:962
+0f2e 2:963
+0f31 2:964
+0f33 2:965
+0f36 2:966
+0f39 2:968
+0f3b 2:969
+0f3e 2:970
+0f41 2:971
+0f43 2:972
+0f46 2:973
+0f48 2:974
+0f4b 2:975
+0f4e 2:976
+0f51 2:977
+0f54 2:979
+0f56 2:980
+0f59 2:981
+0f5c 2:982
+0f5e 2:983
+0f61 2:984
+0f63 2:985
+0f66 2:986
+0f69 2:988
+0f6b 2:989
+0f6e 2:990
+0f71 2:991
+0f73 2:992
+0f76 2:993
+0f78 2:994
+0f7b 2:995
+0f7e 2:996
+0f81 2:997
+0f84 2:999
+0f86 2:1000
+0f89 2:1001
+0f8c 2:1002
+0f8e 2:1003
+0f91 2:1004
+0f93 2:1005
+0f96 2:1006
+0f99 2:1008
+0f9b 2:1009
+0f9e 2:1010
+0fa1 2:1011
+0fa3 2:1012
+0fa6 2:1013
+0fa8 2:1014
+0fab 2:1015
+0fae 2:1016
+0fb1 2:1017
+0fb4 2:1019
+0fb6 2:1020
+0fb9 2:1021
+0fbc 2:1022
+0fbe 2:1023
+0fc1 2:1024
+0fc3 2:1025
+0fc6 2:1026
+0fc9 2:1028
+0fcb 2:1029
+0fce 2:1030
+0fd1 2:1031
+0fd3 2:1032
+0fd6 2:1033
+0fd8 2:1034
+0fdb 2:1035
+0fde 2:1036
+0fe1 2:1037
+0fe4 2:1038
+0fe5 2:1041
+0fe7 2:1042
+0fe9 2:1043
+0feb 2:1044
+0fed 2:1045
+0ff0 2:1046
+0ff3 2:1047
+0ff5 2:1048
+0ff8 2:1049
+0ffa 2:1050
+0ffd 2:1051
+1000 2:1053
+1002 2:1054
+1005 2:1055
+1008 2:1056
+100a 2:1057
+100d 2:1058
+100f 2:1059
+1012 2:1060
+1015 2:1061
+1018 2:1062
+101b 2:1063
+101c 2:1066
+101e 2:1067
+1020 2:1068
+1022 2:1069
+1024 2:1071
+1026 2:1072
+1028 2:1073
+102a 2:1075
+102c 2:1076
+102f 2:1077
+1032 2:1078
+1034 2:1079
+1037 2:1080
+1039 2:1081
+103c 2:1082
+103f 2:1084
+1041 2:1085
+1044 2:1086
+1047 2:1087
+1049 2:1088
+104c 2:1089
+104e 2:1090
+1051 2:1091
+1054 2:1092
+1057 2:1093
+105a 2:1095
+105c 2:1096
+105f 2:1097
+1062 2:1098
+1064 2:1099
+1067 2:1100
+1069 2:1101
+106c 2:1102
+106f 2:1104
+1071 2:1105
+1074 2:1106
+1077 2:1107
+1079 2:1108
+107c 2:1109
+107e 2:1110
+1081 2:1111
+1084 2:1112
+1087 2:1113
+108a 2:1115
+108b 2:1124
+108e 2:1125
+1090 2:1127
+1093 2:1128
+1095 2:1129
+1097 2:1131
+109a 2:1132
+109b 2:1133
+109d 2:1134
+10a0 2:1135
+10a3 2:1137
+10a4 2:1141
+10a6 2:1142
+10a9 2:1143
+10ab 2:1144
+10ae 2:1145
+10b0 2:1146
+10b3 2:1147
+10b5 2:1148
+10b8 2:1149
+10b9 2:1152
+10bc 2:1153
+10bf 2:1154
+10c0 2:1162
+10c3 2:1163
+10c5 2:1164
+10c7 2:1165
+10c9 2:1166
+10cc 2:1167
+10cf 2:1169
+10d1 2:1171
+10d3 2:1173
+10d6 2:1175
+10d9 2:1176
+10da 2:1177
+10dc 2:1178
+10df 2:1179
+10e0 2:1180
+10e2 2:1182
+10e3 2:1186
+10e6 2:1187
+10e7 2:1188
+10e9 2:1189
+10ec 2:1190
+10ee 2:1191
+10f1 2:1193
+10f4 2:1194
+10f5 2:1195
+10f7 2:1196
+10fa 2:1197
+10fc 2:1198
+10ff 2:1200
+1100 2:1203
+1101 2:1204
+1102 2:1205
+1103 2:1206
+1106 2:1207
+1109 2:1208
+110a 2:1209
+110d 2:1210
+1110 2:1211
+1112 2:1212
+1115 2:1213
+1118 2:1214
+1119 2:1215
+111c 2:1216
+111d 2:1217
+111f 2:1218
+1122 2:1219
+1123 2:1220
+1126 2:1221
+1129 2:1222
+112a 2:1223
+112c 2:1224
+112f 2:1225
+1132 2:1226
+1133 2:1227
+1135 2:1228
+1138 2:1229
+113b 2:1230
+113e 2:1231
+1140 2:1232
+1143 2:1234
+1145 2:1235
+1148 2:1236
+1149 2:1238
+114c 2:1239
+114d 2:1244
+114f 2:1245
+1151 2:1246
+1153 2:1247
+1155 2:1248
+1157 2:1250
+1159 2:1251
+115b 2:1252
+115d 2:1253
+115f 2:1254
+1161 2:1255
+1163 2:1256
+1165 2:1257
+1166 2:1259
+1168 2:1260
+116a 2:1261
+116c 2:1262
+116e 2:1263
+1170 2:1264
+1172 2:1265
+1174 2:1266
+1175 2:1268
+1177 2:1269
+1179 2:1270
+117b 2:1271
+117d 2:1272
+117f 2:1273
+1181 2:1274
+1182 2:1276
+1184 2:1277
+1185 2:1280
+1187 2:1282
+1189 2:1283
+118b 2:1284
+118d 2:1285
+118f 2:1286
+1191 2:1287
+1193 2:1288
+1194 2:1290
+1196 2:1291
+1198 2:1292
+119a 2:1293
+119c 2:1294
+119e 2:1295
+11a0 2:1296
+11a2 2:1297
+11a3 2:1299
+11a5 2:1300
+11a7 2:1301
+11a9 2:1302
+11ab 2:1303
+11ac 2:1305
+11ae 2:1306
+11b0 2:1307
+11b2 2:1308
+11b4 2:1309
+11b6 2:1310
+11b8 2:1311
+11ba 2:1312
+11bb 2:1314
+11bd 2:1315
+11be 2:1317
+11c0 2:1318
+11c2 2:1319
+11c4 2:1320
+11c6 2:1321
+11c8 2:1322
+11ca 2:1323
+11cc 2:1324
+11ce 2:1325
+11d0 2:1326
+11d2 2:1327
+11d4 2:1328
+11d5 2:1330
+11d7 2:1331
+11d8 2:1333
+11da 2:1334
+11dc 2:1335
+11de 2:1336
+11e0 2:1337
+11e2 2:1338
+11e4 2:1339
+11e6 2:1340
+11e7 2:1342
+11e9 2:1343
+11eb 2:1344
+11ed 2:1345
+11ef 2:1346
+11f1 2:1347
+11f3 2:1348
+11f4 2:1350
+11f6 2:1351
+11f7 2:1353
+11f9 2:1354
+11fa 2:1357
+11fd 2:1358
+11ff 2:1359
+1201 2:1361
+1203 2:1363
+1206 2:1364
+1207 2:1365
+1209 2:1366
+120a 2:1367
+120c 2:1368
+120f 2:1369
+1211 2:1371
+1212 2:1373
+1213 2:1374
+1214 2:1375
+1217 2:1376
+1219 2:1377
+121c 2:1378
+121e 2:1379
+1221 2:1381
+1222 2:1382
+1223 2:1384
+1225 2:1385
+1228 2:1386
+122a 2:1387
+122d 2:1388
+122e 2:1396
+124c 2:1397
+126a 2:1398
+1288 2:1399
+12a6 2:1400
+12c4 2:1401
+12e2 2:1402
+1300 2:1408
+1320 2:1410
+1340 2:1412
+1360 2:1414
+1380 2:1416
+13a0 2:1418
+13c0 2:1420
+13e0 2:1422
+1400 2:1424
+1420 2:1426
+1440 2:1428
+1460 2:1430
+1480 2:1432
+14a0 2:1434
+14c0 2:1436
+14e0 2:1438
+1500 2:1440
+1520 2:1442
+1540 2:1444
+1560 2:1446
+1580 2:1448
+15a0 2:1450
+15c0 2:1452
+15e0 2:1454
+1600 2:1456
+1620 2:1458
+1640 2:1460
+1660 2:1462
+1680 2:1464
+16a0 2:1466
+16c0 2:1468
+16e0 2:1470
+1700 2:1472
+1720 2:1474
+1740 2:1476
+1760 2:1478
+1780 2:1480
+17a0 2:1482
+17c0 2:1484
+17e0 2:1486
+1800 2:1488
+1820 2:1490
+1840 2:1492
+1860 2:1494
+1880 2:1496
+18a0 2:1498
+18c0 2:1500
+18e0 2:1502
+1900 2:1504
+1920 2:1508
+1934 2:1509
+1948 2:1510
+195c 2:1511
+1970 2:1512
+1982 2:1522
+1996 2:1523
+19aa 2:1524
+19be 2:1525
+19d2 2:1526
+19e6 2:1527
+19f4 2:1537
+19f8 2:1539
+19fc 2:1541
+1a00 2:1543
+1a04 2:1545
+1a08 2:1547
+1a0c 2:1549
+1a10 2:1551
+1a14 2:1553
+1a18 2:1555
+1a1c 2:1557
+1a20 2:1559
+1a24 2:1561
+1a28 2:1563
+1a2c 2:1565
+1a30 2:1567
+1a34 2:1569
+1a38 2:1571
+1a3c 2:1573
+1a40 2:1575
+1a44 2:1577
+1a48 2:1579
+1a4c 2:1581
+1a50 2:1583
+1a54 2:1585
+1a58 2:1587
+1a5c 2:1589
+1a60 2:1591
+1a64 2:1593
+1a68 2:1595
+1a6c 2:1597
+1a70 2:1599
+1a74 2:1601
+1a78 2:1603
+1a7c 2:1605
+1a80 2:1607
+1a84 2:1609
+1a88 2:1611
+1a8c 2:1613
+1a90 2:1615
+1a94 2:1617
+1a98 2:1619
+1a9c 2:1621
+1aa0 2:1623
+1aa4 2:1625
+1aa8 2:1627
+1aac 2:1629
+1ab0 2:1631
+1ab4 2:1633
+1ab8 2:1635
+1abc 2:1637
+1ac0 2:1639
+1ac4 2:1641
+1ac8 2:1643
+1acc 2:1645
+1ad0 2:1647
+1ad4 2:1649
+1ad8 2:1651
+1adc 2:1653
+1ae0 2:1655
+1ae4 2:1657
+1ae8 2:1659
+1aec 2:1661
+1af0 2:1663
+1af4 2:1665
+1af8 2:1667
+1afc 2:1669
+1b00 2:1671
+1b04 2:1673
+1b08 2:1675
+1b0c 2:1677
+1b10 2:1679
+1b14 2:1681
+1b18 2:1683
+1b1c 2:1685
+1b20 2:1687
+1b24 2:1689
+1b28 2:1691
+1b2c 2:1693
+1b30 2:1695
+1b34 2:1697
+1b38 2:1699
+1b3c 2:1701
+1b40 2:1707
+1b44 2:1709
+1b48 2:1711
+1b4c 2:1716
+1b50 2:1718
+1b54 2:1720
+1b58 2:1722
+1b5c 2:1724
+1b60 2:1726
+1b64 2:1728
+1b68 2:1730
+1b6c 2:1732
+1b70 2:1734
+1b74 2:1736
+1b78 2:1738
+1b7c 2:1740
+1b80 2:1742
+1b84 2:1744
+1b88 2:1750
+1b94 2:1751
+1ba0 2:1752
+1bac 2:1753
+1bb8 2:1754
+1bc4 2:1755
+1bd0 2:1756
+1bdc 2:1757
+1be8 2:1758
+1bf4 2:1759
+1c00 2:1760
+1c0c 2:1761
+1c18 2:1762
+1c24 2:1763
+1c30 2:1764
+1c3c 2:1765
+1c48 2:1766
+1c52 2:1775
+1c53 2:1776
+1c54 2:1777
+1c55 2:1778
+1c56 2:1779
+1c57 2:1780
+1c58 2:1783
+1c59 2:1784
+1c5a 2:1785
+1c5b 2:1786
+1c5c 2:1787
+1c5d 2:1788
+1c5e 2:1792
+1c5f 2:1793
+1c60 2:1794
+1c61 2:1795
+1c62 2:1796
+1c63 2:1797
+1c64 2:1800
+1c65 2:1801
+1c66 2:1802
+1c67 2:1803
+1c68 2:1804
+1c69 2:1805
+1c6a 2:1808
+1c6b 2:1809
+1c6c 2:1810
+1c6d 2:1811
+1c6e 2:1812
+1c6f 2:1813
+1c70 2:1816
+1c71 2:1817
+1c72 2:1818
+1c73 2:1819
+1c74 2:1820
+1c75 2:1821
+1c76 2:1824
+1c77 2:1825
+1c78 2:1826
+1c79 2:1827
+1c7a 2:1828
+1c7b 2:1829
+1c7c 2:1832
+1c7d 2:1833
+1c7e 2:1834
+1c7f 2:1835
+1c80 2:1836
+1c81 2:1837
+1c82 2:1840
+1c83 2:1841
+1c84 2:1842
+1c85 2:1843
+1c86 2:1844
+1c87 2:1845
+1c88 2:1848
+1c89 2:1849
+1c8a 2:1850
+1c8b 2:1851
+1c8c 2:1852
+1c8d 2:1853
+1c8e 2:1856
+1c8f 2:1857
+1c90 2:1858
+1c91 2:1859
+1c92 2:1860
+1c93 2:1861
+1c94 2:1864
+1c95 2:1865
+1c96 2:1866
+1c97 2:1867
+1c98 2:1868
+1c99 2:1869
+1c9a 2:1872
+1c9b 2:1873
+1c9c 2:1874
+1c9d 2:1875
+1c9e 2:1876
+1c9f 2:1877
+1ca0 2:1880
+1ca1 2:1881
+1ca2 2:1882
+1ca3 2:1883
+1ca4 2:1884
+1ca5 2:1885
+1ca6 2:1888
+1ca7 2:1889
+1ca8 2:1890
+1ca9 2:1891
+1caa 2:1892
+1cab 2:1893
+1cac 2:1896
+1cad 2:1897
+1cae 2:1898
+1caf 2:1899
+1cb0 2:1900
+1cb1 2:1901
+1cb2 2:1904
+1cb3 2:1905
+1cb4 2:1906
+1cb5 2:1907
+1cb6 2:1908
+1cb7 2:1909
+1cb8 2:1912
+1cb9 2:1913
+1cba 2:1914
+1cbb 2:1915
+1cbc 2:1916
+1cbd 2:1917
+1cbe 2:1920
+1cbf 2:1921
+1cc0 2:1922
+1cc1 2:1923
+1cc2 2:1924
+1cc3 2:1925
+1cc4 2:1928
+1cc5 2:1929
+1cc6 2:1930
+1cc7 2:1931
+1cc8 2:1932
+1cc9 2:1933
+1cca 2:1936
+1ccb 2:1937
+1ccc 2:1938
+1ccd 2:1939
+1cce 2:1940
+1ccf 2:1941
+1cd0 2:1944
+1cd1 2:1945
+1cd2 2:1946
+1cd3 2:1947
+1cd4 2:1948
+1cd5 2:1949
+1cd6 2:1952
+1cd7 2:1953
+1cd8 2:1954
+1cd9 2:1955
+1cda 2:1956
+1cdb 2:1957
+1cdc 2:1960
+1cdd 2:1961
+1cde 2:1962
+1cdf 2:1963
+1ce0 2:1964
+1ce1 2:1965
+1ce2 2:1968
+1ce3 2:1969
+1ce4 2:1970
+1ce5 2:1971
+1ce6 2:1972
+1ce7 2:1973
+1ce8 2:1976
+1ce9 2:1977
+1cea 2:1978
+1ceb 2:1979
+1cec 2:1980
+1ced 2:1981
+1cee 2:1984
+1cef 2:1985
+1cf0 2:1986
+1cf1 2:1987
+1cf2 2:1988
+1cf3 2:1989
+1cf4 2:1992
+1cf5 2:1993
+1cf6 2:1994
+1cf7 2:1995
+1cf8 2:1996
+1cf9 2:1997
+1cfa 2:2000
+1cfb 2:2001
+1cfc 2:2002
+1cfd 2:2003
+1cfe 2:2004
+1cff 2:2005
+1d00 2:2008
+1d01 2:2009
+1d02 2:2010
+1d03 2:2011
+1d04 2:2012
+1d05 2:2013
+1d06 2:2016
+1d07 2:2017
+1d08 2:2018
+1d09 2:2019
+1d0a 2:2020
+1d0b 2:2021
+1d0c 2:2024
+1d0d 2:2025
+1d0e 2:2026
+1d0f 2:2027
+1d10 2:2028
+1d11 2:2029
+1d12 2:2032
+1d13 2:2033
+1d14 2:2034
+1d15 2:2035
+1d16 2:2036
+1d17 2:2037
+1d18 2:2040
+1d19 2:2041
+1d1a 2:2042
+1d1b 2:2043
+1d1c 2:2044
+1d1d 2:2045
+1d1e 2:2048
+1d1f 2:2049
+1d20 2:2050
+1d21 2:2051
+1d22 2:2052
+1d23 2:2053
+1d24 2:2056
+1d25 2:2057
+1d26 2:2058
+1d27 2:2059
+1d28 2:2060
+1d29 2:2061
+1d2a 2:2064
+1d2b 2:2065
+1d2c 2:2066
+1d2d 2:2067
+1d2e 2:2068
+1d2f 2:2069
+1d30 2:2072
+1d31 2:2073
+1d32 2:2074
+1d33 2:2075
+1d34 2:2076
+1d35 2:2077
+1d36 2:2080
+1d37 2:2081
+1d38 2:2082
+1d39 2:2083
+1d3a 2:2084
+1d3b 2:2085
+1d3c 2:2088
+1d3d 2:2089
+1d3e 2:2090
+1d3f 2:2091
+1d40 2:2092
+1d41 2:2093
+1d42 2:2096
+1d43 2:2097
+1d44 2:2098
+1d45 2:2099
+1d46 2:2100
+1d47 2:2101
+1d48 2:2104
+1d49 2:2105
+1d4a 2:2106
+1d4b 2:2107
+1d4c 2:2108
+1d4d 2:2109
+1d4e 2:2113
+1d4f 2:2114
+1d50 2:2115
+1d51 2:2116
+1d52 2:2117
+1d53 2:2118
+1d54 2:2121
+1d55 2:2122
+1d56 2:2123
+1d57 2:2124
+1d58 2:2125
+1d59 2:2126
+1d5a 2:2129
+1d5b 2:2130
+1d5c 2:2131
+1d5d 2:2132
+1d5e 2:2133
+1d5f 2:2134
+1d60 2:2137
+1d61 2:2138
+1d62 2:2139
+1d63 2:2140
+1d64 2:2141
+1d65 2:2142
+1d66 2:2145
+1d67 2:2146
+1d68 2:2147
+1d69 2:2148
+1d6a 2:2149
+1d6b 2:2150
+1d6c 2:2153
+1d6d 2:2154
+1d6e 2:2155
+1d6f 2:2156
+1d70 2:2157
+1d71 2:2158
+1d72 2:2161
+1d73 2:2162
+1d74 2:2163
+1d75 2:2164
+1d76 2:2165
+1d77 2:2166
+1d78 2:2169
+1d79 2:2170
+1d7a 2:2171
+1d7b 2:2172
+1d7c 2:2173
+1d7d 2:2174
+1d7e 2:2177
+1d7f 2:2178
+1d80 2:2179
+1d81 2:2180
+1d82 2:2181
+1d83 2:2182
+1d84 2:2185
+1d85 2:2186
+1d86 2:2187
+1d87 2:2188
+1d88 2:2189
+1d89 2:2190
+1d8a 2:2193
+1d8b 2:2194
+1d8c 2:2195
+1d8d 2:2196
+1d8e 2:2197
+1d8f 2:2198
+1d90 2:2201
+1d91 2:2202
+1d92 2:2203
+1d93 2:2204
+1d94 2:2205
+1d95 2:2206
+1d96 2:2209
+1d97 2:2210
+1d98 2:2211
+1d99 2:2212
+1d9a 2:2213
+1d9b 2:2214
+1d9c 2:2217
+1d9d 2:2218
+1d9e 2:2219
+1d9f 2:2220
+1da0 2:2221
+1da1 2:2222
+1da2 2:2225
+1da3 2:2226
+1da4 2:2227
+1da5 2:2228
+1da6 2:2229
+1da7 2:2230
+1da8 2:2237
+1da9 2:2238
+1db3 2:2240
+1db4 2:2241
+1dbe 2:2243
+1dbf 2:2244
+1dca 2:2246
+1dcb 2:2247
+1dd4 2:2249
+1dd5 2:2250
+1de0 2:2252
+1de1 2:2253
+1de9 2:2255
+1dea 2:2256
+1df1 2:2258
+1df2 2:2259
+1dfe 2:2261
+1dff 2:2262
+1e0a 2:2264
+1e0b 2:2265
+1e1a 2:2267
+1e1b 2:2268
+1e30 2:2270
+1e31 2:2271
+1e3d 2:2273
+1e3e 2:2274
+1e4d 2:2276
+1e4e 2:2277
+1e57 2:2279
+1e58 2:2280
+1e6a 2:2282
+1e6b 2:2283
+1e73 2:2287
+1e7f 2:2288
+1e8b 2:2289
+1e93 2:2293
+1e9e 2:2295
+1ea9 2:2297
+1eb4 2:2299
+1ebf 2:2301
+1eca 2:2303
+1ed5 2:2305
+1ee0 2:2307
+1eeb 2:2309
+1ef6 2:2311
+1f02 2:2313
+1f0e 2:2315
+1f1a 2:2317
+1f26 2:2319
+1f32 2:2321
+1f3e 2:2323
+1f4a 2:2327
+1f56 2:2328
+1f62 2:2329
+1f6a 2:2334
+1f6b 2:2335
+1f7c 2:2337
+1f7d 2:2338
+1f9e 2:2340
+1f9f 2:2341
+1fbf 2:2343
+1fc0 2:2344
+1fce 2:2346
+1fcf 2:2347
+1fed 2:2349
+1fee 2:2350
+2006 2:2353
+2007 2:2354
+202a 2:2356
+202b 2:2357
+2045 2:2359
+2046 2:2360
+2065 2:2362
+2066 2:2363
+207a 2:2365
+207b 2:2366
+209d 2:2368
+209e 2:2369
+20be 2:2371
+20bf 2:2372
+20e7 2:2374
+20e8 2:2375
+210e 2:2379
+210f 2:2380
+212b 2:2382
+212c 2:2383
+213c 2:2386
+213d 2:2387
+215f 2:2389
+2160 2:2390
+217e 2:2392
+217f 2:2393
+219e 2:2395
+219f 2:2396
+21b1 2:2400
+21d9 2:2401
+2201 2:2402
+2229 2:2403
+2251 2:2404
+2279 2:2405
+22a1 2:2406
+22c9 2:2407
+22f1 2:2408
+2319 2:2409
+2341 2:2410
+2369 2:2411
+2391 2:2412
+23b9 2:2413
+23e1 2:2414
+2409 2:2415
+2431 2:2416
+2459 2:2417
+2481 2:2418
+24a9 2:2419
+24d1 2:2420
+24f9 2:2421
+2521 2:2422
+2549 2:2423
+2571 2:2424
+2599 2:2425
+25c1 2:2426
+25e9 2:2427
+2611 2:2428
+2639 2:2429
+2661 2:2430
+2689 2:2431
+26b1 2:2432
+26d9 2:2433
+2701 2:2434
+2729 2:2435
+2751 2:2436
+2779 2:2437
+27a1 2:2438
+27c9 2:2439
+27f1 2:2440
+2819 2:2441
+2841 2:2442
+2869 2:2443
+2891 2:2444
+28b9 2:2445
+28e1 2:2446
+2909 2:2447
+2931 2:2448
+2959 2:2449
+2981 2:2450
+29a9 2:2451
+29d1 2:2452
+29f9 2:2453
+2a22 2:2458
+2a24 2:2459
+2a26 2:2460
+2a28 2:2461
+2a2a 2:2462
+2a2c 2:2463
+2a2e 2:2464
+2a30 2:2465
+2a32 2:2466
+2a34 2:2467
+2a36 2:2472
+2a39 2:2473
+2a42 2:2474
+2a4b 2:2475
+2a54 2:2476
+2a5d 2:2477
+2a66 2:2478
+2a6f 2:2479
+2a78 2:2480
+2a81 2:2481
+2a8a 2:2482
+2a93 2:2483
+2a9c 2:2484
+2aa5 2:2485
+2aae 2:2486
+2ab7 2:2491
+2aba 2:2492
+2ac8 2:2493
+2ad6 2:2494
+2ae4 2:2495
+2af2 2:2496
+2b00 2:2497
+2b0e 2:2498
+2b1c 2:2499
+2b2a 2:2500
+2b38 2:2501
+2b46 2:2502
+2b54 2:2503
+2b62 2:2504
+2b70 2:2505
+2b7e 2:2506
+2b8c 2:2507
+2b9a 2:2508
+2ba8 2:2509
+2bb6 2:2514
+2bb9 2:2515
+2bc8 2:2516
+2bd7 2:2517
+2be6 2:2518
+2bf5 2:2519
+2c04 2:2520
+2c13 2:2521
+2c22 2:2522
+2c31 2:2523
+2c40 2:2524
+2c4f 2:2525
+2c5e 2:2526
+2c6d 2:2527
+2c7c 2:2528
+2c8b 2:2533
+2c8e 2:2534
+2c9b 2:2535
+2ca8 2:2536
+2cb5 2:2537
+2cc2 2:2538
+2ccf 2:2539
+2cdc 2:2540
+2ce9 2:2541
+2cf6 2:2542
+2d03 2:2543
+2d10 2:2544
+2d1d 2:2545
+2d2a 2:2546
+2d37 2:2547
+2d44 2:2553
+2d47 2:2554
+2d56 2:2555
+2d65 2:2556
+2d74 2:2557
+2d83 2:2558
+2d92 2:2559
+2da1 2:2560
+2db0 2:2561
+2dbf 2:2562
+2dce 2:2563
+2ddd 2:2564
+2dec 2:2565
+2dfb 2:2566
+2e0a 2:2567
+2e19 2:2572
+2e1c 2:2573
+2e2b 2:2574
+2e3a 2:2575
+2e49 2:2576
+2e58 2:2577
+2e67 2:2578
+2e76 2:2579
+2e85 2:2580
+2e94 2:2581
+2ea3 2:2582
+2eb2 2:2583
+2ec1 2:2584
+2ed0 2:2585
+2edf 2:2586
+2eee 2:2591
+2ef1 2:2592
+2efe 2:2593
+2f0b 2:2594
+2f18 2:2595
+2f25 2:2596
+2f32 2:2597
+2f3f 2:2598
+2f4c 2:2599
+2f59 2:2600
+2f66 2:2601
+2f73 2:2602
+2f80 2:2603
+2f8d 2:2604
+2f9a 2:2609
+2f9d 2:2610
+2fb3 2:2611
+2fc9 2:2612
+2fdf 2:2613
+2ff5 2:2614
+300b 2:2615
+3021 2:2616
+3037 2:2617
+304d 2:2618
+3063 2:2619
+3079 2:2620
+308f 2:2621
+30a5 2:2622
+30bb 2:2626
+30be 2:2627
+30d7 2:2628
+30f0 2:2629
+3109 2:2630
+3122 2:2631
+313b 2:2632
+3154 2:2633
+316d 2:2634
+3186 2:2635
+319f 2:2636
+31b8 2:2637
+31d1 2:2638
+31ea 2:2639
+3203 2:2644
+3206 2:2645
+3222 2:2646
+323e 2:2647
+325a 2:2648
+3276 2:2649
+3292 2:2650
+32ae 2:2651
+32ca 2:2652
+32e6 2:2653
+3302 2:2654
+331e 2:2655
+333a 2:2656
+3356 2:2657
+3372 2:2658
+338e 2:2659
+33aa 2:2660
+33c6 2:2661
+33e2 4:7
+3400 4:8
+3460 4:11
+346c 4:13
+3472 4:15
+3478 4:17
+347e 4:19
+3484 4:21
+348a 4:23
+3490 4:25
+3496 4:27
+349c 4:29
+34a2 4:31
+34a8 4:33
+34ae 4:35
+34b4 4:37
+34c0 4:39
+34c6 4:41
+34cc 4:43
+34d2 4:45
+34d8 4:47
+34de 4:51
+34df 4:53
+34e0 4:55
+34e1 4:60
+34e2 4:62
+34e3 4:65
+34e4 4:71
+34ea 4:74
+34eb 4:79
+34ec 4:82
+34ed 4:84
+34ee 4:86
+34ef 4:88
+34f0 4:91
+34f1 4:94
+34f2 4:99
+34f3 4:104
+34f4 4:108
+3500 4:110
+3530 4:112
+3560 4:118
+3580 4:120
+3581 4:121
+3582 4:122
+3583 4:123
+3584 4:127
+35a4 4:129
+35a5 4:130
+35a6 4:131
+35a7 4:132
+35a8 4:133
+35a9 4:134
+35aa 4:135
+35ab 4:136
+35ac 4:137
+35ad 4:138
+35ae 4:139
+35af 4:140
+35b0 4:141
+35b1 4:175
+35b3 4:176
+35b6 4:178
+35b9 4:179
+35bb 4:180
+35be 4:182
+35c0 4:183
+35c3 4:184
+35c6 4:185
+35c8 4:186
+35cb 4:187
+35cd 4:188
+35d0 4:189
+35d3 4:192
+35d6 4:193
+35d8 4:195
+35da 4:196
+35dc 4:197
+35de 4:198
+35df 4:199
+35e1 4:200
+35e3 4:201
+35e4 4:202
+35e7 4:203
+35e8 4:204
+35ea 4:205
+35ec 4:206
+35ef 4:207
+35f2 4:208
+35f4 4:209
+35f7 4:210
+35f9 4:211
+35fc 4:212
+35ff 4:213
+3600 4:224
+3602 4:225
+3604 4:226
+3606 4:227
+3608 4:230
+360a 4:231
+360c 4:232
+360f 4:233
+3610 4:235
+3612 4:236
+3615 4:237
+3616 4:239
+3618 4:240
+361b 4:241
+361c 4:243
+361e 4:244
+3621 4:245
+3622 4:247
+3624 4:248
+3627 4:249
+3628 4:251
+362a 4:252
+362d 4:253
+362e 4:264
+3630 4:265
+3632 4:266
+3634 4:267
+3636 4:268
+3638 4:269
+363a 4:270
+363c 4:275
+363f 4:276
+3641 4:279
+3643 4:280
+3645 4:284
+3648 4:285
+364a 4:286
+364d 4:287
+364f 4:288
+3651 4:289
+3653 4:290
+3655 4:291
+3657 4:292
+3659 4:293
+365b 4:295
+365d 4:299
+3660 4:300
+3661 4:301
+3663 4:302
+3665 4:306
+3667 4:307
+3669 4:308
+366c 4:309
+366e 4:310
+3670 4:311
+3672 4:312
+3674 4:313
+3676 4:320
+3679 4:321
+367b 4:322
+367e 4:323
+3680 4:324
+3683 4:325
+3685 4:326
+3688 4:327
+368a 4:328
+368c 4:330
+368f 4:331
+3692 4:334
+3695 4:335
+3698 4:337
+369b 4:338
+369e 4:340
+36a1 4:341
+36a4 4:343
+36a7 4:344
+36aa 4:346
+36ad 4:347
+36b0 4:349
+36b3 4:350
+36b6 4:352
+36b9 4:353
+36bc 4:356
+36bf 4:357
+36c2 4:359
+36c5 4:360
+36c8 4:362
+36cb 4:363
+36ce 4:365
+36d1 4:366
+36d4 4:368
+36d7 4:369
+36d9 4:370
+36dc 4:371
+36de 4:372
+36e1 4:373
+36e3 4:374
+36e6 4:375
+36e8 4:377
+36ea 4:378
+36ed 4:379
+36f0 4:381
+36f3 4:382
+36f6 4:384
+36f9 4:385
+36fc 4:387
+36ff 4:388
+3702 4:390
+3705 4:391
+3708 4:396
+370a 4:397
+370c 4:399
+370f 4:400
+3711 4:401
+3714 4:402
+3716 4:403
+3718 4:404
+371a 4:405
+371c 4:406
+371e 4:416
+3720 4:417
+3722 4:419
+3724 4:420
+3727 4:421
+3729 4:422
+372b 4:431
+372e 4:432
+3730 4:433
+3733 4:435
+3735 4:436
+3737 4:437
+3739 4:438
+373b 4:440
+373d 4:443
+373f 4:444
+3741 4:445
+3743 4:446
+3745 4:447
+3748 4:451
+374b 4:452
+374e 4:455
+3751 4:456
+3754 4:460
+3757 4:461
+375a 4:465
+375c 4:467
+375f 4:468
+3762 4:469
+3763 4:470
+3765 4:471
+3767 4:484
+3769 4:486
+376c 4:487
+376f 4:488
+3770 4:489
+3772 4:490
+3774 4:498
+3776 4:500
+3779 4:501
+377c 4:502
+377d 4:503
+377f 4:504
+3781 4:507
+3784 4:508
+3787 4:511
+378a 4:512
+378d 4:516
+3790 4:517
+3793 4:520
+3796 4:521
+3799 4:524
+379c 4:525
+379f 4:528
+37a2 4:530
+37a5 4:539
+37a6 4:547
+37a8 4:548
+37a9 4:549
+37ab 4:550
+37ad 4:551
+37af 4:553
+37b0 4:562
+37b2 4:563
+37b3 4:564
+37b5 4:565
+37b7 4:566
+37b9 4:568
+37ba 4:591
+37bc 4:592
+37bf 4:594
+37c2 4:595
+37c4 4:596
+37c7 4:598
+37c9 4:599
+37cc 4:600
+37cf 4:601
+37d1 4:602
+37d4 4:603
+37d6 4:604
+37d9 4:605
+37dc 4:607
+37de 4:608
+37e0 4:609
+37e2 4:610
+37e4 4:612
+37e6 4:613
+37e8 4:614
+37ea 4:615
+37eb 4:616
+37ee 4:617
+37f0 4:618
+37f1 4:620
+37f4 4:621
+37f6 4:622
+37f7 4:624
+37fa 4:625
+37fc 4:626
+37fd 4:628
+3800 4:629
+3802 4:630
+3803 4:632
+3806 4:633
+3808 4:634
+3809 4:636
+380c 4:637
+380e 4:638
+380f 4:649
+3811 4:650
+3813 4:651
+3815 4:652
+3817 4:653
+3819 4:654
+381b 4:655
+381d 4:656
+381f 4:662
+3821 4:663
+3823 4:664
+3825 4:666
+3828 4:667
+3829 4:668
+382b 4:669
+382d 4:670
+382f 4:671
+3831 4:672
+3832 4:673
+3833 4:674
+3836 4:678
+3838 4:679
+383a 4:680
+383c 4:682
+383f 4:683
+3841 4:684
+3844 4:685
+3845 4:686
+3847 4:687
+3849 4:688
+384b 4:690
+384d 4:691
+384f 4:692
+3851 4:693
+3853 4:694
+3855 4:695
+3857 4:697
+3859 4:699
+385b 4:700
+385e 4:701
+3861 4:702
+3863 4:703
+3865 4:704
+3868 4:705
+386b 4:706
+386d 4:707
+386f 4:709
+3872 4:710
+3875 4:713
+3878 4:714
+387b 4:716
+387e 4:717
+3881 4:719
+3884 4:720
+3887 4:722
+388a 4:723
+388d 4:725
+3890 4:726
+3893 4:728
+3896 4:729
+3899 4:731
+389c 4:732
+389f 4:735
+38a2 4:736
+38a5 4:738
+38a8 4:739
+38ab 4:741
+38ae 4:742
+38b1 4:744
+38b4 4:745
+38b7 4:747
+38b9 4:748
+38bc 4:749
+38bf 4:750
+38c1 4:751
+38c3 4:752
+38c6 4:753
+38c9 4:754
+38cb 4:757
+38cd 4:758
+38d0 4:760
+38d3 4:761
+38d6 4:763
+38d9 4:764
+38dc 4:766
+38df 4:767
+38e2 4:769
+38e5 4:770
+38e8 4:771
+38eb 4:776
+38ed 4:777
+38ef 4:779
+38f1 4:780
+38f4 4:781
+38f7 4:782
+38f9 4:783
+38fb 4:784
+38fd 4:785
+38ff 4:786
+3901 4:796
+3903 4:797
+3905 4:799
+3907 4:800
+390a 4:801
+390c 4:802
+390e 4:811
+3910 4:812
+3913 4:813
+3916 4:815
+3918 4:816
+391a 4:817
+391c 4:818
+391e 4:820
+3920 4:823
+3922 4:824
+3924 4:825
+3926 4:826
+3928 4:827
+392b 4:831
+392e 4:832
+3931 4:835
+3934 4:836
+3937 4:840
+393a 4:841
+393d 4:845
+393f 4:847
+3942 4:848
+3945 4:849
+3946 4:850
+3948 4:851
+394a 4:864
+394c 4:866
+394f 4:867
+3952 4:868
+3953 4:869
+3955 4:870
+3957 4:878
+3959 4:880
+395c 4:881
+395f 4:882
+3960 4:883
+3962 4:884
+3964 4:887
+3967 4:888
+396a 4:891
+396d 4:892
+3970 4:896
+3973 4:897
+3976 4:900
+3979 4:901
+397c 4:904
+397f 4:905
+3982 4:909
+3985 4:910
+3988 4:919
+398b 4:920
+398d 4:922
+398f 4:924
+3991 4:925
+3993 4:926
+3995 4:927
+3996 4:928
+3998 4:929
+399a 4:930
+399b 4:932
+399d 4:933
+399f 4:934
+39a0 4:935
+39a2 4:936
+39a4 4:937
+39a5 4:939
+39a7 4:940
+39a9 4:941
+39aa 4:942
+39ac 4:943
+39ae 4:944
+39af 4:945
+39b2 4:946
+39b3 4:947
+39b5 4:948
+39b7 4:949
+39ba 4:950
+39bd 4:951
+39bf 4:952
+39c2 4:953
+39c4 4:954
+39c7 4:955
+39ca 4:956
+39cb 4:963
+39cc 4:969
+39cd 4:970
+39e4 4:972
+39e5 4:973
+39f8 4:975
+39f9 4:976
+3a0f 4:979
+3a18 5:8
+3a19 5:12
+3a1a 5:13
+3a1d 5:14
+3a1e 5:19
+3a1f 5:20
+3a21 5:21
+3a23 5:22
+3a25 5:23
+3a26 5:24
+3a28 5:25
+3a2a 5:27
+3a2d 5:28
+3a2f 5:29
+3a32 5:32
+3a34 5:33
+3a36 5:34
+3a39 5:35
+3a3a 5:36
+3a3c 5:37
+3a3f 5:38
+3a40 5:39
+3a42 5:40
+3a45 5:41
+3a46 5:42
+3a48 5:43
+3a4b 5:45
+3a4d 5:46
+3a50 5:47
+3a52 5:48
+3a55 5:49
+3a57 5:50
+3a5a 5:51
+3a5d 5:52
+3a60 5:53
+3a61 5:54
+3a64 5:55
+3a66 5:56
+3a67 5:62
+3a68 5:63
+3a6a 5:64
+3a6c 5:65
+3a6e 5:66
+3a6f 5:67
+3a71 5:68
+3a73 5:70
+3a76 5:72
+3a78 5:73
+3a7b 5:74
+3a7e 5:75
+3a7f 5:76
+3a82 5:77
+3a84 5:78
+3a85 5:83
+3a87 5:84
+3a89 5:85
+3a8b 5:86
+3a8c 5:87
+3a8e 5:88
+3a90 5:89
+3a91 5:92
+3a93 5:93
+3a96 5:94
+3a97 5:95
+3a99 5:96
+3a9b 5:97
+3a9d 5:98
+3aa0 5:100
+3aa2 5:101
+3aa4 5:102
+3aa6 5:104
+3aa9 5:105
+3aac 5:111
+3aae 5:112
+3ab0 5:113
+3ab2 5:114
+3ab3 5:115
+3ab5 5:116
+3ab7 5:117
+3ab8 5:120
+3aba 5:121
+3abd 5:122
+3abe 5:123
+3ac0 5:124
+3ac2 5:125
+3ac4 5:126
+3ac7 5:128
+3ac9 5:130
+3aca 5:132
+3acc 5:133
+3ace 5:135
+3ad1 6:8
+3ad4 6:9
+3ad7 6:10
+3ada 6:11
+3add 6:12
+3ae0 6:13
+3ae3 6:14
+3ae6 6:15
+3ae9 6:16
+3aec 6:17
+3aef 6:18
+3af2 6:22
+3af5 6:23
+3af7 6:24
+3afa 6:26
+3afc 6:27
+3aff 6:31
+3b02 6:32
+3b04 6:33
+3b07 7:5
+3b09 7:6
+3b0c 7:7
+3b0e 7:8
+3b10 7:10
+3b12 7:11
+3b15 7:12
+3b16 7:13
+3b17 7:14
+3b19 7:15
+3b1c 7:16
+3b1d 7:17
+3b1e 7:18
+3b20 7:19
+3b22 7:20
+3b23 7:24
+3b26 7:26
+3b27 7:27
+3b29 7:28
+3b2a 8:2
+3b32 8:9
+3b33 8:10
+3b34 8:11
+3b35 8:12
+3b36 8:13
+3b38 8:14
+3b3a 8:15
+3b3b 8:16
+3b3c 8:22
+3b3e 8:23
+3b40 8:24
+3b42 8:25
+3b43 8:26
+3b45 8:27
+3b47 8:28
+3b48 8:29
+3b4a 8:30
+3b4c 8:34
+3b4f 8:35
+3b51 8:36
+3b54 8:37
+3b56 8:38
+3b57 8:44
+3b59 8:45
+3b5b 8:46
+3b5d 8:47
+3b5e 8:48
+3b60 8:49
+3b62 8:50
+3b63 8:51
+3b65 8:52
+3b67 8:56
+3b6a 8:57
+3b6c 8:58
+3b6f 8:59
+3b71 8:60
+3b72 8:66
+3b74 8:67
+3b76 8:68
+3b78 8:69
+3b79 8:70
+3b7b 8:71
+3b7d 8:72
+3b7e 8:73
+3b80 8:74
+3b82 8:78
+3b85 8:79
+3b87 8:80
+3b8a 8:81
+3b8b 8:82
+3b8d 8:83
+3b8e 9:15
+3c00 9:18
+3d00 9:31

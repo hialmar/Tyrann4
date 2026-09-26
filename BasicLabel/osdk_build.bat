@@ -12,17 +12,16 @@ echo "combat.tap"
 echo "dicesL.tap"
 %OSDK%\bin\bas2tap -b2t1 dicesL.bas BUILD\dices.tap
 
-
-echo "genteam.tap"
-%OSDK%\bin\bas2tap -b2t1 genteamL.bas BUILD\genteam.tap
+:: echo "genteam.tap"
+:: %OSDK%\bin\bas2tap -b2t1 genteamL.bas BUILD\genteam.tap
 
 echo "cop.tap"
 %OSDK%\bin\bas2tap -b2t1 copL.bas BUILD\cop.tap
 
 :: %OSDK%\bin\bas2tap -b2t1 camp.bas BUILD\camp.tap
 
-echo "ville.tap"
-%OSDK%\bin\bas2tap -b2t1 villeL.bas BUILD\ville.tap
+:: echo "ville.tap"
+:: %OSDK%\bin\bas2tap -b2t1 villeL.bas BUILD\ville.tap
 
 echo "armory.tap"
 %OSDK%\bin\bas2tap -b2t1 armoryL.bas BUILD\armory.tap
@@ -57,8 +56,8 @@ echo "editor.tap"
 echo "dices.tap"
 %OSDK%\bin\bas2tap -b2t1 dicesL.bas BUILD\dices.tap
 
-echo "intro.tap"
-%OSDK%\bin\bas2tap -b2t1 IntroL.bas BUILD\intro.tap
+:: echo "intro.tap"
+:: %OSDK%\bin\bas2tap -b2t1 IntroL.bas BUILD\intro.tap
 
 
 :Tap2dsk
@@ -71,7 +70,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann III" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t3_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\combat.tap BUILD\cop.tap BUILD\taberna.tap BUILD\bazar.tap BUILD\animalia.tap BUILD\medicus.tap BUILD\herborist.tap BUILD\creation.tap BUILD\ville.tap BUILD\editor.tap BUILD\monstres.tap BUILD\TPRIX.tap BUILD\TITEMS.tap BUILD\dices.tap BUILD\genteam.tap BUILD\intro.tap BUILD\armory.tap t4_bas_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\combat.tap BUILD\cop.tap BUILD\taberna.tap BUILD\bazar.tap BUILD\animalia.tap BUILD\medicus.tap BUILD\herborist.tap BUILD\editor.tap BUILD\monstres.tap BUILD\TPRIX.tap BUILD\TITEMS.tap BUILD\dices.tap BUILD\armory.tap t4_bas_prog.dsk
 
 pause
 
