@@ -514,7 +514,7 @@ combat_112
  SS=1+VIL+FNA(VIL)+CM(AO(P),4)-BC(TE)-PRD(TE)'FORMULA MONSTER ATTACK
  IF SS<=0 THEN SS$="the armor resists !":GOTO  combat_113 
 combat_121
- SS$="inflicts him "+STR$(SS)+" damage"
+ SS$="inflicts him/her "+STR$(SS)+" damage"
  ET(TE)=ET(TE)-SS:ZAP:WAIT TI*5
  IF ET(TE)<=0 THEN ET(TE)=0:OK(TE)=4:HV=HV-1
 combat_113
@@ -533,13 +533,13 @@ combat_117
  SS=6+FNA(VIL)-INT(FM(TE)/10):GOTO  combat_121 
  GOTO  combat_122 
 combat_118
- IF OK(TE)=1 THEN SS$="he poisons him":OK(TE)=2 ELSE  combat_123 
+ IF OK(TE)=1 THEN SS$="he poisons him/her":OK(TE)=2 ELSE  combat_123 
  GOTO  combat_122 
 combat_119
- IF OK(TE)=1 THEN SS$="his muscles doesn't respond":OK(TE)=3 ELSE  combat_123 
+ IF OK(TE)=1 THEN SS$="his/her muscles doesn't respond":OK(TE)=3 ELSE  combat_123 
  GOTO  combat_122 
 combat_120
- SS$="his protection decreases":BC(TE)=BC(TE)-1-FNA(2)
+ SS$="his/her protection decreases":BC(TE)=BC(TE)-1-FNA(2)
  IF BC(TE)<0 THEN BC(TE)=0
 combat_122
  L=14:S$=SS$:GOSUB  combat_printS :WAITTI*12
@@ -754,7 +754,7 @@ combat_34
 combat_149
  IF SP(AO(P))<7 AND C6OK(TG(AO(P)))=0 THEN  combat_152 
  IF SP(AO(P))<7 THEN S$=" on  "+MM$(MO(TG(AO(P)))) ELSE S$="on the enemies"
- L=12:GOSUB  combat_printS :WAIT TI*10:S$="fails his invocation"
+ L=12:GOSUB  combat_printS :WAIT TI*10:S$="fails his/her invocation"
  ON SPELL(AO(P)) GOSUB  combat_153 , combat_154 , combat_155 , combat_156 , combat_157 , combat_158 , combat_159 , combat_160 
  GOTO  combat_152 
 combat_150
@@ -771,7 +771,7 @@ combat_151
  IF SP(AO(P))=3 THEN IF C6OK(TG(AO(P)))<>0 THEN S$=" on "+ MM$(MO(TG(AO(P)))) ELSE  combat_152 
  IF SP(AO(P))=2 OR SP(AO(P))=3 THEN L=12:GOSUB  combat_printS :WAIT TI*10
  IF SP(AO(P))=8 AND SD<>AO(P) THEN S$=" you have no saddle! ":L=12:GOSUB  combat_printS :WAIT TI*10:GOTO combat_152 
- S$="fails his invocation"
+ S$="fails his/her invocation"
  ON SPELL(AO(P)) GOSUB  combat_170 , combat_171 , combat_172 , combat_173 , combat_174 , combat_175 , combat_176 , combat_177 
 combat_152
  RETURN
@@ -866,7 +866,7 @@ combat_183
 combat_168
  REM 2,8 MORT
  IF C6OK(TG(AO(P)))=0 THEN  combat_184 
- TST=5:DFF=50:GOSUB  combat_30 :IF RT=0 THEN S$="fails his invocation":GOTO  combat_184 
+ TST=5:DFF=50:GOSUB  combat_30 :IF RT=0 THEN S$="fails his/her invocation":GOTO  combat_184 
  GOSUB  combat_185 
  S$="A nice Death !"
 combat_184
@@ -884,7 +884,7 @@ combat_171
  REM 3.2FORCE
  TST=4:DFF=20:GOSUB  combat_30 :IF RT=0 THEN  combat_169 
  IF OK(TG(AO(P)))=4 THEN  combat_186 
- S$=" his strength grows ":PRINT @12,14;S$:WAIT TI*10
+ S$=" his/her strength grows ":PRINT @12,14;S$:WAIT TI*10
  FC(TG(AO(P)))=FC(TG(AO(P)))+FNA(VIL)+5
 combat_186
  RETURN
@@ -1031,7 +1031,7 @@ combat_load
  FOR P=1TO6
  O1=O1+1:DD=PEEK(O1)
  FORJ=1TODD:O1=O1+1:N$(P)=N$(P)+CHR$(PEEK(O1)):NEXTJ
- O1=O1+1:RI(P)=DEEK(O1)*10:O1=O1+2:CP(P)=PEEK(O1)
+ O1=O1+1:RI(P)=DEEK(O1):O1=O1+2:CP(P)=PEEK(O1)
  O1=O1+1:MP(P)=PEEK(O1)
  O1=O1+1:CC(P)=PEEK(O1)
  O1=O1+1:CT(P)=PEEK(O1)
