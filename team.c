@@ -52,7 +52,7 @@ void loadCharacters(void)
 	// POKE 48035,0:POKE#26A,PEEK(#26A)AND254
 	poke(48035,0);
 	poke(0x26a,peek(0x26a)&254);
-	printAtXY(8,10, "Veuillez Patienter...\n");
+	printAtXY(8,10, "Please Wait...\n");
 	// 48005 CLOAD"TEAM"
 	if (io_needed) {
 		//printf("Chargement de %s\n", teamfilename);
@@ -196,7 +196,7 @@ void loadCharacters(void)
 		printf("longueur %d\n", (int) (ptr - 0xa000));
 #endif		
 	} else {
-		printAtXY(4,10, "Erreur lors du chargement de TEAM.BIN\n");
+		printAtXY(4,10, "Error while loading TEAM.BIN\n");
 		exit(1);
 	}
 }
@@ -212,7 +212,7 @@ void saveCharacters(void)
 	
 	// 49000 TEXT:CLS:PRINT @ 8,12;CHR$(145);CHR$(135);"++ PREPARE L EQUIPE ++ ";CHR$(144)
 	text(); cls(); 
-	printAtXY(8,10, "++ PREPARE L'EQUIPE V2 ++ \n");
+	printAtXY(8,10, "++ PREPARE TEAM V2 ++ \n");
 	// 49010 O1=#A000
 	ptr = (char*)0xa000;
 	//printf("debut : (%x) ou %d\n", (unsigned int) ptr, (int) ptr);

@@ -56,6 +56,9 @@ echo "editor.tap"
 echo "dices.tap"
 %OSDK%\bin\bas2tap -b2t1 dicesL.bas BUILD\dices.tap
 
+echo "menu.tap"
+%OSDK%\bin\bas2tap -b2t1 menuL.bas BUILD\menu.tap
+
 :: echo "intro.tap"
 :: %OSDK%\bin\bas2tap -b2t1 IntroL.bas BUILD\intro.tap
 
@@ -70,7 +73,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann III" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t3_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\combat.tap BUILD\cop.tap BUILD\taberna.tap BUILD\bazar.tap BUILD\animalia.tap BUILD\medicus.tap BUILD\herborist.tap BUILD\editor.tap BUILD\monstres.tap BUILD\TPRIX.tap BUILD\TITEMS.tap BUILD\dices.tap BUILD\armory.tap t4_bas_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\menu.tap BUILD\combat.tap BUILD\cop.tap BUILD\taberna.tap BUILD\bazar.tap BUILD\animalia.tap BUILD\medicus.tap BUILD\herborist.tap BUILD\editor.tap BUILD\monstres.tap BUILD\TPRIX.tap BUILD\TITEMS.tap BUILD\dices.tap BUILD\armory.tap t4_bas_prog.dsk
 
 pause
 

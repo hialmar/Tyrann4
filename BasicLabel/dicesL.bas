@@ -1,12 +1,16 @@
 #labels
  REM {++++ ORIC - NEMAUSUS RPG - April 2018 ++++}
  REM { Maximus (denis SOL)
+ TEXT:LOAD "FONT.BIN":PAPER0:INK6
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ CLS
  GOSUB  dices_0
  PRINT "PRESS S TO SKIP THE INTRO"
  GETA$:IF A$="S" THEN Dices ' saute l'intro pour tester la suite
  GOSUB Intro
 Dices
  REM DICES TESTS
+ TEXT:POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  CLS:D=10:PAPER0:INK 3
  PRINT "DO YOU WANT THE NOVEL TEAM (Y/N) ?"
 YesNo
@@ -19,161 +23,136 @@ Recruit_Kaeso
  HIRES:LOAD"KAESO.HRS"
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
+Recruit_Kaeso2
+ GETA$:IF A$<>" " THEN Recruit_Kaeso2 
  P=1
  NOM$(P)="Kaeso"
  CULT(P) = 6
  ROLE(P)= 1
- CC(P)= 32
- CT(P)= 26
- FO(P)= 33
+ ML(P)= 32
+ RG(P)= 26
+ ST(P)= 33
  AG(P)= 25
- IN(P)= 21
- FM(P)= 21
- PV(P)=16
- ET(P)=PV(P)
+ IQ(P)= 21
+ MS(P)= 21
+ HP(P)=16
+ ET(P)=HP(P)
  RI(P)=300
- WR(P)=7
- WL(P)=9
- PT(P)=4
- CA(P)=3
- BT(P)=32
- FORI=1TO6:SAD(P,I)=0:NEXTI
- SAD(P,1)=23
- SAD(P,2)=24
+ FORI=1TO6:BAG(P,I)=0:NEXTI
 Recruit_Maelle
- P=2
  HIRES:LOAD"MAELLE.HRS"
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
+Recruit_Maelle2
+ GETA$:IF A$<>" " THEN Recruit_Maelle2 
+ P=2
  NOM$(P)="Maelle"
- ROLE(P) = 1
- CULT(P)= 4
- CC(P)= 20
- CT(P)= 29
- FO(P)= 21
+ CULT(P) = 1
+ ROLE(P)= 4
+ ML(P)= 20
+ RG(P)= 29
+ ST(P)= 21
  AG(P)= 28
- IN(P)= 30
- FM(P)= 32
- PV(P)=15
- ET(P)=PV(P)
+ IQ(P)= 30
+ MS(P)= 32
+ HP(P)=15
+ ET(P)=HP(P)
  RI(P)=300
- WR(P)=7
- WL(P)=12
- PT(P)=4
- CA(P)=3
- BT(P)=33
- FORI=1TO6:SAD(P,I)=0:NEXTI
- SAD(P,1)=16
- SAD(P,2)=19
+ FORI=1TO6:BAG(P,I)=0:NEXTI
 Recruit_Elancia 
  HIRES:LOAD"ELANCIA.HRS"
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
+Recruit_Elancia2
+ GETA$:IF A$<>" " THEN Recruit_Elancia2
  P=5
- N$(P)="Elancia"
- MP(P) = 6
- CP(P)=3
- CC(P)= 19
- CT(P)= 32
- FO(P)= 22
+ NOM$(P)="Elancia"
+ CULT(P) = 6
+ ROLE(P)=3
+ ML(P)= 19
+ RG(P)= 32
+ ST(P)= 22
  AG(P)= 30
- IN(P)= 29
- FM(P)= 26
- PV(P)=15
- ET(P)=PV(P)
+ IQ(P)= 29
+ MS(P)= 26
+ HP(P)=15
+ ET(P)=HP(P)
  RI(P)=300
- WR(P)=14
- WL(P)=12
- PT(P)=4
- CA(P)=3
- BT(P)=30
- FORI=1TO6:SAD(P,I)=0:NEXTI
- SAD(P,1)=23
- SAD(P,2)=24
+ FORI=1TO6:BAG(P,I)=0:NEXTI
 Recruit_Carpo 
- P=3
  HIRES:LOAD"CARPO.HRS"
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
- N$(P)="Carpo"
- MP(P) = 6
- CP(P)= 2
- CC(P)= 35
- CT(P)= 25
- FO(P)= 36
+Recruit_Carpo2
+ GETA$:IF A$<>" " THEN Recruit_Carpo2
+ P=3
+ NOM$(P)="Carpo"
+ CULT(P) = 6
+ ROLE(P)= 2
+ ML(P)= 35
+ RG(P)= 25
+ ST(P)= 36
  AG(P)= 26
- IN(P)= 18
- FM(P)= 18
- PV(P)=16
- ET(P)=PV(P)
+ IQ(P)= 18
+ MS(P)= 18
+ HP(P)=16
+ ET(P)=HP(P)
  RI(P)=300
- WR(P)=7
- WL(P)=10
- PT(P)=4
- CA(P)=3
- BT(P)=31
- FORI=1TO6:SAD(P,I)=0:NEXTI
- SAD(P,1)=23
- SAD(P,2)=24 
+ FORI=1TO6:BAG(P,I)=0:NEXTI
 Recruit_Astrid 
  HIRES:LOAD"ASTRID.HRS"
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
+Recruit_Astrid2
+ GETA$:IF A$<>" " THEN Recruit_Astrid2
  P=6
- N$(P)="Astrid"
- MP(P) = 7
- CP(P)= 5
- CC(P)= 18
- CT(P)= 20
- FO(P)= 20
+ NOM$(P)="Astrid"
+ CULT(P) = 7
+ ROLE(P)= 5
+ ML(P)= 18
+ RG(P)= 20
+ ST(P)= 20
  AG(P)= 32
- IN(P)= 35
- FM(P)= 35
- PV(P)=15
- ET(P)=PV(P)
+ IQ(P)= 35
+ MS(P)= 35
+ HP(P)=15
+ ET(P)=HP(P)
  RI(P)=300
- WR(P)=13
- WL(P)=15
- PT(P)=6
- CA(P)=1
- BT(P)=36
- FORI=1TO6:SAD(P,I)=0:NEXTI
- SAD(P,1)=23
- SAD(P,2)=24
+ FORI=1TO6:BAG(P,I)=0:NEXTI
 Recruit_Viggo 
  HIRES:LOAD"VIGGO.HRS"
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  PRINT "PRESS SPACE"
+Recruit_Viggo2
+ GETA$:IF A$<>" " THEN Recruit_Viggo2
  P=4
- N$(P)="Viggo"
- MP(P) = 7
- CP(P)= 1
- CC(P)= 30
- CT(P)= 28
- FO(P)= 32
+ NOM$(P)="Viggo"
+ CULT(P) = 7
+ ROLE(P)= 1
+ ML(P)= 30
+ RG(P)= 28
+ ST(P)= 32
  AG(P)= 28
- IN(P)= 20
- FM(P)= 20
- PV(P)=16
- ET(P)=PV(P)
+ IQ(P)= 20
+ MS(P)= 20
+ HP(P)=16
+ ET(P)=HP(P)
  RI(P)=300
- WR(P)=7
- WL(P)=10
- PT(P)=4
- CA(P)=3
- BT(P)=31
- FORI=1TO6:SAD(P,I)=0:NEXTI
- SAD(P,1)=23
- SAD(P,2)=24
+ FORI=1TO6:BAG(P,I)=0:NEXTI
+ TEXT
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254 
  GOSUB Sauvegarde
+ LOAD "MAP.COM"
  END:REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 DicesSuite 
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+ CLS
  INPUT "DICE ROLL SPEED (1=FAST-3=SLOW)";VT
  FOR P=1TO6
  TRY=1
  GOSUB IntroCreation
- POKE#26A,PEEK(#26A) AND 254 'Vire le curseur
+ POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  DEF FN A(X)=INT(RND(1)*X)+1
 dices_14
  CLS:TT=0
@@ -183,8 +162,8 @@ dices_14
  S$=" > "+ROLE$(ROLE(P))+" < "
  T=INT((40-LEN(S$))/2)
  PRINT @T,2;CHR$(148);S$;CHR$(144)
- S$=" <  ROLL 2x10 DICES > - TRY:"+CHR$(144)
- PRINT@ 6,4;CHR$(148);S$;TRY
+ S$="< ROLL 2x10 Sided DICES > - TRY:"+CHR$(144)
+ PRINT@ 2,4;CHR$(148);S$;TRY
  PRINT@ 5,12;CHR$(148);"Ml - Rg - St - Ag - IQ - MS - HP ";CHR$(144)
  PRINT@ 1,11;"2D:"
  FOR C=1TO7
@@ -228,13 +207,13 @@ dices_12
  IF A$<>"N" THEN  dices_12 
  ZAP:TRY=TRY+1:GOTO dices_14 
 dices_13
- PRINT@12,20;CHR$(145);"^  CULTURE BONUS  ^ ";CHR$(144)
+ PRINT@12,20;CHR$(145);"<  CULTURE BONUS  > ";CHR$(144)
  FORI=1TO7
  PRINT@ I*5+1,14;BC(CULT(P),I):WAITVT*40:PING
  PRINT@ I*5,15;CARAC(I)+BC(CULT(P),I):WAITVT*40:PING
  NEXT I
  
- PRINT@12,20;CHR$(148);"^   ROLE  BONUS  ^ ";CHR$(144)
+ PRINT@12,20;CHR$(148);"<   ROLE  BONUS  > ";CHR$(144)
  FORI=1TO7
  PRINT@ I*5+1,16;BR(ROLE(P),I):WAITVT*40:PING
  PRINT@ I*5,17;CARAC(I)+BR(ROLE(P),I):WAITVT*40:PING
@@ -243,12 +222,13 @@ dices_13
  RI(P)=FNA(150)+200
  NEXT P
  GOSUB Sauvegarde
+ LOAD "MAP.COM"
  END:REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 dices_1
  REM ++  DICES ROLL  ++++++++
  PRINT @13,7;CHR$(138);"                   "
  PRINT @13,8;CHR$(138);"                   "
- PRINT @14,20;"< Press Space>"
+ PRINT @14,20;"< Press Space >"
  RETURN
 dices_3
  FOR I=1TO15
@@ -278,7 +258,9 @@ dices_0
 
 Intro
   A=DEEK(#308):R=RND(-A)
-  TEXT:CLS:PAPER0:INK3
+  TEXT:PAPER0:INK3
+  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
+  CLS
   PRINT CHR$(17);CHR$(20)
   PRINTSPC(4);CHR$(4);CHR$(27);"JCEO GAMES STUDIOS ";CHR$(27)"BPRESENT"
   PRINT:PRINT:PRINT
@@ -307,7 +289,7 @@ Intro_0
   A$="":B$="":LP$=""
   REM MESSAGE D'INTRO DE L'EMPEREUR
   PAPER0:INK7:HIRES:POKE#26A,PEEK(#26A) AND 254 'Vire le curseur
-  PRINT:S$="<| EMPEROR LUCIUS VERUS OFFICE |>":GOSUB Intro_1
+  PRINT:S$="<* EMPEROR LUCIUS VERUS OFFICE *>":GOSUB Intro_1
   T1=1:T2=1'temporisation affichage
   CL=10:LINE=6:NLIGNE=19
   FORI=1TONL:READS$
@@ -472,7 +454,7 @@ Sauvegarde
  DATA Celtic, Egyptian, Gallic, Goth, Persian, Roman, Viking
  DATA Melee Skill, Range Skill, Strength
  DATA Agility, Intelligence
- DATA Mental Strength, Health Points
+ DATA Mental Strength, Hit Points
  REM   Ml Rg St  Ag IQ MS HP  les 7 bonus de roles
  DATA   8, 4, 6, 3, 0, 5, 5: REM Legionary
  DATA   9, 2, 5, 5, 0, 6, 4: REM Gladiator

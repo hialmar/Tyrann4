@@ -410,10 +410,8 @@ void inspect(void)
 	// construction du nom/titre
 	strcpy(titre, " < ");
 	strcat(titre, characters[i].nom);
-	if(characters[i].mp != 1) {
-		strcat(titre, " ");
-		strcat(titre, culture[characters[i].mp-1]);
-	}
+	strcat(titre, " ");
+	strcat(titre, culture[characters[i].mp-1]);
 	strcat(titre, " > ");
 	j = strlen(titre);
 	a = (31-j)/2 + 4;
