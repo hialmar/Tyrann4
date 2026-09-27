@@ -402,14 +402,21 @@ suite_voleur
 	lda #>t_voleur_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	; on vole 10 = 100 sesterces
+	; on vole 100 sesterces = 64 en hex
 	sec
 	lda _character_ri
-	sbc #10
+	sbc #$64
 	sta _character_ri
 	lda _character_ri+1
 	sbc #0
 	sta _character_ri+1
+	bcc cycle
+	jmp suite_voleur2
+cycle ; on a cyclé, on remet à 0
+	lda #0
+	sta _character_ri
+	sta _character_ri+1
+suite_voleur2	
 	jsr hit_release_key
 	jsr eff_text
 ;-------------------------------------------------
@@ -525,13 +532,19 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; on ajoute 20000 ses = 2000 = 7d0 en hex 
+	; on ajoute 20000 ses = 4e20 en hex 
 	clc
 	lda _character_ri
-	adc #$d0
+	adc #$20
 	sta _character_ri
 	lda _character_ri+1
-	adc #$7
+	adc #$4e
+	sta _character_ri+1
+	bcs overflow
+	rts
+overflow ; on met le max
+	lda #$ff
+	sta _character_ri
 	sta _character_ri+1
 	rts
 ;-------------------------------------------------	
@@ -703,13 +716,19 @@ suite_coffre
 	; inc nb_coffres_non_ouverts
 	; ajout d'une somme aléatoire
 	jsr _random
-	and #$64      ;;; en dur : on limite à 100 = 64 hex
 	clc
 	adc _character_ri
 	sta _character_ri
 	lda _character_ri+1
 	adc #0
 	sta _character_ri+1
+	bcs overflow_coffres
+	jmp suite_overflow
+overflow_coffres ; on met le max
+	lda #$ff
+	sta _character_ri
+	sta _character_ri+1
+suite_overflow
 	lda ligne_map
 	cmp #11
 	bne suite_coffre1

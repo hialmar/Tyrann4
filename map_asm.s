@@ -268,9 +268,9 @@ init_div_var
 	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
+	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	lda #TRUE	        ; TEMPO
 	sta _team_out
-	sta a_un_bateau			; drapeau bateau : 1 on a un bateau / 0 pas de bateau
 	sta numero_lieu         ; indique lieu <> Gallia (0)
 	lda #2
 	sta _team_version
@@ -278,7 +278,6 @@ init_div_var
 	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
 	bne fin
 load_from_team
-	
 	lda _team_boat
 	sta a_un_bateau
 	lda _team_ligne_hg_map
@@ -303,7 +302,7 @@ load_from_team
 	sta est_affiche_texte			; drapeau nom ville à l'écran 	1 : nom à l'ecran , 0 rien
 	sta scroll_est_interdit			; drapeau scroll autorisé/interdit 	1 : interdit , 0 autorisé
 	sta depl_perso_est_interdit			; drapeau déplacement perso autorisé/interdit 	1 : interdit , 0 autorisé
-	lda _team_numero_lieu
+	lda #$ff
 	sta numero_lieu         ; indique lieu <> Gallia (0)
 	lda _team_sortie_victorieuse
 	sta sortie_victorieuse ; drapeau sortie victorieuse de la carte = $80 sinon = $20
@@ -313,14 +312,6 @@ fin
 
 ProgCombat
 	.asc "COMBAT.COM"
-	.byt 0
-
-ProgArmory
-	.asc "ARM.COM"
-	.byt 0
-
-ProgVille1
-	.asc "VILLE1.COM"
 	.byt 0
 
 ProgCamp
@@ -386,7 +377,7 @@ choix_perso
 .(
 		lda tuile_sous_pos_perso
 		beq mer_bateau
-		cmp #TRUE
+		cmp #1
 		beq mer_bateau
 		lda #FALSE
 		sta est_en_mer					; drapeau  à 0 : on n'est pas en mer
@@ -399,6 +390,7 @@ choix_perso
 		beq vers_droite			; si flêche gauche perso regarde à gauche
 		cmp #$bc
 		beq vers_gauche			; si flêche droite, perso regarde vers droite
+		lda #$4c
 		bne fin_ch_perso		; Saut incontionnel
 vers_haut
 		lda #$4c
@@ -838,6 +830,20 @@ aff_text
 	sbc #$55		; la première ville est numéroté #$50 (la dernière : #$64)
 	bmi hadrian_wall	; si pas sur ville, test suivant
 	sta _team_ville
+	cmp #2
+	bpl tempo_demo
+	jmp aff_text_suite
+tempo_demo
+	ldx #0
+	lda t_tempo_demo_1,x
+	sta adr_ecr_txt+1
+	lda #<t_tempo_demo_1+1
+	sta write_phrase+1
+	lda #>t_tempo_demo_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	rts
+aff_text_suite	
 	asl				; prépare index
 	tax				; 
 	lda ptr_v,x			; Partie basse adresse premier byte chaine nom (ie: $a0,"narbone",0) 
@@ -964,6 +970,7 @@ suite_dh
 	lda #>t_druid_hut_1+1
 	sta write_phrase+2	
 	jsr write_phrase
+	rts ;;;;; a modifier quand la quete principale marchera
 	
 	ldx #0
 	lda t_druid_hut_2,x
@@ -2394,6 +2401,10 @@ t_kraken_3
 t_kraken_4
 	.byt $c4
 	.asc "It lets you pass.",0
+
+t_tempo_demo_1
+    .byt $c4
+	.asc "WORK IN PROGRESS", 0
 
 ; ------------------------------------
 dta_bandeau

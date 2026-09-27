@@ -129,11 +129,11 @@ void money(char p)
 	for(i=0;i<6;i++) {
 		printAtXY(5,4+i, itoa(i+1));
 		printAtXY(7,4+i, characters[i].nom);
-		printAtXY(19,4+i, t4_itoa(characters[i].ri*10));
+		printAtXY(19,4+i, t4_itoa(characters[i].ri*1));
 	}
 	// affiche les richesses du héros sélectionné
 	printAtXY(4,13, "Your Money :");
-	printAtXY(18,13, t4_itoa(characters[p].ri*10));
+	printAtXY(18,13, t4_itoa(characters[p].ri*1));
 	printAtXY(26,13, " Sesterces");
 
 	// demande la somme
@@ -149,7 +149,7 @@ void money(char p)
 			// schéma de Horner
 			somme = somme*10 + (a - '0');
 			// si ça fait trop on repasse à 0 en pingant
-			if (characters[p].ri*10 >= 0 && somme > characters[p].ri*10) {
+			if (characters[p].ri*1 >= 0 && somme > characters[p].ri*1) {
 				ping();
 				somme = 0;
 				// on efface aussi ce qu'il y avait
@@ -190,9 +190,9 @@ void money(char p)
 				if ((i>=0) && (i!=p)) {
 					// c'est correct on transfère	
 					// attention a ne pas cycler
-					if (characters[i].ri<3000) {
-						characters[i].ri+=somme/10;
-						characters[p].ri-=somme/10;
+					if (characters[i].ri<30000) {
+						characters[i].ri+=somme;
+						characters[p].ri-=somme;
 						break; // correct : on sort
 					} else {
 						printAtXY(5,15, "He is too rich!!!");
@@ -222,7 +222,7 @@ void items(char p)
 				return; // on arrête tout
 			item = characters[p].sad[o];
 			// IF(IT>21ANDIT<27)OR(IT>33ANDIT<44)THENL=24
-			if ((item<=0)||(item>17 && item<23)||(item>27 && item<37)) {
+			if (item<=0) {
 				ping();
 				printAtXY(6,25, "       !IMPOSSIBLE!       ");
 				wait(250);
@@ -434,7 +434,7 @@ void inspect(void)
 	printAtXY(32, 6, itoa(characters[i].pv));
 	// affichage bourse
 	printAtXY(5,  8, "Money:");
-	printAtXY(13, 8, t4_itoa(characters[i].ri*10));
+	printAtXY(13, 8, t4_itoa(characters[i].ri*1));
 	printAtXY(21, 8, " Sesterces");
 	
 	// affichage de l'équipement porté
@@ -537,7 +537,7 @@ void printTeamFull(void)
 		printAtXY (17,7+3*i, culture[characters[i].mp-1]);
 		printAtXY (27,7+3*i, classe[characters[i].cp-1]);
 		printAtXY (37,7+3*i, itoa(characters[i].ni));
-		printAtXY (6,7+3*i+1, t4_itoa(characters[i].ri*10));
+		printAtXY (6,7+3*i+1, t4_itoa(characters[i].ri*1));
 		printAtXY (12,7+3*i+1, " s");
 		printAtXY (17,7+3*i+1, itoa(characters[i].cc));
 		printAtXY (20,7+3*i+1, itoa(characters[i].ct));
@@ -648,7 +648,7 @@ void chest(void)
 		// 21920 TL=TL+1:UP=1
 		// 21950 RETURN
 		int prime = rand()%5000 + 3000;
-		characters[a].ri += prime/10; // attention on stocke les ca / 10
+		characters[a].ri += prime; // attention on stocke les ca / 10
 		printAtXY(20,12, "a Treasure of");
 		printAtXY(33,13, itoa(prime));
 		printAtXY(38,13, "se");

@@ -482,13 +482,19 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; on ajoute 10000 ses = 1000 = 3e8 en hex 
+	; on ajoute 10000 ses = 2710 en hex 
 	clc
 	lda _character_ri
-	adc #$e8
+	adc #$10
 	sta _character_ri
 	lda _character_ri+1
-	adc #$3
+	adc #$27
+	sta _character_ri+1
+	bcs overflow
+	rts
+overflow ; on met le max
+	lda #$ff
+	sta _character_ri
 	sta _character_ri+1
 	rts
 ;-------------------------------------------------	
@@ -660,13 +666,19 @@ suite_coffre
 	; inc nb_coffres_non_ouverts
 	; ajout d'une somme aléatoire
 	jsr _random
-	and #$64      ;;; en dur : on limite à 100 = 64 hex
 	clc
 	adc _character_ri
 	sta _character_ri
 	lda _character_ri+1
 	adc #0
 	sta _character_ri+1
+	bcs overflow_coffres
+	jmp suite_overflow
+overflow_coffres ; on met le max
+	lda #$ff
+	sta _character_ri
+	sta _character_ri+1
+suite_overflow
 	lda ligne_map
 	cmp #1
 	bne suite_coffre1

@@ -397,7 +397,7 @@ Intro_5
   RETURN
 
 Sauvegarde
- S$="   SAUVEGARDES EN COURS - PATIENCE  ":GOSUB  Intro_1
+ S$="   SAVING - PLEASE WAIT  ":GOSUB  Intro_1
  VIL=1:TL=1:BS=0:FIL=0:SD=0:NP=0:PM=0' ni boussole, ni Filet, ni Selle
  O1=#A000:POKE O1,0
  O1=O1+1:POKEO1,1 'numero de version passera a 2 qd map aura bien init tout
@@ -411,7 +411,7 @@ Sauvegarde
  FORJ=1TOLEN(NOM$(P))
  O1=O1+1:POKEO1,ASC(MID$(NOM$(P),J,1))'stockage du prenom
  NEXTJ
- O1=O1+1:DOKEO1,INT(RI(P)/10)' argent sur 2 octets
+ O1=O1+1:DOKEO1,RI(P)' argent sur 2 octets
  O1=O1+2:POKEO1,ROLE(P):REM + Role du Personnage
  O1=O1+1:POKEO1,CULT(P):REM + Culture du Personnage
  O1=O1+1:POKEO1,ML(P):REM + Capacite de Combat
