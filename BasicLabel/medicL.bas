@@ -19,6 +19,7 @@ ville_27
  REM LABY
 ville_11
  CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_SAVE
+ IF VIL=0 THEN LOAD("MAP")
  PROG$ = "VILLE"+MID$(STR$(VIL),2)
  LOAD(PROG$)
 ville_BlueBg

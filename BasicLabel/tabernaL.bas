@@ -19,6 +19,7 @@ ville_27
  REM LABY
 ville_11
  CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_SAVE
+ IF VIL=0 THEN LOAD("MAP")
  PROG$ = "VILLE"+MID$(STR$(VIL),2)
  LOAD(PROG$)
 ville_BlueBg
@@ -53,9 +54,9 @@ ville_7
  PLOT12,14,"G > Give money"
  PLOT12,16,"S > Sleep in a bedroom"
  PLOT12,18,"L > Leave Taberna"
- IFVIL=1ANDT4INF(4)+TVDO(2)=20THENPLOT12,20,"E > Recruit Elancia":PLOT12,22,"K > Recruit Kaeso"
- IFVIL=1ANDT4INF(4)+TVDO(2)=22THENPLOT12,20,"M > Recruit Maelle":PLOT12,22,"C > Recruit Carpo"
- IFVIL=2THENPLOT12,20,"A > Recruit Astrid":PLOT12,22,"V > Recruit Viggo"
+ REM IFVIL=1ANDT4INF(4)+TVDO(2)=20THENPLOT12,20,"E > Recruit Elancia":PLOT12,22,"K > Recruit Kaeso"
+ REM IFVIL=1ANDT4INF(4)+TVDO(2)=22THENPLOT12,20,"M > Recruit Maelle":PLOT12,22,"C > Recruit Carpo"
+ REM IFVIL=2THENPLOT12,20,"A > Recruit Astrid":PLOT12,22,"V > Recruit Viggo"
  FR=FRE("")
 ville_53
  GETP$:P=VAL(P$)
@@ -66,12 +67,12 @@ ville_53
  IFP$="I"THEN PRINT FRE(""),"LG",T4INF(3)+TVDO(1),"ORD",T4INF(4)+TVDO(2)
  IFP$="G"THEN GOSUB  ville_52 
  IFP$="S"THEN GOSUB  ville_sleep 
- IFP$="E"ANDVIL=1ANDT4INF(4)+TVDO(2)=20THEN GOSUB  Recruit_Elancia 
- IFP$="K"ANDVIL=1ANDT4INF(4)+TVDO(2)=20THEN GOSUB  Recruit_Kaeso 
- IFP$="M"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Maelle 
- IFP$="C"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Carpo 
- IFP$="A"ANDVIL=2THEN GOSUB  Recruit_Astrid 
- IFP$="V"ANDVIL=2THEN GOSUB  Recruit_Viggo 
+ REM IFP$="E"ANDVIL=1ANDT4INF(4)+TVDO(2)=20THEN GOSUB  Recruit_Elancia 
+ REM IFP$="K"ANDVIL=1ANDT4INF(4)+TVDO(2)=20THEN GOSUB  Recruit_Kaeso 
+ REM IFP$="M"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Maelle 
+ REM IFP$="C"ANDVIL=1ANDT4INF(4)+TVDO(2)=22THEN GOSUB  Recruit_Carpo 
+ REM IFP$="A"ANDVIL=2THEN GOSUB  Recruit_Astrid 
+ REM IFP$="V"ANDVIL=2THEN GOSUB  Recruit_Viggo 
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53 
  GOTO ville_56
 Recruit_Astrid 
@@ -368,12 +369,12 @@ ville_recup2
  RETURN
 
 ville_56
- S$=" BROWSE SHOP ?":N=NS:ENC=EE(VIL):GOSUB ville_51 :GOSUB ville_54 
+ S$=" Buy or Sell ?":N=NS:ENC=EE(VIL):GOSUB ville_51 :GOSUB ville_54 
  PRINT@9,8;" 0 > Change customer ":FR=FRE(0)
 ville_55
- GETA$:SH=VAL(A$):IFSH>1THEN ville_55
+ GETA$:SH=VAL(A$):IFSH>2THEN ville_55
  IFA$="C"THEN RI(P)=RI(P)+10000:GOTO ville_56 
- IFA$="S"THENGOSUB ville_57 :GOTO ville_56 
+ IFSH=2THENGOSUB ville_57 :GOTO ville_56  
  IFSH=0THEN ville_7 
  SH=3
 ville_83
@@ -478,7 +479,7 @@ ville_54
  IFBT(P)>0THENM$=IT$(BT(P))ELSEM$="..........."
  PRINT@4,L;I;M$:L=L+2
  PRINT@2,L;"*************************************"
- PRINT@6,L;CHR$(135);CHR$(145);" S)ell ";CHR$(128+ENC);CHR$(144)
+ REM PRINT@6,L;CHR$(135);CHR$(145);" S)ell ";CHR$(128+ENC);CHR$(144)
  RETURN
 ville_51
  CLS:PRINT:INK(ENC):PRINTCHR$(17);
@@ -495,7 +496,8 @@ ville_51
  PRINT@4,L;I;N$(I);@18,L;S$;@T,L;RI(I);"se":GOTO ville_86
 ville_PrintShops
  IFN<>NSTHEN ville_Items 
- IF I=1 THEN PRINT@12,L;I;SH$(3)
+ IF I=1 THEN PRINT@12,L;I;"Buy"
+ IF I=2 THEN PRINT@12,L;I;"Sell"
  GOTO ville_86
  REM ITEMS
 ville_Items

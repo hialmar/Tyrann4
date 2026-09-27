@@ -19,6 +19,7 @@ ville_27
  REM LABY
 ville_11
  CO = 0 : IF DE >= 128 THEN DE = 128 ELSE DE = 0 : GOSUB  ville_SAVE
+ IF VIL=0 THEN LOAD("MAP")
  PROG$ = "VILLE"+MID$(STR$(VIL),2)
  LOAD(PROG$)
 ville_BlueBg
@@ -63,12 +64,12 @@ ville_53
  IFP$="G"THEN GOSUB  ville_52 
  IFP<1ORP>6OROK(P)>2THENZAP:GOTO ville_53 
 ville_56
- S$=" BROWSE SHOP ?":N=NS:ENC=EE(VIL):GOSUB ville_51 :GOSUB ville_54 
+ S$=" Buy or Sell ?":N=NS:ENC=EE(VIL):GOSUB ville_51 :GOSUB ville_54 
  PRINT@9,8;" 0 > Change customer ":FR=FRE(0)
 ville_55
- GETA$:SH=VAL(A$):IFSH>1THEN ville_55
+ GETA$:SH=VAL(A$):IFSH>2THEN ville_55
  IFA$="C"THEN IFRI(P)<50000THENRI(P)=RI(P)+10000:GOTO ville_56 
- IFA$="S"THENGOSUB ville_57 :GOTO ville_56 
+ IFSH=2THENGOSUB ville_57 :GOTO ville_56 
  IFSH=0THEN ville_7 
  SH=2
 ville_83
@@ -176,7 +177,7 @@ ville_54
  IFBT(P)>0THENM$=IT$(BT(P))ELSEM$="..........."
  PRINT@4,L;I;M$:L=L+2
  PRINT@2,L;"*************************************"
- PRINT@6,L;CHR$(135);CHR$(145);" S)ell ";CHR$(128+ENC);CHR$(144)
+ REM PRINT@6,L;CHR$(135);CHR$(145);" S)ell ";CHR$(128+ENC);CHR$(144)
  RETURN
 ville_51
  CLS:PRINT:INK(ENC):PRINTCHR$(17);
@@ -193,7 +194,8 @@ ville_51
  PRINT@4,L;I;N$(I);@18,L;S$;@T,L;RI(I);"se":GOTO ville_86 
 ville_85
  IFN<>NSTHEN ville_87 
- IF I=1 THEN PRINT@12,L;I;SH$(I+1)
+ IF I=1 THEN PRINT@12,L;I;"Buy"
+ IF I=2 THEN PRINT@12,L;I;"Sell"
  GOTO ville_86 
  REM ITEMS
 ville_87
