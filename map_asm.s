@@ -119,6 +119,14 @@ main_loop
 	jsr prt_nom_lieu		; affiche lieu géographique (pays, mer...)
 	jsr aff_hero			; affiche le hero au centre ... PROVISOIRE
 	jsr	aff_text
+	ldx #0
+	lda t_help_1,x
+	sta adr_ecr_txt+1
+	lda #<t_help_1+1
+	sta write_phrase+1
+	lda #>t_help_1+1
+	sta write_phrase+2	
+	jsr write_phrase
 	; cli
 
 	ldy depl_perso_est_interdit
@@ -319,7 +327,7 @@ ProgCamp
 	.byt 0
 
 ProgDir
-	.asc "CLS"
+	.asc "MENU"
 	.byt 0
 
 ;-------------------------
@@ -2405,6 +2413,10 @@ t_kraken_4
 t_tempo_demo_1
     .byt $c4
 	.asc "WORK IN PROGRESS", 0
+
+t_help_1
+    .byt $70
+	.asc "S=SAVE/STOP C=CAMP F=FIGHT", 0
 
 ; ------------------------------------
 dta_bandeau

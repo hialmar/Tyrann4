@@ -593,18 +593,22 @@ combat_42
  FU=0
  FOR P=1TO6
  IF OK(P)>2 THEN  combat_129 
- XP(P)=XP(P)+XP+(MT(P)*20)+FNA(10*VIL)
- RI(P)=RI(P)+PO+(MT(P)*25)+FNA(10*VIL)
+ XP(P)=XP(P)+XP+(MT(P)*20)+FNA(10)
+ RI(P)=RI(P)+PO+(MT(P)*25)+FNA(10)
+ IF RI(P)>65535 THEN RI(P)=65535
+ IF XP(P)>65535 THEN XP(P)=65535
 combat_129
  IF MT(P)< NE THEN  combat_130 
  S$="Well done "+N$(P):L=11:GOSUB  combat_printS :WAITTI*8
  S$="who killed them all !":L=12:GOSUB  combat_printS :WAITTI*12
  PRIME=(NE*100)+FNA(DC*20)
  S$="A special bounty of"+STR$(PRI)+" ss":L=14:GOSUB  combat_printS :WAITTI*12
- RI(P)=RI(P)+PRI:XP(P)=XP(P)+XP+(MT(P)*20)+FNA(10*VIL)
+ RI(P)=RI(P)+PRI:XP(P)=XP(P)+XP+(MT(P)*20)+FNA(10)
+ IF RI(P)>65535 THEN RI(P)=65535
+ IF XP(P)>65535 THEN XP(P)=65535
  L=16:GOSUB  combat_5 :GOSUB  combat_131 
 combat_130
- IF XP(P)>1000+(VIL*150) AND NI(P)<21 AND OK(P)<>4 THEN GOSUB  combat_132 
+ IF XP(P)>1000+(NI(P)*150) AND NI(P)<21 AND OK(P)<>4 THEN GOSUB  combat_132 
  NEXT P
  L=18:S$="LET'S MOVE ON !":GOSUB  combat_printS 
  L=21:GOSUB  combat_5 

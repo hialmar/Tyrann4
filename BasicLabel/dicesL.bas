@@ -1,10 +1,12 @@
 #labels
+ FR=FRE("")
  REM {++++ ORIC - NEMAUSUS RPG - April 2018 ++++}
  REM { Maximus (denis SOL)
  TEXT:LOAD "FONT.BIN":PAPER0:INK6
  POKE 48035,0:POKE#26A,PEEK(#26A)AND254
  CLS
  GOSUB  dices_0
+ GOTO Dices
  PRINT "PRESS S TO SKIP THE INTRO"
  GETA$:IF A$="S" THEN Dices ' saute l'intro pour tester la suite
  GOSUB Intro
