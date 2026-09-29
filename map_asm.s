@@ -970,6 +970,7 @@ druid_hut
 	beq suite_dh
 	jmp herb_
 suite_dh	
+	rts ;;;;; a modifier quand la quete principale marchera
 	ldx #0
 	lda t_druid_hut_1,x
 	sta adr_ecr_txt+1
@@ -978,7 +979,6 @@ suite_dh
 	lda #>t_druid_hut_1+1
 	sta write_phrase+2	
 	jsr write_phrase
-	rts ;;;;; a modifier quand la quete principale marchera
 	
 	ldx #0
 	lda t_druid_hut_2,x
