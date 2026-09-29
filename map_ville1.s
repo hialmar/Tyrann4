@@ -1342,7 +1342,7 @@ t_coffre_2
 	.byt $c6	
 	.asc "do you open it?",0
 t_coffre_3
-	.byt $c6	
+	.byt $9b	
 	.asc "You find some coins!",0	
 ; ------------------------------------
 
