@@ -762,6 +762,14 @@ sk_ef
 	lda #$38
 	sta direction_scroll
 	jsr eff_text
+	ldx #$00
+	lda t_coffre_3,x
+	sta adr_ecr_txt+1
+	lda #<t_coffre_3+1
+	sta write_phrase+1
+	lda #>t_coffre_3+1
+	sta write_phrase+2	
+	jsr write_phrase
 ;-------------------------------------------------		
 fin_txt	
 	rts
@@ -1333,6 +1341,9 @@ t_coffre_1
 t_coffre_2
 	.byt $c6	
 	.asc "do you open it?",0
+t_coffre_3
+	.byt $c6	
+	.asc "You find some coins!",0	
 ; ------------------------------------
 
 dta_bandeau	
