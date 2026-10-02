@@ -68,7 +68,7 @@ SET OSDKLINK=
 SET OSDKHEAD=
 CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_map.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\map.tap BUILD\map_init.tap
 Copy BUILD\symbols BUILD\symbols_map
 
@@ -91,7 +91,7 @@ Goto Tap2dsk
 
 CALL osdk_config_map_ville1.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_ville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\symbols BUILD\symbols_ville1
 
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
@@ -114,7 +114,7 @@ Goto Tap2dsk
 
 CALL osdk_config_map_ville2.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
-%OSDK%\bin\MemMap.exe build\symbols build\map_ville2.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville2.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\symbols BUILD\symbols_ville2
 
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
