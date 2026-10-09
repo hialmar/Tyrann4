@@ -7,10 +7,12 @@
 IF "%OSDK%"=="" GOTO ErCfg
 
 :: Goto Camp
-Goto MapAsm
+:: Goto MapAsm
 :: Goto Ville1
 :: Goto Ville2
-:: Goto Ville3
+Goto Ville3
+:: Goto Ville4
+:: Goto Ville5
 
 ::
 :: Set the build parameters : Laby
@@ -73,20 +75,7 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 Copy BUILD\map.tap BUILD\map_init.tap
 Copy BUILD\symbols BUILD\symbols_map
 
-Call sed -i.bak s/\\/\//g BUILD\symbols_ext
-Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
-Call sed -i.bak s/C:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
-
-
-Copy sed.exe ased.exe
-Copy sedoric_io.s asedoric_io.s
-
-Del sed*
-
-Copy ased.exe sed.exe 
-Copy asedoric_io.s sedoric_io.s 
-
-Goto Tap2dsk
+Goto GestionSymbols
 
 :Ville1
 
@@ -95,21 +84,7 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\symbols BUILD\symbols_ville1
 
-Call sed -i.bak s/\\/\//g BUILD\symbols_ext
-Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
-Call sed -i.bak s/C:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
-
-
-Copy sed.exe ased.exe
-Copy sedoric_io.s asedoric_io.s
-
-Del sed*
-
-Copy ased.exe sed.exe 
-Copy asedoric_io.s sedoric_io.s 
-
-Goto Tap2dsk
-
+Goto GestionSymbols
 
 :Ville2
 
@@ -118,28 +93,36 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville2.htm %OSDKNAME% %OSDK%\documentation\documentation.css
 Copy BUILD\symbols BUILD\symbols_ville2
 
-Call sed -i.bak s/\\/\//g BUILD\symbols_ext
-Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
-Call sed -i.bak s/C:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
-
-
-Copy sed.exe ased.exe
-Copy sedoric_io.s asedoric_io.s
-
-Del sed*
-
-Copy ased.exe sed.exe 
-Copy asedoric_io.s sedoric_io.s 
-
-Goto Tap2dsk
+Goto GestionSymbols
 
 :Ville3
 
 CALL osdk_config_map_ville3.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
 %OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville3.htm %OSDKNAME% %OSDK%\documentation\documentation.css
-Copy BUILD\symbols BUILD\symbols_ville2
+Copy BUILD\symbols BUILD\symbols_ville3
 
+Goto GestionSymbols
+
+:Ville4
+
+CALL osdk_config_map_ville4.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville4.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_ville4
+
+Goto GestionSymbols
+
+:Ville5
+
+CALL osdk_config_map_ville5.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville5.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_ville5
+
+Goto GestionSymbols
+
+:GestionSymbols
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
 Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
 Call sed -i.bak s/C:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
@@ -175,7 +158,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t4_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\ville1.tap BUILD\ville2.tap BUILD\ville3.tap t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\ville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap t4_prog.dsk
 
 pause
 
