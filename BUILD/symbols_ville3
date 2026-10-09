@@ -240,11 +240,11 @@
 1121 out_eff_text
 1118 lp_efface
 1126 lp1_impl
-2924 dta_car_redef_p1
+2994 dta_car_redef_p1
 1133 lp2_impl
-2a20 dta_car_redef_p2
+2a90 dta_car_redef_p2
 1140 lp3_impl
-2b1c dta_car_redef_p3
+2b8c dta_car_redef_p3
 1159 suite_portail
 1189 key_1
 1de7 t_portail_1
@@ -318,7 +318,7 @@
 15ad ad_dta_nv
 15b0 ad_ec_nv
 15d2 maj_adr_nv
-288a dta_nom_ville
+2862 dta_nom_ville
 15e0 sk_ret1
 15ee sk_ret2
 15ef _L00
