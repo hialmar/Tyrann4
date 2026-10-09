@@ -838,8 +838,8 @@ aff_text
 	sbc #$55		; la première ville est numéroté #$50 (la dernière : #$64)
 	bmi hadrian_wall	; si pas sur ville, test suivant
 	sta _team_ville
-	cmp #2
-	bpl tempo_demo
+;	cmp #2
+;	bpl tempo_demo
 	jmp aff_text_suite
 tempo_demo
 	ldx #0
