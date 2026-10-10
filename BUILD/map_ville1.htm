@@ -33,14 +33,13 @@
 <tr><td>606<td><a href='#_save_t4_characters'>_save_t4_characters</a>
 <tr><td>521<td><a href='#_load_t4_characters'>_load_t4_characters</a>
 <tr><td>256<td><a href='#__bss_clear_start'>__bss_clear_start</a>
+<tr><td>184<td><a href='#__data_end'>__data_end</a>
 <tr><td>120<td><a href='#_L44'>_L44</a>
 <tr><td>103<td><a href='#_main'>_main</a>
 <tr><td>96<td><a href='#_character_name'>_character_name</a>
-<tr><td>84<td><a href='#__data_end'>__data_end</a>
 <tr><td>73<td><a href='#_DiscSave'>_DiscSave</a>
-<tr><td>61<td><a href='#_get'>_get</a>
-<tr><td>48<td><a href='#_character_sp'>_character_sp</a>
 <tr><td>48<td><a href='#_character_sad'>_character_sad</a>
+<tr><td>43<td><a href='#_get'>_get</a>
 <tr><td>39<td><a href='#_Sedoric'>_Sedoric</a>
 <tr><td>37<td><a href='#_SwitchToCommand'>_SwitchToCommand</a>
 <tr><td>32<td><a href='#_team_combats_coffres'>_team_combats_coffres</a>
@@ -55,6 +54,7 @@
 <tr><td>30<td><a href='#_L37'>_L37</a>
 <tr><td>30<td><a href='#_L36'>_L36</a>
 <tr><td>30<td><a href='#_L35'>_L35</a>
+<tr><td>30<td><a href='#_L34'>_L34</a>
 </tbody>
 </table>
 <br>
@@ -909,7 +909,9 @@
 <tr>
 <td><b>$2e00</b></td><td align="right" id='_character_sad'>48</td><td align="right">48</td><td>_character_sad</td></tr>
 <tr>
-<td>$2e30</td><td align="right" id='_character_sp'>48</td><td align="right">48</td><td>_character_sp</td></tr>
+<td>$2e30</td><td align="right" id='_character_sp'>24</td><td align="right">24</td><td>_character_sp</td></tr>
+<tr>
+<td>$2e48</td><td align="right" id='__text_size'>24</td><td align="right">24</td><td>__text_size</td></tr>
 <tr>
 <td>$2e60</td><td align="right" id='_team_cles'>32</td><td align="right">32</td><td>_team_cles</td></tr>
 <tr>
@@ -939,7 +941,7 @@
 <tr>
 <td>$2eab</td><td align="right" id='_team_tuile_sous_pos_perso'>1</td><td align="right">1</td><td>_team_tuile_sous_pos_perso</td></tr>
 <tr>
-<td>$2eac</td><td align="right" id='__text_size'>1</td><td align="right">1</td><td>__text_size, _team_numero_lieu</td></tr>
+<td>$2eac</td><td align="right" id='_team_numero_lieu'>1</td><td align="right">1</td><td>_team_numero_lieu</td></tr>
 <tr>
 <td>$2ead</td><td align="right" id='_team_sortie_victorieuse'>1</td><td align="right">1</td><td>_team_sortie_victorieuse</td></tr>
 <tr>
@@ -1019,79 +1021,63 @@
 <tr>
 <td>$330f</td><td colspan="2" align="right">9</td><td>t_team_filemane</td></tr>
 <tr>
-<td>$3318</td><td align="right" id='_SPStorage'>1</td><td align="right">1</td><td>_SPStorage</td></tr>
+<td>$3318</td><td align="right" id='_rand'>10</td><td align="right">10</td><td>_rand, _random</td></tr>
 <tr>
-<td>$3319</td><td align="right" id='_BackupSP'>5</td><td align="right">5</td><td>_BackupSP</td></tr>
+<td>$3322</td><td align="right" id='_srandom'>20</td><td align="right">20</td><td>_srandom</td></tr>
 <tr>
-<td>$331e</td><td align="right" id='_DiscSave'>73</td><td align="right">73</td><td>_DiscSave</td></tr>
+<td>$3336</td><td align="right" id='_hires'>3</td><td align="right">3</td><td>_hires</td></tr>
 <tr>
-<td>$3367</td><td align="right" id='_DiscLoad'>30</td><td align="right">30</td><td>_DiscLoad</td></tr>
+<td>$3339</td><td align="right" id='_text'>3</td><td align="right">3</td><td>_text</td></tr>
 <tr>
-<td>$3385</td><td align="right" id='_Sedoric'>39</td><td align="right">12</td><td>_Sedoric</td></tr>
+<td>$333c</td><td align="right" id='_ping'>3</td><td align="right">3</td><td>_ping</td></tr>
 <tr>
-<td>$3391</td><td colspan="2" align="right">27</td><td>sedoricloop1</td></tr>
+<td>$333f</td><td align="right" id='_shoot'>3</td><td align="right">3</td><td>_shoot</td></tr>
 <tr>
-<td>$33ac</td><td align="right" id='_SwitchToCommand'>37</td><td align="right">12</td><td>_SwitchToCommand</td></tr>
+<td>$3342</td><td align="right" id='_zap'>3</td><td align="right">3</td><td>_zap</td></tr>
 <tr>
-<td>$33b8</td><td colspan="2" align="right">25</td><td>sedoricloop2</td></tr>
+<td>$3345</td><td align="right" id='_explode'>3</td><td align="right">3</td><td>_explode</td></tr>
 <tr>
-<td>$33d1</td><td align="right" id='_rand'>10</td><td align="right">10</td><td>_rand, _random</td></tr>
+<td>$3348</td><td align="right" id='_kbdclick1'>3</td><td align="right">3</td><td>_kbdclick1</td></tr>
 <tr>
-<td>$33db</td><td align="right" id='_srandom'>20</td><td align="right">20</td><td>_srandom</td></tr>
+<td>$334b</td><td align="right" id='_kbdclick2'>3</td><td align="right">3</td><td>_kbdclick2</td></tr>
 <tr>
-<td>$33ef</td><td align="right" id='_hires'>3</td><td align="right">3</td><td>_hires</td></tr>
+<td>$334e</td><td align="right" id='_cls'>3</td><td align="right">3</td><td>_cls</td></tr>
 <tr>
-<td>$33f2</td><td align="right" id='_text'>3</td><td align="right">3</td><td>_text</td></tr>
+<td>$3351</td><td align="right" id='_lores0'>3</td><td align="right">3</td><td>_lores0</td></tr>
 <tr>
-<td>$33f5</td><td align="right" id='_ping'>3</td><td align="right">3</td><td>_ping</td></tr>
+<td>$3354</td><td align="right" id='_lores1'>3</td><td align="right">3</td><td>_lores1</td></tr>
 <tr>
-<td>$33f8</td><td align="right" id='_shoot'>3</td><td align="right">3</td><td>_shoot</td></tr>
+<td>$3357</td><td align="right" id='_key'>13</td><td align="right">8</td><td>_key</td></tr>
 <tr>
-<td>$33fb</td><td align="right" id='_zap'>3</td><td align="right">3</td><td>_zap</td></tr>
+<td>$335f</td><td colspan="2" align="right">5</td><td>key001</td></tr>
 <tr>
-<td>$33fe</td><td align="right" id='_explode'>3</td><td align="right">3</td><td>_explode</td></tr>
+<td>$3364</td><td align="right" id='_get'>43</td><td align="right">8</td><td>_get</td></tr>
 <tr>
-<td>$3401</td><td align="right" id='_kbdclick1'>3</td><td align="right">3</td><td>_kbdclick1</td></tr>
+<td>$336c</td><td colspan="2" align="right">9</td><td>getXparm</td></tr>
 <tr>
-<td>$3404</td><td align="right" id='_kbdclick2'>3</td><td align="right">3</td><td>_kbdclick2</td></tr>
+<td>$3375</td><td colspan="2" align="right">19</td><td>getXloop</td></tr>
 <tr>
-<td>$3407</td><td align="right" id='_cls'>3</td><td align="right">3</td><td>_cls</td></tr>
+<td>$3388</td><td colspan="2" align="right">3</td><td>grexit</td></tr>
 <tr>
-<td>$340a</td><td align="right" id='_lores0'>3</td><td align="right">3</td><td>_lores0</td></tr>
+<td>$338b</td><td colspan="2" align="right">4</td><td>grexit2</td></tr>
 <tr>
-<td>$340d</td><td align="right" id='_lores1'>3</td><td align="right">3</td><td>_lores1</td></tr>
+<td>$338f</td><td align="right" id='_SPStorage'>1</td><td align="right">1</td><td>_SPStorage</td></tr>
 <tr>
-<td>$3410</td><td align="right" id='_key'>13</td><td align="right">8</td><td>_key</td></tr>
+<td>$3390</td><td align="right" id='_BackupSP'>5</td><td align="right">5</td><td>_BackupSP</td></tr>
 <tr>
-<td>$3418</td><td colspan="2" align="right">5</td><td>key001</td></tr>
+<td>$3395</td><td align="right" id='_DiscSave'>73</td><td align="right">73</td><td>_DiscSave</td></tr>
 <tr>
-<td>$341d</td><td align="right" id='_get'>61</td><td align="right">8</td><td>_get</td></tr>
+<td>$33de</td><td align="right" id='_DiscLoad'>30</td><td align="right">30</td><td>_DiscLoad</td></tr>
 <tr>
-<td>$3425</td><td colspan="2" align="right">9</td><td>getXparm</td></tr>
+<td>$33fc</td><td align="right" id='_Sedoric'>39</td><td align="right">12</td><td>_Sedoric</td></tr>
 <tr>
-<td>$342e</td><td colspan="2" align="right">19</td><td>getXloop</td></tr>
+<td>$3408</td><td colspan="2" align="right">27</td><td>sedoricloop1</td></tr>
 <tr>
-<td>$3441</td><td colspan="2" align="right">3</td><td>grexit</td></tr>
+<td>$3423</td><td align="right" id='_SwitchToCommand'>37</td><td align="right">12</td><td>_SwitchToCommand</td></tr>
 <tr>
-<td>$3444</td><td colspan="2" align="right">4</td><td>grexit2</td></tr>
+<td>$342f</td><td colspan="2" align="right">25</td><td>sedoricloop2</td></tr>
 <tr>
-<td>$3448</td><td colspan="2" align="right">8</td><td>TableBit</td></tr>
-<tr>
-<td>$3450</td><td colspan="2" align="right">10</td><td>calculXY</td></tr>
-<tr>
-<td>$345a</td><td align="right" id='_SetBit'>16</td><td align="right">16</td><td>_SetBit</td></tr>
-<tr>
-<td>$346a</td><td align="right" id='_SetBitInternal'>11</td><td align="right">11</td><td>_SetBitInternal</td></tr>
-<tr>
-<td>$3475</td><td align="right" id='_InvertBit'>16</td><td align="right">16</td><td>_InvertBit</td></tr>
-<tr>
-<td>$3485</td><td align="right" id='_InvertBitInternal'>11</td><td align="right">11</td><td>_InvertBitInternal</td></tr>
-<tr>
-<td>$3490</td><td align="right" id='_TestBit'>16</td><td align="right">16</td><td>_TestBit</td></tr>
-<tr>
-<td>$34a0</td><td align="right" id='_TestBitInternal'>12</td><td align="right">12</td><td>_TestBitInternal</td></tr>
-<tr>
-<td>$34ac</td><td align="right" id='__data_end'>84</td><td align="right">84</td><td>__data_end, __data_start, __text_end</td></tr>
+<td>$3448</td><td align="right" id='__data_end'>184</td><td align="right">184</td><td>__data_end, __data_start, __text_end</td></tr>
 <tr>
 <td><b>$3500</b></td><td align="right" id='__bss_clear_start'>256</td><td align="right">256</td><td>__bss_clear_start, __bss_start, osdk_stack</td></tr>
 <tr>

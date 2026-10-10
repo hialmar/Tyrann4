@@ -32,7 +32,7 @@ init_div_var
 	and #8
 	sta laisser_passer
 	; cache les tuiles spéciales
-	; attention, si on les déplace il faudra changer ces adresses !!!
+	; attention, si on les deplace il faudra changer ces adresses !!!
 	lda on_a_clef_1
 	beq suite_init1
 	ldx #8
