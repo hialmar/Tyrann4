@@ -36,7 +36,7 @@
 ;	$1C :	Numero région sur carte europe (GALLIA,BRITANIA, ...)
 ;	$1d :	Nombre de coffres ramassés et non ouverts
 
-main_routine
+_main
 ;	jsr impl_car			; Implante jeu de caractères redéfinis
 	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile)
 	jsr impl_car			; Implante jeu de caractères redéfinis	(modif: maintenant après HIRES car plus de place pour nouveaux car redef...)

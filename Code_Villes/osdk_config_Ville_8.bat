@@ -1,0 +1,11 @@
+@ECHO OFF
+
+::
+:: Set the build parameters
+::
+SET OSDKDEBUG=-g1
+SET OSDKCOMP=-O1
+SET OSDKADDR=$600
+SET OSDKNAME=Ville_8
+SET OSDKTAPNAME=Ville_8
+SET OSDKFILE=Ville_8

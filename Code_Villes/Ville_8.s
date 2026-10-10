@@ -30,18 +30,19 @@
 ;	$19	: 	drapeau : on a clef_2
 ;	$1a	:	drapeau : on a mot de passe :1
 ;	$1b :	drapeau : on a laissez-passer :1 on n'a pas laissez-passer : 0
-;	$1c :	N° de région (GALLIA, BRITANIA, ...)
+;	$1C :	Numero région sur carte europe
 ;	$1d :	Nombre de coffres ramassés et non ouverts
+;	$1e :	Drapeau pass donné par legat Londinium  pour centurion fort (initialisé à 0 uniquement sur carte générale si nouvelle partie)
+;	$1f :	Drapeau poudre de corne de taureau =1 pas de poudre =0
+;	$20 :	drapeau mot de passe pour phare (Brigantium)
 
-main_routine
-;	jsr impl_car			; Implante jeu de caractères redéfinis	
+_main
 	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile)
 	jsr impl_car			; Implante jeu de caractères redéfinis	
 	jsr init_div_var		; initialise diverses variables dont coordonnées coin haut gauche de la  partie table affichée.
 							; mais pas que...
-;	jsr _DoSync						
 	jsr cadre_plan			; dessine un cadre blanc autour du plan de ville
-	jsr bandeau				; dessine image au dessus du plan		
+	jsr bandeau				; dessine image au dessus du plan	
 main_loop
 	jsr scrl_fenetre		; Affiche/ scrolle les 105 tuiles dans la fenetre
 	jsr aff_hero			; affiche le hero.
@@ -211,9 +212,9 @@ sens_4
 		bne around_sortie
 		lda $07
 		cmp #$30
-		bne suite_sens_4	;pour cause branch out of range
+		bne cont_b4
 		jmp no_scroll
-suite_sens_4		
+cont_b4		
 		inc $07
 		jsr rech_tab_map		; en sortie  repère tuile dans $0a
 		lda $0a
@@ -242,39 +243,45 @@ chck_54		; clef_1
 		bne chck_56
 		lda #$01
 		sta $18					; met à 1 drapeau clef 1
-		bne around_sortie		
+		bne around_sortie
 chck_56							; a port  guard ask for laissez-passer
 		lda $0a
 		cmp #$56				; 
-		bne chck_57
-		lda $1b
-		bne around_sortie		; test:   $1b =1 => on a laissez-passer port	=> scroll et/ou delplacement autorisés
+		bne chck_58
+		lda $20
+		bne around_sortie		; test:   $1g =1 => on a mdp visite phare	=> scroll et/ou delplacement autorisés
 		jsr  why_no_scoll		
 		beq no_scroll			; branchement forcé par sortie sp précédent	
-chck_57							; mot de passe lu sur colonne
-		lda $0a
-		cmp #$57
-		bne chck_58
-		lda #$01
-		sta $1a					; met à 1 drapeau mote de passe
-	
-chck_58							; a guard ask for pass word to access lagat villa
+		
+chck_58		; a guard ask for pass word
 		lda $0a
 		cmp #$58				; 
-		bne chck_59
+		bne chck_57
 		lda $1a
 		bne around_sortie		; test:   $1a =1 => on a mot de passe	=> scroll et/ou delplacement autorisés
 		jsr  why_no_scoll		
 		beq no_scroll			; branchement forcé par sortie sp précédent		
-
-		bne around_sortie
-chck_59							; Legat donne laissez-passer pour le port
+chck_57							; mot de passe lu sur mur
 		lda $0a
-		cmp #$59
-		bne chck_55
+		cmp #$57
+		bne chck_60
+		lda #$01
+		sta $1a					; met à 1 drapeau mot de passe
+		bne around_sortie
+chck_60							; la visite turris herculis donne accès au 2nd discours Legat
+		lda $0a
+		cmp #$60
+		bne chck_61
 		lda #$01
 		sta $1b					; met à 1 drapeau laissez-passer
-		bne around_sortie		
+		bne around_sortie
+chck_61							; le beggar doone le mdp pour visite phare
+		lda $0a
+		cmp #$61
+		bne chck_55
+		lda #$01
+		sta $20					; met à 1 drapeau mot de passe pour phare
+		bne around_sortie				
 chck_55		; clef_2
 		lda $0a
 		cmp #$55
@@ -551,6 +558,7 @@ init_div_var
 	sta $19			; drapeau on a clef 2	
 	sta $1a			; drapeau on a mot de passe
 	sta $1b			; drapeau on a laissez-passer
+	sta $20			; drapeau mdp visite phare
 	rts	
 ;----------------------------------------------------------
 ;---   cherche n° de tuile en position X,Y dans carte   ---
@@ -950,7 +958,7 @@ suite_portail
 	lda #>t_portail_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 ;---------------------------------------------------
 key_1	
@@ -959,7 +967,7 @@ key_1
 	beq suite_clef
 	cmp #$55				; valeur tuile clef_2
 	beq suite_clef	
-	jmp port_guard
+	jmp phare_guard_guard
 suite_clef
 	jsr eff_tuile_spe	
 	ldx #$00
@@ -979,7 +987,7 @@ suite_clef
 	lda #>t_key_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	
 	ldx #$00
@@ -990,44 +998,82 @@ suite_clef
 	lda #>t_key_3+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 ;-------------------------------------------------------------
-port_guard
+phare_guard_guard
+
 	lda $0e
-	cmp #$56				; valeur tuile pour garde du port militaire
-	beq suite_port_guard
-	jmp _mot_de_passe
-suite_port_guard
+	cmp #$56				; valeur tuile pour garde du phare "tout d'Harcule"
+	beq suite_phare_guard
+	jmp visit_phare
+suite_phare_guard
 	jsr eff_tuile_spe
 	ldx #$00
-	lda t_port_guard_3,x
+	lda t_phare_guard_3,x
 	sta adr_ecr_txt+1
-	lda #<t_port_guard_3+1
+	lda #<t_phare_guard_3+1
 	sta write_phrase+1
-	lda #>t_port_guard_3+1
+	lda #>t_phare_guard_3+1
 	sta write_phrase+2	
 	jsr write_phrase
 	
 	ldx #$00
-	lda t_port_guard_4,x
+	lda t_phare_guard_4,x
 	sta adr_ecr_txt+1
-	lda #<t_port_guard_4+1
+	lda #<t_phare_guard_4+1
 	sta write_phrase+1
-	lda #>t_port_guard_4+1
+	lda #>t_phare_guard_4+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
+	jsr eff_text	
+
+	ldx #$00
+	lda t_phare_guard_5,x
+	sta adr_ecr_txt+1
+	lda #<t_phare_guard_5+1
+	sta write_phrase+1
+	lda #>t_phare_guard_5+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_release_key
 	jsr eff_text		
 	rts
 ;-------------------------------------------------
+visit_phare
+	lda $0e
+	cmp #$60				; valeur tuile pour garde du phare "tout d'Harcule"
+	beq suite_p_g
+	jmp _mot_de_passe
+suite_p_g
+	ldx #$00
+	lda t_visit_phare_1,x
+	sta adr_ecr_txt+1
+	lda #<t_visit_phare_1+1
+	sta write_phrase+1
+	lda #>t_visit_phare_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	ldx #$00
+	lda t_visit_phare_2,x
+	sta adr_ecr_txt+1
+	lda #<t_visit_phare_2+1
+	sta write_phrase+1
+	lda #>t_visit_phare_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_release_key
+	jsr eff_text		
+	rts	
+;-------------------------------------------------
 _mot_de_passe
 	lda $0e					
-	cmp #$57				; valeur tuile lecture mot de passe sur colonne
+	cmp #$57				; valeur tuile lecture mot de passe sur mur
 	beq suite_mot_passe
-	jmp garde_
+	jmp _beggar
 suite_mot_passe
-	jsr eff_tuile_spe
+;	jsr eff_tuile_spe
 	ldx #$00
 	lda t_m_de_passe_1,x
 	sta adr_ecr_txt+1
@@ -1045,9 +1091,39 @@ ldx #$00
 	lda #>t_m_de_passe_2+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text	
 	rts
+
+;-------------------------------------------------
+_beggar
+	lda $0e					
+	cmp #$61				; valeur tuile lecture graffitti sur mur
+	beq suite_graffitti
+	jmp garde_
+suite_graffitti
+;	jsr eff_tuile_spe
+	ldx #$00
+	lda t_beggar_1,x
+	sta adr_ecr_txt+1
+	lda #<t_beggar_1+1
+	sta write_phrase+1
+	lda #>t_beggar_1+1
+	sta write_phrase+2
+	jsr write_phrase	
+
+ldx #$00
+	lda t_beggar_2,x
+	sta adr_ecr_txt+1
+	lda #<t_beggar_2+1
+	sta write_phrase+1
+	lda #>t_beggar_2+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text	
+	rts	
+	
 ;-------------------------------------------------
 garde_
 	lda $0e					
@@ -1065,7 +1141,7 @@ suite_garde
 	sta write_phrase+2
 	jsr write_phrase	
 
-	ldx #$00
+ldx #$00
 	lda t_garde_4,x
 	sta adr_ecr_txt+1
 	lda #<t_garde_4+1
@@ -1073,10 +1149,10 @@ suite_garde
 	lda #>t_garde_4+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
-	
-	ldx #$00
+
+ldx #$00
 	lda t_garde_5,x
 	sta adr_ecr_txt+1
 	lda #<t_garde_5+1
@@ -1085,7 +1161,7 @@ suite_garde
 	sta write_phrase+2
 	jsr write_phrase	
 	jsr hit_key
-	jsr eff_text	
+	jsr eff_text
 	
 	rts
 ;-------------------------------------------------
@@ -1095,7 +1171,8 @@ legat_
 	beq suite_legat
 	jmp entrance_	
 suite_legat
-	jsr eff_tuile_spe	
+	lda $1b
+	bne legat_2
 	ldx #$00
 	lda t_legat_1,x
 	sta adr_ecr_txt+1
@@ -1113,7 +1190,7 @@ suite_legat
 	lda #>t_legat_2+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 
 	ldx #$00
@@ -1124,9 +1201,65 @@ suite_legat
 	lda #>t_legat_3+1
 	sta write_phrase+2
 	jsr write_phrase	
-	jsr hit_key
+	
+	ldx #$00
+	lda t_legat_4,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_4+1
+	sta write_phrase+1
+	lda #>t_legat_4+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
 	jsr eff_text
-	rts
+	rts	
+
+legat_2
+	jsr eff_tuile_spe	
+	ldx #$00
+	lda t_legat_5,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_5+1
+	sta write_phrase+1
+	lda #>t_legat_5+1
+	sta write_phrase+2
+	jsr write_phrase	
+
+	ldx #$00
+	lda t_legat_6,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_6+1
+	sta write_phrase+1
+	lda #>t_legat_6+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
+
+	ldx #$00
+	lda t_legat_7,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_7+1
+	sta write_phrase+1
+	lda #>t_legat_7+1
+	sta write_phrase+2
+	jsr write_phrase	
+	
+	ldx #$00
+	lda t_legat_8,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_8+1
+	sta write_phrase+1
+	lda #>t_legat_8+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
+	lda #$01
+	sta $1f
+	
+	rts	
+	
 ;-------------------------------------------------	
 entrance_
 	lda $0e
@@ -1240,7 +1373,7 @@ taberna_
 bazar_
 	lda $0e
 	cmp #$5f				; valeur Bazar
-	bne vente_bateau_
+	bne coffre_
 	ldx #$00
 	lda t_bazar_1,x
 	sta adr_ecr_txt+1
@@ -1253,65 +1386,65 @@ bazar_
 	jsr hit_key
 	jsr eff_text
 ;-------------------------------------------------	
-vente_bateau_
-	lda $0e
-	cmp #$60				; valeur boutique vente bateau
-	bne quais_
-	ldx #$00
-	lda t_vente_bateau_1,x
-	sta adr_ecr_txt+1
-	lda #<t_vente_bateau_1+1
-	sta write_phrase+1
-	lda #>t_vente_bateau_1+1
-	sta write_phrase+2	
-	jsr write_phrase
-	jsr do_you_enter
-	jsr hit_key
-	jsr eff_text
+;vente_bateau_
+;	lda $0e
+;	cmp #$60				; valeur boutique vente bateau
+;	bne quais_
+;	ldx #$00
+;	lda t_vente_bateau_1,x
+;	sta adr_ecr_txt+1
+;	lda #<t_vente_bateau_1+1
+;	sta write_phrase+1
+;	lda #>t_vente_bateau_1+1
+;	sta write_phrase+2	
+;	jsr write_phrase
+;	jsr do_you_enter
+;	jsr hit_key
+;	jsr eff_text
 ;-------------------------------------------------	
-quais_
-	lda $0e
-	cmp #$61				; valeur quai embarquement
-	bne coffre_
-	ldx #$00
-	lda t_quais_1,x
-	sta adr_ecr_txt+1
-	lda #<t_quais_1+1
-	sta write_phrase+1
-	lda #>t_quais_1+1
-	sta write_phrase+2	
-	jsr write_phrase
-	
-	ldx #$00
-	lda t_quais_2,x
-	sta adr_ecr_txt+1
-	lda #<t_quais_2+1
-	sta write_phrase+1
-	lda #>t_quais_2+1
-	sta write_phrase+2	
-	jsr write_phrase
-	jsr hit_key
-	jsr eff_text
-
-		ldx #$00
-	lda t_quais_3,x
-	sta adr_ecr_txt+1
-	lda #<t_quais_3+1
-	sta write_phrase+1
-	lda #>t_quais_3+1
-	sta write_phrase+2	
-	jsr write_phrase
-	
-	ldx #$00
-	lda t_quais_4,x
-	sta adr_ecr_txt+1
-	lda #<t_quais_4+1
-	sta write_phrase+1
-	lda #>t_quais_4+1
-	sta write_phrase+2	
-	jsr write_phrase
-	jsr hit_key
-	jsr eff_text
+;quais_
+;	lda $0e
+;	cmp #$61				; valeur quai embarquement
+;	bne coffre_
+;	ldx #$00
+;	lda t_quais_1,x
+;	sta adr_ecr_txt+1
+;	lda #<t_quais_1+1
+;	sta write_phrase+1
+;	lda #>t_quais_1+1
+;	sta write_phrase+2	
+;	jsr write_phrase
+;	
+;	ldx #$00
+;	lda t_quais_2,x
+;	sta adr_ecr_txt+1
+;	lda #<t_quais_2+1
+;	sta write_phrase+1
+;	lda #>t_quais_2+1
+;	sta write_phrase+2	
+;	jsr write_phrase
+;	jsr hit_key
+;	jsr eff_text
+;
+;		ldx #$00
+;	lda t_quais_3,x
+;	sta adr_ecr_txt+1
+;	lda #<t_quais_3+1
+;	sta write_phrase+1
+;	lda #>t_quais_3+1
+;	sta write_phrase+2	
+;	jsr write_phrase
+;	
+;	ldx #$00
+;	lda t_quais_4,x
+;	sta adr_ecr_txt+1
+;	lda #<t_quais_4+1
+;	sta write_phrase+1
+;	lda #>t_quais_4+1
+;	sta write_phrase+2	
+;	jsr write_phrase
+;	jsr hit_key
+;	jsr eff_text
 ;-------------------------------------------------	
 coffre_
 	lda $0e
@@ -1385,12 +1518,13 @@ why_no_scoll
 		jsr no_pasaran
 		rts
 chck_wns_56		
-		cmp #$56	; garde port vous n'avez pas laissez_passer port
+		cmp #$56	; garde phare vous n'avez pas mdp "et lux fit"
 		bne chck_wns_58
-		jsr port_garde_nsc
-		rts		
+		jsr phare_garde_nsc
+		rts				
+		
 chck_wns_58		
-		cmp #$58	; garde vousn 'avez pas mot de pass
+		cmp #$58	; garde vousn 'avez pas mot de passe
 		bne chck_wns_53
 		jsr garde_nsc
 		rts
@@ -1411,8 +1545,7 @@ garde_nsc
 	lda #>t_garde_1+1
 	sta write_phrase+2	
 	jsr write_phrase	
-;	jsr hit_key
-;	jsr eff_text
+
 	ldx #$00
 	lda t_garde_2,x
 	sta adr_ecr_txt+1
@@ -1421,31 +1554,32 @@ garde_nsc
 	lda #>t_garde_2+1
 	sta write_phrase+2	
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text	
 	rts
 ;-------------------------------------	
-port_garde_nsc	
+phare_garde_nsc	
 	ldx #$00
-	lda t_port_guard_1,x
+	lda t_phare_guard_1,x
 	sta adr_ecr_txt+1
-	lda #<t_port_guard_1+1
+	lda #<t_phare_guard_1+1
 	sta write_phrase+1
-	lda #>t_port_guard_1+1
+	lda #>t_phare_guard_1+1
 	sta write_phrase+2	
 	jsr write_phrase
 	
 	ldx #$00
-	lda t_port_guard_2,x
+	lda t_phare_guard_2,x
 	sta adr_ecr_txt+1
-	lda #<t_port_guard_2+1
+	lda #<t_phare_guard_2+1
 	sta write_phrase+1
-	lda #>t_port_guard_2+1
+	lda #>t_phare_guard_2+1
 	sta write_phrase+2	
 	jsr write_phrase
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
-	rts	
+	rts			
+
 ;-------------------------------------
 no_pasaran
 	ldx #$00
@@ -1456,7 +1590,7 @@ no_pasaran
 	lda #>t_portail_3+1
 	sta write_phrase+2	
 	jsr write_phrase	
-	jsr hit_key
+	jsr hit_release_key
 	jsr eff_text
 	rts
 ;-------------------------------------
@@ -1469,7 +1603,6 @@ do_you_enter
 	lda #>t_do_you_1+1
 	sta write_phrase+2	
 	jsr write_phrase
-;	jsr hit_key	
 	rts
 ;-------------------------------------
 
@@ -1505,7 +1638,22 @@ ld_208
 	sta $0c
 release_	
 	rts
+.)
+;****************************************************	
+;****   routine attend appui et laché  any key   ****
+;****************************************************	
+hit_release_key
+.(
+	lda $208
+	cmp #$38
+	bne hit_release_key
+ld_208	
+	lda $208
+	cmp #$38
+	beq ld_208
+	rts
 .)	
+	
 ;************************************************
 ;*******       efface le texte       ************
 ;************************************************	
@@ -1600,6 +1748,7 @@ maj_adr_v_dcm
 end_maj_v
 	pla
 	rts	
+
 ;******************************************************************
 ;***  dessine image au dessus carte ville et ecrit nom ville  *****
 ;******************************************************************
@@ -1643,11 +1792,11 @@ prt_nom_ville
 	jsr ini_adr_dta_nv
 	ldy #$11
 prt_lign	
-	ldx #$16
+	ldx #$10
 ad_dta_nv
 	lda $1111,x
 ad_ec_nv	
-	sta $BA9F,x
+	sta $BA9c,x
 	dex
 	bpl ad_dta_nv
 	jsr maj_adr_nv
@@ -1660,7 +1809,7 @@ ini_adr_dta_nv
 	sta ad_dta_nv+1
 	lda #>dta_nom_ville
 	sta ad_dta_nv+2
-	lda #$71
+	lda #$9c
 	sta ad_ec_nv+1
 	lda #$ba
 	sta ad_ec_nv+2
@@ -1669,7 +1818,7 @@ ini_adr_dta_nv
 maj_adr_nv
 	lda ad_dta_nv+1
 	clc
-	adc #$17
+	adc #$11
 	sta ad_dta_nv+1
 	bcc sk_ret1
 	inc ad_dta_nv+2
@@ -1682,7 +1831,6 @@ sk_ret1
 	inc ad_ec_nv+2
 sk_ret2
 	rts	
-
 
 	
 				
@@ -1699,98 +1847,98 @@ tab_adr_hires
 	.byt $46,$b5,$48,$b5,$4a,$b5,$4c,$b5,$4e,$b5,$50,$b5,$52,$b5,$54,$b5,$56,$b5,$58,$b5,$5a,$b5,$5c,$b5,$5e,$b5,$60,$b5,$62,$b5
 				
 	;*******************************************
-	;*******    DATA PLAN/VILLE 08  ************
+	;*******    DATA PLAN/VILLE 15  ************
 	;*******************************************
 _L00
-	.byt $13,$03,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$1d
+	.byt $14,$14,$14,$14,$14,$1d,$1d,$1d,$1d,$1d,$1d,$46,$46,$46,$46,$46,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d
 _L01
-	.byt $05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$14,$63,$1d
+	.byt $14,$00,$00,$00,$14,$1d,$14,$14,$01,$03,$04,$00,$00,$00,$00,$3f,$46,$46,$46,$46,$46,$46,$46,$46,$46,$46,$1d,$1d,$1d,$1d
 _L02
-	.byt $04,$00,$13,$02,$01,$02,$01,$02,$01,$03,$03,$03,$04,$00,$04,$00,$13,$03,$03,$03,$03,$03,$03,$03,$03,$04,$00,$14,$00,$1d
+	.byt $14,$60,$35,$00,$14,$1d,$14,$00,$00,$00,$01,$03,$03,$02,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$3f,$46,$46,$1d,$1d
 _L03
-	.byt $05,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$12,$00,$12,$14,$06,$0e,$14,$00,$00,$00,$00,$12,$00,$14,$00,$1d
+	.byt $14,$00,$00,$00,$00,$14,$1d,$14,$04,$00,$00,$00,$00,$00,$00,$14,$14,$14,$14,$01,$04,$00,$00,$00,$00,$00,$00,$3f,$1d,$1d
 _L04
-	.byt $04,$00,$04,$00,$13,$03,$03,$03,$13,$03,$02,$00,$12,$00,$12,$00,$12,$14,$0f,$10,$00,$00,$00,$00,$14,$12,$00,$14,$00,$1d
+	.byt $14,$14,$01,$04,$56,$04,$14,$14,$05,$00,$06,$06,$06,$06,$06,$06,$06,$06,$07,$00,$01,$03,$03,$03,$03,$02,$00,$3f,$46,$1d
 _L05
-	.byt $05,$00,$05,$00,$12,$00,$00,$55,$12,$63,$00,$00,$12,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$57,$14,$12,$00,$00,$00,$1d
+	.byt $1d,$1d,$14,$05,$00,$01,$02,$00,$00,$00,$0c,$0b,$0a,$0a,$0a,$0a,$0a,$0c,$08,$00,$00,$00,$00,$00,$00,$00,$00,$00,$3f,$1d
 _L06
-	.byt $04,$00,$04,$00,$05,$00,$13,$03,$03,$03,$03,$03,$11,$00,$12,$00,$12,$00,$00,$00,$00,$14,$14,$14,$14,$12,$00,$00,$14,$1d
+	.byt $1d,$14,$1d,$00,$00,$00,$00,$00,$13,$03,$0c,$08,$00,$00,$00,$00,$14,$0c,$08,$01,$03,$03,$03,$03,$03,$03,$02,$00,$3f,$1d
 _L07
-	.byt $05,$00,$05,$00,$04,$00,$12,$00,$00,$00,$00,$00,$00,$00,$12,$00,$01,$52,$03,$03,$03,$03,$03,$03,$03,$11,$00,$14,$14,$1d
+	.byt $1d,$14,$04,$00,$13,$03,$03,$03,$11,$00,$0d,$42,$00,$15,$17,$00,$00,$0c,$08,$00,$00,$00,$00,$00,$00,$00,$00,$00,$3f,$1d
 _L08
-	.byt $04,$00,$04,$00,$05,$00,$12,$00,$00,$13,$03,$03,$03,$03,$11,$00,$14,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$14,$14,$1d
+	.byt $14,$13,$11,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$19,$1b,$00,$00,$0c,$08,$04,$00,$13,$03,$13,$03,$03,$02,$00,$3f,$1d
 _L09
-	.byt $05,$00,$05,$00,$04,$00,$01,$04,$00,$05,$00,$00,$00,$00,$00,$00,$06,$06,$06,$06,$06,$06,$06,$0c,$07,$00,$14,$14,$1d,$1d
+	.byt $13,$11,$00,$00,$04,$00,$04,$00,$04,$00,$0c,$07,$00,$00,$00,$00,$59,$0c,$08,$12,$00,$12,$63,$12,$00,$00,$00,$00,$3f,$1d
 _L10
-	.byt $04,$00,$04,$00,$12,$00,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$0c,$0b,$0a,$0a,$0a,$0a,$0a,$0c,$08,$00,$14,$14,$1d,$1d
+	.byt $05,$00,$00,$13,$11,$00,$05,$00,$05,$00,$0c,$08,$00,$00,$00,$00,$14,$0c,$08,$05,$00,$05,$00,$01,$02,$01,$02,$01,$02,$04
 _L11
-	.byt $05,$00,$05,$00,$01,$04,$00,$01,$03,$03,$03,$03,$13,$03,$04,$00,$0c,$08,$14,$14,$14,$14,$14,$0c,$08,$14,$14,$1d,$1d,$1d
+	.byt $14,$00,$00,$12,$61,$00,$00,$58,$00,$00,$06,$06,$06,$06,$06,$06,$06,$06,$08,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
 _L12
-	.byt $04,$00,$04,$00,$00,$12,$00,$00,$00,$00,$00,$00,$12,$63,$12,$00,$0c,$08,$00,$00,$00,$00,$00,$0d,$42,$00,$00,$1d,$1d,$1d
+	.byt $01,$02,$00,$01,$02,$01,$03,$52,$02,$14,$0d,$0a,$0a,$0a,$0a,$0a,$0a,$0a,$42,$14,$00,$01,$02,$01,$02,$01,$02,$00,$14,$04
 _L13
-	.byt $05,$00,$01,$04,$00,$13,$02,$00,$01,$03,$13,$03,$11,$00,$12,$00,$0c,$08,$00,$35,$36,$00,$00,$00,$00,$00,$00,$1d,$1d,$1d
+	.byt $14,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$04,$00,$13,$03,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
 _L14
-	.byt $14,$00,$00,$12,$00,$12,$00,$00,$1e,$00,$12,$00,$00,$00,$13,$03,$0c,$08,$00,$38,$37,$00,$59,$0c,$07,$58,$14,$1d,$1d,$1d
+	.byt $14,$00,$13,$02,$00,$04,$00,$13,$03,$04,$00,$12,$00,$12,$63,$13,$53,$03,$13,$02,$01,$03,$45,$02,$01,$02,$01,$13,$03,$04
 _L15
-	.byt $14,$00,$00,$05,$00,$05,$00,$1f,$20,$00,$12,$00,$13,$03,$12,$00,$0c,$08,$00,$00,$00,$00,$14,$0c,$08,$00,$14,$14,$1d,$1d
+	.byt $14,$00,$05,$00,$00,$01,$03,$11,$00,$01,$03,$11,$00,$05,$00,$12,$00,$00,$12,$00,$00,$00,$5f,$00,$00,$00,$00,$12,$63,$05
 _L16
-	.byt $14,$00,$00,$04,$00,$04,$00,$00,$00,$00,$12,$00,$12,$00,$05,$00,$06,$06,$06,$06,$06,$06,$06,$06,$08,$00,$14,$14,$14,$1d
+	.byt $14,$00,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$13,$02,$01,$02,$01,$02,$01,$02,$00,$05,$00,$04
 _L17
-	.byt $14,$00,$00,$05,$00,$05,$00,$13,$03,$03,$11,$00,$12,$00,$04,$00,$0d,$0a,$0a,$0a,$0a,$0a,$0a,$0a,$42,$00,$00,$14,$14,$1d
+	.byt $14,$00,$05,$00,$2c,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2a,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$05
 _L18
-	.byt $04,$00,$00,$04,$00,$04,$00,$05,$00,$00,$00,$00,$12,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$14,$14,$1d
+	.byt $04,$00,$04,$00,$2a,$00,$00,$00,$00,$14,$14,$14,$00,$00,$00,$00,$2a,$00,$04,$00,$13,$03,$45,$03,$03,$13,$03,$04,$00,$04
 _L19
-	.byt $05,$00,$00,$05,$00,$05,$00,$04,$00,$13,$03,$03,$11,$00,$04,$00,$13,$03,$03,$02,$00,$01,$03,$03,$03,$04,$00,$14,$14,$1d
+	.byt $05,$00,$05,$00,$2a,$00,$15,$17,$00,$00,$00,$00,$00,$15,$17,$00,$2a,$00,$05,$00,$05,$00,$5e,$00,$00,$05,$00,$05,$00,$05
 _L20
-	.byt $04,$00,$00,$04,$00,$04,$00,$05,$00,$12,$00,$00,$00,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$14,$1d,$1d
+	.byt $04,$00,$04,$00,$2a,$00,$19,$1b,$00,$00,$00,$00,$00,$19,$1b,$00,$2a,$00,$04,$00,$04,$00,$00,$00,$00,$04,$00,$04,$00,$04
 _L21
-	.byt $12,$00,$00,$12,$00,$12,$00,$04,$00,$12,$00,$13,$03,$03,$11,$00,$12,$00,$00,$15,$16,$16,$17,$00,$00,$12,$00,$14,$1d,$1d
+	.byt $05,$55,$12,$00,$2a,$00,$00,$00,$15,$16,$16,$16,$17,$00,$00,$00,$2a,$00,$05,$00,$05,$00,$14,$00,$14,$11,$00,$01,$03,$11
 _L22
-	.byt $01,$02,$00,$05,$00,$05,$00,$05,$00,$05,$00,$05,$00,$00,$00,$00,$12,$00,$00,$19,$1a,$1a,$1b,$00,$00,$12,$14,$14,$00,$1d
+	.byt $01,$03,$11,$00,$2a,$14,$00,$00,$18,$1d,$1d,$1d,$1c,$00,$00,$14,$2a,$00,$04,$00,$00,$00,$14,$00,$14,$04,$00,$00,$00,$04
 _L23
-	.byt $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$13,$03,$12,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$00,$1d
+	.byt $51,$00,$00,$00,$2a,$14,$00,$00,$18,$1d,$1d,$1d,$1c,$00,$00,$14,$2a,$00,$12,$00,$04,$00,$14,$00,$14,$05,$00,$04,$00,$05
 _L24
-	.byt $13,$02,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$00,$12,$00,$01,$03,$02,$01,$02,$01,$02,$01,$03,$11,$00,$14,$00,$1d
+	.byt $04,$00,$13,$03,$2a,$14,$00,$00,$18,$1d,$1d,$1d,$1c,$00,$00,$14,$2a,$00,$13,$03,$11,$00,$14,$00,$14,$04,$00,$05,$00,$04
 _L25
-	.byt $12,$00,$00,$12,$00,$12,$00,$12,$00,$12,$00,$01,$03,$03,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$14,$00,$1d
+	.byt $12,$00,$12,$00,$2a,$00,$00,$00,$19,$1a,$1a,$1a,$1b,$00,$00,$00,$2a,$00,$12,$00,$00,$00,$00,$00,$00,$05,$00,$04,$00,$05
 _L26
-	.byt $05,$00,$13,$11,$00,$12,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$01,$04,$00,$00,$00,$00,$00,$00,$01,$04,$14,$00,$1d
+	.byt $05,$00,$05,$00,$2a,$00,$15,$17,$00,$00,$00,$00,$00,$15,$17,$00,$2a,$00,$12,$00,$04,$00,$00,$00,$57,$04,$00,$05,$00,$04
 _L27
-	.byt $04,$00,$12,$00,$00,$12,$00,$12,$00,$01,$03,$03,$03,$03,$03,$04,$00,$00,$01,$03,$45,$03,$03,$04,$00,$00,$05,$14,$00,$1d
+	.byt $04,$00,$04,$00,$2a,$00,$19,$1b,$00,$00,$00,$00,$00,$19,$1b,$00,$2b,$00,$12,$00,$01,$02,$01,$02,$01,$11,$00,$04,$00,$05
 _L28
-	.byt $05,$00,$05,$00,$13,$11,$00,$05,$00,$00,$00,$00,$00,$00,$00,$12,$00,$00,$00,$00,$5b,$00,$00,$12,$00,$00,$00,$14,$63,$1d
+	.byt $05,$00,$05,$00,$2a,$00,$00,$00,$00,$14,$14,$14,$00,$00,$00,$00,$00,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$04
 _L29
-	.byt $04,$00,$04,$00,$12,$00,$00,$00,$00,$13,$03,$03,$03,$03,$03,$13,$03,$45,$03,$45,$03,$45,$03,$45,$03,$03,$13,$03,$02,$1d
+	.byt $04,$00,$04,$00,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2d,$2b,$00,$01,$02,$01,$02,$01,$02,$01,$02,$01,$11,$00,$05
 _L30
-	.byt $05,$00,$05,$00,$12,$00,$01,$03,$03,$11,$00,$00,$00,$00,$00,$05,$00,$5f,$00,$5a,$00,$5c,$00,$5e,$00,$00,$12,$20,$20,$1d
+	.byt $05,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$04
 _L31
-	.byt $04,$00,$04,$00,$12,$00,$00,$00,$00,$00,$00,$13,$03,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$20,$20,$1d
+	.byt $04,$00,$13,$03,$13,$03,$13,$03,$13,$03,$13,$45,$03,$45,$03,$04,$00,$14,$14,$14,$14,$14,$14,$14,$14,$00,$00,$04,$00,$05
 _L32
-	.byt $05,$00,$05,$00,$12,$00,$00,$13,$03,$04,$00,$05,$00,$01,$03,$13,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$11,$20,$2c,$1d
+	.byt $05,$00,$05,$00,$05,$00,$05,$00,$05,$00,$05,$5b,$00,$5d,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$04
 _L33
-	.byt $04,$00,$04,$00,$01,$03,$03,$11,$00,$12,$00,$04,$00,$00,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$61,$00,$00,$00,$2c,$1d
+	.byt $04,$00,$00,$00,$04,$00,$00,$00,$04,$00,$04,$00,$04,$00,$00,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$03,$11,$00,$05
 _L34
-	.byt $05,$00,$05,$00,$00,$00,$00,$00,$00,$05,$00,$05,$00,$04,$00,$12,$00,$3f,$3a,$3a,$3a,$3a,$3a,$3a,$3a,$3a,$3a,$3a,$31,$1d
+	.byt $05,$00,$14,$00,$05,$00,$04,$00,$05,$00,$05,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$04
 _L35
-	.byt $04,$00,$04,$00,$04,$00,$00,$04,$00,$04,$00,$04,$00,$12,$00,$12,$00,$2c,$41,$1d,$41,$1d,$41,$1d,$41,$46,$46,$46,$21,$1d
+	.byt $04,$00,$04,$00,$04,$00,$05,$00,$14,$00,$04,$00,$13,$45,$04,$00,$13,$02,$01,$02,$01,$02,$01,$02,$01,$02,$00,$01,$03,$12
 _L36
-	.byt $05,$00,$05,$00,$05,$00,$00,$05,$00,$05,$00,$05,$00,$12,$00,$12,$00,$2c,$41,$1d,$41,$1d,$41,$1d,$1d,$2d,$00,$00,$2c,$1d
+	.byt $05,$00,$05,$00,$05,$00,$04,$00,$00,$00,$05,$00,$04,$5c,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12
 _L37
-	.byt $04,$00,$04,$00,$04,$00,$00,$04,$00,$04,$00,$04,$00,$13,$53,$12,$00,$2a,$46,$46,$46,$46,$46,$46,$3e,$40,$00,$00,$2c,$1d
+	.byt $04,$00,$04,$00,$04,$00,$05,$00,$04,$00,$04,$00,$05,$00,$01,$45,$11,$00,$13,$03,$02,$01,$02,$01,$02,$01,$03,$04,$00,$12
 _L38
-	.byt $05,$00,$05,$00,$05,$00,$00,$05,$00,$05,$00,$05,$00,$12,$00,$12,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$04,$31,$1d
+	.byt $05,$00,$05,$00,$05,$00,$04,$00,$05,$00,$05,$00,$04,$00,$00,$5a,$00,$00,$12,$54,$00,$00,$00,$00,$00,$00,$00,$12,$00,$05
 _L39
-	.byt $04,$00,$04,$00,$12,$00,$00,$12,$00,$04,$00,$00,$00,$12,$00,$01,$03,$03,$45,$03,$03,$03,$03,$02,$56,$01,$03,$11,$1d,$1d
+	.byt $04,$00,$04,$00,$04,$00,$05,$00,$04,$00,$00,$00,$05,$00,$00,$00,$00,$00,$05,$00,$00,$15,$16,$16,$17,$00,$00,$12,$00,$04
 _L40
-	.byt $05,$00,$05,$00,$01,$03,$03,$11,$00,$12,$00,$04,$00,$12,$00,$00,$00,$00,$60,$00,$00,$00,$00,$00,$00,$00,$00,$14,$1d,$1d
+	.byt $05,$00,$05,$00,$05,$00,$04,$00,$05,$00,$14,$00,$04,$00,$35,$36,$00,$00,$00,$00,$00,$19,$1a,$1a,$1b,$00,$00,$13,$03,$11
 _L41
-	.byt $04,$00,$04,$00,$00,$00,$00,$00,$00,$13,$03,$03,$03,$13,$03,$03,$03,$13,$03,$13,$03,$13,$03,$02,$00,$00,$00,$14,$1d,$1d
+	.byt $04,$00,$04,$00,$04,$00,$05,$00,$04,$00,$13,$03,$11,$00,$38,$37,$00,$00,$04,$00,$00,$00,$00,$00,$00,$00,$00,$12,$00,$04
 _L42
-	.byt $05,$00,$01,$03,$03,$03,$03,$03,$03,$11,$00,$00,$00,$05,$00,$00,$00,$05,$54,$05,$63,$05,$00,$00,$00,$14,$14,$1d,$1d,$1d
+	.byt $05,$00,$13,$52,$11,$00,$13,$03,$11,$00,$05,$63,$14,$00,$00,$00,$00,$00,$01,$03,$02,$01,$02,$01,$02,$01,$03,$11,$00,$05
 _L43
-	.byt $04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$04,$00,$00,$00,$00,$00,$14,$14,$14,$14,$1d,$1d,$1d,$1d,$1d
+	.byt $04,$00,$12,$00,$00,$00,$12,$63,$00,$00,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$12
 _L44
-	.byt $01,$03,$02,$01,$02,$01,$03,$03,$02,$01,$03,$02,$01,$03,$02,$01,$02,$01,$02,$01,$03,$02,$1d,$1d,$1d,$1d,$1d,$1d,$1d,$1d
+	.byt $01,$03,$11,$01,$02,$01,$03,$03,$02,$01,$03,$03,$03,$03,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$02,$01,$03,$11
 
 ptr_Lignes
 
@@ -2317,12 +2465,12 @@ dta_car_redef_p2
 	.byt $f8	;1,1,1,1,1,0,0,0
 
 ;40 en $9e80
-	.byt $40	;0,1,0,0,0,0,0,0
-	.byt $cf	;1,1,0,0,1,1,1,1
-	.byt $58	;0,1,0,1,1,0,0,0
-	.byt $d3	;1,1,0,1,0,0,1,1
-	.byt $5a	;0,1,0,1,1,0,1,0
-	.byt $6d	;0,1,1,0,1,1,0,1
+	.byt $ff	;1,1,1,1,1,1,1,1
+	.byt $7f	;0,1,1,1,1,1,1,1
+	.byt $ff	;1,1,1,1,1,1,1,1
+	.byt $7f	;0,1,1,1,1,1,1,1
+	.byt $ff	;1,1,1,1,1,1,1,1
+	.byt $7f	;0,1,1,1,1,1,1,1
 
 ;41 en $9e86
 	.byt $ff	;1,1,1,1,1,1,1,1
@@ -2670,11 +2818,11 @@ dta_car_redef_p3
 	.byt $ff	;1,1,1,1,1,1,1,1
 
 ;6C en $9f88
-	.byt $5b	;0,1,0,1,1,0,1,1
+	.byt $ef	;1,1,1,0,1,1,1,1
 	.byt $6d	;0,1,1,0,1,1,0,1
-	.byt $5b	;0,1,0,1,1,0,1,1
-	.byt $6d	;0,1,1,0,1,1,0,1
-	.byt $5b	;0,1,0,1,1,0,1,1
+	.byt $ef	;1,1,1,0,1,1,1,1
+	.byt $6f	;0,1,1,0,1,1,1,1
+	.byt $ef	;1,1,1,0,1,1,1,1
 	.byt $6d	;0,1,1,0,1,1,0,1
 
 ;6D en $9f8e
@@ -2885,13 +3033,13 @@ _t1c
 _t1d 
 		.byt $18,$19,$17,$16 
 _t1e 
-		.byt $00,$00,$1a,$00 
+		.byt $65,$00,$1a,$00 
 _t1f 
 		.byt $00,$1b,$00,$1c 
 _t20 
 		.byt $1d,$1e,$1f,$20 
 _t21 
-		.byt $16,$18,$63,$40 
+		.byt $40,$40,$41,$41 
 _t22 
 		.byt $21,$22,$23,$24 
 _t23 
@@ -2909,13 +3057,13 @@ _t28
 _t29 
 		.byt $37,$3b,$3c,$3d 
 _t2a 
-		.byt $63,$6c,$63,$63 
+		.byt $07,$71,$07,$71 
 _t2b 
-		.byt $44,$44,$08,$08 
+		.byt $07,$71,$6f,$76 
 _t2c 
-		.byt $63,$6c,$63,$6c 
+		.byt $07,$01,$07,$70 
 _t2d 
-		.byt $63,$00,$63,$00 
+		.byt $01,$01,$6f,$6f 
 _t2e 
 		.byt $4a,$00,$4b,$00 
 _t2f 
@@ -2923,7 +3071,7 @@ _t2f
 _t30 
 		.byt $4e,$00,$4f,$00 
 _t31 
-		.byt $63,$6c,$6c,$62 
+		.byt $50,$51,$08,$52 
 _t32 
 		.byt $53,$53,$08,$08 
 _t33 
@@ -2949,9 +3097,9 @@ _t3c
 _t3d 
 		.byt $16,$63,$19,$63 
 _t3e 
-		.byt $16,$63,$63,$63 
+		.byt $63,$16,$63,$63 
 _t3f 
-		.byt $63,$63,$63,$6c 
+		.byt $00,$63,$00,$63 
 _t40 
 		.byt $63,$00,$00,$00 
 _t41 
@@ -2987,43 +3135,44 @@ _t4f
 _t50 
 		.byt $00,$00,$00,$00 
 _t51 
-		.byt $00,$00,$00,$00	; Entrée ville
+		.byt $00,$00,$00,$00 
 _t52 
-		.byt $01,$01,$3e,$3f
+		.byt $01,$01,$3e,$3f 
 _t53 
-		.byt $01,$01,$3e,$3f
+		.byt $01,$01,$3e,$3f 
 _t54 
-		.byt $59,$00,$00,$00
+		.byt $59,$00,$00,$00 
 _t55 
-		.byt $00,$00,$00,$59
+		.byt $00,$00,$00,$59 
 _t56 
-		.byt $00,$00,$00,$00	; gardien port
+		.byt $00,$00,$00,$00 ; gardien du phare 
 _t57 
-		.byt $00,$00,$00,$00	; Mot de passe
+		.byt $00,$00,$00,$00 ; Mot de passe 
 _t58 
-		.byt $00,$00,$00,$00	; garde
+		.byt $00,$00,$00,$00 ; garde 
 _t59 
-		.byt $00,$00,$00,$00	; Legat
+		.byt $00,$00,$00,$00 ; Legat 
 _t5a 
-		.byt $00,$00,$00,$00	; Medicus
+		.byt $00,$00,$00,$00 ; Medicus 
 _t5b 
-		.byt $00,$00,$00,$00	; Faber armorum
+		.byt $00,$00,$00,$00 ; Faber armorum 
 _t5c 
-		.byt $00,$00,$00,$00	; Herbarius
+		.byt $00,$00,$00,$00 ; Herbarius 
 _t5d 
-		.byt $00,$00,$00,$00	; Omnia animalia
+		.byt $00,$00,$00,$00 ; Omnia animalia 
 _t5e 
-		.byt $00,$00,$00,$00	; Taberna
+		.byt $00,$00,$00,$00 ; Taberna 
 _t5f 
-		.byt $00,$00,$00,$00	; Bazar
+		.byt $00,$00,$00,$00 ; Bazar 
 _t60 
-		.byt $00,$00,$00,$00	; Navis venalis
+		.byt $00,$00,$00,$00 ;inscription sur phare 
 _t61 
-		.byt $00,$00,$00,$00	; Quai
+		.byt $00,$00,$00,$00 ; mot de passe pour phare
 _t62 
-		.byt $00,$00,$00,$00
+		.byt $00,$00,$00,$00 
 _t63 
-		.byt $7a,$7b,$7c,$7d	; coffre			
+		.byt $7a,$7b,$7c,$7d ; coffre 
+		 
 ; -----------------------------------------------
 ;       Table des pointeurs adresse tuiles  
 ; -----------------------------------------------
@@ -3075,68 +3224,101 @@ t_portail_2
 	.byt $c6 
 	.asc "You can cross.",0
 t_portail_3
-	.byt $96
+	.byt $97
 	.asc "You don't have the right key.",0	
 
 ; ------------------------------------	
 t_key_1
-	.byt $9b
+	.byt $9c
 	.asc "You've found a key.",0 ;(key_1)
 t_key_2	
-	.byt $c1	
+	.byt $c2	
 	.asc "Now all you have to do",0
 t_key_3	
-	.byt $99	
+	.byt $9a	
 	.asc "is find the right door.",0
 ; ------------------------------------	
 	
-t_port_guard_1
+t_phare_guard_1
 	.byt $93
-	.asc "The guard will only allow you access",0
-t_port_guard_2	
-	.byt $bb	
-	.asc "to the pier if you present your pass",0
+	.asc "The lighthouse guard says:'Fiat lux'",0
+t_phare_guard_2	
+	.byt $bd
+	.asc "And is waiting for your answer.",0
 	
-t_port_guard_3
-	.byt $95
-	.asc "After seeing your pass, the guard",0
-t_port_guard_4	
-	.byt $bb	
-	.asc "gives you the access key to the piers.",0	
-	
+t_phare_guard_3
+	.byt $93
+	.asc "The lighthouse guard says:'Fiat lux'",0
+t_phare_guard_4	
+	.byt $c3	
+	.asc "You say :'and lux fit'",0	
+t_phare_guard_5
+	.byt $9a
+	.asc "the guard lets you in.",0		
+; ------------------------------------
+t_visit_phare_1
+	.byt $92
+	.asc "Engraved on the lighthouse, you read'",0
+t_visit_phare_2
+	.byt $c5
+	.asc "Turris Herculis.",0
 ; ------------------------------------	
+	
 t_m_de_passe_1
-	.byt $94
-	.asc "A friend of Carpo hands you a note",0
+	.byt $96
+	.asc "There is a plaque on the wall",0
 t_m_de_passe_2	
-	.byt $bc	
-	.asc "you read 'Caesaris Caesaris' on it.",0
+	.byt $C2	
+	.asc "It reads 'sed qui vide'.",0
+; ------------------------------------	
+t_beggar_1
+	.byt $9e
+	.asc "A beggar shouts:",0
+t_beggar_2	
+	.byt $C8	
+	.asc "'Et lux fit'.",0
 ; ------------------------------------
 t_garde_1
-	.byt $99
-	.asc "A guard says 'Quae sunt'.",0
+	.byt $9c
+	.asc "A guard says 'Fide'",0
 t_garde_2
 	.byt $bd
 	.asc "And is waiting for your answer.",0
 t_garde_3
-	.byt $99
-	.asc "A guard says 'Quae sunt'.",0
+	.byt $9c
+	.asc "A guard says 'Fide'",0	
 t_garde_4
-	.byt $bf
-	.asc "You say 'Caesaris Caesaris'",0	
+	.byt $c3
+	.asc "You say 'sed qui vide'",0
 t_garde_5
-	.byt $99
+	.byt $9a
 	.asc "the guard lets you in.",0	
+
 ; ------------------------------------
 t_legat_1
 	.byt $94
-	.asc "On orders received from Antoninus,",0
+	.asc "Legat: Antoninus has instructed me",0
 t_legat_2
-	.byt $bd	
-	.asc "the legate gives you a pass for",0
+	.byt $bf	
+	.asc "to help you purshase a boat.",0
 t_legat_3
-	.byt $97	
-	.asc "the military port guard post.",0	
+	.byt $98	
+	.asc "Unfortunately we no longer",0
+t_legat_4
+	.byt $bf	
+	.asc "have a single boat for sale.",0	
+t_legat_5
+	.byt $92
+	.asc "I see you visited our 'Turris Herculis",0
+t_legat_6
+	.byt $c1	
+	.asc "We are very proud of it.",0
+t_legat_7
+	.byt $93	
+	.asc "Let me give you some bull horn powder",0
+t_legat_8
+	.byt $ba	
+	.asc "it's very good for strenght and health.",0		
 ; ------------------------------------	
 t_entrance_1
 	.byt $99	
@@ -3173,99 +3355,99 @@ t_bazar_1
 	.byt $a2	
 	.asc "bazar",0
 ; ------------------------------------	
-t_vente_bateau_1
-	.byt $9e	
-	.asc "Navis venalis",0
+;t_vente_bateau_1
+;	.byt $9e	
+;	.asc "Navis venalis",0
 ; ------------------------------------	
-t_quais_1
-	.byt $9f	
-	.asc "On the dock,",0
-t_quais_2
-	.byt $c1	
-	.asc "but you don't own a boat.",0
+;t_quais_1
+;	.byt $9f	
+;	.asc "On the dock,",0
+;t_quais_2
+;	.byt $c1	
+;	.asc "but you don't own a boat.",0
 ; ------------------------------------	
-t_quais_3
-	.byt $99	
-	.asc "Your ship is at the dock.",0
-t_quais_4
-	.byt $c1	
-	.asc "Do you want to set sail?",0
+;t_quais_3
+;	.byt $99	
+;	.asc "Your ship is at the dock.",0
+;t_quais_4
+;	.byt $c1	
+;	.asc "Do you want to set sail?",0
 ; ------------------------------------	
 t_coffre_1
-	.byt $9c	
+	.byt $9d	
 	.asc "You find a chest,",0
 t_coffre_2
-	.byt $c5	
+	.byt $c6
 	.asc "do you take it?",0
+	
 ; ------------------------------------
 dta_bandeau		
 	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
 	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$01,$41,$7F,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
-	.byt $00,$04,$00,$04,$01,$40,$47,$7F,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$44,$00,$04,$00,$04,$01,$40,$4F,$7F,$11,$10,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$01,$40,$5E,$43,$78,$41,$7F,$7F,$11,$10,$00,$04,$00,$03,$40,$44,$00,$04,$00,$04,$40,$01,$7F,$60,$7F,$70,$40,$41,$7F,$7F,$7E,$00,$04,$00,$04,$0
-	.byt $00,$04,$00,$04,$01,$40,$78,$40,$78,$40,$4F,$7F,$7F,$70,$00,$04,$00,$7F,$04,$7F,$7C,$00,$04,$01,$40,$43,$78,$40,$43,$7C,$40,$40,$4F,$7F,$7F,$70,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$01,$41,$70,$40,$58,$40,$47,$70,$47,$78,$00,$06,$40,$5F,$7F,$7F,$7F,$7F,$7C,$01,$40,$4F,$60,$40,$00,$11,$7F,$7F,$78,$4F,$78,$47,$10,$04,$00,$4
-	.byt $00,$04,$00,$01,$40,$43,$70,$40,$58,$40,$47,$70,$43,$7C,$00,$04,$40,$43,$7F,$7F,$7F,$7F,$70,$01,$40,$5F,$40,$40,$40,$5F,$60,$40,$47,$70,$41,$7C,$00,$04,$00,$4
-	.byt $00,$04,$00,$01,$40,$43,$60,$40,$48,$40,$47,$70,$41,$7E,$00,$06,$40,$41,$7F,$7F,$7F,$7F,$78,$01,$40,$7E,$40,$40,$40,$4F,$70,$40,$47,$70,$40,$7E,$00,$04,$00,$4
-	.byt $00,$04,$00,$01,$40,$43,$70,$40,$40,$40,$47,$70,$40,$7E,$00,$04,$40,$41,$7F,$7F,$7F,$7F,$78,$01,$41,$7C,$40,$40,$40,$47,$78,$40,$47,$70,$40,$7E,$00,$04,$00,$4
-	.byt $00,$04,$00,$01,$40,$43,$70,$40,$40,$40,$47,$70,$40,$7E,$00,$7F,$7F,$01,$FF,$FF,$16,$00,$47,$10,$01,$78,$40,$40,$40,$43,$78,$40,$47,$70,$40,$5F,$00,$04,$00,$4
-	.byt $00,$04,$00,$01,$40,$43,$78,$40,$40,$40,$47,$70,$40,$5E,$00,$7F,$7F,$04,$7F,$7F,$7F,$7F,$7C,$01,$43,$78,$40,$40,$40,$43,$7C,$40,$47,$70,$40,$5F,$00,$04,$00,$4
-	.byt $00,$04,$00,$01,$40,$41,$7C,$40,$40,$40,$47,$70,$40,$5E,$00,$7F,$7F,$06,$5F,$7F,$7F,$7F,$7C,$01,$43,$70,$40,$40,$40,$41,$7C,$40,$47,$70,$40,$5F,$00,$04,$00,$4
-	.byt $00,$04,$00,$01,$40,$41,$7E,$40,$40,$40,$47,$70,$40,$5E,$00,$7F,$7F,$04,$5F,$7F,$7F,$7F,$7C,$01,$47,$70,$40,$40,$40,$41,$7E,$40,$47,$70,$40,$5E,$00,$04,$00,$4
-	.byt $00,$04,$00,$7F,$7F,$01,$7F,$60,$40,$40,$47,$70,$40,$7C,$00,$7F,$7F,$06,$5F,$7F,$7F,$7F,$78,$01,$47,$70,$40,$40,$40,$41,$7E,$40,$47,$70,$40,$5E,$00,$04,$00,$4
-	.byt $00,$04,$00,$7F,$01,$40,$5F,$70,$40,$40,$47,$70,$40,$7C,$00,$7F,$04,$40,$4F,$7F,$7F,$7F,$78,$01,$47,$70,$40,$40,$40,$40,$7E,$40,$47,$70,$40,$5C,$00,$04,$00,$4
-	.byt $00,$04,$00,$7F,$7F,$01,$4F,$7C,$40,$40,$47,$70,$41,$78,$00,$7F,$06,$40,$4F,$7F,$7F,$7F,$78,$01,$47,$70,$40,$40,$40,$40,$7E,$40,$47,$70,$40,$5C,$00,$04,$00,$4
-	.byt $00,$04,$00,$7F,$7F,$01,$43,$7E,$40,$40,$47,$70,$43,$70,$00,$04,$40,$40,$5F,$7F,$7F,$7F,$70,$01,$47,$70,$40,$40,$40,$40,$7E,$40,$47,$70,$40,$78,$00,$04,$00,$4
-	.byt $00,$04,$00,$7F,$7F,$01,$41,$7F,$60,$40,$47,$70,$4F,$40,$00,$04,$06,$40,$5F,$7F,$7F,$7F,$70,$01,$47,$70,$40,$40,$40,$40,$7E,$40,$47,$70,$41,$70,$00,$04,$00,$4
-	.byt $00,$04,$00,$7F,$7F,$7F,$01,$5F,$70,$40,$47,$73,$7C,$40,$00,$04,$40,$40,$5F,$7F,$7F,$7F,$60,$01,$47,$70,$40,$40,$40,$40,$7E,$40,$47,$7F,$7F,$60,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$40,$40,$01,$4F,$70,$40,$47,$70,$40,$40,$03,$46,$40,$01,$FF,$FF,$16,$00,$10,$01,$47,$70,$40,$40,$40,$40,$7E,$40,$47,$7F,$7F,$60,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$40,$40,$01,$47,$78,$40,$47,$70,$40,$40,$07,$58,$50,$04,$7F,$7C,$41,$7F,$00,$01,$47,$78,$40,$40,$40,$41,$7C,$40,$47,$70,$47,$70,$00,$04,$00,$4
-	.byt $00,$04,$00,$04,$40,$40,$01,$43,$78,$40,$47,$70,$40,$40,$03,$70,$06,$43,$70,$00,$06,$58,$00,$01,$43,$78,$40,$40,$40,$41,$7C,$40,$47,$70,$47,$78,$40,$00,$04,$0
-	.byt $00,$04,$00,$04,$40,$40,$01,$41,$7C,$40,$47,$70,$40,$07,$41,$60,$60,$40,$40,$44,$40,$40,$42,$01,$43,$78,$40,$40,$40,$41,$78,$40,$47,$70,$43,$7C,$40,$00,$04,$0
-	.byt $00,$04,$00,$04,$40,$40,$40,$01,$7C,$40,$47,$70,$40,$03,$43,$7F,$78,$40,$40,$44,$40,$40,$42,$01,$43,$7C,$40,$40,$40,$43,$78,$40,$47,$70,$41,$7E,$40,$00,$04,$0
-	.byt $00,$04,$00,$04,$40,$40,$40,$01,$7C,$40,$47,$70,$40,$07,$42,$6A,$68,$40,$40,$44,$40,$40,$4E,$01,$41,$7E,$40,$40,$40,$43,$70,$40,$47,$70,$40,$7F,$40,$00,$04,$0
-	.byt $00,$04,$00,$04,$01,$44,$40,$40,$78,$40,$47,$70,$40,$03,$43,$7F,$6A,$52,$52,$56,$52,$41,$7C,$00,$01,$7F,$40,$40,$40,$47,$60,$40,$47,$70,$40,$5F,$40,$00,$04,$0
-	.byt $00,$04,$00,$01,$40,$44,$40,$40,$78,$40,$47,$70,$40,$07,$43,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7C,$00,$01,$5F,$60,$40,$40,$4F,$40,$40,$47,$70,$40,$4F,$70,$00,$04,$0
-	.byt $00,$04,$00,$01,$40,$46,$40,$41,$70,$40,$47,$70,$40,$03,$41,$7F,$6A,$6A,$6A,$74,$6A,$6B,$7C,$00,$01,$4F,$70,$40,$40,$5E,$40,$40,$47,$70,$40,$47,$78,$00,$04,$0
-	.byt $00,$04,$00,$01,$40,$47,$40,$43,$60,$40,$47,$70,$40,$07,$41,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7E,$40,$01,$47,$7C,$40,$41,$7C,$40,$40,$47,$70,$40,$43,$7C,$00,$04,$0
-	.byt $00,$04,$00,$01,$40,$47,$60,$47,$40,$40,$47,$70,$40,$40,$03,$5F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$70,$01,$41,$7F,$70,$5F,$7E,$40,$40,$47,$70,$40,$41,$7E,$00,$04,$0
-	.byt $00,$04,$00,$01,$40,$47,$7F,$7E,$40,$40,$4F,$70,$40,$40,$07,$4F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7E,$40,$01,$5F,$7F,$7F,$7F,$60,$40,$47,$70,$40,$40,$7F,$60,$00,$4
-	.byt $00,$04,$00,$7F,$7F,$01,$4F,$60,$40,$40,$7F,$7F,$40,$40,$07,$45,$13,$40,$40,$40,$40,$40,$00,$40,$5F,$7F,$10,$11,$4F,$60,$43,$7F,$40,$40,$7F,$7F,$70,$41,$10,$4
-	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$07,$48,$49,$49,$49,$49,$48,$40,$40,$40,$40,$40,$40,$40,$01,$43,$7F,$40,$40,$40,$40,$40,$40,$00,$04,$0
-	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$03,$58,$52,$52,$52,$52,$50,$40,$40,$40,$40,$40,$40,$40,$40,$01,$7F,$78,$40,$40,$40,$40,$40,$00,$04,$0
-	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$07,$50,$52,$52,$52,$52,$50,$40,$40,$40,$40,$40,$40,$40,$40,$01,$4F,$7E,$40,$40,$40,$40,$40,$00,$04,$0
-	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$03,$70,$64,$64,$64,$64,$60,$40,$40,$40,$40,$40,$40,$40,$40,$01,$41,$7F,$78,$40,$40,$40,$40,$00,$04,$0
-	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$07,$60,$64,$64,$64,$64,$60,$40,$40,$40,$40,$40,$40,$40,$40,$40,$01,$4F,$7F,$60,$40,$4F,$40,$40,$00,$4
-	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$01,$41,$7F,$7F,$7F,$78,$40,$40,$00,$4
-	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$01,$47,$7F,$7E,$40,$40,$40,$00,$4,$0a
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$06,$48,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$40,$4A,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$06,$40,$4B,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$40,$4F,$60,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$06,$40,$4C,$60,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$4B,$50,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$4B,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$55,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$5D,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$4F,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$5C,$4C,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$63,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$5F,$7C,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$4F,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$4F,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$5F,$7C,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$7E,$7E,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$03,$40,$41,$60,$47,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$46,$5D,$78,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$03,$40,$43,$7D,$6F,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$43,$7D,$7F,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$03,$40,$43,$7C,$47,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$43,$61,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$40,$40,$03,$5D,$6F,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$43,$7D,$6D,$00,$04,$40,$40,$43,$60,$00,$04,$00,$04,$40,$41,$70,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$60,$00,$04,$00,$04,$00,$04,$03,$40,$43,$7D,$7D,$04,$47,$7C,$40,$43,$60,$00,$04,$00,$04,$40,$41,$70,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$60,$00,$04,$00,$04,$00,$04,$07,$40,$43,$7C,$47,$04,$47,$14,$10,$43,$60,$00,$04,$00,$04,$41,$71,$70,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$00,$04,$00,$04,$00,$04,$00,$03,$40,$43,$61,$78,$04,$47,$47,$40,$40,$00,$04,$00,$04,$40,$41,$70,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$78,$43,$7C,$5D,$6E,$4E,$5D,$79,$78,$40,$07,$5D,$7F,$04,$47,$47,$47,$5B,$61,$7F,$4F,$71,$77,$67,$7F,$73,$63,$67,$5E,$5E,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$7E,$5F,$6E,$4E,$5F,$7F,$7C,$03,$43,$7D,$7D,$04,$47,$47,$47,$7B,$67,$7E,$5F,$79,$7F,$77,$7F,$73,$63,$67,$7F,$14,$10,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$78,$44,$4E,$5E,$4E,$4E,$5E,$5E,$5C,$07,$43,$7D,$7D,$04,$47,$7C,$47,$63,$66,$4C,$50,$79,$79,$71,$71,$73,$63,$67,$67,$67,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$60,$4E,$5C,$4E,$4E,$5C,$5C,$5C,$03,$43,$7C,$43,$04,$47,$7F,$47,$43,$66,$4C,$40,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$63,$7E,$5C,$4E,$4E,$5C,$5C,$5C,$07,$43,$61,$78,$04,$47,$47,$67,$43,$66,$4C,$4F,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$7E,$5C,$4E,$4E,$5C,$5C,$5C,$40,$03,$5D,$7F,$04,$47,$43,$67,$43,$67,$7C,$5F,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$4E,$5C,$4E,$4E,$5C,$5C,$5C,$07,$43,$75,$7F,$04,$47,$43,$67,$43,$67,$78,$5C,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$4E,$5C,$4E,$5E,$5C,$5C,$5C,$03,$43,$75,$7D,$04,$47,$47,$67,$43,$66,$40,$5C,$79,$71,$71,$71,$73,$67,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$7E,$5C,$4F,$7E,$5C,$5C,$5C,$07,$43,$7D,$7D,$04,$47,$7F,$47,$43,$67,$7C,$5F,$79,$71,$71,$7D,$73,$7F,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$7F,$7F,$04,$78,$43,$7E,$5C,$47,$6E,$5C,$5C,$5C,$03,$43,$7C,$47,$04,$47,$7E,$47,$43,$67,$7E,$4F,$79,$71,$70,$7D,$71,$7B,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$07,$43,$61,$78,$40,$40,$40,$40,$04,$4E,$46,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$03,$5D,$7F,$40,$40,$40,$40,$04,$4E,$46,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$43,$75,$7F,$40,$40,$40,$40,$04,$47,$7E,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$03,$43,$75,$7F,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$45,$43,$7D,$7D,$40,$40,$40,$40,$04,$43,$78,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$03,$4A,$74,$4D,$50,$60,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$45,$57,$70,$4E,$6A,$60,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$6A,$6A,$65,$55,$55,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$0a
 
 ;--------------------------------------------------	
 dta_nom_ville
-	.byt $1,$40,$40,$40,$40,$40,$40,$47,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
-	.byt $3,$40,$4F,$60,$40,$40,$40,$47,$40,$40,$40,$40,$40,$40,$40,$4E,$41,$60,$40,$40,$40,$40,$40
-	.byt $1,$40,$7F,$70,$40,$40,$47,$47,$40,$40,$40,$40,$40,$40,$40,$4F,$41,$60,$40,$40,$40,$40,$40
-	.byt $3,$41,$78,$50,$40,$40,$47,$47,$40,$40,$40,$40,$40,$40,$40,$4F,$61,$60,$40,$40,$40,$40,$40
-	.byt $1,$41,$70,$43,$7C,$5D,$7F,$77,$5E,$47,$78,$4F,$78,$5F,$40,$4D,$61,$60,$5F,$47,$47,$6F,$70
-	.byt $3,$43,$60,$47,$7E,$5F,$7F,$77,$7F,$4F,$7C,$7F,$71,$7F,$60,$4D,$71,$61,$7F,$67,$47,$5F,$78
-	.byt $1,$43,$60,$44,$4E,$5E,$47,$47,$67,$48,$5C,$71,$61,$73,$70,$4C,$71,$61,$73,$77,$47,$50,$78
-	.byt $3,$43,$60,$40,$4E,$5C,$47,$47,$47,$40,$5C,$71,$63,$61,$70,$4C,$79,$63,$61,$77,$47,$40,$78
-	.byt $1,$43,$60,$43,$7E,$5C,$47,$47,$47,$47,$7C,$71,$63,$61,$70,$4C,$59,$63,$61,$73,$6E,$4F,$78
-	.byt $3,$43,$60,$47,$7E,$5C,$47,$47,$47,$4F,$7C,$7F,$63,$61,$70,$4C,$4D,$63,$61,$73,$6E,$5F,$78
-	.byt $1,$43,$70,$47,$4E,$5C,$47,$47,$47,$4E,$5C,$7F,$43,$61,$70,$4C,$4D,$63,$61,$73,$6C,$5C,$78
-	.byt $3,$41,$78,$57,$4E,$5C,$47,$47,$47,$4E,$5C,$70,$43,$73,$60,$4C,$47,$63,$73,$61,$7C,$5C,$78
-	.byt $1,$40,$7F,$77,$7E,$5C,$47,$77,$47,$4F,$7C,$7F,$61,$7F,$60,$4C,$47,$61,$7F,$61,$7C,$5F,$78
-	.byt $3,$40,$5F,$63,$7E,$5C,$43,$77,$47,$47,$7C,$7F,$70,$7E,$40,$4C,$43,$60,$7E,$40,$78,$4F,$78
-	.byt $1,$40,$40,$40,$40,$40,$40,$40,$40,$40,$41,$70,$70,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
-	.byt $3,$40,$40,$40,$40,$40,$40,$40,$40,$40,$41,$70,$70,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
-	.byt $1,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$7F,$70,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
-	.byt $3,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$5F,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40	
+	.byt $1,$40,$40,$40,$47,$40,$40,$40,$40,$40,$40,$43,$60,$40,$40,$40,$40
+	.byt $3,$4F,$78,$40,$47,$40,$40,$40,$40,$40,$40,$43,$60,$40,$40,$40,$40
+	.byt $1,$4F,$7E,$40,$47,$40,$40,$40,$40,$40,$43,$63,$60,$40,$40,$40,$40
+	.byt $3,$4E,$4E,$40,$40,$40,$40,$40,$40,$40,$43,$60,$40,$40,$40,$40,$40
+	.byt $1,$4E,$4E,$4E,$77,$43,$7E,$5F,$63,$6F,$4F,$7F,$67,$47,$4E,$7C,$7C
+	.byt $3,$4E,$4E,$4F,$77,$4F,$7C,$7F,$73,$7F,$6F,$7F,$67,$47,$4F,$7F,$7E
+	.byt $1,$4F,$78,$4F,$47,$4C,$58,$61,$73,$73,$63,$63,$67,$47,$4F,$4F,$4E
+	.byt $3,$4F,$7E,$4E,$47,$4C,$58,$41,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $1,$4E,$4F,$4E,$47,$4C,$58,$5F,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $3,$4E,$47,$4E,$47,$4F,$78,$7F,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $1,$4E,$47,$4E,$47,$4F,$70,$79,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $3,$4E,$4F,$4E,$47,$4C,$40,$79,$73,$63,$63,$63,$67,$4F,$4E,$4E,$4E
+	.byt $1,$4F,$7E,$4E,$47,$4F,$78,$7F,$73,$63,$63,$7B,$67,$7F,$4E,$4E,$4E
+	.byt $3,$4F,$7C,$4E,$47,$4F,$7C,$5F,$73,$63,$61,$7B,$63,$77,$4E,$4E,$4E
+	.byt $1,$40,$40,$40,$40,$5C,$4C,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $3,$40,$40,$40,$40,$5C,$4C,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $1,$40,$40,$40,$40,$4F,$7C,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $3,$40,$40,$40,$40,$47,$70,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40

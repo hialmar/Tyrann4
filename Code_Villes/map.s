@@ -35,7 +35,7 @@
 ;
 
 
-main_routine
+_main
 
 	jsr hires_et_atributs	; passe en HIRES et installe 84 atributs de couleur ( 7 x hauteur tuile) 
 	jsr impl_car			; Implante jeu de caractères redéfinis	

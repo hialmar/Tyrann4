@@ -31,7 +31,7 @@
 ;	$1a	:	drapeau : on a mot de passe
 
 
-main_routine
+_main
 ;	jsr impl_car			; Implante jeu de caractères redéfinis	
 	jsr hires_et_atributs	; spécifique à ce test passe en HIRES et installe 84 atributs de couleur (hauteur tuile)
 	jsr impl_car			; Implante jeu de caractères redéfinis	
