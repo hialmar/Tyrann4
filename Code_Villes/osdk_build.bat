@@ -162,11 +162,16 @@ Goto Tap2dsk
 
 pause
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\Ville_11.tap BUILD\Ville_15.tap BUILD\Ville_7.tap BUILD\Ville_9.tap BUILD\Ville_3.tap BUILD\map.tap BUILD\Ville_12.tap BUILD\Ville_16.tap BUILD\Ville_4.tap BUILD\Ville_13.tap BUILD\ville_5.tap BUILD\Ville_1.tap BUILD\Ville_10.tap BUILD\Ville_14.tap BUILD\ville_6.tap BUILD\Ville_2.tap BUILD\Ville_8.tap  t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\Ville_11.tap BUILD\Ville_15.tap BUILD\Ville_7.tap BUILD\Ville_9.tap BUILD\Ville_3.tap BUILD\map.tap BUILD\Ville_12.tap BUILD\Ville_16.tap BUILD\Ville_4.tap BUILD\Ville_13.tap BUILD\ville_5.tap BUILD\Ville_1.tap BUILD\Ville_10.tap BUILD\Ville_14.tap BUILD\ville_6.tap BUILD\Ville_2.tap t4_prog.dsk
+
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\Ville_8.tap  t4_1_prog.dsk
+
 
 pause
 
 %OSDK%\bin\old2mfm t4_prog.dsk
+
+%OSDK%\bin\old2mfm t4_1_prog.dsk
 
 GOTO End
 
