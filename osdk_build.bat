@@ -10,8 +10,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto MapAsm
 :: Goto Ville1
 :: Goto Ville2
-Goto Ville3
-:: Goto Ville4
+:: Goto Ville3
+Goto Ville4
 :: Goto Ville5
 
 ::
