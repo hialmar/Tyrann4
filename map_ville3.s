@@ -37,45 +37,45 @@ init_div_var
 	; attention, si on les deplace il faudra changer ces adresses !!!
 	lda on_a_clef_1
 	beq suite_init1
-	ldx #8
+	ldx #15
 	lda #0
-	sta _L39,x
+	sta _L38,x
 suite_init1
 	lda on_a_clef_2
 	beq suite_init2
-	ldx #25
+	ldx #22
 	lda #0
-	sta _L40,x
+	sta _L41,x
 suite_init2
 	lda mot_de_passe
 	beq suite_init2_2
-	ldx #26
+	ldx #28
 	lda #0
-	sta _L03,x
+	sta _L01,x
 suite_init2_2
 	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #1
 	beq suite_init3
-	ldx #15
+	ldx #19
 	lda #0
-	sta _L11,x
+	sta _L10,x
 suite_init3
 	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #2
 	beq suite_init4
-	ldx #1
+	ldx #19
 	lda #0
-	sta _L25,x
+	sta _L23,x
 suite_init4
 	ldx #VILLE
 	lda _team_combats_coffres,x
 	and #4
 	beq suite_init5
-	ldx #14
+	ldx #13
 	lda #0
-	sta _L32,x
+	sta _L43,x
 suite_init5
 	ldx #VILLE
 	lda _team_combats_coffres,x
@@ -487,13 +487,13 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; on ajoute 20000 ses = 4e20 en hex 
+	; on ajoute 10000 ses = 2710 en hex 
 	clc
 	lda _character_ri
-	adc #$20
+	adc #$10
 	sta _character_ri
 	lda _character_ri+1
-	adc #$4e
+	adc #$27
 	sta _character_ri+1
 	bcs overflow
 	rts
@@ -584,7 +584,7 @@ herboriste_
 	jsr gestion_boutiques
 	jsr eff_text
 	rts
-;-------------------------------------------------	
+;-------------------------------------------------
 taberna_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$5e				; valeur auberge
@@ -1263,8 +1263,11 @@ t_coffre_1
 	.byt $9d	
 	.asc "You find a chest,",0
 t_coffre_2
-	.byt $c6
-	.asc "do you take it?",0
+	.byt $c6	
+	.asc "do you open it?",0
+t_coffre_3
+	.byt $9b	
+	.asc "You find some coins!",0	
 ; ------------------------------------
 dta_bandeau		
 	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
@@ -1338,17 +1341,6 @@ dta_nom_ville
 	.byt $1,$40,$40,$40,$40,$40,$40,$40,$40,$78,$58,$40,$40,$40,$40
 	.byt $1,$40,$40,$40,$40,$40,$40,$40,$40,$5F,$78,$40,$40,$40,$40
 	.byt $1,$40,$40,$40,$40,$40,$40,$40,$40,$4F,$60,$40,$40,$40,$40
-
-
-
-;--- <<< First Label t_coffre_3 >>>
-; -----------------------------------------------
-;----- added texts
-; -----------------------------------------------
-t_coffre_3
-	.byt $9b
-	.asc "You find some coins!",0
-; ------------------------------------
 
 
 
