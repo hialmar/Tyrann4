@@ -167,16 +167,16 @@
 0c7d suite_init2
 1a34 _L41
 0c88 suite_init2_2
-1584 _L01
+1764 _L17
 2e84 _team_combats_coffres
 0c98 suite_init3
-1692 _L10
+1584 _L01
 0ca8 suite_init4
-1818 _L23
+1692 _L10
 0cb8 suite_init5
-1a70 _L43
+1818 _L23
 0cc8 suite_init6
-1980 _L35
+1a70 _L43
 2de3 _team_boat
 0cf3 load_from_team
 0d8f sortie_scroll_direct
@@ -328,7 +328,6 @@
 170a _L14
 1728 _L15
 1746 _L16
-1764 _L17
 1782 _L18
 17a0 _L19
 17be _L20
@@ -345,6 +344,7 @@
 1926 _L32
 1944 _L33
 1962 _L34
+1980 _L35
 199e _L36
 19bc _L37
 19f8 _L39
