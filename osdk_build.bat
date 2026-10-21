@@ -11,8 +11,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Ville1
 :: Goto Ville2
 :: Goto Ville3
-Goto Ville4
-:: Goto Ville5
+:: Goto Ville4
+Goto Ville5
 
 ::
 :: Set the build parameters : Laby
