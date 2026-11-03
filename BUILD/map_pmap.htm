@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML lang=fr dir=ltr>
+	<HEAD>
+		<meta name="robots" content="noindex">
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<title>pmap</title>
+		<link href="C:\OSDK_2_0\documentation\documentation.css" rel="stylesheet" type="text/css">
+	</HEAD>
+	<BODY>
+<hr>
+<center>pmap</center>
+<hr>
+<table>
+<tr>
+<td valign=top>
+<a name="Normal"></a>
+<h1>Normal memory</h1>
+<table class='memmap'>
+<thead>
+<tr>
+<th colspan=2>Largest 8 sections</th>
+</tr>
+<tr>
+<th>Size</th><th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>18943<td><a href='#__bss_clear_end'>__bss_clear_end</a>
+<tr><td>12046<td><a href='#__text_size'>__text_size</a>
+<tr><td>8925<td><a href='#_main'>_main</a>
+<tr><td>8690<td><a href='#__bss_clear_size'>__bss_clear_size</a>
+<tr><td>256<td><a href='#__bss_clear_start'>__bss_clear_start</a>
+<tr><td>17<td><a href='#__text_start'>__text_start</a>
+<tr><td>14<td><a href='#__data_end'>__data_end</a>
+<tr><td>4<td><a href='#_exit'>_exit</a>
+</tbody>
+</table>
+<br>
+<table class='memmap'>
+<thead>
+<tr>
+<th colspan=4>Section layout</th>
+</tr>
+<tr>
+<th>Address</th><th colspan="2">Size</th><th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>$100</b></td><td align="right" id='__bss_clear_size'>8690</td><td align="right">8690</td><td>__bss_clear_size, __bss_size</td></tr>
+<tr>
+<td>$22f2</td><td align="right" id='__text_size'>12046</td><td align="right">12046</td><td>__text_size</td></tr>
+<tr>
+<td><b>$5200</b></td><td align="right" id='__text_start'>17</td><td align="right">17</td><td>__text_start, osdk_start</td></tr>
+<tr>
+<td>$5211</td><td align="right" id='_exit'>4</td><td align="right">4</td><td>_exit, exitldx</td></tr>
+<tr>
+<td>$5215</td><td align="right" id='_main'>8925</td><td align="right">30</td><td>_main</td></tr>
+<tr>
+<td>$5233</td><td colspan="2" align="right">12</td><td>e_255E</td></tr>
+<tr>
+<td>$523f</td><td colspan="2" align="right">3</td><td>e_256A</td></tr>
+<tr>
+<td>$5242</td><td colspan="2" align="right">12</td><td>e_256D</td></tr>
+<tr>
+<td>$524e</td><td colspan="2" align="right">4</td><td>e_2579</td></tr>
+<tr>
+<td>$5252</td><td colspan="2" align="right">11</td><td>e_257D</td></tr>
+<tr>
+<td>$525d</td><td colspan="2" align="right">11</td><td>e_2588</td></tr>
+<tr>
+<td>$5268</td><td colspan="2" align="right">40</td><td>e_2593</td></tr>
+<tr>
+<td>$5290</td><td colspan="2" align="right">23</td><td>e_25BB</td></tr>
+<tr>
+<td>$52a7</td><td colspan="2" align="right">8779</td><td>dta_map</td></tr>
+<tr>
+<td>$74f2</td><td align="right" id='__data_end'>14</td><td align="right">14</td><td>__data_end, __data_start, __text_end</td></tr>
+<tr>
+<td><b>$7500</b></td><td align="right" id='__bss_clear_start'>256</td><td align="right">256</td><td>__bss_clear_start, __bss_start, osdk_stack</td></tr>
+<tr>
+<td><b>$7600</b></td><td align="right" id='__bss_clear_end'>18943</td><td align="right">18943</td><td>__bss_clear_end, __bss_end, osdk_end</td></tr>
+</tbody>
+</table>
+</td>
+<td valign=top>
+<a name="Zero"></a>
+<h1>Zero page</h1>
+<table class='memmap'>
+<thead>
+<tr>
+<th colspan=2>Largest 4 sections</th>
+</tr>
+<tr>
+<th>Size</th><th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>207<td><a href='#__zero_end'>__zero_end</a>
+<tr><td>40<td><a href='#__zero_start'>__zero_start</a>
+<tr><td>4<td><a href='#__zero_size'>__zero_size</a>
+<tr><td>4<td><a href='#__data_size'>__data_size</a>
+</tbody>
+</table>
+<br>
+<table class='memmap'>
+<thead>
+<tr>
+<th colspan=4>Section layout</th>
+</tr>
+<tr>
+<th>Address</th><th colspan="2">Size</th><th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>$00</b></td><td align="right" id='__data_size'>4</td><td align="right">4</td><td>__data_size</td></tr>
+<tr>
+<td>$04</td><td align="right" id='__zero_start'>40</td><td align="right">40</td><td>__zero_start</td></tr>
+<tr>
+<td>$2c</td><td align="right" id='__zero_size'>4</td><td align="right">4</td><td>__zero_size</td></tr>
+<tr>
+<td>$30</td><td align="right" id='__zero_end'>207</td><td align="right">32</td><td>__zero_end</td></tr>
+<tr>
+<td>$50</td><td colspan="2" align="right">2</td><td>ap, zp_compiler_save_start</td></tr>
+<tr>
+<td>$52</td><td colspan="2" align="right">2</td><td>fp</td></tr>
+<tr>
+<td>$54</td><td colspan="2" align="right">2</td><td>sp</td></tr>
+<tr>
+<td>$56</td><td colspan="2" align="right">2</td><td>tmp0</td></tr>
+<tr>
+<td>$58</td><td colspan="2" align="right">2</td><td>tmp1</td></tr>
+<tr>
+<td>$5a</td><td colspan="2" align="right">2</td><td>tmp2</td></tr>
+<tr>
+<td>$5c</td><td colspan="2" align="right">2</td><td>tmp3</td></tr>
+<tr>
+<td>$5e</td><td colspan="2" align="right">2</td><td>tmp4</td></tr>
+<tr>
+<td>$60</td><td colspan="2" align="right">2</td><td>tmp5</td></tr>
+<tr>
+<td>$62</td><td colspan="2" align="right">2</td><td>tmp6</td></tr>
+<tr>
+<td>$64</td><td colspan="2" align="right">2</td><td>tmp7</td></tr>
+<tr>
+<td>$66</td><td colspan="2" align="right">2</td><td>op1</td></tr>
+<tr>
+<td>$68</td><td colspan="2" align="right">2</td><td>op2</td></tr>
+<tr>
+<td>$6a</td><td colspan="2" align="right">2</td><td>tmp</td></tr>
+<tr>
+<td>$6c</td><td colspan="2" align="right">2</td><td>reg0</td></tr>
+<tr>
+<td>$6e</td><td colspan="2" align="right">2</td><td>reg1</td></tr>
+<tr>
+<td>$70</td><td colspan="2" align="right">2</td><td>reg2</td></tr>
+<tr>
+<td>$72</td><td colspan="2" align="right">2</td><td>reg3</td></tr>
+<tr>
+<td>$74</td><td colspan="2" align="right">2</td><td>reg4</td></tr>
+<tr>
+<td>$76</td><td colspan="2" align="right">2</td><td>reg5</td></tr>
+<tr>
+<td>$78</td><td colspan="2" align="right">2</td><td>reg6</td></tr>
+<tr>
+<td>$7a</td><td colspan="2" align="right">2</td><td>reg7</td></tr>
+<tr>
+<td>$7c</td><td colspan="2" align="right">131</td><td>zp_compiler_save_end</td></tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+<hr>
+<center>Generated by MemMap version 1.1</center>
+<hr>
+	</BODY>
+</HTML>

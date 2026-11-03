@@ -12,7 +12,9 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Ville2
 :: Goto Ville3
 :: Goto Ville4
-Goto Ville5
+:: Goto Ville5
+:: Goto PMap
+Goto PVille1
 
 ::
 :: Set the build parameters : Laby
@@ -122,6 +124,28 @@ Copy BUILD\symbols BUILD\symbols_ville5
 
 Goto GestionSymbols
 
+:PMap
+CALL %OSDK%\bin\FilePack.exe -p0 Compressed\map.raw Compressed\map.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map.comp Compressed\cmap.s dta_map
+Copy /b pbase.s Compressed\cmap.s pmap.s
+CALL osdk_config_pmap.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap
+
+Goto GestionSymbols
+
+:PVille1
+CALL %OSDK%\bin\FilePack.exe -p0 Compressed\ville1.raw Compressed\ville1.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\ville1.comp Compressed\cville1.s dta_map
+Type pbase.s Compressed\cville1.s > pville1.s
+CALL osdk_config_pville1.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pville1.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pville1
+
+Goto GestionSymbols
+
 :GestionSymbols
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
 Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
@@ -158,7 +182,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t4_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\ville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\pmap.tap BUILD\ville1.tap BUILD\pville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap t4_prog.dsk
 
 pause
 
