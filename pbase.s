@@ -12,7 +12,7 @@ _main
 	LDA #$06	; adresse de début
 	STA $59 	; de la table décompactée 
 	LDA #$8D	;
-	STA $5A 	; $5A-5B => $8D3d
+	STA $5A 	; $5A-5B => $3c8d
 	LDA #$3C 	; Adresse de fin
 	STA $5B 	; de la table décompactée
 	LDA #<dta_map	;							<== A MODIFIER EN FONCION DU NOM DES DATA (ex : dta_ville1)
