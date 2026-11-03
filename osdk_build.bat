@@ -125,7 +125,9 @@ Copy BUILD\symbols BUILD\symbols_ville5
 Goto GestionSymbols
 
 :PMap
-CALL %OSDK%\bin\FilePack.exe -p0 Compressed\map.raw Compressed\map.comp
+CALL osdk_config_map_asm.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map.comp
 CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map.comp Compressed\cmap.s dta_map
 Copy /b pbase.s Compressed\cmap.s pmap.s
 CALL osdk_config_pmap.bat
@@ -136,7 +138,9 @@ Copy BUILD\symbols BUILD\symbols_pmap
 Goto GestionSymbols
 
 :PVille1
-CALL %OSDK%\bin\FilePack.exe -p0 Compressed\ville1.raw Compressed\ville1.comp
+CALL osdk_config_map_ville1.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\ville1.comp
 CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\ville1.comp Compressed\cville1.s dta_map
 Type pbase.s Compressed\cville1.s > pville1.s
 CALL osdk_config_pville1.bat
