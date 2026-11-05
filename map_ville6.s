@@ -527,13 +527,13 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; on ajoute 20000 ses = 4e20 en hex 
+	; on ajoute 5000 ses = 01f4 en hex 
 	clc
 	lda _character_ri
-	adc #$20
+	adc #$f4
 	sta _character_ri
 	lda _character_ri+1
-	adc #$4e
+	adc #$01
 	sta _character_ri+1
 	bcs overflow
 	rts
@@ -1246,7 +1246,7 @@ t_voleur_1
 	.asc "A pickpocket skillfully;",0
 t_voleur_2	
 	.byt $c2	
-	.asc "steals from Carpophorus.",0
+	.asc "steals from one of yours.",0
 ; ------------------------------------		
 t_m_de_passe_1
 	.byt $96

@@ -487,20 +487,7 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; on ajoute 20000 ses = 4e20 en hex 
-	clc
-	lda _character_ri
-	adc #$20
-	sta _character_ri
-	lda _character_ri+1
-	adc #$4e
-	sta _character_ri+1
-	bcs overflow
-	rts
-overflow ; on met le max
-	lda #$ff
-	sta _character_ri
-	sta _character_ri+1
+	; TO DO, donner ingrédient ?
 	rts
 ;-------------------------------------------------	
 entrance_
@@ -1201,11 +1188,8 @@ t_key_3
 	.byt $9a	
 	.asc "is find the right door.",0
 ; ------------------------------------	
-	.byt $c6	
-	.asc "do you open it?",0
-t_coffre_3
-	.byt $9b	
-	.asc "You find some coins!",0	
+t_phare_guard_1
+	.byt $93
 	.asc "The lighthouse guard says:'Fiat lux'",0
 t_phare_guard_2	
 	.byt $bd
@@ -1280,7 +1264,7 @@ t_legat_7
 	.asc "Let me give you some bull horn powder",0
 t_legat_8
 	.byt $ba	
-	.asc "it's very good for strenght and health.",0		
+	.asc "it's very good for strength and health.",0		
 ; ------------------------------------	
 t_entrance_1
 	.byt $99	

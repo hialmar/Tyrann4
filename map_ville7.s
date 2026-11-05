@@ -487,20 +487,6 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; on ajoute 20000 ses = 4e20 en hex 
-	clc
-	lda _character_ri
-	adc #$20
-	sta _character_ri
-	lda _character_ri+1
-	adc #$4e
-	sta _character_ri+1
-	bcs overflow
-	rts
-overflow ; on met le max
-	lda #$ff
-	sta _character_ri
-	sta _character_ri+1
 	rts
 ;-------------------------------------------------	
 entrance_
