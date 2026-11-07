@@ -134,6 +134,96 @@ Copy BUILD\symbols BUILD\symbols_ville6
 
 Goto GestionSymbols
 
+:Ville7
+
+CALL osdk_config_map_ville7.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville7.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville7
+
+Goto GestionSymbols
+
+:Ville8
+
+CALL osdk_config_map_ville8.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville8.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville8
+
+Goto GestionSymbols
+
+:Ville9
+
+CALL osdk_config_map_ville9.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville9.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville9
+
+Goto GestionSymbols
+
+:Ville10
+
+CALL osdk_config_map_ville10.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville10.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville10
+
+Goto GestionSymbols
+
+:Ville11
+
+CALL osdk_config_map_ville11.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville11.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville11
+
+Goto GestionSymbols
+
+:Ville12
+
+CALL osdk_config_map_ville12.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville12.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville12
+
+Goto GestionSymbols
+
+:Ville13
+
+CALL osdk_config_map_ville13.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville13.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville13
+
+Goto GestionSymbols
+
+:Ville14
+
+CALL osdk_config_map_ville14.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville14.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville14
+
+Goto GestionSymbols
+
+:Ville15
+
+CALL osdk_config_map_ville15.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville15.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville15
+
+Goto GestionSymbols
+
+:Ville16
+
+CALL osdk_config_map_ville16.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville16.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_map_ville16
+
+Goto GestionSymbols
+
 :PMap
 CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
