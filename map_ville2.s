@@ -423,7 +423,7 @@ suite_garde
 	sta write_phrase+2
 	jsr write_phrase	
 
-ldx #$00
+	ldx #$00
 	lda t_garde_3,x
 	sta adr_ecr_txt+1
 	lda #<t_garde_3+1

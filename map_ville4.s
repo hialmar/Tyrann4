@@ -462,7 +462,7 @@ suite_garde
 	lda #>t_garde_3+1
 	sta write_phrase+2
 	jsr write_phrase	
-ldx #$00
+	ldx #$00
 	lda t_garde_4,x
 	sta adr_ecr_txt+1
 	lda #<t_garde_4+1
@@ -472,7 +472,7 @@ ldx #$00
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-ldx #$00
+	ldx #$00
 	lda t_garde_5,x
 	sta adr_ecr_txt+1
 	lda #<t_garde_5+1

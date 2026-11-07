@@ -445,6 +445,16 @@ suite_mot_passe
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
+	ldx #$00
+	lda t_m_de_passe_3,x
+	sta adr_ecr_txt+1
+	lda #<t_m_de_passe_3+1
+	sta write_phrase+1
+	lda #>t_m_de_passe_3+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
 	rts
 ;-------------------------------------------------
 garde_
@@ -462,7 +472,7 @@ suite_garde
 	lda #>t_garde_3+1
 	sta write_phrase+2
 	jsr write_phrase	
-ldx #$00
+	ldx #$00
 	lda t_garde_4,x
 	sta adr_ecr_txt+1
 	lda #<t_garde_4+1
@@ -472,7 +482,7 @@ ldx #$00
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-ldx #$00
+	ldx #$00
 	lda t_garde_5,x
 	sta adr_ecr_txt+1
 	lda #<t_garde_5+1
@@ -500,6 +510,7 @@ suite_legat2
 	ora #8
 	sta _team_cles,x
 	sta laisser_passer
+	ldx #$00	
 	lda t_legat_1,x
 	sta adr_ecr_txt+1
 	lda #<t_legat_1+1
@@ -527,13 +538,13 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; on ajoute 5000 ses = 01f4 en hex 
+	; on ajoute 5000 ses = 1388 en hex 
 	clc
 	lda _character_ri
-	adc #$f4
+	adc #$88
 	sta _character_ri
 	lda _character_ri+1
-	adc #$01
+	adc #$13
 	sta _character_ri+1
 	bcs overflow
 	rts

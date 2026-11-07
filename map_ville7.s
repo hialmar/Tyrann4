@@ -460,6 +460,7 @@ suite_legat2
 	ora #8
 	sta _team_cles,x
 	sta laisser_passer
+	ldx #$00
 	lda t_legat_1,x
 	sta adr_ecr_txt+1
 	lda #<t_legat_1+1

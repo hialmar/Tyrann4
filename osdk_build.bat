@@ -13,6 +13,7 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Ville3
 :: Goto Ville4
 :: Goto Ville5
+Goto Ville6
 :: Goto PMap
 Goto PVille1
 
@@ -124,6 +125,15 @@ Copy BUILD\symbols BUILD\symbols_ville5
 
 Goto GestionSymbols
 
+:Ville6
+
+CALL osdk_config_map_ville6.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_ville6.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_ville6
+
+Goto GestionSymbols
+
 :PMap
 CALL osdk_config_map_asm.bat
 CALL %OSDK%\bin\make.bat %OSDKFILE%
@@ -186,7 +196,7 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t4_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\pmap.tap BUILD\ville1.tap BUILD\pville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\pmap.tap BUILD\ville1.tap BUILD\pville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap BUILD\ville6.tap t4_prog.dsk
 
 pause
 
