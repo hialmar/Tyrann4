@@ -250,6 +250,45 @@ Copy BUILD\symbols BUILD\symbols_pville1
 
 Goto GestionSymbols
 
+:PVille2
+CALL osdk_config_map_ville2.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\Ville_2.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\Ville_2.comp Compressed\cVille_2.s dta_map
+Type pbase.s Compressed\cVille_2.s > pville2.s
+CALL osdk_config_pmap_ville2.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pville2.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pville2
+
+Goto GestionSymbols
+
+:PVille3
+CALL osdk_config_map_ville3.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville3.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville3.comp Compressed\cmap_ville3.s dta_map
+Type pbase.s Compressed\cmap_ville3.s > pville3.s
+CALL osdk_config_pmap_ville3.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville3.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville3
+
+Goto GestionSymbols
+
+:PVille4
+CALL osdk_config_map_ville4.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville4.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville4.comp Compressed\cmap_ville4.s dta_map
+Type pbase.s Compressed\cmap_ville4.s > pville4.s
+CALL osdk_config_pmap_ville4.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville4.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville4
+
+Goto GestionSymbols
+
 :GestionSymbols
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
 Call sed -i.bak s/c:\//\/Users\/torguet\/.wine\/drive_c\//g BUILD\symbols_ext
