@@ -14,8 +14,33 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Ville4
 :: Goto Ville5
 Goto Ville6
+:: Goto Ville7
+:: Goto Ville8
+:: Goto Ville9
+:: Goto Ville10
+:: Goto Ville11
+:: Goto Ville12
+:: Goto Ville13
+:: Goto Ville14
+:: Goto Ville15
+:: Goto Ville16
 :: Goto PMap
-Goto PVille1
+:: Goto PVille1
+:: Goto PVille2
+:: Goto PVille3
+:: Goto PVille4
+:: Goto PVille5
+:: Goto PVille6
+:: Goto PVille7
+:: Goto PVille8
+:: Goto PVille9
+:: Goto PVille10
+:: Goto PVille11
+:: Goto PVille12
+:: Goto PVille13
+:: Goto PVille14
+:: Goto PVille15
+:: Goto PVille16
 
 ::
 :: Set the build parameters : Laby
@@ -288,6 +313,163 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 Copy BUILD\symbols BUILD\symbols_pmap_ville4
 
 Goto GestionSymbols
+
+:PVille5
+CALL osdk_config_map_ville5.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville5.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville4.comp Compressed\cmap_ville5.s dta_map
+Type pbase.s Compressed\cmap_ville5.s > pville5.s
+CALL osdk_config_pmap_ville5.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville5.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville5
+
+Goto GestionSymbols
+
+:PVille6
+CALL osdk_config_map_ville6.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville6.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville6.comp Compressed\cmap_ville6.s dta_map
+Type pbase.s Compressed\cmap_ville6.s > pville6.s
+CALL osdk_config_pmap_ville6.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville6.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville6
+
+Goto GestionSymbols
+
+:PVille7
+CALL osdk_config_map_ville7.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville7.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville7.comp Compressed\cmap_ville7.s dta_map
+Type pbase.s Compressed\cmap_ville7.s > pville7.s
+CALL osdk_config_pmap_ville7.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville7.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville7
+
+Goto GestionSymbols
+
+:PVille8
+CALL osdk_config_map_ville8.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville8.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville8.comp Compressed\cmap_ville8.s dta_map
+Type pbase.s Compressed\cmap_ville8.s > pville8.s
+CALL osdk_config_pmap_ville8.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville8.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville8
+
+Goto GestionSymbols
+
+:PVille9
+CALL osdk_config_map_ville9.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville9.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville9.comp Compressed\cmap_ville9.s dta_map
+Type pbase.s Compressed\cmap_ville9.s > pville9.s
+CALL osdk_config_pmap_ville9.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville9.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville9
+
+Goto GestionSymbols
+
+:PVille10
+CALL osdk_config_map_ville10.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville10.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville10.comp Compressed\cmap_ville10.s dta_map
+Type pbase.s Compressed\cmap_ville10.s > pville10.s
+CALL osdk_config_pmap_ville10.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville10.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville10
+
+Goto GestionSymbols
+
+:PVille11
+CALL osdk_config_map_ville11.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville11.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville11.comp Compressed\cmap_ville11.s dta_map
+Type pbase.s Compressed\cmap_ville11.s > pville11.s
+CALL osdk_config_pmap_ville11.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville11.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville11
+
+Goto GestionSymbols
+
+:PVille12
+CALL osdk_config_map_ville12.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville12.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville12.comp Compressed\cmap_ville12.s dta_map
+Type pbase.s Compressed\cmap_ville12.s > pville12.s
+CALL osdk_config_pmap_ville12.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville12.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville12
+
+Goto GestionSymbols
+
+:PVille13
+CALL osdk_config_map_ville13.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville13.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville13.comp Compressed\cmap_ville13.s dta_map
+Type pbase.s Compressed\cmap_ville13.s > pville13.s
+CALL osdk_config_pmap_ville13.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville13.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville13
+
+Goto GestionSymbols
+
+:PVille14
+CALL osdk_config_map_ville14.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville14.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville14.comp Compressed\cmap_ville14.s dta_map
+Type pbase.s Compressed\cmap_ville14.s > pville14.s
+CALL osdk_config_pmap_ville14.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville14.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville14
+
+Goto GestionSymbols
+
+:PVille15
+CALL osdk_config_map_ville15.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville15.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville15.comp Compressed\cmap_ville15.s dta_map
+Type pbase.s Compressed\cmap_ville15.s > pville15.s
+CALL osdk_config_pmap_ville15.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville15.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville15
+
+Goto GestionSymbols
+
+:PVille16
+CALL osdk_config_map_ville16.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+CALL %OSDK%\bin\FilePack.exe -p0 BUILD\final.out Compressed\map_ville16.comp
+CALL %OSDK%\bin\bin2txt.exe -s1 -f2 Compressed\map_ville16.comp Compressed\cmap_ville16.s dta_map
+Type pbase.s Compressed\cmap_ville16.s > pville16.s
+CALL osdk_config_pmap_ville16.bat
+CALL %OSDK%\bin\make.bat %OSDKFILE%
+%OSDK%\bin\MemMap.exe -s30 build\symbols build\map_pmap_ville16.htm %OSDKNAME% %OSDK%\documentation\documentation.css
+Copy BUILD\symbols BUILD\symbols_pmap_ville16
+
+Goto GestionSymbols
+
 
 :GestionSymbols
 Call sed -i.bak s/\\/\//g BUILD\symbols_ext
