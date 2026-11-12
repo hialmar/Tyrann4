@@ -231,14 +231,14 @@ chck_54		; clef_1
 chck_58		; a guard ask for pass word
 		lda tuile_courante
 		cmp #$58				;
-		bne chck_57
+		bne chck_56
 		lda mot_de_passe
 		bne around_sortie		; test:   $1a =1 => on a mot de passe	=> scroll et/ou delplacement autorisés
 		jsr why_no_scoll
 		beq no_scroll			; branchement forcé par sortie sp précédent
-chck_57		; patricienne donne mdp
+chck_56		; mdp
 		lda tuile_courante
-		cmp #$57
+		cmp #$56
 		bne chck_55
 		lda #TRUE
 		sta mot_de_passe					; met à 1 drapeau mote de passe
@@ -382,7 +382,7 @@ suite_clef
 ;-------------------------------------------------------------
 _mot_de_passe
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
-	cmp #$57				; valeur tuile pour patricienne donne mot de passe
+	cmp #$56				; valeur tuile pour patricienne donne mot de passe
 	beq suite_mot_passe
 	jmp garde_
 suite_mot_passe
@@ -488,6 +488,28 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
+	; on ajoute 500 xp = 01f4 en hex 
+	ldx #12
+add_xp
+	dex
+	dex
+	clc
+	lda _character_xp,x
+	adc #$f4
+	sta _character_xp,x
+	lda _character_xp+1,x
+	adc #$01
+	sta _character_xp+1,x
+	bcs overflow
+	txa
+	bne add_xp
+	rts
+overflow ; on met le max
+	lda #$ff
+	sta _character_xp,x
+	sta _character_xp+1,x
+	txa
+	bne add_xp
 	rts
 ;-------------------------------------------------	
 entrance_

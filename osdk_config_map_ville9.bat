@@ -8,4 +8,4 @@ SET OSDKCOMP=-O1
 SET OSDKADDR=$600
 SET OSDKNAME=ville9
 SET OSDKTAPNAME=ville9
-SET OSDKFILE=ville9 t4_team sedoric_io
+SET OSDKFILE=map_ville9 t4_team sedoric_io
