@@ -14,8 +14,8 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Ville4
 :: Goto Ville5
 :: Goto Ville6
-Goto Ville7
-:: Goto Ville8
+:: Goto Ville7
+Goto Ville8
 :: Goto Ville9
 :: Goto Ville10
 :: Goto Ville11
@@ -507,7 +507,9 @@ pause
 
 :: %OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\TIMGPERSOS.tap BUILD\TITEMS.tap  BUILD\L1King.tap BUILD\TXTPER1.tap BUILD\L2Dorne.tap BUILD\TXTPER2.tap BUILD\L3Storm.tap BUILD\TXTPER3.tap BUILD\L4HighGa.tap BUILD\TXTPER4.tap BUILD\L5Pike.tap BUILD\TXTPER5.tap BUILD\L6Eyrie.tap BUILD\TXTPER6.tap BUILD\L7Caster.tap BUILD\TXTPER7.tap BUILD\L8River.tap BUILD\TXTPER8.tap BUILD\L9Winter.tap BUILD\TXTPER9.tap BUILD\TXTPER10.tap BUILD\TPRIX.tap BUILD\monstres.tap t4_data.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\pmap.tap BUILD\ville1.tap BUILD\pville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap BUILD\ville6.tap BUILD\ville7.tap t4_prog.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\pmap.tap BUILD\ville1.tap BUILD\pville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap BUILD\ville6.tap BUILD\ville7.tap BUILD\ville8.tap t4_prog.dsk
+
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\ville8.tap t4_prog1.dsk
 
 pause
 
@@ -516,6 +518,7 @@ pause
 :: %OSDK%\bin\old2mfm t4_data.dsk
 :: copy t4_data.dsk c:\Euphoric\disks
 %OSDK%\bin\old2mfm t4_prog.dsk
+%OSDK%\bin\old2mfm t4_prog1.dsk
 :: copy t4_prog.dsk c:\Euphoric\disks
 
 GOTO End

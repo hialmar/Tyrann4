@@ -33,6 +33,9 @@ init_div_var
 	lda _team_cles,x
 	and #8
 	sta laisser_passer
+	lda _team_cles,x
+	and #16
+	sta mot_de_passe_phare
 	; cache les tuiles spéciales
 	; attention, si on les deplace il faudra changer ces adresses !!!
 	lda on_a_clef_1
@@ -47,11 +50,17 @@ suite_init1
 	lda #0
 	sta _L21,x
 suite_init2
-	lda mot_de_passe
-	beq suite_init2_2
+	lda mot_de_passe_phare
+	beq suite_init2_1
 	ldx #4
 	lda #0
 	sta _L04,x
+suite_init2_1
+	lda mot_de_passe
+	beq suite_init2_2
+	ldx #7
+	lda #0
+	sta _L11,x
 suite_init2_2
 	ldx #VILLE
 	lda _team_combats_coffres,x
@@ -209,18 +218,19 @@ sortie_scroll_direct
 ;-----------------------------------------------------------------------------
 tuile_speciale
 		cmp#$51
-		bmi no_scroll
+		bmi towards_no_scroll
 		cmp #$52				; have you the right key for gate 1?
 ;		bmi no_scroll
 		bne chck_54
 		lda on_a_clef_1
 		bne around_sortie		; test: $18 =1 => on a la clef_1	=> scroll et/ou delplacement autorisés
 		jsr why_no_scoll
-		beq no_scroll			; branchement forcé par sortie sp précédent
+towards_no_scroll		
+		jmp no_scroll			; branchement forcé par sortie sp précédent
 chck_54		; clef_1
 		lda tuile_courante
 		cmp #$54
-		bne chck_58
+		bne chck_56
 		lda #TRUE
 		sta on_a_clef_1					; met à 1 drapeau clef 1
 		ldx #VILLE
@@ -228,6 +238,14 @@ chck_54		; clef_1
 		ora #1
 		sta _team_cles,x
 		bne around_sortie
+chck_56							; a port  guard ask for laissez-passer
+		lda tuile_courante
+		cmp #$56				; 
+		bne chck_58
+		lda mot_de_passe_phare
+		bne around_sortie		; test:   $1g =1 => on a mdp visite phare	=> scroll et/ou delplacement autorisés
+		jsr  why_no_scoll		
+		beq no_scroll			; branchement forcé par sortie sp précédent	
 chck_58		; a guard ask for pass word
 		lda tuile_courante
 		cmp #$58				;
@@ -239,7 +257,7 @@ chck_58		; a guard ask for pass word
 chck_57		; patricienne donne mdp
 		lda tuile_courante
 		cmp #$57
-		bne chck_55
+		bne chck_60
 		lda #TRUE
 		sta mot_de_passe					; met à 1 drapeau mote de passe
 		ldx #VILLE
@@ -247,6 +265,27 @@ chck_57		; patricienne donne mdp
 		ora #4
 		sta _team_cles,x
 		bne around_sortie
+chck_60							; la visite turris herculis donne accès au 2nd discours Legat
+		lda tuile_courante
+		cmp #$60
+		bne chck_61
+		ldx #VILLE
+		lda _team_cles,x
+		ora #8
+		sta _team_cles,x
+		sta laisser_passer
+		bne around_sortie
+chck_61							; le beggar doone le mdp pour visite phare
+		lda tuile_courante
+		cmp #$61
+		bne chck_55
+		lda #TRUE
+		sta mot_de_passe_phare					; met à 1 drapeau mot de passe pour phare
+		ldx #VILLE
+		lda _team_cles,x
+		ora #16
+		sta _team_cles,x
+		jmp around_sortie					
 chck_55		; clef_2
 		lda tuile_courante
 		cmp #$55
@@ -257,13 +296,17 @@ chck_55		; clef_2
 		lda _team_cles,x
 		ora #2
 		sta _team_cles,x
-		bne around_sortie
+		jmp around_sortie
 chck_53		; have you the rigth key for gate 2?
 		lda tuile_courante
 		cmp #$53
-		bne around_sortie
+		beq chck_53_suite
+		jmp around_sortie
+chck_53_suite		
 		lda on_a_clef_2
-		bne around_sortie		; test: $19 =1 => on a la clef_2	=> scroll et/ou delplacement autorisés
+		beq chck_53_suite2
+		jmp around_sortie		; test: $19 =1 => on a la clef_2	=> scroll et/ou delplacement autorisés
+chck_53_suite2		
 		jsr why_no_scoll
 		beq no_scroll			; branchement forcé par sortie sp précédent
 no_scroll
@@ -348,7 +391,7 @@ key_1
 	beq suite_clef
 	cmp #$55				; valeur tuile clef_2
 	beq suite_clef	
-	jmp _mot_de_passe
+	jmp phare_guard_guard
 suite_clef
 	jsr eff_tuile_spe	
 	ldx #$00
@@ -379,12 +422,76 @@ suite_clef
 	jsr write_phrase
 	jsr hit_release_key
 	jsr eff_text
+phare_guard_guard
+	lda tuile_sous_pos_perso
+	cmp #$56				; valeur tuile pour garde du phare "tout d'Harcule"
+	beq suite_phare_guard
+	jmp visit_phare
+suite_phare_guard
+	jsr eff_tuile_spe
+	ldx #$00
+	lda t_phare_guard_3,x
+	sta adr_ecr_txt+1
+	lda #<t_phare_guard_3+1
+	sta write_phrase+1
+	lda #>t_phare_guard_3+1
+	sta write_phrase+2	
+	jsr write_phrase
+	
+	ldx #$00
+	lda t_phare_guard_4,x
+	sta adr_ecr_txt+1
+	lda #<t_phare_guard_4+1
+	sta write_phrase+1
+	lda #>t_phare_guard_4+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_release_key
+	jsr eff_text	
+
+	ldx #$00
+	lda t_phare_guard_5,x
+	sta adr_ecr_txt+1
+	lda #<t_phare_guard_5+1
+	sta write_phrase+1
+	lda #>t_phare_guard_5+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_release_key
+	jsr eff_text		
+	rts
+;-------------------------------------------------
+visit_phare
+	lda tuile_sous_pos_perso
+	cmp #$60				; valeur tuile pour garde du phare "tout d'Harcule"
+	beq suite_p_g
+	jmp _mot_de_passe
+suite_p_g
+	ldx #$00
+	lda t_visit_phare_1,x
+	sta adr_ecr_txt+1
+	lda #<t_visit_phare_1+1
+	sta write_phrase+1
+	lda #>t_visit_phare_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	ldx #$00
+	lda t_visit_phare_2,x
+	sta adr_ecr_txt+1
+	lda #<t_visit_phare_2+1
+	sta write_phrase+1
+	lda #>t_visit_phare_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_release_key
+	jsr eff_text		
+	rts	
 ;-------------------------------------------------------------
 _mot_de_passe
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
 	cmp #$57				; valeur tuile pour patricienne donne mot de passe
 	beq suite_mot_passe
-	jmp garde_
+	jmp _beggar
 suite_mot_passe
 	jsr eff_tuile_spe
 	ldx #$00
@@ -406,6 +513,34 @@ suite_mot_passe
 	jsr hit_release_key
 	jsr eff_text
 	rts
+;-------------------------------------------------
+_beggar
+	lda tuile_sous_pos_perso				
+	cmp #$61				; valeur tuile lecture graffitti sur mur
+	beq suite_graffitti
+	jmp garde_
+suite_graffitti
+;	jsr eff_tuile_spe
+	ldx #$00
+	lda t_beggar_1,x
+	sta adr_ecr_txt+1
+	lda #<t_beggar_1+1
+	sta write_phrase+1
+	lda #>t_beggar_1+1
+	sta write_phrase+2
+	jsr write_phrase	
+
+ldx #$00
+	lda t_beggar_2,x
+	sta adr_ecr_txt+1
+	lda #<t_beggar_2+1
+	sta write_phrase+1
+	lda #>t_beggar_2+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text	
+	rts		
 ;-------------------------------------------------
 garde_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
@@ -450,16 +585,9 @@ legat_
 	beq suite_legat
 	jmp entrance_	
 suite_legat
-	jsr eff_tuile_spe
 	lda laisser_passer
-	beq suite_legat2
-	rts
-suite_legat2	
-	ldx #VILLE
-	lda _team_cles,x
-	ora #8
-	sta _team_cles,x
-	sta laisser_passer
+	bne suite_legat2
+	ldx #$00
 	lda t_legat_1,x
 	sta adr_ecr_txt+1
 	lda #<t_legat_1+1
@@ -487,8 +615,68 @@ suite_legat2
 	jsr write_phrase	
 	jsr hit_release_key
 	jsr eff_text
-	; TO DO, donner ingrédient ?
+	ldx #$00
+	lda t_legat_4,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_4+1
+	sta write_phrase+1
+	lda #>t_legat_4+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
 	rts
+suite_legat2
+	jsr eff_tuile_spe
+	ldx #$00
+	lda t_legat_5,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_5+1
+	sta write_phrase+1
+	lda #>t_legat_5+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
+	ldx #$00
+	lda t_legat_6,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_6+1
+	sta write_phrase+1
+	lda #>t_legat_6+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
+	ldx #$00
+	lda t_legat_7,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_7+1
+	sta write_phrase+1
+	lda #>t_legat_7+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
+	ldx #$00
+	lda t_legat_8,x
+	sta adr_ecr_txt+1
+	lda #<t_legat_8+1
+	sta write_phrase+1
+	lda #>t_legat_8+1
+	sta write_phrase+2
+	jsr write_phrase	
+	jsr hit_release_key
+	jsr eff_text
+	; TO DO, donner ingrédient ?
+	ldx #3
+	lda #1
+	sta _team_ingredients,x
+	sta poudre_de_taureau
+	rts
+
+
+
 ;-------------------------------------------------	
 entrance_
 	lda tuile_sous_pos_perso			; valeur tuile sous perso
@@ -725,9 +913,14 @@ why_no_scoll
 .(
 		lda tuile_courante
 		cmp #$52	;portail 1 vous n'avez pas clef_1
-		bne chck_wns_58
+		bne chck_wns_56
 		jsr no_pasaran
 		rts
+chck_wns_56		
+		cmp #$56	; garde phare vous n'avez pas mdp "et lux fit"
+		bne chck_wns_58
+		jsr phare_garde_nsc
+		rts	
 chck_wns_58		
 		cmp #$58	; garde vousn 'avez pas mot de pass
 		bne chck_wns_53
@@ -760,6 +953,28 @@ garde_nsc
 	jsr hit_key
 	jsr eff_text	
 	rts
+;-------------------------------------	
+phare_garde_nsc	
+	ldx #$00
+	lda t_phare_guard_1,x
+	sta adr_ecr_txt+1
+	lda #<t_phare_guard_1+1
+	sta write_phrase+1
+	lda #>t_phare_guard_1+1
+	sta write_phrase+2	
+	jsr write_phrase
+	
+	ldx #$00
+	lda t_phare_guard_2,x
+	sta adr_ecr_txt+1
+	lda #<t_phare_guard_2+1
+	sta write_phrase+1
+	lda #>t_phare_guard_2+1
+	sta write_phrase+2	
+	jsr write_phrase
+	jsr hit_release_key
+	jsr eff_text
+	rts				
 .)
 ;-------------------------------------
 no_pasaran
@@ -1199,7 +1414,7 @@ t_phare_guard_3
 	.asc "The lighthouse guard says:'Fiat lux'",0
 t_phare_guard_4	
 	.byt $c3	
-	.asc "You say :'and lux fit'",0	
+	.asc "You say :'et lux fit'",0	
 t_phare_guard_5
 	.byt $9a
 	.asc "the guard lets you in.",0		
@@ -1300,7 +1515,87 @@ t_taberna_1
 t_bazar_1
 	.byt $a2	
 	.asc "bazar",0
+; ------------------------------------		
+t_coffre_1
+	.byt $9d	
+	.asc "You find a chest,",0
+t_coffre_2
+	.byt $c6	
+	.asc "do you open it?",0
+t_coffre_3
+	.byt $9b	
+	.asc "You find some coins!",0
+; ------------------------------------
+dta_bandeau		
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$06,$48,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$40,$4A,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$06,$40,$4B,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$40,$4F,$60,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$06,$40,$4C,$60,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$4B,$50,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$4B,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$55,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$5D,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$4F,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$5C,$4C,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$63,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$5F,$7C,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$4F,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$4F,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$03,$40,$5F,$7C,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$07,$40,$7E,$7E,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$03,$40,$41,$60,$47,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$46,$5D,$78,$70,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$03,$40,$43,$7D,$6F,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$43,$7D,$7F,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$03,$40,$43,$7C,$47,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$43,$61,$78,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$40,$40,$03,$5D,$6F,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$00,$04,$07,$40,$43,$7D,$6D,$00,$04,$40,$40,$43,$60,$00,$04,$00,$04,$40,$41,$70,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$60,$00,$04,$00,$04,$00,$04,$03,$40,$43,$7D,$7D,$04,$47,$7C,$40,$43,$60,$00,$04,$00,$04,$40,$41,$70,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$60,$00,$04,$00,$04,$00,$04,$07,$40,$43,$7C,$47,$04,$47,$14,$10,$43,$60,$00,$04,$00,$04,$41,$71,$70,$00,$04,$00,$04,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$00,$04,$00,$04,$00,$04,$00,$03,$40,$43,$61,$78,$04,$47,$47,$40,$40,$00,$04,$00,$04,$40,$41,$70,$00,$04,$00,$04,$00,$04,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$78,$43,$7C,$5D,$6E,$4E,$5D,$79,$78,$40,$07,$5D,$7F,$04,$47,$47,$47,$5B,$61,$7F,$4F,$71,$77,$67,$7F,$73,$63,$67,$5E,$5E,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$7E,$5F,$6E,$4E,$5F,$7F,$7C,$03,$43,$7D,$7D,$04,$47,$47,$47,$7B,$67,$7E,$5F,$79,$7F,$77,$7F,$73,$63,$67,$7F,$14,$10,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$78,$44,$4E,$5E,$4E,$4E,$5E,$5E,$5C,$07,$43,$7D,$7D,$04,$47,$7C,$47,$63,$66,$4C,$50,$79,$79,$71,$71,$73,$63,$67,$67,$67,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$60,$4E,$5C,$4E,$4E,$5C,$5C,$5C,$03,$43,$7C,$43,$04,$47,$7F,$47,$43,$66,$4C,$40,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$7F,$63,$7E,$5C,$4E,$4E,$5C,$5C,$5C,$07,$43,$61,$78,$04,$47,$47,$67,$43,$66,$4C,$4F,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$7E,$5C,$4E,$4E,$5C,$5C,$5C,$40,$03,$5D,$7F,$04,$47,$43,$67,$43,$67,$7C,$5F,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$4E,$5C,$4E,$4E,$5C,$5C,$5C,$07,$43,$75,$7F,$04,$47,$43,$67,$43,$67,$78,$5C,$79,$71,$71,$71,$73,$63,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$4E,$5C,$4E,$5E,$5C,$5C,$5C,$03,$43,$75,$7D,$04,$47,$47,$67,$43,$66,$40,$5C,$79,$71,$71,$71,$73,$67,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$78,$47,$7E,$5C,$4F,$7E,$5C,$5C,$5C,$07,$43,$7D,$7D,$04,$47,$7F,$47,$43,$67,$7C,$5F,$79,$71,$71,$7D,$73,$7F,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$7F,$7F,$04,$78,$43,$7E,$5C,$47,$6E,$5C,$5C,$5C,$03,$43,$7C,$47,$04,$47,$7E,$47,$43,$67,$7E,$4F,$79,$71,$70,$7D,$71,$7B,$67,$47,$47,$00,$04,$00,$4
+	.byt $00,$04,$00,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$7F,$07,$43,$61,$78,$40,$40,$40,$40,$04,$4E,$46,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$03,$5D,$7F,$40,$40,$40,$40,$04,$4E,$46,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$43,$75,$7F,$40,$40,$40,$40,$04,$47,$7E,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$03,$43,$75,$7F,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$45,$43,$7D,$7D,$40,$40,$40,$40,$04,$43,$78,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$4
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$03,$4A,$74,$4D,$50,$60,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$45,$57,$70,$4E,$6A,$60,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$0
+	.byt $00,$04,$00,$04,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$07,$6A,$6A,$65,$55,$55,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40,$00,$04,$00,$0a
 
+;--------------------------------------------------	
+dta_nom_ville
+	.byt $1,$40,$40,$40,$47,$40,$40,$40,$40,$40,$40,$43,$60,$40,$40,$40,$40
+	.byt $3,$4F,$78,$40,$47,$40,$40,$40,$40,$40,$40,$43,$60,$40,$40,$40,$40
+	.byt $1,$4F,$7E,$40,$47,$40,$40,$40,$40,$40,$43,$63,$60,$40,$40,$40,$40
+	.byt $3,$4E,$4E,$40,$40,$40,$40,$40,$40,$40,$43,$60,$40,$40,$40,$40,$40
+	.byt $1,$4E,$4E,$4E,$77,$43,$7E,$5F,$63,$6F,$4F,$7F,$67,$47,$4E,$7C,$7C
+	.byt $3,$4E,$4E,$4F,$77,$4F,$7C,$7F,$73,$7F,$6F,$7F,$67,$47,$4F,$7F,$7E
+	.byt $1,$4F,$78,$4F,$47,$4C,$58,$61,$73,$73,$63,$63,$67,$47,$4F,$4F,$4E
+	.byt $3,$4F,$7E,$4E,$47,$4C,$58,$41,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $1,$4E,$4F,$4E,$47,$4C,$58,$5F,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $3,$4E,$47,$4E,$47,$4F,$78,$7F,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $1,$4E,$47,$4E,$47,$4F,$70,$79,$73,$63,$63,$63,$67,$47,$4E,$4E,$4E
+	.byt $3,$4E,$4F,$4E,$47,$4C,$40,$79,$73,$63,$63,$63,$67,$4F,$4E,$4E,$4E
+	.byt $1,$4F,$7E,$4E,$47,$4F,$78,$7F,$73,$63,$63,$7B,$67,$7F,$4E,$4E,$4E
+	.byt $3,$4F,$7C,$4E,$47,$4F,$7C,$5F,$73,$63,$61,$7B,$63,$77,$4E,$4E,$4E
+	.byt $1,$40,$40,$40,$40,$5C,$4C,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $3,$40,$40,$40,$40,$5C,$4C,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $1,$40,$40,$40,$40,$4F,$7C,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
+	.byt $3,$40,$40,$40,$40,$47,$70,$40,$40,$40,$40,$40,$40,$40,$40,$40,$40
 
 
 ;--- <<< First Label dta_car_redef_p1 >>>
