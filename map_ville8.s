@@ -628,6 +628,11 @@ suite_legat
 	rts
 suite_legat2
 	jsr eff_tuile_spe
+	ldx #3
+	lda _team_ingredients,x
+	beq suite_legat3
+	rts
+suite_legat3	
 	ldx #$00
 	lda t_legat_5,x
 	sta adr_ecr_txt+1
