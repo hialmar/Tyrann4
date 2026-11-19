@@ -738,7 +738,7 @@ ville_100
  DATA Celtic,Nemausus,1, Egyptian,Lugdunum,5, Gallic,Lutecia,3, Goth,Agrippina,2
  DATA Persian,Burdigala,5, Roman,Gesoriacum,6, Viking,Brigantium,1
  DATA Iberian,Bacino,4, Thrace,Londinium,7
- DATA ARMORY,15,7, BOTANICS,7,2, TABERNA,5,3, ANIMALS,7,7
+ DATA ARMORY,15,7, BOTANICS,8,2, TABERNA,5,3, ANIMALS,7,7
  DATA "royal leech","lily flower","kraken ink","rose of the Vale","oil of the Rock","trout liver"
  DATA SOMNUS, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
  DATA ESCULAPE R, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT

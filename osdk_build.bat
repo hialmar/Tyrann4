@@ -12,10 +12,10 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Ville2
 :: Goto Ville3
 :: Goto Ville4
-:: Goto Ville5
+Goto Ville5
 :: Goto Ville6
 :: Goto Ville7
-Goto Ville8
+:: Goto Ville8
 :: Goto Ville9
 :: Goto Ville10
 :: Goto Ville11

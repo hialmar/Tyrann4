@@ -79,6 +79,7 @@ ville_83
  M$=" IMPOSSIBLE !":FD=145
  S$=CHR$(FD)+N$(P)+" "+C$(CP(P))+" "+STR$(RI(P))+" se "+CHR$(144)
  L=2:GOSUB ville_27 
+ REM PRINT@20,3;"IG(4)",IG(4) 
  PRINT@6,3;" Your choice ";:GOSUB ville_ReadChoice 
  IFCH>NTHEN ville_58 
  IFCH=0THEN ville_56 
@@ -88,7 +89,8 @@ ville_83
 ville_59
  IFCP(P)=5ORCP(P)=6THEN ville_71 
  IFCH>2ANDCP(P)<4THEN ville_62 
- IFCP(P)=4ANDCH>7THEN ville_62 
+ IFCP(P)=4ANDCH=7THEN ville_62 
+ IFCH=8ANDIG(4)=1THEN eau_cologne 
 ville_71
  M$=IT$(CH+SS):GOSUB ville_72 
  GOTO ville_65 
@@ -102,6 +104,16 @@ ville_72
 ville_74
  SA(P,I)=SS+CH
  RETURN
+eau_cologne
+ IG(4)=2
+ M$="You create your own"
+ T=INT((38-LEN(M$))/2)
+ PING:CLS:PRINT:PRINT@T,5;CHR$(FD);" ";M$;" ";CHR$(144)
+ M$="Aqua Agrippinensis!"
+ T=INT((38-LEN(M$))/2)
+ PRINT@T,7;CHR$(FD);" ";M$;" ";CHR$(144)
+ WAIT150
+ GOTO ville_83
 ville_57
  IFWR(P)=0ANDWL(P)=0ANDPT(P)=0ANDSA(P,1)=0ANDBT(P)=0THENS$=" ! EMPTY ! ":GOSUB ville_RedBg :PRINT@20,17;S$:ZAP:WAIT80:RETURN
 ville_77
@@ -430,7 +442,7 @@ ville_100
  DATA Celtic,Nemausus,1, Egyptian,Lugdunum,5, Gallic,Lutecia,3, Goth,Agrippina,2
  DATA Persian,Burdigala,5, Roman,Gesoriacum,6, Viking,Brigantium,1
  DATA Iberian,Bacino,4, Thrace,Londinium,7
- DATA ARMORY,15,7, BOTANICS,7,2, BAZAAR,7,3, ANIMALS,7,5
+ DATA ARMORY,15,7, BOTANICS,8,2, BAZAAR,7,3, ANIMALS,7,5
  DATA "royal leech","lily flower","kraken ink","rose of the Vale","oil of the Rock","trout liver"
  DATA SOMNUS, FIRE, STONE, VENOM, BLOOD, MAXIMA FULGUR, LAVA, EARTHQUAKE
  DATA ESCULAPE R, SERUM, MUSCLE, SHIELD, ELIXIR, SCREEN, LIFE, ORCUS CUT
