@@ -12,11 +12,11 @@ IF "%OSDK%"=="" GOTO ErCfg
 :: Goto Ville2
 :: Goto Ville3
 :: Goto Ville4
-Goto Ville5
+:: Goto Ville5
 :: Goto Ville6
 :: Goto Ville7
 :: Goto Ville8
-:: Goto Ville9
+Goto Ville9
 :: Goto Ville10
 :: Goto Ville11
 :: Goto Ville12
@@ -509,7 +509,7 @@ pause
 
 %OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\camp.tap BUILD\map.tap BUILD\pmap.tap BUILD\ville1.tap BUILD\pville1.tap BUILD\ville2.tap BUILD\ville3.tap BUILD\ville4.tap BUILD\ville5.tap BUILD\ville6.tap BUILD\ville7.tap BUILD\ville8.tap t4_prog.dsk
 
-%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\ville8.tap t4_prog1.dsk
+%OSDK%\bin\tap2dsk -n"   Tyrann IV" -i"DIR" BUILD\ville8.tap BUILD\ville9.tap t4_prog1.dsk
 
 pause
 
